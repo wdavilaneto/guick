@@ -1,0 +1,20 @@
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+
+    version = '1.0-SNAPSHOT'
+
+    dependencies {
+        compile "org.codehaus.groovy:groovy-all:2.1.6"
+        compile "com.google.guava:guava:14.0.1"
+        compile "org.springframework:spring-context:3.2.3.RELEASE"
+        testCompile "junit:junit:4.11"
+    }
+
+}
