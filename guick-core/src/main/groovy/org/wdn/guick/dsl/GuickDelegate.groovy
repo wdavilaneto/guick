@@ -1,7 +1,7 @@
 package org.wdn.guick.dsl
 
 import org.springframework.stereotype.Component
-import org.wdn.guick.model.GuickContext
+import org.wdn.guick.model.Project
 import org.wdn.guick.view.TemplateWriter
 
 import javax.annotation.Resource
@@ -16,8 +16,8 @@ import javax.annotation.Resource
 @Component
 class GuickDelegate {
 
+    @Resource Project project
     @Resource TemplateWriter writer
-    @Resource GuickContext context
 
     private objects
     private templates
@@ -29,12 +29,12 @@ class GuickDelegate {
 
                 if (objects == null) {
                     for (def templateParams : templates) {
-                        processTemplate templateParams
+                        writer.execute templateParams
                     }
                 } else {
                     for (def obj : objects) {
                         for (def templateParams : templates) {
-                            processTemplate templateParams
+                            writer.execute templateParams, obj
                         }
                     }
                 }
@@ -45,13 +45,6 @@ class GuickDelegate {
         } else {
             throw new MissingMethodException(name, this.class, args as Object[])
         }
-    }
-
-    private void processTemplate(def templateParams) {
-        if (templateParams?.context != null) {
-            context.putAll(templateParams.context)
-        }
-        writer.execute(templateParams.input, templateParams.output, context)
     }
 
     def objects(List<Object> entries) {

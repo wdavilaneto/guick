@@ -1,11 +1,11 @@
 package org.wdn.guick.view
 
-import freemarker.template.Configuration
-import freemarker.template.DefaultObjectWrapper
-import freemarker.template.Template
-import freemarker.template.TemplateExceptionHandler
-import freemarker.template.Version
+import freemarker.template.*
+import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
+import org.wdn.guick.model.Project
+
+import javax.annotation.Resource
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,37 +15,60 @@ import org.springframework.stereotype.Component
  * To change this template use File | Settings | File Templates.
  */
 @Component
+@CompileStatic
 class TemplateWriter {
+
+    @Resource Project project
 
     Configuration configuration
 
     public TemplateWriter() {
-        Configuration cfg = new Configuration();
+        configuration = new Configuration();
         //cfg.setDirectoryForTemplateLoading(new File("/where/you/store/templates"));
-        cfg.setClassForTemplateLoading(Thread.currentThread().getClass(), "/" )
+        configuration.setClassForTemplateLoading(Thread.currentThread().getClass(), "/")
 
-        cfg.setObjectWrapper(new DefaultObjectWrapper());
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-        // At least in new projects, specify that you want the fixes that aren't
-        // 100% backward compatible too (these are very low-risk changes as far as the
-        // 1st and 2nd version number remains):
-        cfg.setIncompatibleImprovements(new Version(2, 3, 20));
+        configuration.setObjectWrapper(new DefaultObjectWrapper());
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+        configuration.setIncompatibleImprovements(new Version(2, 3, 20));
     }
 
-    public void execute(String input, String output, Map context) {
+    private void execute(Map templateParams, def obj = null) {
+        HashMap<String, Object> context = new HashMap();
+        context.put("project", project)
+        if (obj != null) {
+            context.put(getClassName(obj.class).toLowerCase(), obj)
+        }
+        if (templateParams?.context != null) {
+            context.putAll((Map) templateParams.context)
+        }
+        processTemplate( (String)templateParams.input, (String)templateParams.output, context)
+    }
+
+    private void processTemplate(String input, String output, Map context) {
         Template template = configuration.getTemplate(input);
-        File outputFile = getFileCratingAllNecessaryDirs(output)
+        File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
         FileOutputStream fileOutputStream = new FileOutputStream(outputFile)
         Writer out = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-        template.process(context , out)
+        template.process(context, out)
+    }
+
+    private static String getClassName(Class c) {
+        final String className = c.getName()
+        final int firstChar = className.lastIndexOf('.') + 1;
+        if (firstChar > 0) {
+            return className.substring(firstChar);
+        }
+        return className;
     }
 
     private File getFileCratingAllNecessaryDirs(final String output) {
         File file = new File(output)
-        if (!file.exists()) {
+        if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs()
         }
         return file
     }
+
+
 }

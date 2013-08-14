@@ -1,8 +1,8 @@
 package org.wdn.guick.dsl
 
 import org.springframework.stereotype.Component
-import org.wdn.guick.common.ResourceReader
-import org.wdn.guick.model.GuickContext
+import org.wdn.guick.common.GdslReader
+import org.wdn.guick.model.Project
 
 import javax.annotation.Resource
 
@@ -15,14 +15,15 @@ import javax.annotation.Resource
 @Component
 class DslArchitecture {
 
-    @Resource GuickDelegate guickDelegate
-    @Resource GuickContext context
-    @Resource ResourceReader reader
+    @Resource TargetDelegate targetDelegate
+    @Resource Project project
+
+    @Resource GdslReader reader
 
     void runEngine(String target) {
 
-        Binding binding = new Binding();
-        binding.setVariable("project", context.project)
+        Binding binding = new Binding()
+        binding.setVariable("project", project)
 
         Script dslScript = new GroovyShell(binding).parse(reader.get(target))
 
@@ -30,13 +31,12 @@ class DslArchitecture {
             ExpandoMetaClass emc ->
                 emc.guick = {
                     Closure cl ->
-                        cl.delegate = guickDelegate
+                        cl.delegate = targetDelegate
                         cl.resolveStrategy = Closure.DELEGATE_FIRST
                         cl()
                 }
         })
         dslScript.run()
-
     }
 
     private ExpandoMetaClass createEMC(Class clazz, Closure cl) {

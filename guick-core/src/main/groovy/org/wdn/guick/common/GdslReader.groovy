@@ -1,9 +1,6 @@
 package org.wdn.guick.common
-
 import groovy.transform.CompileStatic
-import org.codehaus.groovy.reflection.ReflectionUtils
 import org.springframework.stereotype.Component
-
 /**
  * Created with IntelliJ IDEA.
  * User: walter
@@ -13,12 +10,10 @@ import org.springframework.stereotype.Component
  */
 @CompileStatic
 @Component
-class ResourceReader {
+class GdslReader {
 
     public Reader get(String runner) {
-        //InputStream stream = ReflectionUtils.getCallingClass(0).getResourceAsStream("${runner}.groovy")
-        //InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("${runner}.groovy")
-        InputStream stream =  ResourceReader.class.getClassLoader().getResourceAsStream("/${runner}.groovy")
+        InputStream stream =  GdslReader.class.getClassLoader().getResourceAsStream("${runner}.gdsl")
         if (stream) {
             return new InputStreamReader( stream );
         }
