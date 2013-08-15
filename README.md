@@ -3,7 +3,7 @@ guick
 
 Gradle plugin / (Runtimetools) to Quick development Applications
 
-==== It (will) Contain ====
+### It (will) Contain ###
 
 *  General DSL fro artifacts generation (w/freemarker)
 **   (inputs from csv, wsdl/xsd, database, xpi, and java/groovy codes)
@@ -12,9 +12,7 @@ Gradle plugin / (Runtimetools) to Quick development Applications
 *  Usecase Generation from known xml model (webflow initially )
 
 
-==== Usage for Gradle users ====
-TODO
+### Usage for Gradle users ###
 
 
 Usage for maven3 users
-TODO
