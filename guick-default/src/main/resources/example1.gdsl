@@ -5,11 +5,6 @@ guick {
 
     domain {
 
-        "images" {
-
-            templates = [[input: "default/webapp",output:"src/main/webapp" ]]
-
-        }
 
     }
 
