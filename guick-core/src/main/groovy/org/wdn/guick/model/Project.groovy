@@ -1,5 +1,6 @@
 package org.wdn.guick.model
 
+import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component
  * To change this template use File | Settings | File Templates.
  */
 @Component
+@CompileStatic
 class Project {
 
     def name

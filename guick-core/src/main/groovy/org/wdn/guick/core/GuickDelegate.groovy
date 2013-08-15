@@ -1,11 +1,10 @@
-package org.wdn.guick.dsl
+package org.wdn.guick.core
 
+import groovy.transform.PackageScope
 import org.springframework.stereotype.Component
 import org.wdn.guick.model.Project
-import org.wdn.guick.view.TemplateWriter
 
 import javax.annotation.Resource
-
 /**
  * Created with IntelliJ IDEA.
  * User: walter
@@ -14,6 +13,7 @@ import javax.annotation.Resource
  * To change this template use File | Settings | File Templates.
  */
 @Component
+@PackageScope
 class GuickDelegate {
 
     @Resource Project project

@@ -1,7 +1,7 @@
 package org.wdn.guick
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.wdn.guick.dsl.DslArchitecture
+import org.wdn.guick.core.DslArchitecture
 import org.wdn.guick.model.Project
 
 /**

@@ -1,10 +1,12 @@
-package org.wdn.guick.dsl
+package org.wdn.guick.core
 
+import groovy.transform.PackageScope
 import org.springframework.stereotype.Component
 
 import javax.annotation.Resource
 
 @Component
+@PackageScope
 class TargetDelegate {
 
     @Resource GuickDelegate guickDelegate

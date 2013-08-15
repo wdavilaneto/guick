@@ -1,11 +1,8 @@
-package org.wdn.guick.dsl
-
+package org.wdn.guick.core
 import org.springframework.stereotype.Component
-import org.wdn.guick.common.GdslReader
 import org.wdn.guick.model.Project
 
 import javax.annotation.Resource
-
 /**
  * Created with IntelliJ IDEA.
  * User: walter

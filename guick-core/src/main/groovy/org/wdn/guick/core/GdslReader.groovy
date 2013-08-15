@@ -1,5 +1,6 @@
-package org.wdn.guick.common
+package org.wdn.guick.core
 import groovy.transform.CompileStatic
+import groovy.transform.PackageScope
 import org.springframework.stereotype.Component
 /**
  * Created with IntelliJ IDEA.
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component
  */
 @CompileStatic
 @Component
+@PackageScope
 class GdslReader {
 
     public Reader get(String runner) {

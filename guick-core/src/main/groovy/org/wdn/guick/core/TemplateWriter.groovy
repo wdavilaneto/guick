@@ -1,7 +1,8 @@
-package org.wdn.guick.view
+package org.wdn.guick.core
 
 import freemarker.template.*
 import groovy.transform.CompileStatic
+import groovy.transform.PackageScope
 import org.springframework.stereotype.Component
 import org.wdn.guick.model.Project
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource
  */
 @Component
 @CompileStatic
+@PackageScope
 class TemplateWriter {
 
     @Resource Project project
