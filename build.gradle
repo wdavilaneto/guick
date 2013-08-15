@@ -1,24 +1,33 @@
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
-}
-
 subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'maven-publish'
+//    apply plugin: 'idea'
+    group = 'org.wdn.guick'
+    version = '1.0-SNAPSHOT'
 
     repositories {
         mavenCentral()
     }
 
-    apply plugin: 'java'
-    apply plugin: 'groovy'
-
-    version = '1.0-SNAPSHOT'
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 
     dependencies {
         compile "org.codehaus.groovy:groovy-all:2.1.6"
-        compile "com.google.guava:guava:14.0.1"
         compile "org.springframework:spring-context:3.2.3.RELEASE"
         testCompile "junit:junit:4.11"
     }
 
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.7'
 }

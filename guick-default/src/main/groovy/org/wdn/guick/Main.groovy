@@ -13,7 +13,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final DEFAULT_PROJECT_ROOT = "../ppgi/ppgi-ca-service"
+    private static final DEFAULT_PROJECT_ROOT = "../myapp"
 
     public static void main(String[] args) {
 

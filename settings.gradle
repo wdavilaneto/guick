@@ -1,1 +1,1 @@
-include "guick-core", "guick-default", "guick-gradle-plugin"
+include "guick-core", "guick-default", "guick-plugin", "guick-example"
