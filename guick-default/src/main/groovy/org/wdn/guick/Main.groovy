@@ -13,7 +13,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final DEFAULT_PROJECT_ROOT = "../myapp"
+    private static final DEFAULT_PROJECT_ROOT = "../ppgi-ca-service"
 
     public static void main(String[] args) {
 
@@ -29,6 +29,7 @@ class Main {
     }
 
     public execute(String path = DEFAULT_PROJECT_ROOT) {
+        ExpandoMetaClass.disableGlobally()
         // Initializing Spring
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("org.wdn.guick");

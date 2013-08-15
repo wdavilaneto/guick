@@ -17,7 +17,7 @@ guick {
             ]
         }
         "testParent" {
-            templates = [[input: "src/main/webapp/css/bootstrap.css"],
+            templates = [[input: "src/main/webapp/css/bootstrvai ser ap.css"],
                     [input: "src/main/webapp/css/bootstrap.min.css"],
                     [input: "src/main/webapp/css/bootstrap-responsive.css"],
                     [input: "src/main/webapp/css/bootstrap-responsive.min.css"],

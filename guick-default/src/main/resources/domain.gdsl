@@ -21,6 +21,10 @@ guick {
         "testParent" {
             templates = [[input: "default/caParentTest.ftl", output: "src/test/java/${packageBase}/CaContextualizedTest.groovy"]]
         }
+
+        "testParent" {
+            templates = [[input: "default/caParentTest.ftl", output: "src/test/java/${packageBase}/CaContextualizedTest.groovy"]]
+        }
     }
 
 }

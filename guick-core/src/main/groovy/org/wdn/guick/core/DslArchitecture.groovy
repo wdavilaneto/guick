@@ -14,15 +14,14 @@ class DslArchitecture {
 
     @Resource TargetDelegate targetDelegate
     @Resource Project project
-
-    @Resource GdslReader reader
+    @Resource ResourceReader reader
 
     void runEngine(String target) {
 
         Binding binding = new Binding()
         binding.setVariable("project", project)
 
-        Script dslScript = new GroovyShell(binding).parse(reader.get(target))
+        Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
 
         dslScript.metaClass = createEMC(dslScript.class, {
             ExpandoMetaClass emc ->
