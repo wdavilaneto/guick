@@ -6,10 +6,12 @@ package br.com.petrobras.ppgi.ca.facade
 
 import br.com.petrobras.security.ISecurityContext
 import br.com.petrobras.security.model.${clazz.name}
+import groovy.transform.CompileStatic
 
 /**
  *  Classe Facade da entidade ${clazz.name}
  **/
+@CompileStatic
 class ${clazz.name}Facade {
 
     private ISecurityContext securityContext = ISecurityContext.getContext();
@@ -22,7 +24,7 @@ class ${clazz.name}Facade {
 </#if>
     }
 
-    public ${clazz.name} find(List<String> ids) {
+    public List<${clazz.name}> find(List<String> ids) {
 <#if clazz.name != "IContext">
         securityContext.get${clazz.name}Manager().find(ids)
 <#else>

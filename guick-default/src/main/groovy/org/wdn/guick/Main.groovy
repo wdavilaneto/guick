@@ -29,15 +29,18 @@ class Main {
     }
 
     public execute(String path = DEFAULT_PROJECT_ROOT) {
+        // Initializing Spring
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("org.wdn.guick");
         context.refresh();
 
+        // Initializing project path(like done by maven3 plugin or gradle plugin)
         Project project = (Project) context.getBean("project");
         project.initialize(path)
 
+        // Lets run an example ...
         DslArchitecture guick = (DslArchitecture) context.getBean("dslArchitecture");
-        guick.runEngine("domain")
+        guick.runEngine("example1")
     }
 
 
