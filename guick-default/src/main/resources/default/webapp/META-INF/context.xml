@@ -1,0 +1,9 @@
+<Context docBase="sies" path="/sies" reloadable="false">
+
+    <Resource name="wdnDS" type="javax.sql.DataSource" auth="Container"
+              driverClassName="oracle.jdbc.driver.OracleDriver"
+              url="jdbc:postgresql://localhost/test"
+              username="wdn" password="wdn" maxActive="20" maxIdle="10" maxWait="-1" />
+
+
+</Context>
