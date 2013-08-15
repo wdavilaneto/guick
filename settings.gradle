@@ -1,1 +1,1 @@
-include "guick-core", "guick-default", "guick-plugin", "guick-example"
+include "guick-core", "guick-default", "guick-plugin"
