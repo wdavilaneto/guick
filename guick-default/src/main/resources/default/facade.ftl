@@ -5,7 +5,11 @@
 package br.com.petrobras.ppgi.ca.facade
 
 import br.com.petrobras.security.ISecurityContext
+import br.com.petrobras.security.management.basic.IContextManager
+import br.com.petrobras.security.management.information.IInformationValueManager
+import br.com.petrobras.security.model.IContext
 import br.com.petrobras.security.model.${clazz.name}
+import br.com.petrobras.security.model.InformationValue
 import groovy.transform.CompileStatic
 
 /**
@@ -14,53 +18,57 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class ${clazz.name}Facade {
 
-    private ISecurityContext securityContext = ISecurityContext.getContext();
+    private ISecurityContext securityContext = ISecurityContext.getContext()
+    private IContextManager contextManager
+    private IInformationValueManager informationValueManager
+
+    public ${clazz.name}Facade() {
+        contextManager = securityContext.getContextManager()
+        informationValueManager = securityContext.getInformationValueManager()
+    }
 
     public ${clazz.name} get(String id) {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().find(id)
+<#if clazz.name == "InformationValue">
+        def all = contextManager.findAll()
+        if (all == null) {
+            return null
+        }
+        IContext contextsInfo = contextManager.findAll()[0]
+        List<InformationValue> informationValues = informationValueManager.findAll(contextsInfo.getId())
+        for (def informationValue : informationValues) {
+            if (informationValue.getId().equals(id)) {
+                return informationValue;
+            }
+        }
+        return null;
 <#else>
-        securityContext.getContextManager().find(id)
+        return securityContext.get${clazz.name}Manager().find(id)
 </#if>
     }
 
-    public List<${clazz.name}> find(List<String> ids) {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().find(ids)
+<#if clazz.name == "InformationValue">
+    public List<${clazz.name}> findAll(List<String> ids) {
+        def all = contextManager.findAll()
+        if (all == null) {
+            return null
+        }
+        IContext contextsInfo = contextManager.findAll()[0]
+        return securityContext.get${clazz.name}Manager().findAll(contextsInfo.getId())
 <#else>
-        securityContext.getContextManager().find(ids)
-</#if>
-    }
-
     public List<${clazz.name}> findAll() {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().findAll()
-<#else>
-        securityContext.getContextManager().findAll()
+        return securityContext.get${clazz.name}Manager().findAll()
 </#if>
     }
 
     public void create(${clazz.name} dto) {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().save(dto)
-<#else>
-        securityContext.getInformationManager().save(dto)
-</#if>
+        <#if clazz.name == "User">//</#if>securityContext.get${clazz.name}Manager().save(dto)
     }
 
     public void remove(${clazz.name} dto) {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().remove(dto)
-<#else>
-        securityContext.getInformationManager().remove(dto)
-</#if>
+        <#if clazz.name == "User">//</#if>securityContext.get${clazz.name}Manager().remove(dto)
     }
 
     public void update(${clazz.name} dto) {
-<#if clazz.name != "IContext">
-        securityContext.get${clazz.name}Manager().update(dto)
-<#else>
-        securityContext.getInformationManager().update(dto)
-</#if>
+        <#if clazz.name == "User">//</#if>securityContext.get${clazz.name}Manager().update(dto)
     }
 }

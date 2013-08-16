@@ -2,4 +2,5 @@
 dependencies {
     //compile "com.google.guava:guava:14.0.1"
     compile "org.freemarker:freemarker:2.3.20"
+    compile "commons-lang:commons-lang:2.6"
 }

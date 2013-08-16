@@ -1,12 +1,8 @@
 package org.wdn.guick.core
 
-import freemarker.template.Configuration
-import freemarker.template.DefaultObjectWrapper
-import freemarker.template.Template
-import freemarker.template.TemplateExceptionHandler
-import freemarker.template.Version
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.wdn.guick.model.Project
+import org.wdn.guick.util.StringUtil
 
 import javax.annotation.Resource
 import java.nio.ByteBuffer
@@ -34,11 +30,15 @@ abstract class AbstractTemplateWriter {
             for (def prams : templates) {
                 def resources = resolver.getResources(prams.input.toString())
                 if (resources.size() == 1 && !resources[0].filename.contains(".")) {
-                    def insideResources = resolver.getResources(prams.input.toString() + "/*")
-                    executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context)
+                    try {
+                        def insideResources = resolver.getResources(prams.input.toString() + "/*")
+                        executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context)
+                    } catch (e) {
+                        println "WARN Template not found"
+                    }
                 } else {
                     String output = prams.output
-                    String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0],"")
+                    String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
                     if (output == null) {
                         output = normalizedInput
                     } else {
@@ -54,11 +54,15 @@ abstract class AbstractTemplateWriter {
                 for (def prams : templates) {
                     def resources = resolver.getResources(prams.input.toString())
                     if (resources.size() == 1 && !resources[0].isReadable()) {
-                        def insideResources = resolver.getResources(prams.input.toString() + "/*")
-                        executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context, obj)
+                        try {
+                            def insideResources = resolver.getResources(prams.input.toString() + "/*")
+                            executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context, obj)
+                        } catch (e) {
+                            println "WARN Template not found"
+                        }
                     } else {
                         String output = prams.output
-                        String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0],"")
+                        String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
                         if (output == null) {
                             output = normalizedInput
                         } else {
@@ -80,9 +84,9 @@ abstract class AbstractTemplateWriter {
                 String newOutput = (output == null ? newInput : output + "/" + resource.getFilename())
                 execute(newInput, newOutput, context, obj)
             } else {
-                String pathToAdd =  "/${resource.getFilename()}/"
+                String pathToAdd = "/${resource.getFilename()}/"
                 def insideResources = resolver.getResources(input + "${pathToAdd}*")
-                executeDinamic(insideResources, input + pathToAdd ,(output==null ? output : output+pathToAdd )  , context, obj)
+                executeDinamic(insideResources, input + pathToAdd, (output == null ? output : output + pathToAdd), context, obj)
             }
 
         }
@@ -91,6 +95,8 @@ abstract class AbstractTemplateWriter {
     private void execute(String input, String output, def extraContext = null, def obj = null) {
         HashMap<String, Object> context = new HashMap();
         context.put("project", project)
+        context.put("stringUtil",new StringUtil())
+
         if (obj != null) {
             context.put(getClassName(obj.class).toLowerCase(), obj)
         }
@@ -101,7 +107,7 @@ abstract class AbstractTemplateWriter {
             //TODO ...
         }
 
-        output = normalizeOutput(input , output)
+        output = normalizeOutput(input, output)
 
         if (input.endsWith(".ftl")) {
             doWriteTemplate(input, context, output);
@@ -110,13 +116,13 @@ abstract class AbstractTemplateWriter {
         }
     }
 
-    String normalizeOutput(final String input,final  String output) {
+    String normalizeOutput(final String input, final String output) {
         def outputFileName = output.split("/").last()
         if (outputFileName.contains(".")) {
-            return (output.endsWith(".ftl")? output[0..-5] : output )
+            return (output.endsWith(".ftl") ? output[0..-5] : output)
         }
-        def inputFilename = input.split("/").last().replaceFirst(".ftl","")
-        return output + "/" + inputFilename ;
+        def inputFilename = input.split("/").last().replaceFirst(".ftl", "")
+        return output + "/" + inputFilename;
     }
 
     private doCopyResrouce(String input, String output) {

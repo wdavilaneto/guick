@@ -1,6 +1,7 @@
 package org.wdn.guick.core
 import org.springframework.stereotype.Component
 import org.wdn.guick.model.Project
+import org.wdn.guick.util.StringUtil
 
 import javax.annotation.Resource
 /**
@@ -20,6 +21,7 @@ class DslArchitecture {
 
         Binding binding = new Binding()
         binding.setVariable("project", project)
+        binding.setVariable("stringUtil",new StringUtil())
 
         Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
 

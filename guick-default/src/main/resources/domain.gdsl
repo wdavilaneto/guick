@@ -2,7 +2,7 @@ import org.wdn.guick.model.Clazz
 
 def packageBase = "br/com/petrobras/ppgi/ca/facade"
 
-def classes = [new Clazz(name: "Role"), new Clazz(name: "Resource"), new Clazz(name: "Information"), new Clazz(name: "InformationValue"), new Clazz(name: "IContext"), new Clazz(name: "Area")]
+def classes = [new Clazz(name: "Role"), new Clazz(name: "Resource"), new Clazz(name: "InformationValue"), new Clazz(name: "User")]
 
 guick {
 
@@ -19,7 +19,7 @@ guick {
         }
 
         "testParent" {
-            templates = [[input: "default/caParentTest.ftl", output: "src/test/java/${packageBase}/CaContextualizedTest.groovy"]]
+            templates = [[input: "default/CaContextualizedTest.groovy.ftl", output: "src/test/java/${packageBase}"]]
         }
 
     }
