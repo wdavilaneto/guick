@@ -6,7 +6,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="false">
 
-    <display-name>sies</display-name>
+    <display-name>${project.name}</display-name>
 
     <distributable/>
 

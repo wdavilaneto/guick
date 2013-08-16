@@ -30,5 +30,4 @@
         <property name="viewName" value="contact"/>
     </bean>
 
-
 </beans>

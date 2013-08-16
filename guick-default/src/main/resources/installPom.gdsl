@@ -1,0 +1,13 @@
+
+guick {
+
+
+    installPom {
+
+        "pom" {
+            templates = [[input: "default/pom.xml.ftl"]]
+        }
+
+    }
+
+}

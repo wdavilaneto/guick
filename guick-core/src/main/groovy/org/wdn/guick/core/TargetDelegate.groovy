@@ -15,6 +15,10 @@ class TargetDelegate {
         println  "unprocessed property " + name
     }
 
+    public File file (String name) {
+        return new File(name)
+    }
+
     def methodMissing(String name, Object args) {
         if (args.length == 1) {
             // logo apos o "qualquer-coisa" existe um Closure { } ?
@@ -29,12 +33,8 @@ class TargetDelegate {
     }
 
     private setLayerDelegateAndExecute(Closure cl) {
-        // Delega a layerDelegate as realizacoes dentro da closure da referida layer
         cl.delegate = guickDelegate
-        // Set Estrategia que define que as tentativas de resolver as propriedades
-        // serao feitas primeiro pela "delegate" (cl.delegate) e nao o owner (this)
         cl.resolveStrategy = Closure.DELEGATE_FIRST
-        // Executa o codigo da Clusure em questao
         cl()
     }
 }

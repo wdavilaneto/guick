@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <file>log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>log.%i</fileNamePattern>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p [%c] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <root>
+        <level value="WARN"/>
+        <appender-ref ref="logfile"/>
+    </root>
+</configuration>

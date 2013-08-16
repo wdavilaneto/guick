@@ -14,11 +14,26 @@ import org.springframework.stereotype.Component
 @CompileStatic
 class Project {
 
-    def name
-    def path
+    String group
+    String name
+    String path
 
     def initialize(String rootPath) {
         path = new File(rootPath).getCanonicalPath()
+    }
+
+    public String getName(){
+        if (name != null) {
+            return name
+        }
+        return path.split("/").last()
+    }
+
+    public String getGroup(){
+        if (group != null) {
+            return group
+        }
+        return getName()
     }
 
 }

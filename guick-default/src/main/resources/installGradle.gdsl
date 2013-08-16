@@ -1,0 +1,10 @@
+guick {
+
+    installGradle {
+
+        "gradle" {
+            templates = [[input: "default/build.gradle.ftl"]]
+        }
+    }
+
+}

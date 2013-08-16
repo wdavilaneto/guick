@@ -1,0 +1,15 @@
+
+def group = project.group
+def name  = project.name
+
+guick {
+
+    persistence {
+
+        "repository" {
+            templates = [[input: "default/repository.groovy.ftl", output: "src/main/java/${group}/${name}/persistence/TestRepository.groovy"]]
+        }
+
+    }
+
+}
