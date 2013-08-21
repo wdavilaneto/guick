@@ -22,6 +22,9 @@ dependencies {
     compile "jstl:jstl:1.2"
     compile "org.postgresqlpostgresql:9.2-1003-jdbc4"
     compile "mysql:mysql-connector-java:5.1.25"
+    compile "org.thymeleaf:thymeleaf:2.0.18"
+    compile "org.thymeleaf:thymeleaf-spring3:2.0.18"
+
     compile "org.springframework:spring-context:${"$"}{spring_version}"
     compile "org.springframework:spring-tx:${"$"}{spring_version}"
     compile "org.springframework:spring-webmvc:${"$"}{spring_version}"
