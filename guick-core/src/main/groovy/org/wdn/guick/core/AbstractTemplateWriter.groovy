@@ -1,6 +1,7 @@
 package org.wdn.guick.core
-
+import groovy.transform.CompileStatic
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
+import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
 import org.wdn.guick.util.StringUtil
 
@@ -9,7 +10,6 @@ import java.nio.ByteBuffer
 import java.nio.channels.Channels
 import java.nio.channels.ReadableByteChannel
 import java.nio.channels.WritableByteChannel
-
 /**
  * Created with IntelliJ IDEA.
  * User: walter
@@ -17,10 +17,13 @@ import java.nio.channels.WritableByteChannel
  * Time: 12:13 AM
  * To change this template use File | Settings | File Templates.
  */
+@CompileStatic
 abstract class AbstractTemplateWriter {
 
     @Resource ResourceReader reader
+    @Resource Json json;
     @Resource Project project
+
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     abstract protected doWriteTemplate(String input, def context, String output);
@@ -95,10 +98,11 @@ abstract class AbstractTemplateWriter {
     private void execute(String input, String output, def extraContext = null, def obj = null) {
         HashMap<String, Object> context = new HashMap();
         context.put("project", project)
-        context.put("stringUtil",new StringUtil())
+        context.put("stringUtil", new StringUtil())
+        context.put("json", json)
 
         if (obj != null) {
-            context.put(getClassName(obj.class).toLowerCase(), obj)
+            context.put( getClassName(obj) , getContextObject(obj) )
         }
         if (extraContext != null) {
             if (extraContext instanceof Map) {
@@ -109,11 +113,15 @@ abstract class AbstractTemplateWriter {
 
         output = normalizeOutput(input, output)
 
+        println "->" + output
         if (input.endsWith(".ftl")) {
-            doWriteTemplate(input, context, output);
+            doWriteTemplate(input, context,  output);
         } else {
             doCopyResrouce(input, output)
         }
+//        if (Diff.diff( new File(output), new File("target/temp/" + output), true).size()) {
+//            doCopyFile ( "target/temp/" + output, output)
+//        }
     }
 
     String normalizeOutput(final String input, final String output) {
@@ -127,9 +135,27 @@ abstract class AbstractTemplateWriter {
 
     private doCopyResrouce(String input, String output) {
         File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
-        println "writing ${outputFile.getAbsolutePath()}"
         final OutputStream outputStram = new FileOutputStream(outputFile);
         final InputStream inputStream = reader.getResourceAsStream(input);
+        if (inputStream != null) {
+            // get an channel from the stream
+            final ReadableByteChannel inputChannel = Channels.newChannel(inputStream);
+            final WritableByteChannel outputChannel = Channels.newChannel(outputStram);
+            // copy the channels
+            fastChannelCopy(inputChannel, outputChannel);
+            // closing the channels
+            inputChannel.close();
+            outputChannel.close()
+        } else {
+            println "File  ${input} not found"
+        }
+    }
+
+    private doCopyFile(String input, String output) {
+        File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
+        println "writing ${outputFile.getAbsolutePath()}"
+        final OutputStream outputStram = new FileOutputStream(outputFile);
+        final InputStream inputStream = new FileInputStream(input);
         if (inputStream != null) {
             // get an channel from the stream
             final ReadableByteChannel inputChannel = Channels.newChannel(inputStream);
@@ -163,14 +189,29 @@ abstract class AbstractTemplateWriter {
         }
     }
 
-
-    private static String getClassName(Class c) {
-        final String className = c.getName()
+    private static String getClassName(def object) {
+        if (object instanceof Map) {
+            def map = (object as Map)
+            if (map.size() >= 0 ) {
+                return  map.keySet()[0]
+            }
+        }
+        final String className = object.class.name
         final int firstChar = className.lastIndexOf('.') + 1;
         if (firstChar > 0) {
-            return className.substring(firstChar);
+            return className.substring(firstChar).toLowerCase();
         }
-        return className;
+        return className.toLowerCase();
+    }
+
+    def getContextObject(def object) {
+        if (object instanceof Map) {
+            def map = (object as Map)
+            if (map.size() >= 0 ) {
+                return map.values()[0]
+            }
+        }
+        return object
     }
 
     protected File getFileCratingAllNecessaryDirs(final String output) {

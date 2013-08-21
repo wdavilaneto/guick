@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component
 class ResourceReader {
 
     public Reader getRunner(String runner) {
+
         return getResource("${runner}.gdsl")
     }
 

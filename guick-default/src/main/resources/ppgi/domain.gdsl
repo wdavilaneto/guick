@@ -1,0 +1,59 @@
+package ppgi
+
+import org.wdn.guick.model.Clazz
+
+def packageBase = "br/com/petrobras/ppgi/ca/facade"
+
+def classes = [new Clazz(name: "Resource"), new Clazz(name: "Area"), new Clazz(name: "UserGroup")]
+
+
+guick {
+
+    domain {
+
+        // CA service ...
+        for (def clazz : classes) {
+            "item" {
+                object clazz
+                templates = [
+                        [input: "ppgi/service.ftl", output: "src/main/java/${packageBase}/${clazz.name}Service.groovy"]
+//                        ,[input: "ppgi/mock.ftl", output: "src/test/java/${packageBase}/mock/${clazz.name}FacadeMock.groovy"]
+                ]
+            }
+        }
+
+//        for (def clazz : classes) {
+//            "vc" {
+//                object clazz
+//                templates = [
+//                        [input: "ppgi/serviceTest.ftl", output: "src/test/java/${packageBase}/${clazz.name}ServiceTest.groovy"]
+//                ]
+//            }
+//        }
+
+//        "ontime" {
+//            templates = [
+//                    [input: "ppgi/UserProfile.groovy.ftl", output: "src/main/java/$s{packageBase}/../domain"],
+//                    [input: "ppgi/CaServiceBase.groovy.ftl", output: "src/main/java/${packageBase}/"],
+//                    [input: "ppgi/CaMockTest.groovy.ftl", output: "src/test/java/${packageBase}"]
+//            ]
+//        }
+
+        // CA service integration...
+        for (def clazz : classes) {
+            "item" {
+                object clazz
+                templates = [
+                        [input: "ppgi/serviceTest.ftl", output: "src/test/java/${packageBase}/${clazz.name}ServiceTest.groovy"]
+                ]
+            }
+        }
+//        "ontime" {
+//            templates = [
+//                    [input: "ppgi/CaContextualizedTest.groovy.ftl", output: "src/test/java/${packageBase}"]
+//            ]
+//        }
+
+    }
+
+}

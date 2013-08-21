@@ -1,0 +1,18 @@
+def packageBase = "br/com/petrobras/ppgi/presentation/ca"
+
+def metadata = json.load('ppgi/domain.json')
+
+guick {
+
+    presentation {
+
+        for (def result : metadata.entities){
+            "geracao de services" {
+                object result
+                templates = [
+                        [input:"ppgi/Controller.groovy.ftl" , output:"/src/main/java/${packageBase}/${result.entity.name}Controller.groovy"]
+                ]
+            }
+        }
+    }
+}

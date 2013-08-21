@@ -29,7 +29,6 @@ class TemplateWriter extends AbstractTemplateWriter {
     protected doWriteTemplate(String input, def context, String output) {
         Template template = configuration.getTemplate(input);
         File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
-        println "writing ${outputFile.getAbsolutePath()}"
         FileOutputStream fileOutputStream = new FileOutputStream(outputFile)
         Writer out = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
         template.process(context, out)

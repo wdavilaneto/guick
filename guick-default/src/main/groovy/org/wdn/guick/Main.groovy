@@ -29,7 +29,7 @@ class Main {
     }
 
     public execute(String path = DEFAULT_PROJECT_ROOT) {
-        ExpandoMetaClass.disableGlobally()
+//        ExpandoMetaClass.disableGlobally()
         // Initializing Spring
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("org.wdn.guick");
@@ -42,7 +42,7 @@ class Main {
         // Lets run an example ...
         DslArchitecture guick = (DslArchitecture) context.getBean("dslArchitecture");
 
-        guick.runEngine("domain")
+        guick.runEngine("ppgi/domain")
 //        guick.runEngine("installPom")
 //        guick.runEngine("installGradle")
 //        guick.runEngine("persistence")
