@@ -23,12 +23,8 @@
     <context:component-scan base-package="${project.group}.${project.name}.service"/>
 
     <!--<jee:jndi-lookup id="dataSource" expected-type="javax.sql.DataSource" jndi-name="${project.name}Ds"/>-->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
-    </bean>
+    <!-- this will import development/test datasource while in development profile -->
+    <import resource="datasource.xml" />
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
