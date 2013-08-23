@@ -7,7 +7,7 @@ guick {
     persistence {
 
         "repository" {
-            templates = [[input: "default/repository.groovy.ftl", output: "src/main/java/${group}/${name}/persistence/TestRepository.groovy"]]
+//            templates = [[input: "default/repository.groovy.ftl", output: "src/main/java/${group}/${name}/persistence/TestRepository.groovy"]]
         }
 
     }
