@@ -1,9 +1,0 @@
-{"entities":[
-    {"entity":{"name":"Information","service":"InformationValueService","methods":["get","find","findAll"]}},
-    {"entity":{"name":"InformationValue","service":"InformationValueService","methods":["get","find","findAll"]}},
-    {"entity":{"name":"Resource","service":"ResourceService","methods":["get","find","findAll"]}},
-    {"entity":{"name":"User","service":"UserService","methods":["get","find","findAll"]}},
-    {"entity":{"name":"Role","service":"RoleService","methods":["get","find","findAll"]}},
-    {"entity":{"name":"Area","service":"AreaService","methods":["get","find","findAll"]}}
-]
-}

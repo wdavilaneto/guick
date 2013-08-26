@@ -1,7 +1,45 @@
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'org.wdn.guick'
+            artifactId 'guick-core'
+            version '1.0-SNAPSHOT'
+
+            from components.java
+            pom.withXml {
+                asNode().children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    description 'guick core'
+//                    url projectUrl
+//                    scm {
+//                        url scmUrl
+//                        connection connectionUrl
+//                        developerConnection developerConnectionUrl
+//                    }
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/license/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'wdavilaneto'
+                            name "Walter D'Avila Neto"
+                            email 'wdavilaneto@gmail.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 dependencies {
     //compile "com.google.guava:guava:14.0.1"
     compile "com.cloudbees:diff4j:1.0"
     compile "org.freemarker:freemarker:2.3.20"
+    compile 'org.apache.velocity:velocity:1.7'
     compile "commons-lang:commons-lang:2.6"
 }

@@ -13,7 +13,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final DEFAULT_PROJECT_ROOT = "../../openshift/service"
+    private static final DEFAULT_PROJECT_ROOT = "../wdavilaneto"
 
     public static void main(String[] args) {
 
@@ -24,12 +24,10 @@ class Main {
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
-
-
     }
 
     public execute(String path = DEFAULT_PROJECT_ROOT) {
-//        ExpandoMetaClass.disableGlobally()
+        ExpandoMetaClass.disableGlobally()
         // Initializing Spring
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("org.wdn.guick");
@@ -41,13 +39,11 @@ class Main {
 
         // Lets run an example ...
         DslArchitecture guick = (DslArchitecture) context.getBean("dslArchitecture");
-
-//        guick.runEngine("ppgi/domain")
 //        guick.runEngine("installPom")
 //        guick.runEngine("installGradle")
 //        guick.runEngine("persistence")
         guick.runEngine("installWebArtifacts")
-
+        guick.runEngine("domain")
     }
 
 }

@@ -1,0 +1,37 @@
+
+project.group = "com.wdavilaneto"
+project.name = 'wdavilaneto'
+
+def packageBase = "com/wdavilaneto/${project.name}"
+
+
+def metadata = json.load('domain/domain.json')
+project.metadata =  metadata
+
+guick {
+
+    domain {
+        for (def entity : metadata.entities) {
+
+            "geracao de services" {
+                object entity
+                templates = [
+                        [input: "domain/Entity.groovy.ftl", output: "/src/main/java/${packageBase}/domain/${entity.name}.groovy"],
+                        [input: "domain/repository.groovy.ftl", output: "/src/main/java/${packageBase}/persistence/${entity.name}Repository.groovy"],
+                        [input: "domain/controller.groovy.ftl", output: "/src/main/java/${packageBase}/presentation/${entity.name}Controller.groovy"],
+                        [input: "domain/controllerTest.groovy.ftl", output: "/src/test/java/${packageBase}/presentation/${entity.name}ControllerTest.groovy"],
+                        [input: "domain/filter.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/filter.html"]
+                ]
+            }
+        }
+//        "repository" {
+//            templates = [[input: "domain/crudRepository.groovy.ftl", output: "src/main/java/${packageBase}/persistence/CrudRepository.groovy"]]
+//        }
+        "single-generateds" {
+            templates = [
+                    [input: "domain/home.html.vm",  output: "/src/main/webapp/WEB-INF/views/home.html"],
+                    [input: "domain/AbstractTest.groovy.vm",  output: "/src/test/java/${packageBase}/"]
+            ]
+        }
+    }
+}

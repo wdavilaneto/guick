@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+
+<head>
+    <title>WDN Consultancy and Solution Developer</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Guick Generated Example" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" />
+</head>
+<body>
+
+<div class="container">
+
+    <div th:include="common/header :: top" />
+
+    <div class="hero-unit">
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="" class="form-horizontal" id="${entity.name}Form" method="post">
+                    <div class="span12">
+                        <div class="well clearfix">
+                            <fieldset>
+                                <legend>Person</legend>
+                                <div class="span5">
+#foreach( ${property} in ${entity.properties})
+#if ($velocityCount % 2 != 0)
+                                    <div class="control-group">
+                                        <label class="control-label">${property.name}: </label>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge"  name="${property.name}"  id="${property.name}"/>
+                                        </div>
+                                    </div>
+#end
+#end
+                                </div>
+                                <div class="span5">
+#foreach( ${property} in ${entity.properties})
+#if ($velocityCount % 2 == 0)
+                                    <div class="control-group">
+                                        <label class="control-label">${property.name}: </label>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge"  name="${property.name}"  id="${property.name}"/>
+                                        </div>
+                                    </div>
+#end
+#end
+                                </div>
+                            </fieldset>
+                            <button class="btn btn-primary">Submit</button>
+                            <button class="btn">Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+#foreach( ${property} in ${entity.properties})
+            <th>${property.name}</th>
+#end
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="${util.uncapitalize($entity.name)},row : *{${util.uncapitalize($entity.name)}List}">
+#foreach( ${property} in ${entity.properties})
+            <td th:text="${'$'}{${util.uncapitalize($entity.name)}.${property.name}}">field </td>
+#end
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:substituteby="common/footer :: copy"></div>
+
+</div>
+
+</body>
+</html>

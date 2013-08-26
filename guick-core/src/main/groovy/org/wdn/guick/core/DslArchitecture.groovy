@@ -23,7 +23,7 @@ class DslArchitecture {
 
         Binding binding = new Binding()
         binding.setVariable("project", project)
-        binding.setVariable("stringUtil",new StringUtil())
+        binding.setVariable("util",new StringUtil())
         binding.setVariable("json", json)
 
         Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))

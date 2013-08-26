@@ -14,7 +14,7 @@ import javax.annotation.Resource
 @PackageScope
 class GuickDelegate {
 
-    @Resource TemplateWriter writer
+    @Resource VelocityWriter writer
 
     private List objects
     private List templates

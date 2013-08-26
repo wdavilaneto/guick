@@ -26,7 +26,7 @@ class TemplateWriter extends AbstractTemplateWriter {
     }
 
     @Override
-    protected doWriteTemplate(String input, def context, String output) {
+    protected doWriteTemplate(String input, Map context, String output) {
         Template template = configuration.getTemplate(input);
         File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
         FileOutputStream fileOutputStream = new FileOutputStream(outputFile)

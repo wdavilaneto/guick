@@ -1,4 +1,4 @@
-def packageBase = "br/com/petrobras/ppgi/presentation/ca"
+def packageBase = "com/wdavilaneto/wdavilaneto/presentation/"
 
 def metadata = json.load('ppgi/domain.json')
 

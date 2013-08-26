@@ -1,3 +1,7 @@
+project.group = 'com.wdavilaneto'
+project.name = 'wdavilaneto'
+
+
 guick {
 
     installWebArtifacts {

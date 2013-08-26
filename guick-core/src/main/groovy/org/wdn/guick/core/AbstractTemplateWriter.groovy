@@ -26,7 +26,7 @@ abstract class AbstractTemplateWriter {
 
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-    abstract protected doWriteTemplate(String input, def context, String output);
+    abstract protected doWriteTemplate(String input, Map context, String output);
 
     public process(List objects, List<Map<String, Object>> templates) {
         if (objects == null) {
@@ -98,7 +98,7 @@ abstract class AbstractTemplateWriter {
     private void execute(String input, String output, def extraContext = null, def obj = null) {
         HashMap<String, Object> context = new HashMap();
         context.put("project", project)
-        context.put("stringUtil", new StringUtil())
+        context.put("util", new StringUtil())
         context.put("json", json)
 
         if (obj != null) {
@@ -114,7 +114,7 @@ abstract class AbstractTemplateWriter {
         output = normalizeOutput(input, output)
 
         println "->" + output
-        if (input.endsWith(".ftl")) {
+        if (input.endsWith(".ftl") || input.endsWith(".vm")) {
             doWriteTemplate(input, context,  output);
         } else {
             doCopyResrouce(input, output)
@@ -127,7 +127,13 @@ abstract class AbstractTemplateWriter {
     String normalizeOutput(final String input, final String output) {
         def outputFileName = output.split("/").last()
         if (outputFileName.contains(".")) {
-            return (output.endsWith(".ftl") ? output[0..-5] : output)
+            if (output.endsWith(".ftl")) {
+                return   output[0..-5]
+            }
+            if (output.endsWith(".vm")) {
+                return   output[0..-4]
+            }
+            return output
         }
         def inputFilename = input.split("/").last().replaceFirst(".ftl", "")
         return output + "/" + inputFilename;
@@ -192,8 +198,10 @@ abstract class AbstractTemplateWriter {
     private static String getClassName(def object) {
         if (object instanceof Map) {
             def map = (object as Map)
-            if (map.size() >= 0 ) {
-                return  map.keySet()[0]
+            if (map.size() >= 0 && map._type != null) {
+                return map._type.toString().toLowerCase()
+            } else {
+                return "entity"
             }
         }
         final String className = object.class.name
@@ -208,7 +216,7 @@ abstract class AbstractTemplateWriter {
         if (object instanceof Map) {
             def map = (object as Map)
             if (map.size() >= 0 ) {
-                return map.values()[0]
+                return map//.values()[0]
             }
         }
         return object

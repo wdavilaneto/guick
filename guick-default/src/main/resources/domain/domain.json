@@ -1,0 +1,26 @@
+{
+    "entities": [
+        {
+            "name": "Person",
+            "_type": "Entity",
+            "_typeGroup": "entities",
+            "properties": [
+                {
+                    "name": "firstName",
+                    "type": "String",
+                    "length": 7
+                },
+                {
+                    "name": "lastName",
+                    "type": "String",
+                    "length": 7
+                },
+                {
+                    "name": "age",
+                    "type": "Integer",
+                    "length": 7
+                }
+            ]
+        }
+    ]
+}

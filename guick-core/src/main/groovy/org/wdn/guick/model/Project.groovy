@@ -18,7 +18,9 @@ class Project {
     String name
     String path
 
-    def initialize(String rootPath) {
+    def metadata = [:]
+
+    def initialize(String rootPath = "") {
         path = new File(rootPath).getCanonicalPath()
     }
 
@@ -30,8 +32,8 @@ class Project {
     }
 
     public String getGroup(){
-        if (group != null) {
-            return group
+        if (this.group != null) {
+            return this.group
         }
         return getName()
     }

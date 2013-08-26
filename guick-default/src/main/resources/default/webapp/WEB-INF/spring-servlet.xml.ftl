@@ -7,22 +7,36 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.data.web.PageableArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 
-    <context:component-scan base-package="org.wdn.json"/>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+            </list>
+        </property>
+        <property name="formatters">
+            <list>
+                <bean class="org.springframework.format.datetime.DateFormatter"/>
+            </list>
+        </property>
+    </bean>
 
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-        <!--<property name="prefix" value="/WEB-INF/views/"/>-->
-        <!--<property name="suffix" value=".jsp"/>-->
-        <!--<property name="order" value="1"/>-->
-    <!--</bean>-->
+    <bean class="org.springframework.data.repository.support.DomainClassConverter">
+        <constructor-arg ref="conversionService" />
+    </bean>
 
-    <bean id="templateResolver"
-          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+    <context:component-scan base-package="${project.group}.${project.name}.presentation"/>
+
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".html" />
         <property name="templateMode" value="HTML5" />
+        <!-- just for dev -->
+        <property name="cacheable" value="false" />
     </bean>
 
     <bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
@@ -31,6 +45,10 @@
 
     <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
+    </bean>
+
+    <bean class="org.springframework.data.repository.support.DomainClassConverter">
+        <constructor-arg ref="conversionService" />
     </bean>
 
     <bean name="/home.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">

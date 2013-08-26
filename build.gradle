@@ -1,3 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'org.wdn.guick'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
 
 subprojects {
 
@@ -9,16 +18,7 @@ subprojects {
     version = '1.0-SNAPSHOT'
 
     repositories {
-        mavenLocal()
         mavenCentral()
-    }
-
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                from components.java
-            }
-        }
     }
 
     dependencies {
@@ -26,9 +26,100 @@ subprojects {
         compile "org.springframework:spring-context:3.2.3.RELEASE"
         testCompile "junit:junit:4.11"
     }
+    // javadoc.jar generation
+    task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    // sources.jar generation
+    task sourceJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+// pom file name
+    ext {
+        pomFilePath = "${project.projectDir}/tmp/pom.xml"
+        pomFile = file(pomFilePath)
+    }
+// add configuration for pom signing
+    configurations {
+        pom
+    }
+
+    // summarize artifacts
+    artifacts {
+        archives jar
+        archives sourceJar
+        archives javadocJar
+        if (pomFile.exists()) {
+            pom pomFile
+        }
+    }
 
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.7'
 }
+
+ext.pomConfiguration = {
+    name 'Gradle Guick plugin'
+    description 'Gradle plugin supporting rapid development of your web application.'
+    url 'https://github.com/wdavilaneto/guick'
+    inceptionYear '2010'
+
+    scm {
+        url 'https://github.com/bmuschko/gradle-tomcat-plugin'
+        connection 'scm:https://github.com/wdavilaneto/guick.git'
+        developerConnection 'scm:git://github.com/wdavilaneto/guick.git'
+    }
+
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+
+    developers {
+        developer {
+            id 'wdavilaneto'
+            name "Walter D'Avila Neto"
+            email 'wdavilaneto@gmail.com'
+        }
+    }
+}
+
+//install {
+//    repositories.mavenInstaller {
+//        pom.project pomConfiguration
+//    }
+//}
+
+//if(hasProperty('nexusUsername') && hasProperty('nexusPassword')) {
+//    apply plugin: 'signing'
+//
+//    signing {
+//        required { gradle.taskGraph.hasTask(uploadArchives) && !version.endsWith('SNAPSHOT') }
+//        sign configurations.archives
+//    }
+//
+//    uploadArchives {
+//        repositories.mavenDeployer {
+//            beforeDeployment { deployment ->
+//                signing.signPom(deployment)
+//            }
+//
+//            name = 'mavenCentralReleaseDeployer'
+//
+//            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
+//                authentication(userName: nexusUsername, password: nexusPassword)
+//                releases(updatePolicy: 'always')
+//            }
+//
+//            pom.project pomConfiguration
+//        }
+//    }
+//}

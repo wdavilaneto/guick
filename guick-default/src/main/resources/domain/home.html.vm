@@ -42,10 +42,10 @@
             <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
         <div class="span4">
-            <h2>TISS </h2>
-            <p>Created an Architecture and lead development team to create AMS TISS for Petrobras.
-                An exchange of Information on Health Insurance model. A Highly critical application with webservices with hight performance requirements</p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
+            <h2>Generated Entities</h2>
+#foreach( ${entity} in ${project.metadata.entities})
+            <p><a th:href="@{/${entity.name}/filter.do}" href="#">${entity.name}</a></p>
+#end
         </div>
         <div class="span4">
             <h2>Social</h2>
