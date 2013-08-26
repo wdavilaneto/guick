@@ -1,6 +1,3 @@
-#set( $open  = "${")
-#set( $close = "}")
-#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
@@ -33,11 +30,12 @@
                             <fieldset>
                                 <legend>Creating new Person</legend>
                                 <div class="span7">
+                                    <input type="hidden" name="id"  id="id"/>
 #foreach( ${property} in ${entity.properties})
                                     <div class="control-group">
                                         <label class="control-label">${property.name}: </label>
                                         <div class="controls">
-                                            <input type="text" class="input-xlarge"  name="${property.name}" id="${property.name}" th:value="${open}${entityBeanName}.${property.name}}"/>
+                                            <input type="text" class="input-xlarge"  name="${property.name}"  id="${property.name}"/>
                                         </div>
                                     </div>
 #end

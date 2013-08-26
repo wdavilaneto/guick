@@ -45,17 +45,17 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${"$"}{spring_version}</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>${"$"}{spring_version}</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${"$"}{spring_version}</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -184,8 +184,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
-                    <target>1.7</target>
-                    <source>1.7</source>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
                     <showWarnings>true</showWarnings>
                 </configuration>
@@ -206,7 +206,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <java.io.tmpdir>${"$"}{project.build.directory}</java.io.tmpdir>
+                        <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                     </systemPropertyVariables>
                 </configuration>
                 <version>2.7.1</version>

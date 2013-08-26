@@ -1,5 +1,7 @@
 #set( $open  = "${")
 #set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
@@ -24,46 +26,35 @@
     <div th:include="common/header :: top" />
 
     <div class="hero-unit">
-        <div class="row-fluid">
-            <div class="span12">
-                <form action="#" th:attr="action=@{/${entity.name}/filter.do}" class="form-horizontal" id="${entity.name}Form" method="post">
-                    <div class="span12">
-                        <div class="well clearfix">
-                            <fieldset>
-                                <legend>Person Search Filter</legend>
-                                <div class="span5">
+        <form action="#" th:attr="action=@{/${entity.name}/filter.do}" class="form-horizontal" id="${entity.name}Form" method="post">
+            <div class="well clearfix">
+                <fieldset>
+                    <legend>Person Search Filter</legend>
+                    <div class="row-fluid">
+                        <div class="span6">
 #foreach( ${property} in ${entity.properties})
 #if ($velocityCount % 2 != 0)
-                                    <div class="control-group">
-                                        <label class="control-label">${property.name}: </label>
-                                        <div class="controls">
-                                            <input type="text" class="input-xlarge"  name="${property.name}"  id="${property.name}"/>
-                                        </div>
-                                    </div>
+                            <label for="${property.name}">${property.name}: </label>
+                            <input type="text" class="input-xlarge"  name="${property.name}" id="${property.name}"/>
 #end
 #end
-                                </div>
-                                <div class="span5">
+                        </div>
+                        <div class="span5">
 #foreach( ${property} in ${entity.properties})
 #if ($velocityCount % 2 == 0)
-                                    <div class="control-group">
-                                        <label class="control-label">${property.name}: </label>
-                                        <div class="controls">
-                                            <input type="text" class="input-xlarge"  name="${property.name}"  id="${property.name}"/>
-                                        </div>
-                                    </div>
+                            <label for="${property.name}">${property.name}: </label>
+                            <input type="text" class="input-xlarge"  name="${property.name}" id="${property.name}"/>
 #end
 #end
-                                </div>
-                            </fieldset>
-                            <button class="btn btn-primary">Search</button>
-                            <button class="btn">Clear</button>
-                            <button class="btn btn-primary" formmethod="get" th:attr="formaction=@{/${entity.name}/create.do}">New</button>
                         </div>
                     </div>
-                </form>
+                </fieldset>
+                <br />
+                <button class="btn btn-primary">Search</button>
+                <button class="btn">Clear</button>
+                <button class="btn btn-primary" formmethod="get" th:formaction="@{/${entity.name}/create.do}">New</button>
             </div>
-        </div>
+        </form>
     </div>
 
     <hr />
@@ -74,16 +65,51 @@
 #foreach( ${property} in ${entity.properties})
             <th>${property.name}</th>
 #end
+            <th> - </th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="${util.uncapitalize($entity.name)},row : *{${util.uncapitalize($entity.name)}List}">
+        <tr th:each="${entityBeanName},row : *{${entityBeanName}List}">
 #foreach( ${property} in ${entity.properties})
-            <td th:text="${open}${util.uncapitalize($entity.name)}.${property.name}}">field </td>
+            <td th:text="${open}${entityBeanName}.${property.name}}">field </td>
 #end
+            <td>
+                <a href="edit.html" th:href="@{/${entity.name}/edit.do(id=${person.id})}"><i class="icon-edit"></i></a>
+                <a href="view.html" th:href="@{/${entity.name}/view.do(id=${person.id})}"><i class="icon-search"></i></a>
+            </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- Pagination Bar -->
+    <div th:fragment="paginationbar">
+        <div class="pagination pagination-centered">
+            <ul>
+                <li th:class="${open}${entityBeanName}List.firstPage}  ? 'disabled' : ''">
+                    <span th:if="${open}${entityBeanName}List.firstPage}">← First</span>
+                    <a th:if="${open}not ${entityBeanName}List.firstPage}" th:href="@{/Person/filter.do(page.page=1,page.size=${open}${entityBeanName}List.size})}">← First</a>
+                </li>
+                <li th:class="${open}${entityBeanName}List.hasNextPage()}? '' : 'disabled'">
+                    <span th:if="${open}not ${entityBeanName}List.hasNextPage()}">«</span>
+                    <a th:if="${open}${entityBeanName}List.hasNextPage()}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.number-1},page.size=${open}${entityBeanName}List.size})}" title="Go to previous page">«</a>
+                </li>
+                <li th:each="item : ${beans.pageableSupport.getPageList( personList )}" th:class="${item.current}? 'active' : ''">
+                    <span th:if="${item.current}" th:text="${item.number}">1</span>
+                    <a th:if="${open}not item.current}" th:href="@{/Person/filter.do(page.page=${item.number},page.size=${open}${entityBeanName}List.size})}">
+                        <span th:text="${item.number}">1</span>
+                    </a>
+                </li>
+                <li th:class="${open}${entityBeanName}List.hasPreviousPage()}? '' : 'disabled'">
+                    <span th:if="${open}not personList.hasPreviousPage()}">»</span>
+                    <a th:if="${open}${entityBeanName}List.hasPreviousPage()}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.number+1},page.size=${open}${entityBeanName}List.size})}" title="Go to next page">»</a>
+                </li>
+                <li th:class="${open}${entityBeanName}List.lastPage}? 'disabled' : ''">
+                    <span th:if="${open}${entityBeanName}List.lastPage}">Last →</span>
+                    <a th:if="${open}not personList.lastPage}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.totalPages},page.size=${open}${entityBeanName}List.size})}">Last →</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div th:substituteby="common/footer :: copy"></div>
 

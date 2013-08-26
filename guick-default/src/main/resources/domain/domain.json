@@ -8,18 +8,28 @@
                 {
                     "name": "firstName",
                     "type": "String",
-                    "length": 7
+                    "length": 150
                 },
                 {
                     "name": "lastName",
                     "type": "String",
-                    "length": 7
+                    "length": 150
                 },
                 {
                     "name": "age",
                     "type": "Integer",
                     "length": 7
-                }
+                },
+                 {
+                     "name": "nickName",
+                     "type": "String",
+                     "length": 150
+                 },
+                  {
+                      "name": "knowBy",
+                      "type": "String",
+                      "length": 150
+                  }
             ]
         }
     ]

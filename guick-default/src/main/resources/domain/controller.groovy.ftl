@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,9 +40,20 @@ class ${entity.name}Controller {
      */
     @RequestMapping(value = "filter")
     public String list(@ModelAttribute(value = "${util.uncapitalize($entity.name)}") ${entity.name} ${util.uncapitalize($entity.name)}, Model model, Pageable pageable) {
-        // Calling template method to create Form Screen
         model.addAttribute("${util.uncapitalize($entity.name)}List", ${util.uncapitalize($entity.name)}Repository.findAll(pageable));
         return "${entity.name}/filter";
+    }
+
+    /**
+     * Controller method to edit of a existent entity
+     * @param person
+     * @param model
+     * @return viewId
+     */
+    @RequestMapping("/{id}")
+    public String edit(@PathVariable("id") Person person, Model model){
+        model.addAttribute("person", person);
+        return "Person/edit";
     }
 
     /**
@@ -53,18 +65,24 @@ class ${entity.name}Controller {
      */
     @RequestMapping(value = "create" , method = RequestMethod.GET)
     public String create(@ModelAttribute(value = "${util.uncapitalize($entity.name)}") ${entity.name} ${util.uncapitalize($entity.name)}, Model model) {
-        // Calling template method to create Form Screen
-        model.addAttribute("${util.uncapitalize($entity.name)}",  ${entity.name});
         return "${entity.name}/create";
     }
 
+    /**
+     * Controller method to save entity
+     * @param person
+     * @param result
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "create" , method = RequestMethod.POST)
     public String save(@ModelAttribute(value = "${util.uncapitalize($entity.name)}") ${entity.name} ${util.uncapitalize($entity.name)}, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             LOGGER.debug("Errors found during form validation, reloading form.");
             return "${entity.name}/create";
         }
-        personRepository.save(person)
+        personRepository.save(person);
         return "redirect:/${entity.name}/filter.do";
     }
 
