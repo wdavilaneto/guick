@@ -20,7 +20,8 @@ guick {
                         [input: "domain/repository.groovy.ftl", output: "/src/main/java/${packageBase}/persistence/${entity.name}Repository.groovy"],
                         [input: "domain/controller.groovy.ftl", output: "/src/main/java/${packageBase}/presentation/${entity.name}Controller.groovy"],
                         [input: "domain/controllerTest.groovy.ftl", output: "/src/test/java/${packageBase}/presentation/${entity.name}ControllerTest.groovy"],
-                        [input: "domain/filter.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/filter.html"]
+                        [input: "domain/filter.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/filter.html"],
+                        [input: "domain/create.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/create.html"]
                 ]
             }
         }

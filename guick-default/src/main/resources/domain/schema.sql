@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS Person  ;
+
+CREATE TABLE IF NOT EXISTS Person (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstName CHAR(150) NOT NULL ,
+    lastName CHAR(150) NOT NULL ,
+    age INT
+);
