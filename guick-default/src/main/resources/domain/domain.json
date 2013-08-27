@@ -19,17 +19,7 @@
                     "name": "age",
                     "type": "Integer",
                     "length": 7
-                },
-                 {
-                     "name": "nickName",
-                     "type": "String",
-                     "length": 150
-                 },
-                  {
-                      "name": "knowBy",
-                      "type": "String",
-                      "length": 150
-                  }
+                }
             ]
         }
     ]

@@ -1,3 +1,6 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
@@ -43,36 +46,48 @@
     <div th:include="common/header :: top" />
 
     <div class="hero-unit">
-        <h1>WDN</h1>
-
-        <h2> Consultancy and Solution Developer</h2>
-        <p>Acting with software development since 1994 and with solid experience in developing solutions. Working within the most different architectures, languages
-            and tools. Specialized in the development of corporate services, frameworks, critical applications and with high performance requirements.
-            With more than 11 years of experience in software architecture on the Java/Groovy platform and its plethora of tools and many other languages like Python and Ruby and C++.</p>
-
-        <p>With a multidisciplinary partnerships, WDN is ready to provide the very best breed of software development and design for your company with the most efficient way.</p>
-
-        <p><a class="btn btn-primary btn-large" href="/about.do">Learn more &raquo;</a></p>
-    </div>
-
-    <div class="row">
-        <div class="span4">
-            <h2>Generated Entities</h2>
-#foreach( ${entity} in ${project.metadata.entities})
-            <p><a th:href="@{/${entity.name}/filter.do}" href="#">${entity.name}</a></p>
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="#" th:attr="action=@{/${entity.name}/filter.do}" class="form-horizontal" id="${entity.name}Form" method="post">
+                    <div class="span12">
+                        <div class="well clearfix">
+                            <fieldset>
+                                <legend>${entity.name} Details</legend>
+                                <div th:fragment="form">
+                                    <div class="span7">
+                                        <input type="hidden" name="id" id="id" th:value="${open}${entityBeanName}.id}"/>
+#foreach( ${property} in ${entity.properties})
+                                        <div class="control-group">
+                                            <label class="control-label">${property.name}: </label>
+                                            <div class="controls">
+                                                <span class="input-xlarge uneditable-input" th:text="${open}${entityBeanName}.${property.name}}"> campo </span>
+                                            </div>
+                                        </div>
 #end
-        </div>
-        <div class="span4">
-            <h2>Architecture</h2>
-            <p>Working with Architecture and Development consultancy for Petrobras, a huge Brazilian Oil Company, over seven years.
-               There I've helped on creation critical comparative tools, components and webservices. Created of code patterns, standardized development architectures and much more.</p>
-            <p>There I've also developed several tools for productivity like "Grails framework", but all on compile/generation time as Maven plugins..
-                Now I'm begining to develop some of that 'experience' for Opensource World</p>
-        </div>
-        <div class="span4">
-            <h2>Guick</h2>
-            <p>Code generation and revers engeneering plugin on the fly, enabling a productivity just as Grails but with your withou all the groovy "magic" and wight, and most important with your desired architecture, like plain java, groovy CompileStatic and performance focus</p>
-            <p><a class="btn" href="https://github.com/wdavilaneto/guick">Guick &raquo;</a></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <button class="btn">Back</button>
+                            <a id="modal-553376" href="#modal-container-553376" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                            <div id="modal-container-553376" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel">
+                                        Confirmation Event
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Do you confirm Deleting ?</p>
+                                </div>
+                                <div class="modal-footer">
+                                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                     <button class="btn btn-danger" th:attr="formaction=@{/${entity.name}/delete.do}">Confirm Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

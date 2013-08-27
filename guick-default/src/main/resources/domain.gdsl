@@ -21,7 +21,9 @@ guick {
                         [input: "domain/controllerTest.groovy.ftl", output: "/src/test/java/${packageBase}/presentation/${entity.name}ControllerTest.groovy"],
                         [input: "domain/filter.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/filter.html"],
                         [input: "domain/create.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/create.html"],
-                        [input: "domain/edit.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/edit.html"]
+                        [input: "domain/fieldset.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/fieldset.html"],
+                        [input: "domain/edit.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/edit.html"],
+                        [input: "domain/show.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/show.html"]
                 ]
             }
         }
@@ -32,8 +34,8 @@ guick {
             templates = [
                     [input: "domain/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"],
                     [input: "domain/AbstractTest.groovy.vm", output: "/src/test/java/${packageBase}/"],
-                    [input: "domain/PageableSupport.groovy.vm", output: "/src/java/java/${packageBase}/presentation/support/"],
-                    [input: "domain/PageItem.groovy.vm", output: "/src/java/java/${packageBase}/presentation/support/"]
+                    [input: "domain/PageableSupport.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"],
+                    [input: "domain/PageItem.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"]
             ]
         }
     }

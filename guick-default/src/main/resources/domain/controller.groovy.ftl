@@ -1,3 +1,6 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 package ${project.group}.${project.name}.presentation;
 
 import com.wdavilaneto.wdavilaneto.domain.${entity.name};
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -50,10 +54,34 @@ class ${entity.name}Controller {
      * @param model
      * @return viewId
      */
-    @RequestMapping("/{id}")
-    public String edit(@PathVariable("id") Person person, Model model){
+    @RequestMapping(value ="edit", method = RequestMethod.GET)
+    public String edit(@RequestParam("id") Person person, Model model){
         model.addAttribute("person", person);
         return "Person/edit";
+    }
+
+    /**
+     * Controller method to view of a existent entity
+     * @param person
+     * @param model
+     * @return viewId
+     */
+    @RequestMapping(value ="show", method = RequestMethod.GET)
+    public String show(@RequestParam("id") ${entity.name} ${util.uncapitalize($entity.name)}, Model model){
+        model.addAttribute("${util.uncapitalize($entity.name)}", ${util.uncapitalize($entity.name)});
+        return "${entity.name}/show";
+    }
+
+    /**
+     * Controller method to delete an existent entity with a given id
+     * @param person
+     * @param model
+     * @return viewId
+     */
+    @RequestMapping(value ="delete", method = RequestMethod.POST)
+    public String delete(@RequestParam("id") ${entity.name} ${util.uncapitalize($entity.name)}, Model model){
+        ${util.uncapitalize($entity.name)}Repository.delete(${util.uncapitalize($entity.name)}.id);
+        return "redirect:/${entity.name}/filter.do";
     }
 
     /**

@@ -5,7 +5,12 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-
+/**
+ *  Entity: ${entity.name}
+ *  Guick Generate class:
+ *  https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ */
 @Entity
 class ${entity.name} implements Serializable {
 

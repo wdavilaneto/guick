@@ -39,7 +39,7 @@ class Main {
 
         // Lets run an example ...
         DslArchitecture guick = (DslArchitecture) context.getBean("dslArchitecture");
-        guick.runEngine("installPom")
+//        guick.runEngine("installPom")
 //        guick.runEngine("installGradle")
 //        guick.runEngine("persistence")
         guick.runEngine("installWebArtifacts")
