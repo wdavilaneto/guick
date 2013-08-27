@@ -7,13 +7,13 @@ guick {
     installWebArtifacts {
 
         "archetype" {
-            templates = [[input: "default/webapp", output: "src/main/webapp"]]
+            templates = [[input: "archetype/webapp", output: "src/main/webapp"]]
         }
 
         "resources" {
             templates = [
-                    [input: "default/resources", output: "src/main/resources"],
-                    [input: "default/testResources", output: "src/test/resources"]
+                    [input: "archetype/resources", output: "src/main/resources"],
+                    [input: "archetype/testResources", output: "src/test/resources"]
             ]
         }
 

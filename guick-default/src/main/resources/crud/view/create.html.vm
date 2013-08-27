@@ -48,13 +48,13 @@
     <div class="hero-unit">
         <div class="row-fluid">
             <div class="span12">
-                <form action="#" th:attr="action=@{/${entity.name}/filter.do}" class="form-horizontal" id="${entity.name}Form" method="post">
+                <form action="#" th:action="@{/${entity.name}/filter.do}" th:object="${open}${entityBeanName}}" class="form-horizontal" id="${entityBeanName}Form" method="post">
                     <div class="well clearfix">
                         <fieldset>
                             <legend>Creating new ${entity.name}</legend>
                             <div th:include="${entity.name}/fieldset :: form" />
                         </fieldset>
-                        <button class="btn btn-primary" th:attr="formaction=@{/${entity.name}/create.do}">Save</button>
+                        <button class="btn btn-primary" th:formaction="@{/${entity.name}/create.do}">Save</button>
                         <button class="btn">Back</button>
                     </div>
                 </form>

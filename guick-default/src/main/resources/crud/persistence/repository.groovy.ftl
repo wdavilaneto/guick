@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  *  Author: service-wdavilaneto@redhat.com
  */
 @Repository
-public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long > {
+public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ICoreRepository<Person, Long > {
 }

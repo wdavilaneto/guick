@@ -18,7 +18,7 @@
 
     <tx:annotation-driven/>
 
-    <jpa:repositories base-package="${project.group}.${project.name}.persistence" />
+    <jpa:repositories base-package="${project.group}.${project.name}.persistence" factory-class="${project.group}.${project.name}.persistence.CoreRepositoryFactoryBean" />
 
     <context:component-scan base-package="${project.group}.${project.name}.service"/>
 

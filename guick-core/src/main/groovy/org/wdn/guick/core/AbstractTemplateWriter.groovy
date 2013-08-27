@@ -41,7 +41,8 @@ abstract class AbstractTemplateWriter {
                     }
                 } else {
                     String output = prams.output
-                    String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
+                    //String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
+                    String normalizedInput = prams.input.toString().split("/").last().toString()
                     if (output == null) {
                         output = normalizedInput
                     } else {
@@ -65,7 +66,8 @@ abstract class AbstractTemplateWriter {
                         }
                     } else {
                         String output = prams.output
-                        String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
+                        //String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
+                        String normalizedInput = prams.input.toString().split("/").last().toString()
                         if (output == null) {
                             output = normalizedInput
                         } else {

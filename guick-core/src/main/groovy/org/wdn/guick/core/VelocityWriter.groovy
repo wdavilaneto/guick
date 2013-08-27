@@ -18,7 +18,7 @@ class VelocityWriter  extends AbstractTemplateWriter{
         Velocity.setProperty("output.encoding", "UTF-8");
         Velocity.setProperty("input.encoding", "UTF-8");
         Velocity.setProperty("default.contentType", "UTF-8");
-        //Inicializa o Velociy .
+        //Inicializa o Velociy.
         Velocity.init()
     }
 

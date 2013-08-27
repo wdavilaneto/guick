@@ -39,7 +39,6 @@ publishing {
 dependencies {
     //compile "com.google.guava:guava:14.0.1"
     compile "com.cloudbees:diff4j:1.0"
-    compile "org.freemarker:freemarker:2.3.20"
     compile 'org.apache.velocity:velocity:1.7'
     compile "commons-lang:commons-lang:2.6"
 }

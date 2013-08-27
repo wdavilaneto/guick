@@ -44,7 +44,7 @@ class ${entity.name}Controller {
      */
     @RequestMapping(value = "filter")
     public String list(@ModelAttribute(value = "${util.uncapitalize($entity.name)}") ${entity.name} ${util.uncapitalize($entity.name)}, Model model, Pageable pageable) {
-        model.addAttribute("${util.uncapitalize($entity.name)}List", ${util.uncapitalize($entity.name)}Repository.findAll(pageable));
+        model.addAttribute("${util.uncapitalize($entity.name)}List", ${util.uncapitalize($entity.name)}Repository.find(${util.uncapitalize($entity.name)}, pageable));
         return "${entity.name}/filter";
     }
 

@@ -106,8 +106,8 @@
         <div class="pagination pagination-centered">
             <ul>
                 <li th:class="${open}${entityBeanName}List.firstPage}  ? 'disabled' : ''">
-                    <span th:if="${open}${entityBeanName}List.firstPage}">← First</span>
-                    <a th:if="${open}not ${entityBeanName}List.firstPage}" th:href="@{/Person/filter.do(page.page=1,page.size=${open}${entityBeanName}List.size})}">← First</a>
+                    <span th:if="${open}${entityBeanName}List.firstPage}">First</span>
+                    <a th:if="${open}not ${entityBeanName}List.firstPage}" th:href="@{/Person/filter.do(page.page=1,page.size=${open}${entityBeanName}List.size})}">First</a>
                 </li>
                 <li th:class="${open}${entityBeanName}List.hasNextPage()}? '' : 'disabled'">
                     <span th:if="${open}not ${entityBeanName}List.hasNextPage()}">«</span>
@@ -124,8 +124,8 @@
                     <a th:if="${open}${entityBeanName}List.hasPreviousPage()}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.number+1},page.size=${open}${entityBeanName}List.size})}" title="Go to next page">»</a>
                 </li>
                 <li th:class="${open}${entityBeanName}List.lastPage}? 'disabled' : ''">
-                    <span th:if="${open}${entityBeanName}List.lastPage}">Last →</span>
-                    <a th:if="${open}not personList.lastPage}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.totalPages},page.size=${open}${entityBeanName}List.size})}">Last →</a>
+                    <span th:if="${open}${entityBeanName}List.lastPage}">Last</span>
+                    <a th:if="${open}not personList.lastPage}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.totalPages},page.size=${open}${entityBeanName}List.size})}">Last</a>
                 </li>
             </ul>
         </div>
