@@ -1,4 +1,4 @@
-package ${project.group}.${project.name}.persistence;
+package ${project.group}.${project.name}.persistence.support;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;

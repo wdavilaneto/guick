@@ -1,6 +1,7 @@
 project.group = 'com.wdavilaneto'
 project.name = 'wdavilaneto'
 
+def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
 
 guick {
 
@@ -16,6 +17,22 @@ guick {
                     [input: "archetype/testResources", output: "src/test/resources"]
             ]
         }
+
+        "persistence" {
+            templates = [
+                    [input: "archetype/persistence/CoreRepository.java.vm", output: "/src/main/java/${packageBase}/persistence/support/"],
+                    [input: "archetype/persistence/ICoreRepository.java.vm", output: "/src/main/java/${packageBase}/persistence/support/"],
+                    [input: "archetype/persistence/CoreRepositoryFactoryBean.java.vm", output: "/src/main/java/${packageBase}/persistence/support/"]
+            ]
+        }
+
+        "presentation" {
+            templates = [
+                    [input: "archetype/presentation/PageableSupport.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"],
+                    [input: "archetype/presentation/PageItem.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"]
+            ]
+        }
+
 
     }
 

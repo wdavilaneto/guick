@@ -1,6 +1,7 @@
 package ${project.group}.${project.name}.persistence;
 
 import com.wdavilaneto.wdavilaneto.domain.${entity.name};
+import com.wdavilaneto.wdavilaneto.persistence.support.ICoreRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

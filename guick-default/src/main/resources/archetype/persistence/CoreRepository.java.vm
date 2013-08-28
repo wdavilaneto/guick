@@ -1,4 +1,4 @@
-package ${project.group}.${project.name}.persistence;
+package ${project.group}.${project.name}.persistence.support;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;

@@ -39,6 +39,7 @@ publishing {
 dependencies {
     //compile "com.google.guava:guava:14.0.1"
     compile "com.cloudbees:diff4j:1.0"
+    compile "org.hibernate:hibernate-entitymanager:4.2.4.Final"
     compile 'org.apache.velocity:velocity:1.7'
     compile "commons-lang:commons-lang:2.6"
 }

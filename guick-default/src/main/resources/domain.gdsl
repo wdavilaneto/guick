@@ -1,7 +1,7 @@
 project.group = "com.wdavilaneto"
 project.name = 'wdavilaneto'
 
-def packageBase = "com/wdavilaneto/${project.name}"
+def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
 
 
 def metadata = json.load('crud/domain.json')
@@ -16,6 +16,7 @@ guick {
                 object entity
                 templates = [
                         [input: "crud/Entity.groovy.ftl", output: "/src/main/java/${packageBase}/domain/${entity.name}.groovy"],
+
                         [input: "crud/persistence/repository.groovy.ftl", output: "/src/main/java/${packageBase}/persistence/${entity.name}Repository.groovy"],
 
                         [input: "crud/presentation/controller.groovy.ftl", output: "/src/main/java/${packageBase}/presentation/${entity.name}Controller.groovy"],
@@ -35,15 +36,7 @@ guick {
         "single-generateds" {
             templates = [
                     [input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"],
-
-                    [input: "crud/AbstractTest.groovy.vm", output: "/src/test/java/${packageBase}/"],
-
-                    [input: "crud/persistence/CoreRepository.java.vm", output: "/src/main/java/${packageBase}/persistence/"],
-                    [input: "crud/persistence/ICoreRepository.java.vm", output: "/src/main/java/${packageBase}/persistence/"],
-                    [input: "crud/persistence/CoreRepositoryFactoryBean.java.vm", output: "/src/main/java/${packageBase}/persistence/"],
-
-                    [input: "crud/presentation/PageableSupport.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"],
-                    [input: "crud/presentation/PageItem.groovy.vm", output: "/src/main/java/${packageBase}/presentation/support/"]
+                    [input: "crud/AbstractTest.groovy.vm", output: "/src/test/java/${packageBase}/"]
             ]
         }
     }
