@@ -1,25 +1,28 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'maven-publish'
+//apply plugin: 'maven-publish'
 
 group = 'org.wdn.guick'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 subprojects {
 
     apply plugin: 'java'
     apply plugin: 'groovy'
-    apply plugin: 'maven-publish'
+    apply plugin: 'maven'
+//    apply plugin: 'maven-publish'
 //    apply plugin: 'idea'
     group = 'org.wdn.guick'
     version = '1.0-SNAPSHOT'
 
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 
     dependencies {

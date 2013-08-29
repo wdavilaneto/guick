@@ -1,6 +1,7 @@
 package org.wdn.guick.core
 import groovy.transform.CompileStatic
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
+import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
 import org.wdn.guick.util.StringUtil
@@ -23,6 +24,7 @@ abstract class AbstractTemplateWriter {
     @Resource ResourceReader reader
     @Resource Json json;
     @Resource Project project
+    @Resource Jpa jpa
 
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
@@ -102,6 +104,8 @@ abstract class AbstractTemplateWriter {
         context.put("project", project)
         context.put("util", new StringUtil())
         context.put("json", json)
+        context.put("jpa", jpa)
+
 
         if (obj != null) {
             context.put( getClassName(obj) , getContextObject(obj) )

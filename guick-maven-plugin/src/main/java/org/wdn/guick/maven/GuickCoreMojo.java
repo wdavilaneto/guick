@@ -22,6 +22,7 @@ public abstract class GuickCoreMojo extends AbstractMojo {
         context.refresh();
 
         Project project = (Project) context.getBean("project");
+        getLog().info("Running");
         project.initialize();
 
         // Lets run an example ...

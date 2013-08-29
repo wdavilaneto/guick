@@ -1,8 +1,6 @@
 package org.wdn.guick.model
-
-import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
-import sun.misc.ClassLoaderUtil
+import org.wdn.guick.util.ClassPathManager
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,29 +18,37 @@ class Project {
 
     def metadata = [:]
     def pom;
+    def datasource = [:]
 
     def initialize(String rootPath = "") {
         path = new File(rootPath).getCanonicalPath()
 
-        if (new File(path+"/pom.xml").exists()) {
-            pom = new XmlSlurper(false,false).parse(path+"/pom.xml");
+        def pomfilePath = path + "/pom.xml"
+        if (new File(pomfilePath).exists()) {
+            pom = new XmlSlurper(false, false).parse(pomfilePath);
             group = pom.groupId
             group = pom.artifactId
-            //this.class.classLoader.rootLoader.addURL( new URL("file:///${path}/target/classes"))
-            def loader = Project.class.getClassLoader()//new GroovyClassLoader()
-            loader.addURL(new URL("file:///${path}/target/classes"))
+            ClassPathManager.addURLToSystemClassLoader(new URL("file:///${path}/target/classes/"))
         }
-
+        def dsPath = path + "/src/main/resources/datasource.xml"
+        if (new File(dsPath).exists()) {
+            def xmlDS = new XmlSlurper(false, false).parse(dsPath);
+            datasource.dialect = xmlDS.depthFirst().grep { it.@name == 'databasePlatform' }.'@value'*.text()[0]
+            datasource.username = xmlDS.depthFirst().grep { it.@name == 'username' }.'@value'*.text()[0]
+            datasource.password = xmlDS.depthFirst().grep { it.@name == 'password' }.'@value'*.text()[0]
+            datasource.url = xmlDS.depthFirst().grep { it.@name == 'url' }.'@value'*.text()[0]
+            datasource.driverClass = xmlDS.depthFirst().grep { it.@name == 'driverClass' }.'@value'*.text()[0]
+        }
     }
 
-    public String getName(){
+    public String getName() {
         if (name != null) {
             return name
         }
         return path.split("/").last()
     }
 
-    public String getGroup(){
+    public String getGroup() {
         if (this.group != null) {
             return this.group
         }

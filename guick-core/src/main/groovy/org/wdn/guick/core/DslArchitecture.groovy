@@ -1,5 +1,6 @@
 package org.wdn.guick.core
 import org.springframework.stereotype.Component
+import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
 import org.wdn.guick.util.StringUtil
@@ -18,6 +19,7 @@ class DslArchitecture {
     @Resource Project project
     @Resource ResourceReader reader
     @Resource Json json
+    @Resource Jpa jpa
 
     void runEngine(String target) {
 
@@ -25,6 +27,7 @@ class DslArchitecture {
         binding.setVariable("project", project)
         binding.setVariable("util",new StringUtil())
         binding.setVariable("json", json)
+        binding.setVariable("jpa", jpa)
 
         Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
 
