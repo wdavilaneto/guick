@@ -42,8 +42,8 @@ class Main {
 //        guick.runEngine("installPom")
 //        guick.runEngine("installGradle")
 //        guick.runEngine("persistence")
-//        guick.runEngine("installWebArtifacts")
-//        guick.runEngine("domain")
+        guick.runEngine("installWebArtifacts")
+        guick.runEngine("domain")
         guick.runEngine("migrateToDb")
     }
 

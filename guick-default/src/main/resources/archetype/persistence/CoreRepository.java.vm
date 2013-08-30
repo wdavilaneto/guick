@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @NoRepositoryBean
+@SuppressWarnings("unchecked")
 public class CoreRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements ICoreRepository<T, ID> {
 
     private EntityManager entityManager;

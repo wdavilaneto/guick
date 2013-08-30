@@ -1,22 +1,46 @@
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.project {
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-            }
-        }
-    }
-}
-
 dependencies {
     compile "org.apache.maven:maven-plugin-api:2.0"
     compile project(':guick-core')
     compile project(':guick-default')
+}
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            artifactId = 'guick'
+            packaging = 'maven-plugin'
+            name 'Gradle Guick plugin'
+            description 'Gradle plugin supporting rapid development of your web application.'
+            url 'https://github.com/wdavilaneto/guick'
+            inceptionYear '2010'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url 'https://github.com/bmuschko/gradle-tomcat-plugin'
+                connection 'scm:https://github.com/wdavilaneto/guick.git'
+                developerConnection 'scm:git://github.com/wdavilaneto/guick.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'wdavilaneto'
+                    name "Walter D'Avila Neto"
+                    email 'wdavilaneto@gmail.com'
+                }
+            }
+        }
+    }
 }

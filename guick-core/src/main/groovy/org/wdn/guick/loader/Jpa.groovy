@@ -24,20 +24,18 @@ class Jpa {
     def read() {
         GenericXmlApplicationContext clientContext
 
-        try {
-            Reader uri = reader.getResource("datasource.xml");
-            clientContext = new GenericXmlApplicationContext("datasource.xml");
-        } catch (Throwable e) {
-            UrlResource resource = new UrlResource("file://${project.path}/src/main/resources/datasource.xml");
-            clientContext = new GenericXmlApplicationContext(resource);
-        }
-        AbstractDriverBasedDataSource dataSource = (AbstractDriverBasedDataSource)clientContext.getBean("dataSource")
+        UrlResource resource = new UrlResource("file://${project.path}/src/main/resources/datasource.xml");
+        clientContext = new GenericXmlApplicationContext(resource);
 
+        AbstractDriverBasedDataSource dataSource = (AbstractDriverBasedDataSource) clientContext.getBean("dataSource")
         HibernateEntityManagerFactory emf = (HibernateEntityManagerFactory) clientContext.getBean("entityManagerFactory")
-
-        println emf.getMetamodel().getEntities()
-        println emf.getMetamodel().getEmbeddables()
-        println emf.getMetamodel().getManagedTypes()
+        println "found ${emf.getMetamodel().getEntities().toString()}"
+        for (def e : emf.getMetamodel().getManagedTypes()) {
+            println e.getPersistenceType().toString() + ":" + e.getJavaType().toString()
+            for (def a : e.getAttributes()) {
+                println " ->" + [name: a.name, javaType: a.javaType, javaMember: a.javaMember]
+            }
+        }
 
     }
 

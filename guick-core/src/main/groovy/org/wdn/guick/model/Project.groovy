@@ -1,4 +1,5 @@
 package org.wdn.guick.model
+
 import org.springframework.stereotype.Component
 import org.wdn.guick.util.ClassPathManager
 
@@ -20,7 +21,14 @@ class Project {
     def pom;
     def datasource = [:]
 
+    boolean runningFromPlugin = false
+
     def initialize(String rootPath = "") {
+        if ("".equals(rootPath)) {
+            runningFromPlugin = true
+            println "****Initializing Plugin"
+        }
+
         path = new File(rootPath).getCanonicalPath()
 
         def pomfilePath = path + "/pom.xml"
@@ -28,8 +36,10 @@ class Project {
             pom = new XmlSlurper(false, false).parse(pomfilePath);
             group = pom.groupId
             group = pom.artifactId
+
             ClassPathManager.addURLToSystemClassLoader(new URL("file:///${path}/target/classes/"))
         }
+
         def dsPath = path + "/src/main/resources/datasource.xml"
         if (new File(dsPath).exists()) {
             def xmlDS = new XmlSlurper(false, false).parse(dsPath);

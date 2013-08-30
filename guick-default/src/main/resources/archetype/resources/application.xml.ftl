@@ -27,21 +27,6 @@
     <!-- this will import development/test datasource while in development profile -->
     <import resource="datasource.xml" />
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="${project.group}.${project.name}.domain" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.SQLiteDialect"/>
-            </bean>
-        </property>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list><value>${project.name}_messages</value></list>
