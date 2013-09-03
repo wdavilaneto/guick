@@ -8,7 +8,7 @@ guick {
     installPom {
 
         "pom" {
-            templates = [[input: "default/pom.xml.ftl"]]
+            templates = [[input: "archetype/pom.xml.ftl"]]
         }
 
     }

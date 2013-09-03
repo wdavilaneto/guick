@@ -21,23 +21,16 @@ class Project {
     def pom;
     def datasource = [:]
 
-    boolean runningFromPlugin = false
-
     def initialize(String rootPath = "") {
-        if ("".equals(rootPath)) {
-            runningFromPlugin = true
-            println "****Initializing Plugin"
-        }
 
         path = new File(rootPath).getCanonicalPath()
-
         def pomfilePath = path + "/pom.xml"
         if (new File(pomfilePath).exists()) {
             pom = new XmlSlurper(false, false).parse(pomfilePath);
             group = pom.groupId
             group = pom.artifactId
-
-            ClassPathManager.addURLToSystemClassLoader(new URL("file:///${path}/target/classes/"))
+        } else {
+            // gradle classpath ?
         }
 
         def dsPath = path + "/src/main/resources/datasource.xml"

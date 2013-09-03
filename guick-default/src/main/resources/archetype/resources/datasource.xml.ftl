@@ -5,16 +5,11 @@
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
-    <!--<property name="driverClass" value="org.h2.Driver"/>-->
-    <!--<property name="url" value="jdbc:h2:mem:${project.name}Ds;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>-->
-    <!--<property name="username" value="sa"/>-->
-    <!--<property name="password" value=""/>-->
-    <!--</bean>-->
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="org.sqlite.JDBC"/>
-        <property name="url" value="jdbc:sqlite:${project.name}.db"/>
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:wdavilanetoDs;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

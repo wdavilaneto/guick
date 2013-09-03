@@ -3,7 +3,7 @@ guick {
     installGradle {
 
         "gradle" {
-            templates = [[input: "default/build.gradle.ftl"]]
+            templates = [[input: "archetype/build.gradle.ftl"]]
         }
     }
 

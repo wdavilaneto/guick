@@ -24,8 +24,9 @@ class Jpa {
     def read() {
         GenericXmlApplicationContext clientContext
 
-        UrlResource resource = new UrlResource("file://${project.path}/src/main/resources/datasource.xml");
-        clientContext = new GenericXmlApplicationContext(resource);
+        UrlResource resource
+        //resource = new UrlResource(new URL("file", null, "${project.path}/src/main/resources/datasource.xml"));
+        clientContext = new GenericXmlApplicationContext("classpath:datasource.xml");
 
         AbstractDriverBasedDataSource dataSource = (AbstractDriverBasedDataSource) clientContext.getBean("dataSource")
         HibernateEntityManagerFactory emf = (HibernateEntityManagerFactory) clientContext.getBean("entityManagerFactory")

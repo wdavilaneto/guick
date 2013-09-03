@@ -1,5 +1,6 @@
 include "guick-core"
 include "guick-default"
+include "guick-plugin"
 //include "guick-maven-plugin"
-//include "guick-plugin"
+
 
