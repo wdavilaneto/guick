@@ -22,9 +22,6 @@
 
     <context:component-scan base-package="${project.group}.${project.name}.service"/>
 
-
-    <!--<jee:jndi-lookup id="dataSource" expected-type="javax.sql.DataSource" jndi-name="${project.name}Ds"/>-->
-    <!-- this will import development/test datasource while in development profile -->
     <import resource="datasource.xml" />
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
