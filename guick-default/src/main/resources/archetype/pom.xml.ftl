@@ -91,16 +91,16 @@
         </dependency>
 
         <dependency>
-        	<groupId>org.xerial</groupId>
-        	<artifactId>sqlite-jdbc</artifactId>
-        	<version>3.7.2</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.173</version>
         </dependency>
 
         <!-- other driver examples
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.173</version>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -177,7 +177,7 @@
             <!--<plugin>-->
                 <!--<groupId>org.wdn.guick</groupId>-->
                 <!--<artifactId>guick-maven-plugin</artifactId>-->
-                <!--<version>1.0-SNAPSHOT</version>-->
+                <!--<version>1.1-SNAPSHOT</version>-->
             <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

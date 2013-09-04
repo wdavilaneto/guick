@@ -4,6 +4,8 @@ import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.Velocity
+import org.apache.velocity.runtime.RuntimeConstants
+import org.apache.velocity.slf4j.Slf4jLogChute
 import org.springframework.stereotype.Component
 
 @Component
@@ -18,6 +20,8 @@ class VelocityWriter  extends AbstractTemplateWriter{
         Velocity.setProperty("output.encoding", "UTF-8");
         Velocity.setProperty("input.encoding", "UTF-8");
         Velocity.setProperty("default.contentType", "UTF-8");
+
+        Velocity.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, new Slf4jLogChute())
         //Inicializa o Velociy.
         Velocity.init()
     }
