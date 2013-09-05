@@ -1,4 +1,7 @@
 package org.wdn.guick.core
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
@@ -14,6 +17,8 @@ import javax.annotation.Resource
  */
 @Component
 class DslArchitecture {
+
+    private final Logger logger = LoggerFactory.getLogger(this.class)
 
     @Resource TargetDelegate targetDelegate
     @Resource Project project

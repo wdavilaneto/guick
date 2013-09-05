@@ -1,6 +1,6 @@
 
 dependencies {
-    compile project(':guick-default')
+    compile project(':guick-core')
     compile gradleApi()
-//    compile localGroovy()
+    compile localGroovy()
 }

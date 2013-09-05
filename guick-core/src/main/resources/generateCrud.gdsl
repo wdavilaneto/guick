@@ -1,0 +1,41 @@
+project.group = "com.wdavilaneto"
+project.name = 'wdavilaneto'
+
+def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
+
+
+def metadata = json.load('crud/domain.json')
+project.metadata = metadata
+
+guick {
+
+    domain {
+        for (def entity : metadata.entities) {
+
+            "geracao de services" {
+                object entity
+                templates = [
+                        [input: "crud/Entity.groovy.ftl", output: "/src/main/groovy/${packageBase}/domain/${entity.name}.groovy"],
+                        [input: "crud/persistence/repository.groovy.ftl", output: "/src/main/groovy/${packageBase}/persistence/${entity.name}Repository.groovy"],
+                        [input: "crud/presentation/controller.groovy.ftl", output: "/src/main/groovy/${packageBase}/presentation/${entity.name}Controller.groovy"],
+                        [input: "crud/presentation/controllerTest.groovy.ftl", output: "/src/test/groovy/${packageBase}/presentation/${entity.name}ControllerTest.groovy"],
+
+                        [input: "crud/view/filter.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/filter.html"],
+                        [input: "crud/view/create.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/create.html"],
+                        [input: "crud/view/fieldset.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/fieldset.html"],
+                        [input: "crud/view/edit.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/edit.html"],
+                        [input: "crud/view/show.html.vm", output: "/src/main/webapp/WEB-INF/views/${entity.name}/show.html"]
+                ]
+            }
+        }
+//        "repository" {
+//            templates = [[input: "domain/crudRepository.groovy.ftl", output: "src/main/java/${packageBase}/persistence/CrudRepository.groovy"]]
+//        }
+        "single-generateds" {
+            templates = [
+                    [input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"],
+                    [input: "crud/AbstractTest.groovy.vm", output: "/src/test/groovy/${packageBase}/"]
+            ]
+        }
+    }
+}

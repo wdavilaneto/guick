@@ -1,18 +1,19 @@
 package org.wdn.guick.core
 
-import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.Velocity
 import org.apache.velocity.runtime.RuntimeConstants
 import org.apache.velocity.slf4j.Slf4jLogChute
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-@CompileStatic
 @PackageScope
 class VelocityWriter  extends AbstractTemplateWriter{
 
+    private final Logger logger = LoggerFactory.getLogger(this.class)
 
     public VelocityWriter() {
         Velocity.setProperty("resource.loader", "classpath");

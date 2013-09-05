@@ -1,9 +1,11 @@
 package org.wdn.guick.loader
 
-import groovy.transform.CompileStatic
 import org.hibernate.ejb.HibernateEntityManagerFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.context.support.GenericXmlApplicationContext
 import org.springframework.core.io.UrlResource
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.jdbc.datasource.AbstractDriverBasedDataSource
 import org.springframework.stereotype.Component
 import org.wdn.guick.core.ResourceReader
@@ -12,8 +14,9 @@ import org.wdn.guick.model.Project
 import javax.annotation.Resource
 
 @Component
-@CompileStatic
 class Jpa {
+
+    private final Logger logger = LoggerFactory.getLogger(this.class)
 
     @Resource
     ResourceReader reader
@@ -22,12 +25,7 @@ class Jpa {
     Project project
 
     def read() {
-        GenericXmlApplicationContext clientContext
-
-        UrlResource resource
-        //resource = new UrlResource(new URL("file", null, "${project.path}/src/main/resources/datasource.xml"));
-        clientContext = new GenericXmlApplicationContext("classpath:datasource.xml");
-
+        GenericXmlApplicationContext clientContext = new GenericXmlApplicationContext("datasource.xml");
         AbstractDriverBasedDataSource dataSource = (AbstractDriverBasedDataSource) clientContext.getBean("dataSource")
         HibernateEntityManagerFactory emf = (HibernateEntityManagerFactory) clientContext.getBean("entityManagerFactory")
         println "found ${emf.getMetamodel().getEntities().toString()}"
@@ -37,7 +35,6 @@ class Jpa {
                 println " ->" + [name: a.name, javaType: a.javaType, javaMember: a.javaMember]
             }
         }
-
     }
 
 }

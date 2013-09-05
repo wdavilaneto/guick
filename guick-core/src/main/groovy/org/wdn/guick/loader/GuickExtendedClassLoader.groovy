@@ -11,7 +11,6 @@ class GuickExtendedClassLoader extends URLClassLoader {
 
     public GuickExtendedClassLoader(URLClassLoader classLoader) {
         super(classLoader.getURLs());
-
     }
 
     @Override

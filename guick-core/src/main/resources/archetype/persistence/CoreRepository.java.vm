@@ -1,0 +1,58 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.persistence.support;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+
+import javax.persistence.EntityManager;
+import java.io.Serializable;
+import java.util.List;
+
+@NoRepositoryBean
+@SuppressWarnings("unchecked")
+public class CoreRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements ICoreRepository<T, ID> {
+
+    private EntityManager entityManager;
+
+    // There are two constructors to choose from, either can be used.
+    public CoreRepository(Class<T> domainClass, EntityManager entityManager) {
+        super(domainClass, entityManager);
+        // This is the recommended method for accessing inherited class dependencies.
+        this.entityManager = entityManager;
+    }
+
+    public Page<T> find(T entity, Pageable pageable) {
+        if (pageable == null) {
+            pageable = new PageRequest(0, 10);
+        }
+
+        Session session = (Session) entityManager.getDelegate();
+        Criteria criteria = session.createCriteria(entity.getClass());
+        // Prepare Example
+        Example example = Example.create(entity);
+        criteria.add(example.enableLike(MatchMode.ANYWHERE).ignoreCase());
+
+        // Count
+        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+
+        // Pageable result Result
+        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+        List<T> result = criteria.setFirstResult(pageable.getPageNumber() * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
+        return (Page<T>) new PageImpl<T>(result, pageable, totalItems);
+    }
+}

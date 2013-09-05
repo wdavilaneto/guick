@@ -1,5 +1,7 @@
 package org.wdn.guick.core
-import groovy.transform.CompileStatic
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
@@ -18,15 +20,16 @@ import java.nio.channels.WritableByteChannel
  * Time: 12:13 AM
  * To change this template use File | Settings | File Templates.
  */
-@CompileStatic
 abstract class AbstractTemplateWriter {
+
+    private final Logger logger = LoggerFactory.getLogger(this.class)
 
     @Resource ResourceReader reader
     @Resource Json json;
     @Resource Project project
     @Resource Jpa jpa
 
-    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver()
 
     abstract protected doWriteTemplate(String input, Map context, String output);
 
