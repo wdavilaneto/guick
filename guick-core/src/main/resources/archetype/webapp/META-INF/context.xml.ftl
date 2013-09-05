@@ -1,4 +1,5 @@
-<Context docBase="${project.name}" path="/${project.name}" reloadable="false">
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="false">
 
     <ResourceLink name="${project.name}Ds" global="myappDs" type="javax.sql.DataSource"/>
 
