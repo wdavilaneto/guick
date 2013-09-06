@@ -13,9 +13,15 @@ class GuickMainTest {
 
     private static final DEFAULT_PROJECT_ROOT = "../wdavilaneto"
 
-
+    @Test
     void testMigrateToDb() {
         GuickMain.main("migrateToDb",DEFAULT_PROJECT_ROOT)
+        assert true
+    }
+
+    @Test
+    void testMigrateToDomain() {
+        GuickMain.main("migrateToDomain",DEFAULT_PROJECT_ROOT)
         assert true
     }
 
@@ -24,12 +30,8 @@ class GuickMainTest {
         assert true
     }
 
-    void testMigrateToJava() {
-        GuickMain.main("migrateToDomain",DEFAULT_PROJECT_ROOT)
-        assert true
-    }
 
-    @Test
+
     void testGenerateCrud() {
         GuickMain.main("generateCrud",DEFAULT_PROJECT_ROOT)
         assert true

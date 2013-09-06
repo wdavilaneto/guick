@@ -45,7 +45,12 @@ class DslArchitecture {
                         cl()
                 }
         })
-        dslScript.run()
+        try {
+            dslScript.run()
+        } catch (RuntimeException e) {
+            println "Erro ao executar o script ${target}"
+            throw e;
+        }
     }
 
     private ExpandoMetaClass createEMC(Class clazz, Closure cl) {

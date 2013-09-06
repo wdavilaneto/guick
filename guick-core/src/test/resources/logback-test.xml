@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
 
-    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <append>true</append>
-        <file>log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>log.%i</fileNamePattern>
-            <maxIndex>10</maxIndex>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>10MB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %p [%c] - %m%n</pattern>
-        </encoder>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d %p [%c] - %m%n</Pattern>
+        </layout>
     </appender>
+
+    <logger name="org.hibernate.cfg.Configuration" level="DEBUG"/>
+    <logger name="org.hibernate.ejb" level="DEBUG"/>
+    <logger name="org.hibernate.internal" level="DEBUG"/>
+    <logger name="java.sql" level="DEBUG"/>
+    <logger name="org.hibernate.tool.hbm2ddl.SchemaUpdate" level="INFO"/>
+
     <root>
         <level value="WARN"/>
-        <appender-ref ref="logfile"/>
+        <appender-ref ref="stdout"/>
     </root>
 </configuration>

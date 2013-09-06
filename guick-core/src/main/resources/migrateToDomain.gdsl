@@ -1,0 +1,22 @@
+def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
+
+
+def metadata = jpa.getMetamodel()
+
+guick {
+
+    domain {
+        for (def entity : metadata.entities) {
+
+            "geracao de services" {
+                object entity
+                templates = [
+                        [input: "domain/Entity.groovy.vm", output: "/src/main/groovy/${packageBase}/domain/${entity.name}.groovy"]
+                ]
+            }
+        }
+        "home" {
+            templates = [[input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"]]
+        }
+    }
+}

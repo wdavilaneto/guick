@@ -1,2 +1,7 @@
 
-jpa.read()
+
+//jpa.exportAllSchema ("${project.path}/src/main/schemas/export.sql")
+jpa.exportUpdate("${project.path}/src/main/schemas/mirgate.sql")
+jpa.migrate()
+
+//jpa.debug()

@@ -1,6 +1,5 @@
 package org.wdn.guick.core
 
-import groovy.transform.PackageScope
 import org.springframework.stereotype.Component
 import org.wdn.guick.model.Project
 
@@ -14,7 +13,6 @@ import javax.annotation.Resource
  * To change this template use File | Settings | File Templates.
  */
 @Component
-@PackageScope
 class ResourceReader {
 
     @Resource
@@ -27,7 +25,12 @@ class ResourceReader {
     }
 
     public Reader getResource(String runner) {
-        def strClientPath = "file://${project.path}/src/main/guick"
+        InputStream stream = ResourceReader.class.getClassLoader().getResourceAsStream(runner)
+        if (stream) {
+            return new InputStreamReader(stream);
+        }
+        if (project) {
+            def strClientPath = "file://${project.path}/src/main/guick"
 //        if (initizlied) {
 //            try {
 //                ClassPathManager.addURLToSystemClassLoader(new URL("file:///${project.path}/src/main/guick/"));
@@ -35,13 +38,10 @@ class ResourceReader {
 //                // ignore ...
 //            }
 //        }
-        InputStream stream = ResourceReader.class.getClassLoader().getResourceAsStream(runner)
-        if (stream) {
-            return new InputStreamReader(stream);
-        }
-        stream = new FileInputStream("${strClientPath}/${runner}")
-        if (stream) {
-            return new InputStreamReader(stream);
+            stream = new FileInputStream("${strClientPath}/${runner}")
+            if (stream) {
+                return new InputStreamReader(stream);
+            }
         }
         throw new FileNotFoundException("File ${runner} not found on classpath")
     }

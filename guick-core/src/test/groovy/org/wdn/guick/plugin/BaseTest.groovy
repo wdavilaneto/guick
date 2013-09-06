@@ -38,11 +38,11 @@ class BaseTest {
     }
 
     public void viaSpring(Project project){
-//        Map<String, Object> emfProperties = emf.getProperties();
+//        Map<String, Object> emfProperties = entityManagerFactory.getProperties();
 //        println emfProperties
-//        println emf.getJpaDialect()
-//        println emf.dataSource
-//        println emf.getPersistenceProvider()
+//        println entityManagerFactory.getJpaDialect()
+//        println entityManagerFactory.dataSource
+//        println entityManagerFactory.getPersistenceProvider()
     }
 
     public void viaConfiguration(Project project){
