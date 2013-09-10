@@ -48,7 +48,7 @@ class Project {
         if (name != null) {
             return name
         }
-        return path.split("/").last()
+        return path.replaceAll( '\\\\' ,"/").split("/")?.last()
     }
     public String getGroup() {
         if (this.group != null) {

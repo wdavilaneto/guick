@@ -12,14 +12,14 @@ import javax.persistence.Id
  *  Author: service-wdavilaneto@redhat.com
  */
 @Entity
-class ${entity.name} implements Serializable {
+class ${entity.jpaEntityName} implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id
 
-#foreach( ${property} in ${entity.properties})
-    ${property.type} ${property.name}
+#foreach( ${attribute} in ${entity.getAttributes()})
+    ${attribute.javaType.simpleName} ${attribute.name}
 #end
 
 }

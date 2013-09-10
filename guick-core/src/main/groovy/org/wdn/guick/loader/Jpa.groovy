@@ -49,6 +49,9 @@ class Jpa {
 
     public void exportUpdate(String output) {
         Configuration configuration = getConfiguration(getEntityManagerFactory().getProperties());
+        if (getDatasource().driver  != null ) {
+            configuration.setProperty("hibernate.connection.driver_class", getDatasource().driver.class.name )
+        }
         SchemaUpdate schemaUpdate = new SchemaUpdate(configuration)
         File file = getFile(output)
         schemaUpdate.setOutputFile(file.getAbsolutePath())
@@ -57,6 +60,9 @@ class Jpa {
 
     public void migrate() {
         Configuration configuration = getConfiguration(getEntityManagerFactory().getProperties());
+        if (getDatasource().driver  != null ) {
+            configuration.setProperty("hibernate.connection.driver_class", getDatasource().driver.class.name )
+        }
         SchemaUpdate schemaUpdate = new SchemaUpdate(configuration)
         schemaUpdate.execute(true, true)
     }

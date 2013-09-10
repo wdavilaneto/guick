@@ -1,7 +1,9 @@
-def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
-
+def packageBase = project.group.replaceAll("\\.",'/') + "/" + project.name.replaceAll("\\.",'/')
 
 def metadata = jpa.getMetamodel()
+
+jpa.debug()
+println metadata
 
 guick {
 
@@ -11,7 +13,7 @@ guick {
             "geracao de services" {
                 object entity
                 templates = [
-                        [input: "domain/Entity.groovy.vm", output: "/src/main/groovy/${packageBase}/domain/${entity.name}.groovy"]
+                        [input: "domain/Entity.groovy.vm", output: "/src/main/groovy/${packageBase}/domain/${entity.jpaEntityName}.groovy"]
                 ]
             }
         }

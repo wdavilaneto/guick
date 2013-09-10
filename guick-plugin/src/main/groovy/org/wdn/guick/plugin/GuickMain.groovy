@@ -33,6 +33,12 @@ class GuickMain implements Runnable {
             main.setTarget(args[0])
             if (args.size() >= 2) {
                 main.project.initialize(args[1])
+                if (args.size() >= 3) {
+                    main.project.group = args[2]
+                    if (args.size() >= 4) {
+                        main.project.name = args[3]
+                    }
+                }
             } else {
                 main.project.initialize()
             }
