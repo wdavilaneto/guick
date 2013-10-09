@@ -1,8 +1,11 @@
 package org.wdn.guick.core
 
+import antlr.CppCodeGenerator
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
+import org.wdn.guick.loader.Cpp
+import org.wdn.guick.loader.Ctags
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
@@ -25,6 +28,8 @@ class DslArchitecture {
     @Resource ResourceReader reader
     @Resource Json json
     @Resource Jpa jpa
+    @Resource Ctags ctags
+    @Resource Cpp cpp
 
     void runEngine(String target) {
 
@@ -33,6 +38,8 @@ class DslArchitecture {
         binding.setVariable("util",new StringUtil())
         binding.setVariable("json", json)
         binding.setVariable("jpa", jpa)
+        binding.setVariable("ctags", ctags)
+        binding.setVariable("cpp", cpp)
 
         Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
 

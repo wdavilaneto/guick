@@ -2,6 +2,7 @@ apply plugin: 'maven'
 
 dependencies {
 
+    compile "org.antlr:antlr:3.5"
     compile "com.cloudbees:diff4j:1.0"
 
     compile 'org.apache.velocity:velocity:1.7'

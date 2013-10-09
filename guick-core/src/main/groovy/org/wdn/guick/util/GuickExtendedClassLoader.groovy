@@ -1,4 +1,4 @@
-package org.wdn.guick.loader
+package org.wdn.guick.util
 
 /**
  * Created with IntelliJ IDEA.
