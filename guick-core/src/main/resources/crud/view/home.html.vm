@@ -16,7 +16,7 @@
     <!--script src="../../js/less-1.3.3.min.js"></script-->
     <!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/bootstrhomeap.min.css}" href="css/bootstrap.min.css" />
     <link rel="stylesheet" th:href="@{/css/bootstrap-responsive.min.css}" href="css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" th:href="@{/css/main.css}" href="css/main.css" />
 
@@ -43,16 +43,12 @@
     <div th:include="common/header :: top" />
 
     <div class="hero-unit">
-        <h1>WDN</h1>
-
-        <h2> Consultancy and Solution Developer</h2>
-        <p>Acting with software development since 1994 and with solid experience in developing solutions. Working within the most different architectures, languages
-            and tools. Specialized in the development of corporate services, frameworks, critical applications and with high performance requirements.
-            With more than 11 years of experience in software architecture on the Java/Groovy platform and its plethora of tools and many other languages like Python and Ruby and C++.</p>
-
-        <p>With a multidisciplinary partnerships, WDN is ready to provide the very best breed of software development and design for your company with the most efficient way.</p>
-
-        <p><a class="btn btn-primary btn-large" href="/about.do">Learn more &raquo;</a></p>
+        <h1>${project.name}</h1>
+        <h2>${project.description}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus turpis nisl, ac ullamcorper libero varius sodales. Donec semper tincidunt iaculis. Vivamus varius porta feugiat. Ut elit ipsum, porttitor id eleifend non, auctor a magna. Nullam magna turpis, feugiat ultrices sodales sit amet, congue sed sem. Sed malesuada tempor urna. Curabitur et dolor in quam commodo dapibus vel eu magna. Praesent non velit nec metus molestie cursus. Phasellus a arcu velit.</p>
+##        <p>Acting with software development since 1994 and with solid experience in developing solutions. Working within the most different architectures, languages and tools. Specialized in the development of corporate services, frameworks, critical applications and with high performance requirements. With more than 11 years of experience in software architecture on the Java/Groovy platform and its plethora of tools and many other languages like Python and Ruby and C++.</p>
+##        <p>With a multidisciplinary partnerships, WDN is ready to provide the very best breed of software development and design for your company with the most efficient way.</p>
+##        <p><a class="btn btn-primary btn-large" href="/about.do">Learn more &raquo;</a></p>
     </div>
 
     <div class="row">
@@ -63,16 +59,20 @@
 #end
         </div>
         <div class="span4">
-            <h2>Architecture</h2>
-            <p>Working with Architecture and Development consultancy for Petrobras, a huge Brazilian Oil Company, over seven years.
-               There I've helped on creation critical comparative tools, components and webservices. Created of code patterns, standardized development architectures and much more.</p>
-            <p>There I've also developed several tools for productivity like "Grails framework", but all on compile/generation time as Maven plugins..
-                Now I'm begining to develop some of that 'experience' for Opensource World</p>
+              <h2>Lorem</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus turpis nisl, ac ullamcorper libero </p>
+##            <h2>Architecture</h2>
+##            <p>Working with Architecture and Development consultancy for Petrobras, a huge Brazilian Oil Company, over seven years.
+##               There I've helped on creation critical comparative tools, components and webservices. Created of code patterns, standardized development architectures and much more.</p>
+##            <p>There I've also developed several tools for productivity like "Grails framework", but all on compile/generation time as Maven plugins..
+##                Now I'm begining to develop some of that 'experience' for Opensource World</p>
         </div>
         <div class="span4">
-            <h2>Guick</h2>
-            <p>Code generation and revers engeneering plugin on the fly, enabling a productivity just as Grails but with your withou all the groovy "magic" and wight, and most important with your desired architecture, like plain java, groovy CompileStatic and performance focus</p>
-            <p><a class="btn" href="https://github.com/wdavilaneto/guick">Guick &raquo;</a></p>
+              <h2>Lorem</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus turpis nisl, ac ullamcorper libero </p>
+##            <h2>Guick</h2>
+##            <p>Code generation and revers engeneering plugin on the fly, enabling a productivity just as Grails but with your withou all the groovy "magic" and wight, and most important with your desired architecture, like plain java, groovy CompileStatic and performance focus</p>
+##            <p><a class="btn" href="https://github.com/wdavilaneto/guick">Guick &raquo;</a></p>
         </div>
     </div>
 

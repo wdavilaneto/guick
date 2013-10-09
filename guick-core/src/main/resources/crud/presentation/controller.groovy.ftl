@@ -3,8 +3,8 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 package ${project.group}.${project.name}.presentation;
 
-import com.wdavilaneto.wdavilaneto.domain.${entity.name};
-import com.wdavilaneto.wdavilaneto.persistence.${entity.name}Repository;
+import ${project.group}.${project.name}.domain.${entity.name};
+import ${project.group}.${project.name}.persistence.${entity.name}Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +33,7 @@ class ${entity.name}Controller {
     private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}Controller.class);
 
     @Resource
-    private PersonRepository personRepository;
+    private ${entity.name}Repository ${entityBeanName}Repository;
 
     /**
      * Method that lists/filter entity
@@ -50,19 +50,19 @@ class ${entity.name}Controller {
 
     /**
      * Controller method to edit of a existent entity
-     * @param person
+     * @param ${entityBeanName}
      * @param model
      * @return viewId
      */
     @RequestMapping(value ="edit", method = RequestMethod.GET)
-    public String edit(@RequestParam("id") Person person, Model model){
-        model.addAttribute("person", person);
-        return "Person/edit";
+    public String edit(@RequestParam("id") ${entity.name} ${entityBeanName}, Model model){
+        model.addAttribute("${entityBeanName}", ${entityBeanName});
+        return "${entity.name}/edit";
     }
 
     /**
      * Controller method to view of a existent entity
-     * @param person
+     * @param ${entityBeanName}
      * @param model
      * @return viewId
      */
@@ -74,7 +74,7 @@ class ${entity.name}Controller {
 
     /**
      * Controller method to delete an existent entity with a given id
-     * @param person
+     * @param ${entityBeanName}
      * @param model
      * @return viewId
      */
@@ -98,7 +98,7 @@ class ${entity.name}Controller {
 
     /**
      * Controller method to save entity
-     * @param person
+     * @param ${entityBeanName}
      * @param result
      * @param redirectAttributes
      * @param model
@@ -110,7 +110,7 @@ class ${entity.name}Controller {
             LOGGER.debug("Errors found during form validation, reloading form.");
             return "${entity.name}/create";
         }
-        personRepository.save(person);
+        ${entityBeanName}Repository.save(${entityBeanName});
         return "redirect:/${entity.name}/filter.do";
     }
 

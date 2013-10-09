@@ -4,16 +4,14 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.9'
         classpath group: 'org.wdn.guick', name: 'guick-plugin', version: '1.1-SNAPSHOT'
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'tomcat'
-apply plugin: 'maven'
+apply plugin: 'jetty'
 apply plugin: 'guick'
+apply plugin: 'maven'
 
 repositories {
     mavenCentral()
@@ -21,10 +19,6 @@ repositories {
 }
 
 def spring_version = "3.1.4.RELEASE"
-
-tomcatRun {
-    contextPath = "/"
-}
 
 dependencies {
 
@@ -52,13 +46,6 @@ dependencies {
     runtime 'org.slf4j:jcl-over-slf4j:1.6.1'
     runtime 'org.slf4j:log4j-over-slf4j:1.6.1'
     runtime 'org.slf4j:jul-to-slf4j:1.6.1'
-
-    def tomcatVersion = '7.0.11'
-    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
-    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
-        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
-    }
 
     testCompile "org.springframework:spring-test:${spring_version}"
     testCompile "junit:junit:4.11"

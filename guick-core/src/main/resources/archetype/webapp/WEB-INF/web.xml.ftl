@@ -62,7 +62,6 @@
 
     <welcome-file-list>
         <welcome-file>/index.html</welcome-file>
-        <welcome-file>/home.do</welcome-file>
     </welcome-file-list>
          
 </web-app>

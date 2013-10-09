@@ -1,7 +1,7 @@
 package ${project.group}.${project.name}.persistence;
 
-import com.wdavilaneto.wdavilaneto.domain.${entity.name};
-import com.wdavilaneto.wdavilaneto.persistence.support.ICoreRepository;
+import ${project.group}.${project.name}.domain.${entity.name};
+import ${project.group}.${project.name}.persistence.support.ICoreRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  *  Author: service-wdavilaneto@redhat.com
  */
 @Repository
-public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ICoreRepository<Person, Long > {
+public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ICoreRepository<${entity.name}, Long > {
 }

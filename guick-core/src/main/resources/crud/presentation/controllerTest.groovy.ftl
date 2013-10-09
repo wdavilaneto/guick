@@ -1,8 +1,8 @@
 package ${project.group}.${project.name}.presentation;
 
-import com.wdavilaneto.wdavilaneto.AbstractTest;
-import com.wdavilaneto.wdavilaneto.domain.${entity.name};
-import com.wdavilaneto.wdavilaneto.persistence.${entity.name}Repository;
+import ${project.group}.${project.name}.AbstractTest;
+import ${project.group}.${project.name}.domain.${entity.name};
+import ${project.group}.${project.name}.persistence.${entity.name}Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,7 @@ class ${entity.name}ControllerTest extends AbstractTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}ControllerTest.class);
 
-    private PersonController personController;
+    private ${entity.name}Controller personController;
 
     @Before
     void setUp() {
