@@ -2,7 +2,9 @@ package org.wdn.guick.core
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.core.io.UrlResource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
+import org.wdn.guick.loader.Database
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
@@ -24,25 +26,27 @@ abstract class AbstractTemplateWriter {
 
     private final Logger logger = LoggerFactory.getLogger(this.class)
 
+    @Resource StringUtil util;
     @Resource ResourceReader reader
     @Resource Json json;
     @Resource Project project
     @Resource Jpa jpa
+    @Resource Database database
 
-    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver()
+    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(UrlResource.getClassLoader())
 
     abstract protected doWriteTemplate(String input, Map context, String output);
 
     public process(List objects, List<Map<String, Object>> templates) {
         if (objects == null) {
             for (def prams : templates) {
-                def resources = resolver.getResources(prams.input.toString())
+                def resources = resolver.getResources("classpath*:" + prams.input.toString())
                 if (resources.size() == 1 && !resources[0].filename.contains(".")) {
                     try {
-                        def insideResources = resolver.getResources(prams.input.toString() + "/*")
+                        def insideResources = resolver.getResources("classpath*:" + prams.input.toString() + "/*")
                         executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context)
                     } catch (e) {
-                        println "WARN Template not found"
+                        println "WARN Template not found [${prams.input.toString()}/*]"
                     }
                 } else {
                     String output = prams.output
@@ -61,13 +65,13 @@ abstract class AbstractTemplateWriter {
         } else {
             for (def obj : objects) {
                 for (def prams : templates) {
-                    def resources = resolver.getResources(prams.input.toString())
+                    def resources = resolver.getResources("classpath*:" +prams.input.toString())
                     if (resources.size() == 1 && !resources[0].isReadable()) {
                         try {
-                            def insideResources = resolver.getResources(prams.input.toString() + "/*")
+                            def insideResources = resolver.getResources("classpath*:" + prams.input.toString() + "/*")
                             executeDinamic(insideResources, prams.input.toString(), prams.output?.toString(), prams.context, obj)
                         } catch (e) {
-                            println "WARN Template not found"
+                            println "WARN Template not found [${prams.input.toString()}/*]"
                         }
                     } else {
                         String output = prams.output
@@ -105,9 +109,10 @@ abstract class AbstractTemplateWriter {
     private void execute(String input, String output, def extraContext = null, def obj = null) {
         HashMap<String, Object> context = new HashMap();
         context.put("project", project)
-        context.put("util", new StringUtil())
+        context.put("util", util);
         context.put("json", json)
         context.put("jpa", jpa)
+        context.put("database", database)
 
 
         if (obj != null) {
@@ -208,7 +213,7 @@ abstract class AbstractTemplateWriter {
         if (object instanceof Map) {
             def map = (object as Map)
             if (map.size() >= 0 && map._type != null) {
-                return map._type.toString().toLowerCase()
+                return new StringUtil().uncapitalize(map._type.toString())
             } else {
                 return "entity"
             }
@@ -216,9 +221,9 @@ abstract class AbstractTemplateWriter {
         final String className = object.class.name
         final int firstChar = className.lastIndexOf('.') + 1;
         if (firstChar > 0) {
-            return className.substring(firstChar).toLowerCase();
+            return new StringUtil().uncapitalize(className.substring(firstChar));
         }
-        return className.toLowerCase();
+        return new StringUtil().uncapitalize(className.toLowerCase());
     }
 
     def getContextObject(def object) {

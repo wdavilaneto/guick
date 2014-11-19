@@ -5,11 +5,19 @@
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 
+##    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+##        <property name="driverClass" value="org.h2.Driver"/>
+##        <property name="url" value="jdbc:h2:mem:wdavilanetoDs;MODE=Oracle"/>
+##        <property name="username" value="sa"/>
+##        <property name="password" value=""/>
+##    </bean>
+
+    <!-- FIXME: change to jndi datasource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:wdavilanetoDs;MODE=Oracle"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@d-dbora11g01:1521:dbmp"/>
+        <property name="username" value="custeio"/>
+        <property name="password" value="custeio"/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -18,7 +26,7 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
+                <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>
             </bean>
         </property>
     </bean>

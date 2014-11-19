@@ -1,0 +1,31 @@
+/* modificado 14.10.14 */
+
+a.logo-control{ color: #fff;float: left;font-family: "Kaushan Script",cursive; font-size: 1.4em; margin: 12px 0 0 0;text-shadow: 1px 1px 5px #666;}
+.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../imagens/logo.png) no-repeat center center;}
+.logo-control span{font-size: 2em;}
+.row{margin-left: -12px;margin-right: -12px;}
+.info-graphic{min-height:435px;border:none;}
+/* adminlte */
+.content{padding:7px 7px 0 7px;}
+.box{margin-bottom: 7px;}
+.box .box-header{padding-bottom: 3px;}
+.box .box-body{padding: 3px;}
+.box .box-header > .fa, .box .box-header > .glyphicon, .box .box-header > .ion, .box .box-header .box-title{padding: 7px 0px 7px 10px;}
+body > .header .navbar{min-width:320px;height:50px;background:#007AAF;}
+.form-group{margin-bottom: 3px;}
+.gridStyle {border: 1px solid rgb(212,212,212);min-height: 500px;}
+.gridStyle .ngViewport {overflow-x: hidden;}
+.gridStyle button.btn.btn-danger{padding:2px !important;margin:2px !important;}
+header{background:#007aaf;width:100%;}
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 200px;
+    width: 100%;
+
+}
+
+.alert {
+padding-left: 20px !important;
+margin-left: 0px !important;
+position: relative !important;
+}

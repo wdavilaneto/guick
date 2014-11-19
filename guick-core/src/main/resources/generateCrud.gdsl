@@ -1,8 +1,7 @@
+def packageBase = project.packageBase
+// def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
 
-def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
-
-
-def metadata = json.load('crud/domain.json')
+def metadata = json.load('example1/domain.json')
 project.metadata = metadata
 
 guick {

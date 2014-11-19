@@ -16,14 +16,14 @@ class GuickDelegate {
 
     @Resource VelocityWriter writer
 
-    private List objects
+    private List objectList
     private List templates
 
     def methodMissing(String name, Object args) {
         if (args.length == 1) {
             if (args[0] instanceof Closure) {
                 args[0]()
-                writer.process(objects,templates )
+                writer.process(objectList,templates )
             } else {
                 throw new MissingMethodException(name, this.class, args as Object[])
             }
@@ -33,12 +33,12 @@ class GuickDelegate {
     }
 
     def objects(List<Object> entries) {
-        objects = entries
+        objectList = entries
     }
 
     def object(Object entry) {
-        objects = new ArrayList()
-        objects.add(entry)
+        objectList = new ArrayList()
+        objectList.add(entry)
     }
 
     def templates(def entries) {

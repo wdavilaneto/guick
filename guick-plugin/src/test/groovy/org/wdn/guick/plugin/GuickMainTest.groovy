@@ -11,17 +11,15 @@ import org.junit.Test
  */
 class GuickMainTest {
 
-    private static final DEFAULT_PROJECT_ROOT = "../progride/progride_web"
-    private static final GROUP = "br.com.ep.petrobras"
-    private static final NAME = "progride_web"
+    private static final DEFAULT_PROJECT_ROOT = "../mgp/"
+    private static final GROUP = "br.mprj"
+    private static final NAME = "mgp"
 
-    @Test
     void testMigrateToDb() {
         GuickMain.main("migrateToDb", DEFAULT_PROJECT_ROOT, GROUP, NAME)
         assert true
     }
 
-    @Test
     void testMigrateToDomain() {
         GuickMain.main("installGradle", DEFAULT_PROJECT_ROOT, GROUP, NAME)
         assert true

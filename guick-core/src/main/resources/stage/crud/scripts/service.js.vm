@@ -1,0 +1,28 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name ${projectBeanName}App.${projectBeanName}Service
+ * @description
+ * # myService
+ * Factory in the ${projectBeanName}App.
+ */
+
+var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+
+${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
+    function ($resource) {
+        return $resource(ipHost + '/${entity.name}', {}, {
+            'findAll': { method: 'GET', url: ipHost + '${entity.name}', isArray: false},
+            'find': { method: 'GET', url: ipHost + '${entity.name}/find', isArray: false},
+            'get': { method: 'GET'},
+            'save': { method: 'POST'},
+            'save': { method: 'DELETE'}
+        });
+    }
+]);

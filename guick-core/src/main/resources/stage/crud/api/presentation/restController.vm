@@ -1,0 +1,98 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+package ${project.group}.${project.name}.api.rest;
+
+import ${project.group}.${project.name}.domain.${entity.name};
+import ${project.group}.${project.name}.api.persistence.${entity.name}Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
+/**
+ *  CRUD Rest Json 'Controller' for entity${entity.name}
+ *  Guick Generate class:
+ *  https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ */
+@RestController
+@RequestMapping(value="/${entity.name}")
+public class ${entity.name}Controller {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}Controller.class);
+
+    @Resource(name = "${entityBeanName}Repository")
+    private ${entity.name}Repository ${entityBeanName}Repository;
+
+    /**
+     * Returns an full, but Paged, list of all entities (${entity.name})
+     * @param pageable
+     * @return
+     */
+#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos' )
+    @Cacheable(value = "${entityBeanName}")
+#end
+    @RequestMapping(method = RequestMethod.GET)
+    public HttpEntity<Page<${entity.name}>> findAll(Pageable pageable) {
+        return new HttpEntity(${entityBeanName}Repository.findAll(pageable));
+    }
+
+    /**
+     * Returns a paged and filtered list with an given example (ignoring relationship examples beyond id)
+     * @param pageable
+     * @return
+     */
+#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos'  )
+    @Cacheable(value = "${entityBeanName}")
+#end
+    @RequestMapping(value = "/find",method = RequestMethod.GET)
+    public HttpEntity<Page<${entity.name}>> find(${entity.name} example, Pageable pageable) {
+        return new HttpEntity(${entityBeanName}Repository.search(example , pageable));
+    }
+
+    /**
+     * Return an entity,${entity.name} ,with an Given ID
+     * @param id
+     * @return
+     */
+#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos'  )
+    @Cacheable(value = "${entityBeanName}")
+#end
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public HttpEntity<${entity.name}> get(@PathVariable Long id) {
+        return new HttpEntity<>(${entityBeanName}Repository.findOne(id));
+    }
+
+    /**
+     * Deletes an entity with an given ID
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public HttpEntity delete(@PathVariable Long id) {
+        ${entityBeanName}Repository.delete(id);
+        return new HttpEntity(null);
+    }
+
+    /**
+     * Simple save or update an entity
+     * @param bemImovel
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public HttpEntity<${entity.name}> save(@RequestBody @Valid ${entity.name} ${entityBeanName}) {
+        ${entityBeanName}Repository.save(${entityBeanName});
+        return new HttpEntity<${entity.name}>(${entityBeanName});
+    }
+
+}

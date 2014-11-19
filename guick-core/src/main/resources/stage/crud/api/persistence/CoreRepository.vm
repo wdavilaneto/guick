@@ -4,7 +4,7 @@
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${project.group}.${project.name}.persistence.support;
+package ${project.group}.${project.name}.api.persistence.support;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -36,7 +36,7 @@ public class CoreRepository<T, ID extends Serializable> extends SimpleJpaReposit
         this.entityManager = entityManager;
     }
 
-    public Page<T> find(T entity, Pageable pageable) {
+    public Page<T> search(T entity, Pageable pageable) {
         if (pageable == null) {
             pageable = new PageRequest(0, 10);
         }

@@ -12,57 +12,49 @@ import org.slf4j.LoggerFactory;
  * this class for logging by adding the following to your velocity.properties:
  *
  * <code>
- * runtime.log.logsystem.class = org.apache.velocity.slf4j.Slf4jLogChute
+ * runtime.logger.logsystem.class = org.apache.velocity.slf4j.Slf4jLogChute
  * </code>
  * </p>
  *
- * <p>You may also set this property to specify what log/name Velocity's
+ * <p>You may also set this property to specify what logger/name Velocity's
  * messages should be logged to (example below is default).
  * <code>
- * runtime.log.logsystem.slf4j.name = org.apache.velocity
+ * runtime.logger.logsystem.slf4j.name = org.apache.velocity
  * </code>
  * </p>
  *
  * @since 2.0
  * @version $Id$
  */
-public class Slf4jLogChute implements LogChute
-{
+public class Slf4jLogChute implements LogChute {
 
-    /** Property key for specifying the name for the log instance */
+    /** Property key for specifying the name for the logger instance */
     public static final String LOGCHUTE_SLF4J_NAME =
-        "runtime.log.logsystem.slf4j.name";
+            "runtime.logger.logsystem.slf4j.name";
 
     /** Default name for the commons-logging instance */
     public static final String DEFAULT_LOG_NAME = "org.apache.velocity";
 
-
     /** the commons-logging Log instance */
     protected Logger log;
 
-
     /********** LogChute methods *************/
 
-    public void init(RuntimeServices rs)
-    {
-        String name =
-            (String)rs.getProperty(LOGCHUTE_SLF4J_NAME);
-
-        if (name == null)
-        {
-            name = DEFAULT_LOG_NAME;
-        }
-        log = LoggerFactory.getLogger(name);
-        log(LogChute.DEBUG_ID, "Slf4jLogChute name is '" + name + "'");
+    public void init(RuntimeServices rs) {
+//        String name = (String) rs.getProperty(LOGCHUTE_SLF4J_NAME);
+//
+//        if (name == null) {
+//            name = DEFAULT_LOG_NAME;
+//        }
+//        logger = LoggerFactory.getLogger(name);
+//        logger(LogChute.DEBUG_ID, "Slf4jLogChute name is '" + name + "'");
     }
 
     /**
-     * Send a log message from Velocity.
+     * Send a logger message from Velocity.
      */
-    public void log(int level, String message)
-    {
-        switch (level)
-        {
+    public void log(int level, String message) {
+        switch (level) {
             case LogChute.WARN_ID:
                 log.warn(message);
                 break;
@@ -83,12 +75,10 @@ public class Slf4jLogChute implements LogChute
     }
 
     /**
-     * Send a log message from Velocity with an error.
+     * Send a logger message from Velocity with an error.
      */
-    public void log(int level, String message, Throwable t)
-    {
-        switch (level)
-        {
+    public void log(int level, String message, Throwable t) {
+        switch (level) {
             case LogChute.WARN_ID:
                 log.warn(message, t);
                 break;
@@ -109,12 +99,10 @@ public class Slf4jLogChute implements LogChute
     }
 
     /**
-     * Checks whether the specified log level is enabled.
+     * Checks whether the specified logger level is enabled.
      */
-    public boolean isLevelEnabled(int level)
-    {
-        switch (level)
-        {
+    public boolean isLevelEnabled(int level) {
+        switch (level) {
             case LogChute.DEBUG_ID:
                 return log.isDebugEnabled();
             case LogChute.INFO_ID:

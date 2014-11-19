@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/libs-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.7.RELEASE")
+    }
+}
+
+apply plugin: 'groovy'
+//apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+war {
+    baseName = '${project.name}'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+configurations {
+    //providedRuntime
+}
+
+dependencies {
+
+    compile ("br.com.caelum:vraptor:3.5.4") {
+        exclude module: 'slf4j-log4j12'
+    }
+
+    // spring data
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-data-rest"
+
+    // JPA
+    compile "org.hibernate:hibernate-entitymanager:4.2.4.Final"
+
+    // Scurity Context for rest request...
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.security:spring-security-ldap:3.2.4.RELEASE")
+    compile("org.apache.directory.server:apacheds-server-jndi:1.5.5")
+
+    compile "commons-lang:commons-lang:2.6"
+    runtime 'com.oracle:ojdbc6:11.2.0.3'
+
+    compile(group: "org.codehaus.groovy", name: "groovy-all", version: "2.3.6")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+    testCompile("junit:junit")
+}

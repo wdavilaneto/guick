@@ -1,12 +1,76 @@
 package org.wdn.guick.model
 
+import org.apache.commons.lang.builder.EqualsBuilder
+import org.apache.commons.lang.builder.HashCodeBuilder
+
 
 /**
  *
  */
-class Clazz {
+class Clazz implements Serializable {
 
-    def name
+    private static final long serialVersionUID = 4832846464666782423L;
+    private static final PACKAGE_SEPARATOR = "."
+
+    private String codePackage;
+    String name
+    String inheritedClass
+
+    String extension = "java" // defaultValue
+    String type = null
+
+    List<String> interfaces = new ArrayList<String>()
+    List<String> imports = new ArrayList<String>()
+
+    List<Clazz> properties = new ArrayList<Clazz>(0);
+    List<CollectionProperty> collections;
+
+    ClazzStereotype stereotype = ClazzStereotype.Implementation;
+
+    // Bi-directional relations ..
+    Project project
+
+    public getPackage() {
+        if (codePackage == null) {
+            return project.group + PACKAGE_SEPARATOR + project.name
+        }
+        return codePackage
+    }
+
+    public setPackage(String codePackage) {
+        this.codePackage = codePackage
+    }
+
+    public getType() {
+        if (type == null) {
+            return name
+        }
+        return type
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().
+                append(name).
+                append(getPackage()).
+                toHashCode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        Clazz rhs = (Clazz) obj;
+        return new EqualsBuilder()
+                .append(name, rhs.name)
+                .append(getPackage(), rhs.getPackage())
+                .isEquals();
+    }
 
     @Override
     public String toString(){
@@ -14,3 +78,4 @@ class Clazz {
     }
 
 }
+

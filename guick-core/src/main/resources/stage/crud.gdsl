@@ -1,0 +1,76 @@
+def packageBase = project.packageBase
+
+database.url = "jdbc:oracle:thin:@d-dbora11g01:1521:dbmp"
+database.driverName = "oracle.jdbc.driver.OracleDriver"
+database.user = "walter"
+database.password = "a1234"
+
+def entities = database.generateModel()
+
+def entityList = entities.findAll { e -> !e.isEmbeddable() }
+def embeddedList = entities.findAll { entity -> entity.isEmbeddable() }
+def enumList = []
+entities.each { entity -> enumList.addAll(entity.enums) }
+
+project.metadata.entities = entities
+
+def lang = "java" //TODO to parametrize
+
+guick {
+    domain {
+        for (def entity : entities) {
+            "geracao de services" {
+                object entity
+                templates = [
+                        [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"],
+                        [input: "stage/crud/api/persistence/repository.${lang}.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
+                        [input: "stage/crud/api/service/service.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/${entity.name}Service.${lang}"],
+                        [input: "stage/crud/api/presentation/restController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/${entity.name}Controller.${lang}"]
+                ]
+            }
+        }
+        "single-generateds" {
+            templates = [
+                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
+                    [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
+                    [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/api/aop/OnSuccessAdvice.${lang}"],
+                    [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
+                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
+                    [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
+                    [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"]
+            ]
+        }
+
+        for (def entity : entities) {
+            "geracao de front-end" {
+                object entity
+                templates = [
+                        [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/${entity.name}Controller.js"],
+                        [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/${entity.name}Service.js"],
+                        [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}.html"],
+                        [input: "stage/crud/html/components/crud/entityFieldset.html.vm", output: "/front-end/app/components/crud/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
+                        [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
+                ]
+            }
+        }
+        "repository" {
+            templates = [
+                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
+                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
+                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"]
+            ]
+        }
+        /*
+        "single-generateds" {
+            templates = [
+                    [input: "stage/crud/views/index.html.vm", output: "/front-end/app/views/crud/index.html"],
+                    [input: "stage/crud/views/common/footer.html.vm", output: "/front-end/app/views/crud/common/footer.html"],
+                    [input: "stage/crud/views/common/header.html.vm", output: "/front-end/app/views/crud/common/header.html"],
+                    [input: "stage/crud/views/common/layout.html.vm", output: "/front-end/app/views/crud/common/layout.html"]
+            ]
+        }
+        */
+    }
+}

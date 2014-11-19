@@ -1,0 +1,18 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+package ${project.group}.${project.name}.api.persistence;
+
+import groovy.transform.CompileStatic;
+import ${project.group}.${project.name}.domain.${entity.name};
+import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.rest.core.annotation.RepositoryRestResource
+
+/**
+ *  CRUD Genreated Repository for entity${entity.name}
+ *  Guick Generate class:
+ *  https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ */
+@CompileStatic
+@RepositoryRestResource(collectionResourceRel = "${entity.name}Rest", path = "${entity.name}Rest")
+public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long > {
+}

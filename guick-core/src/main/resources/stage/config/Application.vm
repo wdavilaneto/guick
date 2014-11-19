@@ -1,0 +1,67 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name};
+
+import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.cache.support.SimpleCacheManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+@ComponentScan
+@Configuration
+@EnableWebMvc
+@EnableJpaRepositories
+@EnableAutoConfiguration
+@EnableTransactionManagement
+@EnableAspectJAutoProxy
+@EnableCaching
+public class Application {
+
+    private static final String EHCACHE_FILE = "ehcache.xml";
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public OnSuccessAdvice httpOkResponseAdvice() {
+        return new OnSuccessAdvice();
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean cacheFactoryBean() {
+        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+        ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource(EHCACHE_FILE));
+        return ehCacheManagerFactoryBean;
+    }
+
+    @Bean
+    public CacheManager cacheManager(EhCacheManagerFactoryBean ehCacheManagerFactoryBean) {
+        EhCacheCacheManager cacheManager = new EhCacheCacheManager();
+        cacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
+        return cacheManager;
+    }
+
+}

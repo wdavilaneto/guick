@@ -143,6 +143,10 @@ class Jpa {
         return dataSource
     }
 
+    public execute(String sql){
+
+    }
+
     public GenericXmlApplicationContext getSpringContext() {
         if (!clientContext) {
             clientContext = new GenericXmlApplicationContext("datasource.xml");

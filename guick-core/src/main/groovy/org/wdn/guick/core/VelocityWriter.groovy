@@ -16,13 +16,13 @@ class VelocityWriter  extends AbstractTemplateWriter{
     private final Logger logger = LoggerFactory.getLogger(this.class)
 
     public VelocityWriter() {
-        Velocity.setProperty("resource.loader", "classpath");
+        Velocity.setProperty("resource.loader", "classpath"); //class
         Velocity.setProperty("classpath.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.setProperty("output.encoding", "UTF-8");
         Velocity.setProperty("input.encoding", "UTF-8");
         Velocity.setProperty("default.contentType", "UTF-8");
 
-        Velocity.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, new Slf4jLogChute())
+        //Velocity.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, new Slf4jLogChute())
         //Inicializa o Velociy.
         Velocity.init()
     }

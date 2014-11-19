@@ -1,0 +1,30 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+#foreach( ${property} in ${entity.properties})
+#if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
+<!-- Commented Becouse this foreing Key is unkown to generator and points to an not nullable property
+                                <div class="col-md-2">
+                                    <label>${property} (${property.column.length})</label>
+                                    <p><input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}"/></p>
+                                </div>
+-->
+#else
+                                <div class="col-md-2">
+                                    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                        <label class="control-label" for="${property}">${property}</label>
+                                            <input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}" id="${property}"/>
+                                    </div>
+                                </div>
+#end
+#end
+#foreach( ${ent} in ${entity.complexProperties})
+#set( $beanName = ${util.uncapitalize($ent.name)} )
+                                <div class="col-md-2">
+                                    <label>${ent.name}</label>
+                                    <p>
+                                        <${entityBeanName}-select></${entityBeanName}-select>
+                                    </p>
+                                </div>
+#end

@@ -6,8 +6,12 @@
             <Pattern>%d %p [%c] - %m%n</Pattern>
         </layout>
     </appender>
+
+    <logger name="org.wdn.guick" level="DEBUG"/>
+
     <root>
         <level value="WARN"/>
         <appender-ref ref="stdout"/>
     </root>
+
 </configuration>

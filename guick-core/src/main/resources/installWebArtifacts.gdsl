@@ -1,5 +1,5 @@
 
-def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
+def packageBase = project.packageBase
 
 guick {
 

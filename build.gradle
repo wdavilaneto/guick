@@ -8,6 +8,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:2.3.6"
+}
+
 subprojects {
 
     apply plugin: 'java'
@@ -19,13 +23,15 @@ subprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 
     install {
         repositories.mavenInstaller {
             pom.project {
                 licenses {
-                    license { 'The Apache Software License, Version 2.0'
+                    license {
+                        'The Apache Software License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                         name
                         distribution 'repo'
@@ -36,7 +42,7 @@ subprojects {
     }
 
     dependencies {
-        compile "org.codehaus.groovy:groovy-all:1.8.6"
+        compile "org.codehaus.groovy:groovy-all:2.3.6"
         testCompile "junit:junit:4.11"
 
         // logging ..
@@ -91,5 +97,5 @@ install {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
+    gradleVersion = '2.2'
 }

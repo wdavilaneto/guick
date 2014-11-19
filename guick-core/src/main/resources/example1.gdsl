@@ -1,0 +1,23 @@
+
+def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
+
+def metadata = json.load('example1/domain.json')
+
+guick {
+
+    domain {
+
+        for (def entity : metadata.entities) {
+            "geracao de services" {
+                object entity
+                templates = [[input: "example1/TemplateExample.groovy.vm", output: "/src/main/groovy/${packageBase}/domain/${entity.name}.groovy"]]
+            }
+        }
+//        "single-generateds" {
+//            templates = [
+//                    [input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"],
+//                    [input: "crud/AbstractTest.groovy.vm", output: "/src/test/groovy/${packageBase}/"]
+//            ]
+//        }
+    }
+}

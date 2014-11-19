@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.wdn.guick.loader.Cpp
 import org.wdn.guick.loader.Ctags
+import org.wdn.guick.loader.Database
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
@@ -30,6 +31,7 @@ class DslArchitecture {
     @Resource Jpa jpa
     @Resource Ctags ctags
     @Resource Cpp cpp
+    @Resource Database database
 
     void runEngine(String target) {
 
@@ -40,6 +42,7 @@ class DslArchitecture {
         binding.setVariable("jpa", jpa)
         binding.setVariable("ctags", ctags)
         binding.setVariable("cpp", cpp)
+        binding.setVariable("database", database)
 
         Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
 

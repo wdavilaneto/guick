@@ -1,0 +1,111 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+var ipHost = 'http://localhost:8080/';
+
+/**
+ * @ngdoc overview
+ * @name ${projectBeanName}App
+ * @description
+ * # ${projectBeanName}App
+ *
+ * Main module of the application.
+ */
+var app = angular.module('${project.name}App', [
+    'ngAnimate',
+    'ngCookies',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize',
+    'ngTouch',
+    'ui.select',
+    'ui.bootstrap',
+    'ui.date',
+    'ngGrid',
+    'toaster',
+    'angucomplete-alt',
+    '${project.name}Services'
+  ])
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
+      })
+#foreach( ${entity} in ${project.metadata.entities})
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+      .when('/manter${entity.name}', {templateUrl: 'views/crud/${entity.name}.html'})
+#end
+      .otherwise({
+        redirectTo: '/'
+      });
+  });
+
+angular.module('${projectBeanName}Services', ['ngResource']);
+
+//Tratamento global de excecoes
+app.config(['${js}httpProvider', function(${js}httpProvider) {
+
+    var nomeApp = 'Controle de Custo';
+
+    ${js}httpProvider.interceptors.push(
+        ['${js}q', 'toaster', '${js}window','${js}injector',
+            function(${js}q, toaster, ${js}window, ${js}injector) {
+
+                return {
+                    'response': function(response) {
+
+                        var title = response.headers('title');
+                        var message = response.headers('message');
+
+                        switch (response.status) {
+                            case 200: break;
+                            default: toaster.pop('success', title, message);
+                        }
+
+                        return response;
+                    },
+
+                    'responseError': function (errorResponse) {
+
+                        switch (errorResponse.status) {
+                            case 0:
+                                toaster.pop('error', 'Desculpe', 'Nossos servidores encontram-se indisponíveis no momento.');
+                                break;
+                            case 400:
+                                angular.forEach(errorResponse.data.violations, function(value) {
+                                    toaster.pop('warning', nomeApp, value.message);
+                                });
+                                toaster.pop('warning', nomeApp, errorResponse.data.error);
+                                break;
+                            case 401: // 401-Unauthorized - Falta autenticacao
+                                $window.location.href = '/index.html';
+                                break;
+                            case 403: // 403-Forbidden - Tem autenticacao, mas, o acesso é proibido para este usuario.
+                                toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo');
+                                break;
+                            case 404:
+                                toaster.pop('info', nomeApp, 'Nenhum registro encontrado');
+                                break;
+                            case 409:
+                                angular.forEach(errorResponse.data.violations, function(value) {
+                                    toaster.pop('warning', nomeApp, value);
+                                });
+                                break;
+                            case 500:
+                                //Neste caso o melhor é
+                                toaster.pop('error', nomeApp, errorResponse.data.error +
+                                    ' ticket[' + errorResponse.data.ticket + ']',9000,'');
+                                break;
+                        }
+
+                        return ${js}q.reject(errorResponse);
+                    }
+                };
+            }]);
+}]);
+

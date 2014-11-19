@@ -1,12 +1,12 @@
 {
     "entities": [
         {
-            "name": "AnaliseConvencionalXml",
+            "name": "Pessoa",
             "_type": "Entity",
             "_typeGroup": "entities",
             "properties": [
                 {
-                    "name": "content",
+                    "name": "nome",
                     "type": "String",
                     "length": 150
                 }

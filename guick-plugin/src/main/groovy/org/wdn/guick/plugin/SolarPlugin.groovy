@@ -13,8 +13,8 @@ class SolarPlugin extends GuickMain {
 
     public static void main(String[] args) {
         ResourceReader reader = new ResourceReader()
-        def resource = reader.getResource("solar/data.xml")
-//        def data = new BufferedReader(reader.getResource("solar/data.xml"))
+        def resource = reader.getReader("solar/data.xml")
+//        def data = new BufferedReader(reader.getReader("solar/data.xml"))
 //        data.readLines().each {
 //            if (it.contains('<input id="svn.remote.loc"')){
 //                println it.value

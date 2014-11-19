@@ -11,7 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <spring_version>3.2.3.RELEASE</spring_version>
+        <spring_version>4.1.0.RELEASE</spring_version>
     </properties>
 
     <repositories>
@@ -31,15 +31,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>2.0.18</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring_version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring3</artifactId>
-            <version>2.0.18</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -52,48 +53,34 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring_version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring_version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.3.4.RELEASE</version>
+            <version>1.7.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-webmvc</artifactId>
-            <version>1.1.0.M1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.2.2</version>
+            <version>2.2.0.RELEASE</version>
         </dependency>
 
         <dependency>
-        	<groupId>org.hibernate</groupId>
-        	<artifactId>hibernate-entitymanager</artifactId>
-        	<version>4.2.4.Final</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.2.4.Final</version>
         </dependency>
 
         <dependency>
-        	<groupId>org.hibernate</groupId>
-        	<artifactId>hibernate-validator</artifactId>
-        	<version>5.0.1.Final</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.1.Final</version>
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.173</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
 
         <!-- other driver examples
@@ -159,11 +146,12 @@
         </dependency>
 
         <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<version>4.11</version>
-        	<scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -175,9 +163,9 @@
     <build>
         <plugins>
             <!--<plugin>-->
-                <!--<groupId>org.wdn.guick</groupId>-->
-                <!--<artifactId>guick-maven-plugin</artifactId>-->
-                <!--<version>1.1-SNAPSHOT</version>-->
+            <!--<groupId>org.wdn.guick</groupId>-->
+            <!--<artifactId>guick-maven-plugin</artifactId>-->
+            <!--<version>1.1-SNAPSHOT</version>-->
             <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -228,7 +216,7 @@
         <profile>
             <id>tomcat</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -236,6 +224,11 @@
                     <artifactId>jta</artifactId>
                     <version>1.1</version>
                     <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc6</artifactId>
+                    <version>11.2.0.3</version>
                 </dependency>
             </dependencies>
             <build>
@@ -253,7 +246,7 @@
                         <artifactId>tomcat7-maven-plugin</artifactId>
                         <version>2.1</version>
                         <configuration>
-                            <path>/</path>
+                            <path>/custeio</path>
                             <port>8080</port>
                         </configuration>
                     </plugin>

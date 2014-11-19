@@ -1,0 +1,23 @@
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+#foreach(${validation} in ${property.getValidations()})
+    @${validation.getName()}#if(!$validation.parameters.isEmpty())(#foreach( $parameterKey in $validation.parameters.keySet())$parameterKey = $validation.parameters.get($parameterKey)#{end})#{end}
+
+#end
+#if( ${property.getConstraint().isSingleColumn()})
+    @ManyToOne
+    @JoinColumn(name = "${property.getConstraint().singleColumnPair.coluna.name}"#if(!${property.getConstraint().singleColumnPair.coluna.getNullable()}), nullable = false#{end})
+#else
+    @ManyToOne()
+    @JoinColumns( [
+#set( $index = 1 )
+#set( $totalValues = ${property.constraint.columnPairs.size()} )
+#foreach( ${columnPair} in ${property.constraint.columnPairs})
+            @JoinColumn(name = "${columnPair.coluna.name}", nullable = false, updatable = false)#if($index < $totalValues ), #end
+#set($index = $index + 1)
+
+#end
+    ])
+#end
+    ${property.getType()} $property.getName();
+
+#end

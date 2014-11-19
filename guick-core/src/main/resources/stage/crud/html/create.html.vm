@@ -1,0 +1,10 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+<!-- sessões -->
+<section class="content-header"><h1><i class="fa fa-tachometer"></i> ${entity.name}</h1></section>
+<div ng-controller="${entityBeanName}Controller">
+    <section class="content">
+
+    </section>
+    <!-- fim sessão -->
+</div>

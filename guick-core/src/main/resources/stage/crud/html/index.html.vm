@@ -1,0 +1,178 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+<!doctype html>
+<html ng-app="${project.name}App" lang="pt">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title ng-scope>MPRJ - ${project.name}</title>
+    <meta name="description" content="MPRJ sistema ${project.name}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
+    <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
+    <link rel="stylesheet" href="bower_components/adminlte/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/adminlte/css/ionicons.min.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endbuild -->
+</head>
+<body class="skin-blue">
+<toaster-container></toaster-container>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+ <header class="header">
+    <a href="index.html" class="logo">
+        <!-- Add the class icon to your logo image or logo icon to add the margining -->
+        AdminLTE
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header bg-light-blue"><img src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
+                        <p>
+                            Bruno<small>Usuário desde Nov. 2012</small>
+                        </p></li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="">Pendências</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="">Principal</a>
+                        </div>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="" class="btn btn-default btn-flat">Perfil</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="" class="btn btn-default btn-flat">Sair</a>
+                        </div>
+                    </li>
+                </ul></li>
+            </ul>
+        </div>
+        <a class="logo-control" href="#">S<small>istema ${project.name}</small> </a>
+    </nav>
+</header>
+
+<div class="div.wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left info">
+                    <p>Olá, bem vindo!</p>
+                </div>
+            </div>
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-group"></i> <span>Entidades</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+#foreach( ${entity} in ${project.metadata.entities})
+                        <li><a href="#/manter${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
+                    </ul>
+                </li>
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <aside class="right-side" id="home" ng-view></aside>
+</div>
+
+<!-- rodape <div ng-include src="'components/footer/footer.html'"></div>-->
+
+<!-- build:js(.) scripts/oldieshim.js -->
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/angular-ui-date/src/date.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/ng-grid/build/ng-grid.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+<script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<script src="bower_components/adminlte/js/AdminLTE/app.js"></script>
+<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<!-- principal -->
+<script src="scripts/app.js"></script>
+
+<!-- servicos -->
+#foreach( ${entity} in ${project.metadata.entities})
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+    <script src="scripts/service/${entity.name}Service.js"></script>
+#end
+
+<!-- controllers -->
+#foreach( ${entity} in ${project.metadata.entities})
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+    <script src="scripts/controllers/${entity.name}Controller.js"></script>
+#end
+
+<!-- diretrizes -->
+#foreach( ${entity} in ${project.metadata.entities})
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+<script src="components/directives/${entityBeanName}/select.js"></script>
+#end
+<!-- endbuild -->
+
+</body>
+</html>

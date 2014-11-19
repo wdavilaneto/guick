@@ -1,0 +1,17 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+package ${project.group}.${project.name}.api.persistence;
+
+import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
+import ${project.group}.${project.name}.domain.${entity.name};
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+/**
+ *  CRUD Genreated Repository for entity${entity.name}
+ *  Guick Generate class:
+ *  https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ */
+@RepositoryRestResource(collectionResourceRel = "${entityBeanName}List", path = "${entityBeanName}DataService")
+public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ICoreRepository<${entity.name}, Long > {
+}

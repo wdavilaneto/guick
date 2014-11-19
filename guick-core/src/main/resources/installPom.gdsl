@@ -1,14 +1,23 @@
+package stage
 
-project.group = 'com.wdavilaneto'
-project.name = 'wdavilaneto'
+def packageBase = project.packageBase
 
 guick {
-
 
     installPom {
 
         "pom" {
             templates = [[input: "archetype/pom.xml.ftl"]]
+        }
+
+        "single-generateds" {
+            templates = [
+                    [input: "crud/AbstractTest.groovy.vm", output: "/src/test/groovy/${packageBase}/"],
+                    [input: "archetype/presentation/MainWebApplicationInitializer.groovy.vm", output: "/src/main/groovy/${packageBase}/presentation/support/"],
+                    [input: "archetype/presentation/MainWebConfig.groovy.vm", output: "/src/main/groovy/${packageBase}/presentation/support/"],
+                    [input: "archetype/presentation/PageableSupport.java.vm", output: "/src/main/java/${packageBase}/presentation/support/"],
+                    [input: "archetype/presentation/PageItem.java.vm", output: "/src/main/java/${packageBase}/presentation/support/"]
+            ]
         }
 
     }

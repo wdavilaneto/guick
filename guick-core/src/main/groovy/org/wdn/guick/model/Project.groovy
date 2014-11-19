@@ -13,17 +13,25 @@ import org.wdn.guick.util.ClassPathManager
  * To change this template use File | Settings | File Templates.
  */
 @Component
-class Project {
+class Project implements Serializable {
 
     private final Logger logger = LoggerFactory.getLogger(this.class)
 
     String group
     String name
     String path
+    List<Table> tables = new ArrayList<Table>();
+    List<Entity> entities = new ArrayList<Entity>();
+    List<Clazz> classes = new ArrayList<Clazz>();
 
+    DatasourceInfo database
     def pom
     def gradleProject
     def metadata = [:]
+
+    // Staging
+    def webXml
+    def presentationXml
 
     def initialize(String rootPath) {
         if (rootPath == null){
@@ -31,8 +39,14 @@ class Project {
         } else {
             // is it Test... we need to add classpaths ...
             path = new File(rootPath).getCanonicalPath()
-            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/classes/main/"))
-            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/resources/main/"))
+//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/classes/main/"))
+//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/resources/main/"))
+//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/src/main/resources"))
+
+//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/classes/main/") );
+//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/resources/main/") );
+//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/src/main/resources") );
+
         }
         def pomfilePath = path + "/pom.xml"
         if (new File(pomfilePath).exists()) {
@@ -45,16 +59,56 @@ class Project {
     }
 
     public String getName() {
-        if (name != null) {
-            return name
+        if (name == null || name.isEmpty()) {
+            name = path.replaceAll( '\\\\' ,"/").replaceAll("-","/").split("/")?.last();
         }
-        return path.replaceAll( '\\\\' ,"/").split("/")?.last()
+        return name;
     }
     public String getGroup() {
         if (this.group != null) {
             return this.group
         }
         return getName()
+    }
+
+    public String getSourcePath() {
+        return EngineConstants.DEFAULT_JAVA_SRC_WITH_PACKAGE + "/" + getAcronym()
+    }
+
+    public String getTestSourcePath() {
+        return EngineConstants.DEFAULT_JAVA_TEST_WITH_PACKAGE + "/" + getAcronym()
+    }
+
+    public List<EnumClass> getEnums(){
+        def enumList = []
+        return (List<EnumClass>) entities.each { entity -> enumList.addAll(entity.enums) }
+    }
+
+    public List<Entity> getEntitiesWithoutHibernateIssue(){
+        return entities.findAll { e -> !hasHibernateIssue(e )}
+    }
+
+    private boolean hasHibernateIssue(Entity entity) {
+        if (entity.parent?.id instanceof Entity ){
+            Entity parentId = (Entity)entity.parent.id
+            return parentId.isEmbeddable();
+        }
+        return false;
+    }
+
+    def getData() {
+        if (data == null){
+            data = [:]
+        }
+        return data
+    }
+
+    public String getPackageBase(){
+        return group.replaceAll("\\.",'/') + "/${name}"
+    }
+
+    public String getAcronym(){
+        return name
     }
 
 }

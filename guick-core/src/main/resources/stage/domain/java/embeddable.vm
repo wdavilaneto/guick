@@ -1,0 +1,106 @@
+/*
+ * Esse arquivo pertence a Petrobras e nao pode ser utilizado fora
+ * dessa empresa sem previa autorizacao.
+ */
+
+package ${entity.getPackage()};
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+import javax.persistence.Basic;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
+import br.com.petrobras.fcorp.validation.annotation.NotBlank;
+import br.com.petrobras.fcorp.validation.annotation.CPF;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.format.annotation.DateTimeFormat;
+#foreach( ${property} in ${entity.getEnums()})
+import ${entity.getPackage()}.domain.${property.getName()};
+#end
+
+/**
+ * ${entity.getName()}
+ * A classe ${entity.getName()} representa o mapeamento Objeto-Relacional
+ * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
+ */
+@Embeddable
+public class ${entity.getName()} implements java.io.Serializable {
+
+#parse( "simpleProperties.vm" )
+#foreach( ${property} in ${entity.getEnums()})
+    @Enumerated(EnumType.STRING)
+    @Type(
+        type = "br.com.petrobras.fcorp.persistence.dao.hibernate.support.GenericEnumUserType",
+        parameters = [
+            @Parameter(
+                name = "enumClass",
+                value = "${entity.getPackage()}.domain.${property.getName()}")
+        ])
+    @Column(name = "${property.getSimpleProperty().getColumn().getName()}", nullable = false, length = 2)
+    @NotBlank
+    ${property.getName()} ${property.getSimpleProperty().getName()};
+
+#end
+#foreach( ${property} in ${entity.getOneToManyProperties()})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.isEmbeddable()})id.#{end}$util.uncapitalize( ${entity.getName()} )")
+    List<$property.type> $property.getName() = new ArrayList<$property.type>(0);
+
+#end
+#parse( "manyToOneProperties.vm" )
+#parse( "manyToManyProperties.vm" )
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+    public ${entity.getId().getType()} getId() {
+        return this.id;
+    }
+
+    public void setId(${entity.getId().getType()} value) {
+        this.id = value;
+    }
+
+#end
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
+}

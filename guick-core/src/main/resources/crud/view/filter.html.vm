@@ -25,7 +25,7 @@
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script th:src="@{/js/html5shiv.js}" src="js/html5shiv.js"></script>
+        <script th:src="@{/js/html5shiv.js}" src="js/html5shiv.js"></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
@@ -49,7 +49,7 @@
         <form action="#" th:attr="action=@{/${entity.name}/filter.do}" class="form-horizontal" id="${entity.name}Form" method="post">
             <div class="well clearfix">
                 <fieldset>
-                    <legend>Person Search Filter</legend>
+                    <legend>${property.name} Search Filter</legend>
                     <div class="row-fluid">
                         <div class="span6">
 #foreach( ${property} in ${entity.properties})
@@ -94,8 +94,8 @@
             <td th:text="${open}${entityBeanName}.${property.name}}">field </td>
 #end
             <td>
-                <a href="edit.html" th:href="@{/${entity.name}/edit.do(id=${person.id})}"><i class="icon-edit"></i></a>
-                <a href="show.html" th:href="@{/${entity.name}/show.do(id=${person.id})}"><i class="icon-search"></i></a>
+                <a href="edit.html" th:href="@{/${entity.name}/edit.do(id=${${entityBeanName}.id})}"><i class="icon-edit"></i></a>
+                <a href="show.html" th:href="@{/${entity.name}/show.do(id=${${entityBeanName}.id})}"><i class="icon-search"></i></a>
             </td>
         </tr>
         </tbody>
@@ -107,25 +107,25 @@
             <ul>
                 <li th:class="${open}${entityBeanName}List.firstPage}  ? 'disabled' : ''">
                     <span th:if="${open}${entityBeanName}List.firstPage}">First</span>
-                    <a th:if="${open}not ${entityBeanName}List.firstPage}" th:href="@{/Person/filter.do(page.page=1,page.size=${open}${entityBeanName}List.size})}">First</a>
+                    <a th:if="${open}not ${entityBeanName}List.firstPage}" th:href="@{/${entity.name}/filter.do(page.page=1,page.size=${open}${entityBeanName}List.size})}">First</a>
                 </li>
                 <li th:class="${open}${entityBeanName}List.hasNextPage()}? '' : 'disabled'">
                     <span th:if="${open}not ${entityBeanName}List.hasNextPage()}">«</span>
-                    <a th:if="${open}${entityBeanName}List.hasNextPage()}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.number-1},page.size=${open}${entityBeanName}List.size})}" title="Go to previous page">«</a>
+                    <a th:if="${open}${entityBeanName}List.hasNextPage()}" th:href="@{/${entity.name}/filter.do(page.page=${open}${entityBeanName}List.number-1},page.size=${open}${entityBeanName}List.size})}" title="Go to previous page">«</a>
                 </li>
-                <li th:each="item : ${beans.pageableSupport.getPageList( personList )}" th:class="${item.current}? 'active' : ''">
+                <li th:each="item : ${open}beans.pageableSupport.getPageList( ${entityBeanName}List )}" th:class="${item.current}? 'active' : ''">
                     <span th:if="${item.current}" th:text="${item.number}">1</span>
-                    <a th:if="${open}not item.current}" th:href="@{/Person/filter.do(page.page=${item.number},page.size=${open}${entityBeanName}List.size})}">
+                    <a th:if="${open}not item.current}" th:href="@{/${entity.name}/filter.do(page.page=${item.number},page.size=${open}${entityBeanName}List.size})}">
                         <span th:text="${item.number}">1</span>
                     </a>
                 </li>
                 <li th:class="${open}${entityBeanName}List.hasPreviousPage()}? '' : 'disabled'">
-                    <span th:if="${open}not personList.hasPreviousPage()}">»</span>
-                    <a th:if="${open}${entityBeanName}List.hasPreviousPage()}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.number+1},page.size=${open}${entityBeanName}List.size})}" title="Go to next page">»</a>
+                    <span th:if="${open}not ${entityBeanName}List.hasPreviousPage()}">»</span>
+                    <a th:if="${open}${entityBeanName}List.hasPreviousPage()}" th:href="@{/${entity.name}/filter.do(page.page=${open}${entityBeanName}List.number+1},page.size=${open}${entityBeanName}List.size})}" title="Go to next page">»</a>
                 </li>
                 <li th:class="${open}${entityBeanName}List.lastPage}? 'disabled' : ''">
                     <span th:if="${open}${entityBeanName}List.lastPage}">Last</span>
-                    <a th:if="${open}not personList.lastPage}" th:href="@{/Person/filter.do(page.page=${open}${entityBeanName}List.totalPages},page.size=${open}${entityBeanName}List.size})}">Last</a>
+                    <a th:if="${open}not ${entityBeanName}List.lastPage}" th:href="@{/${entity.name}/filter.do(page.page=${open}${entityBeanName}List.totalPages},page.size=${open}${entityBeanName}List.size})}">Last</a>
                 </li>
             </ul>
         </div>

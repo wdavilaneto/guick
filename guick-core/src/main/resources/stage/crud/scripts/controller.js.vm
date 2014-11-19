@@ -1,0 +1,107 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:${entityBeanName}Ctrl
+ * @description
+ * # AboutCtrl
+ * Controller of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${entityBeanName}Service',   function (${js}scope, ${js}routeParams , ${js}modal, ${entityBeanName}Service ) {
+
+    ${js}scope.title = 'Search Filter: ${entity.name}';
+    ${js}scope.${entityBeanName} = {};
+    ${js}scope.${entityBeanName}Selected = [];
+    ${js}scope.${entityBeanName}Page = {};
+
+    ${js}scope.pagingOptions = {
+        pageSizes: [10, 20, 50],
+        pageSize: 10,
+        currentPage: 1
+    };
+
+    ${entityBeanName}Service.findByFilter(${js}scope.${entityBeanName}, function (data) {
+        ${js}scope.${entityBeanName}Page = data;
+    });
+
+    ${js}scope.search = function() {
+        var pagination = {
+            currentPage: ${js}scope.pagingOptions.currentPage,
+            pageSize: ${js}scope.pagingOptions.pageSize
+        };
+        //${entityBeanName}.findByFilter( {} , function (data) {
+        ${entityBeanName}Service.findByFilter( ${js}scope.${entityBeanName} , function (data) {
+            ${js}scope.${entityBeanName}Page = data;
+            ${js}scope.result = data.content;
+        });
+    };
+
+    ${js}scope.gridOptions = {
+        data: '${entityBeanName}Page.content',
+        enablePaging: true,
+        showFooter: true,
+        pagingOptions: ${js}scope.pagingOptions,
+        multiSelect: false,
+        selectedItems: ${js}scope.${entityBeanName}Selected,
+        totalServerItems: ${js}scope.${entityBeanName}Page.totalElements,
+        i18n: 'pt-br',
+        columnDefs: [
+            {field: 'id', displayName: 'id'},
+#set($size = ${entity.properties.size()} )
+#set($counter = 0)
+#foreach( ${property} in ${entity.properties})
+#set($counter = $counter + 1)
+            {field: '${property}', displayName: '${property}'}#if($counter < $size),
+#end
+#end
+
+        ]
+    };
+
+    // Create ${entity.name} Modal Window
+    ${js}scope.open = function (size) {
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Ctrl', size: size,
+            resolve: {
+                ${entityBeanName}: function () {
+                  return $scope.${entityBeanName};
+                }
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.selected = selectedItem;
+        }, function () {
+            //${js}log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // watches
+    ${js}scope.${js}watch('pagingOptions', function (newVal, oldVal) {
+        if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
+            ${js}scope.search();
+        }
+    }, true);
+}]);
+
+
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+angular.module('${projectBeanName}App').controller('Modal${entity.name}Ctrl', function (${js}scope, ${js}modalInstance, ${entityBeanName}) {
+
+    ${js}scope.${entityBeanName} = ${entityBeanName};
+
+    ${js}scope.ok = function () {
+        ${js}modalInstance.close(${js}scope.${entityBeanName});
+    };
+
+    ${js}scope.cancel = function () {
+        ${js}modalInstance.dismiss('cancel');
+    };
+
+});

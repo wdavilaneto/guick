@@ -16,7 +16,7 @@ class Json {
     public Object load(String resourceOrFile) {
         def reader
         try {
-            reader = resourceReader.getResource(resourceOrFile);
+            reader = resourceReader.getReader(resourceOrFile);
         } catch (FileNotFoundException e) {
             reader = new FileReader(new File(resourceOrFile));
         }

@@ -33,7 +33,7 @@ class BaseTest {
         project.initialize("../wdavilaneto")
 
         Jpa jpa = context.getBean("jpa");
-        jpa.read()
+        //jpa.read()
 
     }
 

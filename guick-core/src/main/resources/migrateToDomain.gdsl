@@ -1,9 +1,11 @@
+import javax.persistence.metamodel.Metamodel
+
 def packageBase = project.group.replaceAll("\\.",'/') + "/" + project.name.replaceAll("\\.",'/')
 
-def metadata = jpa.getMetamodel()
+Metamodel metadata = jpa.getMetamodel()
 
 jpa.debug()
-println metadata
+
 
 guick {
 
@@ -17,8 +19,8 @@ guick {
                 ]
             }
         }
-        "home" {
-            templates = [[input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"]]
-        }
+//        "home" {
+//            templates = [[input: "crud/view/home.html.vm", output: "/src/main/webapp/WEB-INF/views/home.html"]]
+//        }
     }
 }
