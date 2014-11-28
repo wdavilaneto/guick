@@ -1,0 +1,16 @@
+{
+  "entities": [
+    {
+      "name": "NovoTest",
+      "_type": "Entity",
+      "_typeGroup": "entities",
+      "properties": [
+        {
+          "name": "nome",
+          "type": "String",
+          "length": 150
+        }
+      ]
+    }
+  ]
+}

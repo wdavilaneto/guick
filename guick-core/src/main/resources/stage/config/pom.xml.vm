@@ -154,7 +154,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>4.1.2.RELEASE</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>c3p0</groupId>
