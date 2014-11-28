@@ -1,0 +1,41 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../../../../../../concordion.css" rel="stylesheet" type="text/css" charset="UTF-8"/>
+    </head>
+
+    <body>
+
+        <!-- Exemplo 1 - concordion:assertEquals -->
+        <p>
+            The greeting should be:
+            <span concordion:assertEquals="greeting">Hello World!</span>
+        </p>
+
+        <!-- Exemplo 2 - concordion:set + concordion:assertEquals -->
+        <p>
+            The greeting for user <span concordion:set="#firstName">Bob</span>
+            will be:
+            <span concordion:assertEquals="greetingFor(#firstName)">Hello Bob!</span>
+        </p>
+
+        <!-- Exemplo 3 - concordion:set + concordion:execute + concordion:assertEquals -->
+        <p>
+            If the time is
+            <span concordion:set="#time">09:00</span>AM
+            <span concordion:execute="setCurrentTimeExample3(#time)" />
+            then the greeting will say:
+            <span concordion:assertEquals="getGreetingForTimeExample3()">Good Morning World!</span>
+        </p>
+
+        <!-- Exemplo 3 - concordion:execute + #TEXT + concordion:assertEquals -->
+        <p>
+            If the time is
+            <span concordion:execute="setCurrentTimeExample3(#TEXT)">09:00</span>AM
+            then the greeting will say:
+            <span concordion:assertEquals="getGreetingForTimeExample3()">Good Morning World!</span>
+        </p>
+
+    </body>
+</html>

@@ -1,12 +1,20 @@
 #set( $open  = "${")
 #set( $close = "}")
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
 package ${project.group}.${project.name}.api.rest;
 
+import ${project.group}.${project.name}.api.rest.dto.SearchFilter;
 import ${project.group}.${project.name}.domain.${entity.name};
-import ${project.group}.${project.name}.api.persistence.${entity.name}Repository;
+import ${project.group}.${project.name}.api.service.I${entity.name}Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,8 +39,8 @@ public class ${entity.name}Controller {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}Controller.class);
 
-    @Resource(name = "${entityBeanName}Repository")
-    private ${entity.name}Repository ${entityBeanName}Repository;
+    @Resource(name = "${entityBeanName}Service")
+    private I${entity.name}Service ${entityBeanName}Service;
 
     /**
      * Returns an full, but Paged, list of all entities (${entity.name})
@@ -44,20 +52,20 @@ public class ${entity.name}Controller {
 #end
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity<Page<${entity.name}>> findAll(Pageable pageable) {
-        return new HttpEntity(${entityBeanName}Repository.findAll(pageable));
+        return new HttpEntity(${entityBeanName}Service.findAll(pageable));
     }
 
     /**
      * Returns a paged and filtered list with an given example (ignoring relationship examples beyond id)
-     * @param pageable
+     * @param filter
      * @return
      */
 #if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos'  )
     @Cacheable(value = "${entityBeanName}")
 #end
-    @RequestMapping(value = "/find",method = RequestMethod.GET)
-    public HttpEntity<Page<${entity.name}>> find(${entity.name} example, Pageable pageable) {
-        return new HttpEntity(${entityBeanName}Repository.search(example , pageable));
+    @RequestMapping(value = "/find",method = RequestMethod.POST)
+    public HttpEntity<Page<${entity.name}>> find(@RequestBody SearchFilter<${entity.name}> filter) {
+        return new HttpEntity(${entityBeanName}Service.find(filter.getContent() , filter.getPageable()));
     }
 
     /**
@@ -70,7 +78,7 @@ public class ${entity.name}Controller {
 #end
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public HttpEntity<${entity.name}> get(@PathVariable Long id) {
-        return new HttpEntity<>(${entityBeanName}Repository.findOne(id));
+        return new HttpEntity<>(${entityBeanName}Service.findOne(id));
     }
 
     /**
@@ -80,18 +88,18 @@ public class ${entity.name}Controller {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public HttpEntity delete(@PathVariable Long id) {
-        ${entityBeanName}Repository.delete(id);
+        ${entityBeanName}Service.delete(id);
         return new HttpEntity(null);
     }
 
     /**
      * Simple save or update an entity
-     * @param bemImovel
+     * @param ${entityBeanName}
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
     public HttpEntity<${entity.name}> save(@RequestBody @Valid ${entity.name} ${entityBeanName}) {
-        ${entityBeanName}Repository.save(${entityBeanName});
+        ${entityBeanName}Service.save(${entityBeanName});
         return new HttpEntity<${entity.name}>(${entityBeanName});
     }
 

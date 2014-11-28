@@ -5,8 +5,6 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 'use strict';
 
-var ipHost = 'http://localhost:8080/';
-
 /**
  * @ngdoc overview
  * @name ${projectBeanName}App
@@ -32,10 +30,11 @@ var app = angular.module('${project.name}App', [
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
+        .when('/', {templateUrl: 'views/main.html'})
+#if (${project.name} == 'msm')
+        .when('/manterPesquisarPaciente', {templateUrl: 'views/paciente/pesquisarPaciente.html'})
+        .when('/manterPaciente', {templateUrl: 'views/paciente/paciente.html'})
+#end
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
       .when('/manter${entity.name}', {templateUrl: 'views/crud/${entity.name}.html'})

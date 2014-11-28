@@ -1,0 +1,59 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.service;
+
+import org.concordion.integration.junit4.ConcordionRunner;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.junit.runner.RunWith;
+
+@RunWith(ConcordionRunner.class)
+public class ${entity.name}AcceptanceTest {
+
+#**
+    /*
+     * Exemplo 1 - concordion:assertEquals
+     */
+    public String getGreeting() {
+        return "Hello World!";
+    }
+
+    /*
+     * Exemplo 2 - concordion:set + concordion:assertEquals
+     */
+    public String greetingFor(String firstName) {
+        return "Hello " + firstName + "!";
+    }
+
+    /*
+     * (An execute with no return value often indicates a "bad smell")
+     * Exemplo 3 - concordion:set + concordion:execute + concordion:assertEquals
+     *             concordion:execute + #TEXT + concordion:assertEquals
+     */
+    private DateTime currentTimeExample3;
+
+    public void setCurrentTimeExample3(String time) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm");
+        this.currentTimeExample3 = formatter.parseDateTime(time);
+    }
+
+    public String getGreetingForTimeExample3() {
+        if (currentTimeExample3 == null) {
+            return "FALHA";
+        }
+        if (currentTimeExample3.hourOfDay().get() < 12){
+            return "Good Morning World!";
+        } else {
+            return "Good Evening World!";
+        }
+    }
+*#
+}

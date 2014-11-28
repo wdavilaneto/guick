@@ -5,11 +5,11 @@
 
 #set ( $stringField = '' )
 #foreach( ${property} in ${entity.properties})
-#if(${property.type} == 'String' && $stringField != '' )
+#if(${property.type} == 'String' && $stringField == '' )
 #set ($stringField = ${property})
 #end
 #end
-<label>${entity.name}</label>
+<label>${entity.name}<i class="fa fa-search pull-right"></i></label>
 <ui-select ng-model="select.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" theme="bootstrap" ng-required="true">
     <ui-select-match placeholder="Escolha o ${entityBeanName}...">{{${js}select.selected.${stringField}}}</ui-select-match>
     <ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">

@@ -1,0 +1,74 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.service;
+
+import ${project.group}.${project.name}.DatabaseIntegrationTestBase;
+import ${project.group}.${project.name}.domain.${entity.name};
+import org.hamcrest.core.Is;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.test.context.jdbc.Sql;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+public class ${entity.name}IntegrationTest extends DatabaseIntegrationTestBase {
+
+    @Resource
+    private I${entity.name}Service ${entityBeanName}Service;
+
+#**
+    @Test
+    @Sql(scripts = "dml-${entityBeanName}.sql")
+    public void testFindAll(){
+        Iterable<${entity.name}> ${entityBeanName}Iterable = ${entityBeanName}Service.findAll();
+        List<${entity.name}> ${entityBeanName}List = Lists.newArrayList(${entityBeanName}Iterable);
+
+        Assert.assertThat(${entityBeanName}List.size(), Is.is(1));
+    }
+
+    @Test
+    public void testPersist(){
+        ${entity.name} ${entityBeanName} = new ${entity.name}("NOME", "DESCRICAO");
+
+        ${entity.name} ${entityBeanName}Incluido = ${entityBeanName}Service.save(${entityBeanName});
+
+        Assert.assertNotNull(${entityBeanName}Incluido.getId());
+        Assert.assertThat(${entityBeanName}Incluido.getNome(), Is.is("NOME"));
+        Assert.assertThat(${entityBeanName}Incluido.getDescricao(), Is.is("DESCRICAO"));
+    }
+
+    @Test
+    @Sql(scripts = "dml-${entityBeanName}.sql")
+    public void testUpdate(){
+        ${entity.name} ${entityBeanName}Existente = ${entityBeanName}Service.findOne(1001L);
+
+        ${entityBeanName}Existente.setNome("NOME ALTERADO");
+        ${entityBeanName}Existente.setDescricao("DESCRICAO ALTERADA");
+
+        ${entity.name} ${entityBeanName}Alterado = ${entityBeanName}Service.save(${entityBeanName}Existente);
+
+        Assert.assertThat(${entityBeanName}Alterado.getId(), Is.is(${entityBeanName}Existente.getId()));
+        Assert.assertThat(${entityBeanName}Alterado.getNome(), Is.is("NOME ALTERADO"));
+        Assert.assertThat(${entityBeanName}Alterado.getDescricao(), Is.is("DESCRICAO ALTERADA"));
+    }
+
+    @Test
+    @Sql(scripts = "dml-${entityBeanName}.sql")
+    public void testDelete(){
+        ${entityBeanName}Service.delete(1001L);
+
+        ${entity.name} ${entityBeanName}Deletado = ${entityBeanName}Service.findOne(1001L);
+
+        Assert.assertNull("O ${entityBeanName} não foi deletado corretamente!", ${entityBeanName}Deletado);
+    }
+*#
+
+}

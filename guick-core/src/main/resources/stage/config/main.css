@@ -29,3 +29,9 @@ padding-left: 20px !important;
 margin-left: 0px !important;
 position: relative !important;
 }
+
+/* CAMPOS OBRIGATÓRIOS */
+.form-group.has-warning .form-control{border-color:#ddd !important; background-color:#f7ead5 !important;}
+.form-group.has-warning label{color:#000 }
+
+.modal-lg{width:75% !important; }

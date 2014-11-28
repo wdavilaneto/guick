@@ -1,0 +1,24 @@
+INSERT INTO PARAMETRO (
+#set($size = ${entity.properties.size()} )
+#set($counter = 0)
+#foreach( ${property} in ${entity.properties})
+#set($counter = $counter + 1)
+#if(${property.getType()} != 'Long' || ${property.getType()} != 'Date' || ${property.getType()} != 'String')
+     ${property.column.name} #if($counter < $size),
+#end
+#end
+#end
+
+) VALUES (
+#set($size = ${entity.properties.size()} )
+#set($counter = 0)
+#foreach( ${property} in ${entity.properties})
+#set($counter = $counter + 1)
+#if(${property.getType()} != 'Long' || ${property.getType()} != 'Date' || ${property.getType()} != 'String')
+    #if(${property.getType()} == 'Long')${counter}#{end}#if(${property.getType()} == 'String')'${counter}'#{end}#if(${property.getType()} == 'Date')'18/03/1314'#{end}  #if($counter < $size),
+#end
+#end
+#end
+
+);
+COMMIT;

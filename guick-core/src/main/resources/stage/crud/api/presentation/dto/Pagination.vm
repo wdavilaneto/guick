@@ -1,0 +1,56 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.rest.dto;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+/**
+ * Wraps pageable requests Parameters for creation of an Spring Pageable parameters
+ * TODO: Staging class!
+ */
+public class Pagination {
+
+    private static final long serialVersionUID = -4541509938956089562L;
+
+    private int page = 0;  // default values
+    private int size = 20; // default values
+    private Sort sort;
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public Sort getSort() {
+        return sort;
+    }
+
+    public void setSort(Sort sort) {
+        this.sort = sort;
+    }
+
+    public Pageable getPageable() {
+        return new PageRequest(page, size, sort);
+    }
+
+}

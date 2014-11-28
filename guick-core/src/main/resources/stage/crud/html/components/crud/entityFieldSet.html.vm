@@ -5,26 +5,27 @@
 #foreach( ${property} in ${entity.properties})
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
 <!-- Commented Becouse this foreing Key is unkown to generator and points to an not nullable property
-                                <div class="col-md-2">
-                                    <label>${property} (${property.column.length})</label>
-                                    <p><input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}"/></p>
+                                <div class="col-md-#if(${property.column.length} > 100)4#{else}2#end">
+                                    <label>${property}</label>
+                                    <p><input class="form-control" type="text" ng-model="${entityBeanName}.${property}" ng-required="true" placeholder="${property}"/></p>
                                 </div>
 -->
 #else
-                                <div class="col-md-2">
+                                <div class="col-md-#if(${property.column.length} > 50)4#{else}2#end">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${property}">${property}</label>
-                                            <input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}" id="${property}"/>
+                                        <input class="form-control" type="text" ng-model="${entityBeanName}.${property}" ng-required="true" placeholder="${property}" id="${property}"/>
                                     </div>
                                 </div>
 #end
 #end
 #foreach( ${ent} in ${entity.complexProperties})
+#if( !${ent.isOneToMany()})
 #set( $beanName = ${util.uncapitalize($ent.name)} )
-                                <div class="col-md-2">
-                                    <label>${ent.name}</label>
+                                <div class="col-md-4">
                                     <p>
-                                        <${entityBeanName}-select></${entityBeanName}-select>
+                                        <${beanName}-select></${beanName}-select>
                                     </p>
                                 </div>
+#end
 #end

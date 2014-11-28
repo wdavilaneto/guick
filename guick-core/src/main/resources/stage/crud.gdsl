@@ -24,7 +24,8 @@ guick {
                 templates = [
                         [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"],
                         [input: "stage/crud/api/persistence/repository.${lang}.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
-                        [input: "stage/crud/api/service/service.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/${entity.name}Service.${lang}"],
+                        [input: "stage/crud/api/service/service.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/core/${entity.name}Service.${lang}"],
+                        [input: "stage/crud/api/service/iservice.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/I${entity.name}Service.${lang}"],
                         [input: "stage/crud/api/presentation/restController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/${entity.name}Controller.${lang}"]
                 ]
             }
@@ -55,6 +56,7 @@ guick {
                 ]
             }
         }
+
         "repository" {
             templates = [
                     [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
@@ -62,15 +64,16 @@ guick {
                     [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"]
             ]
         }
-        /*
-        "single-generateds" {
-            templates = [
-                    [input: "stage/crud/views/index.html.vm", output: "/front-end/app/views/crud/index.html"],
-                    [input: "stage/crud/views/common/footer.html.vm", output: "/front-end/app/views/crud/common/footer.html"],
-                    [input: "stage/crud/views/common/header.html.vm", output: "/front-end/app/views/crud/common/header.html"],
-                    [input: "stage/crud/views/common/layout.html.vm", output: "/front-end/app/views/crud/common/layout.html"]
-            ]
+
+        for (def entity : entities) {
+            "tests" {
+                object entity
+                templates = [
+                    [input: "stage/crud/test/acceptanceTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}AcceptanceTest.${lang}"],
+                    [input: "stage/crud/test/integrationTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}IntegrationTest.${lang}"],
+                    [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"]
+                ]
+            }
         }
-        */
     }
 }

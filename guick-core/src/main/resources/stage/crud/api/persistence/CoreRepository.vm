@@ -52,7 +52,8 @@ public class CoreRepository<T, ID extends Serializable> extends SimpleJpaReposit
 
         // Pageable result Result
         criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
-        List<T> result = criteria.setFirstResult(pageable.getPageNumber() * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
+        List<T> result = criteria.setFirstResult((pageable.getPageNumber() - 1 ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
         return (Page<T>) new PageImpl<T>(result, pageable, totalItems);
     }
+
 }

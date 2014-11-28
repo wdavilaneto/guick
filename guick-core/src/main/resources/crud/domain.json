@@ -11,6 +11,18 @@
                     "length": 150
                 }
             ]
+        },
+        {
+            "name": "Bairro",
+            "_type": "Entity",
+            "_typeGroup": "entities",
+            "properties": [
+                {
+                    "name": "nome",
+                    "type": "String",
+                    "length": 150
+                }
+            ]
         }
     ]
 }

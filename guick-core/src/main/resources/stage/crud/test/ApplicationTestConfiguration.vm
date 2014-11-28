@@ -1,0 +1,147 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name};
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+##import org.activiti.engine.*;
+##import org.activiti.engine.impl.history.HistoryLevel;
+##import org.activiti.spring.ProcessEngineFactoryBean;
+##import org.activiti.spring.SpringProcessEngineConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+import java.util.Properties;
+
+@ComponentScan(basePackages = {"${project.group}.${project.name}.api", "${project.group}.${project.name}.domain"})
+@Configuration
+@EnableJpaRepositories
+@EnableTransactionManagement
+@PropertySource("classpath:/application-test.properties")
+public class ApplicationTestConfiguration {
+
+    @Autowired
+    private Environment testEnvironment;
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public DataSource dataSource() throws PropertyVetoException {
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setUser(testEnvironment.getProperty("spring.datasource.username"));
+        dataSource.setPassword(testEnvironment.getProperty("spring.datasource.password"));
+        dataSource.setJdbcUrl(testEnvironment.getProperty("spring.datasource.url"));
+        dataSource.setDriverClass(testEnvironment.getProperty("spring.datasource.driver-class-name"));
+
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource){
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setPackagesToScan("br.gov.mprj.mgp2.domain");
+        JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+        entityManagerFactoryBean.setJpaProperties(hibernateProperties());
+        return entityManagerFactoryBean;
+    }
+
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        return properties;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
+    }
+
+#**
+    @Bean
+    public SpringProcessEngineConfiguration processEngineConfiguration(DataSource dataSource,
+                                                                       PlatformTransactionManager transactionManager,
+                                                                       EntityManagerFactory entityManagerFactory) {
+        SpringProcessEngineConfiguration engineConfiguration = new SpringProcessEngineConfiguration();
+        engineConfiguration.setDataSource(dataSource);
+        engineConfiguration.setTransactionManager(transactionManager);
+        engineConfiguration.setJpaEntityManagerFactory(entityManagerFactory);
+        engineConfiguration.setHistory(HistoryLevel.FULL.getKey());
+
+        return engineConfiguration;
+    }
+
+    @Bean
+    public ProcessEngine processEngine(SpringProcessEngineConfiguration springProcessEngineConfiguration) throws Exception {
+        ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
+        processEngineFactoryBean.setProcessEngineConfiguration(springProcessEngineConfiguration);
+        return processEngineFactoryBean.getObject();
+    }
+
+    @Bean
+    public RepositoryService repositoryService(ProcessEngine processEngine) {
+        return processEngine.getRepositoryService();
+    }
+
+    @Bean
+    public RuntimeService runtimeService(ProcessEngine processEngine) {
+        return processEngine.getRuntimeService();
+    }
+
+    @Bean
+    public HistoryService historyService(ProcessEngine processEngine) {
+        return processEngine.getHistoryService();
+    }
+
+    @Bean
+    public ManagementService managementService(ProcessEngine processEngine) {
+        return processEngine.getManagementService();
+    }
+
+    @Bean
+    public IdentityService identityService(ProcessEngine processEngine) {
+        return processEngine.getIdentityService();
+    }
+
+    @Bean
+    public FormService formService(ProcessEngine processEngine) {
+        return processEngine.getFormService();
+    }
+
+    @Bean
+    public TaskService taskService(ProcessEngine processEngine) {
+        return processEngine.getTaskService();
+    }
+*#
+}

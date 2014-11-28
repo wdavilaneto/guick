@@ -1,0 +1,8 @@
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=xe
+spring.datasource.password=
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+
+#Manter espaço em branco entre as tabelas
+database.activiti.tables=ACT_HI_PROCINST ACT_HI_TASKINST ACT_HI_VARINST ACT_HI_ACTINST ACT_HI_IDENTITYLINK ACT_HI_ATTACHMENT ACT_HI_DETAIL ACT_ID_INFO ACT_ID_MEMBERSHIP ACT_ID_GROUP ACT_ID_USER ACT_EVT_LOG ACT_RE_DEPLOYMENT ACT_GE_BYTEARRAY ACT_RE_MODEL ACT_RE_PROCDEF ACT_RU_JOB ACT_RU_EXECUTION ACT_RU_TASK ACT_RU_IDENTITYLINK ACT_RU_EVENT_SUBSCR ACT_RU_VARIABLE
+databse.domain.tables=#foreach( ${entity} in ${project.metadata.entities})${entity.table.name} #end

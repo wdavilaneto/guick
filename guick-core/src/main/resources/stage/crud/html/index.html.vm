@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title ng-scope>MPRJ - ${project.name}</title>
-    <meta name="description" content="MPRJ sistema ${project.name}">
+    <meta name="description" content="MPRJ - Módulo de Saúde Mental">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -49,6 +49,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
+#if (${project.name} == 'msm')
+        <a class="logo-control" href="#">Módulo de Sáude Mental <small>[ MSM ]</small></a>
+#end
         <div class="navbar-right">
             <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
@@ -81,7 +84,6 @@
                 </ul></li>
             </ul>
         </div>
-        <a class="logo-control" href="#">S<small>istema ${project.name}</small> </a>
     </nav>
 </header>
 
@@ -98,6 +100,9 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
+#if (${project.name} == 'msm')
+                <li><a href="#/manterPesquisarPaciente"><i class="fa fa-user"></i>Paciente</a></li>
+#end
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-group"></i> <span>Entidades</span>
@@ -147,8 +152,7 @@
 <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-
-<script src="bower_components/adminlte/js/AdminLTE/app.js"></script>
+<script src="bower_components/adminlte/js/app.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -162,6 +166,9 @@
 #end
 
 <!-- controllers -->
+#if (${project.name} == 'msm')
+    <script src="scripts/controllers/PacienteController.js"></script>
+#end
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
     <script src="scripts/controllers/${entity.name}Controller.js"></script>

@@ -7,35 +7,33 @@
 package ${project.group}.${project.name};
 
 import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
+import ${project.group}.${project.name}.api.persistence.support.CoreRepositoryFactoryBean;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.cache.Cache;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.cache.support.SimpleCacheManager;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.sql.DataSource;
 
 @ComponentScan
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence",repositoryFactoryBeanClass = CoreRepositoryFactoryBean.class)
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @EnableCaching
-public class Application {
+public class Application extends SpringBootServletInitializer {
 
     private static final String EHCACHE_FILE = "ehcache.xml";
 
@@ -62,6 +60,13 @@ public class Application {
         EhCacheCacheManager cacheManager = new EhCacheCacheManager();
         cacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
         return cacheManager;
+    }
+
+    @Bean
+    @Profile("jboss")
+    public DataSource dataSource() {
+        JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
+        return dataSourceLookup.getDataSource("java:jboss/custeioDS");
     }
 
 }

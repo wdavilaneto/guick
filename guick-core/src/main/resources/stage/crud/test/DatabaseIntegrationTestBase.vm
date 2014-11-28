@@ -1,0 +1,41 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name};
+
+import org.junit.After;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.annotation.Resource;
+
+##import static com.google.common.collect.ObjectArrays.concat;
+##import static org.apache.commons.lang3.StringUtils.split;
+import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
+
+/**
+ * Classe para ser herdada por classes de testes de integracao com o banco de dados, tendo como comportamento
+ * limpar a base ao final de cada @Test
+ *
+ * @author Rafael Duque
+ */
+public abstract class DatabaseIntegrationTestBase extends SpringIntegrationTestBase {
+    @Value("${database.activiti.tables}")
+    private String activiti_tables;
+
+    @Value("${databse.domain.tables}")
+    private String domain_tables;
+
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+
+/**
+    @After
+    public void afterMethod() {
+        deleteFromTables(jdbcTemplate, concat(split(activiti_tables, " "), split(domain_tables, " "), String.class));
+    }
+*/
+}

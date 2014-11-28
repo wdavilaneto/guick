@@ -7,7 +7,6 @@
 <div ng-controller="${entityBeanName}Controller">
     <section class="content">
         <form name="medidorForm" novalidate>
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="box box-primary">
@@ -15,43 +14,13 @@
 
                         <div class="box-body">
                             <div class="row">
-#foreach( ${property} in ${entity.properties})
-#if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
-<!-- Commented Becouse this foreing Key is unkown to generator and points to an not nullable property
-                                <div class="col-md-2">
-                                    <label>${property} (${property.column.length})</label>
-                                    <p><input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}"/></p>
-                                </div>
--->
-#else
-                                <div class="col-md-2">
-                                    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
-                                        <label class="control-label" for="${property}">${property}</label>
-                                            <input class="form-control" type="text" ng-model="$entityBeanNameList[0].${property}" ng-required="true" placeholder="${property}" id="${property}"/>
+                                <div ng-include src="'components/crud/${entity.name}Fieldset.html'"></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
+                                        <div class="btn btn-primary"><i class="fa fa-circle"></i> Limpar Filtro</div>
+                                        <button type="button" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i> Buscar</button>
                                     </div>
-                                </div>
-#end
-#end
-#foreach( ${ent} in ${entity.complexProperties})
-#if( !${ent.isOneToMany()})
-#set( $beanName = ${util.uncapitalize($ent.name)} )
-                                <div class="col-md-2">
-                                    <label>${ent.name}</label>
-                                    <p>
-                                        <${entityBeanName}-select></${entityBeanName}-select>
-                                    </p>
-                                </div>
-#end
-#end
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-default" ng-click="open('lg')">Novo</button>
-                                    <div class="btn btn-info">Limpar Filtro</div>
-                                    <button type="button" class="btn btn-success" ng-click="search()">Buscar
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +34,7 @@
             <div class="row">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <div class="box-header"><h3 class="box-title">Lista dos Medidores</h3></div>
+                        <div class="box-header"><h3 class="box-title">Resultado da Busca</h3></div>
                         <div class="gridStyle" ng-grid="gridOptions"></div>
                     </div>
                 </div>
