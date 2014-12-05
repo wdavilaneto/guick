@@ -8,13 +8,11 @@
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} >= 50)
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} >= 50)
@@ -24,7 +22,13 @@
 
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-#if(${complexProperty.referedEntity.table.count} > 200)
+#if(${complexProperty.referedEntity.table.count} < 200)
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <${beanName}-select></${beanName}-select>
+                                    </div>
+                                </div>
+#else
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">${complexProperty.title}</label>
@@ -41,15 +45,8 @@
                                               remote-url-response-formatter="formata${complexProperty}Array"/>
                                     </div>
                                 </div>
-#else
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <${beanName}-select></${beanName}-select>
-                                    </div>
-                                </div>
 #end
 #end
-
 
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} < 50)

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../concordion.css" rel="stylesheet" type="text/css"/>
+</head>
+
+    <body>
+
+        <h2>Story: Create and persist a New${entity.name}</h2>
+        <h4>For saving a new ${entity.name} (with null Id) and all obrigatory fields it shuld be persisted on Repository</h4>
+
+        <h5>Schema: Insert a new ${entity.name} validating all obrigatory fields</h5>
+        <p>
+            With a given new ${entity.name} with fields = |FIELDS| <br/>
+            When I insert the new entity <br/>
+            Then |RESULT|
+        </p>
+
+        <table concordion:execute="#resultado = create${entity.name}WithFields(#name)">
+            <tr>
+                <th concordion:set="#nome">|name|</th>
+                <th concordion:assertEquals="#result">|RESULT|</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Falha: o nome do parâmetro é obrigatório</td>
+            </tr>
+            <tr>
+                <td>ASSINATURA_GSI</td>
+                <td>Inclusão do Parâmetro realizada com sucesso</td>
+            </tr>
+        </table>
+
+        <h5>Esquema do Cenário: Incluir Parâmetro validando campo valor obrigatório</h5>
+
+        <p>
+            Dado um novo parâmetro com campo valor = |VALOR| <br/>
+            Quando tento incluir o parâmetro <br/>
+            Então |RESULTADO|
+        </p>
+
+        <table concordion:execute="#resultado = incluirParametroComValor(#valor)">
+            <tr>
+                <th concordion:set="#valor">|VALOR|</th>
+                <th concordion:assertEquals="#resultado">|RESULTADO|</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Falha: a descrição do parâmetro é obrigatória</td>
+            </tr>
+            <tr>
+                <td>360</td>
+                <td>Inclusão do Parâmetro realizada com sucesso</td>
+            </tr>
+            <tr>
+                <td>Gerência de Segurança da Informação</td>
+                <td>Inclusão do Parâmetro realizada com sucesso</td>
+            </tr>
+        </table>
+
+    </body>
+</html>

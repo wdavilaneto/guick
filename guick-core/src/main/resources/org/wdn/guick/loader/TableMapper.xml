@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wdn.guick.loader.TableMapper">
+
+    <resultMap id="tableResultMap" type="org.wdn.guick.model.Table">
+        <id property="name" column="table_name"/>
+        <id property="owner" column="owner"/>
+        <result property="comment" column="table_comments"/>
+        <collection property="columns" resultMap="columnResultMap"  />
+    </resultMap>
+
+    <resultMap id="columnResultMap" type="org.wdn.guick.model.Column">
+        <id property="name" column="column_name"/>
+        <id property="table.name" column="table_name"/>
+        <id property="table.owner" column="owner"/>
+        <result property="comment" column="column_comments"/>
+        <result property="length" column="data_length"/>
+        <result property="nullable" column="nullable"/>
+        <result property="position" column="position"/>
+        <result property="precision" column="data_precision"/>
+        <result property="scale" column="data_scale"/>
+        <result property="type" column="data_type"/>
+    </resultMap>
+
+
+    <select id="findTableAndColumns" resultMap="tableResultMap" parameterType="string">
+        select
+        tab.owner,
+        tab.table_name,
+        cols.column_name ,
+        cols.data_type,
+        cols.data_length,
+        cols.data_precision,
+        cols.data_scale,
+        case cols.nullable when 'Y' then 1 else 0 end as nullable ,
+        cols.column_id,
+        cc.position,
+        tcom.comments as table_comments,
+        ccom.comments as column_comments
+        from DBA_TABLES tab
+        left join dba_constraints cons
+        on tab.owner = cons.owner
+        and tab.table_name = cons.table_name
+        and cons.constraint_type = 'P'
+        inner join dba_tab_columns cols
+        on tab.owner = cols.owner
+        and tab.table_name = cols.table_name
+        left join dba_cons_columns cc
+        on cons.owner = cc.owner
+        and cons.table_name = cc.table_name
+        and cons.constraint_name = cc.constraint_name
+        and cols.column_name = cc.column_name
+        left join dba_tab_comments tcom
+        on cols.owner = tcom.owner
+        and cols.table_name = tcom.table_name
+        left join dba_col_comments ccom
+        on cols.owner = ccom.owner
+        and cols.table_name = ccom.table_name
+        and cols.column_name = ccom.column_name
+        where (
+                ( cols.owner = upper('ORGI') AND  cols.table_name = UPPER('ORGI_ENDERECO_COMPLEMENTO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_BAIRRO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_BEM'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_CIDADE'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_CONTATO_PESSOA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_COR_PELE'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_ENDERECO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_ENDERECO_PESSOA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_ESCOLARIDADE'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_ESTADO_CIVIL'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_FAIXA_RENDA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_NACIONALIDADE'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_OBJETOS_ANEXOS'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_PESSOA_FISICA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_PESSOA_JURIDICA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_PESSOA_DOCUMENTO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_PESSOA_TP_DOCUMENT'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_PROFISSAO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_RENDA_BENEFICIO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_BEM'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_CONTATO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_ENDERECO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_LOGRADOURO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_MORADIA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_OBJETO'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_TP_PESSOA_JURIDICA'))
+            OR  ( cols.owner = upper('CORP') AND  cols.table_name = UPPER('CORP_UF'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_CONTRL_ENVIO_COMUNICACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_DIAGNOSTICO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_DIAGNOSTICO_INTERNACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_EQUIPE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_FREQUENCIA_VISITA'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_INSTITUICAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_INSTITUICAO_DISPOSITIVO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_MOTIVO_CONTINUIDADE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_MOTIVO_INTERNACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_MOTIVO_REGISTRO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_MOVIMENTACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_NATUREZA_JURIDICA'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_ORGAO_ATRIBUICAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_ORGAO_BAIRRO_ATUACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_ORIENTACAO_EQUIPE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_ORIENT_EQUIPE_INTERNACAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_PACIENTE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_PAPEL_EQUIPE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_PARAMETRO_SISTEMA'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_REFERENCIA_FAMILIAR'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_REF_MORADIA'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_SITUACAO_JURIDICA'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_TP_DISPOSITIVO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_TP_INSTITUICAO'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_TP_PLANO_SAUDE'))
+            OR  ( cols.owner = upper('NMSM') AND  cols.table_name = UPPER('NMSM_TP_RELACIONAM_PACIENTE'))
+        )
+        and (tab.table_name not like 'VW_%')
+        and (tab.table_name not like 'BIN$%')
+        and (tab.table_name not like 'AD$%')
+        order by cols.table_name, cc.position, cols.column_id
+    </select>
+
+    <select id="findContraints" resultType="hashmap"  parameterType="string">
+        select
+        k.constraint_name,
+        k.table_name, c.column_name, k.constraint_type ,
+        r.table_name as R_TABLE_NAME, cr.column_name r_column_name,
+        extractvalue (dbms_xmlgen.getxmltype ( 'select search_condition from user_constraints where table_name =''' || k.table_name || ''' and constraint_name = ''' || k.constraint_name || ''''),  '//text()') as SEARCH_CONDITION
+        from dba_constraints k
+        left join dba_constraints r on k.r_owner = r.owner and k.r_constraint_name = r.constraint_name
+        inner join dba_cons_columns c on k.owner = c.owner and k.constraint_name = c.constraint_name and c.table_name = k.table_name
+        left join dba_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
+        and c.position = cr.position
+        where (
+                ( k.owner = upper('ORGI') AND  k.table_name = UPPER('ORGI_ENDERECO_COMPLEMENTO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_BAIRRO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_BEM'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_CIDADE'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_CONTATO_PESSOA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_COR_PELE'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_ENDERECO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_ENDERECO_PESSOA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_ESCOLARIDADE'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_ESTADO_CIVIL'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_FAIXA_RENDA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_NACIONALIDADE'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_OBJETOS_ANEXOS'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_PESSOA_FISICA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_PESSOA_JURIDICA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_PESSOA_DOCUMENTO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_PESSOA_TP_DOCUMENT'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_PROFISSAO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_RENDA_BENEFICIO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_BEM'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_CONTATO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_ENDERECO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_LOGRADOURO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_MORADIA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_OBJETO'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_TP_PESSOA_JURIDICA'))
+            OR  ( k.owner = upper('CORP') AND  k.table_name = UPPER('CORP_UF'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_CONTRL_ENVIO_COMUNICACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_DIAGNOSTICO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_DIAGNOSTICO_INTERNACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_EQUIPE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_FREQUENCIA_VISITA'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_INSTITUICAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_INSTITUICAO_DISPOSITIVO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_MOTIVO_CONTINUIDADE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_MOTIVO_INTERNACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_MOTIVO_REGISTRO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_MOVIMENTACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_NATUREZA_JURIDICA'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_ORGAO_ATRIBUICAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_ORGAO_BAIRRO_ATUACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_ORIENTACAO_EQUIPE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_ORIENT_EQUIPE_INTERNACAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_PACIENTE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_PAPEL_EQUIPE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_PARAMETRO_SISTEMA'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_REFERENCIA_FAMILIAR'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_REF_MORADIA'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_SITUACAO_JURIDICA'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_TP_DISPOSITIVO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_TP_INSTITUICAO'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_TP_PLANO_SAUDE'))
+            OR  ( k.owner = upper('NMSM') AND  k.table_name = UPPER('NMSM_TP_RELACIONAM_PACIENTE'))
+        )
+        and (k.table_name not like 'AD$%')
+        and k.constraint_type not in ( 'P' )
+        order by k.table_name, r.table_name , c.position
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT COUNT(*) * 100 FROM ${owner}.${table} SAMPLE (1)
+    </select>
+
+</mapper>

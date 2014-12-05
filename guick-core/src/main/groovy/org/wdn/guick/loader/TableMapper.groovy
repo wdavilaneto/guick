@@ -1,5 +1,6 @@
 package org.wdn.guick.loader
 
+import org.apache.ibatis.annotations.Param
 import org.wdn.guick.model.Table
 
 /**
@@ -8,16 +9,22 @@ import org.wdn.guick.model.Table
 interface TableMapper {
 
     /**
-     * Obtem lista de tabelas e colunas de um dado owner
+     * Returns table informations for given parameters
      * @param owner
      * @return
      */
-    List<Table> findTableAndColumns(String owner);
+    List<Table> findTableAndColumns(@Param("owner") String owner);
 
     /**
-     * Obtem lista de constraints de um dado owner
+     * Returns an list of contraints
      * @return
      */
-    List<Map> findContraints(String owner);
+    List<Map> findContraints(@Param("owner") String owner);
+
+    /**
+     * Returns a estimate (statistc count) quantity of tuples on a given Table
+     * @return
+     */
+    Long count(@Param("owner") String owner, @Param("table") String table)
 
 }

@@ -17,12 +17,13 @@ var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
 ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
     function ($resource) {
-        return $resource('http://localhost:8080/${entity.name}', {}, {
+        return $resource('http://localhost:8080/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: 'http://localhost:8080/${entity.name}', isArray: false},
-            'find': { method: 'POST', url: 'http://localhost:8080/${entity.name}/find', isArray: false},
+            'search': { method: 'POST', url: 'http://localhost:8080/${entity.name}/search', isArray: false},
+            'searchText': { method: 'POST', url: 'http://localhost:8080/${entity.name}/searchText', isArray: false},
             'get': { method: 'GET'},
             'save': { method: 'POST'},
-            'delete': { method: 'DELETE'}
+            'remove': { method: 'DELETE'}
         });
     }
 ]);

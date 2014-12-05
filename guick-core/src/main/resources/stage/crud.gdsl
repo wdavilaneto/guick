@@ -24,6 +24,8 @@ guick {
                 templates = [
                         [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"],
                         [input: "stage/crud/api/persistence/repository.${lang}.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
+                        [input: "stage/crud/api/persistence/EntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryImpl.${lang}"],
+                        [input: "stage/crud/api/persistence/IEntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryCustom.${lang}"],
                         [input: "stage/crud/api/service/service.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/core/${entity.name}Service.${lang}"],
                         [input: "stage/crud/api/service/iservice.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/I${entity.name}Service.${lang}"],
                         [input: "stage/crud/api/presentation/restController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/${entity.name}Controller.${lang}"]
@@ -49,8 +51,11 @@ guick {
                 templates = [
                         [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/${entity.name}Controller.js"],
                         [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/${entity.name}Service.js"],
-                        [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}.html"],
-                        [input: "stage/crud/html/components/crud/entityFieldset.html.vm", output: "/front-end/app/components/crud/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
+                        [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
+                        [input: "stage/crud/html/components/crud/entityFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityEditFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}EditFieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityToOneFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
                         [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
                 ]
@@ -69,11 +74,30 @@ guick {
             "tests" {
                 object entity
                 templates = [
-                    [input: "stage/crud/test/acceptanceTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}AcceptanceTest.${lang}"],
                     [input: "stage/crud/test/integrationTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}IntegrationTest.${lang}"],
-                    [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"]
+                    [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"],
+
+                    [input: "stage/crud/test/AcceptanceSuiteTest.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuiteTest.${lang}"],
+                    [input: "stage/crud/test/AcceptanceSuite.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuite.html"],
+
+                    [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                    [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                    [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                    [input: "stage/crud/test/FindOneAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.${lang}"],
+                    [input: "stage/crud/test/FindAllAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.${lang}"],
+
+                    [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.html"],
+                    [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.html"],
+                    [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.html"],
+                    [input: "stage/crud/test/FindOneAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.html"],
+                    [input: "stage/crud/test/FindAllAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.html"]
                 ]
             }
+        }
+        "single-tests" {
+            templates = [
+                    [input: "stage/crud/test/index.html.vm", output: "/api/src/test/resources/index.html"]
+            ]
         }
     }
 }

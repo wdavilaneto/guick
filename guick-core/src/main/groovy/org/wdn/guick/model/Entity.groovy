@@ -44,6 +44,16 @@ class Entity extends Clazz {
         return id
     }
 
+    public List<RelationshipProperty> getAllObrigatoryProperties(){
+        List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
+        for (RelationshipProperty property : properties) {
+            if (!property.column.nullable) {
+                returnList.add(property);
+            }
+        }
+        return returnList;
+    }
+
     public List<ComplexProperty> getOneToManyProperties() {
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
         for (ComplexProperty property : complexProperties) {
@@ -72,6 +82,22 @@ class Entity extends Clazz {
             }
         }
         return returnList;
+    }
+
+    private Boolean _looksLikeEnum = null;
+    public boolean looksLikeEnum(){
+        if (_looksLikeEnum == null) {
+            (_looksLikeEnum = properties.size() == 1 && getManyToOneProperties().size() == 0) || (_looksLikeEnum = properties.size() ==2 && name.startsWith("Tipo") );
+        }
+        return _looksLikeEnum;
+    }
+
+    private Boolean _looksLikeDomain = null;
+    public boolean looksLikeDomain(){
+        if (_looksLikeDomain == null) {
+            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum() );
+        }
+        return _looksLikeDomain;
     }
 
     public String getPackage() {

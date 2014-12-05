@@ -4,20 +4,26 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 
 #set ( $stringField = '' )
+#set ( $secondStringField = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.type} == 'String' && $stringField == '' )
-#set ($stringField = ${property})
+    #set ($stringField = ${property.name})
+#end
+#if(${property.type} == 'String' && ${stringField} != ${property.name} )
+    #set ($secondStringField = ${property})
 #end
 #end
-<label>${entity.name}<i class="fa fa-search pull-right"></i></label>
+<label>${entity.title}<i class="fa fa-search pull-right"></i></label>
 <ui-select ng-model="select.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" theme="bootstrap" ng-required="true">
-    <ui-select-match placeholder="Escolha o ${entityBeanName}...">{{${js}select.selected.${stringField}}}</ui-select-match>
+    <ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
     <ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
 #if ($stringField == '' )
         <div ng-bind-html="item.id | highlight: ${js}select.search"></div>
 #else
         <div ng-bind-html="item.${stringField} | highlight: ${js}select.search"></div>
-        <small ng-bind-html="item.id |  highlight: $select.search | id"></small>
+#if($secondStringField != '')
+        <small ng-bind-html="item.${secondStringField} |  highlight: $select.search "></small>
+#end
 #end
     </ui-select-choices>
 </ui-select>

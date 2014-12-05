@@ -15,6 +15,8 @@ class Table {
     String sequenceName;
     Table inheritanceTable;
 
+    Long count = 0;
+
     //Constraint primaryKey
     List<Column> columns = new ArrayList<Column>();
     List<Constraint> constraints = new ArrayList<Constraint>();

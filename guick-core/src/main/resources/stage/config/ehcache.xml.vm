@@ -136,19 +136,18 @@
 
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-#if( ${entityBeanName} == 'orgao' )
-    <cache name="${entityBeanName}" maxElementsInMemory="500" eternal="false" diskPersistent="false"
-           timeToIdleSeconds="600" timeToLiveSeconds="600"/>
-
-#end
-#if( ${entity.table.name.contains('TP_')} )
-    <cache name="${entityBeanName}" maxElementsInMemory="300" eternal="false" diskPersistent="false"
-           timeToIdleSeconds="300" timeToLiveSeconds="300"/>
-
-#end
-#if( ${entityBeanName} == 'enderecos' )
+#if( ${entityBeanName} == 'endereco' )
     <cache name="${entityBeanName}" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
            timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
+    <cache name="${entityBeanName}List" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
+              timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
+#end
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
+    <cache name="${entityBeanName}" maxElementsInMemory="600" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
+    <cache name="${entityBeanName}List" maxElementsInMemory="600" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
+
 #end
 #end
 

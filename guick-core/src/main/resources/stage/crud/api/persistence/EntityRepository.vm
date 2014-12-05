@@ -1,0 +1,165 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.persistence.core;
+
+import ${project.group}.${project.name}.domain.${entity.name};
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import javax.persistence.EntityManager;
+import java.io.Serializable;
+import java.util.List;
+
+public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCustom {
+
+    @Autowired
+    private EntityManager entityManager;
+
+    public Page<${entity.name}> search(${entity.name} $entityBeanName, Pageable pageable) {
+        if (pageable == null) {
+            pageable = new PageRequest(0, 10);
+        }
+
+        Session session = (Session) entityManager.getDelegate();
+        Criteria criteria = session.createCriteria(${entity.getName()}.class);
+
+        // Prepare Example
+        Example example = Example.create(${entityBeanName});
+        criteria.add(example.enableLike(MatchMode.ANYWHERE).ignoreCase());
+
+#foreach( ${property} in ${entity.id.getProperties()})
+#set($propertyCaptalized = $util.capitalize(${property.getName()}))
+#if( $property.type == 'String' )
+        if (${entityBeanName}.getId() != null && ${entityBeanName}.getId().get${propertyCaptalized}() != null && ${entityBeanName}.getId().get${propertyCaptalized}().trim().length() > 0) {
+            criteria.add(
+                Restrictions.ilike("id.${property.name}", ${entityBeanName}.getId().get${propertyCaptalized}(), MatchMode.ANYWHERE)
+            );
+        }
+
+#else
+        if (${entityBeanName}.getId() != null && ${entityBeanName}.getId().get${propertyCaptalized}() != null) {
+             criteria.add(Restrictions.eq("id.${property.getName()}", ${entityBeanName}.getId().get${propertyCaptalized}()));
+        }
+
+#end
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+#set($propertyCaptalized = $util.capitalize(${property.getName()}))
+#if( $property.type == 'String' )
+        if (${entityBeanName}.getId()!= null && ${entityBeanName}.getId().get${propertyCaptalized}() != null && ${entityBeanName}.getId().get${propertyCaptalized}().trim().length() > 0) {
+            criteria.add(
+                Restrictions.ilike("id.${property.name}.id", ${entityBeanName}.getId().get${propertyCaptalized}().getId(), MatchMode.ANYWHERE)
+            );
+        }
+
+#else
+        if (${entityBeanName}.getId()!= null && ${entityBeanName}.getId().get${propertyCaptalized}() != null) {
+             criteria.add(Restrictions.eq("id.${property.getName()}.id", ${entityBeanName}.getId().get${propertyCaptalized}().getId()));
+        }
+
+#end
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+#set($propertyCaptalized = $util.capitalize(${property.getName()}))
+        if (${entityBeanName}.get${propertyCaptalized}() != null && ${entityBeanName}.get${propertyCaptalized}().getId() != null) {
+            criteria.add(Restrictions.eq("${property.getName()}.id", ${entityBeanName}.get${propertyCaptalized}().getId()));
+        }
+
+#end
+#foreach( ${property} in ${entity.getEnums()})
+#set($propertyCaptalized = $util.capitalize(${property.getSimpleProperty().getName()}))
+        if (${entityBeanName}.get${propertyCaptalized}() != null ) {
+            criteria.add(Restrictions.eq("${property.getSimpleProperty().getName()}", ${entityBeanName}.get${propertyCaptalized}()));
+        }
+
+#end
+#foreach( ${property} in ${entity.parent.getEnums()})
+#set($propertyCaptalized = $util.capitalize(${property.getSimpleProperty().getName()}))
+        if (${entityBeanName}.get${propertyCaptalized}() != null ) {
+            criteria.add(Restrictions.eq("${property.getSimpleProperty().getName()}", ${entityBeanName}.get${propertyCaptalized}()));
+        }
+
+#end
+#foreach( ${property} in ${entity.id.getEnums()})
+#set($propertyCaptalized = $util.capitalize( ${property.getSimpleProperty().getName()} ))
+        if (${entityBeanName}.getId().get${propertyCaptalized}() != null ) {
+            criteria.add(Restrictions.eq("id.${property.getSimpleProperty().getName()}", ${entityBeanName}.getId().get${propertyCaptalized}()));
+        }
+
+#end
+        // Count
+        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+
+        // Pageable result Result
+        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
+        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+    }
+
+
+
+    public Page<${entity.name}> searchText(String text, Pageable pageable) {
+        if (pageable == null) {
+            pageable = new PageRequest(0, 10);
+        }
+
+        Session session = (Session) entityManager.getDelegate();
+        Criteria criteria = session.createCriteria(${entity.getName()}.class);
+        criteria.add( Restrictions.disjunction()
+#foreach( ${property} in ${entity.getProperties()})
+#if( $property.type == 'String' )
+            .add(Restrictions.ilike("${property.getName()}", text, MatchMode.ANYWHERE))
+#else
+//            .add(Restrictions.eq("${property.getName()}", text))
+#end
+#end
+#foreach( ${property} in ${entity.id.getProperties()})
+#if( $property.type == 'String' )
+            .add(Restrictions.ilike("id.${property.name}", text, MatchMode.ANYWHERE))
+#else
+            .add(Restrictions.eq("id.${property.getName()}", text ))
+#end
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+#if( $property.type == 'String' )
+            .add(Restrictions.ilike("id.${property.name}.id", text, MatchMode.ANYWHERE))
+#else
+            .add(Restrictions.eq("id.${property.getName()}.id", text))
+#end
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+            .add(Restrictions.eq("${property.getName()}.id", text))
+#end
+#foreach( ${property} in ${entity.getEnums()})
+#set($propertyCaptalized = $util.capitalize(${property.getSimpleProperty().getName()}))
+            .add(Restrictions.eq("${property.getSimpleProperty().getName()}", text))
+#end
+#foreach( ${property} in ${entity.parent.getEnums()})
+            .add(Restrictions.eq("${property.getSimpleProperty().getName()}",text))
+#end
+#foreach( ${property} in ${entity.id.getEnums()})
+            .add(Restrictions.eq("id.${property.getSimpleProperty().getName()}", text))
+#end
+        );
+        // Count
+        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+
+        // Pageable result Result
+        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
+        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+    }
+
+
+}

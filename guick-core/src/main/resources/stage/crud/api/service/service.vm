@@ -40,8 +40,13 @@ class ${entity.name}Service implements I${entity.name}Service {
     }
 
     @Override
-    public Page<${entity.name}> find(${entity.name} $entityBeanName , Pageable pageable) {
+    public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable) {
         return ${entityBeanName}Repository.search($entityBeanName, pageable);
+    }
+
+    @Override
+    public Page<${entity.name}> searchText(String text , Pageable pageable) {
+        return ${entityBeanName}Repository.searchText(text, pageable);
     }
 
     @Override

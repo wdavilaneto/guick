@@ -1,7 +1,5 @@
-/* modificado 14.10.14 */
-
-a.logo-control{ color: #fff;float: left;font-family: "Kaushan Script",cursive; font-size: 1.4em; margin: 12px 0 0 0;text-shadow: 1px 1px 5px #666;}
-.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../imagens/logo.png) no-repeat center center;}
+a.logo-control{ color: #fff;float: left;font-family: 'Marcellus SC', serif; font-size: 1.1em; margin: 12px 0 0 0;text-shadow: 1px 1px 5px #666;}
+.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.svg) no-repeat center center;}
 .logo-control span{font-size: 2em;}
 .row{margin-left: -12px;margin-right: -12px;}
 .info-graphic{min-height:435px;border:none;}
@@ -13,7 +11,7 @@ a.logo-control{ color: #fff;float: left;font-family: "Kaushan Script",cursive; f
 .box .box-header > .fa, .box .box-header > .glyphicon, .box .box-header > .ion, .box .box-header .box-title{padding: 7px 0px 7px 10px;}
 body > .header .navbar{min-width:320px;height:50px;background:#007AAF;}
 .form-group{margin-bottom: 3px;}
-.gridStyle {border: 1px solid rgb(212,212,212);min-height: 500px;}
+.gridStyle {border: 1px solid rgb(212,212,212);min-height: 390px;}
 .gridStyle .ngViewport {overflow-x: hidden;}
 .gridStyle button.btn.btn-danger{padding:2px !important;margin:2px !important;}
 header{background:#007aaf;width:100%;}
@@ -21,17 +19,14 @@ header{background:#007aaf;width:100%;}
     overflow-y: auto;
     max-height: 200px;
     width: 100%;
-
 }
-
 .alert {
-padding-left: 20px !important;
-margin-left: 0px !important;
-position: relative !important;
+    padding-left: 20px !important;
+    margin-left: 0px !important;
+    position: relative !important;
 }
-
 /* CAMPOS OBRIGATÓRIOS */
 .form-group.has-warning .form-control{border-color:#ddd !important; background-color:#f7ead5 !important;}
 .form-group.has-warning label{color:#000 }
-
 .modal-lg{width:75% !important; }
+a.btn.btn-primary.btn-sm.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }

@@ -1,0 +1,51 @@
+#if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
+<!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
+                                <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
+                                    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+                                        <input class="form-control" type="text" ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                    </div>
+                                </div>
+-->
+#else
+#if ( ${property.getType().equalsIgnoreCase('Date')} )
+                                <div ng-controller="DatepickerDemoCtrl">
+                                    <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end} form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                        <label for="${idAgragation}${property}">${property.title}</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" min-date="minDate"
+                                                   max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
+                                                   ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+#else
+#if ( ${property.name.equalsIgnoreCase('sex')} || ${property.name.equalsIgnoreCase('sexo')} )
+                                <div class="form-group col-md-#if(${property.column.length} >= 50)6#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <label for="${idAgragation}${property}">${property.title}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" ng-controller="ButtonsCtrl">
+                                        <div class="row">
+                                            <div class="btn-group btn-group-justified">
+                                                <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Left'" uncheckable>Masculino</label>
+                                                <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'right'" uncheckable>Feminino</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+#else
+                                <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
+                                    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+                                        <input class="form-control" type="text" ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                    </div>
+                                </div>
+#end
+#end
+#end

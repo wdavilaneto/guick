@@ -45,7 +45,15 @@ public interface I${entity.name}Service {
     * @param pageable
     * @return
     */
-    public Page<${entity.name}> find(${entity.name} $entityBeanName , Pageable pageable);
+    public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable);
+
+    /**
+    *
+    * @param text
+    * @param pageable
+    * @return
+    */
+    public Page<${entity.name}> searchText(String text , Pageable pageable);
 
     /**
      * Return an entity,${entity.name} ,with an Given ID

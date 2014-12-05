@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -48,10 +50,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </a>
-#if (${project.name} == 'msm')
-        <a class="logo-control" href="#">Módulo de Sáude Mental <small>[ MSM ]</small></a>
-#end
+        </a>#if (${project.name} == 'msm') <a class="logo-control" href="#">MÓDULO DE SAÚDE MENTAL</a> #end
         <div class="navbar-right">
             <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
@@ -100,8 +99,12 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
+
+                <li><a href="#"><i class="glyphicon glyphicon-cog"></i>Workflow</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-signal"></i>Dashboards</a></li>
 #if (${project.name} == 'msm')
-                <li><a href="#/manterPesquisarPaciente"><i class="fa fa-user"></i>Paciente</a></li>
+                <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
+                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
 #end
                 <li class="treeview">
                     <a href="#">
@@ -110,11 +113,41 @@
                     </a>
                     <ul class="treeview-menu">
 #foreach( ${entity} in ${project.metadata.entities})
-                        <li><a href="#/manter${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#if(${entity.properties.size()} >= 3 )
+                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
 #end
                     </ul>
                 </li>
 
+                <li class="treeview">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+#foreach( ${entity} in ${project.metadata.entities})
+#if( ${entity.looksLikeDomain()} )
+                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
+#end
+                    </ul>
+                </li>
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+#foreach( ${entity} in ${project.metadata.entities})
+#if(${entity.looksLikeEnum()})
+                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
+#end
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -160,12 +193,15 @@
 <script src="scripts/app.js"></script>
 
 <!-- servicos -->
+    <script src="scripts/service/monitor/MonitorService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
     <script src="scripts/service/${entity.name}Service.js"></script>
 #end
 
 <!-- controllers -->
+    <script src="scripts/controllers/monitor/MonitorController.js"></script>
+    <script src="scripts/controllers/MainController.js"></script>
 #if (${project.name} == 'msm')
     <script src="scripts/controllers/PacienteController.js"></script>
 #end

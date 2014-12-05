@@ -1,0 +1,25 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package specs.${entity.name.toLowerCase()};
+
+import org.concordion.api.ExpectedToFail;
+import org.concordion.integration.junit4.ConcordionRunner;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.junit.runner.RunWith;
+
+@RunWith(ConcordionRunner.class)
+@ExpectedToFail
+public class Create${entity.name}WithRequiredAcceptanceCriteria {
+
+    public String createNewParametroComNome(String nome){
+        return "TODO";
+    }
+
+}

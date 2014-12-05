@@ -9,12 +9,14 @@
  */
 package ${project.group}.${project.name}.api.rest;
 
+import br.gov.mprj.msm.api.rest.dto.Pagination;
 import ${project.group}.${project.name}.api.rest.dto.SearchFilter;
 import ${project.group}.${project.name}.domain.${entity.name};
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,15 +46,15 @@ public class ${entity.name}Controller {
 
     /**
      * Returns an full, but Paged, list of all entities (${entity.name})
-     * @param pageable
+     * @param pagination
      * @return
      */
-#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos' )
-    @Cacheable(value = "${entityBeanName}")
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
+    @Cacheable(value = "${entityBeanName}List")
 #end
     @RequestMapping(method = RequestMethod.GET)
-    public HttpEntity<Page<${entity.name}>> findAll(Pageable pageable) {
-        return new HttpEntity(${entityBeanName}Service.findAll(pageable));
+    public HttpEntity<Page<${entity.name}>> findAll(Pagination pagination) {
+        return new HttpEntity(${entityBeanName}Service.findAll(pagination.getPageable()));
     }
 
     /**
@@ -60,12 +62,28 @@ public class ${entity.name}Controller {
      * @param filter
      * @return
      */
-#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos'  )
-    @Cacheable(value = "${entityBeanName}")
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
+    @Cacheable(value = "${entityBeanName}List")
 #end
-    @RequestMapping(value = "/find",method = RequestMethod.POST)
-    public HttpEntity<Page<${entity.name}>> find(@RequestBody SearchFilter<${entity.name}> filter) {
-        return new HttpEntity(${entityBeanName}Service.find(filter.getContent() , filter.getPageable()));
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public HttpEntity<Page<${entity.name}>> search(@RequestBody SearchFilter<${entity.name}> filter) {
+        return new HttpEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()));
+    }
+
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
+    @Cacheable(value = "${entityBeanName}List")
+#end
+    @RequestMapping(value = "/searchText", method = RequestMethod.POST)
+    public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
+        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
+    }
+
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain} )
+    @Cacheable(value = "${entityBeanName}List")
+#end
+    @RequestMapping(value = "/searchText", method = RequestMethod.GET)
+    public HttpEntity<Page<${entity.name}>> searchTextGet(SearchFilter<String> filter) {
+        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
     }
 
     /**
@@ -73,9 +91,6 @@ public class ${entity.name}Controller {
      * @param id
      * @return
      */
-#if(${entityBeanName} == 'orgao' || ${entityBeanName.startsWith('tipo')} || ${entityBeanName} == 'enderecos'  )
-    @Cacheable(value = "${entityBeanName}")
-#end
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public HttpEntity<${entity.name}> get(@PathVariable Long id) {
         return new HttpEntity<>(${entityBeanName}Service.findOne(id));
@@ -86,6 +101,9 @@ public class ${entity.name}Controller {
      * @param id
      * @return
      */
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
+    @CacheEvict(value="${entityBeanName}List", allEntries=true)
+#end
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public HttpEntity delete(@PathVariable Long id) {
         ${entityBeanName}Service.delete(id);
@@ -97,8 +115,11 @@ public class ${entity.name}Controller {
      * @param ${entityBeanName}
      * @return
      */
+#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
+    @CacheEvict(value="${entityBeanName}List", allEntries=true)
+#end
     @RequestMapping(method = RequestMethod.POST)
-    public HttpEntity<${entity.name}> save(@RequestBody @Valid ${entity.name} ${entityBeanName}) {
+    public HttpEntity<${entity.name}> save(@RequestBody ${entity.name} ${entityBeanName}) {
         ${entityBeanName}Service.save(${entityBeanName});
         return new HttpEntity<${entity.name}>(${entityBeanName});
     }

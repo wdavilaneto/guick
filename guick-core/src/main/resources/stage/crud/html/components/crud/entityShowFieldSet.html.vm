@@ -1,0 +1,74 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+#set( $idAgragation = '' )
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.length} >= 50)
+<div class="col-md-6">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end
+
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.length} >= 50)
+<div class="col-md-6">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end
+
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.length} >= 50)
+<div class="col-md-6">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end
+
+
+
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.length} < 50)
+<div class="col-md-3">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end
+
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.length} < 50)
+<div class="col-md-3">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end
+
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.length} < 50)
+<div class="col-md-3">
+    <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
+        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
+        {{${entityBeanName}}}
+    </div>
+</div>
+#end
+#end

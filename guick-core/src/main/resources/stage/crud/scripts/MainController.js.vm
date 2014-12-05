@@ -1,0 +1,77 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:mainController
+ * @description
+ * # mainController
+ * Controller of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App').controller('mainController', function($scope) {
+    $scope.pageClass = 'page-home';
+});
+
+
+angular.module('msmApp').controller('TabsDemoCtrl', function (${js}scope, ${js}window) {
+  ${js}scope.tabs = [
+    { title:'Dynamic Title 1', content:'Dynamic content 1' },
+    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+  ];
+
+  ${js}scope.alertMe = function() {
+    setTimeout(function() {
+      ${js}window.alert('You\'ve selected the alert tab!');
+    });
+  };
+});
+angular.module('msmApp').controller('ButtonsCtrl', function (${js}scope) {
+  ${js}scope.singleModel = 1;
+
+  ${js}scope.radioModel = 'Middle';
+
+  ${js}scope.checkModel = {
+    left: false,
+    middle: true,
+    right: false
+  };
+});
+angular.module('msmApp').controller('DatepickerDemoCtrl', function (${js}scope) {
+  ${js}scope.today = function() {
+    ${js}scope.dt = new Date();
+  };
+  ${js}scope.today();
+
+  ${js}scope.clear = function () {
+    ${js}scope.dt = null;
+  };
+
+  // Disable weekend selection
+  ${js}scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  ${js}scope.toggleMin = function() {
+    ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
+  };
+  ${js}scope.toggleMin();
+
+  ${js}scope.open = function(${js}event) {
+    ${js}event.preventDefault();
+    ${js}event.stopPropagation();
+
+    ${js}scope.opened = true;
+  };
+
+  ${js}scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  ${js}scope.format = ${js}scope.formats[0];
+});

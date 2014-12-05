@@ -12,8 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 
-##import static com.google.common.collect.ObjectArrays.concat;
-##import static org.apache.commons.lang3.StringUtils.split;
+import static com.google.common.collect.ObjectArrays.concat;
+import static org.apache.commons.lang.StringUtils.split;
 import static org.springframework.test.jdbc.JdbcTestUtils.deleteFromTables;
 
 /**
@@ -32,10 +32,8 @@ public abstract class DatabaseIntegrationTestBase extends SpringIntegrationTestB
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-/**
     @After
     public void afterMethod() {
         deleteFromTables(jdbcTemplate, concat(split(activiti_tables, " "), split(domain_tables, " "), String.class));
     }
-*/
 }

@@ -1,0 +1,92 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+<!-- sessões -->
+<section class="content-header">
+    <h1><i class="fa fa-user"></i> : ${entity.name} </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">${entity.name}</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div ng-controller="${entityBeanName}Controller">
+        <form name="medidorForm" novalidate>
+            <tabset>
+                <tab heading="Principal">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box box-primary">
+                                <div class="box-header"><h3 class="box-title"></h3></div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div ng-include src="'views/crud/${entity.name}/${entity.name}EditFieldset.html'"></div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
+                                        <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
+                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Avançar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+#if(!${entity.looksLikeEnum()})
+#foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
+                <tab heading="${complexProperty.referedEntity.title}" ng-click="find${complexProperty.referedEntity.name}()">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box box-primary">
+                                <div class="box-header"><h3 class="box-title"></h3></div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="gridStyle" ng-grid="gridOptions"></div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
+                                        <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
+                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Avançar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+#end
+#foreach( ${complexProperty} in ${entity.getManeyToOneProperties()})
+                <tab heading="${complexProperty.referedEntity.title}" ng-click="find${complexProperty.referedEntity.name}()">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box box-primary">
+                                <div class="box-header"><h3 class="box-title"></h3></div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="row">
+                                                <div class="box box-primary">
+                                                    <div class="box-body">
+texto qualquer
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+#end
+#end
+            </tabset>
+        </form>
+        <!-- fim sessão -->
+        <!-- sessão -->
+    </div>
+</section>

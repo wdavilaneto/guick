@@ -1,5 +1,6 @@
 package org.wdn.guick.model
 
+import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 
@@ -29,6 +30,15 @@ class Clazz implements Serializable {
 
     // Bi-directional relations ..
     Project project
+
+    public String getTitle(){
+        // TODO: remove to business rule processor
+        String word = StringUtils.splitByCharacterTypeCamelCase(name).join(" ").toLowerCase();
+        if (word.equalsIgnoreCase("CPF") || word.equalsIgnoreCase("CEP") || word.equalsIgnoreCase("CNPJ")){
+            return word.toUpperCase();
+        }
+        return StringUtils.capitalize(word);
+    }
 
     public getPackage() {
         if (codePackage == null) {

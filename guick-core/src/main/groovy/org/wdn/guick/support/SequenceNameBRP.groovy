@@ -23,7 +23,14 @@ class SequenceNameBRP implements IBusinessRulesProcessor {
         for (Entity entity : project.getEntities()) {
             if (entity.table != null && entity.table.sequenceName == null) {
                 try {
-                    entity.table.sequenceName = "SQ_" + entity.table.getPk()[0].name
+                    //entity.table.sequenceName = "SQ_" + entity.table.getPk()[0].name
+                    if ( entity.table.getPk().size() == 1 ){
+                        // TODO validate this formation
+                        entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.getPk()[0].name.split("_")[0] + "_DK";
+                    } else {
+                        // TODO validate this formation
+                        entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.columns[0].name.split("_")[0]+ "_DK";
+                    }
                 } catch (e) {
                     logger.println("Entity without Table or no PK ..." + entity.table.name)
                 }

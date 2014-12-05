@@ -33,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 #foreach( ${property} in ${entity.getEnums()})
 import ${entity.getPackage()}.domain.${property.getName()};
 #end
@@ -59,11 +61,14 @@ import ${entity.getPackage()}.domain.${property.getName()};
 @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
-@Cacheable
+#end
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 #end
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ${entity.getName()}#if( $entity.getParent() ) extends ${entity.getParent().getName()}#{else} implements Serializable#{end} {
+public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.getParent().getName()}#{else} implements Serializable#{end} {
 
 
 #if(!$entity.isEmbeddable() and !$entity.getParent() )

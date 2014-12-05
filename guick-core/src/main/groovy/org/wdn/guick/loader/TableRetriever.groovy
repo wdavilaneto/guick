@@ -35,8 +35,11 @@ class TableRetriever {
             Map<String, Table> tables = new HashMap<String, Table>();
 
             for (Table table : tableList) {
+                // Retrieve a statistic count from the given table for better euristics..
+                table.count = mapper.count(table.owner , table.name);
+
                 tables.put(table.getName(), table);
-                // ajust birirectional Association
+                // ajust bidirectional Association
                 for (def column : table.columns) {
                     column.table = table
                 }

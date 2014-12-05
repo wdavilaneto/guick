@@ -30,18 +30,22 @@ var app = angular.module('${project.name}App', [
   ])
   .config(function ($routeProvider) {
     $routeProvider
-        .when('/', {templateUrl: 'views/main.html'})
+       .when('/', {templateUrl: 'views/main.html'})
+##TODO REVMOVER!
 #if (${project.name} == 'msm')
-        .when('/manterPesquisarPaciente', {templateUrl: 'views/paciente/pesquisarPaciente.html'})
-        .when('/manterPaciente', {templateUrl: 'views/paciente/paciente.html'})
+      .when('/manterPesquisarPaciente', {templateUrl: 'views/paciente/pesquisarPaciente.html'})
+      .when('/manterPaciente', {templateUrl: 'views/paciente/paciente.html'})
+      .when('/manterInstituicao', {templateUrl: 'views/instituicao/instituicao.html'})
 #end
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-      .when('/manter${entity.name}', {templateUrl: 'views/crud/${entity.name}.html'})
+      .when('/${entity.name}', {templateUrl: 'views/crud/${entity.name}/${entity.name}.html'})
+      .when('/edit${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
 #end
-      .otherwise({
-        redirectTo: '/'
-      });
+      .when('/monitor/health', {templateUrl: 'views/monitor/health.html'})
+      .when('/monitor/metrics', {templateUrl: 'views/monitor/metrics.html'})
+      .when('/monitor/audits', {templateUrl: 'views/monitor/audits.html'})
+      .otherwise({redirectTo: '/'});
   });
 
 angular.module('${projectBeanName}Services', ['ngResource']);
@@ -49,7 +53,7 @@ angular.module('${projectBeanName}Services', ['ngResource']);
 //Tratamento global de excecoes
 app.config(['${js}httpProvider', function(${js}httpProvider) {
 
-    var nomeApp = 'Controle de Custo';
+    var nomeApp = '${project.name}';
 
     ${js}httpProvider.interceptors.push(
         ['${js}q', 'toaster', '${js}window','${js}injector',
@@ -82,7 +86,7 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
                                 toaster.pop('warning', nomeApp, errorResponse.data.error);
                                 break;
                             case 401: // 401-Unauthorized - Falta autenticacao
-                                $window.location.href = '/index.html';
+                                ${js}window.location.href = '/index.html';
                                 break;
                             case 403: // 403-Forbidden - Tem autenticacao, mas, o acesso é proibido para este usuario.
                                 toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo');
@@ -108,3 +112,31 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
             }]);
 }]);
 
+app.directive('back', ['$window', function($window) {
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+            elem.bind('click', function () {
+                $window.history.back();
+            });
+        }
+    };
+}]);
+
+/**
+ * A generic confirmation for risky actions.
+ * Usage: Add attributes: ng-really-message="Are you sure"? ng-really-click="takeAction()" function
+ */
+app.directive('ngReallyClick', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                var message = attrs.ngReallyMessage;
+                if (message && confirm(message)) {
+                    scope.$apply(attrs.ngReallyClick);
+                }
+            });
+        }
+    }
+}]);

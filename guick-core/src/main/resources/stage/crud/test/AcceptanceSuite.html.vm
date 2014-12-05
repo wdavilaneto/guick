@@ -1,0 +1,73 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../concordion.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+
+        <h2>Theme:  ${entity.name} Maintenace</h2>
+
+        <h5>História: Ao Criar uma nova entidade do tipo ${entity.name} e selecionar "gravar", com todos
+        For saving a new ${entity.name} (with null Id) and all obrigatory fields it should be persisted on Repository</h5>
+        <h4>
+            Para poder parametrizar valores em funcionalidades do sistema<br/>
+            As sistem Administrator <br/>
+            Create and Insert a new ${entity.name} <br/>
+        </h4>
+        <h5>Acceptance Criterias:</h5>
+        <ul>
+            <li><a concordion:run="concordion" href="Create${entity.name}WithRequiredAcceptanceCriteria.html">For saving a new ${entity.name} (null Id) and all obrigatory fields it shuld be persisted on Repository</a></li>
+        </ul>
+
+        <h5>Users Story: After editing a existent ${entity.name} and matained and all obrigatory fields it shuld be persisted on Repository with the new values</h5>
+        <h4>
+            Para poder parametrizar valores em funcionalidades do sistema<br/>
+            As sistem Administrator <br/>
+            Create and Insert a new ${entity.name} <br/>
+        </h4>
+        <h5>Acceptance Criterias:</h5>
+        <ul>
+            <li><a concordion:run="concordion" href="Update${entity.name}WithRequiredAcceptanceCriteria.html">TODO</a></li>
+        </ul>
+
+        <h5>Users Story: An ${entity.name} with a given, valid and existent Id, and, without association childrens  shuld be deleted normaly </h5>
+        <h4>
+            Para poder parametrizar valores em funcionalidades do sistema<br/>
+            As sistem Administrator <br/>
+            Create and Insert a new ${entity.name} <br/>
+        </h4>
+        <h5>Acceptance Criterias:</h5>
+        <ul>
+            <li><a concordion:run="concordion" href="Delete${entity.name}WithRequiredAcceptanceCriteria.html"></a></li>
+        </ul>
+
+
+        <h5>Users Story: Returns and existent ${entity.name} for a given Id </h5>
+        <h4>
+            Para poder parametrizar valores em funcionalidades do sistema<br/>
+            As sistem Administrator <br/>
+            Create and Insert a new ${entity.name} <br/>
+        </h4>
+        <h5>Acceptance Criterias:</h5>
+        <ul>
+            <li><a concordion:run="concordion" href="FindOne${entity.name}AcceptanceCriteria.html">TODO</a></li>
+        </ul>
+
+        <h5>Users Story: Test the paged result for all ${entity.name} on repository, total count shuld be equals to the paged result...</h5>
+        <h4>
+            Para poder parametrizar valores em funcionalidades do sistema<br/>
+            As sistem Administrator <br/>
+            Create and Insert a new ${entity.name} <br/>
+        </h4>
+        <h5>Acceptance Criterias:</h5>
+        <ul>
+            <li><a concordion:run="concordion" href="FindAll${entity.name}AcceptanceCriteria.html">TODO</a></li>
+        </ul>
+
+
+    </body>
+</html>

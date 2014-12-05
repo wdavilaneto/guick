@@ -22,9 +22,16 @@
 #end
 #end
 
+
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-#if(${complexProperty.referedEntity.table.count} > 200)
+#if(${complexProperty.referedEntity.table.count} < 200)
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <${beanName}-select></${beanName}-select>
+                                    </div>
+                                </div>
+#else
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">${complexProperty.title}</label>
@@ -39,12 +46,6 @@
                                               field-required="true"
                                               auto-match="true"
                                               remote-url-response-formatter="formata${complexProperty}Array"/>
-                                    </div>
-                                </div>
-#else
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <${beanName}-select></${beanName}-select>
                                     </div>
                                 </div>
 #end

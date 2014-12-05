@@ -1,0 +1,40 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/* Services */
+angular.module('${projectBeanName}App').factory('MetricsService',function (${js}http) {
+        return {
+        get: function() {
+            var promise = ${js}http.get('http://localhost:8080/metrics/metrics').then(function(response){
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});
+
+angular.module('${projectBeanName}App').factory('ThreadDumpService', function (${js}http) {
+    return {
+        dump: function() {
+            var promise = ${js}http.get('http://localhost:8080/dump').then(function(response){
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});
+
+angular.module('${projectBeanName}App').factory('HealthCheckService', function (${js}rootScope, ${js}http) {
+    return {
+        check: function() {
+            var promise = ${js}http.get('http://localhost:8080/health').then(function(response){
+                return response.data;
+            });
+            return promise;
+        }
+    };
+});

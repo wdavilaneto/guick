@@ -1,0 +1,107 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+angular.module('${projectBeanName}App').controller('HealthController', function (${js}scope, HealthCheckService) {
+     ${js}scope.updatingHealth = true;
+     ${js}scope.refresh = function() {
+         ${js}scope.updatingHealth = true;
+         HealthCheckService.check().then(function(promise) {
+             ${js}scope.healthCheck = promise;
+             ${js}scope.updatingHealth = false;
+         },function(promise) {
+             ${js}scope.healthCheck = promise.data;
+             ${js}scope.updatingHealth = false;
+         });
+     }
+     ${js}scope.refresh();
+     ${js}scope.getLabelClass = function(statusState) {
+         if (statusState == 'UP') {
+             return "label-success";
+         } else {
+             return "label-danger";
+         }
+     }
+ });
+
+angular.module('${projectBeanName}App').controller('MetricsController', function (${js}scope, MetricsService, HealthCheckService, ThreadDumpService) {
+    ${js}scope.metrics = {};
+    ${js}scope.updatingMetrics = true;
+
+    ${js}scope.refresh = function() {
+        ${js}scope.updatingMetrics = true;
+        MetricsService.get().then(function(promise) {
+            ${js}scope.metrics = promise;
+            ${js}scope.updatingMetrics = false;
+        },function(promise) {
+            ${js}scope.metrics = promise.data;
+            ${js}scope.updatingMetrics = false;
+        });
+    };
+
+    ${js}scope.${js}watch('metrics', function(newValue, oldValue) {
+        ${js}scope.servicesStats = {};
+        ${js}scope.cachesStats = {};
+        angular.forEach(newValue.timers, function(value, key) {
+            if (key.indexOf("web.rest") != -1 || key.indexOf("service") != -1) {
+                ${js}scope.servicesStats[key] = value;
+            }
+            if (key.indexOf("net.sf.ehcache.Cache") != -1) {
+                // remove gets or puts
+                var index = key.lastIndexOf(".");
+                var newKey = key.substr(0, index);
+
+                // Keep the name of the domain
+                index = newKey.lastIndexOf(".");
+                ${js}scope.cachesStats[newKey] = {
+                    'name': newKey.substr(index + 1),
+                    'value': value
+                };
+            };
+        });
+    });
+
+    ${js}scope.refresh();
+
+    ${js}scope.threadDump = function() {
+        ThreadDumpService.dump().then(function(data) {
+            ${js}scope.threadDump = data;
+            ${js}scope.threadDumpRunnable = 0;
+            ${js}scope.threadDumpWaiting = 0;
+            ${js}scope.threadDumpTimedWaiting = 0;
+            ${js}scope.threadDumpBlocked = 0;
+
+            angular.forEach(data, function(value, key) {
+                if (value.threadState == 'RUNNABLE') {
+                    ${js}scope.threadDumpRunnable += 1;
+                } else if (value.threadState == 'WAITING') {
+                    ${js}scope.threadDumpWaiting += 1;
+                } else if (value.threadState == 'TIMED_WAITING') {
+                    ${js}scope.threadDumpTimedWaiting += 1;
+                } else if (value.threadState == 'BLOCKED') {
+                    ${js}scope.threadDumpBlocked += 1;
+                }
+            });
+
+            ${js}scope.threadDumpAll = ${js}scope.threadDumpRunnable + ${js}scope.threadDumpWaiting +
+                ${js}scope.threadDumpTimedWaiting + ${js}scope.threadDumpBlocked;
+        });
+    };
+
+    ${js}scope.getLabelClass = function(threadState) {
+        if (threadState == 'RUNNABLE') {
+            return "label-success";
+        } else if (threadState == 'WAITING') {
+            return "label-info";
+        } else if (threadState == 'TIMED_WAITING') {
+            return "label-warning";
+        } else if (threadState == 'BLOCKED') {
+            return "label-danger";
+        }
+    };
+});
+
+

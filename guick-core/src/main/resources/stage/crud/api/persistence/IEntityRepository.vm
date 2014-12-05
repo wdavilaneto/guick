@@ -1,0 +1,19 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.persistence.core;
+
+import ${project.group}.${project.name}.domain.${entity.name};
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+public interface ${entity.name}RepositoryCustom {
+
+    Page<${entity.name}> search(${entity.name} entity, Pageable pageable);
+
+    Page<${entity.name}> searchText(String text, Pageable pageable);
+
+}

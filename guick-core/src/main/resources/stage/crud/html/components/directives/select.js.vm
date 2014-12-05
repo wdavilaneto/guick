@@ -6,7 +6,7 @@
  * Created by thiago.gama on 09/10/2014.
  */
 
-app.directive('${entityBeanName}Select', function(){
+app.directive('${entityBeanName.toLowerCase()}Select', function(){
     return {
         restrict: 'E',
         templateUrl: 'components/directives/${entityBeanName}/select.html'

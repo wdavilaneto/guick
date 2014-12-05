@@ -25,7 +25,7 @@ class PatternConverter {
 
     public String getBeanName(String tableName) {
         StringBuffer beanPattern = new StringBuffer("")
-        for (String splited : removeFirstPart( tableName.toLowerCase().replaceFirst("^tb_", "")).split("_")) {
+        for (String splited : removeFirstPart(tableName.toLowerCase().replaceFirst("^tb_", "")).split("_")) {
             if (splited.equals("tp")) {
                 beanPattern.append(getCasedString("Tipo"))
             } else {
@@ -42,7 +42,14 @@ class PatternConverter {
     public String columnToPropertyName(Column column) {
         String columnReturn = removeUnusedParts(column.name)
         String name = columnReturn.replace(column.table.name, "")
-        return getBeanPattern(name.size() > 0 ? name : columnReturn)
+        name = getBeanPattern(name.size() > 0 ? name : columnReturn);
+        if (column.table.entity != null) {
+            String beanName = name.replace(column.table.entity.name, "");
+            if (beanName != null && !"".equals(beanName)) {
+                name = beanName;
+            }
+        }
+        return name;
     }
 
     public String columnToPropertyName(String column) {
@@ -92,7 +99,7 @@ class PatternConverter {
                 break
             case 2:
                 buffer = new StringBuffer(splited[0].toLowerCase())
-                // FIXME Campos totalmente fora do padrao petrobras deveriam abendar o gerador ?
+                // FIXME Campos totalmente fora do padrao ? deveriam abendar o gerador ?
                 if (splited[0].length() <= 1) {
                     buffer.append("fixme")
                 }
@@ -120,7 +127,7 @@ class PatternConverter {
 
     private String removeFirstPart(String column) {
         String[] splited = column.split("_")
-        if (splited.length > 1 && splited[0].length() == 4 ) {
+        if (splited.length > 1 && splited[0].length() == 4) {
             return column.replaceFirst(splited[0] + "_", "")
         }
         return column
