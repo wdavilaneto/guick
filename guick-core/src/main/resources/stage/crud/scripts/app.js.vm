@@ -138,5 +138,5 @@ app.directive('ngReallyClick', [function() {
                 }
             });
         }
-    }
+    };
 }]);

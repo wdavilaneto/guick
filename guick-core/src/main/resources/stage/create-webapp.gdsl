@@ -1,6 +1,5 @@
 def packageBase = project.packageBase
-
-def lang = "java" //TODO to parametrize
+def lang = project.config.generationLanguage
 
 guick {
 
@@ -32,6 +31,7 @@ guick {
                     [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
                     [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
 
+                    [input: "stage/crud/html/index.html.vm", output: "/front-end/app/views/index.html"],
                     [input: "stage/crud/html/metrics.html", output: "/front-end/app/views/monitor/metrics.html"],
                     [input: "stage/crud/html/health.html", output:  "/front-end/app/views/monitor/health.html"]
             ]
@@ -49,6 +49,12 @@ guick {
         //[input: "crud/AbstractTest.groovy.vm", output: "/api/src/test/groovy/${packageBase}/"]
         "single-generateds" {
             templates = [
+                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/api/aop/OnSuccessAdvice.${lang}"],
+                    [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
+                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
+                    [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
+
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
 

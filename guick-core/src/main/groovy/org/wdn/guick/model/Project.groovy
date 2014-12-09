@@ -1,9 +1,10 @@
 package org.wdn.guick.model
 
+import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import org.wdn.guick.util.ClassPathManager
+import org.wdn.guick.loader.Json
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,12 +30,10 @@ class Project implements Serializable {
     def gradleProject
     def metadata = [:]
 
-    // Staging
-    def webXml
-    def presentationXml
+    def config;
 
     def initialize(String rootPath) {
-        if (rootPath == null){
+        if (rootPath == null) {
             path = new File("").getCanonicalPath()
         } else {
             // is it Test... we need to add classpaths ...
@@ -48,22 +47,53 @@ class Project implements Serializable {
 //            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/src/main/resources") );
 
         }
-        def pomfilePath = path + "/pom.xml"
-        if (new File(pomfilePath).exists()) {
-            pom = new XmlSlurper(false, false).parse(pomfilePath);
-            group = pom.groupId
-            name = pom.artifactId
-        } else {
-            // gradle classpath ?
+//        def guickFilePath = path + "/pom.xml"
+//        if (new File(guickFilePath).exists()) {
+//            pom = new XmlSlurper(false, false).parse(guickFilePath);
+//            group = pom.groupId
+//            name = pom.artifactId
+//        } else {
+//            //
+//        }
+        File guickFile = new File(path)
+        if (!guickFile.exists()) {
+            guickFile.mkdirs();
         }
+        guickFile = new File(path + "/guick.json")
+        if (guickFile.exists()) {
+            config = new JsonSlurper().parse(guickFile);
+            group = config.group
+            name = config.name
+            logger.debug("initializing with ${config}")
+        } else {
+            config = [:];
+            config.group = "org.wdn.configure"
+            config.name = "configure-me"
+            config.guickConnectionInfo = new DatasourceInfo()
+            config.generatedDatasourceInfo = new DatasourceInfo()
+            config.generationLanguage = "java"
+
+            // if no pom nither guick.json exists, create one and stop any generation
+            new Json().write(guickFile, config)
+            logger.warn "******** GUICK MESSAGE: READ THIS ********* "
+            logger.warn "NO file ${guickFile} found !!!"
+            logger.warn "creating an example file";
+            logger.warn "Make sure to configure it before running any generator task again";
+            logger.warn "Or it will create all with default values";
+            logger.warn "******** ************************ ********* "
+            throw new FileNotFoundException("NO file ${guickFile} found");
+        }
+
     }
+
 
     public String getName() {
         if (name == null || name.isEmpty()) {
-            name = path.replaceAll( '\\\\' ,"/").replaceAll("-","/").split("/")?.last();
+            name = path.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
         }
         return name;
     }
+
     public String getGroup() {
         if (this.group != null) {
             return this.group
@@ -79,36 +109,36 @@ class Project implements Serializable {
         return EngineConstants.DEFAULT_JAVA_TEST_WITH_PACKAGE + "/" + getAcronym()
     }
 
-    public List<EnumClass> getEnums(){
+    public List<EnumClass> getEnums() {
         def enumList = []
         return (List<EnumClass>) entities.each { entity -> enumList.addAll(entity.enums) }
     }
 
-    public List<Entity> getEntitiesWithoutHibernateIssue(){
-        return entities.findAll { e -> !hasHibernateIssue(e )}
+    public List<Entity> getEntitiesWithoutHibernateIssue() {
+        return entities.findAll { e -> !hasHibernateIssue(e) }
     }
 
     private boolean hasHibernateIssue(Entity entity) {
-        if (entity.parent?.id instanceof Entity ){
-            Entity parentId = (Entity)entity.parent.id
+        if (entity.parent?.id instanceof Entity) {
+            Entity parentId = (Entity) entity.parent.id
             return parentId.isEmbeddable();
         }
         return false;
     }
 
     def getData() {
-        if (data == null){
+        if (data == null) {
             data = [:]
         }
         return data
     }
 
-    public String getPackageBase(){
-        return group.replaceAll("\\.",'/') + "/${name}"
+    public String getPackageBase() {
+        return group.replaceAll("\\.", '/') + "/" + getAcronym();
     }
 
-    public String getAcronym(){
-        return name
+    public String getAcronym() {
+        return name.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
     }
 
 }

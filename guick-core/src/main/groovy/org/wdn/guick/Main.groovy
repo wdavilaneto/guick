@@ -2,6 +2,7 @@ package org.wdn.guick
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.wdn.guick.core.DslArchitecture
+import org.wdn.guick.loader.Json
 import org.wdn.guick.model.Project
 
 /**
@@ -22,6 +23,7 @@ class Main {
 
     Main() {
         context = new AnnotationConfigApplicationContext();
+
         context.scan(GUICK_CONTEXT_CLASSPATH);
         context.refresh();
         guick = (DslArchitecture) context.getBean("dslArchitecture");
@@ -29,19 +31,17 @@ class Main {
     }
 
     public static void main(String[] args) {
-        ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.group = 'br.gov.mprj'
-            main.project.name = 'msm'
-            main.project.initialize("../mprj-gsi-msm/")
+            main.project.initialize("../atest")
+
 //            main.project.initialize("../mprj-gsi-mgp2/")
 
             main.setTarget("stage/create-webapp")
             main.run()
 
-            main.setTarget("stage/crud")
-            main.run()
+//            main.setTarget("stage/crud")
+//            main.run()
 
         } catch (RuntimeException e) {
             e.printStackTrace()
