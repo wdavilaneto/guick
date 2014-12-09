@@ -13,6 +13,8 @@ import ${project.group}.${project.name}.domain.${entity.name};
 import ${project.group}.${project.name}.api.persistence.${entity.name}Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,9 @@ public interface I${entity.name}Service {
      * @param pageable
      * @return
      */
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+    @Cacheable(value = "${entityBeanName}List")
+#end
     public Page<${entity.name}> findAll(Pageable pageable);
 
     /**
@@ -45,6 +50,9 @@ public interface I${entity.name}Service {
     * @param pageable
     * @return
     */
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+    @Cacheable(value = "${entityBeanName}List")
+#end
     public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable);
 
     /**
@@ -53,6 +61,9 @@ public interface I${entity.name}Service {
     * @param pageable
     * @return
     */
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+    @Cacheable(value = "${entityBeanName}List")
+#end
     public Page<${entity.name}> searchText(String text , Pageable pageable);
 
     /**
@@ -67,6 +78,9 @@ public interface I${entity.name}Service {
      * @param id
      * @return
      */
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+    @CacheEvict(value="${entityBeanName}List", allEntries=true)
+#end
     public void delete(Long id);
 
     /**
@@ -74,6 +88,9 @@ public interface I${entity.name}Service {
      * @param ${entityBeanName}
      * @return
      */
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+    @CacheEvict(value="${entityBeanName}List", allEntries=true)
+#end
     public ${entity.name} save(${entity.name} ${entityBeanName});
 
 

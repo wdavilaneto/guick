@@ -45,27 +45,39 @@ class Table {
      * Metodo "de negocio" que retorna se a tabela eh  uma tabela de relacionamento N x M
      * @return
      */
+    private Boolean _isNamRelationship;
+
     public boolean isNMRelationShip() {
-        List<Constraint> fkContraints = constraints.each { t -> t.tipo.equals(ConstraintType.Relationship )}
-        if (fkContraints.size() < 2 ) {
-            return false
-        }
-        List<Column> cols = new ArrayList<Column>()
-        for (Constraint fk : fkContraints ) {
-            cols.addAll(fk.thisSideColumns);
-        }
-        if (!pk.equals(cols)) {
-            return false;
-        }
-        cols = columns.clone()
-        cols.removeAll(pk)
-        for (Column col : cols) {
-            // TODO Ver padrao de infra para campos default SYSDATE
-            if ( !col.name.endsWith("DT_ULT_ALTERACAO") || !col.name.endsWith("DT_INCLUSAO")) {
-                return false
+        if (_isNamRelationship == null) {
+            if ("NMSM_ORIENT_EQUIPE_INTERNACAO".equals(name)) {
+                print "stop";
+            }
+            List<Constraint> fkContraints = constraints.each { t -> t.tipo.equals(ConstraintType.Relationship) }
+            if (fkContraints.size() < 2) {
+                return false;
+            }
+            List<Column> cols = new ArrayList<Column>()
+            for (Constraint fk : fkContraints) {
+                cols.addAll(fk.thisSideColumns);
+            }
+            if (cols.plus(pk).containsAll(columns) && columns.size() == 3) {
+                _isNamRelationship = true;
+            } else {
+                if (pk.equals(cols)) {
+                    cols = columns.clone()
+                    cols.removeAll(pk)
+                    for (Column col : cols) {
+                        // TODO Ver padrao de infra para campos default SYSDATE
+                        if (!col.name.endsWith("DT_ULT_ALTERACAO") || !col.name.endsWith("DT_INCLUSAO")) {
+                            _isNamRelationship = false;
+                        }
+                    }
+                    _isNamRelationship = true;
+                }
+
             }
         }
-        return true;
+        return _isNamRelationship;
     }
 
     /**
@@ -89,7 +101,9 @@ class Table {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) { return false; }
+        if (obj == null) {
+            return false;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }
@@ -101,7 +115,7 @@ class Table {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name
     }
 }

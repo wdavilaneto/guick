@@ -49,9 +49,6 @@ public class ${entity.name}Controller {
      * @param pagination
      * @return
      */
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
-    @Cacheable(value = "${entityBeanName}List")
-#end
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity<Page<${entity.name}>> findAll(Pagination pagination) {
         return new HttpEntity(${entityBeanName}Service.findAll(pagination.getPageable()));
@@ -62,25 +59,16 @@ public class ${entity.name}Controller {
      * @param filter
      * @return
      */
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
-    @Cacheable(value = "${entityBeanName}List")
-#end
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public HttpEntity<Page<${entity.name}>> search(@RequestBody SearchFilter<${entity.name}> filter) {
         return new HttpEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()));
     }
 
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
-    @Cacheable(value = "${entityBeanName}List")
-#end
     @RequestMapping(value = "/searchText", method = RequestMethod.POST)
     public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
         return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
     }
 
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain} )
-    @Cacheable(value = "${entityBeanName}List")
-#end
     @RequestMapping(value = "/searchText", method = RequestMethod.GET)
     public HttpEntity<Page<${entity.name}>> searchTextGet(SearchFilter<String> filter) {
         return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
@@ -101,9 +89,6 @@ public class ${entity.name}Controller {
      * @param id
      * @return
      */
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
-    @CacheEvict(value="${entityBeanName}List", allEntries=true)
-#end
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public HttpEntity delete(@PathVariable Long id) {
         ${entityBeanName}Service.delete(id);
@@ -115,9 +100,6 @@ public class ${entity.name}Controller {
      * @param ${entityBeanName}
      * @return
      */
-#if( ${entityBeanName} == 'endereco' || ${entity.looksLikeEnum()} || ${entity.looksLikeDomain})
-    @CacheEvict(value="${entityBeanName}List", allEntries=true)
-#end
     @RequestMapping(method = RequestMethod.POST)
     public HttpEntity<${entity.name}> save(@RequestBody ${entity.name} ${entityBeanName}) {
         ${entityBeanName}Service.save(${entityBeanName});

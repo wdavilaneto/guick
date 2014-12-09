@@ -3,7 +3,7 @@
                                 <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-                                        <input class="form-control" type="text" ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} placeholder="${property.title}" id="${idAgragation}${property}"/>
                                     </div>
                                 </div>
 -->
@@ -15,7 +15,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" min-date="minDate"
                                                    max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
-                                                   ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}" />
+                                                   ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}" />
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
@@ -43,7 +43,7 @@
                                 <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-                                        <input class="form-control" type="text" ng-model="${entityBeanName}.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}"/>
                                     </div>
                                 </div>
 #end

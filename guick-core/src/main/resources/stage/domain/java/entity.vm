@@ -4,7 +4,16 @@
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${entity.getPackage()};
+## #if(${entity.looksLikeMainEntitiy())
+## package ${project.group}.${project.name}.entity;
+## #end
+## #if( ${entity.looksLikeDomain()} )
+## package ${project.group}.${project.name}.domain;
+## #end
+## #if(${entity.looksLikeEnum()})
+## package ${project.group}.${project.name}.enums;
+## #end
+package ${project.group}.${project.name}.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -135,7 +144,12 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
         ${entity.getName()} rhs = (${entity.getName()}) obj;
 #end
         return new EqualsBuilder()
+#if( ${entity.getParent()} )
                 .appendSuper(super.equals(obj))
+#end
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+                .append(id ,rhs.id )
+#end
 #foreach( ${property} in ${entity.properties})
                 .append(${property.name}, rhs.${property.name})
 #end

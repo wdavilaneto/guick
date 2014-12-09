@@ -22,7 +22,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     ${js}scope.title = 'Search Filter: ${entity.name}';
 
     // For select boxes on screen TODO ...
-    ${js}scope.select = {
+    ${js}scope.entity = {
 #set($size = ${entity.getManyToOneProperties().size()} )
 #set($counter = 0)
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
@@ -34,19 +34,17 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     };
 
     // binded entity on search for filter (fields)
-    ${js}scope.${entityBeanName} = {};
     if (${js}routeParams.id) {
-        console.log("Request ${entityBeanName} with Id:" + ${js}routeParams.id);
+        console.log('Request ${entityBeanName} with Id:' + ${js}routeParams.id);
         ${entityBeanName}Service.get( {'id':$routeParams.id} , function (data) {
-            ${js}scope.${entityBeanName} = data;
-            ${js}scope.select = ${js}scope.${entityBeanName};
+            ${js}scope.entity = data;
         });
     }
 
     // Paged result for search filter
     ${js}scope.resultPage = {};
     // scoped variable for selections os ng-grid
-    ${js}scope.${entityBeanName}Selected = [];
+    ${js}scope.entitySelected = [];
 
     // ng-grid pagination options
     ${js}scope.pagingOptions = { pageSizes: [10, 20, 50],pageSize: 10,currentPage: 1};
@@ -61,9 +59,8 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
     // Selects to Fullfill select boxes
     // Begin block
-#foreach( ${ent} in ${entity.complexProperties})
-#if( !${ent.isOneToMany()})
-#set( $beanName = ${util.uncapitalize($ent.name)} )
+#foreach( ${ent} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
 ### Encontrar o nome principal do campo texto que fica na busca
 #set ( $stringField = 'id' )
 #foreach( ${prop} in ${ent.referedEntity.properties})
@@ -75,38 +72,31 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
          ${js}scope.${beanName}List = [{id:0, '${stringField}':' - '}].concat(data.content);
     });
 #{end}
-#{end}
     // end block
-
 
 
     // Search By Example Methdo definition
     ${js}scope.search = function() {
-        console.log("Realizando busca:");
+        console.log('Realizando busca:');
         ${js}scope.pageable = {page: ${js}scope.pagingOptions.currentPage ,size: ${js}scope.pagingOptions.pageSize};
-#foreach( ${ent} in ${entity.complexProperties})
-#if( !${ent.isOneToMany()})
-#set( $beanName = ${util.uncapitalize($ent.name)} )
-        ${js}scope.${entityBeanName}.${beanName} = {id: ${js}scope.select.${beanName}.id};
-#{end}
-#{end}
-        ${entityBeanName}Service.search( {'content':${js}scope.${entityBeanName},'pagination':${js}scope.pageable} , function (data) {
+        ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
             ${js}scope.resultPage = data;
-            ${js}scope.result = data.content;
         });
     };
 
-#foreach( ${ent} in ${entity.complexProperties})
-#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-#if( ${ent.isOneToMany()})
-    ${js}scope.${beanName}Page = [];
+    // Search of OneToMany/ManyToMany
+#if( ${entity.looksLikeMainEntity()} )
+#foreach( ${ent} in ${entity.getOneToManyProperties()})
+#set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
     ${js}scope.find${ent.referedEntity.name} = function() {
-        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.${entityBeanName}},'pagination':${js}scope.pageable}  , function (data) {
+        console.log('Realizando busca de 1 x N( $beanName.${entityBeanName}.id):' + ${js}scope.entity.id);
+        ${js}scope.resultPage = {};
+        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.pageable}  , function (data) {
             ${js}scope.resultPage = data;
         });
-    }
+    };
 #{end}
-#{end}
+#end
 
     ${js}scope.gridOptions = {
         data: 'resultPage.content',
@@ -115,7 +105,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         pagingOptions: ${js}scope.pagingOptions,
         multiSelect: false,
         enableColumnResize: true,
-        selectedItems: ${js}scope.${entityBeanName}Selected,
+        selectedItems: ${js}scope.entitySelected,
         totalServerItems: 'resultPage.totalElements',
         i18n: 'pt-br',
         columnDefs: [
@@ -130,35 +120,36 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     };
 
     $scope.detalhar = function (${entityBeanName}) {
-        console.log("Redirecting to edit ${entityBeanName} with id:" + ${entityBeanName}.id);
+        console.log('Redirecting to edit ${entityBeanName} with id:' + ${js}scope.entity.id);
         ${js}location.path('/edit${entity.name}/' + ${entityBeanName}.id );
     };
 
     $scope.save = function() {
-        console.log("Requesting asve on ${entityBeanName}");
-        ${entityBeanName}Service.save( ${js}scope.${entityBeanName} , function (/**successResult**/) {
-            //${js}scope.${entityBeanName} = {};
+        console.log('Requesting asve on ${entityBeanName}');
+        ${entityBeanName}Service.save( ${js}scope.entity , function (/**successResult**/) {
+            //${js}scope.entity = {};
             // back ??
         });
      };
 
     $scope.remove = function (){
-        console.log("Deleting ${entityBeanName} with id:" + ${entityBeanName}.id);
-        ${entityBeanName}Service.remove( ${js}scope.${entityBeanName}  , function ( /*successResult*/) {
-            ${js}scope.${entityBeanName} = {};
+        console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
+        ${entityBeanName}Service.remove( ${js}scope.entity  , function ( /*successResult*/) {
+            ${js}scope.entity = {};
         });
     };
 
     $scope.clearForm = function () {
-        ${js}scope.${entityBeanName} = {};
-        ${js}scope.select = {
+        ${js}scope.entity = {};
+        ${js}scope.entity = {
 #set($size = ${entity.getManyToOneProperties().size()} )
 #set($counter = 0)
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
 #set($counter = $counter + 1)
-            ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
+        ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
 #end
 #end
+
         };
     };
 
@@ -177,9 +168,8 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         }, function () {
             //${js}log.info('Modal dismissed at: ' + new Date());
             // Refreshing Result List
-            ${entityBeanName}Service.search( {'content':${js}scope.${entityBeanName},'pagination':${js}scope.pageable} , function (data) {
+            ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
                 ${js}scope.resultPage = data;
-                ${js}scope.result = data.content;
             });
         });
     };
@@ -197,13 +187,13 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 // It is not the same as the $modal service used above.
 angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', function (${js}scope, ${js}modalInstance, ${entityBeanName}Service, ${entityBeanName}) {
 
-    ${js}scope.${entityBeanName} = ${entityBeanName};
+    ${js}scope.entity = ${entityBeanName};
 
     ${js}scope.save = function () {
-        ${entityBeanName}Service.save( ${js}scope.${entityBeanName} , function (/**successResult**/) {
-            ${js}scope.${entityBeanName} = {};
+        ${entityBeanName}Service.save( ${js}scope.entity , function (/**successResult**/) {
+            ${js}scope.entity = {};
         });
-        ${js}modalInstance.close(${js}scope.${entityBeanName});
+        ${js}modalInstance.close(${js}scope.entity);
     };
 
     ${js}scope.cancel = function () {

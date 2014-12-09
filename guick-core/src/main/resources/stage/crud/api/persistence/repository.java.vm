@@ -5,7 +5,8 @@ import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
 import ${project.group}.${project.name}.api.persistence.core.${entity.name}RepositoryCustom;
 import ${project.group}.${project.name}.domain.${entity.name};
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+##import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 /**
  *  CRUD Genreated Repository for entity${entity.name}
@@ -13,6 +14,53 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  *  https://github.com/wdavilaneto/guick
  *  Author: service-wdavilaneto@redhat.com
  */
-@RepositoryRestResource(collectionResourceRel = "${entityBeanName}List", path = "${entityBeanName}DataService")
+##@RepositoryRestResource(collectionResourceRel = "${entityBeanName}List", path = "${entityBeanName}DataService")
+@Repository
 public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ${entity.name}RepositoryCustom  {
+##public interface I${entity.name}Repository, ${entity.name}Repository {
+
+##     /**
+##     * Returns an full, but Paged, list of all entities (${entity.name})
+##     * @param pageable
+##     * @return
+##     */
+##     public Page<${entity.name}> findAll(Pageable pageable);
+##
+##     /**
+##     *
+##     * @param $entityBeanName
+##     * @param pageable
+##     * @return
+##     */
+##     public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable);
+##
+##     /**
+##     *
+##     * @param text
+##     * @param pageable
+##     * @return
+##     */
+##     public Page<${entity.name}> searchText(String text , Pageable pageable);
+##
+##     /**
+##      * Return an entity,${entity.name} ,with an Given ID
+##      * @param id
+##      * @return
+##      */
+##     public ${entity.name} findOne(Long id);
+##
+##     /**
+##      * Deletes an entity with an given ID
+##      * @param id
+##      * @return
+##      */
+##     public void delete(Long id);
+##
+##     /**
+##      * Simple save or update an entity
+##      * @param ${entityBeanName}
+##      * @return
+##      */
+##     public ${entity.name} save(${entity.name} ${entityBeanName});
+
 }

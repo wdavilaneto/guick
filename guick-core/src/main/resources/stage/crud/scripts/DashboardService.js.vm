@@ -1,0 +1,28 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name ${projectBeanName}App.${projectBeanName}Service
+ * @description
+ * # myService
+ * Factory in the ${projectBeanName}App.
+ */
+
+var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+
+${projectBeanName}Services.factory('DashboardService', ['$resource',
+    function () {
+         var ${entity.name} = {};
+         function fooBar (){
+
+         };
+        return  {
+               fooBar: fooBar
+        };
+    }
+]);

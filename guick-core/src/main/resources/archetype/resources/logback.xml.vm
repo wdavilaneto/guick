@@ -16,9 +16,8 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework.web" level="INFO"/>
     <logger name="${project.group}.${project.name}" level="DEBUG"/>
-    <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
+    <logger name="org.springframework.cache.interceptor.CacheInterceptor" level="TRACE" />
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">

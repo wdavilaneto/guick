@@ -14,7 +14,7 @@
 #end
 #end
 <label>${entity.title}<i class="fa fa-search pull-right"></i></label>
-<ui-select ng-model="select.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" theme="bootstrap" ng-required="true">
+<ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" theme="bootstrap" ng-required="true">
     <ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
     <ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
 #if ($stringField == '' )

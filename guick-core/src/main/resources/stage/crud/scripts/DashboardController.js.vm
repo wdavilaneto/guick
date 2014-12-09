@@ -1,0 +1,17 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:mainController
+ * @description
+ * # mainController
+ * Controller of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App').factory('DashboardService', function($scope) {
+    $scope.pageClass = 'page-home';
+});

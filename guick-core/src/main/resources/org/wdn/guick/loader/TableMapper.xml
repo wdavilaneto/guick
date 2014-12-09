@@ -40,23 +40,23 @@
         cc.position,
         tcom.comments as table_comments,
         ccom.comments as column_comments
-        from DBA_TABLES tab
-        left join dba_constraints cons
+        from ALL_TABLES tab
+        left join ALL_constraints cons
         on tab.owner = cons.owner
         and tab.table_name = cons.table_name
         and cons.constraint_type = 'P'
-        inner join dba_tab_columns cols
+        inner join ALL_tab_columns cols
         on tab.owner = cols.owner
         and tab.table_name = cols.table_name
-        left join dba_cons_columns cc
+        left join ALL_cons_columns cc
         on cons.owner = cc.owner
         and cons.table_name = cc.table_name
         and cons.constraint_name = cc.constraint_name
         and cols.column_name = cc.column_name
-        left join dba_tab_comments tcom
+        left join ALL_tab_comments tcom
         on cols.owner = tcom.owner
         and cols.table_name = tcom.table_name
-        left join dba_col_comments ccom
+        left join ALL_col_comments ccom
         on cols.owner = ccom.owner
         and cols.table_name = ccom.table_name
         and cols.column_name = ccom.column_name
@@ -127,10 +127,10 @@
         k.table_name, c.column_name, k.constraint_type ,
         r.table_name as R_TABLE_NAME, cr.column_name r_column_name,
         extractvalue (dbms_xmlgen.getxmltype ( 'select search_condition from user_constraints where table_name =''' || k.table_name || ''' and constraint_name = ''' || k.constraint_name || ''''),  '//text()') as SEARCH_CONDITION
-        from dba_constraints k
-        left join dba_constraints r on k.r_owner = r.owner and k.r_constraint_name = r.constraint_name
-        inner join dba_cons_columns c on k.owner = c.owner and k.constraint_name = c.constraint_name and c.table_name = k.table_name
-        left join dba_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
+        from ALL_constraints k
+        left join ALL_constraints r on k.r_owner = r.owner and k.r_constraint_name = r.constraint_name
+        inner join ALL_cons_columns c on k.owner = c.owner and k.constraint_name = c.constraint_name and c.table_name = k.table_name
+        left join ALL_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
         and c.position = cr.position
         where (
                 ( k.owner = upper('ORGI') AND  k.table_name = UPPER('ORGI_ENDERECO_COMPLEMENTO'))

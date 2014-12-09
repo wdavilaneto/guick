@@ -1,5 +1,6 @@
 def packageBase = project.packageBase
-def lang = project.config.generationLanguage
+
+def lang = "java" //TODO to parametrize
 
 guick {
 

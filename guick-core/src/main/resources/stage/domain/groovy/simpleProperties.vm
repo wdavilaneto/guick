@@ -10,6 +10,7 @@
     @Column(name = "${property.getColumn().getName()}")
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
 #else
     @Column(name = "${property.getColumn().getName()}"#if(!${property.getColumn().getNullable()}), nullable = false#{end}#if(${property.column.precision}), precision = ${property.column.precision}#{end}#if(${property.column.scale}), scale = ${property.column.scale}#{end}#if(${property.column.length}), length = ${property.column.length}#{end}#if( !${property.getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getColumn().isUpdatable()}), updatable = false #end)
 #end

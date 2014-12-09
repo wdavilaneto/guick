@@ -16,3 +16,19 @@ spring.datasource.validation-query= select 1 from dual
 
 #JPA/HIbernate
 spring.jpa.show-sql=true
+
+spring.jpa.hibernate.max_fetch_depth=0
+spring.jpa.hibernate.max-fetch-depth=0
+spring.jpa.hibernate.max.fetch.depth=0
+
+hibernate.cache.use_query_cache=true
+hibernate.cache.use_second_level_cache=true
+hibernate.cache.query_cache_factory=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
+hibernate.cache.use-query-cache=true
+hibernate.cache.use-second-level-cache=true
+hibernate.cache.query-cache-factory=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
+hibernate.cache.use.query.cache=true
+hibernate.cache.use.second.level.cache=true
+hibernate.cache.query.cache.factory=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory

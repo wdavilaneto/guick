@@ -99,6 +99,13 @@ class Entity extends Clazz {
         }
         return _looksLikeDomain;
     }
+    private Boolean _looksLikeMainEntity = null;
+    public boolean looksLikeMainEntity(){
+        if (_looksLikeMainEntity == null) {
+            _looksLikeMainEntity = properties.size() > 3;
+        }
+        return _looksLikeMainEntity
+    }
 
     public String getPackage() {
         return project.group + "." + project.acronym + ".domain";

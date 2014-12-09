@@ -12,6 +12,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface ${entity.name}RepositoryCustom {
 
+    /**
+     * Returns an full, but Paged, list of all entities (${entity.name})
+     * @param pageable
+     * @return
+     */
+    public Page<${entity.name}> findAll(Pageable pageable);
+
     Page<${entity.name}> search(${entity.name} entity, Pageable pageable);
 
     Page<${entity.name}> searchText(String text, Pageable pageable);

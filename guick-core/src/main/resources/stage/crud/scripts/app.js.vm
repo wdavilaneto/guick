@@ -30,7 +30,8 @@ var app = angular.module('${project.name}App', [
   ])
   .config(function ($routeProvider) {
     $routeProvider
-       .when('/', {templateUrl: 'views/main.html'})
+      .when('/', {templateUrl: 'views/main.html'})
+      .when('/dashboard', {templateUrl: 'views/dashboards/dashboard.html'})
 ##TODO REVMOVER!
 #if (${project.name} == 'msm')
       .when('/manterPesquisarPaciente', {templateUrl: 'views/paciente/pesquisarPaciente.html'})

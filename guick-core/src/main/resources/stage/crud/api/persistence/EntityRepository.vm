@@ -26,6 +26,28 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * Returns an full, but Paged, list of all entities (${entity.name})
+     * @param pageable
+     * @return
+     */
+    public Page<${entity.name}> findAll(Pageable pageable){
+        if (pageable == null) {
+            pageable = new PageRequest(0, 10);
+        }
+        Session session = (Session) entityManager.getDelegate();
+        Criteria criteria = session.createCriteria(${entity.getName()}.class);
+
+        // Count
+        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+
+        // Pageable result Result
+        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
+        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+    }
+
+    @Override
     public Page<${entity.name}> search(${entity.name} $entityBeanName, Pageable pageable) {
         if (pageable == null) {
             pageable = new PageRequest(0, 10);
@@ -107,8 +129,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
     }
 
-
-
+    @Override
     public Page<${entity.name}> searchText(String text, Pageable pageable) {
         if (pageable == null) {
             pageable = new PageRequest(0, 10);

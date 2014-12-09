@@ -101,7 +101,7 @@
             <ul class="sidebar-menu">
 
                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i>Workflow</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-signal"></i>Dashboards</a></li>
+                <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Dashboards</a></li>
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
                 <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
@@ -193,6 +193,7 @@
 <script src="scripts/app.js"></script>
 
 <!-- servicos -->
+    <script src="scripts/service/dashboards/DashboardService.js"></script>
     <script src="scripts/service/monitor/MonitorService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
@@ -200,8 +201,9 @@
 #end
 
 <!-- controllers -->
-    <script src="scripts/controllers/monitor/MonitorController.js"></script>
     <script src="scripts/controllers/MainController.js"></script>
+    <script src="scripts/controllers/dashboards/DashboardController.js"></script>
+    <script src="scripts/controllers/monitor/MonitorController.js"></script>
 #if (${project.name} == 'msm')
     <script src="scripts/controllers/PacienteController.js"></script>
 #end
