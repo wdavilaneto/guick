@@ -1,10 +1,13 @@
 package org.wdn.guick.model
 
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.wdn.guick.loader.Json
+
+import javax.persistence.Transient
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,8 +33,9 @@ class Project implements Serializable {
     def gradleProject
     def metadata = [:]
 
-    def config;
+    def config = [:];
 
+    @Transient
     def initialize(String rootPath) {
         if (rootPath == null) {
             path = new File("").getCanonicalPath()
@@ -66,15 +70,22 @@ class Project implements Serializable {
             name = config.name
             logger.debug("initializing with ${config}")
         } else {
-            config = [:];
-            config.group = "org.wdn.configure"
-            config.name = "configure-me"
+            if (new File(path + "/pom.xml").exists()) {
+                pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
+                config.group = pom.groupId.toString();
+                config.name = pom.artifactId.toString();
+            } else {
+                config.group = "org.wdn.configure";
+                config.name = "configure-me";
+            }
             config.guickConnectionInfo = new DatasourceInfo()
             config.generatedDatasourceInfo = new DatasourceInfo()
-            config.generationLanguage = "java"
+            config.generationLanguage = "java";
 
             // if no pom nither guick.json exists, create one and stop any generation
-            new Json().write(guickFile, config)
+            def json = new JsonBuilder(config).toPrettyString();
+            guickFile.write(json);
+
             logger.warn "******** GUICK MESSAGE: READ THIS ********* "
             logger.warn "NO file ${guickFile} found !!!"
             logger.warn "creating an example file";
@@ -84,6 +95,16 @@ class Project implements Serializable {
             throw new FileNotFoundException("NO file ${guickFile} found");
         }
 
+    }
+
+    @Transient
+    public void persist (){
+        def json = new JsonBuilder(tables).toPrettyString();
+        new File (path + "/tables.json").write(json);
+//        json = new JsonBuilder(tables).toPrettyString();
+//        new File (path + "/metadata.json").write(json);
+//        json = new JsonBuilder(entities).toPrettyString();
+//        new File (path + "/metadata.json").write(json);
     }
 
 

@@ -183,6 +183,7 @@
 <script src="bower_components/angularjs-toaster/toaster.js"></script>
 <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
 <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+<script src="bower_components/jsog/lib/JSOG.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <script src="bower_components/adminlte/js/app.js"></script>

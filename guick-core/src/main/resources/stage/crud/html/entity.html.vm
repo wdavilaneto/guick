@@ -2,7 +2,7 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
-<section class="content-header"><h1><i class="fa fa-tachometer"></i> ${entity.name}</h1></section>
+<section class="content-header"><h1><i class="fa #if(${entity.looksLikeDomain()})fa-map-marker#{else}fa-tachometer#{end}"></i> ${entity.name}</h1></section>
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
@@ -19,10 +19,11 @@
                         </div>
                         <div class="box-footer">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
-                                <button class="btn btn-primary" ng-click="clearForm()"><span class="glyphicon glyphicon-trash"></span> Limpar</button>
-                                <button class="btn btn-primary" ng-click="search()"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
+                                <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="fa fa-circle"></i> Limpar Filtro</div>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="fa fa-search"></i> Buscar</button>
                             </div>
+
                         </div>
                     </div>
 

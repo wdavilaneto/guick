@@ -7,6 +7,7 @@
  */
 package ${project.group}.${project.name}.api.persistence.core;
 
+import br.gov.mprj.msm.api.persistence.support.PageableHelper;
 import ${project.group}.${project.name}.domain.${entity.name};
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -33,18 +34,11 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
      */
     public Page<${entity.name}> findAll(Pageable pageable){
         if (pageable == null) {
-            pageable = new PageRequest(0, 10);
+            pageable = PageableHelper.deafultPageable();
         }
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
-
-        // Count
-        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-
-        // Pageable result Result
-        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
-        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
-        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+        return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
     @Override
@@ -52,7 +46,6 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         if (pageable == null) {
             pageable = new PageRequest(0, 10);
         }
-
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
 
@@ -120,47 +113,31 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         }
 
 #end
-        // Count
-        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-
-        // Pageable result Result
-        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
-        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
-        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+        return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
     @Override
     public Page<${entity.name}> searchText(String text, Pageable pageable) {
         if (pageable == null) {
-            pageable = new PageRequest(0, 10);
+            pageable = PageableHelper.deafultPageable();
         }
-
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
         criteria.add( Restrictions.disjunction()
 #foreach( ${property} in ${entity.getProperties()})
 #if( $property.type == 'String' )
             .add(Restrictions.ilike("${property.getName()}", text, MatchMode.ANYWHERE))
-#else
-//            .add(Restrictions.eq("${property.getName()}", text))
 #end
 #end
 #foreach( ${property} in ${entity.id.getProperties()})
 #if( $property.type == 'String' )
             .add(Restrictions.ilike("id.${property.name}", text, MatchMode.ANYWHERE))
-#else
-            .add(Restrictions.eq("id.${property.getName()}", text ))
 #end
 #end
 #foreach( ${property} in ${entity.id.getManyToOneProperties()})
 #if( $property.type == 'String' )
             .add(Restrictions.ilike("id.${property.name}.id", text, MatchMode.ANYWHERE))
-#else
-            .add(Restrictions.eq("id.${property.getName()}.id", text))
 #end
-#end
-#foreach( ${property} in ${entity.getManyToOneProperties()})
-            .add(Restrictions.eq("${property.getName()}.id", text))
 #end
 #foreach( ${property} in ${entity.getEnums()})
 #set($propertyCaptalized = $util.capitalize(${property.getSimpleProperty().getName()}))
@@ -173,14 +150,12 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
             .add(Restrictions.eq("id.${property.getSimpleProperty().getName()}", text))
 #end
         );
-        // Count
-        Long totalItems = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-
-        // Pageable result Result
-        criteria.setProjection(null).setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
-        List<${entity.name}> result = criteria.setFirstResult((pageable.getPageNumber() ) * pageable.getPageSize()).setMaxResults(pageable.getPageSize()).list();
-        return (Page<${entity.name}>) new PageImpl<${entity.name}>(result, pageable, totalItems);
+        return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
+    @Override
+    public ${entity.name} get(${entity.id.type} id) {
+        return entityManager.find(${entity.name}.class, id);
+    }
 
 }

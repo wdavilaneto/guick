@@ -1,6 +1,6 @@
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
 <!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
-                                <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
+                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} placeholder="${property.title}" id="${idAgragation}${property}"/>
@@ -10,7 +10,7 @@
 #else
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
                                 <div ng-controller="DatepickerDemoCtrl">
-                                    <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end} form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                    <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label for="${idAgragation}${property}">${property.title}</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" min-date="minDate"
@@ -24,8 +24,8 @@
                                 </div>
 #else
 #if ( ${property.name.equalsIgnoreCase('sex')} || ${property.name.equalsIgnoreCase('sexo')} )
-                                <div class="form-group col-md-#if(${property.column.length} >= 50)6#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
-                                    <div class="col-md-12">
+                                <div class="form-group col-md-#if(${property.column.length} >= 100)4#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
+                                    <div class="col-md-3">
                                         <div class="row">
                                             <label for="${idAgragation}${property}">${property.title}</label>
                                         </div>
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
 #else
-                                <div class="col-md-#if(${property.column.length} >= 50)6#{else}3#{end}">
+                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}"/>

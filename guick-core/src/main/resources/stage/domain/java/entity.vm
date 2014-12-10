@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -75,7 +76,7 @@ import ${entity.getPackage()}.domain.${property.getName()};
 //@Cacheable
 //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 #end
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.getParent().getName()}#{else} implements Serializable#{end} {
 
@@ -123,8 +124,17 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
+#if( ${entity.getParent()} )
+                .appendSuper(super.equals(obj))
+#end
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+                .append(id)
+#end
 #foreach( ${property} in ${entity.properties})
-               .append(${property.name})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+                .append(${property.name})
 #end
                .toHashCode();
     }
@@ -151,6 +161,9 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(id ,rhs.id )
 #end
 #foreach( ${property} in ${entity.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name}, rhs.${property.name})
 #end
                 .isEquals();

@@ -23,4 +23,7 @@ public interface ${entity.name}RepositoryCustom {
 
     Page<${entity.name}> searchText(String text, Pageable pageable);
 
+    ${entity.name} get(${entity.id.type} id);
+
+
 }

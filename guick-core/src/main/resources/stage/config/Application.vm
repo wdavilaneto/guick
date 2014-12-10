@@ -7,7 +7,6 @@
 package ${project.group}.${project.name};
 
 import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
-import ${project.group}.${project.name}.api.persistence.support.CoreRepositoryFactoryBean;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,7 +27,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "br.gov.mprj.msm.api")
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence",repositoryFactoryBeanClass = CoreRepositoryFactoryBean.class)
+@EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence")
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @EnableAspectJAutoProxy

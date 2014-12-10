@@ -31,17 +31,20 @@ class Main {
     }
 
     public static void main(String[] args) {
+        ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../atest")
+            main.project.initialize("../mprj-gsi-msm")
 
 //            main.project.initialize("../mprj-gsi-mgp2/")
 
-            main.setTarget("stage/create-webapp")
+//            main.setTarget("stage/create-webapp")
+//            main.run()
+
+            main.setTarget("stage/crud")
             main.run()
 
-//            main.setTarget("stage/crud")
-//            main.run()
+//            main.project.persist();
 
         } catch (RuntimeException e) {
             e.printStackTrace()

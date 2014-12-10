@@ -32,6 +32,14 @@ guick {
                 ]
             }
         }
+        "repository" {
+            templates = [
+                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
+                    [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/PageableHelper.${lang}"],
+                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
+                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"]
+            ]
+        }
         "single-generateds" {
             templates = [
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
@@ -65,14 +73,6 @@ guick {
                         [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
                 ]
             }
-        }
-
-        "repository" {
-            templates = [
-                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
-                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"]
-            ]
         }
 
         for (def entity : entities) {

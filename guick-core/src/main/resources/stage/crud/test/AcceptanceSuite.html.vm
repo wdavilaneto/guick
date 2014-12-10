@@ -11,16 +11,20 @@
 
         <h2>Theme:  ${entity.name} Maintenace</h2>
 
-        <h5>História: Ao Criar uma nova entidade do tipo ${entity.name} e selecionar "gravar", com todos
-        For saving a new ${entity.name} (with null Id) and all obrigatory fields it should be persisted on Repository</h5>
+        <h5>História: Ao Criar uma nova entidade do tipo ${entity.name} e selecionar "gravar", com todos os campos obrigatórios, a referida entidade deve ser persistida no
+        Repositorio</h5>
         <h4>
             Para poder parametrizar valores em funcionalidades do sistema<br/>
             As sistem Administrator <br/>
             Create and Insert a new ${entity.name} <br/>
         </h4>
-        <h5>Acceptance Criterias:</h5>
+        <h5>Criterios de aceitação:</h5>
         <ul>
-            <li><a concordion:run="concordion" href="Create${entity.name}WithRequiredAcceptanceCriteria.html">For saving a new ${entity.name} (null Id) and all obrigatory fields it shuld be persisted on Repository</a></li>
+            <li>
+                <a concordion:run="concordion" href="Create${entity.name}WithRequiredAcceptanceCriteria.html">
+                    For saving a new ${entity.name} (null Id) and all obrigatory fields it shuld be persisted on Repository
+                </a>
+            </li>
         </ul>
 
         <h5>Users Story: After editing a existent ${entity.name} and matained and all obrigatory fields it shuld be persisted on Repository with the new values</h5>
@@ -31,7 +35,11 @@
         </h4>
         <h5>Acceptance Criterias:</h5>
         <ul>
-            <li><a concordion:run="concordion" href="Update${entity.name}WithRequiredAcceptanceCriteria.html">TODO</a></li>
+            <li>
+                <a concordion:run="concordion" href="Update${entity.name}WithRequiredAcceptanceCriteria.html">
+                TODO
+                </a>
+            </li>
         </ul>
 
         <h5>Users Story: An ${entity.name} with a given, valid and existent Id, and, without association childrens  shuld be deleted normaly </h5>

@@ -17,9 +17,11 @@
  * # ${entityBeanName}Controller
  * Controller of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', '${entityBeanName}Service', #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )'${beanName}Service', #{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, ${entityBeanName}Service #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} ), ${beanName}Service#{end} ) {
+angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )'${beanName}Service', #{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} ), ${beanName}Service#{end} ) {
 
     ${js}scope.title = 'Search Filter: ${entity.name}';
+    ${js}scope.editMode = false;
+    ${js}scope.maxSelectBoxSize = 300;
 
     // For select boxes on screen TODO ...
     ${js}scope.entity = {
@@ -35,8 +37,10 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
     // binded entity on search for filter (fields)
     if (${js}routeParams.id) {
+        ${js}scope.editMode = true;
         console.log('Request ${entityBeanName} with Id:' + ${js}routeParams.id);
         ${entityBeanName}Service.get( {'id':$routeParams.id} , function (data) {
+            ${js}scope.editMode = true;
             ${js}scope.entity = data;
         });
     }
@@ -52,10 +56,13 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     // pageable for search/filter requests
     ${js}scope.pageable = {page: ${js}scope.pagingOptions.currentPage , size: ${js}scope.pagingOptions.pageSize};
 
-    // Search de tidos os elementos incial ( quando entra na tela )
-    ${entityBeanName}Service.findAll( ${js}scope.pageable , function (data) {
-        ${js}scope.resultPage = data;
-    });
+    // Search de todos os elementos incial ( quando entra na tela )
+    if (!${js}scope.editMode) {
+        ${entityBeanName}Service.findAll( ${js}scope.pageable , function (data) {
+            ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
+        });
+    };
 
     // Selects to Fullfill select boxes
     // Begin block
@@ -68,7 +75,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #set ($stringField = ${prop})
 #end
 #end
-    ${beanName}Service.findAll( {page:1 , size:200}  , function (data) {
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
          ${js}scope.${beanName}List = [{id:0, '${stringField}':' - '}].concat(data.content);
     });
 #{end}
@@ -81,6 +88,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         ${js}scope.pageable = {page: ${js}scope.pagingOptions.currentPage ,size: ${js}scope.pagingOptions.pageSize};
         ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
             ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
         });
     };
 
@@ -93,6 +101,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         ${js}scope.resultPage = {};
         ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.pageable}  , function (data) {
             ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
         });
     };
 #{end}
@@ -109,38 +118,58 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         totalServerItems: 'resultPage.totalElements',
         i18n: 'pt-br',
         columnDefs: [
+#set($size = ${entity.properties.size()} )
+#set($counter = 0)
+            {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
 #foreach( ${property} in ${entity.properties})
+#set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
 #if( ${property.type} != 'Long' || !${property.column.constraint} )
-            {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}},
+            {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
 #end
 #end
-            {field:'', displayName: 'Ação', cellTemplate: '<a class="btn btn-primary btn-sm btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i> Ver Detalhe</a>', width : '100', resizable: false}
+#end
+#if (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )
+#set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
+### find first StringField
+#set ( $stringField = 'id' )
+#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
+#if(${prop.type} == 'String' && $stringField == 'id' )
+#set ($stringField = ${prop})
+#end
+#end
+            {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}'#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
+#end
+
         ]
     };
 
     $scope.detalhar = function (${entityBeanName}) {
+        //if (${js}scope.editMode === true && !confirm("Deseja realmente sair do modo de edição do cadastro de ${entity.name}?")){
+        //    return false;
+        //}
         console.log('Redirecting to edit ${entityBeanName} with id:' + ${js}scope.entity.id);
         ${js}location.path('/edit${entity.name}/' + ${entityBeanName}.id );
     };
 
     $scope.save = function() {
         console.log('Requesting asve on ${entityBeanName}');
-        ${entityBeanName}Service.save( ${js}scope.entity , function (/**successResult**/) {
-            //${js}scope.entity = {};
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
             // back ??
         });
      };
 
     $scope.remove = function (){
         console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
-        ${entityBeanName}Service.remove( ${js}scope.entity  , function ( /*successResult*/) {
+        ${entityBeanName}Service.remove( ${js}scope.entity  , function ( successResult) {
+            console.log(successResult);
             ${js}scope.entity = {};
         });
     };
 
     $scope.clearForm = function () {
-        ${js}scope.entity = {};
+        console.log('Limpando form filter');
         ${js}scope.entity = {
 #set($size = ${entity.getManyToOneProperties().size()} )
 #set($counter = 0)
@@ -159,7 +188,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
             resolve: {
                 ${entityBeanName}: function () {
-                    return $scope.${entityBeanName};
+                    return $scope.entity;
                 }
             }
         });
@@ -190,7 +219,10 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
     ${js}scope.entity = ${entityBeanName};
 
     ${js}scope.save = function () {
-        ${entityBeanName}Service.save( ${js}scope.entity , function (/**successResult**/) {
+        console.log('Saving Modal' );
+        console.log(${js}scope.entity);
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
             ${js}scope.entity = {};
         });
         ${js}modalInstance.close(${js}scope.entity);

@@ -4,7 +4,7 @@ package ${project.group}.${project.name}.api.persistence;
 import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
 import ${project.group}.${project.name}.api.persistence.core.${entity.name}RepositoryCustom;
 import ${project.group}.${project.name}.domain.${entity.name};
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 ##import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 ##@RepositoryRestResource(collectionResourceRel = "${entityBeanName}List", path = "${entityBeanName}DataService")
 @Repository
-public interface ${entity.name}Repository extends PagingAndSortingRepository<${entity.name}, Long >, ${entity.name}RepositoryCustom  {
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, Long >, ${entity.name}RepositoryCustom  {
 ##public interface I${entity.name}Repository, ${entity.name}Repository {
 
 ##     /**

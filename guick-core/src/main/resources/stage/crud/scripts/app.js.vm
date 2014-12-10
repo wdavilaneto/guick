@@ -141,3 +141,8 @@ app.directive('ngReallyClick', [function() {
         }
     };
 }]);
+
+app.factory('jsog', function ($resource) {
+        return JSOG;
+    }
+);

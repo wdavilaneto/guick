@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.ui.Model;
@@ -38,6 +39,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value="/${entity.name}")
 public class ${entity.name}Controller {
+
+    private static PageRequest DEFAULT_PAGE = new PageRequest(0,20);
 
     private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}Controller.class);
 
@@ -64,14 +67,14 @@ public class ${entity.name}Controller {
         return new HttpEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()));
     }
 
-    @RequestMapping(value = "/searchText", method = RequestMethod.POST)
-    public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
-        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
-    }
-
+    /**
+     * Request first page of a text based search on all fields ignoring associations
+     * @param text
+     * @return
+     */
     @RequestMapping(value = "/searchText", method = RequestMethod.GET)
-    public HttpEntity<Page<${entity.name}>> searchTextGet(SearchFilter<String> filter) {
-        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
+    public HttpEntity<Page<${entity.name}>> searchTextGet(String text) {
+        return new HttpEntity(${entityBeanName}Service.searchText(text , DEFAULT_PAGE ));
     }
 
     /**

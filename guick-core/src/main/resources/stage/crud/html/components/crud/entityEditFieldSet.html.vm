@@ -1,21 +1,22 @@
 #set( $js  = "$")
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
+#set( $bigFieldSize = 100)
 
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
-#if(${property.column.length} >= 50)
+#if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
 #foreach( ${property} in ${entity.parent.getProperties()})
-#if(${property.column.length} >= 50)
+#if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
-#if(${property.column.length} >= 50)
+#if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
@@ -23,13 +24,13 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} < 200)
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <${beanName}-select></${beanName}-select>
                                     </div>
                                 </div>
 #else
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">${complexProperty.title}</label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
@@ -49,7 +50,7 @@
 #end
 
 #foreach( ${property} in ${entity.properties})
-#if(${property.column.length} < 50)
+#if(${property.column.length} < ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end

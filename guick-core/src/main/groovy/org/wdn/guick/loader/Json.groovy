@@ -25,14 +25,8 @@ class Json {
         return slurper.parse(reader)
     }
 
-    public String toJson(def object) {
-        return new JsonBuilder(object).toPrettyString()
-    }
+    public void persist(File file, def object){
 
-    public void write(File target, def json) {
-        target.withWriter {
-            it.write(toJson(json));
-        }
     }
 
     public Object loadText(String text) {
