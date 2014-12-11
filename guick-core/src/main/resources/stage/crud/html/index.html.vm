@@ -105,6 +105,7 @@
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
                 <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
+                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-step-forward"></i>Movimentação</a></li>
 #end
                 <li class="treeview">
                     <a href="#">

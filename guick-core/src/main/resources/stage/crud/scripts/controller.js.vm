@@ -17,12 +17,11 @@
  * # ${entityBeanName}Controller
  * Controller of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )'${beanName}Service', #{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.complexProperties})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} ), ${beanName}Service#{end} ) {
+angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )'${beanName}Service', #{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} ), ${beanName}Service#{end} ) {
 
     ${js}scope.title = 'Search Filter: ${entity.name}';
     ${js}scope.editMode = false;
     ${js}scope.maxSelectBoxSize = 300;
-
     // For select boxes on screen TODO ...
     ${js}scope.entity = {
 #set($size = ${entity.getManyToOneProperties().size()} )
@@ -67,6 +66,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     // Selects to Fullfill select boxes
     // Begin block
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
+#if( ${ent.referedEntity.table.count} < 200) ## Caso nao seja muito grande para um select box ...
 #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
 ### Encontrar o nome principal do campo texto que fica na busca
 #set ( $stringField = 'id' )
@@ -79,13 +79,24 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
          ${js}scope.${beanName}List = [{id:0, '${stringField}':' - '}].concat(data.content);
     });
 #{end}
+#end
     // end block
 
 
     // Search By Example Methdo definition
     ${js}scope.search = function() {
         console.log('Realizando busca:');
+        // prepare page request
         ${js}scope.pageable = {page: ${js}scope.pagingOptions.currentPage ,size: ${js}scope.pagingOptions.pageSize};
+        // prepare search(d) text object
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+#if(${complexProperty.referedEntity.table.count} > 200)
+        if (${js}scope.entity.${beanName} && ${js}scope.entity.${beanName}.originalObject) {
+            ${js}scope.entity.${beanName} = ${js}scope.entity.${beanName}.originalObject;
+        }
+#end
+#end
         ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
             ${js}scope.resultPage = data;
             ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -118,9 +129,14 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         totalServerItems: 'resultPage.totalElements',
         i18n: 'pt-br',
         columnDefs: [
+            {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
+#foreach( ${property} in ${entity.parent.properties})
+#if( ${property.type} != 'Long' || !${property.column.constraint} )
+            {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}},
+#end
+#end
 #set($size = ${entity.properties.size()} )
 #set($counter = 0)
-            {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
 #foreach( ${property} in ${entity.properties})
 #set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
@@ -203,6 +219,18 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         });
     };
 
+    // Create ${entity.name} Modal Window
+    ${js}scope.view = function (size, entityName) {
+        var modalInstance = ${js}modal.open({
+            templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal${entity.name}Controller', size: size,
+            resolve: {
+                ${entityBeanName}: function () {
+                    return $scope.entity;
+                }
+            }
+        });
+    };
+
     // watches
     ${js}scope.${js}watch('pagingOptions', function (newVal, oldVal) {
         if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
@@ -215,9 +243,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', function (${js}scope, ${js}modalInstance, ${entityBeanName}Service, ${entityBeanName}) {
-
     ${js}scope.entity = ${entityBeanName};
-
     ${js}scope.save = function () {
         console.log('Saving Modal' );
         console.log(${js}scope.entity);
@@ -231,5 +257,4 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
     ${js}scope.cancel = function () {
         ${js}modalInstance.dismiss('cancel');
     };
-
 });

@@ -59,18 +59,31 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>5.16.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>5.16.4</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.2.16.Final</version>
         </dependency>
         <dependency>
-        	<groupId>net.sf.ehcache</groupId>
-        	<artifactId>ehcache</artifactId>
-        	<version>2.8.5</version>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
         </dependency>
         <!--
         <dependency>
@@ -145,12 +158,38 @@
             <artifactId>groovy-all</artifactId>
             <version>2.3.6</version>
         </dependency>
+
+        <!--
+            ************************************
+            *** PROVIDED SCOPED DEPENDENCIES ***
+            ************************************
+        -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+
+
+        <!--
+            ********************************
+            *** TESTE SCOPED DEPENDECIES ***
+            ********************************
+        -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -175,6 +214,26 @@
             <version>4.1.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Ainda nao existe versao do spring boot test para api spring-test 4.1.2, solucao temporaria ate lancarem o boot -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
@@ -185,6 +244,12 @@
             <groupId>org.concordion</groupId>
             <artifactId>concordion</artifactId>
             <version>1.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>0.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -324,6 +389,16 @@
                     </exclusions>
                 </dependency>
             </dependencies>
+        </profile>
+
+        <profile>
+            <id>integracao-continua</id>
+            <properties>
+                <test.database.url>jdbc:oracle:thin:@d-dbora11gic01:1521:dbmpic</test.database.url>
+                <test.database.user>INTG</test.database.user>
+                <test.database.password>INTG</test.database.password>
+                <spring.profiles.active>ci</spring.profiles.active>
+            </properties>
         </profile>
 
     </profiles>

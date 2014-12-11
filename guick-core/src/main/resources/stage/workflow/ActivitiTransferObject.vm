@@ -1,0 +1,27 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.service.support;
+
+import java.io.Serializable;
+
+/**
+ * Immutable Transfer Object to be used within activity workflow
+ * Created by walter.davila on 10/12/2014.
+ */
+public class ActivitiTransferObject<T extends Serializable> implements Serializable {
+
+    private T entity;
+
+    public ActivitiTransferObject(T referedEntity){
+        this.entity = referedEntity;
+    }
+
+    public T getEntity() {
+        return entity;
+    }
+
+}

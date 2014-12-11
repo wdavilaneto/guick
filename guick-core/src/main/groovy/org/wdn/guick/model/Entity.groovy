@@ -74,6 +74,19 @@ class Entity extends Clazz {
         return returnList;
     }
 
+    public List<ComplexProperty> getDistinctedAllComplexProperties(){
+        Map<String, String> map = new HashMap<String, String>();
+        List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
+        for (ComplexProperty property : complexProperties) {
+            if (!map.containsKey(property.referedEntity.name)){
+                map.put(property.referedEntity.name, property.name);
+                returnList.add(property);
+            }
+        }
+        return returnList;
+    }
+
+
     public List<ComplexProperty> getManyToManyProperties() {
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
         for (ComplexProperty property : complexProperties) {

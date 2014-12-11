@@ -1,0 +1,15 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.service.support;
+
+import br.gov.mprj.mgp2.domain.Parametro;
+
+public interface IWorkflowCommand {
+
+    T execute(T parametr);
+
+}

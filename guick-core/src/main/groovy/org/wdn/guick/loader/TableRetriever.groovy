@@ -93,7 +93,7 @@ class TableRetriever {
                             if (tabelaPai != null) {
                                 tabelaPai.getConstraints().add(constraint);
                             } else {
-                                println "nlas";
+                                //println "nlas";
                             }
 
                             tabelaReferenciada = tabelas.get((String) resultMap["R_TABLE_NAME"]);

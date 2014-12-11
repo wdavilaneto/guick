@@ -8,6 +8,7 @@ dependencies {
 
     compile 'org.apache.velocity:velocity:1.7'
     compile "commons-lang:commons-lang:2.6"
+    compile 'xstream:xstream:1.2.2'
 
     compile "org.springframework:spring-context:3.2.3.RELEASE"
     runtime "org.springframework:spring-tx:3.2.3.RELEASE"

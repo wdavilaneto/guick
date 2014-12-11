@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/processdef">
+
+    <process id="process${entity.name}">
+
+        <startEvent id="iniciarProcesso${entity.name}"/>
+
+            <sequenceFlow sourceRef="iniciarProcesso${entity.name}" targetRef="criar${entity.name}"/>
+
+            <serviceTask id="criar${entity.name}"
+                         name="Incluir ${entity.name}"
+                         activiti:expression="${${entity.name}Service.create(nome${entity.name}, descricao${entity.name})}"
+                         activiti:resultVariable="result"/>
+
+            <sequenceFlow sourceRef="criar${entity.name}" targetRef="avaliarInclusao${entity.name}"/>
+
+            <userTask id="avaliarInclusao${entity.name}" name="Avaliar Inclusão de ${entity.name}"/>
+
+            <sequenceFlow sourceRef="avaliarInclusao${entity.name}" targetRef="finalizarProcesso${entity.name}"/>
+
+        <endEvent id="finalizarProcesso${entity.name}"/>
+
+    </process>
+
+</definitions>

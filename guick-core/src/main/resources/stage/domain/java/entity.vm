@@ -124,17 +124,28 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-#if( ${entity.getParent()} )
-                .appendSuper(super.equals(obj))
-#end
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
                 .append(id)
+#end
+#if( ${entity.getParent()} )
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.id.getProperties()})
+                .append(id.${property.name})
+#end
 #end
 #foreach( ${property} in ${entity.properties})
                 .append(${property.name})
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name})
+#end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.referedEntity.name}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.referedEntity.name}())
 #end
                .toHashCode();
     }
@@ -152,21 +163,38 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 
 #if ( !${entity.properties.empty})
         ${entity.getName()} rhs = (${entity.getName()}) obj;
-#end
-        return new EqualsBuilder()
-#if( ${entity.getParent()} )
-                .appendSuper(super.equals(obj))
-#end
+
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
-                .append(id ,rhs.id )
+        // For performance reasons we first eliminate @id (primary key) difference
+        if (id != null && (!id.equals(rhs.id)) ) {
+            return false;
+        }
 #end
+        // so lets check all properties
+        return new EqualsBuilder()
 #foreach( ${property} in ${entity.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.id.properties})
                 .append(${property.name}, rhs.${property.name})
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name}, rhs.${property.name})
 #end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.referedEntity.name}(), rhs.get${property.referedEntity.name}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.referedEntity.name}(), rhs.getId().get${property.referedEntity.name}())
+#end
                 .isEquals();
+#else
+        return true;
+#end
+
     }
 
 }
