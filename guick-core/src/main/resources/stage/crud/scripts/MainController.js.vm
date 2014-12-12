@@ -29,6 +29,10 @@ angular.module('msmApp').controller('TabsDemoCtrl', function (${js}scope, ${js}w
     });
   };
 });
+angular.module('msmApp').controller('PopoverDemoCtrl', function ($scope) {
+  $scope.dynamicPopover = 'Hello, World!';
+  $scope.dynamicPopoverTitle = 'Title';
+});
 angular.module('msmApp').controller('ButtonsCtrl', function (${js}scope) {
   ${js}scope.singleModel = 1;
 

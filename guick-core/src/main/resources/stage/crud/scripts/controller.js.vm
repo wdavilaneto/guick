@@ -34,6 +34,12 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
     };
 
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()} )
+#if( ${complexProperty.referedEntity.looksLikeMainEntity()} && ${complexProperty.referedEntity.table.count} > 200 )
+    ${js}scope.${complexProperty} = {select:{}};
+#end
+#end
+
     // binded entity on search for filter (fields)
     if (${js}routeParams.id) {
         ${js}scope.editMode = true;
@@ -61,7 +67,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             ${js}scope.resultPage = data;
             ${js}scope.resultPage.content = jsog.decode(data.content);
         });
-    };
+    }
 
     // Selects to Fullfill select boxes
     // Begin block
@@ -92,8 +98,8 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200)
-        if (${js}scope.entity.${beanName} && ${js}scope.entity.${beanName}.originalObject) {
-            ${js}scope.entity.${beanName} = ${js}scope.entity.${beanName}.originalObject;
+        if (${js}scope.entity.${beanName} && ${js}scope.${complexProperty}.select.originalObject) {
+            ${js}scope.entity.${beanName} = ${js}scope.${complexProperty}.select.originalObject;
         }
 #end
 #end
@@ -191,11 +197,17 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #set($counter = 0)
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
 #set($counter = $counter + 1)
-        ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
+            ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
 #end
 #end
 
         };
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#if( ${complexProperty.referedEntity.looksLikeMainEntity()} && ${complexProperty.referedEntity.table.count} > 200 )
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+        ${js}scope.entity.${beanName} = ${js}scope.select.${complexProperty}.originalObject;
+#end
+#end
     };
 
     // Create ${entity.name} Modal Window
@@ -203,7 +215,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         var modalInstance = ${js}modal.open({
             templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
             resolve: {
-                ${entityBeanName}: function () {
+                data: function () {
                     return $scope.entity;
                 }
             }
@@ -221,10 +233,18 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
     // Create ${entity.name} Modal Window
     ${js}scope.view = function (size, entityName) {
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#if( ${complexProperty.referedEntity.looksLikeMainEntity()} && ${complexProperty.referedEntity.table.count} > 200 )
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+        if (${js}scope.entity.${beanName} && ${js}scope.${complexProperty}.select.originalObject) {
+            ${js}scope.entity.${beanName} = ${js}scope.${complexProperty}.select.originalObject;
+        }
+#end
+#end
         var modalInstance = ${js}modal.open({
             templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal${entity.name}Controller', size: size,
             resolve: {
-                ${entityBeanName}: function () {
+                data: function () {
                     return $scope.entity;
                 }
             }
@@ -239,22 +259,3 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     }, true);
 
 }]);
-
-// Please note that $modalInstance represents a modal window (instance) dependency.
-// It is not the same as the $modal service used above.
-angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', function (${js}scope, ${js}modalInstance, ${entityBeanName}Service, ${entityBeanName}) {
-    ${js}scope.entity = ${entityBeanName};
-    ${js}scope.save = function () {
-        console.log('Saving Modal' );
-        console.log(${js}scope.entity);
-        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
-            console.log(successResult);
-            ${js}scope.entity = {};
-        });
-        ${js}modalInstance.close(${js}scope.entity);
-    };
-
-    ${js}scope.cancel = function () {
-        ${js}modalInstance.dismiss('cancel');
-    };
-});

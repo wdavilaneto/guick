@@ -1,0 +1,29 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+#foreach( ${entity} in ${project.metadata.entities})
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', function (${js}scope, ${js}modalInstance, ${entityBeanName}Service, data) {
+
+    ${js}scope.entity = data;
+
+    ${js}scope.save = function () {
+        console.log('Saving Modal' );
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
+            ${js}scope.entity = {};
+        });
+        ${js}modalInstance.close(${js}scope.entity);
+    };
+
+    ${js}scope.cancel = function () {
+        ${js}modalInstance.dismiss('cancel');
+    };
+});
+
+#end

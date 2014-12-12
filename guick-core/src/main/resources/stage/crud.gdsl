@@ -73,9 +73,11 @@ guick {
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
                     [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
+                    [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
                     [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],
 
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
+
                     [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
                     [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"]
 

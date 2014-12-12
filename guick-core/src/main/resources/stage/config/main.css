@@ -26,15 +26,33 @@ header{background:#007aaf;width:100%;}
     position: relative !important;
 }
 /* CAMPOS OBRIGATÓRIOS */
-
+/* WARNING */
 .form-group.has-warning .form-control{border:1px solid #fbe9e7 !important;}
-.form-group.has-warning .form-control:focus{border:1px solid #f39c12 !important; }
-.form-group label{border-bottom:1px solid #ccc;padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%;}
+.form-group.has-warning .form-control:focus, .form-group.has-warning-plus .form-control:focus {border:1px solid #f39c12 !important; }
+/* WARNING PLUS */
+.form-group.has-warning.has-warning-plus label{padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%;  background: #f39c12;border-radius:3px 3px 0 0;color:#fff !important;border-color:transparent !important; }
+/* WARNING BRIGHTNESS */
+.form-group.has-warning.has-warning-brightness label{border-color:transparent !important;}
+.form-group.has-warning.has-warning-brightness input{border-color:#ddd !important; background-color:#f7ead5 !important;}
+.form-group.has-warning.has-warning-brightness input:focus{box-shadow: 1px 1px 10px #f39c12 !important;border:none !important; }
+/* WARNING SIMPLIFIED */
+.form-group.has-warning.has-warning-simplified .form-control{border:1px solid orange}
+.form-group.has-warning.has-warning-simplified label{border-color:#f7ead5 !important;}
+/* WARNING STONED */
+.form-group.has-warning.has-warning-stoned .form-control{background:#f39c12;box-shadow:1px 1px 5px #666 inset !important;}
+.form-group.has-warning.has-warning-stoned label{border-color: transparent !important;}
+/* WARNING CLEAN*/
+.form-group.has-warning.has-warning-clean .form-control{background:#fff;color:#666;box-shadow:1px 1px 15px #f7ead5 !important;}
+.form-group.has-warning.has-warning-clean .form-control:focus{border-color:#f7ead5 !important;}
+.form-group.has-warning.has-warning-clean label{border:transparent !important;color:#f39c12 !important;}
+
+.form-group label{padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%;}
 .form-group.has-warning label{color:#000;border-bottom:1px solid #f39c12;padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%; /* background: #f39c12;border-radius:3px 3px 0 0;color:#fff !important;*/ }
 .modal-lg{width:75% !important; }
 a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 .form-search label{background: #007AAF;width: 100%;padding: 2px 3px 0px 3px;margin: 3px 0 0 0;border-radius: 3px 3px 0 0;color: #fff !important;}
 .form-group .fa-search{color: #fff;}
 
-.form-control{height:30px;border-color:#ededed;}
+.form-control{border-top:1px solid #ededed;border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-left:1px solid #ededed;}
 .form-control:focus{border-color:#ccc !important;}
+.popover{color:#000;}

@@ -34,6 +34,7 @@ var app = angular.module('${project.name}App', [
       .when('/dashboard', {templateUrl: 'views/dashboards/dashboard.html'})
 ##TODO REVMOVER!
 #if (${project.name} == 'msm')
+      .when('/templatePage', {templateUrl: 'views/templatePage/templatePage.html'})
       .when('/manterPesquisarPaciente', {templateUrl: 'views/paciente/pesquisarPaciente.html'})
       .when('/manterPaciente', {templateUrl: 'views/paciente/paciente.html'})
       .when('/manterInstituicao', {templateUrl: 'views/instituicao/instituicao.html'})

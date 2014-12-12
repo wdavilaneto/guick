@@ -28,7 +28,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
                                         <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
-                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Avançar</button>
+                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Gravar</button>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
                                         <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
-                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Avançar</button>
+                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-chevron-circle-right"></span> Gravar</button>
                                     </div>
                                 </div>
                             </div>
