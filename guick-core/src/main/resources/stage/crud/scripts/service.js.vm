@@ -17,7 +17,7 @@ var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
 ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
     function ($resource) {
-        return $resource('http://localhost:8080/${entity.name}/:id', {}, {
+        var service = $resource('http://localhost:8080/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: 'http://localhost:8080/${entity.name}', isArray: false},
             'search': { method: 'POST', url: 'http://localhost:8080/${entity.name}/search', isArray: false},
             'searchText': { method: 'POST', url: 'http://localhost:8080/${entity.name}/searchText', isArray: false},
@@ -25,5 +25,68 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             'save': { method: 'POST'},
             'remove': { method: 'DELETE'}
         });
+
+        var entity = {};
+
+        service.getCurrentEntity = function (){
+            return entity;
+        };
+
+        var baseOptions = {
+            data: 'resultPage.content',
+            enablePaging: true,
+            showFooter: true,
+            multiSelect: false,
+            enableColumnResize: true,
+            totalServerItems: 'resultPage.totalElements',
+            i18n: 'pt-br'
+        };
+
+        service.factoryGridOptions = function (pagingOptions , entitySelected, isEditMode){
+            if (!isEditMode) {
+                isEditMode = false
+            }
+            var options = baseOptions;
+            options.selectedItems = entitySelected;
+            options.pagingOptions = pagingOptions;
+            options.columnDefs = [
+                {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
+#foreach( ${property} in ${entity.parent.properties})
+#if( ${property.type} != 'Long' || !${property.column.constraint} )
+                {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}},
+#end
+#end
+#set($size = ${entity.properties.size()} )
+#set($counter = 0)
+#foreach( ${property} in ${entity.properties})
+#set($counter = $counter + 1)
+## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
+#if( ${property.type} != 'Long' || !${property.column.constraint} )
+                {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
+#end
+#end
+#end
+#if (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )
+#set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
+### find first StringField
+#set ( $stringField = 'id' )
+#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
+#if(${prop.type} == 'String' && $stringField == 'id' )
+#set ($stringField = ${prop})
+#end
+#end
+                {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}'#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
+#end
+
+            ];
+            if (isEditMode) {
+                options.columnDefs.shift();
+                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); remove${entity.name}(row.entity);"><i class="fa fa-remove"></i></a>', width : '35', resizable: false});
+            }
+            return options;
+
+        };
+        return service;
     }
 ]);

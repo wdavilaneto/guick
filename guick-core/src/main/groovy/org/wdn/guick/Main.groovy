@@ -34,9 +34,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../mprj-gsi-msm")
-
-//            main.project.initialize("../mprj-gsi-mgp2/")
+            main.project.initialize("../rh/")
 
 //            main.setTarget("stage/create-webapp")
 //            main.run()

@@ -90,8 +90,6 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "${entity.getTable().getSequenceName()}")
     @Column(name="$entity.id.column.name"#if(${entity.id.column.precision}), precision = ${entity.id.column.precision}#{end}#if(${entity.id.column.scale}), scale = ${entity.id.column.scale}#{end} )
 #end
-#if(!$entity.isEmbeddable() and !$entity.getParent() )
-#end
     private ${entity.getId().getType()} id;
 
 #end
@@ -127,13 +125,11 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
                 .append(id)
 #end
-#if( ${entity.getParent()} )
 #foreach( ${property} in ${entity.parent.properties})
                 .append(${property.name})
 #end
 #foreach( ${property} in ${entity.id.getProperties()})
                 .append(id.${property.name})
-#end
 #end
 #foreach( ${property} in ${entity.properties})
                 .append(${property.name})
@@ -179,7 +175,8 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(${property.name}, rhs.${property.name})
 #end
 #foreach( ${property} in ${entity.id.properties})
-                .append(${property.name}, rhs.${property.name})
+#set( $name = $util.capitalize( ${property.name} ))
+                .append(id.get${name}(), rhs.id.get${name}())
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name}, rhs.${property.name})

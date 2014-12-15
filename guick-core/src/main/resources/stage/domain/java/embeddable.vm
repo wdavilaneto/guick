@@ -5,6 +5,15 @@
 
 package ${entity.getPackage()};
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -34,8 +43,6 @@ import javax.persistence.Basic;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
-import br.com.petrobras.fcorp.validation.annotation.NotBlank;
-import br.com.petrobras.fcorp.validation.annotation.CPF;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -53,10 +60,16 @@ import ${entity.getPackage()}.domain.${property.getName()};
  * A classe ${entity.getName()} representa o mapeamento Objeto-Relacional
  * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Embeddable
 public class ${entity.getName()} implements java.io.Serializable {
 
-#parse( "simpleProperties.vm" )
+#parse( "stage/domain/java/simpleProperties.vm" )
 #foreach( ${property} in ${entity.getEnums()})
     @Enumerated(EnumType.STRING)
     @Type(
@@ -76,8 +89,8 @@ public class ${entity.getName()} implements java.io.Serializable {
     List<$property.type> $property.getName() = new ArrayList<$property.type>(0);
 
 #end
-#parse( "manyToOneProperties.vm" )
-#parse( "manyToManyProperties.vm" )
+#parse( "stage/domain/java/manyToOneProperties.vm" )
+#parse( "stage/domain/java/manyToManyProperties.vm" )
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
     public ${entity.getId().getType()} getId() {
         return this.id;

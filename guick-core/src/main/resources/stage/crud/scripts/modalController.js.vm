@@ -8,9 +8,23 @@
 // It is not the same as the $modal service used above.
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', function (${js}scope, ${js}modalInstance, ${entityBeanName}Service, data) {
-
+angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',  function (${js}scope, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data) {
     ${js}scope.entity = data;
+    console.log('Editing Modal' );
+    console.log(${js}scope.entity);
+
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getManyToOneProperties()})
+#if( ${ent.referedEntity.table.count} < 200) ## Caso nao seja muito grande para um select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = data.content;
+    });
+#{end}
+#end
+    // end block
+
 
     ${js}scope.save = function () {
         console.log('Saving Modal' );
@@ -24,6 +38,6 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
     ${js}scope.cancel = function () {
         ${js}modalInstance.dismiss('cancel');
     };
-});
+}]);
 
 #end

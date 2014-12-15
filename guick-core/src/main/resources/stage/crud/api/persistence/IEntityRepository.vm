@@ -7,6 +7,9 @@
 package ${project.group}.${project.name}.api.persistence.core;
 
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +26,12 @@ public interface ${entity.name}RepositoryCustom {
 
     Page<${entity.name}> searchText(String text, Pageable pageable);
 
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
     ${entity.name} get(${entity.id.type} id);
+#else
+    ${entity.name} get(${entity.name} e);
+#end
+
 
 
 }

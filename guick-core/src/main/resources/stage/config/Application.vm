@@ -6,6 +6,9 @@
  */
 package ${project.group}.${project.name};
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -24,9 +27,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 
-@ComponentScan(basePackages = "br.gov.mprj.msm.api")
+@ComponentScan(basePackages = "${project.group}.${project.name}.api")
 @Configuration
 @EnableWebMvc
+@MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.reports")
 @EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence")
 @EnableAutoConfiguration
 @EnableTransactionManagement
@@ -66,6 +70,13 @@ public class Application extends SpringBootServletInitializer {
     public DataSource dataSource() {
         JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
         return dataSourceLookup.getDataSource("java:jboss/custeioDS");
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+        sqlSessionFactory.setDataSource(dataSource);
+        return (SqlSessionFactory) sqlSessionFactory.getObject();
     }
 
 }

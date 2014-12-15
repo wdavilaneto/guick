@@ -17,7 +17,7 @@ angular.module('${projectBeanName}App').controller('mainController', function($s
 });
 
 
-angular.module('msmApp').controller('TabsDemoCtrl', function (${js}scope, ${js}window) {
+angular.module('${project.name}App').controller('TabsDemoCtrl', function (${js}scope, ${js}window) {
   ${js}scope.tabs = [
     { title:'Dynamic Title 1', content:'Dynamic content 1' },
     { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
@@ -29,11 +29,11 @@ angular.module('msmApp').controller('TabsDemoCtrl', function (${js}scope, ${js}w
     });
   };
 });
-angular.module('msmApp').controller('PopoverDemoCtrl', function ($scope) {
+angular.module('${project.name}App').controller('PopoverDemoCtrl', function ($scope) {
   $scope.dynamicPopover = 'Hello, World!';
   $scope.dynamicPopoverTitle = 'Title';
 });
-angular.module('msmApp').controller('ButtonsCtrl', function (${js}scope) {
+angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}scope) {
   ${js}scope.singleModel = 1;
 
   ${js}scope.radioModel = 'Middle';
@@ -44,7 +44,7 @@ angular.module('msmApp').controller('ButtonsCtrl', function (${js}scope) {
     right: false
   };
 });
-angular.module('msmApp').controller('DatepickerDemoCtrl', function (${js}scope) {
+angular.module('${project.name}App').controller('DatepickerDemoCtrl', function (${js}scope) {
   ${js}scope.today = function() {
     ${js}scope.dt = new Date();
   };

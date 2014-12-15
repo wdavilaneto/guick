@@ -17,7 +17,7 @@
  * # ${entityBeanName}Controller
  * Controller of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )'${beanName}Service', #{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} ), ${beanName}Service#{end} ) {
+angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
     ${js}scope.title = 'Search Filter: ${entity.name}';
     ${js}scope.editMode = false;
@@ -40,7 +40,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #end
 #end
 
-    // binded entity on search for filter (fields)
+    // if in edit mode get the wanted ${entityBeanName}
     if (${js}routeParams.id) {
         ${js}scope.editMode = true;
         console.log('Request ${entityBeanName} with Id:' + ${js}routeParams.id);
@@ -69,25 +69,20 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         });
     }
 
+
     // Selects to Fullfill select boxes
     // Begin block
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
 #if( ${ent.referedEntity.table.count} < 200) ## Caso nao seja muito grande para um select box ...
 #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-### Encontrar o nome principal do campo texto que fica na busca
-#set ( $stringField = 'id' )
-#foreach( ${prop} in ${ent.referedEntity.properties})
-#if(${prop.type} == 'String' && $stringField == 'id' )
-#set ($stringField = ${prop})
-#end
-#end
     ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-         ${js}scope.${beanName}List = [{id:0, '${stringField}':' - '}].concat(data.content);
+         ${js}scope.${beanName}List = data.content;
     });
 #{end}
 #end
     // end block
 
+    ${js}scope.gridOptions = ${entityBeanName}Service.factoryGridOptions($scope.pagingOptions , $scope.entitySelected);
 
     // Search By Example Methdo definition
     ${js}scope.search = function() {
@@ -107,63 +102,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             ${js}scope.resultPage = data;
             ${js}scope.resultPage.content = jsog.decode(data.content);
         });
-    };
-
-    // Search of OneToMany/ManyToMany
-#if( ${entity.looksLikeMainEntity()} )
-#foreach( ${ent} in ${entity.getOneToManyProperties()})
-#set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-    ${js}scope.find${ent.referedEntity.name} = function() {
-        console.log('Realizando busca de 1 x N( $beanName.${entityBeanName}.id):' + ${js}scope.entity.id);
-        ${js}scope.resultPage = {};
-        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.pageable}  , function (data) {
-            ${js}scope.resultPage = data;
-            ${js}scope.resultPage.content = jsog.decode(data.content);
-        });
-    };
-#{end}
-#end
-
-    ${js}scope.gridOptions = {
-        data: 'resultPage.content',
-        enablePaging: true,
-        showFooter: true,
-        pagingOptions: ${js}scope.pagingOptions,
-        multiSelect: false,
-        enableColumnResize: true,
-        selectedItems: ${js}scope.entitySelected,
-        totalServerItems: 'resultPage.totalElements',
-        i18n: 'pt-br',
-        columnDefs: [
-            {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
-#foreach( ${property} in ${entity.parent.properties})
-#if( ${property.type} != 'Long' || !${property.column.constraint} )
-            {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}},
-#end
-#end
-#set($size = ${entity.properties.size()} )
-#set($counter = 0)
-#foreach( ${property} in ${entity.properties})
-#set($counter = $counter + 1)
-## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
-#if( ${property.type} != 'Long' || !${property.column.constraint} )
-            {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
-#end
-#end
-#end
-#if (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )
-#set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
-### find first StringField
-#set ( $stringField = 'id' )
-#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
-#if(${prop.type} == 'String' && $stringField == 'id' )
-#set ($stringField = ${prop})
-#end
-#end
-            {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}'#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
-#end
-
-        ]
     };
 
     $scope.detalhar = function (${entityBeanName}) {
@@ -210,20 +148,20 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #end
     };
 
+    // ******************************************************************************************
+    // Modals
+    // ******************************************************************************************
     // Create ${entity.name} Modal Window
     ${js}scope.open = function (size) {
         var modalInstance = ${js}modal.open({
             templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
             resolve: {
-                data: function () {
-                    return $scope.entity;
-                }
+                data: function () {return $scope.entity;}
             }
         });
         modalInstance.result.then(function (selectedItem) {
             ${js}scope.selected = selectedItem;
         }, function () {
-            //${js}log.info('Modal dismissed at: ' + new Date());
             // Refreshing Result List
             ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
                 ${js}scope.resultPage = data;
@@ -250,6 +188,48 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             }
         });
     };
+
+    // ******************************************************************************************
+    // Master Details: Operations for Search and  editing of OneToMany/ManyToMany ()
+    // ******************************************************************************************
+#if( ${entity.looksLikeMainEntity()} )
+#foreach( ${ent} in ${entity.getOneToManyProperties()})
+#set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
+    ${js}scope.grid${beanName}Options = ${beanName}Service.factoryGridOptions($scope.pagingOptions , $scope.entitySelected, true);
+    ${js}scope.find${ent.referedEntity.name} = function() {
+        console.log('Realizando busca de 1 x N( $beanName.${entityBeanName}.id):' + ${js}scope.entity.id);
+        ${js}scope.resultPage = {};
+        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.pageable}  , function (data) {
+            ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
+        });
+    };
+    $scope.remove${ent.referedEntity.name} = function (obj){
+        console.log('Deleting ${beanName} with id:' + obj.id);
+        ${beanName}Service.remove( obj , function ( successResult) {
+            console.log(successResult);
+            ${js}scope.entity = {};
+        });
+    };
+    ${js}scope.edit${ent.referedEntity.name} = function (obj) {
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'create${ent.referedEntity.name}Modal.html', controller: 'Modal${ent.referedEntity.name}Controller', size: 'lg',
+            resolve: {
+                data: function () {return obj;}
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.selected = selectedItem;
+        }, function () {
+            // Refreshing Result List
+            ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.pageable}  , function (data) {
+                ${js}scope.resultPage = data;
+                ${js}scope.resultPage.content = jsog.decode(data.content);
+            });
+        });
+    };
+#{end}
+#end
 
     // watches
     ${js}scope.${js}watch('pagingOptions', function (newVal, oldVal) {

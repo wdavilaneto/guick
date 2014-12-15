@@ -5,7 +5,6 @@ import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import org.wdn.guick.loader.Json
 
 import javax.persistence.Transient
 
@@ -66,9 +65,10 @@ class Project implements Serializable {
         guickFile = new File(path + "/guick.json")
         if (guickFile.exists()) {
             config = new JsonSlurper().parse(guickFile);
+            logger.debug("initializing with ${config}")
             group = config.group
             name = config.name
-            logger.debug("initializing with ${config}")
+            this.database = config.guickConnectionInfo;
         } else {
             if (new File(path + "/pom.xml").exists()) {
                 pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
@@ -98,9 +98,9 @@ class Project implements Serializable {
     }
 
     @Transient
-    public void persist (){
+    public void persist() {
         def json = new JsonBuilder(tables).toPrettyString();
-        new File (path + "/tables.json").write(json);
+        new File(path + "/tables.json").write(json);
 //        json = new JsonBuilder(tables).toPrettyString();
 //        new File (path + "/metadata.json").write(json);
 //        json = new JsonBuilder(entities).toPrettyString();
@@ -137,6 +137,10 @@ class Project implements Serializable {
 
     public List<Entity> getEntitiesWithoutHibernateIssue() {
         return entities.findAll { e -> !hasHibernateIssue(e) }
+    }
+
+    public List<Entity> getAllMainEntities(){
+        return getEntitiesWithoutHibernateIssue().findAll() {it.looksLikeMainEntity()};
     }
 
     private boolean hasHibernateIssue(Entity entity) {

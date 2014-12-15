@@ -5,14 +5,39 @@
     </h1>
 </section>
 <section class="content">
-    <div class="col-xs-12">
+    <div class="col-xs-12" ng-controller="dashboardController">
         <div class="row">
             <div class="box box-primary">
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            opa!
+                        <div class="col-md-6">
+                            <nvd3 options="options" data="allCount" class="with-3d-shadow with-transitions"></nvd3>
                         </div>
+#set( $mainEntities = ${project.getAllMainEntities()} )
+#foreach( ${entity} in ${mainEntities} )
+#foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${entity}WithSum${e.referedEntity.name}${capitalizedProp}" data="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${entity}WithSum${e.referedEntity.name}${capitalizedProp}" data="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${entity}WithSum${e.referedEntity.name}${capitalizedProp}" data="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+#end
+#end
+
                     </div>
                 </div>
             </div>

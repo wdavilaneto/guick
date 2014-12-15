@@ -1,28 +1,42 @@
 def packageBase = project.packageBase
 
-database.url = "jdbc:oracle:thin:@d-dbora11g01:1521:dbmp"
-database.driverName = "oracle.jdbc.driver.OracleDriver"
-database.user = "walter"
-database.password = "a1234"
-
 def entities = database.generateModel()
+project.metadata.entities = entities
 
-def entityList = entities.findAll { e -> !e.isEmbeddable() }
+//def entityList = entities.findAll { e -> !e.isEmbeddable() }
+def entityList = project.getEntitiesWithoutHibernateIssue().findAll { e -> !e.isEmbeddable() }
 def embeddedList = entities.findAll { entity -> entity.isEmbeddable() }
 def enumList = []
 entities.each { entity -> enumList.addAll(entity.enums) }
-
-project.metadata.entities = entities
 
 def lang = "java" //TODO to parametrize
 
 guick {
     domain {
-        for (def entity : entities) {
+
+        for (def entity : entityList) {
+            "domain layer" {
+                object entity
+                templates = [[input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]]
+            }
+        }
+        for (def entity : embeddedList) {
+            "embeddables" {
+                object entity
+                templates = [[input: "stage/domain/${lang}/embeddable.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]]
+            }
+        }
+        for (def entity : enumList) {
+            "enums" {
+                object entity
+                templates = [[input: "stage/domain/${lang}/enum.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]]
+            }
+        }
+
+        for (def entity : entityList) {
             "geracao de services" {
                 object entity
                 templates = [
-                        [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"],
                         [input: "stage/crud/api/persistence/repository.${lang}.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
                         [input: "stage/crud/api/persistence/EntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryImpl.${lang}"],
                         [input: "stage/crud/api/persistence/IEntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryCustom.${lang}"],
@@ -32,7 +46,7 @@ guick {
                 ]
             }
         }
-        for (def entity : entities) {
+        for (def entity : entityList) {
             if ( entity.looksLikeMainEntity()){
 
                 "geracao de workflows" {
@@ -50,7 +64,10 @@ guick {
                     [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
                     [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/PageableHelper.${lang}"],
                     [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
-                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"]
+                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"],
+
+                    [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/reports/DashboardRepository.${lang}"],
+                    [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/reports/DashboardRepository.xml"]
             ]
         }
 //        [input: "stage/workflow/SimpleProccessCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/SimpleProccessCommand.${lang}"],
@@ -71,6 +88,8 @@ guick {
                     [input: "stage/support/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/DefaultExceptionHandler.${lang}"],
                     [input: "stage/support/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/RestFieldMessageDTO.${lang}"],
 
+                    [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
+
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
                     [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
                     [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
@@ -84,7 +103,7 @@ guick {
             ]
         }
 
-        for (def entity : entities) {
+        for (def entity : entityList) {
             "geracao de front-end" {
                 object entity
                 templates = [
@@ -92,17 +111,17 @@ guick {
                         [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/${entity.name}Service.js"],
                         [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
                         [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
-                        [input: "stage/crud/html/components/crud/entityFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityEditFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}EditFieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityShowFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityToOneFieldset.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityEditFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}EditFieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityShowFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityToOneFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
                         [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
                 ]
             }
         }
 
-        for (def entity : entities) {
+        for (def entity : entityList) {
             "tests" {
                 object entity
                 templates = [

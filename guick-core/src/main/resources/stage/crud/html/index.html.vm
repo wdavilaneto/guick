@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -185,6 +186,9 @@
 <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
 <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
 <script src="bower_components/jsog/lib/JSOG.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/nvd3/nv.d3.js"></script>
+<script src="bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <script src="bower_components/adminlte/js/app.js"></script>

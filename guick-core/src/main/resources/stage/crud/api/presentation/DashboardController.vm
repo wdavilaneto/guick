@@ -1,0 +1,73 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.rest.reports;
+
+import ${project.group}.${project.name}.domain.${entity.name};
+import ${project.group}.${project.name}.api.persistence.reports.DashboardRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *  CRUD Rest Json 'Controller' for entity${entity.name}
+ *  Guick Generate class:
+ *  https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ */
+@RestController
+@RequestMapping(value="/reports/dashboard")
+public class DashboardController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DashboardController.class);
+
+    @Resource(name = "dashboardRepository")
+    private DashboardRepository dashboardRepository;
+
+    @RequestMapping(value = "/allCount", method = RequestMethod.GET)
+    public List<Map> allCount(){
+        return dashboardRepository.allCount();
+    }
+
+#set( $mainEntities = ${project.getAllMainEntities()} )
+#foreach( ${entity} in ${mainEntities} )
+#foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
+    @RequestMapping(value = "/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}() {
+        return dashboardRepository.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+    }
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
+    @RequestMapping(value = "/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}(){
+        return dashboardRepository.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+    }
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
+    @RequestMapping(value = "/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}(){
+        return dashboardRepository.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+    }
+#end
+#end
+#end
+
+}

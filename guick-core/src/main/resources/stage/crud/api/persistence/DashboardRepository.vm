@@ -1,0 +1,38 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.persistence.reports;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by walter on 14/12/14.
+ */
+public interface DashboardRepository {
+
+    List<Map> allCount();
+
+#set( $mainEntities = ${project.getAllMainEntities()} )
+#foreach( ${entity} in ${mainEntities} )
+#foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
+    List<Map> get${entity}WithSum${e.referedEntity.name}${capitalizedProp}();
+#end
+#end
+#end
+
+}

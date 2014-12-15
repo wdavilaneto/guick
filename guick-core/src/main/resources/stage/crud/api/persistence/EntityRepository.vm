@@ -7,8 +7,11 @@
  */
 package ${project.group}.${project.name}.api.persistence.core;
 
-import br.gov.mprj.msm.api.persistence.support.PageableHelper;
+import ${project.group}.${project.name}.api.persistence.support.PageableHelper;
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
@@ -153,9 +156,16 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
     @Override
     public ${entity.name} get(${entity.id.type} id) {
         return entityManager.find(${entity.name}.class, id);
     }
+#else
+    @Override
+    public ${entity.name} get(${entity.name} e) {
+        return entityManager.find(${entity.name}.class, e);
+    }
+#end
 
 }

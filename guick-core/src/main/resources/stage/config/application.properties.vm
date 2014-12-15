@@ -1,15 +1,10 @@
-##spring.datasource.url=jdbc:oracle:thin:@d-dbora11g01:1521:dbmp
-##spring.datasource.username=sa
-##spring.datasource.password=
-##spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 #spring.datasource.jndi-name=java:jboss/datasources/bootdemo
 #spring.datasource.jndi-name=jdbc/${project.name}Ds
+spring.groovy.template.check-template-location=false
 
-spring.datasource.url=jdbc:oracle:thin:@d-dbora11g01:1521:dbmp
-##spring.datasource.username=walter
-##spring.datasource.password=a1234
-spring.datasource.username=NMSM10
-spring.datasource.password=a123
+spring.datasource.url=${project.database.url}
+spring.datasource.username=${project.database.user}
+spring.datasource.password=${project.database.password}
 spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 spring.datasource.testOnBorrow=true
 spring.datasource.validation-query= select 1 from dual

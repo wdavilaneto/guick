@@ -54,6 +54,30 @@ class Entity extends Clazz {
         return returnList;
     }
 
+    public List<RelationshipProperty> getAllNumericProperties(){
+        List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
+        for (RelationshipProperty property : properties) {
+            if (property.type == 'Long') {
+                returnList.add(property);
+            }
+        }
+        return returnList;
+    }
+
+    private _mostDescritiveProperties = null;
+    public List<RelationshipProperty> getMostDescritiveProperties(){
+        if (_mostDescritiveProperties == null) {
+            _mostDescritiveProperties = new ArrayList<RelationshipProperty>()
+            for (RelationshipProperty property : properties) {
+                if (property.type == 'String') {
+                    _mostDescritiveProperties.add(property);
+                }
+            }
+            // Todo order for significance...
+        }
+        return _mostDescritiveProperties;
+    }
+
     public List<ComplexProperty> getOneToManyProperties() {
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
         for (ComplexProperty property : complexProperties) {

@@ -9,7 +9,7 @@
  */
 package ${project.group}.${project.name}.api.rest;
 
-import br.gov.mprj.msm.api.rest.dto.Pagination;
+import ${project.group}.${project.name}.api.rest.dto.Pagination;
 import ${project.group}.${project.name}.api.rest.dto.SearchFilter;
 import ${project.group}.${project.name}.domain.${entity.name};
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;
