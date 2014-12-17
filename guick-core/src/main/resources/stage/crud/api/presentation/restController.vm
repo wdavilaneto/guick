@@ -76,6 +76,16 @@ public class ${entity.name}Controller {
     public HttpEntity<Page<${entity.name}>> searchTextGet(String text) {
         return new HttpEntity(${entityBeanName}Service.searchText(text , DEFAULT_PAGE ));
     }
+    /**
+     * Returns a paged and filtered list with an given example (ignoring relationship examples beyond id)
+     * @param filter
+     * @return
+     */
+    @RequestMapping(value = "/searchText", method = RequestMethod.POST)
+    public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
+        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
+    }
+
 
     /**
      * Return an entity,${entity.name} ,with an Given ID

@@ -32,6 +32,18 @@ public class RelationshipProperty extends Clazz {
                 toHashCode();
     }
 
+    public boolean looksLikeEndDate(){
+        if (!'Date'.equals(type) ){
+            return false;
+        }
+        for (def word : ["endDate","dataFim","prazo","dataEntrega"]){
+            if (name.contains(word)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * {@inheritDoc}
      */

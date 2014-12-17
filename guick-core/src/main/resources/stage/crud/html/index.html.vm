@@ -54,34 +54,62 @@
         </a>#if (${project.name} == 'msm') <a class="logo-control" href="#">MÓDULO DE SAÚDE MENTAL</a> #end
         <div class="navbar-right">
             <ul class="nav navbar-nav">
+                <li class="dropdown tasks-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-tasks"></i>
+                        <span class="label label-danger">9</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have 4 messages</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <!-- start message -->
+                                <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+                                        </div>
+                                        <h4>
+                                            Support Team <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                <!-- end message -->
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">See All Messages</a></li>
+                    </ul>
+                </li>
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <!-- User image -->
-                    <li class="user-header bg-light-blue"><img src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
-                        <p>
-                            Bruno<small>Usuário desde Nov. 2012</small>
-                        </p></li>
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <div class="col-xs-4 text-center">
-                            <a href="">Pendências</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                            <a href="">Principal</a>
-                        </div>
-                    </li>
-                    <!-- Menu Footer-->
-                    <li class="user-footer">
-                        <div class="pull-left">
-                            <a href="" class="btn btn-default btn-flat">Perfil</a>
-                        </div>
-                        <div class="pull-right">
-                            <a href="" class="btn btn-default btn-flat">Sair</a>
-                        </div>
-                    </li>
-                </ul></li>
+                <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span></a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header bg-light-blue"><img src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
+                            <p>
+                                Fulano<small>Usuário desde Nov. 2012</small>
+                            </p></li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            <div class="col-xs-4 text-center">
+                                <a href="">Pendências</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="">Principal</a>
+                            </div>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="" class="btn btn-default btn-flat">Perfil</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="" class="btn btn-default btn-flat">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>

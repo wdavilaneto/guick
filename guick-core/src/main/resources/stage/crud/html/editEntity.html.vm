@@ -12,7 +12,7 @@
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
-        <form name="medidorForm" novalidate>
+        <form name="${entityBeanName}Form" novalidate>
             <tabset>
                 <tab heading="Principal">
                     <div class="nav-tabs-custom">
@@ -93,7 +93,7 @@
 #set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
         <script type="text/ng-template" id="create${complexProperty.referedEntity.name}Modal.html">
             <div class="modal-header">
-                <h4 class="modal-title">${complexProperty.referedEntity.name}</h4>
+                <h4 class="modal-title">${complexProperty.referedEntity.title}</h4>
             </div>
             <div class="modal-body">
                 <div class="box box-primary">

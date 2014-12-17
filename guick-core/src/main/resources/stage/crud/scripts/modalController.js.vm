@@ -33,8 +33,8 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
         ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
             console.log(successResult);
             ${js}scope.entity = {};
+            ${js}modalInstance.close(${js}scope.entity);
         });
-        ${js}modalInstance.close(${js}scope.entity);
     };
 
     ${js}scope.cancel = function () {
