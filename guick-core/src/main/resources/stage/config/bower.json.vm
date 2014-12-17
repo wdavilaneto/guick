@@ -25,7 +25,8 @@
     "angular-bootstrap": "~0.11.2",
     "jsog": "~1.0",
     "bootstrap": "~3.3.0",
-    "angular-nvd3": "latest"
+    "angular-nvd3": "latest",
+    "angular-ui-utils": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.3",

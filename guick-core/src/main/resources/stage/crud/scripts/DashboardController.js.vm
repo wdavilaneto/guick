@@ -19,31 +19,7 @@
  */
 angular.module('${projectBeanName}App').controller('dashboardController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'dashboardService', function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, dashboardService ) {
 
-    ${js}scope.allCount = []
-    ${js}scope.options = {
-        chart: {
-            type: 'discreteBarChart',
-            height: 450,
-            margin : {
-                top: 20,
-                right: 20,
-                bottom: 60,
-                left: 55
-            },
-            x: function(d){return d.LABEL;},
-            y: function(d){return parseInt(d.VALUE);},
-            showValues: true,
-            transitionDuration: 500,
-            xAxis: {
-                axisLabel: 'Entidade',
-                rotateLabels: -25
-            },
-            yAxis: {
-                axisLabel: 'Quantidade',
-                axisLabelDistance: 30
-            }
-        }
-    };
+    ${js}scope.allCount = [];
 
     dashboardService.allCount( {}, function (data) {
         ${js}scope.allCount = [{ key: 'Quantidade por Entitdade',values: data }];
@@ -55,7 +31,7 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = $scope.options;
+    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name} ${capitalizedProp}";
     dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
@@ -64,7 +40,7 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = $scope.options;
+    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
     dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
@@ -73,7 +49,7 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = $scope.options;
+    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
     dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {

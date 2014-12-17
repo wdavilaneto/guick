@@ -1,5 +1,5 @@
 a.logo-control{ color: #fff;float: left;font-family: 'Marcellus SC', serif; font-size: 1.1em; margin: 14px 0 0 11;text-shadow: 1px 1px 5px #666;}
-.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.svg) no-repeat center center;}
+.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat center center;}
 .logo-control span{font-size: 2em;}
 .row{margin-left: -12px;margin-right: -12px;}
 .info-graphic{min-height:435px;border:none;}

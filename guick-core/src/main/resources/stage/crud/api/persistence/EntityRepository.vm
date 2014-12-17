@@ -167,5 +167,19 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return entityManager.find(${entity.name}.class, e);
     }
 #end
+#if( $entity.childrens.size() > 0 )
+    @Override
+    public  ${entity.name} update( ${entity.name} ${entityBeanName}){
+        Session session = (Session) entityManager.getDelegate();
+        session.update(${entityBeanName});
+        return ${entityBeanName};
+    }
+    @Override
+    public  ${entity.name} create( ${entity.name} ${entityBeanName}) {
+        Session session = (Session) entityManager.getDelegate();
+        session.persist(${entityBeanName});
+        return ${entityBeanName};
+    }
+#end
 
 }

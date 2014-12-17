@@ -17,7 +17,34 @@ var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
 ${projectBeanName}Services.factory('dashboardService', ['$resource',
     function ($resource) {
-        return $resource('http://localhost:8080/reports/dashboard/', {}, {
+        var basicOptions = {
+            chart: {
+                type: 'discreteBarChart',
+                title: {
+                    enable: true,
+                    text: "Graficos ${project.name}"
+                },
+                height: 450,
+                margin : {
+                    top: 20,
+                    right: 20,
+                    bottom: 60,
+                    left: 55
+                },
+                x: function(d){return d.LABEL;},
+                y: function(d){return parseInt(d.VALUE);},
+                showValues: true,
+                transitionDuration: 500,
+                xAxis: {
+                    rotateLabels: -25
+                },
+                yAxis: {
+                    axisLabelDistance: 25
+                }
+            }
+        };
+
+        var service = $resource('http://localhost:8080/reports/dashboard/', {}, {
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #foreach( ${entity} in ${mainEntities} )
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
@@ -39,5 +66,11 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
             'allCount': { method: 'GET', url: 'http://localhost:8080/reports/dashboard/allCount', isArray: true}
 
         });
+
+        service.getBasicOptions = function (){
+            return basicOptions;
+        };
+
+        return service;
     }
 ]);

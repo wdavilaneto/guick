@@ -23,6 +23,7 @@ var app = angular.module('${project.name}App', [
     'ui.select',
     'ui.bootstrap',
     'ui.date',
+    'ui.utils',
     'ngGrid',
     'toaster',
     'angucomplete-alt',

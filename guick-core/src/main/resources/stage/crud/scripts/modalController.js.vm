@@ -12,6 +12,8 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
     ${js}scope.entity = data;
     console.log('Editing Modal' );
     console.log(${js}scope.entity);
+    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
+    ${js}scope.searchSelects.fromEntity(${js}scope.entity);
 
     // Selects to Fullfill select boxes
     // Begin block
@@ -25,9 +27,9 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
 #end
     // end block
 
-
     ${js}scope.save = function () {
         console.log('Saving Modal' );
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
         ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
             console.log(successResult);
             ${js}scope.entity = {};

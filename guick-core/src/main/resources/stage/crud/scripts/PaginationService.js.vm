@@ -1,0 +1,38 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name ${projectBeanName}App.${projectBeanName}Service
+ * @description
+ * # myService
+ * Factory in the ${projectBeanName}App.
+ */
+
+var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+
+${projectBeanName}Services.factory('paginationService', ['$resource',
+    function ($resource) {
+        var service = {};
+        var grid = {
+            pagingOptions:{pageSizes: [10, 20, 50], pageSize: 10, currentPage: 1},
+            selected:[],
+            result:{}
+        };
+        grid.getPageRequest = function (){
+            return {page: pagingOptions.currentPage , size: pagingOptions.pageSize}
+        };
+
+        service.createGrid= function(){
+            grid.selected = [];
+            grid.result = {};
+            return grid;
+        };
+
+        return service;
+    }
+]);

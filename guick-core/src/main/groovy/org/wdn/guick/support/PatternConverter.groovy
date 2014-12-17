@@ -63,6 +63,8 @@ class PatternConverter {
             columnReturn = columnReturn.replaceFirst("DT_", "DATA_")
         } else if (columnReturn.startsWith("CD_")) {
             columnReturn = columnReturn.replaceFirst("CD_", "CODIGO_")
+        } else if (columnReturn.startsWith("SG_")) {
+            columnReturn = columnReturn.replaceFirst("SG_", "SIGLA_")
         } else if (columnReturn.startsWith("VL_")) {
             columnReturn = columnReturn.replaceFirst("VL_", "VALOR_")
         } else if (columnReturn.startsWith("TX_")) {

@@ -39,7 +39,7 @@
 
 
  <header class="header">
-    <a href="index.html" class="logo">
+    <a href="#/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
         AdminLTE
     </a>
@@ -101,55 +101,56 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
 
-                <li><a href="#"><i class="glyphicon glyphicon-cog"></i>Workflow</a></li>
+                <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
                 <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Dashboards</a></li>
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
                 <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
                 <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-step-forward"></i>Movimentação</a></li>
 #end
+
+#if (${project.getAllMainEntities().size()} > 0)
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-group"></i> <span>Entidades</span>
+                        <i class="fa fa-group"></i> <span>Principal</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-#foreach( ${entity} in ${project.metadata.entities})
-#if(${entity.properties.size()} >= 3 )
+#foreach( ${entity} in ${project.getAllMainEntities()})
                         <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
-#end
 #end
                     </ul>
                 </li>
+#end
 
+#if (${project.getAllDomainEntities().size()} > 0)
                 <li class="treeview">
                     <a href="#">
                         <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-#foreach( ${entity} in ${project.metadata.entities})
-#if( ${entity.looksLikeDomain()} )
+#foreach( ${entity} in ${project.getAllDomainEntities()})
                         <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
-#end
 #end
                     </ul>
                 </li>
+#end
 
-
+#if (${project.getAllEnumLikeEntities().size()} > 0)
                 <li class="treeview">
                     <a href="#">
                         <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-#foreach( ${entity} in ${project.metadata.entities})
-#if(${entity.looksLikeEnum()})
+#foreach( ${entity} in ${project.getAllEnumLikeEntities()})
                         <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
-#end
 #end
                     </ul>
                 </li>
+#end
+
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -189,10 +190,11 @@
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/nvd3/nv.d3.js"></script>
 <script src="bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 <!-- endbower -->
-<!-- endbuild -->
 <script src="bower_components/adminlte/js/app.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+<!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <!-- principal -->
@@ -201,6 +203,7 @@
 <!-- servicos -->
     <script src="scripts/service/dashboards/DashboardService.js"></script>
     <script src="scripts/service/monitor/MonitorService.js"></script>
+    <script src="scripts/service/support/PaginationService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
     <script src="scripts/service/${entity.name}Service.js"></script>

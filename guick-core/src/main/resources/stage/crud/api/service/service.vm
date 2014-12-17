@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -60,9 +61,17 @@ class ${entity.name}Service implements I${entity.name}Service {
     }
 
     @Override
+    @Transactional
     public ${entity.name} save(${entity.name} ${entityBeanName}) {
+#if( $entity.childrens.size() > 0 )
+        if (${entityBeanName}.getId() != null){
+            ${entityBeanName}Repository.update(${entityBeanName});
+        }
+        return ${entityBeanName}Repository.create(${entityBeanName});
+#else
         ${entityBeanName}Repository.save(${entityBeanName});
         return ${entityBeanName};
+#end
     }
 
 }

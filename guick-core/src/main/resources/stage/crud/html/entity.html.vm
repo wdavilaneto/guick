@@ -20,10 +20,9 @@
                         <div class="box-footer">
                             <div class="form-group">
                                 <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
-                                <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="fa fa-circle"></i> Limpar Filtro</div>
-                                <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="fa fa-search"></i> Buscar</button>
+                                <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                             </div>
-
                         </div>
                     </div>
 

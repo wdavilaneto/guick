@@ -1,3 +1,4 @@
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 /**
  *  Guick Generate class: https://github.com/wdavilaneto/guick
  *  Author: service-wdavilaneto@redhat.com
@@ -31,7 +32,11 @@ public interface ${entity.name}RepositoryCustom {
 #else
     ${entity.name} get(${entity.name} e);
 #end
+#if( $entity.childrens.size() > 0 )
 
+    public ${entity.name} update(${entity.name} ${entityBeanName});
 
+    public ${entity.name} create(${entity.name} ${entityBeanName});
+#end
 
 }

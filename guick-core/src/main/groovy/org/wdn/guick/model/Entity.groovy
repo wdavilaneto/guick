@@ -121,6 +121,14 @@ class Entity extends Clazz {
         return returnList;
     }
 
+    private boolean hasHibernateIssue() {
+        if (parent?.id instanceof Entity) {
+            Entity parentId = (Entity) parent.id
+            return parentId.isEmbeddable();
+        }
+        return false;
+    }
+
     private Boolean _looksLikeEnum = null;
     public boolean looksLikeEnum(){
         if (_looksLikeEnum == null) {

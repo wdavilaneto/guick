@@ -3,7 +3,7 @@
                                 <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso') placeholder="${property.title}"#end} id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                                     </div>
                                 </div>
 -->
@@ -13,8 +13,9 @@
                                     <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label for="${idAgragation}${property}">${property.title}</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" min-date="minDate"
-                                                   max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
+## min-date="minDate" max-date="'2015-06-22'"
+                                            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened"
+                                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
                                                    ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}" />
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -43,7 +44,7 @@
                                 <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}"/>
+                                        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end} id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                                     </div>
                                 </div>
 #end

@@ -111,7 +111,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #foreach( ${property} in ${entity.getOneToManyProperties()})
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${entity.getName()} ) )}  )id.#{end}$util.uncapitalize( ${entity.getName()} )")
-    private List<$property.type> $property.getName() = new ArrayList<$property.type>(0);
+    private List<$property.type> $property.getName();## = new ArrayList<$property.type>(0);
 
 #end
 #parse( "stage/domain/java/manyToOneProperties.vm" )

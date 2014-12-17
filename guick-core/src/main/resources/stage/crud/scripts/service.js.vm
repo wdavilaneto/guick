@@ -32,6 +32,24 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             return entity;
         };
 
+        service.setCurrentEntity = function (obj){
+            entity = obj;
+        };
+
+        service.create = function (){
+            var e = {
+#set($size = ${entity.getManyToOneProperties().size()} )
+#set($counter = 0)
+#foreach( ${ent} in ${entity.getManyToOneProperties()})
+#set($counter = $counter + 1)
+                ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
+#end
+#end
+
+            };
+            return e;
+        };
+
         var baseOptions = {
             data: 'resultPage.content',
             enablePaging: true,
@@ -42,9 +60,52 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             i18n: 'pt-br'
         };
 
+        service.factorySearchSelect = function (){
+            // Factory SearchSelect Object for all "search text properties"
+            var searchSelects = {
+#set($searchedEntitys = [])
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()} )
+#if( !${complexProperty.referedEntity.looksLikeEnum()} && ${complexProperty.referedEntity.table.count} >= 200 )
+#set( $foo = ${searchedEntitys.add( $complexProperty )} )
+#end
+#end
+#set($size = ${searchedEntitys.size()} )
+#set($counter = 0)
+#foreach( ${complexProperty} in ${searchedEntitys} )
+#set($counter = $counter + 1)
+                ${complexProperty.referedEntity.beanName}:{}#if($counter < $size),
+#end
+#end
+
+            };
+            // utility method to copy selected object to entity ( reference
+            searchSelects.toEntity = function (ref) {
+                console.log(ref);
+#foreach( ${complexProperty} in ${searchedEntitys} )
+                if (ref && ref.${complexProperty.referedEntity.beanName}  && searchSelects.${complexProperty.referedEntity.beanName}.originalObject) {
+                    ref.${complexProperty.referedEntity.beanName} = searchSelects.${complexProperty.referedEntity.beanName}.originalObject;
+                }
+#end
+            };
+            searchSelects.fromEntity = function (ref) {
+                console.log(ref);
+#foreach( ${complexProperty} in ${searchedEntitys} )
+                if (ref && ref.${complexProperty.referedEntity.beanName} ) {
+                    searchSelects.${complexProperty.referedEntity.beanName}.originalObject = ref.${complexProperty.referedEntity.beanName};
+                }
+#end
+            };
+            searchSelects.clear = function() {
+#foreach( ${complexProperty} in ${searchedEntitys} )
+                searchSelects.${complexProperty.referedEntity.beanName} = {};
+#end
+            };
+            return searchSelects;
+        };
+
         service.factoryGridOptions = function (pagingOptions , entitySelected, isEditMode){
             if (!isEditMode) {
-                isEditMode = false
+                isEditMode = false;
             }
             var options = baseOptions;
             options.selectedItems = entitySelected;

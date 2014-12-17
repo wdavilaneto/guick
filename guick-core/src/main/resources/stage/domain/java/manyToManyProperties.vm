@@ -18,6 +18,6 @@
 #end
             })
     @JsonIgnore
-    List<${property.getReferedEntity().getType()}> ${property.getName()} = new ArrayList<${property.getReferedEntity().getType()}>(0);
+    List<${property.getReferedEntity().getType()}> ${property.getName()}; ## = new ArrayList<${property.getReferedEntity().getType()}>(0)
 
 #end

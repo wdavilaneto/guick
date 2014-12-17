@@ -9,7 +9,6 @@
  */
 package ${project.group}.${project.name}.api.rest.reports;
 
-import ${project.group}.${project.name}.domain.${entity.name};
 import ${project.group}.${project.name}.api.persistence.reports.DashboardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

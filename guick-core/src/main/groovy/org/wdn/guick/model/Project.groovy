@@ -31,6 +31,7 @@ class Project implements Serializable {
     def pom
     def gradleProject
     def metadata = [:]
+    def targetTables = [];
 
     def config = [:];
 
@@ -50,14 +51,6 @@ class Project implements Serializable {
 //            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/src/main/resources") );
 
         }
-//        def guickFilePath = path + "/pom.xml"
-//        if (new File(guickFilePath).exists()) {
-//            pom = new XmlSlurper(false, false).parse(guickFilePath);
-//            group = pom.groupId
-//            name = pom.artifactId
-//        } else {
-//            //
-//        }
         File guickFile = new File(path)
         if (!guickFile.exists()) {
             guickFile.mkdirs();
@@ -69,6 +62,7 @@ class Project implements Serializable {
             group = config.group
             name = config.name
             this.database = config.guickConnectionInfo;
+            this.targetTables = config.tables;
         } else {
             if (new File(path + "/pom.xml").exists()) {
                 pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
@@ -139,8 +133,14 @@ class Project implements Serializable {
         return entities.findAll { e -> !hasHibernateIssue(e) }
     }
 
-    public List<Entity> getAllMainEntities(){
-        return getEntitiesWithoutHibernateIssue().findAll() {it.looksLikeMainEntity()};
+    public List<Entity> getAllMainEntities() {
+        return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeMainEntity() };
+    }
+    public List<Entity> getAllDomainEntities() {
+        return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeDomain() };
+    }
+    public List<Entity> getAllEnumLikeEntities() {
+        return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeEnum() };
     }
 
     private boolean hasHibernateIssue(Entity entity) {
