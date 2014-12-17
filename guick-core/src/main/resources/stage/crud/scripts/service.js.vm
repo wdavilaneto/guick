@@ -21,6 +21,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             'findAll': { method: 'GET', url: 'http://localhost:8080/${entity.name}', isArray: false},
             'search': { method: 'POST', url: 'http://localhost:8080/${entity.name}/search', isArray: false},
             'searchText': { method: 'POST', url: 'http://localhost:8080/${entity.name}/searchText', isArray: false},
+            'findAllOverdue':{ method: 'GET', url: 'http://localhost:8080/${entity.name}/overdue', isArray: false},
             'get': { method: 'GET'},
             'save': { method: 'POST'},
             'remove': { method: 'DELETE'}
@@ -141,7 +142,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 
             ];
             if (isEditMode) {
-                options.columnDefs.shift();
+                //options.columnDefs.shift(); //
                 options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
                 options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); remove${entity.name}(row.entity);"><i class="fa fa-remove"></i></a>', width : '35', resizable: false});
             }

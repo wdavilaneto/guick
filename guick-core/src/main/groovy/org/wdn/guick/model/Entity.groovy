@@ -121,12 +121,28 @@ class Entity extends Clazz {
         return returnList;
     }
 
-    private boolean hasHibernateIssue() {
+    public boolean hasHibernateIssue() {
         if (parent?.id instanceof Entity) {
             Entity parentId = (Entity) parent.id
             return parentId.isEmbeddable();
         }
         return false;
+    }
+
+    private List<RelationshipProperty> _allEndDateProperties = null;
+    public List<RelationshipProperty> getAllEndDateProperties(){
+        if (_allEndDateProperties == null ) {
+            _allEndDateProperties = new ArrayList<RelationshipProperty>()
+            for (RelationshipProperty property : properties) {
+                if (property.looksLikeEndDate()) {
+                    _allEndDateProperties.add(property);
+                }
+            }
+        }
+        return _allEndDateProperties;
+    }
+    public boolean hasEndDateProperties(){
+        return getAllEndDateProperties().size() >0;
     }
 
     private Boolean _looksLikeEnum = null;

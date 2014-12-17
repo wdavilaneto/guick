@@ -23,7 +23,7 @@ public class Pagination {
 
     private int page = 1;  // default values
     private int size = 20; // default values
-    private Sort sort;
+    private String sort;
 
     public int getPage() {
         return page;
@@ -41,18 +41,21 @@ public class Pagination {
         this.size = size;
     }
 
-    public Sort getSort() {
+    public String getSort() {
         return sort;
     }
-
-    public void setSort(Sort sort) {
+    public void setSort(String sort) {
         this.sort = sort;
     }
 
     public Pageable getPageable() {
         // Page is -1 becouse Spring pagination deal with Pagination as an array representation (0..size-1)
         // And presentation pagination starts 'with page 1'
-        return new PageRequest((page - 1), size, sort);
+        if (sort == null || "".equals(sort.trim())){
+            return new PageRequest((page - 1), size);
+        }
+        return new PageRequest((page - 1), size, new Sort(sort));
     }
+
 
 }

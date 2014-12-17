@@ -74,4 +74,10 @@ class ${entity.name}Service implements I${entity.name}Service {
 #end
     }
 
+#if (${entity.hasEndDateProperties()})
+    public Page<${entity.name}> overdue(Pageable pageable) {
+        return ${entityBeanName}Repository.overdue(pageable);
+    }
+#end
+
 }

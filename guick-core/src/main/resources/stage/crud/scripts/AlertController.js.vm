@@ -1,0 +1,37 @@
+#set( $js  = '$')
+#set( $open  = '${')
+#set( $close = '}')
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:dashboardController
+ * @description
+ * # dashboardController
+ * Controller of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App').controller('${entity.beanName}AlertController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', '$interval', 'jsog', '${entity.beanName}Service', function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, $interval, jsog, ${entity.beanName}Service ) {
+
+    ${js}scope.alertCounter = null;
+    ${js}scope.resultPage = {content:[]};
+
+    $scope.findAllOverdue = function (){
+        controleEntradaSaidaService.findAllOverdue( {} , function (data) {
+            ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
+            ${js}scope.alertCounter = data.totalElements;
+        });
+    };
+
+    $interval( $scope.findAllOverdue, 6000 );
+
+
+}]);
+

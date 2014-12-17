@@ -22,6 +22,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -118,5 +120,17 @@ public class ${entity.name}Controller {
         ${entityBeanName}Service.save(${entityBeanName});
         return new HttpEntity<${entity.name}>(${entityBeanName});
     }
+#if (${entity.hasEndDateProperties()})
+
+    /**
+     * Returns an full, but Paged, list of all entities (${entity.name})
+     * @param pagination
+     * @return
+     */
+    @RequestMapping(value = "/overdue", method = RequestMethod.GET)
+    public HttpEntity<Page<${entity.name}>> overdue(Pagination pagination) {
+        return new ResponseEntity(${entityBeanName}Service.overdue(pagination.getPageable()), HttpStatus.OK);
+    }
+#end
 
 }

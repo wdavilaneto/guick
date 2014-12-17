@@ -39,4 +39,7 @@ public interface ${entity.name}RepositoryCustom {
     public ${entity.name} create(${entity.name} ${entityBeanName});
 #end
 
+#if (${entity.hasEndDateProperties()})
+    public Page<${entity.name}> overdue(Pageable pageable);
+#end
 }

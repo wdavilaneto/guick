@@ -143,6 +143,10 @@ class Project implements Serializable {
         return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeEnum() };
     }
 
+    public List<Entity> getAllEntitiesWithEndDates(){
+        return getEntitiesWithoutHibernateIssue().findAll() { (it.getAllEndDateProperties().size() > 0) };
+    }
+
     private boolean hasHibernateIssue(Entity entity) {
         if (entity.parent?.id instanceof Entity) {
             Entity parentId = (Entity) entity.parent.id

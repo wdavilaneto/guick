@@ -41,7 +41,7 @@
  <header class="header">
     <a href="#/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        AdminLTE
+        ${project.name}
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -54,34 +54,41 @@
         </a>#if (${project.name} == 'msm') <a class="logo-control" href="#">MÓDULO DE SAÚDE MENTAL</a> #end
         <div class="navbar-right">
             <ul class="nav navbar-nav">
-                <li class="dropdown tasks-menu">
+#foreach( ${entity} in ${project.getAllEntitiesWithEndDates()} )
+                <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-tasks"></i>
-                        <span class="label label-danger">9</span>
+                        <span class="label label-danger">{{alertCounter}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 4 messages</li>
+                        <li class="header">Quantidade de ${entity.title} pendente: 9 </li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <!-- start message -->
                                 <li>
                                     <a href="#">
-                                        <div class="pull-left">
-                                            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
-                                        </div>
-                                        <h4>
-                                            Support Team <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
+                                        <h4>Processo nº 777 <small><i class="fa fa-clock-o"></i> 5 mins</small></h4>
+                                        <p>texto livre</p>
+                                    </a>
+                                </li>
+                                <!-- end message -->
+                            </ul>
+                            <ul class="menu">
+                                <!-- start message -->
+                                <li>
+                                    <a href="#">
+                                        <h4>Test <small><i class="fa fa-clock-o"></i> 5 mins</small></h4>
+                                        <p>texto livre</p>
                                     </a>
                                 </li>
                                 <!-- end message -->
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">See All Messages</a></li>
+                        <li class="footer"><a href="#">Ver Pendências</a></li>
                     </ul>
                 </li>
+#end
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span></a>
                     <ul class="dropdown-menu">
@@ -242,6 +249,9 @@
     <script src="scripts/controllers/ModalController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>
+#foreach( ${entity} in ${project.getAllEntitiesWithEndDates()} )
+    <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
+#end
 #if (${project.name} == 'msm')
     <script src="scripts/controllers/PacienteController.js"></script>
 #end

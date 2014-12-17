@@ -1,8 +1,9 @@
-/*
- * Esse arquivo pertence a Petrobras e nao pode ser utilizado fora
- * dessa empresa sem previa autorizacao.
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-
 package ${entity.getPackage()};
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -72,16 +73,8 @@ public class ${entity.getName()} implements java.io.Serializable {
 #parse( "stage/domain/java/simpleProperties.vm" )
 #foreach( ${property} in ${entity.getEnums()})
     @Enumerated(EnumType.STRING)
-    @Type(
-        type = "br.com.petrobras.fcorp.persistence.dao.hibernate.support.GenericEnumUserType",
-        parameters = [
-            @Parameter(
-                name = "enumClass",
-                value = "${entity.getPackage()}.domain.${property.getName()}")
-        ])
-    @Column(name = "${property.getSimpleProperty().getColumn().getName()}", nullable = false, length = 2)
-    @NotBlank
-    ${property.getName()} ${property.getSimpleProperty().getName()};
+    @Column(name = "${property.getSimpleProperty().getColumn().getName()}"#if(!${property.getSimpleProperty().getColumn().getNullable()}), nullable = false#{end}#if(${property.getSimpleProperty().column.precision}), precision = ${property.getSimpleProperty().column.precision}#{end}#if(${property.getSimpleProperty().column.scale}), scale = ${property.getSimpleProperty().column.scale}#{end}#if(${property.getSimpleProperty().column.length}), length = ${property.getSimpleProperty().column.length}#{end}#if( !${property.getSimpleProperty().getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getSimpleProperty().getColumn().isUpdatable()}), updatable = false #end)
+    ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})

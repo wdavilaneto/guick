@@ -15,6 +15,9 @@
 ## #end
 package ${project.group}.${project.name}.domain;
 
+#foreach( ${property} in ${entity.getEnums()})
+import  ${project.group}.${project.name}.domain.${property.getName()};
+#end
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,9 +48,7 @@ import java.util.ArrayList;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-#foreach( ${property} in ${entity.getEnums()})
-import ${entity.getPackage()}.domain.${property.getName()};
-#end
+
 
 /**
  * ${entity.getName()}  
@@ -96,16 +97,8 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #parse( "stage/domain/java/simpleProperties.vm" )
 #foreach( ${property} in ${entity.getEnums()})
     @Enumerated(EnumType.STRING)
-    @Type(
-        type = "br.com.petrobras.fcorp.persistence.dao.hibernate.support.GenericEnumUserType",
-        parameters = {
-            @Parameter(
-                name = "enumClass",
-                value = "${entity.getPackage()}.domain.${property.getName()}")
-        })
-    @Column(name = "${property.getSimpleProperty().getColumn().getName()}", nullable = false, length = 2)
-    @NotBlank
-    private ${property.getName()} ${property.getSimpleProperty().getName()};
+    @Column(name = "${property.getSimpleProperty().getColumn().getName()}"#if(!${property.getSimpleProperty().getColumn().getNullable()}), nullable = false#{end}#if(${property.getSimpleProperty().column.precision}), precision = ${property.getSimpleProperty().column.precision}#{end}#if(${property.getSimpleProperty().column.scale}), scale = ${property.getSimpleProperty().column.scale}#{end}#if(${property.getSimpleProperty().column.length}), length = ${property.getSimpleProperty().column.length}#{end}#if( !${property.getSimpleProperty().getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getSimpleProperty().getColumn().isUpdatable()}), updatable = false #end)
+    private ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})

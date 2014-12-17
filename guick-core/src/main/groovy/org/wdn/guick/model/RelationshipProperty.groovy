@@ -32,16 +32,22 @@ public class RelationshipProperty extends Clazz {
                 toHashCode();
     }
 
-    public boolean looksLikeEndDate(){
-        if (!'Date'.equals(type) ){
-            return false;
-        }
-        for (def word : ["endDate","dataFim","prazo","dataEntrega"]){
-            if (name.contains(word)){
-                return true;
+    private Boolean _looksLikeEndDate = null;
+    public boolean looksLikeEndDate() {
+        if (_looksLikeEndDate == null) {
+            _looksLikeEndDate = false;
+            if (!'Date'.equals(type)) {
+                return _looksLikeEndDate;
+            }
+            for (def word : ["endDate", "dataFim", "prazo", "dataEntrega" , "dataPrazo"]) {
+                if (name.contains(word)) {
+                    _looksLikeEndDate = true;
+                    return _looksLikeEndDate;
+                }
             }
         }
-        return false;
+        return _looksLikeEndDate;
+
     }
 
     /**
@@ -49,7 +55,9 @@ public class RelationshipProperty extends Clazz {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) { return false; }
+        if (obj == null) {
+            return false;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }

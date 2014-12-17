@@ -12,12 +12,13 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
-                                <div class="box-header"><h2 class="box-title">Filtro de Busca Avançado</h2></div>
+                                <div class="box-header"><h2 class="box-title"></h2></div>
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input class="form-control" type="text" ng-model="searchText" placeholder="busca por texto.."/>
+                                                <label class="control-label" for="searchField.text">Busca por texto</label>
+                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -46,8 +47,8 @@
                                 <div class="box-footer">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                         <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
                                 </div>
                             </div>

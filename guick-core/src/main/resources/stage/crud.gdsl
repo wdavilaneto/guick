@@ -47,12 +47,23 @@ guick {
             }
         }
         for (def entity : entityList) {
-            if ( entity.looksLikeMainEntity()){
+            if (entity.looksLikeMainEntity()) {
 
                 "geracao de workflows" {
                     object entity
                     templates = [
                             [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/bpm/${entity.name}.bpmn20.xml"]
+                    ]
+                }
+
+            }
+        }
+        for (def entity : entityList) {
+            if (entity.hasEndDateProperties()) {
+                "geracao de alerts" {
+                    object entity
+                    templates = [
+                            [input: "stage/crud/scripts/AlertController.js.vm", output: "/front-end/app/scripts/controllers/support/${entity.name}AlertController.js"]
                     ]
                 }
 
@@ -126,23 +137,23 @@ guick {
             "tests" {
                 object entity
                 templates = [
-                    [input: "stage/crud/test/integrationTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}IntegrationTest.${lang}"],
-                    [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"],
+                        [input: "stage/crud/test/integrationTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}IntegrationTest.${lang}"],
+                        [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"],
 
-                    [input: "stage/crud/test/AcceptanceSuiteTest.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuiteTest.${lang}"],
-                    [input: "stage/crud/test/AcceptanceSuite.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuite.html"],
+                        [input: "stage/crud/test/AcceptanceSuiteTest.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuiteTest.${lang}"],
+                        [input: "stage/crud/test/AcceptanceSuite.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuite.html"],
 
-                    [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
-                    [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
-                    [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
-                    [input: "stage/crud/test/FindOneAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.${lang}"],
-                    [input: "stage/crud/test/FindAllAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.${lang}"],
+                        [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                        [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                        [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
+                        [input: "stage/crud/test/FindOneAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.${lang}"],
+                        [input: "stage/crud/test/FindAllAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.${lang}"],
 
-                    [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.html"],
-                    [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.html"],
-                    [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.html.vm", output:  "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.html"],
-                    [input: "stage/crud/test/FindOneAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.html"],
-                    [input: "stage/crud/test/FindAllAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.html"]
+                        [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.html"],
+                        [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.html"],
+                        [input: "stage/crud/test/DeleteWithRequiredAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/Delete${entity.name}WithRequiredAcceptanceCriteria.html"],
+                        [input: "stage/crud/test/FindOneAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindOne${entity.name}AcceptanceCriteria.html"],
+                        [input: "stage/crud/test/FindAllAcceptanceCriteria.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/FindAll${entity.name}AcceptanceCriteria.html"]
                 ]
             }
         }

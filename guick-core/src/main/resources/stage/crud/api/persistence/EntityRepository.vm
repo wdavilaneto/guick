@@ -23,6 +23,8 @@ import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCustom {
@@ -142,16 +144,6 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
             .add(Restrictions.ilike("id.${property.name}.id", text, MatchMode.ANYWHERE))
 #end
 #end
-#foreach( ${property} in ${entity.getEnums()})
-#set($propertyCaptalized = $util.capitalize(${property.getSimpleProperty().getName()}))
-            .add(Restrictions.eq("${property.getSimpleProperty().getName()}", text))
-#end
-#foreach( ${property} in ${entity.parent.getEnums()})
-            .add(Restrictions.eq("${property.getSimpleProperty().getName()}",text))
-#end
-#foreach( ${property} in ${entity.id.getEnums()})
-            .add(Restrictions.eq("id.${property.getSimpleProperty().getName()}", text))
-#end
         );
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
@@ -179,6 +171,19 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         Session session = (Session) entityManager.getDelegate();
         session.persist(${entityBeanName});
         return ${entityBeanName};
+    }
+#end
+#if (${entity.hasEndDateProperties()})
+
+    public Page<${entity.name}> overdue(Pageable pageable){
+        if (pageable == null) {
+            pageable = PageableHelper.deafultPageable();
+        }
+        Date today = new Date();
+        Session session = (Session) entityManager.getDelegate();
+        Criteria criteria = session.createCriteria(${entity.getName()}.class);
+        criteria.add( Restrictions.le("${entity.getAllEndDateProperties()[0]}", today ) );
+        return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 #end
 
