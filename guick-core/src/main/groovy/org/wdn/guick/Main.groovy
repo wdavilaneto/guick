@@ -36,8 +36,8 @@ class Main {
             Main main = new Main();
             main.project.initialize("../cespae/")
 
-            main.setTarget("stage/create-webapp")
-            main.run()
+//            main.setTarget("stage/create-webapp")
+//            main.run()
 
             main.setTarget("stage/crud")
             main.run()

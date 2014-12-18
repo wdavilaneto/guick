@@ -81,11 +81,12 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         // prepare page request
         ${js}scope.pageable = {page: ${js}scope.pagingOptions.currentPage , size: ${js}scope.pagingOptions.pageSize };
         if (${js}scope.textSearchActive) {
-            console.log(${js}scope.searchField.text);
-            ${entityBeanName}Service.searchText( {'content': ${js}scope.searchField.text ,'pagination':${js}scope.pageable} , function (data) {
-                ${js}scope.resultPage = data;
-                ${js}scope.resultPage.content = jsog.decode(data.content);
-            });
+            //if (${js}scope.searchField.text.length > 3) {
+                ${entityBeanName}Service.searchText( {'content': ${js}scope.searchField.text ,'pagination':${js}scope.pageable} , function (data) {
+                    ${js}scope.resultPage = data;
+                    ${js}scope.resultPage.content = jsog.decode(data.content);
+                });
+            //}
         } else {
             // prepare search(d) text object
             ${js}scope.searchSelects.toEntity(${js}scope.entity);
@@ -210,9 +211,9 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #end
 
 #if(${entity.getOneToManyProperties().size()} == 0 )
-    // ******************************************************************************************
+    // *********************************************************************************************
     // Inline Update/remove Operations: Since this entity, at generation time, had no Master/Details
-    // ******************************************************************************************
+    // *********************************************************************************************
     ${js}scope.edit${entity.name} = function (obj) {
         var modalInstance = ${js}modal.open({
             templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
@@ -228,20 +229,28 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             //dismiss
         });
     };
-
     $scope.remove${entity.name} = function (obj){
-        console.log('Deleting ${beanName} with id:' + obj.id);
-        ${entity.beanName}Service.remove( obj , function ( successResult) {
-            console.log(successResult);
-            ${js}scope.search();
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'confirmRemove${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
+            resolve: {
+                data: function () {return obj;}
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.selected = selectedItem;
+            ${entity.beanName}Service.remove( obj , function ( successResult) {
+                console.log(successResult);
+                ${js}scope.search();
+            });
+        }, function () {
+            //dismiss
         });
     };
 
 #end
-
-    ${js}scope.setTextSearchActive = function (value){
-       ${js}scope.textSearchActive = value
-    }
+    ${js}scope.setTextSearchActive = function (value) {
+       ${js}scope.textSearchActive = value;
+    };
 
     // watches
     ${js}scope.${js}watch('pagingOptions', function (newVal, oldVal) {

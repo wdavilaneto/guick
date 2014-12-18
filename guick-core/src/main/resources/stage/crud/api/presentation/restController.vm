@@ -66,7 +66,7 @@ public class ${entity.name}Controller {
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public HttpEntity<Page<${entity.name}>> search(@RequestBody SearchFilter<${entity.name}> filter) {
-        return new HttpEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()));
+        return new ResponseEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()), HttpStatus.OK);
     }
 
     /**
@@ -87,8 +87,6 @@ public class ${entity.name}Controller {
     public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
         return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
     }
-
-
     /**
      * Return an entity,${entity.name} ,with an Given ID
      * @param id

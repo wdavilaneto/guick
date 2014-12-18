@@ -20,6 +20,7 @@
 angular.module('${projectBeanName}App').controller('dashboardController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'dashboardService', function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, dashboardService ) {
 
     ${js}scope.allCount = [];
+    ${js}scope.options = dashboardService.getBasicOptions();
 
     dashboardService.allCount( {}, function (data) {
         ${js}scope.allCount = [{ key: 'Quantidade por Entitdade',values: data }];

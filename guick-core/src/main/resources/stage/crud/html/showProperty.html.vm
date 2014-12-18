@@ -1,6 +1,6 @@
-<div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
+<div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}" ng-if="entity.${idAgragation}${property}">
     <div class="form-group">
         <label class="control-label">${property.title}</label>
-        {{entity.${idAgragation}${entityBeanName}.${property}}}
+        <div ng-if="entity.${idAgragation}${property}"> {{entity.${idAgragation}${property}}}</div>
     </div>
 </div>

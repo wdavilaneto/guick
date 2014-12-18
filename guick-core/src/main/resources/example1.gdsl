@@ -2,6 +2,9 @@
 //def packageBase = project.group.replaceAll("\\.",'/') + "/${project.name}"
 def metadata = json.load('example1/domain.json')
 
+def context = new HashMap();
+context.put("nome", "walter");
+
 guick {
 
     domain {

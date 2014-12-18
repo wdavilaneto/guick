@@ -1,5 +1,6 @@
-#spring.datasource.jndi-name=java:jboss/datasources/bootdemo
-#spring.datasource.jndi-name=jdbc/${project.name}Ds
+server.context-path=/${project.name}
+server.servlet-path=/api
+
 spring.groovy.template.check-template-location=false
 spring.velocity.checkTemplateLocation=false
 

@@ -17,11 +17,11 @@ var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
 ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
     function ($resource) {
-        var service = $resource('http://localhost:8080/${entity.name}/:id', {}, {
-            'findAll': { method: 'GET', url: 'http://localhost:8080/${entity.name}', isArray: false},
-            'search': { method: 'POST', url: 'http://localhost:8080/${entity.name}/search', isArray: false},
-            'searchText': { method: 'POST', url: 'http://localhost:8080/${entity.name}/searchText', isArray: false},
-            'findAllOverdue':{ method: 'GET', url: 'http://localhost:8080/${entity.name}/overdue', isArray: false},
+        var service = $resource('/${projectBeanName}/api/${entity.name}/:id', {}, {
+            'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entity.name}', isArray: false},
+            'search': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/search', isArray: false},
+            'searchText': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/searchText', isArray: false},
+            'findAllOverdue':{ method: 'GET', url: '/${projectBeanName}/api/${entity.name}/overdue', isArray: false},
             'get': { method: 'GET'},
             'save': { method: 'POST'},
             'remove': { method: 'DELETE'}

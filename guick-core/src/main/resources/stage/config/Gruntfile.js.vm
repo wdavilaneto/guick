@@ -77,16 +77,30 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
+              connect().use('/bower_components', connect.static('./bower_components')),
               connect.static(appConfig.app)
             ];
           }
         }
       },
+      proxies: [
+          {
+              context: '/${project.beanName}/api',
+              host: 'localhost',
+              port: 8080,
+              https: false,
+              changeOrigin: false,
+              xforward: false,
+              headers: {
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Max-Age":"3600",
+                "Access-Control-Expose-Headers": "title, message"
+              }
+          }
+      ],
       test: {
         options: {
           port: 9001,
@@ -388,6 +402,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'configureProxies:server',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',

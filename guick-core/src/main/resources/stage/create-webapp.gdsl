@@ -22,7 +22,7 @@ guick {
                     [input: "stage/config/.gitattributes", output: "/front-end/.gitattributes"],
 
                     [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],
-                    [input: "stage/config/Gruntfile.js", output: "/front-end/Gruntfile.js"],
+                    [input: "stage/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
                     [input: "stage/config/package.json.vm", output: "/front-end/package.json"],
 
                     [input: "stage/crud/images/", output: "/front-end/app/images/"],

@@ -33,7 +33,11 @@ class Clazz implements Serializable {
 
     public String getTitle(){
         // TODO: remove to business rule processor
-        String word = StringUtils.splitByCharacterTypeCamelCase(name).join(" ").toLowerCase();
+        def arry = StringUtils.splitByCharacterTypeCamelCase(name).toList();
+        if ( (arry[0].equals("texto") || arry[0].equals("sigla"))&& arry.size () > 1 ){
+            arry = arry[1..(arry.size ()-1)];
+        }
+        String word = arry.join(" ").toLowerCase();
         if (word.equalsIgnoreCase("CPF") || word.equalsIgnoreCase("CEP") || word.equalsIgnoreCase("CNPJ")){
             return word.toUpperCase();
         }

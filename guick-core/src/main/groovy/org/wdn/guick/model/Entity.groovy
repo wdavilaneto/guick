@@ -16,8 +16,8 @@ class Entity extends Clazz {
 
     RelationshipProperty id;
 
-    List<RelationshipProperty> properties = new ArrayList<RelationshipProperty>(0)
-    List<ComplexProperty> complexProperties = new ArrayList<ComplexProperty>(0)
+    List<RelationshipProperty> properties = new ArrayList<RelationshipProperty>(0);
+    List<ComplexProperty> complexProperties = new ArrayList<ComplexProperty>(0);
 
     List<EnumClass> enums = new ArrayList<EnumClass>()
 
@@ -141,6 +141,7 @@ class Entity extends Clazz {
         }
         return _allEndDateProperties;
     }
+
     public boolean hasEndDateProperties(){
         return getAllEndDateProperties().size() >0;
     }

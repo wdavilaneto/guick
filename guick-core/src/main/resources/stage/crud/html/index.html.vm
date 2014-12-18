@@ -58,28 +58,18 @@
                 <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-tasks"></i>
-                        <span class="label label-danger">{{alertCounter}}</span>
+                        <span class="label label-danger" ng-if="alertCounter > 0">{{alertCounter}}</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">Quantidade de ${entity.title} pendente: 9 </li>
+                    <ul class="dropdown-menu" ng-if="alertCounter > 0">
+                        <li class="header">Quantidade de ${entity.title} pendentes: {{alertCounter}} </li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
+                            <ul class="menu" ng-repeat="${entity.beanName} in resultPage.content">
                                 <!-- start message -->
                                 <li>
                                     <a href="#">
-                                        <h4>Processo nº 777 <small><i class="fa fa-clock-o"></i> 5 mins</small></h4>
-                                        <p>texto livre</p>
-                                    </a>
-                                </li>
-                                <!-- end message -->
-                            </ul>
-                            <ul class="menu">
-                                <!-- start message -->
-                                <li>
-                                    <a href="#">
-                                        <h4>Test <small><i class="fa fa-clock-o"></i> 5 mins</small></h4>
-                                        <p>texto livre</p>
+                                        <h4>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllEndDateProperties()[0]}}}</small></h4>
+                                        <p>#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}</p>
                                     </a>
                                 </li>
                                 <!-- end message -->
@@ -137,7 +127,7 @@
             <ul class="sidebar-menu">
 
                 <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
-                <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Dashboards</a></li>
+                <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
                 <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>

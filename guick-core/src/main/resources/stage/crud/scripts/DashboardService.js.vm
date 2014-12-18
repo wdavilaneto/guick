@@ -44,26 +44,26 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
             }
         };
 
-        var service = $resource('http://localhost:8080/reports/dashboard/', {}, {
+        var service = $resource('/${projectBeanName}/api/reports/dashboard/', {}, {
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #foreach( ${entity} in ${mainEntities} )
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: 'http://localhost:8080/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: 'http://localhost:8080/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: 'http://localhost:8080/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${entity}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
 #end
 #end
 #end
-            'allCount': { method: 'GET', url: 'http://localhost:8080/reports/dashboard/allCount', isArray: true}
+            'allCount': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/allCount', isArray: true}
 
         });
 

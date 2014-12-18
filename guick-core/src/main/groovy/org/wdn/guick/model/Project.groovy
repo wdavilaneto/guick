@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
+import org.wdn.guick.util.StringUtil
 
 import javax.persistence.Transient
 
@@ -26,6 +27,8 @@ class Project implements Serializable {
     List<Table> tables = new ArrayList<Table>();
     List<Entity> entities = new ArrayList<Entity>();
     List<Clazz> classes = new ArrayList<Clazz>();
+
+    private StringUtil stringUtil = new StringUtil();
 
     DatasourceInfo database
     def pom
@@ -101,7 +104,6 @@ class Project implements Serializable {
 //        new File (path + "/metadata.json").write(json);
     }
 
-
     public String getName() {
         if (name == null || name.isEmpty()) {
             name = path.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
@@ -140,7 +142,7 @@ class Project implements Serializable {
         return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeDomain() };
     }
     public List<Entity> getAllEnumLikeEntities() {
-        return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeEnum() };
+        return getEntitiesWithoutHibernateIssue().findAll() {  it.looksLikeEnum()};
     }
 
     public List<Entity> getAllEntitiesWithEndDates(){
@@ -156,10 +158,10 @@ class Project implements Serializable {
     }
 
     def getData() {
-        if (data == null) {
-            data = [:]
+        if (this.data == null) {
+            this.data = [:]
         }
-        return data
+        return this.data
     }
 
     public String getPackageBase() {
@@ -168,6 +170,10 @@ class Project implements Serializable {
 
     public String getAcronym() {
         return name.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
+    }
+
+    public String getBeanName() {
+        return stringUtil.uncapitalize(name);
     }
 
 }

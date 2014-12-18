@@ -30,7 +30,9 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}AlertContr
         });
     };
 
-    $interval( $scope.findAllOverdue, 6000 );
+    $scope.findAllOverdue();
+
+    $interval( $scope.findAllOverdue, 8000 );
 
 
 }]);
