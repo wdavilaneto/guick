@@ -2,7 +2,6 @@ package org.wdn.guick.model
 
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
-import org.wdn.guick.support.PatternConverter
 import org.wdn.guick.util.StringUtil
 
 class Entity extends Clazz {
@@ -44,7 +43,7 @@ class Entity extends Clazz {
         return id
     }
 
-    public List<RelationshipProperty> getAllObrigatoryProperties(){
+    public List<RelationshipProperty> getAllObrigatoryProperties() {
         List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
         for (RelationshipProperty property : properties) {
             if (!property.column.nullable) {
@@ -54,7 +53,7 @@ class Entity extends Clazz {
         return returnList;
     }
 
-    public List<RelationshipProperty> getAllNumericProperties(){
+    public List<RelationshipProperty> getAllNumericProperties() {
         List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
         for (RelationshipProperty property : properties) {
             if (property.type == 'Long') {
@@ -65,7 +64,8 @@ class Entity extends Clazz {
     }
 
     private _mostDescritiveProperties = null;
-    public List<RelationshipProperty> getMostDescritiveProperties(){
+
+    public List<RelationshipProperty> getMostDescritiveProperties() {
         if (_mostDescritiveProperties == null) {
             _mostDescritiveProperties = new ArrayList<RelationshipProperty>()
             for (RelationshipProperty property : properties) {
@@ -98,11 +98,11 @@ class Entity extends Clazz {
         return returnList;
     }
 
-    public List<ComplexProperty> getDistinctedAllComplexProperties(){
+    public List<ComplexProperty> getDistinctedAllComplexProperties() {
         Map<String, String> map = new HashMap<String, String>();
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
         for (ComplexProperty property : complexProperties) {
-            if (!map.containsKey(property.referedEntity.name)){
+            if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.referedEntity.name, property.name);
                 returnList.add(property);
             }
@@ -129,9 +129,26 @@ class Entity extends Clazz {
         return false;
     }
 
+    private List<RelationshipProperty> _allDeadLineProperties = null;
+
+    public List<RelationshipProperty> getAllDeadlineProperties() {
+        if (_allDeadLineProperties == null) {
+            _allDeadLineProperties = new ArrayList<RelationshipProperty>()
+            for (RelationshipProperty property : properties) {
+                if (property.looksDeadline()) {
+                    _allDeadLineProperties.add(property);
+                }
+            }
+        }
+        return _allDeadLineProperties;
+    }
+    public boolean hasDeadline() {
+        return getAllDeadlineProperties().size() > 0;
+    }
+
     private List<RelationshipProperty> _allEndDateProperties = null;
-    public List<RelationshipProperty> getAllEndDateProperties(){
-        if (_allEndDateProperties == null ) {
+    public List<RelationshipProperty> getAllEndDateProperties() {
+        if (_allEndDateProperties == null) {
             _allEndDateProperties = new ArrayList<RelationshipProperty>()
             for (RelationshipProperty property : properties) {
                 if (property.looksLikeEndDate()) {
@@ -141,33 +158,69 @@ class Entity extends Clazz {
         }
         return _allEndDateProperties;
     }
-
-    public boolean hasEndDateProperties(){
-        return getAllEndDateProperties().size() >0;
+    public boolean hasEndDate() {
+        return getAllEndDateProperties().size() > 0;
     }
 
+    private List<RelationshipProperty> _allBeginDateProperties = null;
+    public List<RelationshipProperty> getAllBeginDateProperties() {
+        if (_allBeginDateProperties == null) {
+            _allBeginDateProperties = new ArrayList<RelationshipProperty>()
+            for (RelationshipProperty property : properties) {
+                if (property.looksLikeBeginDate()) {
+                    _allBeginDateProperties.add(property);
+                }
+            }
+        }
+        return _allBeginDateProperties;
+    }
+    public boolean hasBeginDate() {
+        return getAllEndDateProperties().size() > 0;
+    }
+
+
     private Boolean _looksLikeEnum = null;
-    public boolean looksLikeEnum(){
+
+    public boolean looksLikeEnum() {
         if (_looksLikeEnum == null) {
-            (_looksLikeEnum = properties.size() == 1 && getManyToOneProperties().size() == 0) || (_looksLikeEnum = properties.size() ==2 && name.startsWith("Tipo") );
+            (_looksLikeEnum = properties.size() == 1 && getManyToOneProperties().size() == 0) || (_looksLikeEnum = properties.size() == 2 && name.startsWith("Tipo"));
         }
         return _looksLikeEnum;
     }
 
     private Boolean _looksLikeDomain = null;
-    public boolean looksLikeDomain(){
+
+    public boolean looksLikeDomain() {
         if (_looksLikeDomain == null) {
-            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum() );
+            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum());
         }
         return _looksLikeDomain;
     }
     private Boolean _looksLikeMainEntity = null;
-    public boolean looksLikeMainEntity(){
+
+    public boolean looksLikeMainEntity() {
         if (_looksLikeMainEntity == null) {
             _looksLikeMainEntity = properties.size() > 3;
         }
         return _looksLikeMainEntity
     }
+
+    public RelationshipProperty getActiveProperty() {
+        for (RelationshipProperty prop : properties) {
+            if ("indicadorAtivo".equals(prop.name) || "active".equals(prop.name)) {
+                return prop;
+            }
+        }
+        for (EnumClass prop : enums) {
+            if ("indicadorAtivo".equals(prop.getSimpleProperty().name) || "active".equals(prop.getSimpleProperty().name)) {
+                return prop.getSimpleProperty();
+            }
+        }
+        return null;
+    }
+
+
+
 
     public String getPackage() {
         return project.group + "." + project.acronym + ".domain";

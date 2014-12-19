@@ -173,7 +173,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return ${entityBeanName};
     }
 #end
-#if (${entity.hasEndDateProperties()})
+#if (${entity.hasDeadlineProperties()})
 
     public Page<${entity.name}> overdue(Pageable pageable){
         if (pageable == null) {
@@ -182,7 +182,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         Date today = new Date();
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
-        criteria.add( Restrictions.le("${entity.getAllEndDateProperties()[0]}", today ) );
+        criteria.add( Restrictions.le("${entity.getAllDeadlineProperties()[0]}", today ) );
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 #end

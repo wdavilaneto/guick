@@ -51,10 +51,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </a>#if (${project.name} == 'msm') <a class="logo-control" href="#">MÓDULO DE SAÚDE MENTAL</a> #end
+        </a><a class="logo-control" href="#">#if (${project.name} == 'msm') MÓDULO DE SAÚDE MENTAL#else ${project.name} #end</a>
         <div class="navbar-right">
             <ul class="nav navbar-nav">
-#foreach( ${entity} in ${project.getAllEntitiesWithEndDates()} )
+#foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
                 <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-tasks"></i>
@@ -68,7 +68,7 @@
                                 <!-- start message -->
                                 <li>
                                     <a href="#">
-                                        <h4>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllEndDateProperties()[0]}}}</small></h4>
+                                        <h4>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllDeadlineProperties()[0]}}}</small></h4>
                                         <p>#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}</p>
                                     </a>
                                 </li>
@@ -116,12 +116,12 @@
     <aside class="left-side sidebar-offcanvas">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left info">
-                    <p>Olá, bem vindo!</p>
-                </div>
-            </div>
+##            <!-- Sidebar user panel -->
+##            <div class="user-panel">
+##                <div class="pull-left info">
+##                    <p>Olá, bem vindo!</p>
+##                </div>
+##            </div>
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
@@ -239,7 +239,7 @@
     <script src="scripts/controllers/ModalController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>
-#foreach( ${entity} in ${project.getAllEntitiesWithEndDates()} )
+#foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
     <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
 #end
 #if (${project.name} == 'msm')

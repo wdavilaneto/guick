@@ -145,8 +145,8 @@ class Project implements Serializable {
         return getEntitiesWithoutHibernateIssue().findAll() {  it.looksLikeEnum()};
     }
 
-    public List<Entity> getAllEntitiesWithEndDates(){
-        return getEntitiesWithoutHibernateIssue().findAll() { (it.getAllEndDateProperties().size() > 0) };
+    public List<Entity> getAllEntitiesWithDeadline(){
+        return getEntitiesWithoutHibernateIssue().findAll() { (it.getAllDeadlineProperties().size() > 0) };
     }
 
     private boolean hasHibernateIssue(Entity entity) {

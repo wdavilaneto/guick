@@ -2,7 +2,9 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
-<section class="content-header"><h1><i class="fa #if(${entity.looksLikeDomain()})fa-map-marker#{else}fa-tachometer#{end}"></i> ${entity.name}</h1></section>
+##<section class="content-header">
+##    <h1><i class="fa #if(${entity.looksLikeDomain()})fa-map-marker#{else}fa-tachometer#{end}"></i><small>${entity.name}</small></h1>
+##</section>
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
@@ -21,6 +23,15 @@
                                                 <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.."/>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="searchField.active"> Ativo
+                                                </label>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                                 <div class="box-footer">
@@ -41,7 +52,7 @@
                                 <div class="box-header"><h2 class="box-title"></h2></div>
                                 <div class="box-body">
                                     <div class="row">
-                                        <div ng-include src="'views/crud/${entity.name}/${entity.name}Fieldset.html'"></div>
+                                        <div ng-include src="'views/crud/${entity.name}/${entity.name}FilterFieldset.html'"></div>
                                     </div>
                                 </div>
                                 <div class="box-footer">

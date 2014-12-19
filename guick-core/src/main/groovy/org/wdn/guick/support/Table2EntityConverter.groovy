@@ -37,7 +37,11 @@ class Table2EntityConverter {
 
         for (Table table : tables) {
             if (table.isNMRelationShip()) {
-                metadataFactory.createComplexProperty(table)
+                try {
+                    metadataFactory.createComplexProperty(table)
+                } catch (Exception e) {
+                    // ignore
+                }
             }
         }
 

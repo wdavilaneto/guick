@@ -32,6 +32,23 @@ public class RelationshipProperty extends Clazz {
                 toHashCode();
     }
 
+    private Boolean _looksLikeDeadline = null;
+    public boolean looksDeadline() {
+        if (_looksLikeDeadline == null) {
+            _looksLikeDeadline = false;
+            if (!'Date'.equals(type)) {
+                return _looksLikeDeadline;
+            }
+            for (def word : ["deadline", "prazo", "dateDeadLine", "deadlineDate" , "dataPrazo", "prazoData"]) {
+                if (name.contains(word)) {
+                    _looksLikeDeadline = true;
+                    return _looksLikeDeadline;
+                }
+            }
+        }
+        return _looksLikeDeadline;
+    }
+
     private Boolean _looksLikeEndDate = null;
     public boolean looksLikeEndDate() {
         if (_looksLikeEndDate == null) {
@@ -39,7 +56,7 @@ public class RelationshipProperty extends Clazz {
             if (!'Date'.equals(type)) {
                 return _looksLikeEndDate;
             }
-            for (def word : ["endDate", "dataFim", "prazo", "dataEntrega" , "dataPrazo"]) {
+            for (def word : ["endDate", "end", "dataFim", "dataEncerramento" , "termino", "fim"]) {
                 if (name.contains(word)) {
                     _looksLikeEndDate = true;
                     return _looksLikeEndDate;
@@ -47,7 +64,23 @@ public class RelationshipProperty extends Clazz {
             }
         }
         return _looksLikeEndDate;
+    }
 
+    private Boolean _looksLikeBeginDate = null;
+    public boolean looksLikeBeginDate() {
+        if (_looksLikeBeginDate == null) {
+            _looksLikeBeginDate = false;
+            if (!'Date'.equals(type)) {
+                return _looksLikeBeginDate;
+            }
+            for (def word : ["beginDate", "begin", "dataInicio", "dataInicial" , "hiringDate", "inicio"]) {
+                if (name.contains(word)) {
+                    _looksLikeBeginDate = true;
+                    return _looksLikeBeginDate;
+                }
+            }
+        }
+        return _looksLikeBeginDate;
     }
 
     /**
