@@ -26,7 +26,9 @@
     "jsog": "~1.0",
     "bootstrap": "~3.3.0",
     "angular-nvd3": "latest",
-    "angular-ui-utils": "latest"
+    "angular-ui-utils": "latest",
+    "angular-http-auth": "latest"
+
   },
   "devDependencies": {
     "angular-mocks": "~1.3",

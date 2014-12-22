@@ -1,5 +1,7 @@
 package org.wdn.guick.support
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.wdn.guick.model.Column
@@ -12,6 +14,8 @@ import org.wdn.guick.model.Column
  */
 @Component
 class PatternConverter {
+
+    Logger logger = LoggerFactory.getLogger(this.class);
 
     private typeConverter = new JavaTypeConverter()
 
@@ -36,7 +40,12 @@ class PatternConverter {
     }
 
     public String getBeanType(String columnType) {
-        return typeConverter.get[columnType.replaceAll(" ", "_")]
+        def typ = typeConverter.get[columnType.replaceAll(" ", "_")]
+        if (typ){
+            return typ;
+        }
+        logger.error("Endefined typ for " + columnType.replaceAll(" ", "_"));
+        return "String";
     }
 
     public String columnToPropertyName(Column column) {

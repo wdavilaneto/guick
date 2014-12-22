@@ -12,6 +12,7 @@ class JavaTypeConverter {
     def get = ["DATE": "Date",
             "TIMESTAMP": "Date",
             "TIMESTAMP(6)": "Date",
+            "TIMESTAMP(6)_WITH_LOCAL_TIME_ZONE":"Date",
             "CHAR": "String",
             "NUMBER": "Long",
             "LONG": "Long",
@@ -23,5 +24,9 @@ class JavaTypeConverter {
             "BLOB": "byte[]",
             "RAW": "Object",
             "LONG_RAW": "Long",
-            "NCHAR": "String"]
+            "NCHAR": "String",
+            "XMLTYPE":"String",
+            "SDO_GEOMETRY": "String",
+            "INTERVAL_YEAR(2)_TO_MONTH":"String"
+    ]
 }

@@ -102,7 +102,7 @@ guick {
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
-                    [input: "stage/crud/scripts/PaginationService.js.vm", output: "/front-end/app/scripts/service/support/PaginationService.js"],
+
                     [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
                     [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
                     [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],

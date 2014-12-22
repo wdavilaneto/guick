@@ -14,12 +14,10 @@ Gradle plugin / (& runtime tools rails like) to "Quick" development of applicati
 
 ### Main Archetype ###
 
-* Thymeleaf
-* springmvc
-* ioc
-* spring-data and spring-data-rest
-* 'gorm'
-* spring-security
+* Two separated projects (back-end & front-end)
+* spring-boot (mvc, secutiry, data, ioc..)
+* Angular & Bootstrap front (bower & angular)
+
 
 ### Usage for Gradle users ###
 

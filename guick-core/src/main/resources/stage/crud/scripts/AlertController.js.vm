@@ -23,7 +23,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}AlertContr
     ${js}scope.resultPage = {content:[]};
 
     $scope.findAllOverdue = function (){
-        controleEntradaSaidaService.findAllOverdue( {} , function (data) {
+        ${entity.beanName}Service.findAllOverdue( {} , function (data) {
             ${js}scope.resultPage = data;
             ${js}scope.resultPage.content = jsog.decode(data.content);
             ${js}scope.alertCounter = data.totalElements;

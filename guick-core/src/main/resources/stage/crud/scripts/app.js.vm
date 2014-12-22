@@ -1,6 +1,4 @@
 #set( $js  = "$")
-#set( $open  = "${")
-#set( $close = "}")
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 'use strict';

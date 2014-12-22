@@ -29,8 +29,14 @@ guick {
 
                     [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
                     [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
-                    [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
                     [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
+                    [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
+
+                    [input: "stage/crud/scripts/truncate.js.vm", output: "/front-end/app/scripts/service/support/truncate.js"],
+                    [input: "stage/crud/scripts/constants.js.vm", output: "/front-end/app/scripts/service/support/constants.js"],
+                    [input: "stage/crud/scripts/utils.js.vm", output: "/front-end/app/scripts/service/support/utils.js"],
+                    [input: "stage/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/service/support/directives.js"],
+                    [input: "stage/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
 
                     [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/crud/html/metrics.html", output: "/front-end/app/views/monitor/metrics.html"],
