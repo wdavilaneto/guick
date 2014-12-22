@@ -60,16 +60,19 @@
         on cols.owner = ccom.owner
         and cols.table_name = ccom.table_name
         and cols.column_name = ccom.column_name
-        where (
-                ( cols.table_name = UPPER('CONTROLE_ENTRADA_SAIDA'))
-        )
-        and (tab.table_name not like 'VW_%')
-        and (tab.table_name not like 'BIN$%')
-        and (tab.table_name not like 'AD$%')
+        where   (tab.table_name not like 'VW_%')
+            and (tab.table_name not like 'BIN$%')
+            and (tab.table_name not like 'AD$%')
+            AND
+        <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
+            (   cols.owner = upper(#{table.owner})
+                <if test="table.tableName != null and table.tableName != ''"> AND cols.table_name = UPPER(#{table.tableName}) </if>
+            )
+        </foreach>
         order by cols.table_name, cc.position, cols.column_id
     </select>
 
-    <select id="findContraints" resultType="hashmap"  parameterType="string">
+    <select id="findContraints" resultType="hashmap">
         select
         k.constraint_name,
         k.table_name, c.column_name, k.constraint_type ,
@@ -80,11 +83,14 @@
         inner join ALL_cons_columns c on k.owner = c.owner and k.constraint_name = c.constraint_name and c.table_name = k.table_name
         left join ALL_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
         and c.position = cr.position
-        where (
-                ( k.table_name = UPPER('CONTROLE_ENTRADA_SAIDA'))
-        )
-        and (k.table_name not like 'AD$%')
-        and k.constraint_type not in ( 'P' )
+        where   (k.table_name not like 'AD$%')
+            and k.constraint_type not in ( 'P' )
+            AND
+        <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
+            (   k.owner = upper(#{table.owner})
+                <if test="table.tableName != null and table.tableName != ''"> AND k.table_name = UPPER(#{table.tableName}) </if>
+            )
+        </foreach>
         order by k.table_name, r.table_name , c.position
     </select>
 

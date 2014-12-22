@@ -32,7 +32,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}AlertContr
 
     $scope.findAllOverdue();
 
-    $interval( $scope.findAllOverdue, 8000 );
+    $interval( $scope.findAllOverdue, 20000 );
 
 
 }]);

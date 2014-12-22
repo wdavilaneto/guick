@@ -173,7 +173,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return ${entityBeanName};
     }
 #end
-#if (${entity.hasDeadlineProperties()})
+#if (${entity.hasDeadline()})
 
     public Page<${entity.name}> overdue(Pageable pageable){
         if (pageable == null) {

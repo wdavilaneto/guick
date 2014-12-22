@@ -67,15 +67,15 @@
                             <ul class="menu" ng-repeat="${entity.beanName} in resultPage.content">
                                 <!-- start message -->
                                 <li>
-                                    <a href="#">
-                                        <h4>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllDeadlineProperties()[0]}}}</small></h4>
+##                                    <a href="#/">
+                                        <p>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllDeadlineProperties()[0]}}}</small></p>
                                         <p>#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}</p>
-                                    </a>
+##                                    </a>
                                 </li>
                                 <!-- end message -->
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">Ver Pendências</a></li>
+                        <li class="footer"><a href="#/${entity.name}">Ver Pendências</a></li>
                     </ul>
                 </li>
 #end

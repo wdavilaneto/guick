@@ -13,13 +13,13 @@ interface TableMapper {
      * @param owner
      * @return
      */
-    List<Table> findTableAndColumns(@Param("owner") String owner);
+    List<Table> findTableAndColumns(@Param("tables") List tables);
 
     /**
      * Returns an list of contraints
      * @return
      */
-    List<Map> findContraints(@Param("owner") String owner);
+    List<Map> findContraints(@Param("tables") List tables);
 
     /**
      * Returns a estimate (statistc count) quantity of tuples on a given Table

@@ -1,3 +1,4 @@
+# spring.datasource.jndi-name=jboss:${project.name}Ds
 server.context-path=/${project.name}
 server.servlet-path=/api
 
@@ -10,6 +11,9 @@ spring.datasource.password=${project.database.password}
 spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 spring.datasource.testOnBorrow=true
 spring.datasource.validation-query= select 1 from dual
+spring.datasource.initial-size=10
+spring.datasource.min-idle=10
+spring.datasource.max-active=300
 
 #JPA/HIbernate
 spring.jpa.show-sql=true

@@ -118,7 +118,7 @@ public class ${entity.name}Controller {
         ${entityBeanName}Service.save(${entityBeanName});
         return new HttpEntity<${entity.name}>(${entityBeanName});
     }
-#if (${entity.hasDeadlineProperties()})
+#if (${entity.hasDeadline()})
 
     /**
      * Returns an full, but Paged, list of all entities (${entity.name})

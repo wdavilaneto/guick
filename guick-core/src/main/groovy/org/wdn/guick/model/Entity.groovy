@@ -130,7 +130,6 @@ class Entity extends Clazz {
     }
 
     private List<RelationshipProperty> _allDeadLineProperties = null;
-
     public List<RelationshipProperty> getAllDeadlineProperties() {
         if (_allDeadLineProperties == null) {
             _allDeadLineProperties = new ArrayList<RelationshipProperty>()

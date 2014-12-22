@@ -92,7 +92,7 @@ public interface I${entity.name}Service {
 #end
     public ${entity.name} save(${entity.name} ${entityBeanName});
 
-#if (${entity.hasDeadlineProperties()})
+#if (${entity.hasDeadline()})
     public Page<${entity.name}> overdue(Pageable pageable);
 #end
 }

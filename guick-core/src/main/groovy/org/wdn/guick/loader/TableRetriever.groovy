@@ -5,6 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
+import javax.annotation.Resource
 import java.sql.SQLException
 import org.wdn.guick.model.*;
 
@@ -17,6 +18,9 @@ import org.wdn.guick.model.*;
 @Component
 class TableRetriever {
 
+    @Resource
+    private Project project;
+
     private static final Logger logger = LoggerFactory.getLogger(TableRetriever.class)
 
     /**
@@ -25,13 +29,14 @@ class TableRetriever {
      * @param project
      * @return
      */
-    public List<Table> execute(SqlSession session, def user) {
+    public List<Table> execute(SqlSession session, def user= null) {
         List<Table> tableList
         TableMapper mapper = session.getMapper(TableMapper.class)
 
         try {
-            logger.info("Retrieving information from schema " + user)
-            tableList = mapper.findTableAndColumns(user)
+            logger.info("Retrieving information from schema: " + project.config.tables )
+
+            tableList = mapper.findTableAndColumns(project.config.tables)
             Map<String, Table> tables = new HashMap<String, Table>();
 
             for (Table table : tableList) {
@@ -44,7 +49,7 @@ class TableRetriever {
                     column.table = table
                 }
             }
-            List<Map> contraints = mapper.findContraints(user)
+            List<Map> contraints = mapper.findContraints(project.config.tables)
             processTables(tables, contraints)
 
             for (Table table : tableList) {

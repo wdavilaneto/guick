@@ -66,7 +66,8 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             var searchSelects = {
 #set($searchedEntitys = [])
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()} )
-#if( !${complexProperty.referedEntity.looksLikeEnum()} && ${complexProperty.referedEntity.table.count} >= 200 )
+##if( !${complexProperty.referedEntity.looksLikeEnum()} && ${complexProperty.referedEntity.table.count} >= 200 )
+#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
 #set( $foo = ${searchedEntitys.add( $complexProperty )} )
 #end
 #end
@@ -85,6 +86,8 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #foreach( ${complexProperty} in ${searchedEntitys} )
                 if (ref && ref.${complexProperty.referedEntity.beanName}  && searchSelects.${complexProperty.referedEntity.beanName}.originalObject) {
                     ref.${complexProperty.referedEntity.beanName} = searchSelects.${complexProperty.referedEntity.beanName}.originalObject;
+                } else {
+                    ref.${complexProperty.referedEntity.beanName} = null;
                 }
 #end
             };
@@ -113,21 +116,38 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             options.pagingOptions = pagingOptions;
             options.columnDefs = [
                 {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
+#set($properties = [])
+#if (${entity.parent.properties.size()} < 3 )
+#set($properties =  ${entity.parent.properties})
+#else
 #foreach( ${property} in ${entity.parent.properties})
-#if( ${property.type} != 'Long' || !${property.column.constraint} )
-                {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}},
+#if( ${property.column.length} > 3 )
+#set( $foo = ${properties.add( $property )} )
 #end
 #end
-#set($size = ${entity.properties.size()} )
-#set($counter = 0)
+#end
+
+#if (${entity.properties.size()} <5)
+#set( $foo = ${properties.addAll( ${entity.properties} )} )
+#else
 #foreach( ${property} in ${entity.properties})
+#if( ${property.column.length} > 3 )
+#set( $foo = ${properties.add( $property )} )
+#end
+#end
+#end
+
+#set($size = ${properties.size()} )
+#set($counter = 0)
+#foreach( ${property} in ${properties})
 #set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
 #if( ${property.type} != 'Long' || !${property.column.constraint} )
-                {field: '${property}', displayName: '${property.title}'#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
+                {field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
 #end
 #end
 #end
+
 #if (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )
 #set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
 ### find first StringField
@@ -137,7 +157,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #set ($stringField = ${prop})
 #end
 #end
-                {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}'#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
+                {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}', sortable: false#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
 #end
 
             ];
