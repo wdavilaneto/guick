@@ -29,34 +29,36 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #foreach( ${entity} in ${mainEntities} )
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name} ${capitalizedProp}";
-    dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${entity}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name} ${capitalizedProp}";
+    dashboardService.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
+        ${js}scope.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
     });
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
-    dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${entity}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
+    dashboardService.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
+        ${js}scope.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
     });
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
-    ${js}scope.options${entity}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
-    dashboardService.get${entity}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${entity}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = dashboardService.getBasicOptions();
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
+    ${js}scope.options${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}.chart.yAxis.axisLabel = "${e.referedEntity.name}${capitalizedProp}";
+    dashboardService.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}( {}, function (data) {
+        ${js}scope.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp} = [{ key: '${entity} With Sum of ${e.referedEntity.name} ${capitalizedProp}',values: data }];
     });
 #end
+
 #end
 #end
 

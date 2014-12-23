@@ -74,7 +74,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #end
     // end block
 
-    ${js}scope.gridOptions = ${entityBeanName}Service.factoryGridOptions($scope.pagingOptions , $scope.entitySelected, #if(${entity.getOneToManyProperties().size()} > 0 ) false #{else}true#{end});
+    ${js}scope.gridOptions = ${entityBeanName}Service.factoryGridOptions($scope.pagingOptions , $scope.entitySelected, #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
 
     // Search By Example Method
     ${js}scope.search = function() {
@@ -117,7 +117,11 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
             console.log(successResult);
             ${js}scope.entity = ${entityBeanName}Service.create();
-            ${js}scope.search();
+            if (!${js}scope.editMode) {
+                ${js}scope.search();
+            } else {
+                ${js}location.path('/${entity.name}/');
+            }
         });
      };
 
@@ -215,7 +219,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 #{end}
 #end
 
-#if(${entity.getOneToManyProperties().size()} == 0 )
+#if(${entity.getOneToManyProperties().size()} == 0 || ${entity.looksLikeEnum()})
     // *********************************************************************************************
     // Inline Update/remove Operations: Since this entity, at generation time, had no Master/Details
     // *********************************************************************************************

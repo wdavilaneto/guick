@@ -72,26 +72,71 @@ class PatternConverter {
             columnReturn = columnReturn.replaceFirst("DT_", "DATA_")
         } else if (columnReturn.startsWith("CD_")) {
             columnReturn = columnReturn.replaceFirst("CD_", "CODIGO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
+        } else if (columnReturn.startsWith("TP_")) {
+            columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
         } else if (columnReturn.startsWith("SG_")) {
             columnReturn = columnReturn.replaceFirst("SG_", "SIGLA_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("VL_")) {
             columnReturn = columnReturn.replaceFirst("VL_", "VALOR_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("TX_")) {
             columnReturn = columnReturn.replaceFirst("TX_", "TEXTO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("DS_")) {
             columnReturn = columnReturn.replaceFirst("DS_", "DESCRICAO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("NR_")) {
             columnReturn = columnReturn.replaceFirst("NR_", "NUMERO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("NM_")) {
             columnReturn = columnReturn.replaceFirst("NM_", "NOME_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("PGTO_")) {
             columnReturn = columnReturn.replaceFirst("PGTO_", "PAGAMENTO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("IN_")) {
             columnReturn = columnReturn.replaceFirst("IN_", "INDICADOR_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.startsWith("TEL_")) {
             columnReturn = columnReturn.replaceFirst("TEL_", "TELEFONE_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
+        } else if (columnReturn.startsWith("OBS_")) {
+            columnReturn = columnReturn.replaceFirst("OBS_", "OBSERVACAO_")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
+        } else if (columnReturn.endsWith("_OBS")) {
+            columnReturn = columnReturn.replaceFirst("_OBS", "_OBSERVACAO")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         } else if (columnReturn.endsWith("PGTO")) {
             columnReturn = columnReturn.replaceFirst("_PGTO", "_PAGAMENTO")
+            if (columnReturn.contains("_TP_")){
+                columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
+            }
         }
         return columnReturn
     }

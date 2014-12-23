@@ -20,8 +20,9 @@
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    <select id="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
@@ -44,7 +45,7 @@
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    <select id="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
@@ -67,7 +68,7 @@
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    <select id="get${entity}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )

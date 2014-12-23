@@ -69,7 +69,7 @@
                                 <li>
 ##                                    <a href="#/">
                                         <p>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllDeadlineProperties()[0]}}}</small></p>
-                                        <p>#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}</p>
+                                        <p>{{#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}}}</p>
 ##                                    </a>
                                 </li>
                                 <!-- end message -->
@@ -126,7 +126,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
 
-                <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
+##                <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
                 <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
@@ -142,7 +142,7 @@
                     </a>
                     <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllMainEntities()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
 #end
                     </ul>
                 </li>
@@ -180,6 +180,7 @@
         </section>
         <!-- /.sidebar -->
     </aside>
+    <div ng-include src="'views/modals.html'"></div>
     <aside class="right-side" id="home" ng-view></aside>
 </div>
 

@@ -110,7 +110,8 @@ guick {
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
 
                     [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
-                    [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"]
+                    [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
+                    [input: "stage/crud/html/modals.html.vm", output: "/front-end/app/views/modals.html"]
 
             ]
         }
