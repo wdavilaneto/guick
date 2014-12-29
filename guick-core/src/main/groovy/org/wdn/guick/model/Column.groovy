@@ -39,7 +39,23 @@ class Column {
         return true; // TODO
     }
 
+    public String getPrefix() {
+        if (!table) {
+            return null;
+        }
+        String otherPrefixes = table.name.split("_")[0];
+        if (name.split("_")[0] == otherPrefixes) {
+            return otherPrefixes;
+        }
+        if (!isKey()) {
+            otherPrefixes = table.getPk()[0].name.split("_")[0];
+            if (name.split("_")[0] == otherPrefixes) {
+                return otherPrefixes;
+            }
+        }
 
+        return null;
+    }
 
     public boolean isKey() {
         return position != null;
@@ -57,7 +73,9 @@ class Column {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) { return false; }
+        if (obj == null) {
+            return false;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }

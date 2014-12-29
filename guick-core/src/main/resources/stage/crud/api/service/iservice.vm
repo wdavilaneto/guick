@@ -10,6 +10,9 @@
 package ${project.group}.${project.name}.api.service;
 
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -70,7 +73,7 @@ public interface I${entity.name}Service {
      * @param id
      * @return
      */
-    public ${entity.name} findOne(Long id);
+    public ${entity.name} findOne(${entity.id.type} id);
 
     /**
      * Deletes an entity with an given ID
@@ -80,7 +83,7 @@ public interface I${entity.name}Service {
 #if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
     @CacheEvict(value="${entityBeanName}List", allEntries=true)
 #end
-    public void delete(Long id);
+    public void delete(${entity.id.type} id);
 
     /**
      * Simple save or update an entity

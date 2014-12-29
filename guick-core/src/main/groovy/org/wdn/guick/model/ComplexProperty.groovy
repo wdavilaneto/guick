@@ -9,6 +9,7 @@ public class ComplexProperty extends Clazz {
     Entity referedEntity
     Table nmTable
     List<Validation> validations = new ArrayList<Validation>()
+    String mappedBy;
 
     public ComplexProperty(Entity referedEntity) {
         this.referedEntity = referedEntity;

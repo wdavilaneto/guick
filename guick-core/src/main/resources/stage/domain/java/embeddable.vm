@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+##import lombok.AllArgsConstructor;
+##import lombok.Getter;
+##import lombok.NoArgsConstructor;
+##import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -61,10 +61,10 @@ import ${entity.getPackage()}.domain.${property.getName()};
  * A classe ${entity.getName()} representa o mapeamento Objeto-Relacional
  * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+##@Getter
+##@Setter
+##@NoArgsConstructor
+##@AllArgsConstructor
 @JsonIdentityInfo(generator=JSOGGenerator.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Embeddable
@@ -78,19 +78,132 @@ public class ${entity.getName()} implements java.io.Serializable {
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.isEmbeddable()})id.#{end}$util.uncapitalize( ${entity.getName()} )")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.isEmbeddable()})id.#{end}$util.uncapitalize( ${property.mappedBy} )")
     List<$property.type> $property.getName() = new ArrayList<$property.type>(0);
 
 #end
 #parse( "stage/domain/java/manyToOneProperties.vm" )
 #parse( "stage/domain/java/manyToManyProperties.vm" )
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
+    /**
+     * Getter para id.
+     * @return valor do campo
+     */
     public ${entity.getId().getType()} getId() {
         return this.id;
     }
 
+    /**
+     * Setter para id.
+     * @param value valor para id
+     */
     public void setId(${entity.getId().getType()} value) {
         this.id = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public ${property.getType()} get${property.capitalizedName}() {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (this.${property.getName()} != null) {
+            return ($property.type) this.${property.getName()}.clone();
+        }
+        return null;
+#else
+        return this.${property.getName()};
+#end
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(${property.getType()} value) {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (value != null) {
+            this.${property.getName()} = ($property.type) value.clone();
+        } else {
+            this.${property.getName()} = null;
+        }
+#else
+        this.${property.getName()} = value;
+#end
+    }
+
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public ${property.type} get${property.capitalizedName}() {
+        return this.${property.name};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(${property.type} value) {
+        this.${property.name} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getOneToManyProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.${property.getName()};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.${property.getName()} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getManyToManyProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.${property.getName()};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.${property.getName()} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getEnums()})
+   /**
+    * Getter para $property.getName().
+    * @return valor do campo
+    */
+    public ${property.getName()} get$util.capitalize( $property.getSimpleProperty().getName() )() {
+        return this.${property.getSimpleProperty().getName()};
+    }
+
+   /**
+    * Setter para $property.getName().
+    * @param value valor para $property.getName()
+    */
+    public void set$util.capitalize( $property.getSimpleProperty().getName() )(${property.getName()} value) {
+        this.$property.getSimpleProperty().getName() = value;
     }
 
 #end
@@ -99,7 +212,29 @@ public class ${entity.getName()} implements java.io.Serializable {
      */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder()
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+                .append(id)
+#end
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.id.getProperties()})
+                .append(id.${property.name})
+#end
+#foreach( ${property} in ${entity.properties})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.capitalizedName}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.capitalizedName}())
+#end
+               .toHashCode();
     }
 
     /**
@@ -107,6 +242,46 @@ public class ${entity.getName()} implements java.io.Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
+        if (obj == null) { return false; }
+        if (obj == this) { return true; }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+#if ( !${entity.properties.empty})
+        ${entity.getName()} rhs = (${entity.getName()}) obj;
+
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+        // For performance reasons we first eliminate @id (primary key) difference
+        if (id != null && (!id.equals(rhs.id)) ) {
+            return false;
+        }
+#end
+        // so lets check all properties
+        return new EqualsBuilder()
+#foreach( ${property} in ${entity.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.id.properties})
+#set( $name = $util.capitalize( ${property.name} ))
+                .append(id.get${name}(), rhs.id.get${name}())
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.capitalizedName}(), rhs.get${property.capitalizedName}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.capitalizedName}(), rhs.getId().get${property.capitalizedName}())
+#end
+                .isEquals();
+#else
+        return true;
+#end
+
     }
 }

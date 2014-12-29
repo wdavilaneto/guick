@@ -125,7 +125,7 @@ guick {
                         [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
                         [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
                         [input: "stage/crud/html/components/crud/entityFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityFilterFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FilterFieldSet.html"],
+                        [input: "stage/crud/html/components/crud/entityFilterFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FilterFieldset.html"],
                         [input: "stage/crud/html/components/crud/entityShowFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
                         [input: "stage/crud/html/components/crud/entityToOneFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],

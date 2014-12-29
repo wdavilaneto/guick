@@ -38,10 +38,17 @@ class Clazz implements Serializable {
             arry = arry[1..(arry.size ()-1)];
         }
         String word = arry.join(" ").toLowerCase();
+        if (word.endsWith("collection")){
+            word = word.replaceFirst("collection" , "")
+        }
         if (word.equalsIgnoreCase("CPF") || word.equalsIgnoreCase("CEP") || word.equalsIgnoreCase("CNPJ")){
             return word.toUpperCase();
         }
         return StringUtils.capitalize(word);
+    }
+    
+    public String getCapitalizedName(){
+        return  StringUtils.capitalize(name);
     }
 
     public getPackage() {

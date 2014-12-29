@@ -20,9 +20,10 @@
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
 #set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
@@ -31,21 +32,21 @@
 #else
                 ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
 #end
-                NVL( sum(o${e.referedEntity.name}.${numericProperties[0].column.name}), 0) as value
+                NVL( sum(o${e.mappedBy}.${numericProperties[0].column.name}), 0) as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.referedEntity.name} on o${e.referedEntity.name}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
             group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
             group by ${entity.name}.${entity.id.column.name}
 #end
-            order by sum(o${e.referedEntity.name}.${numericProperties[0].column.name}) desc
+            order by sum(o${e.mappedBy}.${numericProperties[0].column.name}) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
@@ -54,21 +55,21 @@
 #else
                 ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
 #end
-                NVL(sum(o${e.referedEntity.name}.${numericProperties[1].column.name}) ,0 ) as value
+                NVL(sum(o${e.mappedBy}.${numericProperties[1].column.name}) ,0 ) as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.referedEntity.name} on o${e.referedEntity.name}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
             group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
             group by ${entity.name}.${entity.id.column.name}
 #end
-            order by sum(o${e.referedEntity.name}.${numericProperties[1].column.name}) desc
+            order by sum(o${e.mappedBy}.${numericProperties[1].column.name}) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    <select id="get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
@@ -77,15 +78,15 @@
 #else
                 ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
 #end
-                NVL(sum(o${e.referedEntity.name}.${numericProperties[2].column.name}),0 )as value
+                NVL(sum(o${e.mappedBy}.${numericProperties[2].column.name}),0 )as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.referedEntity.name} on o${e.referedEntity.name}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
             group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
             group by ${entity.name}.${entity.id.column.name}
 #end
-            order by sum(o${e.referedEntity.name}.${numericProperties[2].column.name}) desc
+            order by sum(o${e.mappedBy}.${numericProperties[2].column.name}) desc
         ) where rownum <![CDATA[ < ]]>  11
     </select>
 #end

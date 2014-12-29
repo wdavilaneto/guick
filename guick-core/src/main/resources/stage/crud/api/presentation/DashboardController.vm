@@ -46,25 +46,26 @@ public class DashboardController {
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
 #set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    @RequestMapping(value = "/get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
-    List<Map> get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}() {
-        return dashboardRepository.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}();
+    @RequestMapping(value = "/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}() {
+        return dashboardRepository.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
     }
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    @RequestMapping(value = "/get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
-    List<Map> get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}(){
-        return dashboardRepository.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}();
+    @RequestMapping(value = "/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}(){
+        return dashboardRepository.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
     }
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    @RequestMapping(value = "/get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}", method = RequestMethod.GET)
-    List<Map> get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}(){
-        return dashboardRepository.get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}();
+    @RequestMapping(value = "/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}", method = RequestMethod.GET)
+    List<Map> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}(){
+        return dashboardRepository.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
     }
 #end
 

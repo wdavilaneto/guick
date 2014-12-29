@@ -48,19 +48,20 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #foreach( ${entity} in ${mainEntities} )
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
 #set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-            'get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-            'get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-            'get${capitalizedName}WithSum${e.referedEntity.name}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${e.referedEntity.name}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${entity}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #end
 #end

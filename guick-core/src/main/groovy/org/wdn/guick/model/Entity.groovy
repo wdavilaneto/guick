@@ -199,21 +199,29 @@ class Entity extends Clazz {
 
     public boolean looksLikeMainEntity() {
         if (_looksLikeMainEntity == null) {
-            _looksLikeMainEntity = properties.size() > 3;
+            _looksLikeMainEntity = !looksLikeEnum() && !looksLikeDomain();
         }
         return _looksLikeMainEntity
     }
 
     public RelationshipProperty getActiveProperty() {
+        def activekeywords = ["indicadorAtivo", "active", "ativo"];
         for (RelationshipProperty prop : properties) {
-            if ("indicadorAtivo".equals(prop.name) || "active".equals(prop.name)) {
-                return prop;
+            for (def word : activekeywords ) {
+                if (word.equals(prop.name) ) {
+                    return prop;
+                }
             }
         }
         for (EnumClass prop : enums) {
-            if ("indicadorAtivo".equals(prop.getSimpleProperty().name) || "active".equals(prop.getSimpleProperty().name)) {
-                return prop.getSimpleProperty();
+            for (def word : activekeywords ) {
+                if (word.equals(prop.getSimpleProperty().name)) {
+                    return prop.getSimpleProperty();
+                }
             }
+        }
+        if (hasEndDate()){
+            return getAllEndDateProperties()[0];
         }
         return null;
     }
@@ -225,20 +233,34 @@ class Entity extends Clazz {
         return project.group + "." + project.acronym + ".domain";
     }
 
-    public boolean containsPropertyName(def name) {
+    public boolean containsPropertyName(String parameter) {
         for (Clazz prop : properties) {
-            if (prop.name.equals(name)) {
+            if (prop.name.equals(parameter)) {
                 return true
             }
         }
-        for (Clazz prop : complexProperties) {
-            if (prop.name.equals(name)) {
+        for (def prop : complexProperties) {
+            if (prop.name.equals(parameter) ) { // && !prop.isOneToMany() && !prop.isManyToMany()
                 return true
             }
         }
         return false
     }
-
+    
+    public Clazz getPropertyWithName(String name){
+        for (RelationshipProperty prop : properties) {
+            if (prop.name.equals(name)) {
+                return prop
+            }
+        }
+        for (ComplexProperty prop : complexProperties) {
+            if (prop.name.equals(name)) {
+                return prop
+            }
+        }
+        return null;
+    }
+    
     @Override
     public int hashCode() {
         return new HashCodeBuilder().

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.wdn.guick.model.Column
+import org.wdn.guick.model.Table
 
 /**
  * Objeto responsavel pelas conversoes de Strings referentes aos patterns
@@ -27,9 +28,9 @@ class PatternConverter {
         return StringUtils.uncapitalize(str)
     }
 
-    public String getBeanName(String tableName) {
+    public String getBeanName(Table table) {
         StringBuffer beanPattern = new StringBuffer("")
-        for (String splited : removeFirstPart(tableName.toLowerCase().replaceFirst("^tb_", "")).split("_")) {
+        for (String splited : getTableNameWithoutPrefix(table).split("_")) {
             if (splited.equals("tp")) {
                 beanPattern.append(getCasedString("Tipo"))
             } else {
@@ -44,12 +45,12 @@ class PatternConverter {
         if (typ){
             return typ;
         }
-        logger.error("Endefined typ for " + columnType.replaceAll(" ", "_"));
+        logger.error("Undefined type for " + columnType.replaceAll(" ", "_"));
         return "String";
     }
 
     public String columnToPropertyName(Column column) {
-        String columnReturn = removeUnusedParts(column.name)
+        String columnReturn = removeUnusedParts(column)
         String name = columnReturn.replace(column.table.name, "")
         name = getBeanPattern(name.size() > 0 ? name : columnReturn);
         if (column.table.entity != null) {
@@ -61,13 +62,8 @@ class PatternConverter {
         return name;
     }
 
-    public String columnToPropertyName(String column) {
-        String columnReturn = removeUnusedParts(column)
-        return getBeanPattern(columnReturn)
-    }
-
-    private String removeUnusedParts(String column) {
-        String columnReturn = new String(removeFirstPart(column))
+    private String removeUnusedParts(Column column) {
+        String columnReturn = new String(getColumnNameWithoutPrefix(column))
         if (columnReturn.startsWith("DT_")) {
             columnReturn = columnReturn.replaceFirst("DT_", "DATA_")
         } else if (columnReturn.startsWith("CD_")) {
@@ -137,6 +133,8 @@ class PatternConverter {
             if (columnReturn.contains("_TP_")){
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
+        } else if (columnReturn.endsWith("_ID") || columnReturn.endsWith("_PK") || columnReturn.endsWith("_DK") ) {
+            columnReturn = columnReturn[0..(columnReturn.size()-3)]
         }
         return columnReturn
     }
@@ -181,12 +179,31 @@ class PatternConverter {
         return values[values.length - 1]
     }
 
-    private String removeFirstPart(String column) {
-        String[] splited = column.split("_")
-        if (splited.length > 1 && splited[0].length() == 4) {
-            return column.replaceFirst(splited[0] + "_", "")
+    private String getTableNameWithoutPrefix(Table table) {
+        String tableName = table.name.toLowerCase().replaceFirst("^tb_", "")
+        String prefix = table.getPk()[0].getPrefix();
+        if (prefix) {
+            String[] splited = tableName.split("_")
+            if (splited.length > 1) {
+                return tableName.replaceFirst( prefix + "_", "")
+            }
         }
-        return column
+        return tableName
+    }
+
+    private String getColumnNameWithoutPrefix(Column column) {
+        String prefix = column.getPrefix();
+        if (prefix) {
+            String[] splited = column.name.split("_")
+            if (splited.length > 1 
+                    && (!"ID".equals(column.name.replaceFirst( prefix + "_", "") ))
+                    && (!"PK".equals(column.name.replaceFirst( prefix + "_", "") ))
+                    && (!"DK".equals(column.name.replaceFirst( prefix + "_", "") ))
+            ) {
+                return column.name.replaceFirst( prefix + "_", "")
+            }
+        }
+        return column.name
     }
 
     private String getBeanPattern(String column) {

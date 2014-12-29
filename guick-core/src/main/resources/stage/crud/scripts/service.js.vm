@@ -65,17 +65,14 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             // Factory SearchSelect Object for all "search text properties"
             var searchSelects = {
 #set($searchedEntitys = [])
-#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()} )
-##if( !${complexProperty.referedEntity.looksLikeEnum()} && ${complexProperty.referedEntity.table.count} >= 200 )
-#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()} )
 #set( $foo = ${searchedEntitys.add( $complexProperty )} )
-#end
 #end
 #set($size = ${searchedEntitys.size()} )
 #set($counter = 0)
 #foreach( ${complexProperty} in ${searchedEntitys} )
 #set($counter = $counter + 1)
-                ${complexProperty.referedEntity.beanName}:{}#if($counter < $size),
+                ${complexProperty.name}:{}#if($counter < $size),
 #end
 #end
 
@@ -84,24 +81,38 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             searchSelects.toEntity = function (ref) {
                 console.log(ref);
 #foreach( ${complexProperty} in ${searchedEntitys} )
-                if (ref && ref.${complexProperty.referedEntity.beanName}  && searchSelects.${complexProperty.referedEntity.beanName}.originalObject) {
-                    ref.${complexProperty.referedEntity.beanName} = searchSelects.${complexProperty.referedEntity.beanName}.originalObject;
+#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
+                if (ref && searchSelects.${complexProperty.name}.originalObject) {
+                    ref.${complexProperty.name}.id = searchSelects.${complexProperty.name}.originalObject.id;
                 } else {
-                    ref.${complexProperty.referedEntity.beanName} = null;
+                    ref.${complexProperty.name} = null;
                 }
+#else
+                if (ref && ref.${complexProperty.name} && searchSelects.${complexProperty.name}) {
+                    ref.${complexProperty.name}.id = searchSelects.${complexProperty.name}.id;
+                } else {
+                    ref.${complexProperty.name} = null;
+                }
+#end
 #end
             };
             searchSelects.fromEntity = function (ref) {
                 console.log(ref);
 #foreach( ${complexProperty} in ${searchedEntitys} )
-                if (ref && ref.${complexProperty.referedEntity.beanName} ) {
-                    searchSelects.${complexProperty.referedEntity.beanName}.originalObject = ref.${complexProperty.referedEntity.beanName};
+#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
+                if (ref && ref.${complexProperty.name} ) {
+                    searchSelects.${complexProperty.name}.originalObject = ref.${complexProperty.name};
                 }
+#else
+                if (ref && ref.${complexProperty.name} ) {
+                    searchSelects.${complexProperty.name} = ref.${complexProperty.name};
+                }
+#end                
 #end
             };
             searchSelects.clear = function() {
 #foreach( ${complexProperty} in ${searchedEntitys} )
-                searchSelects.${complexProperty.referedEntity.beanName} = {};
+                searchSelects.${complexProperty.name} = {};
 #end
             };
             return searchSelects;

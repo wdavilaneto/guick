@@ -13,12 +13,12 @@
     #set ($secondStringField = ${property})
 #end
 #end
-<label>${entity.title}
-#if( ${entity.looksLikeMainEntity()} )
-    <a class="btn-detail" ng-click="view('lg','${entity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
-#end
-</label>
-<ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" theme="bootstrap" ng-required="true">
+##<label>${entity.title}
+###if( ${entity.looksLikeMainEntity()} )
+##    <a class="btn-detail" ng-click="view('lg','${entity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+###end
+##</label>
+<ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" ng-required="true">
     <ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
     <ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
 #if ($stringField == '' )

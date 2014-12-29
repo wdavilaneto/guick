@@ -142,7 +142,9 @@
                     </a>
                     <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllMainEntities()})
+#if (!${entity.isEmbeddable()})
                         <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
+#end
 #end
                     </ul>
                 </li>
@@ -156,7 +158,9 @@
                     </a>
                     <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllDomainEntities()})
+#if (!${entity.isEmbeddable()})
                         <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
 #end
                     </ul>
                 </li>
@@ -233,7 +237,9 @@
     <script src="scripts/service/support/SupportService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#if (!${entity.isEmbeddable()})
     <script src="scripts/service/${entity.name}Service.js"></script>
+#end
 #end
 
 <!-- controllers -->
@@ -247,15 +253,19 @@
 #if (${project.name} == 'msm')
     <script src="scripts/controllers/PacienteController.js"></script>
 #end
-#foreach( ${entity} in ${project.metadata.entities})
+#foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#if (!${entity.isEmbeddable()})
     <script src="scripts/controllers/${entity.name}Controller.js"></script>
+#end
 #end
 
 <!-- diretrizes -->
-#foreach( ${entity} in ${project.metadata.entities})
+#foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#if (!${entity.isEmbeddable()})
 <script src="components/directives/${entityBeanName}/select.js"></script>
+#end
 #end
 <!-- endbuild -->
 

@@ -38,7 +38,7 @@
 #if( ${entity.looksLikeMainEntity()} )
 #foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
 #set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
-                <tab heading="${complexProperty.referedEntity.title}" ng-click="find${complexProperty.referedEntity.name}()">
+                <tab heading="${complexProperty.title}" ng-click="find${complexProperty.referedEntity.name}()">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
@@ -61,7 +61,7 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-                <tab heading="${complexProperty.referedEntity.title}" >
+                <tab heading="${complexProperty.title}" >
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">

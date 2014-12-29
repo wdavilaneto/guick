@@ -1,6 +1,7 @@
 package org.wdn.guick.support
 
 import org.wdn.guick.model.Column
+import org.wdn.guick.model.Table
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,8 +22,8 @@ class PatternConverterFacade {
         return getPatternConverter().getInstanceBeanName(str)
     }
 
-    public static String getBeanName(String tableName) {
-        return getPatternConverter().getBeanName(tableName)
+    public static String getBeanName(Table table) {
+        return getPatternConverter().getBeanName(table)
     }
 
     public static String getBeanType(String columnType) {
@@ -30,10 +31,6 @@ class PatternConverterFacade {
     }
 
     public static String columnToPropertyName(Column column) {
-        return getPatternConverter().columnToPropertyName(column)
-    }
-
-    public static String columnToPropertyName(String column) {
         return getPatternConverter().columnToPropertyName(column)
     }
 

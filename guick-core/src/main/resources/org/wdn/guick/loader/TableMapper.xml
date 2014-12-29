@@ -83,7 +83,7 @@
         inner join ALL_cons_columns c on k.owner = c.owner and k.constraint_name = c.constraint_name and c.table_name = k.table_name
         left join ALL_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
         and c.position = cr.position
-        where   (k.table_name not like 'AD$%')
+        where   (k.table_name not like 'AD$%' and k.table_name NOT LIKE 'BIN$%')
             and k.constraint_type not in ( 'P' )
             AND
         <foreach item="table" collection="tables" open="(" separator=" OR " close=")">

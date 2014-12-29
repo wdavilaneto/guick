@@ -34,7 +34,7 @@ class MetadataFactory {
         if (table != null) {
             entity.setTable(table)
             table.entity = entity
-            entity.name = PatternConverterFacade.getBeanName(table.name)
+            entity.name = PatternConverterFacade.getBeanName(table)
         }
 
         return entity
@@ -56,7 +56,8 @@ class MetadataFactory {
         instance.setProject(currentProject)
         instance.setPackage(currentProject.group + "entity.domain")
         if (simpleProperty != null) {
-            def lastNameColumn = PatternConverterFacade.getBeanName(PatternConverterFacade.getLastNameColumn(simpleProperty.column.name))
+            //def lastNameColumn = PatternConverterFacade.getBeanName(PatternConverterFacade.getLastNameColumn(simpleProperty.column))
+            def lastNameColumn = PatternConverterFacade.columnToPropertyName(simpleProperty.column)
             instance.name = lastNameColumn + simpleProperty.entity?.name + "Enum"
             instance.simpleProperty = simpleProperty;
             EnumValue enumValue
@@ -90,16 +91,20 @@ class MetadataFactory {
                 // ToOne Complex property
                 ComplexProperty complexProperty = new ComplexProperty(constraint, constraint.getReferedTable().entity);
                 complexProperty.project = currentProject
-                complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
-                if (entity.containsPropertyName(complexProperty.name)) {
-                    complexProperty.name += "Entity"
+
+                if (constraint.isSingleColumn()){
+                    complexProperty.name = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
+                } else {
+                    complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
                 }
+
                 entity.getComplexProperties().add(complexProperty)
 
                 // ToMany Property create
                 ComplexProperty referedProperty = new ComplexProperty(entity)
                 referedProperty.project = currentProject
                 referedProperty.name = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), referedProperty.name)
+                referedProperty.mappedBy = complexProperty.name;
                 complexProperty.referedEntity.getComplexProperties().add(referedProperty);
 
                 for (ColumnPair parDeColuna : constraint.getColumnPairs()) {
@@ -110,6 +115,9 @@ class MetadataFactory {
                     }
 
                 }
+//                if (entity.containsPropertyName(complexProperty.name)) {
+//                    complexProperty.name += "Entity"
+//                }
                 return [complexProperty: complexProperty, referedProperty: referedProperty]
             }
             return null

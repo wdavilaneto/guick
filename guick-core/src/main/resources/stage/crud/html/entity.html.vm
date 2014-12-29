@@ -24,9 +24,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label" for="searchField.text">Busca por texto</label>
-                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.."/>
+                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
                                             </div>
                                         </div>
+#if(${entity.getActiveProperty()})
                                         <div class="col-md-6">
                                             <div class="checkbox">
                                                 <label>
@@ -34,6 +35,7 @@
                                                 </label>
                                             </div>
                                         </div>
+#end
                                     </div>
                                 </div>
                                 <div class="box-footer">

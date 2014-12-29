@@ -10,6 +10,9 @@
 package ${project.group}.${project.name}.api.service.core;
 
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import ${project.group}.${project.name}.api.persistence.${entity.name}Repository;
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;
 import org.slf4j.Logger;
@@ -51,12 +54,12 @@ class ${entity.name}Service implements I${entity.name}Service {
     }
 
     @Override
-    public ${entity.name} findOne(Long id) {
+    public ${entity.name} findOne(${entity.id.type} id) {
         return ${entityBeanName}Repository.findOne(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(${entity.id.type} id) {
         ${entityBeanName}Repository.delete(id);
     }
 

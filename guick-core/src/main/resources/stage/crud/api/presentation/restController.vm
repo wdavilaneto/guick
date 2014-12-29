@@ -12,6 +12,9 @@ package ${project.group}.${project.name}.api.rest;
 import ${project.group}.${project.name}.api.rest.dto.Pagination;
 import ${project.group}.${project.name}.api.rest.dto.SearchFilter;
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +96,7 @@ public class ${entity.name}Controller {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public HttpEntity<${entity.name}> get(@PathVariable Long id) {
+    public HttpEntity<${entity.name}> get(@PathVariable ${entity.id.type} id) {
         return new HttpEntity<>(${entityBeanName}Service.findOne(id));
     }
 
@@ -103,7 +106,7 @@ public class ${entity.name}Controller {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public HttpEntity delete(@PathVariable Long id) {
+    public HttpEntity delete(@PathVariable ${entity.id.type} id) {
         ${entityBeanName}Service.delete(id);
         return new HttpEntity(null);
     }

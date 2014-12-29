@@ -1,0 +1,28 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set ( $stringField = '' )
+#set ( $secondStringField = '' )
+#foreach( ${property} in ${complexProperty.referedEntity.properties})
+#if(${property.type} == 'String' && $stringField == '' )
+    #set ($stringField = ${property.name})
+#end
+#if(${property.type} == 'String' && ${stringField} != ${property.name} )
+    #set ($secondStringField = ${property})
+#end
+#end
+
+                                    <ui-select ng-model="entity.${complexProperty.name}" ng-disabled="${complexProperty.referedEntity.beanName}List.length < 1" ng-required="true">
+                                        <ui-select-match placeholder="Escolha ${complexProperty.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
+                                        <ui-select-choices repeat="item in ${complexProperty.referedEntity.beanName}List | filter: ${js}select.search">
+#if ($stringField == '' )
+                                        <div ng-bind-html="item.id | highlight: ${js}select.search"></div>
+#else
+                                        <div ng-bind-html="item.${stringField} | highlight: ${js}select.search"></div>
+#if($secondStringField != '')
+                                        <small ng-bind-html="item.${secondStringField} |  highlight: $select.search "></small>
+#end
+#end
+
+                                        </ui-select-choices>
+                                    </ui-select>

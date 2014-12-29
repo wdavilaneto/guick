@@ -30,10 +30,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+##import lombok.AllArgsConstructor;
+##import lombok.Getter;
+##import lombok.NoArgsConstructor;
+##import lombok.Setter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.Cascade;
@@ -56,13 +56,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
  *${entity.table.comment}
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+##@Getter
+##@Setter
+##@NoArgsConstructor
+##@AllArgsConstructor
 @Entity
 @Table(name = "${entity.getTable().getName()}")
-#if( !$entity.getId().isEmbeddable() && !$entity.getParent() )
+#if( !$entity.getId().isEmbeddable() && !$entity.getParent() && ${entity.id.type} == 'Long' )
 @SequenceGenerator(name = "${entity.getTable().getSequenceName()}", sequenceName = "${entity.getTable().getSequenceName()}")
 #end
 #if( $entity.childrens.size() > 0 )
@@ -88,7 +88,9 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #else
 #set( $id = $entity.getId())
     @Id
+#if(${entity.id.type} == 'Long')
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "${entity.getTable().getSequenceName()}")
+#end
     @Column(name="$entity.id.column.name"#if(${entity.id.column.precision}), precision = ${entity.id.column.precision}#{end}#if(${entity.id.column.scale}), scale = ${entity.id.column.scale}#{end} )
 #end
     private ${entity.getId().getType()} id;
@@ -102,13 +104,138 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})
+    //  ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${property.mappedBy} ) )} :   ${property.mappedBy}
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${entity.getName()} ) )}  )id.#{end}$util.uncapitalize( ${entity.getName()} )")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${property.mappedBy} ) )}  )id.#{end}$util.uncapitalize( ${property.mappedBy} )")
     private List<$property.type> $property.getName();## = new ArrayList<$property.type>(0);
 
 #end
 #parse( "stage/domain/java/manyToOneProperties.vm" )
 #parse( "stage/domain/java/manyToManyProperties.vm" )
+
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+    /**
+     * Getter para id.
+     * @return valor do campo
+     */
+    public ${entity.getId().getType()} getId() {
+        return this.id;
+    }
+
+    /**
+     * Setter para id.
+     * @param value valor para id
+     */
+    public void setId(${entity.getId().getType()} value) {
+        this.id = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public ${property.getType()} get${property.capitalizedName}() {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (this.${property.getName()} != null) {
+            return ($property.type) this.${property.getName()}.clone();
+        }
+        return null;
+#else
+        return this.${property.getName()};
+#end
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(${property.getType()} value) {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (value != null) {
+            this.${property.getName()} = ($property.type) value.clone();
+        } else {
+            this.${property.getName()} = null;
+        }
+#else
+        this.${property.getName()} = value;
+#end
+    }
+
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public ${property.type} get${property.capitalizedName}() {
+        return this.${property.name};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(${property.type} value) {
+        this.${property.name} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getOneToManyProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.${property.getName()};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.${property.getName()} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getManyToManyProperties()})
+    /**
+     * Getter para $property.getName().
+     * @return valor do campo
+     */
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.${property.getName()};
+    }
+
+    /**
+     * Setter para $property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.${property.getName()} = value;
+    }
+
+#end
+#foreach( ${property} in ${entity.getEnums()})
+   /**
+    * Getter para $property.getName().
+    * @return valor do campo
+    */
+    public ${property.getName()} get$util.capitalize( $property.getSimpleProperty().getName() )() {
+        return this.${property.getSimpleProperty().getName()};
+    }
+
+   /**
+    * Setter para $property.getName().
+    * @param value valor para $property.getName()
+    */
+    public void set$util.capitalize( $property.getSimpleProperty().getName() )(${property.getName()} value) {
+        this.$property.getSimpleProperty().getName() = value;
+    }
+
+#end
     /**
      * {@inheritDoc}
      */
@@ -131,10 +258,10 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(${property.name})
 #end
 #foreach( ${property} in ${entity.parent.getManyToOneProperties()})
-                .append(get${property.referedEntity.name}())
+                .append(get${property.capitalizedName}())
 #end
 #foreach( ${property} in ${entity.id.getManyToOneProperties()})
-                .append(id.get${property.referedEntity.name}())
+                .append(id.get${property.capitalizedName}())
 #end
                .toHashCode();
     }
@@ -175,10 +302,10 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(${property.name}, rhs.${property.name})
 #end
 #foreach( ${property} in ${entity.parent.getManyToOneProperties()})
-                .append(get${property.referedEntity.name}(), rhs.get${property.referedEntity.name}())
+                .append(get${property.capitalizedName}(), rhs.get${property.capitalizedName}())
 #end
 #foreach( ${property} in ${entity.id.getManyToOneProperties()})
-                .append(id.get${property.referedEntity.name}(), rhs.getId().get${property.referedEntity.name}())
+                .append(id.get${property.capitalizedName}(), rhs.getId().get${property.capitalizedName}())
 #end
                 .isEquals();
 #else

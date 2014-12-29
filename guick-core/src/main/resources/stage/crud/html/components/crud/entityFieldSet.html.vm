@@ -2,36 +2,37 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 #set( $bigFieldSize = 100)
-
+#set( $isFilter = false )
 #set( $idAgragation = '' )
+#if(${entity.id.type} != 'Long')
+#set( $property = ${entity.id} )
+#parse( "stage/crud/html/property.html.vm" )    
+#end
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
+#########
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
+#########
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
+#########
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
                                 <div class="col-md-4">
-                                    <div class="form-group#if(!${complexProperty.column.nullable}) has-warning#{end}">
+                                    <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
                                         <label class="control-label">${complexProperty.title}
-#if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
-                                            <a class="btn-detail" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
-#end
                                         </label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
@@ -64,8 +65,17 @@
                                 </div>
 #else
                                 <div class="col-md-4">
-                                    <div class="form-group#if(!${complexProperty.column.nullable}) has-warning#{end}">
-                                        <${beanName}-select></${beanName}-select>
+                                    <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
+                                        <label>${complexProperty.title}
+#if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
+                                            <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+#end
+                                        </label>
+#if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
+                                        <${complexProperty.referedEntity.beanName}-select></${complexProperty.referedEntity.beanName}-select>
+#else
+#parse( "stage/crud/html/selectProperty.html.vm" )
+#end                                        
                                     </div>
                                 </div>
 #end
@@ -75,11 +85,8 @@
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
                                 <div class="col-md-4">
-                                    <div class="form-group#if(!${complexProperty.column.nullable}) has-warning#{end}">
+                                    <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
                                         <label class="control-label">${complexProperty.title}
-#if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
-                                            <a class="btn-detail" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
-#end
                                         </label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
@@ -112,27 +119,35 @@
                                 </div>
 #else
                                 <div class="col-md-4">
-                                    <div class="form-group#if(!${complexProperty.column.nullable}) has-warning#{end}">
-                                        <${beanName}-select></${beanName}-select>
+                                    <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
+                                        <label>${complexProperty.title}
+#if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
+                                            <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+#end
+                                        </label>
+#if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
+                                        <${complexProperty.referedEntity.beanName}-select></${complexProperty.referedEntity.beanName}-select>
+#else
+#parse( "stage/crud/html/selectProperty.html.vm" )
+#end
                                     </div>
                                 </div>
 #end
 #end
-
-
+#########
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} < ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
+#########
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} < ${bigFieldSize})
 #parse( "stage/crud/html/property.html.vm" )
 #end
 #end
-
+#########
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} < ${bigFieldSize})

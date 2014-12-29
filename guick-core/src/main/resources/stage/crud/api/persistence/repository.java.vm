@@ -4,6 +4,9 @@ package ${project.group}.${project.name}.api.persistence;
 import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
 import ${project.group}.${project.name}.api.persistence.core.${entity.name}RepositoryCustom;
 import ${project.group}.${project.name}.domain.${entity.name};
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+import ${project.group}.${project.name}.domain.${entity.id.type};
+#end
 import org.springframework.data.jpa.repository.JpaRepository;
 ##import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
@@ -16,7 +19,7 @@ import org.springframework.stereotype.Repository;
  */
 ##@RepositoryRestResource(collectionResourceRel = "${entityBeanName}List", path = "${entityBeanName}DataService")
 @Repository
-public interface ${entity.name}Repository extends JpaRepository<${entity.name}, Long >, ${entity.name}RepositoryCustom  {
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${entity.id.type} >, ${entity.name}RepositoryCustom  {
 ##public interface I${entity.name}Repository, ${entity.name}Repository {
 
 ##     /**
