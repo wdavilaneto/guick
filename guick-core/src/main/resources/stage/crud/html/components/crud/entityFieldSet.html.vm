@@ -41,7 +41,7 @@
                                               remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
                                               selected-object="searchSelects.${complexProperty}"
                                               remote-url-data-field="content"
-                                              title-field="#set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop}#if($counter < $size),#{end}#{end}#{end}"
+                                              title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size),#{end}#{end}"
 #if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
 #set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
 ### find first StringField
@@ -95,7 +95,7 @@
                                               remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
                                               selected-object="searchSelects.${complexProperty}"
                                               remote-url-data-field="content"
-                                              title-field="#set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop}#if($counter < $size),#{end}#{end}#{end}"
+                                              title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size),#{end}#{end}"
 #if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
 #set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
 ### find first StringField

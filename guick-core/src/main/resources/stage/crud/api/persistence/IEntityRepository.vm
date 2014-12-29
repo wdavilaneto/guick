@@ -32,12 +32,12 @@ public interface ${entity.name}RepositoryCustom {
 #else
     ${entity.name} get(${entity.name} e);
 #end
-#if( $entity.childrens.size() > 0 )
+##if( $entity.childrens.size() > 0 )
 
     public ${entity.name} update(${entity.name} ${entityBeanName});
 
     public ${entity.name} create(${entity.name} ${entityBeanName});
-#end
+##end
 
 #if (${entity.hasDeadline()})
     public Page<${entity.name}> overdue(Pageable pageable);

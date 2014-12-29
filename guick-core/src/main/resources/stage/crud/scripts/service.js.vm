@@ -83,16 +83,16 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #foreach( ${complexProperty} in ${searchedEntitys} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
                 if (ref && searchSelects.${complexProperty.name}.originalObject) {
-                    ref.${complexProperty.name}.id = searchSelects.${complexProperty.name}.originalObject.id;
+                    ref.${complexProperty.name} = searchSelects.${complexProperty.name}.originalObject;
                 } else {
                     ref.${complexProperty.name} = null;
                 }
 #else
-                if (ref && ref.${complexProperty.name} && searchSelects.${complexProperty.name}) {
-                    ref.${complexProperty.name}.id = searchSelects.${complexProperty.name}.id;
-                } else {
-                    ref.${complexProperty.name} = null;
-                }
+##                if (ref && ref.${complexProperty.name} && searchSelects.${complexProperty.name}) {
+##                    ref.${complexProperty.name}.id = searchSelects.${complexProperty.name}.id;
+##                } else {
+##                    ref.${complexProperty.name} = null;
+##                }
 #end
 #end
             };
@@ -104,9 +104,9 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
                     searchSelects.${complexProperty.name}.originalObject = ref.${complexProperty.name};
                 }
 #else
-                if (ref && ref.${complexProperty.name} ) {
-                    searchSelects.${complexProperty.name} = ref.${complexProperty.name};
-                }
+##                if (ref && ref.${complexProperty.name} ) {
+##                    searchSelects.${complexProperty.name} = ref.${complexProperty.name};
+##                }
 #end                
 #end
             };

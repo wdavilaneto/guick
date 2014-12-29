@@ -35,7 +35,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     if (${js}routeParams.id) {
         ${js}scope.editMode = true;
         ${entityBeanName}Service.get( {'id':$routeParams.id} , function (data) {
-            ${js}scope.entity = data;
+            ${js}scope.entity = jsog.decode(data);
             ${js}scope.searchSelects.fromEntity(${js}scope.entity);
         });
     }

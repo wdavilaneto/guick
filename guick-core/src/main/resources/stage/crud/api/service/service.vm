@@ -66,15 +66,15 @@ class ${entity.name}Service implements I${entity.name}Service {
     @Override
     @Transactional
     public ${entity.name} save(${entity.name} ${entityBeanName}) {
-#if( $entity.childrens.size() > 0 )
+##if( $entity.childrens.size() > 0 )
         if (${entityBeanName}.getId() != null){
             ${entityBeanName}Repository.update(${entityBeanName});
         }
         return ${entityBeanName}Repository.create(${entityBeanName});
-#else
-        ${entityBeanName}Repository.save(${entityBeanName});
-        return ${entityBeanName};
-#end
+##else
+##        ${entityBeanName}Repository.save(${entityBeanName});
+##        return ${entityBeanName};
+###end
     }
 
 #if (${entity.hasDeadline()})

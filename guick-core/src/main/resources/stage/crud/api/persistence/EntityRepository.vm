@@ -159,7 +159,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return entityManager.find(${entity.name}.class, e);
     }
 #end
-#if( $entity.childrens.size() > 0 )
+##if( $entity.childrens.size() > 0 )
     @Override
     public  ${entity.name} update( ${entity.name} ${entityBeanName}){
         Session session = (Session) entityManager.getDelegate();
@@ -172,7 +172,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         session.persist(${entityBeanName});
         return ${entityBeanName};
     }
-#end
+##end
 #if (${entity.hasDeadline()})
 
     public Page<${entity.name}> overdue(Pageable pageable){
