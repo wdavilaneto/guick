@@ -47,13 +47,15 @@ class Column {
         if (name.split("_")[0] == otherPrefixes) {
             return otherPrefixes;
         }
+        if (name.split("_")[0] == table.owner) {
+            return table.owner;
+        }
         if (!isKey()) {
             otherPrefixes = table.getPk()[0].name.split("_")[0];
             if (name.split("_")[0] == otherPrefixes) {
                 return otherPrefixes;
             }
         }
-
         return null;
     }
 

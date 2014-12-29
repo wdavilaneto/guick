@@ -27,18 +27,18 @@
         select * from (
             select
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
-                ${entity.name}.${entity.id.column.name} ,
+                ${entity.name}.${entity.table.pk[0].name} ,
                 ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name} as label,
 #else
-                ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
+                ${entity.name}.${entity.table.pk[0].name} || ' ${entity.name}' as label,
 #end
                 NVL( sum(o${e.mappedBy}.${numericProperties[0].column.name}), 0) as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.table.pk[0].name} = ${entity.name}.${entity.table.pk[0].name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
-            group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
-            group by ${entity.name}.${entity.id.column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}
 #end
             order by sum(o${e.mappedBy}.${numericProperties[0].column.name}) desc
         ) where rownum <![CDATA[ < ]]> 11
@@ -50,18 +50,18 @@
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
-                ${entity.name}.${entity.id.column.name},
+                ${entity.name}.${entity.table.pk[0].name},
                 ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name} as label,
 #else
-                ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
+                ${entity.name}.${entity.table.pk[0].name} || ' ${entity.name}' as label,
 #end
                 NVL(sum(o${e.mappedBy}.${numericProperties[1].column.name}) ,0 ) as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.table.pk[0].name} = ${entity.name}.${entity.table.pk[0].name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
-            group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
-            group by ${entity.name}.${entity.id.column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}
 #end
             order by sum(o${e.mappedBy}.${numericProperties[1].column.name}) desc
         ) where rownum <![CDATA[ < ]]> 11
@@ -73,18 +73,18 @@
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
-                ${entity.name}.${entity.id.column.name},
+                ${entity.name}.${entity.table.pk[0].name},
                 ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name} as label,
 #else
-                ${entity.name}.${entity.id.column.name} || ' ${entity.name}' as label,
+                ${entity.name}.${entity.table.pk[0].name} || ' ${entity.name}' as label,
 #end
                 NVL(sum(o${e.mappedBy}.${numericProperties[2].column.name}),0 )as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.id.column.name} = ${entity.name}.${entity.id.column.name}
+            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.table.pk[0].name} = ${entity.name}.${entity.table.pk[0].name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
-            group by ${entity.name}.${entity.id.column.name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else
-            group by ${entity.name}.${entity.id.column.name}
+            group by ${entity.name}.${entity.table.pk[0].name}
 #end
             order by sum(o${e.mappedBy}.${numericProperties[2].column.name}) desc
         ) where rownum <![CDATA[ < ]]>  11

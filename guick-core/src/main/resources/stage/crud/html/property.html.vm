@@ -13,9 +13,9 @@
                                     <div class="form-group" ng-controller="DatepickerDemoCtrl">
                                         <label for="${idAgragation}${property}">${property.title}</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened"
+                                            <input type="text" class="form-control input-sm" datepicker-popup="{{dateFormat}}" is-open="opened"
                                                    datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
-                                                   ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}placeholder="${property.title}" id="${idAgragation}${property}" />
+                                                   ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} id="${idAgragation}${property}" ui-mask="99/99/9999" />
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
@@ -23,24 +23,24 @@
                                     </div>
                                 </div>
 #else
-#if ( ${property.name.equalsIgnoreCase('sex')} || ${property.name.equalsIgnoreCase('sexo')} )
+#if ( ${property.name.toLowerCase().equalsIgnoreCase('sex')} || ${property.name.toLowerCase().equalsIgnoreCase('sexo')} )
                                 <div class="form-group col-md-#if(${property.column.length} >= 100)4#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
                                     <div class="col-md-3">
                                         <div class="row">
-                                            <label for="${idAgragation}${property}">${property.title}</label>
+                                            <label>${property.title}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" ng-controller="ButtonsCtrl">
                                         <div class="row">
                                             <div class="btn-group btn-group-justified">
-                                                <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Left'" uncheckable>Masculino</label>
-                                                <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'right'" uncheckable>Feminino</label>
+                                                <label class="btn btn-default btn-sm" uncheckable ng-model="entity.${idAgragation}${property}" data-value="M" ng- btn-radio="'M'">Masculino</label>
+                                                <label class="btn btn-default btn-sm" uncheckable ng-model="entity.${idAgragation}${property}" data-value="F" ng- btn-radio="'F'">Feminino</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 #else
-#if ( ${property.name.startsWith('mail')} || ${property.name.startsWith('email')} )
+#if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
                                 <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label for="${idAgragation}${property}">${property.title}</label>

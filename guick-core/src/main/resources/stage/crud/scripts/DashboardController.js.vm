@@ -33,12 +33,13 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
+#set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = dashboardService.getBasicOptions();
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.yAxis.axisLabel = "${collectionProperty} ${capitalizedProp}";
     dashboardService.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${entity} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
+        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${capitalizedName} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
     });
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
@@ -47,7 +48,7 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.yAxis.axisLabel = "${collectionProperty}${capitalizedProp}";
     dashboardService.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${entity} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
+        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${capitalizedName} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
     });
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
@@ -56,7 +57,7 @@ angular.module('${projectBeanName}App').controller('dashboardController', ['${js
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.xAxis.axisLabel = "${entity}";
     ${js}scope.options${capitalizedName}WithSum${collectionProperty}${capitalizedProp}.chart.yAxis.axisLabel = "${collectionProperty}${capitalizedProp}";
     dashboardService.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}( {}, function (data) {
-        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${entity} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
+        ${js}scope.get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} = [{ key: '${capitalizedName} With Sum of ${collectionProperty} ${capitalizedProp}',values: data }];
     });
 #end
 

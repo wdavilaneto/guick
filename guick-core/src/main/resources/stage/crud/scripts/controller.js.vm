@@ -19,6 +19,7 @@
  */
 angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
+    ${js}scope.dateFormat = "dd/MM/yyyy";
     ${js}scope.title = 'Search Filter: ${entity.name}';
     ${js}scope.editMode = false;
     ${js}scope.maxSelectBoxSize = 300;

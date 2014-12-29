@@ -37,7 +37,7 @@ import java.util.Locale;
 public class OnSuccessAdvice {
 
     public static final String SUCESSO_TITLE = "Sucesso!";
-    public static final String SUCESSO_MSG = "Operação realizada com sucesso!";
+    public static final String SUCESSO_MSG = "Opera&#231;&#227;o realizada com sucesso!";
 
     public static final String TITLE = "title";
     public static final String MESSAGE = "message";

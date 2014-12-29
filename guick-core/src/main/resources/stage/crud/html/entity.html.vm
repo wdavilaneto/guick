@@ -23,8 +23,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label" for="searchField.text">Busca por texto</label>
-                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                                <label class="control-label" for="searchField.text" popover-trigger="mouseenter">Busca por texto</label>
+                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"
+                                                    popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto"
+                                                />
                                             </div>
                                         </div>
 #if(${entity.getActiveProperty()})

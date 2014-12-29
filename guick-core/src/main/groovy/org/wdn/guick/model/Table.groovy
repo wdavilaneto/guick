@@ -49,9 +49,6 @@ class Table {
 
     public boolean isNMRelationShip() {
         if (_isNamRelationship == null) {
-            if ("NMSM_ORIENT_EQUIPE_INTERNACAO".equals(name)) {
-                print "stop";
-            }
             List<Constraint> fkContraints = constraints.each { t -> t.tipo.equals(ConstraintType.Relationship) }
             if (fkContraints.size() < 2) {
                 return false;
@@ -78,6 +75,13 @@ class Table {
             }
         }
         return _isNamRelationship;
+    }
+
+    public String getPrefix() {
+        if (name.split("_")[0] == owner) {
+            return owner;
+        }
+        return getPk()[0].getPrefix();
     }
 
     /**

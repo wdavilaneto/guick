@@ -92,8 +92,22 @@ class MetadataFactory {
                 ComplexProperty complexProperty = new ComplexProperty(constraint, constraint.getReferedTable().entity);
                 complexProperty.project = currentProject
 
-                if (constraint.isSingleColumn()){
-                    complexProperty.name = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
+                if (constraint.isSingleColumn()) {
+                    String thisPrefix = constraint.singleColumnPair.coluna.getPrefix();
+                    String otherKeyName = constraint.singleColumnPair.colunaReferenciada.name;
+                    String fieldBasedOnFKColumnName = constraint.singleColumnPair.coluna.name.replaceFirst(thisPrefix + "_", "").replaceFirst(otherKeyName, "")
+                    if (fieldBasedOnFKColumnName.length() > 4 ) {
+                        fieldBasedOnFKColumnName = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
+                        if (fieldBasedOnFKColumnName.length() > 4) {
+                            complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
+                        } else {
+                            complexProperty.name = fieldBasedOnFKColumnName
+                        }
+                    } else {
+                        // such a short field name .. lets try somthing diferent
+                        complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
+                    }
+
                 } else {
                     complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
                 }
@@ -110,8 +124,8 @@ class MetadataFactory {
                 for (ColumnPair parDeColuna : constraint.getColumnPairs()) {
                     try {
                         entity.getProperties().remove(parDeColuna.getColuna().simpleProperty)
-                    } catch (ex){
-                        logger.error( "Invalid Column Pair: " + parDeColuna , ex);
+                    } catch (ex) {
+                        logger.error("Invalid Column Pair: " + parDeColuna, ex);
                     }
 
                 }

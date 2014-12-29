@@ -42,7 +42,7 @@ class PatternConverter {
 
     public String getBeanType(String columnType) {
         def typ = typeConverter.get[columnType.replaceAll(" ", "_")]
-        if (typ){
+        if (typ) {
             return typ;
         }
         logger.error("Undefined type for " + columnType.replaceAll(" ", "_"));
@@ -68,73 +68,79 @@ class PatternConverter {
             columnReturn = columnReturn.replaceFirst("DT_", "DATA_")
         } else if (columnReturn.startsWith("CD_")) {
             columnReturn = columnReturn.replaceFirst("CD_", "CODIGO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("TP_")) {
             columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
         } else if (columnReturn.startsWith("SG_")) {
             columnReturn = columnReturn.replaceFirst("SG_", "SIGLA_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("VL_")) {
             columnReturn = columnReturn.replaceFirst("VL_", "VALOR_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("TX_")) {
             columnReturn = columnReturn.replaceFirst("TX_", "TEXTO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("DS_")) {
             columnReturn = columnReturn.replaceFirst("DS_", "DESCRICAO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("NR_")) {
             columnReturn = columnReturn.replaceFirst("NR_", "NUMERO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("NM_")) {
             columnReturn = columnReturn.replaceFirst("NM_", "NOME_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("PGTO_")) {
             columnReturn = columnReturn.replaceFirst("PGTO_", "PAGAMENTO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("IN_")) {
-            columnReturn = columnReturn.replaceFirst("IN_", "INDICADOR_")
-            if (columnReturn.contains("_TP_")){
+            columnReturn = columnReturn.replaceFirst("IN_", "")
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("TEL_")) {
             columnReturn = columnReturn.replaceFirst("TEL_", "TELEFONE_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.startsWith("OBS_")) {
             columnReturn = columnReturn.replaceFirst("OBS_", "OBSERVACAO_")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.endsWith("_OBS")) {
             columnReturn = columnReturn.replaceFirst("_OBS", "_OBSERVACAO")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
         } else if (columnReturn.endsWith("PGTO")) {
             columnReturn = columnReturn.replaceFirst("_PGTO", "_PAGAMENTO")
-            if (columnReturn.contains("_TP_")){
+            if (columnReturn.contains("_TP_")) {
                 columnReturn = columnReturn.replaceFirst("TP_", "TIPO_")
             }
-        } else if (columnReturn.endsWith("_ID") || columnReturn.endsWith("_PK") || columnReturn.endsWith("_DK") ) {
-            columnReturn = columnReturn[0..(columnReturn.size()-3)]
+        } else if (columnReturn.endsWith("_ID") || columnReturn.endsWith("_PK") || columnReturn.endsWith("_DK")) {
+            columnReturn = columnReturn[0..(columnReturn.size() - 3)]
+        } else if (columnReturn.contains("_ID_")) {
+            columnReturn = columnReturn.replaceFirst("_ID_", "_")
+        } else if (columnReturn.contains("_PK_")) {
+            columnReturn = columnReturn.replaceFirst("_PK_", "_")
+        } else if (columnReturn.contains("_DK_")) {
+            columnReturn = columnReturn.replaceFirst("_DK_", "_")
         }
         return columnReturn
     }
@@ -181,11 +187,11 @@ class PatternConverter {
 
     private String getTableNameWithoutPrefix(Table table) {
         String tableName = table.name.toLowerCase().replaceFirst("^tb_", "")
-        String prefix = table.getPk()[0].getPrefix();
+        String prefix = table.getPrefix();
         if (prefix) {
             String[] splited = tableName.split("_")
             if (splited.length > 1) {
-                return tableName.replaceFirst( prefix + "_", "")
+                return tableName.replaceFirst(prefix.toLowerCase() + "_", "")
             }
         }
         return tableName
@@ -195,12 +201,12 @@ class PatternConverter {
         String prefix = column.getPrefix();
         if (prefix) {
             String[] splited = column.name.split("_")
-            if (splited.length > 1 
-                    && (!"ID".equals(column.name.replaceFirst( prefix + "_", "") ))
-                    && (!"PK".equals(column.name.replaceFirst( prefix + "_", "") ))
-                    && (!"DK".equals(column.name.replaceFirst( prefix + "_", "") ))
+            if (splited.length > 1
+                    && (!"ID".equals(column.name.replaceFirst(prefix + "_", "")))
+                    && (!"PK".equals(column.name.replaceFirst(prefix + "_", "")))
+                    && (!"DK".equals(column.name.replaceFirst(prefix + "_", "")))
             ) {
-                return column.name.replaceFirst( prefix + "_", "")
+                return column.name.replaceFirst(prefix + "_", "")
             }
         }
         return column.name
