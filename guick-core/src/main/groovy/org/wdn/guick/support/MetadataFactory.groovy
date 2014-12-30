@@ -96,12 +96,13 @@ class MetadataFactory {
                     String thisPrefix = constraint.singleColumnPair.coluna.getPrefix();
                     String otherKeyName = constraint.singleColumnPair.colunaReferenciada.name;
                     String fieldBasedOnFKColumnName = constraint.singleColumnPair.coluna.name.replaceFirst(thisPrefix + "_", "").replaceFirst(otherKeyName, "")
+                    //println "${constraint.singleColumnPair.coluna.name} - ${otherKeyName} = $fieldBasedOnFKColumnName "
                     if (fieldBasedOnFKColumnName.length() > 4 ) {
-                        fieldBasedOnFKColumnName = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
+                        fieldBasedOnFKColumnName = getPropertyName(getAllComplexProperties(entity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
                         if (fieldBasedOnFKColumnName.length() > 4) {
-                            complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
-                        } else {
                             complexProperty.name = fieldBasedOnFKColumnName
+                        } else {
+                            complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
                         }
                     } else {
                         // such a short field name .. lets try somthing diferent

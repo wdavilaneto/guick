@@ -37,7 +37,7 @@ class RelationalInfoBRP implements IBusinessRulesProcessor {
                     //column.length = null; //comentei pq preciso desse valor para o template JSF
                     // se nao tiver informacao de precision o scale e inutil neste caso...
                     if (column.precision == null) {
-                        column.scale = null
+                        column.scale = null;
                     }
                 }
             }

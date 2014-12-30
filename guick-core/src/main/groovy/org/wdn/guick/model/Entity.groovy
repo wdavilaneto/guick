@@ -56,7 +56,7 @@ class Entity extends Clazz {
     public List<RelationshipProperty> getAllNumericProperties() {
         List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
         for (RelationshipProperty property : properties) {
-            if (property.type == 'Long') {
+            if (property.type == 'Long' || property.type == 'BigDecimal') {
                 returnList.add(property);
             }
         }

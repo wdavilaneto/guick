@@ -21,7 +21,11 @@ public class RelationshipProperty extends Clazz {
 
     @Override
     public String getType() {
-        return PatternConverterFacade.getBeanType(column.type)
+        String basicType = PatternConverterFacade.getBeanType(column.type)
+        if ('Long'.equals(basicType) && column.scale > 0) {
+            return 'BigDecimal'
+        }
+        return basicType;
     }
 
     @Override

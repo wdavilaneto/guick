@@ -96,7 +96,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         } else {
             // prepare search(d) text object
             ${js}scope.searchSelects.toEntity(${js}scope.entity);
-
             ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pageable} , function (data) {
                 ${js}scope.resultPage = data;
                 ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -139,7 +138,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         console.log('Limpando form filter');
         ${js}scope.entity = ${entityBeanName}Service.create();
         ${js}scope.searchField.text = '';
-        ${js}scope.searchSelects.clear();
+        ${js}scope.searchSelects.clear($scope);
     };
 
     // ******************************************************************************************

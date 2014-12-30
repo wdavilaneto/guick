@@ -7,6 +7,7 @@
  */
 package ${project.group}.${project.name}.api.persistence.core;
 
+import java.math.BigDecimal;
 import ${project.group}.${project.name}.domain.${entity.name};
 #if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
 import ${project.group}.${project.name}.domain.${entity.id.type};

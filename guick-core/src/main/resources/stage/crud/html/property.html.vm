@@ -1,6 +1,6 @@
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
 <!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
-                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}">
+                                <div class="col-md-#if(${property.column.length} >= 100)6#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso') placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
@@ -24,7 +24,7 @@
                                 </div>
 #else
 #if ( ${property.name.toLowerCase().equalsIgnoreCase('sex')} || ${property.name.toLowerCase().equalsIgnoreCase('sexo')} )
-                                <div class="form-group col-md-#if(${property.column.length} >= 100)4#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
+                                <div class="form-group col-md-#if(${property.column.length} >= 100)6#{else}3#{end}#if(!${property.column.nullable}) has-warning#{end}">
                                     <div class="col-md-3">
                                         <div class="row">
                                             <label>${property.title}</label>
@@ -41,7 +41,7 @@
                                 </div>
 #else
 #if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
-                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
+                                <div class="col-md-#if(${property.column.length} >= 100)6#{else}3#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label for="${idAgragation}${property}">${property.title}</label>
                                         <input type="email" class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" >
@@ -49,14 +49,14 @@
                                 </div>
 #else
 #if(${property.column.length} >= 500)
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                                         <textarea class="form-control" rows="3" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" ></textarea>
                                     </div>
                                 </div>
 #else
-                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}">
+                                <div class="col-md-#if(${property.column.length} >= 100)6#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}">
                                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>

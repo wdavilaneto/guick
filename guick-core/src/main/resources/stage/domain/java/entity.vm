@@ -19,6 +19,7 @@ package ${project.group}.${project.name}.domain;
 import  ${project.group}.${project.name}.domain.${property.getName()};
 #end
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;

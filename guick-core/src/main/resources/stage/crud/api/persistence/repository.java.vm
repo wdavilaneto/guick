@@ -1,6 +1,7 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 package ${project.group}.${project.name}.api.persistence;
 
+import java.math.BigDecimal;
 import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
 import ${project.group}.${project.name}.api.persistence.core.${entity.name}RepositoryCustom;
 import ${project.group}.${project.name}.domain.${entity.name};
