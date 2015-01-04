@@ -21,7 +21,7 @@ public class RelationshipProperty extends Clazz {
 
     @Override
     public String getType() {
-        return PatternConverterFacade.getBeanType(column.type)
+        return PatternConverterFacade.getBeanType(column)
     }
 
     @Override

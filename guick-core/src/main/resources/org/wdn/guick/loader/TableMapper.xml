@@ -72,6 +72,16 @@
         order by cols.table_name, cc.position, cols.column_id
     </select>
 
+    <resultMap id="constraintResultMap" type="org.wdn.guick.model.ConstraintDto">
+        <result property="name" column="CONSTRAINT_NAME"/>
+        <result property="type" column="CONSTRAINT_TYPE"/>
+        <result property="tableName" column="TABLE_NAME"/>
+        <result property="rTableName" column="R_TABLE_NAME"/>
+        <result property="columnName" column="COLUMN_NAME"/>
+        <result property="rColumnName" column="R_COLUMN_NAME"/>
+        <result property="searchCondition" column="SEARCH_CONDITION" />
+    </resultMap>
+
     <select id="findContraints" resultType="hashmap">
         select
         k.constraint_name,

@@ -78,10 +78,16 @@ class Table {
     }
 
     public String getPrefix() {
+        if (project.config?.tablePrefix) {
+            return project.config.tablePrefix;
+        }
         if (name.split("_")[0] == owner) {
             return owner;
         }
-        return getPk()[0].getPrefix();
+        if (getPk()[0]) {
+            getPk()[0].getPrefix();
+        }
+        return "";
     }
 
     /**

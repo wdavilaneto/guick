@@ -26,7 +26,12 @@ class SequenceNameBRP implements IBusinessRulesProcessor {
                     //entity.table.sequenceName = "SQ_" + entity.table.getPk()[0].name
                     if ( entity.table.getPk().size() == 1 ){
                         // TODO validate this formation
-                        entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.getPk()[0].name.split("_")[0] + "_DK";
+                        if (entity.table.getPk()[0].type.toUpperCase().startsWith("CHARACTER")) {
+                            entity.table.getPk()[0].generated = true;
+                            entity.table.getPk()[0].useUUID = true;
+                        } else {
+                            entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.getPk()[0].name.split("_")[0] + "_DK";
+                        }
                     } else {
                         // TODO validate this formation
                         entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.columns[0].name.split("_")[0]+ "_DK";

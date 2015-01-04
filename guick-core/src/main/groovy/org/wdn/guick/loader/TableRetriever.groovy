@@ -31,26 +31,37 @@ class TableRetriever {
      */
     public List<Table> execute(SqlSession session, def user= null) {
         List<Table> tableList
-        TableMapper mapper = session.getMapper(TableMapper.class)
+
+        TableMapper mapper
+        if (project.config?.guickConnectionInfo?.dialect == "org.hibernate.dialect.PostgreSQLDialect") {
+            mapper = session.getMapper(PostgresTableMapper.class)
+        } else {
+            mapper = session.getMapper(TableMapper.class)
+        }
 
         try {
             logger.info("Retrieving information from schema: " + project.config.tables )
 
-            tableList = mapper.findTableAndColumns(project.config.tables)
+            tableList = mapper.findTableAndColumns(project.config.tables);
             Map<String, Table> tables = new HashMap<String, Table>();
 
             for (Table table : tableList) {
-                // Retrieve a statistic count from the given table for better euristics..
-                table.count = mapper.count(table.owner , table.name);
+                // Retrieve a statistic count from the given table for better euristics...
+                try {
+                    //table.count = mapper.count(table.owner, table.name);
+                } catch (Exception e) {
+                    // ignore
+                }
 
                 tables.put(table.getName(), table);
                 // ajust bidirectional Association
                 for (def column : table.columns) {
-                    column.table = table
+                    column.table = table;
                 }
+                table.project = project;
             }
-            List<Map> contraints = mapper.findContraints(project.config.tables)
-            processTables(tables, contraints)
+            List<ConstraintDto> contraints = mapper.findContraints(project.config.tables);
+            processTables(tables, contraints);
 
             for (Table table : tableList) {
                 table.inheritanceTable = getInheritanceTable(table)
@@ -70,26 +81,26 @@ class TableRetriever {
      * @throws SQLException
      * @throws Exception
      */
-    private void processTables(HashMap<String, Table> tabelas, List<Map> contraints) throws SQLException, Exception {
+    private void processTables(HashMap<String, Table> tabelas, List<ConstraintDto> contraints) throws SQLException, Exception {
 
         Table tabelaPai, tabelaReferenciada
         Constraint constraint
         Column column, colunaReferenciada
         String lastContraintsName = null
 
-        for (Map resultMap : contraints) {
+        for (ConstraintDto dto : contraints) {
 
             // Obtem da lista de tabelas a tabel com o name alvo
-            tabelaPai = tabelas.get((String) resultMap["TABLE_NAME"]);
+            tabelaPai = tabelas.get((String) dto.tableName);
 
             // para ignorar tabelas como internas como BIN$!@#$....
             if (tabelaPai != null) {
 
-                switch (resultMap["CONSTRAINT_TYPE"]) {
+                switch (dto.type) {
                     case 'R':
                         // !contraint["TABLE_NAME"].equals(tabelaPai?.getName())
-                        if (!resultMap["CONSTRAINT_NAME"]?.toString()?.equalsIgnoreCase(lastContraintsName)) {
-                            lastContraintsName = resultMap["CONSTRAINT_NAME"];
+                        if (!dto.name?.toString()?.equalsIgnoreCase(lastContraintsName)) {
+                            lastContraintsName = dto.name;
 
                             // Instanciamos uma nova constraint ( obtem do hash via name)
                             constraint = new Constraint();
@@ -101,12 +112,12 @@ class TableRetriever {
                                 //println "nlas";
                             }
 
-                            tabelaReferenciada = tabelas.get((String) resultMap["R_TABLE_NAME"]);
+                            tabelaReferenciada = tabelas.get((String) dto.rTableName);
 
                             // atribui o name da contratint
-                            constraint.setName(resultMap["CONSTRAINT_NAME"].toString());
+                            constraint.setName(dto.name.toString());
                             //tipo da contraint ( tipo relacionamento ou code contraint )
-                            constraint.setTipo(ConstraintType.fromValue(resultMap["CONSTRAINT_TYPE"].toString()));
+                            constraint.setTipo(ConstraintType.fromValue(dto.type.toString()));
 
                             // seta a table (pai) da contraint em questao)
                             constraint.setTable(tabelaPai);
@@ -116,10 +127,10 @@ class TableRetriever {
                         }
 
                         // obtem da lista de columnPairs da table pai a coluna de name xxxx
-                        column = getColumnByName(constraint.getTable(), (String) resultMap["COLUMN_NAME"]);
-                        colunaReferenciada = getColumnByName(constraint.getReferedTable(), (String) resultMap["R_COLUMN_NAME"]);
+                        column = getColumnByName(constraint.getTable(), (String) dto.columnName);
+                        colunaReferenciada = getColumnByName(constraint.getReferedTable(), (String) dto.rColumnName);
                         if (column == null) {
-                            logger.warn('Column ' + resultMap["COLUMN_NAME"] + ' not found on table: ' + constraint.getTable() );
+                            logger.warn('Column ' + dto.columnName+ ' not found on table: ' + constraint.getTable() );
                             logger.warn('Constraint Name: ' + constraint.name);
                             logger.warn('R Column: ' + colunaReferenciada);
                         }
@@ -129,7 +140,7 @@ class TableRetriever {
 
                     case 'U':
                         for (Column columnSearch : tabelaPai.columns) {
-                            if (columnSearch.name == resultMap["COLUMN_NAME"]) {
+                            if (columnSearch.name == dto.columnName) {
                                 // adicionando true para a propriedade unique da coluna da tabelaPai
                                 columnSearch.unique = true
                                 break
@@ -137,9 +148,9 @@ class TableRetriever {
                         }
                         break
                     case 'C':
-                        if (resultMap["SEARCH_CONDITION"] != null && !resultMap["SEARCH_CONDITION"].toString().contains("IS NOT NULL")) {
-                            Column columnSearch = getColumnByName(tabelaPai, resultMap["COLUMN_NAME"]?.toString())
-                            columnSearch.checkValues = getEnumWithValues(resultMap["SEARCH_CONDITION"]?.toString())
+                        if (dto.searchCondition != null && !dto.searchCondition.toString().contains("IS NOT NULL")) {
+                            Column columnSearch = getColumnByName(tabelaPai, dto.columnName?.toString())
+                            columnSearch.checkValues = getEnumWithValues(dto.searchCondition?.toString())
                         }
                         break;
                 }

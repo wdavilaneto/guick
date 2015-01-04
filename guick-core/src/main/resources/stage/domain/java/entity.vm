@@ -19,6 +19,7 @@ package ${project.group}.${project.name}.domain;
 import  ${project.group}.${project.name}.domain.${property.getName()};
 #end
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -64,11 +65,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "${entity.getTable().getName()}")
 #if( !$entity.getId().isEmbeddable() && !$entity.getParent() && ${entity.id.type} == 'Long' )
 @SequenceGenerator(name = "${entity.getTable().getSequenceName()}", sequenceName = "${entity.getTable().getSequenceName()}")
+#else
+#if(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID})
+@SequenceGenerator(name = "uuid", sequenceName = "uuid2")
 #end
+#{end}## Knowable GEnerator Sequence
 #if( $entity.childrens.size() > 0 )
 @Inheritance(strategy= InheritanceType.JOINED)
 #end
-#if( $entity.getParent() )
+#if( $entity.getParent() && ${entity.table.getPk().size()} >0)
 @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )

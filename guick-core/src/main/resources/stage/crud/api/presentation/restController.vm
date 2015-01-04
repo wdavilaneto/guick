@@ -9,10 +9,11 @@
  */
 package ${project.group}.${project.name}.api.rest;
 
+import java.math.BigDecimal;
 import ${project.group}.${project.name}.api.rest.dto.Pagination;
 import ${project.group}.${project.name}.api.rest.dto.SearchFilter;
 import ${project.group}.${project.name}.domain.${entity.name};
-#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date' && ${entity.id.type} != 'BigDecimal')
 import ${project.group}.${project.name}.domain.${entity.id.type};
 #end
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;

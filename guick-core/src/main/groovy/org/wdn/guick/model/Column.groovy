@@ -22,6 +22,8 @@ class Column {
     Long position
     String comment
     boolean unique = false
+    boolean generated = false
+    boolean useUUID = false;
 
     // Bidirectional RelationShips
     RelationshipProperty simpleProperty
@@ -50,7 +52,7 @@ class Column {
         if (name.split("_")[0] == table.owner) {
             return table.owner;
         }
-        if (!isKey()) {
+        if (!isKey() && table.getPk()[0] != null) {
             otherPrefixes = table.getPk()[0].name.split("_")[0];
             if (name.split("_")[0] == otherPrefixes) {
                 return otherPrefixes;

@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.wdn.guick.model.Column
+import org.wdn.guick.model.Project
 import org.wdn.guick.model.Table
+
+import javax.annotation.Resource
 
 /**
  * Objeto responsavel pelas conversoes de Strings referentes aos patterns
@@ -15,6 +18,9 @@ import org.wdn.guick.model.Table
  */
 @Component
 class PatternConverter {
+
+    @Resource
+    private Project project;
 
     Logger logger = LoggerFactory.getLogger(this.class);
 
@@ -40,13 +46,8 @@ class PatternConverter {
         return beanPattern.toString()
     }
 
-    public String getBeanType(String columnType) {
-        def typ = typeConverter.get[columnType.replaceAll(" ", "_")]
-        if (typ) {
-            return typ;
-        }
-        logger.error("Undefined type for " + columnType.replaceAll(" ", "_"));
-        return "String";
+    public String getBeanType(Column columnType) {
+        return typeConverter.getType(columnType)
     }
 
     public String columnToPropertyName(Column column) {
@@ -58,6 +59,9 @@ class PatternConverter {
             if (beanName != null && !"".equals(beanName)) {
                 name = beanName;
             }
+        }
+        if ("class".equals(name)) {
+            name = name.replace("ss", "zz")
         }
         return name;
     }
@@ -186,15 +190,15 @@ class PatternConverter {
     }
 
     private String getTableNameWithoutPrefix(Table table) {
-        String tableName = table.name.toLowerCase().replaceFirst("^tb_", "")
+        String tableName = table.name.toLowerCase().replaceFirst("^tb_", "");
         String prefix = table.getPrefix();
         if (prefix) {
-            String[] splited = tableName.split("_")
+            String[] splited = tableName.split("_");
             if (splited.length > 1) {
-                return tableName.replaceFirst(prefix.toLowerCase() + "_", "")
+                return tableName.replaceFirst(prefix.toLowerCase() + "_", "");
             }
         }
-        return tableName
+        return tableName;
     }
 
     private String getColumnNameWithoutPrefix(Column column) {

@@ -168,7 +168,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     ${js}scope.view = function (size, entityName) {
         ${js}scope.searchSelects.toEntity(${js}scope.entity);
         var modalInstance = ${js}modal.open({
-            templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal${entity.name}Controller', size: size,
+            templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' +entityName+ 'Controller', size: size,
             resolve: {
                 data: function () {
                     return $scope.entity;

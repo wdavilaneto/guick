@@ -122,11 +122,21 @@
             <artifactId>jackson-jsog</artifactId>
             <version>1.0.1</version>
         </dependency>
+
+#if ( ${project.config.guickConnectionInfo.dialect} == 'org.hibernate.dialect.PostgreSQLDialect')
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
+#else
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
         </dependency>
+#end
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

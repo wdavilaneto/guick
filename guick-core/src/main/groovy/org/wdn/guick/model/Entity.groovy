@@ -182,7 +182,7 @@ class Entity extends Clazz {
 
     public boolean looksLikeEnum() {
         if (_looksLikeEnum == null) {
-            (_looksLikeEnum = properties.size() == 1 && getManyToOneProperties().size() == 0) || (_looksLikeEnum = properties.size() == 2 && name.startsWith("Tipo"));
+            _looksLikeEnum = ( properties.size() == 1 && getManyToOneProperties().size() == 0 && parent == null && getEmbeddedId() == null ) || (_looksLikeEnum = properties.size() == 2 && name.startsWith("Tipo"));
         }
         return _looksLikeEnum;
     }

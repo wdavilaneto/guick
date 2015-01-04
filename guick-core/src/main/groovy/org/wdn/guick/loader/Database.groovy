@@ -91,6 +91,7 @@ class Database {
         org.apache.ibatis.mapping.Environment environment = new org.apache.ibatis.mapping.Environment(DEFAULT_ENVIRONMENT, new JdbcTransactionFactory(), dataSource)
         Configuration configuration = new Configuration(environment)
         configuration.addMapper(TableMapper.class)
+        configuration.addMapper(PostgresTableMapper)
         logger.info("Opening Connection")
         return (new SqlSessionFactoryBuilder().build(configuration)).openSession()
     }

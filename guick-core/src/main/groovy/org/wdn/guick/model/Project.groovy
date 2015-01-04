@@ -78,6 +78,8 @@ class Project implements Serializable {
             config.guickConnectionInfo = new DatasourceInfo()
             config.generatedDatasourceInfo = new DatasourceInfo()
             config.generationLanguage = "java";
+            config.tablePrefix = "java";
+            config.tables = [[owner:"schema", tableName:"example_table"]];
 
             // if no pom nither guick.json exists, create one and stop any generation
             def json = new JsonBuilder(config).toPrettyString();

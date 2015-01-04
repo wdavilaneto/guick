@@ -1,6 +1,8 @@
 package org.wdn.guick.loader
 
 import org.apache.ibatis.annotations.Param
+import org.apache.ibatis.transaction.Transaction
+import org.wdn.guick.model.ConstraintDto
 import org.wdn.guick.model.Table
 
 /**
@@ -19,7 +21,7 @@ interface TableMapper {
      * Returns an list of contraints
      * @return
      */
-    List<Map> findContraints(@Param("tables") List tables);
+    List<ConstraintDto> findContraints(@Param("tables") List tables);
 
     /**
      * Returns a estimate (statistc count) quantity of tuples on a given Table

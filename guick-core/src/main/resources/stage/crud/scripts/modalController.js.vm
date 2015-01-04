@@ -9,9 +9,9 @@
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',  function (${js}scope, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data) {
-    ${js}scope.entity = data;
-    console.log('Editing Modal' );
-    console.log(${js}scope.entity);
+    console.log('View/Editing Modal' );
+    console.log(data);
+    ${js}scope.entity = data;//.$entity.beanName;
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
     ${js}scope.searchSelects.fromEntity(${js}scope.entity);
 
