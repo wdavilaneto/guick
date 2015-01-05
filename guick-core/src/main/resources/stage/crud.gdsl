@@ -52,7 +52,7 @@ guick {
                 "geracao de workflows" {
                     object entity
                     templates = [
-                            [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/bpm/${entity.name}.bpmn20.xml"]
+                            [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/processes/${entity.name}.bpmn20.xml"]
                     ]
                 }
 
@@ -102,10 +102,15 @@ guick {
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
-
                     [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
+
+                    [input: "stage/crud/scripts/ActivitiService.js.vm", output: "/front-end/app/scripts/service/support/ActivitiService.js"],
+                    [input: "stage/crud/scripts/ActivitiController.js.vm", output: "/front-end/app/scripts/controllers/support/ActivitiController.js"],
+
                     [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
                     [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],
+
+                    [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
 
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
 

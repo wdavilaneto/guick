@@ -126,7 +126,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
 
-##                <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
+                <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
                 <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 #if (${project.name} == 'msm')
                 <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
@@ -232,6 +232,7 @@
 <script src="scripts/app.js"></script>
 
 <!-- servicos -->
+    <script src="scripts/service/support/ActivitiService.js"></script>
     <script src="scripts/service/dashboards/DashboardService.js"></script>
     <script src="scripts/service/monitor/MonitorService.js"></script>
     <script src="scripts/service/support/SupportService.js"></script>
@@ -244,6 +245,7 @@
 
 <!-- controllers -->
     <script src="scripts/controllers/MainController.js"></script>
+    <script src="scripts/controllers/support/ActivitiController.js"></script>
     <script src="scripts/controllers/ModalController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>

@@ -29,6 +29,7 @@ class SequenceNameBRP implements IBusinessRulesProcessor {
                         if (entity.table.getPk()[0].type.toUpperCase().startsWith("CHARACTER")) {
                             entity.table.getPk()[0].generated = true;
                             entity.table.getPk()[0].useUUID = true;
+                            entity.table.sequenceName = "uuid"
                         } else {
                             entity.table.sequenceName = entity.table.owner + "_SQ_" + entity.table.entity.table.getPk()[0].name.split("_")[0] + "_DK";
                         }

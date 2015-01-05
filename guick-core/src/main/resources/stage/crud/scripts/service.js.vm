@@ -193,7 +193,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 
-#if(${entity.id.type} == 'String')
+#if(${entity.id.type} == 'String' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}))
                 {field: 'id', displayName: 'id', sortable: false},
 #end
 #set($size = ${properties.size()} )

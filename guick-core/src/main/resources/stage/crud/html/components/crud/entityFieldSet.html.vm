@@ -4,7 +4,7 @@
 #set( $bigFieldSize = 100)
 #set( $isFilter = false )
 #set( $idAgragation = '' )
-#if(${entity.id.type} != 'Long')
+#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}))
 #set( $property = ${entity.id} )
 #parse( "stage/crud/html/property.html.vm" )    
 #end

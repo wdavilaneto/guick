@@ -37,11 +37,11 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
 ##import lombok.Setter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +67,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SequenceGenerator(name = "${entity.getTable().getSequenceName()}", sequenceName = "${entity.getTable().getSequenceName()}")
 #else
 #if(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID})
-@SequenceGenerator(name = "uuid", sequenceName = "uuid2")
+@GenericGenerator(name = "uuid", strategy = "uuid2")
 #end
 #{end}## Knowable GEnerator Sequence
 #if( $entity.childrens.size() > 0 )
@@ -95,6 +95,10 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     @Id
 #if(${entity.id.type} == 'Long')
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "${entity.getTable().getSequenceName()}")
+#else
+#if(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID})
+    @GeneratedValue(generator = "uuid")
+#end
 #end
     @Column(name="$entity.id.column.name"#if(${entity.id.column.precision}), precision = ${entity.id.column.precision}#{end}#if(${entity.id.column.scale}), scale = ${entity.id.column.scale}#{end} )
 #end

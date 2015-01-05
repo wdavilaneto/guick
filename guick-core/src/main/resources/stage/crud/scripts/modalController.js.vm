@@ -37,6 +37,16 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
         });
     };
 
+    $scope.remove = function (){
+       console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
+       ${entityBeanName}Service.remove( ${js}scope.entity  , function ( successResult) {
+           console.log(successResult);
+           ${js}scope.entity = ${entityBeanName}Service.create();
+           ${js}modalInstance.close(${js}scope.entity);
+           ${js}location.path('/${entity.name}/');
+       });
+    };
+
     ${js}scope.cancel = function () {
         ${js}modalInstance.dismiss('cancel');
     };

@@ -247,11 +247,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             }
         });
         modalInstance.result.then(function (selectedItem) {
-            ${js}scope.selected = selectedItem;
-            ${entity.beanName}Service.remove( obj , function ( successResult) {
-                console.log(successResult);
-                ${js}scope.search();
-            });
+            ${js}scope.search();
         }, function () {
             //dismiss
         });

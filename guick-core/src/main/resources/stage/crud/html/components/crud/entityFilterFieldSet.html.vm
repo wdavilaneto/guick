@@ -2,8 +2,12 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 #set( $bigFieldSize = 100)
-
 #set( $isFilter = true )
+#set( $idAgragation = '' )
+#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}))
+#set( $property = ${entity.id} )
+#parse( "stage/crud/html/property.html.vm" )
+#end
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= 500)

@@ -5,11 +5,11 @@ server.servlet-path=/api
 spring.groovy.template.check-template-location=false
 spring.velocity.checkTemplateLocation=false
 
-spring.datasource.url=${project.config.generatedDatasourceInfo.database.url}
+spring.datasource.url=${project.config.generatedDatasourceInfo.url}
 spring.datasource.username=${project.config.generatedDatasourceInfo.user}
 spring.datasource.password=${project.config.generatedDatasourceInfo.password}
-spring.datasource.driver-class-name=${project.config.generatedDatasourceInfo.driver}
-#if ( ${project.config.guickConnectionInfo.dialect} == 'org.hibernate.dialect.PostgreSQLDialect')
+spring.datasource.driver-class-name=${project.config.generatedDatasourceInfo.driverName}
+#if ( ${project.config.guickConnectionInfo.driverName} == 'oracle.jdbc.driver.OracleDriver')
 spring.datasource.testOnBorrow=true
 spring.datasource.validation-query= select 1 from dual
 #end

@@ -20,7 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-@Configuration
+//@Configuration
 public class ActivitiConfiguration {
 
     @Bean
@@ -32,8 +32,8 @@ public class ActivitiConfiguration {
         engineConfiguration.setTransactionManager(transactionManager);
         engineConfiguration.setJpaEntityManagerFactory(entityManagerFactory);
         engineConfiguration.setHistory(HistoryLevel.FULL.getKey());
-//        engineConfiguration.setDeploymentResources(processResource());
-//        engineConfiguration.setDeploymentMode("single-resource");
+        engineConfiguration.setDeploymentResources(processResource());
+        engineConfiguration.setDeploymentMode("single-resource");
 
         return engineConfiguration;
     }
@@ -43,7 +43,7 @@ public class ActivitiConfiguration {
 #set($counter = 0)
 #foreach(${entity} in ${project.entities})
 #if(${entity.looksLikeMainEntity()})
-        processResource[${counter}] = new ClassPathResource("bpm/${entity}.bpmn20.xml");
+        processResource[${counter}] = new ClassPathResource("processes/${entity}.bpmn20.xml");
 #end
 #end
         return  processResource;
