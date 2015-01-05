@@ -82,7 +82,7 @@
         <result property="searchCondition" column="SEARCH_CONDITION" />
     </resultMap>
 
-    <select id="findContraints" resultType="hashmap">
+    <select id="findContraints" resultMap="constraintResultMap">
         select
         k.constraint_name,
         k.table_name, c.column_name, k.constraint_type ,

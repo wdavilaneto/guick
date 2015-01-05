@@ -51,8 +51,8 @@ class JavaTypeConverter {
 
     public String getType(Column col) {
         if (get.containsKey(col.type.toUpperCase())) {
-            if (get[col.type.toUpperCase()].equals("Long")) {
-                if (col.scale != 0) {
+            if (get[col.type.toUpperCase()].equals("Long") && !col.isKey() ) {
+                if ((col.scale != null && col.scale != 0) && (col.precision != null && col.scale !=0 )) {
                     return "BigDecimal"
                 }
             }

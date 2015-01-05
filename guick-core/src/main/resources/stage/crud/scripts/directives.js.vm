@@ -125,4 +125,31 @@ angular.module('${project.acronym}App')
                 });
             }
         };
-    });
+    })
+    .directive('authenticatedApplication', function() {
+        return {
+            restrict: 'C', link: function(scope, elem, attrs) {
+                //once Angular is started, remove class:
+                //elem.removeClass('waiting-for-angular');
+
+                var login = elem.find('#login-holder');
+                var main = elem.find('#content');
+                var menu = elem.find('#menu');
+
+                login.hide();
+                //main.hide();
+                //menu.hide();
+
+                scope.$on('event:auth-loginRequired', function() {
+                    login.slideDown('slow', function() {
+                        main.hide();
+                    });
+                });
+                scope.$on('event:auth-loginConfirmed', function() {
+                    main.show();
+                    login.slideUp();
+                });
+            }
+        }
+    })
+;

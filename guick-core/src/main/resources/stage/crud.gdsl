@@ -10,6 +10,7 @@ def enumList = []
 entities.each { entity -> enumList.addAll(entity.enums) }
 
 def lang = "java" //TODO to parametrize
+def useWorkflow = (project.config != null && project.config.useWorkflow);
 
 guick {
     domain {
@@ -47,15 +48,13 @@ guick {
             }
         }
         for (def entity : entityList) {
-            if (entity.looksLikeMainEntity()) {
-
+            if (entity.looksLikeMainEntity() && useWorkflow) {
                 "geracao de workflows" {
                     object entity
                     templates = [
                             [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/processes/${entity.name}.bpmn20.xml"]
                     ]
                 }
-
             }
         }
         for (def entity : entityList) {
@@ -84,12 +83,12 @@ guick {
 //        [input: "stage/workflow/SimpleProccessCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/SimpleProccessCommand.${lang}"],
 //        [input: "stage/workflow/IWorkflowCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/IWorkflowCommand.${lang}"],
 //        [input: "stage/workflow/ActivitiTransferObject.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/ActivitiTransferObject.${lang}"],
+        //[input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
         "single-generateds" {
             templates = [
 
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
-                    [input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
                     [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/api/aop/OnSuccessAdvice.${lang}"],
                     [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
@@ -163,6 +162,7 @@ guick {
                 ]
             }
         }
+
         "single-tests" {
             templates = [
                     [input: "stage/crud/test/index.html.vm", output: "/api/src/test/resources/index.html"]

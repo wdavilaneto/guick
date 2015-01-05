@@ -64,7 +64,7 @@
                                     <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
                                         <label class="control-label">${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
-                                            <a class="btn-detail" ng-show="searchSelects.employees.id != null" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+                                            <a class="btn-detail" ng-show="searchSelects.${complexProperty.referedEntity.beanName}.id != null" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
                                         </label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"

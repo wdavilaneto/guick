@@ -58,6 +58,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+#if( ${project.config.useWorkflow} == true )
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>spring-boot-starter-basic</artifactId>
@@ -68,6 +70,7 @@
             <artifactId>spring-boot-starter-rest-api</artifactId>
             <version>5.17.0</version>
         </dependency>
+#end
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -121,7 +124,7 @@
             <version>1.0.1</version>
         </dependency>
 
-#if ( ${project.config.guickConnectionInfo.dialect} == 'org.hibernate.dialect.PostgreSQLDialect')
+#if( ${project.config.guickConnectionInfo.dialect} == 'org.hibernate.dialect.PostgreSQLDialect')
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>

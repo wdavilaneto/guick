@@ -24,7 +24,6 @@
         <result property="type" column="data_type"/>
     </resultMap>
 
-
     <select id="findTableAndColumns" resultMap="tableResultMap" parameterType="string">
         select
         tab.table_name,
