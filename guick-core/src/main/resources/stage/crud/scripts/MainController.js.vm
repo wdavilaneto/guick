@@ -16,19 +16,34 @@ angular.module('${projectBeanName}App').controller('mainController', function($s
     $scope.pageClass = 'page-home';
 });
 
-
 angular.module('${project.name}App').controller('TabsDemoCtrl', function (${js}scope, ${js}window) {
-  ${js}scope.tabs = [
-    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  ];
+    ${js}scope.tabs = [
+      { title:'Dynamic Title 1', content:'Dynamic content 1' },
+      { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+    ];
 
-  ${js}scope.alertMe = function() {
-    setTimeout(function() {
-      ${js}window.alert('You\'ve selected the alert tab!');
-    });
-  };
+    ${js}scope.alertMe = function() {
+      setTimeout(function() {
+        ${js}window.alert('You\'ve selected the alert tab!');
+      });
+    };
 });
+
+angular.module('${project.name}App').controller('LoginController', function ($scope, $location, AuthenticationSharedService) {
+    $scope.rememberMe = true;
+    $scope.login = function () {
+        AuthenticationSharedService.login({
+            username: $scope.username,
+            password: $scope.password,
+            rememberMe: $scope.rememberMe
+        });
+    }
+});
+
+angular.module('${project.name}App').controller('LogoutController', function ($location, AuthenticationSharedService) {
+    AuthenticationSharedService.logout();
+});
+
 angular.module('${project.name}App').controller('PopoverDemoCtrl', function ($scope) {
   $scope.dynamicPopover = 'Hello, World!';
   $scope.dynamicPopoverTitle = 'Title';

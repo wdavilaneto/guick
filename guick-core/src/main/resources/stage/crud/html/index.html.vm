@@ -51,7 +51,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </a><a class="logo-control" href="#">#if (${project.name} == 'msm') MÓDULO DE SAÚDE MENTAL#else ${project.name} #end</a>
+        </a><a class="logo-control" href="#">${project.name} </a>
         <div class="navbar-right">
             <ul class="nav navbar-nav">
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
@@ -160,11 +160,6 @@
 
                 <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
                 <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
-#if (${project.name} == 'msm')
-                <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
-                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
-                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-step-forward"></i>Movimentação</a></li>
-#end
 
 #if (${project.getAllMainEntities().size()} > 0)
                 <li class="treeview">
@@ -266,8 +261,11 @@
 <!-- servicos -->
     <script src="scripts/service/support/ActivitiService.js"></script>
     <script src="scripts/service/dashboards/DashboardService.js"></script>
-    <script src="scripts/service/monitor/MonitorService.js"></script>
     <script src="scripts/service/support/SupportService.js"></script>
+    <script src="scripts/service/support/truncate.js"></script>
+    <script src="scripts/service/support/utils.js"></script>
+    <script src="scripts/service/support/constants.js"></script>
+    <script src="scripts/service/monitor/MonitorService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
@@ -284,9 +282,7 @@
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
     <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
 #end
-#if (${project.name} == 'msm')
-    <script src="scripts/controllers/PacienteController.js"></script>
-#end
+
 #foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
@@ -295,7 +291,7 @@
 #end
 
 <!-- diretrizes -->
-<script src="components/directives/directives.js"></script>
+<script src="scripts/directives/directives.js"></script>
 #foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
