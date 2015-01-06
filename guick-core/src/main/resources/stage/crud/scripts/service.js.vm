@@ -160,18 +160,11 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
             options.selectedItems = entitySelected;
             options.pagingOptions = pagingOptions;
 #if(!${entity.looksLikeEnum()})
-            if (!isEditMode) {
-                options.rowTemplate= '<div ng-dblclick="detalhar(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
-            } else {
-                options.rowTemplate= '<div ng-dblclick="edit${entity.name}(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
-            }
+            options.rowTemplate= '<div ng-dblclick="detalhar(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
 #else
             options.rowTemplate= '<div ng-dblclick="edit${entity.name}(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
 #end
             options.columnDefs = [
-#if(!${entity.looksLikeEnum()})
-                {field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-search"></i></a>', width : '35', resizable: false},
-#end
 #set($properties = [])
 #if (${entity.parent} && ${entity.parent.properties.size()} < 3 )
 #set($properties =  ${entity.parent.properties})
@@ -221,8 +214,12 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 
             ];
             if (isEditMode) {
-                //options.columnDefs.shift(); //
-                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+#if(!${entity.looksLikeEnum()})
+                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+#else
+                //options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-twitch"></i></a>', width : '35', resizable: false});
+#end
                 options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); remove${entity.name}(row.entity);"><i class="fa fa-remove"></i></a>', width : '35', resizable: false});
             }
             return options;

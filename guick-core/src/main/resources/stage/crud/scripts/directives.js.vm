@@ -1,4 +1,8 @@
 #set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
 'use strict';
 
 angular.module('${project.acronym}App')
@@ -130,7 +134,7 @@ angular.module('${project.acronym}App')
         return {
             restrict: 'C', link: function(scope, elem, attrs) {
                 //once Angular is started, remove class:
-                //elem.removeClass('waiting-for-angular');
+                elem.removeClass('waiting-for-angular');
 
                 var login = elem.find('#login-holder');
                 var main = elem.find('#content');

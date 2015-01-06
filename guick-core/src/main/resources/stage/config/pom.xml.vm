@@ -58,10 +58,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        -->
+
 
 #if( ${project.config.useWorkflow} == true )
         <dependency>
@@ -411,6 +414,7 @@
             </dependencies>
         </profile>
 
+        <!--
         <profile>
             <id>integracao-continua</id>
             <properties>
@@ -420,6 +424,7 @@
                 <spring.profiles.active>ci</spring.profiles.active>
             </properties>
         </profile>
+        -->
 
     </profiles>
 

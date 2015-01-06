@@ -48,6 +48,7 @@ angular.module('${project.name}App').controller('PopoverDemoCtrl', function ($sc
   $scope.dynamicPopover = 'Hello, World!';
   $scope.dynamicPopoverTitle = 'Title';
 });
+
 angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}scope) {
   ${js}scope.singleModel = 1;
 
@@ -59,38 +60,39 @@ angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}sc
     right: false
   };
 });
+
 angular.module('${project.name}App').controller('DatepickerDemoCtrl', function (${js}scope) {
-  ${js}scope.today = function() {
-    ${js}scope.dt = new Date();
-  };
-  ${js}scope.today();
+    ${js}scope.today = function() {
+        ${js}scope.dt = new Date();
+    };
+    ${js}scope.today();
 
-  ${js}scope.clear = function () {
-    ${js}scope.dt = null;
-  };
+    ${js}scope.clear = function () {
+        ${js}scope.dt = null;
+    };
 
-  // Disable weekend selection
-  ${js}scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
+    // Disable weekend selection
+    ${js}scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
 
-  ${js}scope.toggleMin = function() {
-    ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
-  };
-  ${js}scope.toggleMin();
+    ${js}scope.toggleMin = function() {
+        ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
+    };
+    ${js}scope.toggleMin();
 
-  ${js}scope.open = function(${js}event) {
+    ${js}scope.open = function(${js}event) {
     ${js}event.preventDefault();
     ${js}event.stopPropagation();
 
     ${js}scope.opened = true;
-  };
+    };
 
-  ${js}scope.dateOptions = {
+    ${js}scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
-  };
+    };
 
-  ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  ${js}scope.format = ${js}scope.formats[0];
+    ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    ${js}scope.format = ${js}scope.formats[0];
 });

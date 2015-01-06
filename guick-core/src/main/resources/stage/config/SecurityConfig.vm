@@ -17,8 +17,8 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 /**
  * TODO
  */
-//@Configuration
-//@EnableWebMvcSecurity
+@Configuration
+@EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -27,13 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/*").permitAll()
                 .anyRequest().authenticated();
-        http
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
     }
 
     @Configuration

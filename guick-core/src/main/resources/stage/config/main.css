@@ -1,3 +1,16 @@
+body.waiting-for-angular div#content-outer {
+  display: none;
+}
+/** background: url(../images/loading.gif) center center no-repeat; **/
+body.waiting-for-angular div#initializing-panel {
+  display: block;
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+
 a.logo-control{text-indent:-9999px; color: #fff;float: left;font-family: 'Marcellus SC', serif; font-size: 1.1em; margin: 14px 0 0 11;text-shadow: 1px 1px 5px #666;}
 .skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat center center;}
 .logo-control span{font-size: 2em;}

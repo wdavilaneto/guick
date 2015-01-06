@@ -54,6 +54,7 @@ guick {
         }
 
         //[input: "crud/AbstractTest.groovy.vm", output: "/api/src/test/groovy/${packageBase}/"]
+        //[input: "stage/config/SecurityConfig.vm", output: "/api/src/main/${lang}/${packageBase}/SecurityConfig." + lang],
         "single-generateds" {
             templates = [
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
@@ -61,6 +62,7 @@ guick {
                     [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
                     [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
+
 
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],

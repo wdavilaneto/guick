@@ -28,6 +28,9 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
     // For select boxes on screen TODO ...
     ${js}scope.entity = ${entityBeanName}Service.create();
+#if(${entity.getActiveProperty()})
+    ${js}scope.entity.boolActive = true;
+#end
 
     // Text Search Select utility Object
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();

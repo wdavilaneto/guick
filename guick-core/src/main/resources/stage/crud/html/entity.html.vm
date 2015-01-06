@@ -3,10 +3,23 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <i class="fa fa-search"></i> : <small> ${entity.title} </small>
+    <i class="fa fa-search"></i> :
+        <small>
+#if(${entity.title} == 'Proc asses executiva')
+        Processos na assesoria executiva
+#else
+        ${entity.title}
+#end
+        </small>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">${entity.title}</li>
+        <li class="active">
+#if(${entity.title} == 'Proc asses executiva')
+        Processos
+#else
+        ${entity.title}
+#end
+        </li>
     </ol>
 </section>
 
@@ -30,13 +43,44 @@
                                             </div>
                                         </div>
 #if(${entity.getActiveProperty()})
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" ng-model="searchField.active"> Ativo
+                                                    ${entity.getActiveProperty().title}
                                                 </label>
+                                                <p><input type="checkbox" ng-model="entity.boolActive" checked> Ativo</p>
                                             </div>
                                         </div>
+#end
+
+#if(${entity.getAllDeadlineProperties().size()} >= 1 )
+#set($activeProperty = ${entity.getAllDeadlineProperties()[0]})
+#if(${activeProperty})
+                                    </div>
+                                    <div class="row">
+                                        <div ng-controller="DatepickerDemoCtrl">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label" for="">${activeProperty} a partir de</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-controller="DatepickerDemoCtrl">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label" for="">Até</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+#end
 #end
                                     </div>
                                 </div>

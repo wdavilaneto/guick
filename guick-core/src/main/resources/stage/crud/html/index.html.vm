@@ -1,7 +1,12 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!doctype html>
-<html ng-app="${project.name}App" lang="pt">
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="pt"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="pt"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
+<html lang="pt">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title ng-scope>MPRJ - ${project.name}</title>
@@ -20,17 +25,17 @@
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
     <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
     <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
     <link rel="stylesheet" href="bower_components/adminlte/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/adminlte/css/ionicons.min.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="css/main.css">
     <!-- endbuild -->
 </head>
-<body class="skin-blue authenticated-application">
+<body class="skin-blue authenticated-application waiting-for-angular" ng-app="${project.name}App">
 <toaster-container></toaster-container>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -38,7 +43,7 @@
 <![endif]-->
 
 
- <header class="header">
+<header class="header">
     <a href="#/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
         ${project.name}
@@ -112,42 +117,47 @@
     </nav>
 </header>
 
-<div id="login-holder">
+<div id="initializing-panel"></div>
 
-    <div class="form-box" id="login-box">
-        <div class="header">Sign In</div>
-        <form action="../../index.html" method="post">
-            <div class="body bg-gray">
-                <div class="form-group">
-                    <input type="text" name="userid" class="form-control" placeholder="User ID"/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password"/>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" name="remember_me"/> Lembrar Senha
-                </div>
-            </div>
-            <div class="footer">
-                <button type="submit" class="btn bg-olive btn-block">Sign me in</button>
-            </div>
-        </form>
+<div id="content-outer">
 
-        <div class="margin text-center">
-            <!--<span>Sign in using social networks</span>
-            <br/>
-            <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
-            <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
-            <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
-            -->
+    <div id="login-holder">
+
+        <div class="form-box" id="login-box">
+            <div class="header">Sign In</div>
+            <form action="../../index.html" method="post">
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="text" name="userid" class="form-control" placeholder="User ID"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember_me"/> Lembrar Senha
+                    </div>
+                </div>
+                <div class="footer">
+                    <button type="submit" class="btn bg-olive btn-block">Sign me in</button>
+                </div>
+            </form>
+
+            <div class="margin text-center">
+                <!--
+                <span>Sign in using social networks</span>
+                <br/>
+                <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
+                <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
+                <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+                -->
+            </div>
         </div>
     </div>
-</div>
 
-<div class="div.wrapper row-offcanvas row-offcanvas-left" id="menu">
-    <aside class="left-side sidebar-offcanvas">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+    <div class="div.wrapper row-offcanvas row-offcanvas-left" id="menu">
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
 ##            <!-- Sidebar user panel -->
 ##            <div class="user-panel">
 ##                <div class="pull-left info">
@@ -155,64 +165,64 @@
 ##                </div>
 ##            </div>
 
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
 
-                <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
-                <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
+                    <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
+                    <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 
 #if (${project.getAllMainEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-group"></i> <span>Principal</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-group"></i> <span>Principal</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllMainEntities()})
 #if (!${entity.isEmbeddable()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
+                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
 #end
 #end
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 #end
-
 #if (${project.getAllDomainEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllDomainEntities()})
 #if (!${entity.isEmbeddable()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
 #end
 #end
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 #end
 
 #if (${project.getAllEnumLikeEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
 #end
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 #end
 
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-    <div ng-include src="'views/modals.html'"></div>
-    <aside class="right-side" id="content" ng-view></aside>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <div ng-include src="'views/modals.html'"></div>
+        <aside class="right-side" id="content" ng-view></aside>
+    </div>
 </div>
 
 <!-- rodape <div ng-include src="'components/footer/footer.html'"></div>-->

@@ -63,6 +63,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 ##@AllArgsConstructor
 @Entity
 @Table(name = "${entity.getTable().getName()}")
+##@Where(clause = "dataCadastro > to_date('2013','YYYY')")
 #if( !$entity.getId().isEmbeddable() && !$entity.getParent() && ${entity.id.type} == 'Long' )
 @SequenceGenerator(name = "${entity.getTable().getSequenceName()}", sequenceName = "${entity.getTable().getSequenceName()}")
 #else
