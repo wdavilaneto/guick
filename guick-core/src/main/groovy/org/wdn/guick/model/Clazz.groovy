@@ -43,6 +43,12 @@ class Clazz implements Serializable {
         }
         if (word.equalsIgnoreCase("CPF") || word.equalsIgnoreCase("CEP") || word.equalsIgnoreCase("CNPJ")){
             return word.toUpperCase();
+        } else {
+            for(def map in [[chave:"descricao",acentuado:"descrição"],[chave:"Descricao",acentuado: "Descrição"]]){
+                if (word.contains(map.chave)){
+                    word = word.replaceFirst(map.chave,map.acentuado);
+                }
+            }
         }
         return StringUtils.capitalize(word);
     }
