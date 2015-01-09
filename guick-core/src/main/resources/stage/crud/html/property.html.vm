@@ -1,3 +1,4 @@
+#if( !(${entity.table.getFieldThatPointsParentPk().size()} ==1 && ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column}) )
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
 <!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
                                 <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}">
@@ -62,6 +63,7 @@
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                                     </div>
                                 </div>
+#end
 #end
 #end
 #end

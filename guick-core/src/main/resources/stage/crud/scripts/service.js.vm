@@ -141,7 +141,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 ##                if (ref && ref.${complexProperty.name} ) {
 ##                    searchSelects.${complexProperty.name} = ref.${complexProperty.name};
 ##                }
-#end                
+#end
 #end
             };
             searchSelects.clear = function() {
@@ -176,7 +176,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 
-#if (${entity.properties.size()} <5)
+#if (${entity.properties.size()} <4)
 #set( $foo = ${properties.addAll( ${entity.properties} )} )
 #else
 #foreach( ${property} in ${entity.properties})
@@ -186,7 +186,15 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 
-#if(${entity.id.type} == 'String' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}))
+#if( ${entity.table.getFieldThatPointsParentPk().size()} >=1)
+#foreach( ${property} in ${entity.properties})
+#if( ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column})
+#set( $foo = ${properties.remove( $property )} )
+#end
+#end
+#end
+
+#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
                 {field: 'id', displayName: 'id', sortable: false},
 #end
 #set($size = ${properties.size()} )
