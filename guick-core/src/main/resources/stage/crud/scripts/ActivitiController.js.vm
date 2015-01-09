@@ -26,14 +26,24 @@ angular.module('${projectBeanName}App').controller('activitiController', ['${js}
         $scope.deployments = data.data;
     });
 
-   // Search de todos os elementos incial ( quando entra na tela )
+    // Search de todos os elementos incial ( quando entra na tela )
     activitiService.findAllResources( {id:1}, function (data) {
         $scope.processes = data;
     });
 
+    activitiService.findProccessDefinitions( {} , function (data) {
+        $scope.definitions = data;
+    });
+
     $scope.findResources = function() {
         activitiService.findAllResources( {id:1} , function (data) {
-            $scope.processes = data;
+            $scope.processes = data
+        });
+    };
+
+    $scope.getStarters = function (id) {
+        activitiService.getProccessDefinitionStarters( id , function (data) {
+            $scope.starters = data;
         });
     };
 
