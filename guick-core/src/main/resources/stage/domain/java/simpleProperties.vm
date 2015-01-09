@@ -1,4 +1,5 @@
 #foreach( ${property} in ${entity.getProperties()})
+#if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
 #foreach(${validation} in ${property.getValidations()})
     @${validation.getName()}#if(!$validation.parameters.isEmpty())(#foreach( $parameterKey in $validation.parameters.keySet())$parameterKey = $validation.parameters.get($parameterKey)#{end})#{end}
 
@@ -15,4 +16,5 @@
 #end
     ${property.getType()} ${property.getName()};
 
+#end
 #end

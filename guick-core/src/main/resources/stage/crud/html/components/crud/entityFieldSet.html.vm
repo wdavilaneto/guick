@@ -4,9 +4,9 @@
 #set( $bigFieldSize = 100)
 #set( $isFilter = false )
 #set( $idAgragation = '' )
-#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}))
+#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
 #set( $property = ${entity.id} )
-#parse( "stage/crud/html/property.html.vm" )    
+#parse( "stage/crud/html/property.html.vm" )
 #end
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= ${bigFieldSize})
@@ -75,7 +75,7 @@
                                         <${complexProperty.referedEntity.beanName}-select></${complexProperty.referedEntity.beanName}-select>
 #else
 #parse( "stage/crud/html/selectProperty.html.vm" )
-#end                                        
+#end
                                     </div>
                                 </div>
 #end

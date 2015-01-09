@@ -52,7 +52,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 /**
- * ${entity.getName()}  
+ * ${entity.getName()}
  * A classe ${entity.getName()} representa o mapeamento Objeto-Relacional
  * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
  *${entity.table.comment}
@@ -74,8 +74,19 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #if( $entity.childrens.size() > 0 )
 @Inheritance(strategy= InheritanceType.JOINED)
 #end
-#if( $entity.getParent() && ${entity.table.getPk().size()} >0)
-@PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
+#if( ${entity.getParent()} )
+#if (${entity.table.getPk().size()} ==0)
+#set( $strangeKey = ${entity.table.getFieldThatPointsParentPk()[0]})
+@PrimaryKeyJoinColumn(name="${strangeKey.name}")
+#else
+// TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
+#end
+#else
+#if (${entity.parent.table.getPk().size()} ==1)
+@PrimaryKeyJoinColumn(name="${entity.table.pk[0].name}")
+#else
+// TODO implementar Primary key join column para com chave composta @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
+#end
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
 #end
@@ -142,6 +153,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 
 #end
 #foreach( ${property} in ${entity.getProperties()})
+#if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
     /**
      * Getter para $property.getName().
      * @return valor do campo
@@ -173,6 +185,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #end
     }
 
+#end
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
     /**
@@ -246,6 +259,24 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     }
 
 #end
+#foreach( ${property} in ${entity.id.getProperties()})
+    /**
+     * Getter para id.$property.getName().
+     * @return valor do campo
+     */
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.id.get${property.capitalizedName}();
+    }
+
+    /**
+     * Setter para id.$property.getName().
+     * @param value valor para $property.getName()
+     */
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.id.set${property.capitalizedName}(value);
+    }
+
+#end
     /**
      * {@inheritDoc}
      */
@@ -262,7 +293,9 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(id.${property.name})
 #end
 #foreach( ${property} in ${entity.properties})
+#if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
                 .append(${property.name})
+#end
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name})
@@ -299,7 +332,9 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
         // so lets check all properties
         return new EqualsBuilder()
 #foreach( ${property} in ${entity.properties})
+#if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
                 .append(${property.name}, rhs.${property.name})
+#end
 #end
 #foreach( ${property} in ${entity.parent.properties})
                 .append(${property.name}, rhs.${property.name})
