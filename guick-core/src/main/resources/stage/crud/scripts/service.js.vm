@@ -79,7 +79,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 #set($idToManySize = ${entity.id.getManyToOneProperties().size()} )
-#if($idToManySize > 0)
+#if($idToManySize && $idToManySize > 0)
                 id:{
 #end
 #set($counter = 0)
@@ -88,7 +88,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
                     ${complexProperty.name}:{}#if($counter < $idToManySize ),
 #end
 #end
-#if($idToManySize > 0)
+#if($idToManySize && $idToManySize > 0)
 
                 }
 #end
@@ -186,7 +186,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 
-#if( ${entity.table.getFieldThatPointsParentPk().size()} >=1)
+#if( ${entity.table.getFieldThatPointsParentPk()} && ${entity.table.getFieldThatPointsParentPk().size()} >=1)
 #foreach( ${property} in ${entity.properties})
 #if( ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column})
 #set( $foo = ${properties.remove( $property )} )

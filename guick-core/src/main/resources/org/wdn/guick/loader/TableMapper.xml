@@ -82,6 +82,8 @@
         <result property="searchCondition" column="SEARCH_CONDITION" />
     </resultMap>
 
+    <!--  select * from DBA_DEPENDENCIES dep where dep.name LIKE upper('xxx') ; -->
+
     <select id="findContraints" resultMap="constraintResultMap">
         select
         k.constraint_name,

@@ -8,18 +8,16 @@
 
     <body>
 
-        <h1>POC - Especificações</h1>
+        <h1>Documentação do Sistema - </h1>
 
         <p>
             Página inicial contendo o link para as funcionalidades do projeto, a partir da página inicial é
-            possível navegar entre as histórias do usuário, critérios de aceitação e testes de aceitação
+            possível navegar entre as histórias do usuário, critérios de aceitação e seus respectivos testes de aceitação
         </p>
 
-        <h3>Lista das Estórias do Usuário</h3>
+        <h3>Lista das Estórias do Usuário </h3>
         <ul>
-            <li><a concordion:run="concordion" href="#">História 1</a></li>
-            <li><a concordion:run="concordion" href="#">História 2</a></li>
-            <li><a concordion:run="concordion" href="#">História 3</a></li>
+            <li><a concordion:run="concordion" href="#">Exemplo 1</a></li>
         </ul>
 
         <h3>Tabeas de domínio</h3>

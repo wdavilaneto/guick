@@ -47,7 +47,7 @@ class Table {
         // Busca todas as foreing keys que apontam para primary
         // Se achar, eh nossa chave  candidata
         for (Constraint cons : this.constraints) {
-            if (cons.referedSideColumns[0].isKey()) {
+            if (cons.referedSideColumns[0] != null && cons.referedSideColumns[0].isKey()) {
                 pks.addAll(cons.thisSideColumns[0]);
             }
         }
