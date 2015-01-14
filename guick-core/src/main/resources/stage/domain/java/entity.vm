@@ -26,8 +26,6 @@ import javax.persistence.*;
 
 import javax.validation.constraints.*;
 
-import br.mprj.custeio.api.controller.deserializer.JsonDateDeserializer;
-import br.mprj.custeio.api.controller.serializer.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

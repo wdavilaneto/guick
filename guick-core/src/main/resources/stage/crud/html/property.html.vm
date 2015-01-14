@@ -9,6 +9,16 @@
                                 </div>
 -->
 #else
+#if ( ${property.getType().equalsIgnoreCase('byte[]')} )
+                                <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                    <div class="form-group" ng-controller="DatepickerDemoCtrl">
+                                        <label for="${idAgragation}${property}">${property.title}</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/jpeg;base64,{{entity.${property}}}" id="photo-id" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+#end
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
                                 <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
                                     <div class="form-group" ng-controller="DatepickerDemoCtrl">
