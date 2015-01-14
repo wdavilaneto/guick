@@ -279,7 +279,7 @@
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
-    <script src="scripts/service/${entity.name}Service.js"></script>
+    <script src="scripts/service/crud/${entity.name}Service.js"></script>
 #end
 #end
 
@@ -296,7 +296,7 @@
 #foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
-    <script src="scripts/controllers/${entity.name}Controller.js"></script>
+    <script src="scripts/controllers/crud/${entity.name}Controller.js"></script>
 #end
 #end
 

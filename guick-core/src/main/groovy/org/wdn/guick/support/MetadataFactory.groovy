@@ -177,6 +177,10 @@ class MetadataFactory {
         return props
     }
 
+    private List<Clazz> getAllProperties(Entity entity) {
+        return getAllRelationShipProperties(entity).addAll(getAllRelationShipProperties(entity));
+    }
+
     private String getPropertyName(List<Clazz> properties, String propertyName, int counter = 0) {
         String name = propertyName + (counter == 0 ? "" : counter);
         if (!hasPropertyWithName(properties, name)) {

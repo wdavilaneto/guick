@@ -191,11 +191,19 @@ class PatternConverter {
 
     private String getTableNameWithoutPrefix(Table table) {
         String tableName = table.name.toLowerCase().replaceFirst("^tb_", "");
-        String prefix = table.getPrefix();
+        def prefix = table.getPrefix();
         if (prefix) {
             String[] splited = tableName.split("_");
-            if (splited.length > 1) {
-                return tableName.replaceFirst(prefix.toLowerCase() + "_", "");
+            if (prefix instanceof List) {
+                for (def p in prefix) {
+                    if (splited.length > 1 && tableName.startsWith(p.toLowerCase() + "_")) {
+                        return tableName.replaceFirst(p.toLowerCase() + "_", "");
+                    }
+                }
+            } else {
+                if (splited.length > 1) {
+                    return tableName.replaceFirst(prefix.toLowerCase() + "_", "");
+                }
             }
         }
         return tableName;

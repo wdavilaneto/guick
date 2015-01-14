@@ -13,7 +13,7 @@
 #end
 #end
 
-        ) as allCount
+        ) allCount
 	</select>
 
 #foreach( ${entity} in ${mainEntities} )

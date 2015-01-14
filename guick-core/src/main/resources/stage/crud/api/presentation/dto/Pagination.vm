@@ -25,6 +25,14 @@ public class Pagination {
     private int size = 20; // default values
     private String sort;
 
+    public Pagination(){
+    }
+
+    public Pagination(int page, int size){
+        this.page = page;
+        this.size = size;
+    }
+
     public int getPage() {
         return page;
     }

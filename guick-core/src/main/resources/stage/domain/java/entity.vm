@@ -26,6 +26,10 @@ import javax.persistence.*;
 
 import javax.validation.constraints.*;
 
+import br.mprj.custeio.api.controller.deserializer.JsonDateDeserializer;
+import br.mprj.custeio.api.controller.serializer.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -75,17 +79,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Inheritance(strategy= InheritanceType.JOINED)
 #end
 #if( ${entity.getParent()} )
-#if (${entity.table.getPk().size()} ==0)
-#set( $strangeKey = ${entity.table.getFieldThatPointsParentPk()[0]})
-@PrimaryKeyJoinColumn(name="${strangeKey.name}")
+#if ( ${entity.table.getPk().size()} == 0 && ${entity.table.getFieldThatPointsParentPk().size()} == 1 )
+#set( $strangeKey = ${entity.table.getFieldThatPointsParentPk()[0]} )
+@PrimaryKeyJoinColumn( name="${strangeKey.name}" )
 #else
-// TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
+// TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="$ { entity.table.getPk()[0].name } ")
 #end
 #else
 #if (${entity.parent.table.getPk().size()} ==1)
 @PrimaryKeyJoinColumn(name="${entity.table.pk[0].name}")
 #else
-// TODO implementar Primary key join column para com chave composta @PrimaryKeyJoinColumn(name="${entity.table.getPk()[0].name}")
+    // TODO implementar Primary key join column para com chave composta ??
 #end
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )

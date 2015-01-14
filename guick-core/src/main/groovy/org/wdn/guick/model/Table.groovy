@@ -90,7 +90,7 @@ class Table {
         return _isNamRelationship;
     }
 
-    public String getPrefix() {
+    def getPrefix() {
         if (project.config?.tablePrefix) {
             return project.config.tablePrefix;
         }

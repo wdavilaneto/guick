@@ -124,8 +124,8 @@ guick {
             "geracao de front-end" {
                 object entity
                 templates = [
-                        [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/${entity.name}Controller.js"],
-                        [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/${entity.name}Service.js"],
+                        [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/crud/${entity.name}Controller.js"],
+                        [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/crud/${entity.name}Service.js"],
                         [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
                         [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
                         [input: "stage/crud/html/components/crud/entityFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],

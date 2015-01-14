@@ -20,6 +20,8 @@ import org.springframework.data.domain.Pageable;
  */
 public class SearchFilter<T> {
 
+    private static PageRequest DEFAULT_PAGE = new PageRequest(0,10);
+
     private Pagination pagination;
 
     private T content;
@@ -41,6 +43,11 @@ public class SearchFilter<T> {
     }
 
     public Pageable getPageable() {
+        if(pagination == null) {
+            pagination = new Pagination();
+            pagination.setPage(1);
+            pagination.setSize(10);
+        }
         return pagination.getPageable();
     }
 }

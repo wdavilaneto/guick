@@ -6,6 +6,8 @@
 #end
 #if( ${property.getType()} == 'Date' )
     @Temporal(TemporalType.DATE)
+    @JsonSerialize(using = JsonDateSerializer.class)
+    @JsonDeserialize(using = JsonDateDeserializer.class)
 #end
 #if( ${property.getColumn().type} == 'BLOB' or ${property.getColumn().type} == 'CLOB' or ${property.getColumn().type} == 'LOB')
     @Column(name = "${property.getColumn().getName()}")
