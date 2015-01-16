@@ -130,7 +130,7 @@ angular.module('${project.acronym}App')
             }
         };
     })
-    .directive('authenticatedApplication', function() {
+    .directive('authenticatedApplication', function($rootScope, loginService) {
         return {
             restrict: 'C', link: function(scope, elem, attrs) {
                 //once Angular is started, remove class:
@@ -139,18 +139,27 @@ angular.module('${project.acronym}App')
                 var login = elem.find('#login-holder');
                 var main = elem.find('#content');
                 var menu = elem.find('#menu');
+                var userArea = elem.find('#user-area');
 
-                login.hide();
-                //main.hide();
-                //menu.hide();
+                if ( loginService.getCurrentUser() && loginService.getCurrentUser().isAuthenticated) {
+                    main.hide();
+                    menu.hide();
+                    userArea.hide();
+                } else {
+                    login.hide();
+                }
 
                 scope.$on('event:auth-loginRequired', function() {
                     login.slideDown('slow', function() {
                         main.hide();
+                        menu.hide();
+                        userArea.hide();
                     });
                 });
                 scope.$on('event:auth-loginConfirmed', function() {
                     main.show();
+                    menu.show();
+                    userArea.show();
                     login.slideUp();
                 });
             }

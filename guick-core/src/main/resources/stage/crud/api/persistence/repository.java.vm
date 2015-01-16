@@ -2,7 +2,7 @@
 package ${project.group}.${project.name}.api.persistence;
 
 import java.math.BigDecimal;
-import ${project.group}.${project.name}.api.persistence.support.ICoreRepository;
+import ${project.group}.commons.persistence.ICoreRepository;
 import ${project.group}.${project.name}.api.persistence.core.${entity.name}RepositoryCustom;
 import ${project.group}.${project.name}.domain.${entity.name};
 #if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date' && ${entity.id.type} != 'BigDecimal')

@@ -12,6 +12,7 @@
  * Main module of the application.
  */
 var app = angular.module('${project.name}App', [
+    'http-auth-interceptor',
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -88,11 +89,11 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
                                 });
                                 toaster.pop('warning', nomeApp, errorResponse.data.error);
                                 break;
-                            case 401: // 401-Unauthorized - Falta autenticacao
-                                ${js}window.location.href = '/index.html';
-                                break;
+##                            case 401: // 401-Unauthorized - Falta autenticacao
+##                                ${js}window.location.href = '/index.html';
+##                                break;
                             case 403: // 403-Forbidden - Tem autenticacao, mas, o acesso é proibido para este usuario.
-                                toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo');
+                                toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo, ou partes, do conteudo, que foi requisitado.');
                                 break;
                             case 404:
                                 toaster.pop('info', nomeApp, 'Nenhum registro encontrado');

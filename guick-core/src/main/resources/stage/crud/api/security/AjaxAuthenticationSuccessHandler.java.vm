@@ -1,4 +1,13 @@
-package br.mprj.cespae.api.security;
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -17,6 +26,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        logger.debug("Authentication Successful");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 

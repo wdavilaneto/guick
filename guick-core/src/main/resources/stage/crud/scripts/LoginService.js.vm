@@ -1,0 +1,44 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name ${projectBeanName}App.${projectBeanName}Service
+ * @description
+ * # myService
+ * Factory in the ${projectBeanName}App.
+ */
+
+var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+
+${projectBeanName}Services.factory('loginService', ['$resource','authService',
+    function ($resource, authService) {
+        var service = $resource('/${projectBeanName}/api/authentication', {'username':'@username','password':'@password'}, {
+            'login': { method: 'POST', isArray: false, headers:{'Content-Type':'application/x-www-form-urlencoded'} ,ignoreAuthModule: 'ignoreAuthModule'},
+            'logout': { method: 'GET', url:"/'${projectBeanName}/api/logout", isArray: true, ignoreAuthModule: 'ignoreAuthModule'}
+        })
+
+        var currentUser = {
+        };
+
+        service.getCurrentUser = function (){
+            return currentUser;
+        };
+
+        service.activateLogin = function (obj){
+            authService.loginConfirmed(obj);
+            currentUser.isAuthenticated = 'true';
+            currentUser.username = obj.username;
+        };
+
+        service.logout = function (data) {
+            currentUser.isAuthenticated = 'false';
+            authService.loginCancelled(data);
+        };
+        return service;
+    }
+]);

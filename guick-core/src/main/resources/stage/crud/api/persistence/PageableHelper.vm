@@ -4,18 +4,16 @@
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${project.group}.${project.name}.api.persistence.support;
+package ${project.group}.commons.persistence;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 
+import java.util.Iterator;
 import java.util.List;
-
 
 /**
  * Created by walter.davila on 09/12/2014.

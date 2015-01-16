@@ -18,7 +18,7 @@
                                         </div>
                                     </div>
                                 </div>
-#end
+#else
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
                                 <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
                                     <div class="form-group" ng-controller="DatepickerDemoCtrl">
@@ -73,6 +73,7 @@
                                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                                     </div>
                                 </div>
+#end
 #end
 #end
 #end

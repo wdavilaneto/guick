@@ -1,0 +1,34 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.security;
+
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+
+/**
+ * Simple/Defaukt User Details Service Facade
+ */
+@Service
+public class AppUserDetailService implements UserDetailsService {
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Subsituir por sca service
+        if (username != null && "kermit".equalsIgnoreCase(username)) {
+            return new User("kermit", "kermit", true, true, true, true, AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADMIN"));
+        }
+        throw new UsernameNotFoundException("could not find the user '"+ username + "'");
+    }
+}

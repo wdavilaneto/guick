@@ -12,7 +12,7 @@
 #end
         </small>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-home"></i> Inicial </a></li>
         <li class="active">
 #if(${entity.title} == 'Proc asses executiva')
         Processos
@@ -25,7 +25,7 @@
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
-        <form name="${entityBeanName}Form" novalidate>
+        <form name="${entityBeanName}Form" novalidate ng-submit="search()" >
             <tabset>
                 <tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
                     <div class="nav-tabs-custom">
@@ -34,22 +34,18 @@
                                 <div class="box-header"><h2 class="box-title"></h2></div>
                                 <div class="box-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label" for="searchField.text" popover-trigger="mouseenter">Busca por texto</label>
-                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"
-                                                    popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto"
-                                                />
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label" for="searchField.text">Busca por texto
+                                                <i popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
+                                            </label>
+                                            <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
                                         </div>
 #if(${entity.getActiveProperty()})
-                                        <div class="col-md-4">
-                                            <div class="checkbox">
-                                                <label>
-                                                    ${entity.getActiveProperty().title}
-                                                </label>
-                                                <p><input type="checkbox" ng-model="entity.boolActive" checked> Ativo</p>
-                                            </div>
+                                        <div class="checkbox col-md-4">
+                                            <label>
+                                                ${entity.getActiveProperty().title}
+                                            </label>
+                                            <p><input type="checkbox" ng-model="entity.boolActive" checked> Ativo</p>
                                         </div>
 #end
 
@@ -75,7 +71,7 @@
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"/>
                                                     <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                        <button type="submit" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -86,8 +82,8 @@
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                        <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                        <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
                                 </div>
@@ -107,8 +103,8 @@
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                        <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
                                 </div>
@@ -118,6 +114,7 @@
                 </tab>
             </tabset>
         </form>
+
         <!-- fim sessão -->
         <!-- sessão -->
         <div class="col-xs-12">
@@ -127,7 +124,7 @@
                         <div class="box-header"><h3 class="box-title">Resultado da Busca</h3></div>
                         <div class="gridStyle" ng-grid="gridOptions"></div>
                     </div>
-                </div>
+                </div>a
             </div>
         </div>
     </div>

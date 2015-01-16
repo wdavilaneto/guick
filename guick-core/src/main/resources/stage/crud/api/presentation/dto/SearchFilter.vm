@@ -1,13 +1,13 @@
-#set( $open  = "${")
-#set( $close = "}")
-#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 /**
  *  Guick Generate class: https://github.com/wdavilaneto/guick
  *  Author: service-wdavilaneto@redhat.com
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${project.group}.${project.name}.api.rest.dto;
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+package  ${project.group}.commons.rest.dto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

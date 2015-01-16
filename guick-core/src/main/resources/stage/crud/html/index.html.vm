@@ -57,8 +57,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a><a class="logo-control" href="#">${project.name} </a>
-        <div class="navbar-right">
-            <ul class="nav navbar-nav">
+        <div class="navbar-right" ng-controller="loginController" id="user-area">
+            <ul class="nav navbar-nav" ng-show="user.username != null">
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
                 <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -85,13 +85,15 @@
                 </li>
 #end
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span></a>
+                <li class="dropdown user user-menu" >
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i><span>{{user.name}}<i class="caret"></i></span></a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header bg-light-blue"><img src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
-                            <p>
-                                Fulano<small>Usuário desde Nov. 2012</small>
-                            </p></li>
+                        <li class="user-header bg-light-blue">
+                            <img ng-show="user.foto == null" src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="Imagem do usuário">
+                            <img ng-show="user.foto != null" ng-src="data:image/jpeg;base64,{{user.foto}}"  class="img-circle" alt="Imagem do usuário" />
+                            <p> {{user.name}} <small>Usuário desde Nov. 2012</small></p>
+                        </li>
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
@@ -123,33 +125,26 @@
 
     <div id="login-holder">
 
-        <div class="form-box" id="login-box">
-            <div class="header">Sign In</div>
-            <form action="../../index.html" method="post">
+        <div class="form-box" id="login-box" >
+            <div class="header">Área Restrita</div>
+            <form>
                 <div class="body bg-gray">
                     <div class="form-group">
-                        <input type="text" name="userid" class="form-control" placeholder="User ID"/>
+                        <input type="text" name="username" ng-model="username" class="form-control" placeholder="Login"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                        <input type="password" name="password" ng-model="password" class="form-control" placeholder="Senha"/>
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember_me"/> Lembrar Senha
-                    </div>
+##                    <div class="form-group">
+##                        <input type="checkbox" name="remember_me"/> Lembrar Senha
+##                    </div>
                 </div>
                 <div class="footer">
-                    <button type="submit" class="btn bg-olive btn-block">Sign me in</button>
+                    <button type="submit" ng-click="submit()" class="btn bg-olive btn-block">Sign me in</button>
                 </div>
             </form>
 
             <div class="margin text-center">
-                <!--
-                <span>Sign in using social networks</span>
-                <br/>
-                <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
-                <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
-                <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
-                -->
             </div>
         </div>
     </div>
@@ -158,17 +153,32 @@
         <aside class="left-side sidebar-offcanvas">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-##            <!-- Sidebar user panel -->
-##            <div class="user-panel">
-##                <div class="pull-left info">
-##                    <p>Olá, bem vindo!</p>
-##                </div>
-##            </div>
+##                    <div class="user-panel">
+##                        <div class="pull-left image">
+##                            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+##                        </div>
+##                        <div class="pull-left info">
+##                            <p>Hello, Jane</p>
+##                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+##                        </div>
+##                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
 
+#if( ${project.config.useWorkflow} == true )
                     <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
+#end
                     <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 
 #if (${project.getAllMainEntities().size()} > 0)
@@ -224,6 +234,13 @@
         <aside class="right-side" id="content" ng-view></aside>
     </div>
 </div>
+<footer>
+    <nav class="navbar navbar-footer navbar-default navbar-fixed-bottom ">
+        <div class="container">
+            <p class="text-center"><small>Ministério Público do Estado do Rio de Janeiro | 2015</small></p>
+        </div>
+    </nav>
+</footer>
 
 <!-- rodape <div ng-include src="'components/footer/footer.html'"></div>-->
 
@@ -275,6 +292,7 @@
     <script src="scripts/service/support/truncate.js"></script>
     <script src="scripts/service/support/utils.js"></script>
     <script src="scripts/service/support/constants.js"></script>
+    <script src="scripts/service/support/LoginService.js"></script>
     <script src="scripts/service/monitor/MonitorService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
@@ -289,6 +307,7 @@
     <script src="scripts/controllers/ModalController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>
+    <script src="scripts/controllers/support/LoginController.js"></script>
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
     <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
 #end

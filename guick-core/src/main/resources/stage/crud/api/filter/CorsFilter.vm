@@ -1,5 +1,11 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-package ${project.group}.${project.name}.api.filter;
+package ${project.group}.commons.filter;
 
 /**
  * Created by thiago.gama on 01/10/2014.

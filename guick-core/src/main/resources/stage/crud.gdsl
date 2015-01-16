@@ -71,11 +71,6 @@ guick {
 
         "repository" {
             templates = [
-                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/PageableHelper.${lang}"],
-                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
-                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"],
-
                     [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/reports/DashboardRepository.${lang}"],
                     [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/reports/DashboardRepository.xml"]
             ]
@@ -88,16 +83,6 @@ guick {
             templates = [
 
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
-                    [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
-                    [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/api/aop/OnSuccessAdvice.${lang}"],
-                    [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
-
-                    [input: "stage/support/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/exception/BusinessException.${lang}"],
-
-                    [input: "stage/support/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/DefaultExceptionHandler.${lang}"],
-                    [input: "stage/support/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/RestFieldMessageDTO.${lang}"],
-
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
@@ -112,8 +97,6 @@ guick {
                     [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
 
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
-
-                    [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
                     [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/crud/html/modals.html.vm", output: "/front-end/app/views/modals.html"]
 

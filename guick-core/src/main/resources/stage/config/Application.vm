@@ -9,7 +9,7 @@ package ${project.group}.${project.name};
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
+import ${project.group}.commons.aop.OnSuccessAdvice;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

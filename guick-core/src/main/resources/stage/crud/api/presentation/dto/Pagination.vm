@@ -7,7 +7,7 @@
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${project.group}.${project.name}.api.rest.dto;
+package  ${project.group}.commons.rest.dto;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

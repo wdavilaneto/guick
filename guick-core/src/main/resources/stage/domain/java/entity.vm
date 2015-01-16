@@ -26,6 +26,8 @@ import javax.persistence.*;
 
 import javax.validation.constraints.*;
 
+import br.mprj.commons.json.JsonDateDeserializer;
+import br.mprj.commons.json.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -81,13 +83,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #set( $strangeKey = ${entity.table.getFieldThatPointsParentPk()[0]} )
 @PrimaryKeyJoinColumn( name="${strangeKey.name}" )
 #else
-// TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="$ { entity.table.getPk()[0].name } ")
+#####  // TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="$ { entity.table.getPk()[0].name } ") heim ?
 #end
 #else
 #if (${entity.parent.table.getPk().size()} ==1)
 @PrimaryKeyJoinColumn(name="${entity.table.pk[0].name}")
 #else
-    // TODO implementar Primary key join column para com chave composta ??
+#######    // TODO implementar Primary key join column para com chave composta ?? heim ??
 #end
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
@@ -127,7 +129,6 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})
-    //  ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${property.mappedBy} ) )} :   ${property.mappedBy}
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${property.mappedBy} ) )}  )id.#{end}$util.uncapitalize( ${property.mappedBy} )")
     private List<$property.type> $property.getName();## = new ArrayList<$property.type>(0);
@@ -261,24 +262,127 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
     }
 
 #end
+########################################################
+####### Syntax Shuger for properties on Embeddable ID ##
+########################################################
 #foreach( ${property} in ${entity.id.getProperties()})
+#if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
     /**
-     * Getter para id.$property.getName().
+     * Syntax shugar Getter para this.id.${property.getName()} (Delegating)
      * @return valor do campo
      */
+    @Transient
+    public ${property.getType()} get${property.capitalizedName}() {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (this.id.get${property.capitalizedName}() != null) {
+            return ($property.type) this.id.get${property.capitalizedName}().clone();
+        }
+        return null;
+#else
+        return this.id.get${property.capitalizedName}();
+#end
+    }
+
+    /**
+     * syntax shugar Setter para this.id.${property.getName()}  (Delegating)
+     * @param value valor para ${property.getName()}
+     */
+    @Transient
+    public void set${property.capitalizedName}(${property.getType()} value) {
+#if( $property.type == 'Date' or $property.type == 'byte[]' )
+        if (value != null) {
+            this.id.set${property.capitalizedName}(($property.type) value.clone());
+        } else {
+            this.id.set${property.capitalizedName}(null);
+        }
+#else
+        this.id.set${property.capitalizedName}(value);
+#end
+    }
+
+#end
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+    /**
+     * Syntax shugar Getter para this.id.${property.getName()} (Delegating)
+     * @return valor do campo
+     */
+    @Transient
+    public ${property.type} get${property.capitalizedName}() {
+        return this.id.get${property.capitalizedName}();
+    }
+
+    /**
+     * syntax shugar Setter para this.id.${property.getName()}  (Delegating)
+     * @param value valor para ${property.getName()}
+     */
+    @Transient
+    public void set${property.capitalizedName}(${property.type} value) {
+        this.id.set${property.capitalizedName}(value);
+    }
+
+#end
+#foreach( ${property} in ${entity.id.getOneToManyProperties()})
+    /**
+     * Syntax shugar Getter para this.id.${property.getName()} (Delegating)
+     * @return valor do campo
+     */
+    @Transient
     public List<$property.type> get${property.capitalizedName}() {
         return this.id.get${property.capitalizedName}();
     }
 
     /**
-     * Setter para id.$property.getName().
+     * syntax shugar Setter para this.id.${property.getName()}  (Delegating)
      * @param value valor para $property.getName()
      */
+    @Transient
     public void set${property.capitalizedName}(List<$property.type> value) {
         this.id.set${property.capitalizedName}(value);
     }
 
 #end
+#foreach( ${property} in ${entity.id.getManyToManyProperties()})
+    /**
+     * Syntax shugar Getter para this.id.${property.getName()} (Delegating)
+     * @return valor do campo
+     */
+    @Transient
+    public List<$property.type> get${property.capitalizedName}() {
+        return this.id.get${property.capitalizedName}();
+    }
+
+    /**
+     * syntax shugar Setter para this.id.${property.getName()}  (Delegating)
+     * @param value valor para $property.getName()
+     */
+    @Transient
+    public void set${property.capitalizedName}(List<$property.type> value) {
+        this.id.set${property.capitalizedName}(value);
+    }
+
+#end
+#foreach( ${property} in ${entity.id.getEnums()})
+   /**
+    * Syntax shugar Getter para this.id.${property.getName()} (Delegating)
+    * @return valor do campo
+    */
+    @Transient
+    public ${property.getName()} get$util.capitalize( $property.getSimpleProperty().getName() )() {
+        return this.id.get${property.getSimpleProperty().capitalizedName}();
+    }
+
+   /**
+    * Syntax shugar Setter para this.id.${property.getName()}  (Delegating)
+    * @param value valor para $property.getName()
+    */
+    @Transient
+    public void set$util.capitalize( $property.getSimpleProperty().getName() )(${property.getName()} value) {
+        this.id.set${property.getSimpleProperty().capitalizedName}(value);
+    }
+
+#end
+
     /**
      * {@inheritDoc}
      */

@@ -1,6 +1,10 @@
 body.waiting-for-angular div#content-outer {
   display: none;
 }
+body.waiting-for-angular div#user-area {
+  display: none;
+}
+
 /** background: url(../images/loading.gif) center center no-repeat; **/
 body.waiting-for-angular div#initializing-panel {
   display: block;
@@ -10,40 +14,44 @@ body.waiting-for-angular div#initializing-panel {
   width: 100%;
   height: 100%;
 }
+/* modificado 14.10.14 */
+body{transitions:0.5;-webkit-transitions:0.5s;-moz-transitions:0.5s;padding-bottom:70px;}
 a.logo-control{text-indent:-9999px; color: #fff;float: left;font-family: 'Marcellus SC', serif; font-size: 1.1em; margin: 14px 0 0 11;text-shadow: 1px 1px 5px #666;}
-.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logotipo.svg) no-repeat center center;}
+.skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat center center;}
 .skin-blue .navbar.navbar-footer{background:#f4f4f4 !important; min-height:20px !important;box-shadow:10px -20px 30px #fff;color:#999;}
 .navbar.navbar-footer p small{height:24px;padding:3px 0 3px 80px;text-transform: uppercase;font-size: 0.65em;letter-spacing: 1pt;background:url(../images/logotipo-footer.svg)no-repeat left center;}
 .logo-control span{font-size: 2em;}
-.row{margin-left: -12px;margin-right: -12px;}
+.row{margin-left: -7px;margin-right: -7px;}
 .info-graphic{min-height:435px;border:none;}
+
 /* adminlte */
 .content{padding:7px 7px 0 7px;}
 .box{margin-bottom: 7px;}
 .box .box-header{padding-bottom: 3px;}
 .box .box-body{padding: 3px;}
 .box .box-header > .fa, .box .box-header > .glyphicon, .box .box-header > .ion, .box .box-header .box-title{padding: 7px 0px 7px 10px;}
-body{padding-bottom:40px;}
 body > .header .navbar{min-width:320px;height:50px;background:#007AAF;}
-.form-group{margin-bottom: 3px;}
-.gridStyle {border: 1px solid rgb(212,212,212);min-height: 390px;}
+.form-group{margin-bottom: 3px;margin-top:7px;}
+.gridStyle {border: 1px solid rgb(212,212,212);min-height: 500px;}
 .gridStyle .ngViewport {overflow-x: hidden;}
-.gridStyle button.btn.btn-danger{padding:2px !important;margin:2px !important;}
-.gridStyle.gridStyle-half{margin-top:3px !important;display:table;min-height:140px !important;}
-.btn.btn-default.btn-grid{float:none;margin:auto;display:block;}
+.gridStyle button{padding:2px 6px !important;margin:2px !important;}
 header{background:#007aaf;width:100%;}
-.angucomplete-dropdown {
-    overflow-y: auto;
-    max-height: 200px;
-    width: 100%;
-}
-.alert {
-    padding-left: 20px !important;
-    margin-left: 0px !important;
-    position: relative !important;
-}
-.btn.btn-default{height:34px;}
-/*.sidebar .sidebar-menu > li > a, .skin-blue .treeview-menu > li > a{color:#007aaf !important;}*/
+.angucomplete-dropdown {overflow-y: auto;max-height: 200px;width: 100%;}
+.popover{}
+input.form-control.brdb.ng-scope{border:1px solid #007aaf;}
+.btn.btn-default.form-control{text-align:left;}
+.label-default{background:#fff;}
+.label{color:#666;border:1px solid #ededed;}
+.alert {padding-left: 20px !important;margin-left: 0px !important;position: relative !important;}
+.modal-dialog.modal-detalhe{width:60%;}
+.modal-dialog.modal-prevencao{margin-top: 1%; width: 60%;}
+.fa-stack{height: 1.75em; width: 1.75em;}
+.text-danger.alpha, .text-default.alpha{opacity:0.7;}
+modal-title modal-title-success{color:#00a65a;}
+label.btn.btn-default.ng-pristine.ng-valid::before, label.btn.btn-default.ng-valid.ng-dirty::before{content: "X"; color:#ededed; font-weight: bold;}
+label.btn.btn-default.ng-valid.ng-dirty.active::before{content: "X"; color:green;}
+.label-search{background: #2ECC71;width: 100%;padding: 3px;margin-bottom: 0;border-radius: 4px 4px 0 0;color: #fff;}
+
 /* CAMPOS OBRIGATÓRIOS */
 /* WARNING */
 .form-group.has-warning .form-control{border:1px solid #fbe9e7 !important;border-bottom:1px solid #f39c12 !important;}
@@ -66,18 +74,14 @@ header{background:#007aaf;width:100%;}
 .form-group.has-warning.has-warning-clean .form-control:focus{border-color:#f7ead5 !important;}
 .form-group.has-warning.has-warning-clean label{border:transparent !important;color:#f39c12 !important;}
 
-.form-group label{padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%;}
-.form-group label .fa.fa-search{color:#ddd !important;}
 .form-group.has-warning label{color:#000;padding:2px 3px 0px 3px;margin: 3px 0 0 0;width:100%; /* background: #f39c12;border-radius:3px 3px 0 0;color:#fff !important;*/ }
 .modal-lg{width:75% !important; }
 a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 .form-search label{background: #007AAF;width: 100%;padding: 2px 3px 0px 3px;margin: 3px 0 0 0;border-radius: 3px 3px 0 0;color: #fff !important;}
 .form-group.form-search .fa-search{color: #fff;}
-
 .form-control{border-top:1px solid #ededed;border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-left:1px solid #ededed;}
 .form-control:focus{border-color:#ccc !important;}
 .popover{color:#000;}
-
 .form-group.form-group-primary label{width:100%;padding: 0px 3px 0px 3px;margin: 3px 0 0 0;background:#337ab7;border-top:1px solid #ededed;border-right:1px solid #ccc;border-left:1px solid #ededed;border-radius:4px 4px 0 0;color:#fff;}
 .form-group.form-group-primary input{box-shadow:1px 0 3px #ccc inset;}
 .form-group.form-group-primary-clean label{}
@@ -85,14 +89,11 @@ a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 .form-group.form-group-primary-clean .fa-search{color:#337ab7!important;}
 .list-group{margin-bottom:0px;margin-top:1px;}
 .list-group-item{padding:5px 10px !important;font-size:0.65em;letter-spacing:1.0px;}
-
-label.btn.btn-default.active, label.btn.btn-default.ng-untouched.ng-valid.ng-dirty.active.ng-valid-parse, label.btn.btn-default.ng-untouched.ng-valid.ng-dirty:hover{background:#007aaf !important;color:#fff;}
-
-
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{border-top:1px solid #ededed !important;border-right:1px solid #ededed  !important;border-left:1px solid #ededed !important;}
 .nav-tabs > li > a{cursor:pointer  !important;}
 /*.nav > li > a{padding:3px 15px;}*/
 .nav-tabs-custom > .nav-tabs > li.active{border-top-color: #3c8dbc  !important;}
+
 
 /* SLIDE CONTENT */
 .content{ position: relative;top:2px;-ms-animation:animate-content o.5s;-moz-animation:animate-content o.5s; -webkit-animation: animate-content 0.5s; /* Chrome, Safari, Opera */animation: animate-content 0.5s;}
