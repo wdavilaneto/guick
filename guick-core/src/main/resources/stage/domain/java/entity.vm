@@ -26,8 +26,8 @@ import javax.persistence.*;
 
 import javax.validation.constraints.*;
 
-import br.mprj.commons.json.JsonDateDeserializer;
-import br.mprj.commons.json.JsonDateSerializer;
+import ${project.group}.commons.json.JsonDateDeserializer;
+import ${project.group}.commons.json.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

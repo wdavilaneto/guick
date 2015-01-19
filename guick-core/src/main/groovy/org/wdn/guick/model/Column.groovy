@@ -21,6 +21,7 @@ class Column {
     boolean nullable = true
     Long position
     String comment
+    String defaultValue
     boolean unique = false
     boolean generated = false
     boolean useUUID = false;
@@ -34,10 +35,16 @@ class Column {
     List<String> checkValues
 
     public boolean isUpdatable() {
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+            return false;
+        }
         return true; // TODO
     }
 
     public boolean isInsertable() {
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+            return false;
+        }
         return true; // TODO
     }
 

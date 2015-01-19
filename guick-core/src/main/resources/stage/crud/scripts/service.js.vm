@@ -15,8 +15,8 @@
 
 var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
-${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
-    function ($resource) {
+${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'paginationService',
+    function ($resource, paginationService) {
         var service = $resource('/${projectBeanName}/api/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entity.name}', isArray: false},
             'search': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/search', isArray: false},
@@ -43,7 +43,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #set($counter = 0)
 #foreach( ${ent} in ${entity.getManyToOneProperties()})
 #set($counter = $counter + 1)
-                ${util.uncapitalize($ent.name)}:{}#if($counter < $size),
+                //${util.uncapitalize($ent.name)}:{}#if($counter < $size),
 #end
 #end
 
@@ -131,6 +131,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 
             };
             searchSelects.fromEntity = function (ref) {
+                var grid
                 console.log(ref);
 #foreach( ${complexProperty} in ${searchedEntitys} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
@@ -176,11 +177,11 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #end
 #end
 
-#if (${entity.properties.size()} <4)
+#if (${entity.properties.size()} <5)
 #set( $foo = ${properties.addAll( ${entity.properties} )} )
 #else
 #foreach( ${property} in ${entity.properties})
-#if( ${property.column.length} > 3 )
+#if( !( ${property.type} == 'String' && ${property.column.length} < 2) )
 #set( $foo = ${properties.add( $property )} )
 #end
 #end
@@ -202,7 +203,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource',
 #foreach( ${property} in ${properties})
 #set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
-#if( ${property.type} != 'Long' || !${property.column.constraint} )
+#if( !(${property.type} == 'Long' && ${property.column.constraint} ))
                 {field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
 #end
 #end

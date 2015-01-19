@@ -1,7 +1,9 @@
 #foreach( ${property} in ${entity.getProperties()})
 #if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
 #foreach(${validation} in ${property.getValidations()})
+#if( ${property.getType()} != 'Date'  || ${property.getColumn().isInsertable()} )
     @${validation.getName()}#if(!$validation.parameters.isEmpty())(#foreach( $parameterKey in $validation.parameters.keySet())$parameterKey = $validation.parameters.get($parameterKey)#{end})#{end}
+#end
 
 #end
 #if( ${property.getType()} == 'Date' )
@@ -14,7 +16,7 @@
     @Lob
     @Basic(fetch = FetchType.LAZY)
 #else
-    @Column(name = "${property.getColumn().getName()}"#if(!${property.getColumn().getNullable()}), nullable = false#{end}#if(${property.column.precision}), precision = ${property.column.precision}#{end}#if(${property.column.scale}), scale = ${property.column.scale}#{end}#if(${property.column.length}), length = ${property.column.length}#{end}#if( !${property.getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getColumn().isUpdatable()}), updatable = false #end)
+    @Column(name = "${property.getColumn().getName()}"#if(!${property.getColumn().getNullable()} && !${property.column.defaultValue}), nullable = false#{end}#if(${property.column.precision}), precision = ${property.column.precision}#{end}#if(${property.column.scale}), scale = ${property.column.scale}#{end}#if(${property.column.length}), length = ${property.column.length}#{end}#if( !${property.getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getColumn().isUpdatable()}), updatable = false #end)
 #end
     ${property.getType()} ${property.getName()};
 

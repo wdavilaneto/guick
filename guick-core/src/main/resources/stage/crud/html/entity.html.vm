@@ -42,10 +42,10 @@
                                         </div>
 #if(${entity.getActiveProperty()})
                                         <div class="checkbox col-md-4">
-                                            <label>
+                                            <label class="control-label" for="actives">
                                                 ${entity.getActiveProperty().title}
                                             </label>
-                                            <p><input type="checkbox" ng-model="entity.boolActive" checked> Ativo</p>
+                                            <p><input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo</p>
                                         </div>
 #end
 

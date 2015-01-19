@@ -115,3 +115,28 @@ a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
     0%   {left:9999px; top:2px;}
     100% {left:0px; top:2px;}
 }
+
+.drag-over[image-drop] {
+    border: 2px dotted;
+    color: green;
+}
+[image-drop]{
+    border: 2px dotted;
+    color: red;
+}
+.drag-over[image-drop] {
+    border: 2px dotted;
+    color: green;
+}
+[image-drop]{
+    border: 2px dotted;
+    color: red;
+}
+.drag-over[images-drop] {
+    border: 2px dotted;
+    color: green;
+}
+[images-drop]{
+    border: 2px dotted;
+    color: red;
+}

@@ -37,7 +37,7 @@ angular.module('${project.name}App').controller('LoginController', function ($sc
             password: $scope.password,
             rememberMe: $scope.rememberMe
         });
-    }
+    };
 });
 
 angular.module('${project.name}App').controller('LogoutController', function ($location, AuthenticationSharedService) {

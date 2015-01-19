@@ -42,11 +42,10 @@ class JavaTypeConverter {
                "BOOLEAN"                          : "Boolean",
                "DOUBLE"                           : "Double",
                "DOUBLE PRECISION"                 : "Double",
-               "BYTEA"                            : "Integer",
+               "BYTEA"                            : "byte[]",
                "TIMESTAMP WITHOUT TIME ZONE"      : "Date",
                "SMALLINT"                         : "Integer",
-                '"CHAR"':"String",
-
+               '"CHAR"':"String"
     ];
 
     public String getType(Column col) {

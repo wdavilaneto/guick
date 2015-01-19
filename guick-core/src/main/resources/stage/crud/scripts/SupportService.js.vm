@@ -22,7 +22,7 @@ ${projectBeanName}Services.factory('paginationService', ['$resource',
             result:{}
         };
         grid.getPageRequest = function (){
-            return {page: pagingOptions.currentPage , size: pagingOptions.pageSize}
+            return {page: grid.pagingOptions.currentPage , size: grid.pagingOptions.pageSize}
         };
 
         service.createGrid= function(){

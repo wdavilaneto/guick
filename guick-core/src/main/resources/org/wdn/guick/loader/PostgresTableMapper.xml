@@ -22,6 +22,7 @@
         <result property="precision" column="numeric_precision"/>
         <result property="scale" column="numeric_scale"/>
         <result property="type" column="data_type"/>
+        <result property="defaultValue" column="column_default" />
     </resultMap>
 
     <select id="findTableAndColumns" resultMap="tableResultMap" parameterType="string">
@@ -37,6 +38,7 @@
         cols.numeric_scale,
         cols.is_updatable,
         kcu.constraint_name,
+        cols.column_default,
         case when (tc.constraint_type = 'PRIMARY KEY' and kcu.ordinal_position is not null) then kcu.ordinal_position else NULL end as position
         from information_schema.tables tab
         inner join information_schema.columns cols on
@@ -86,7 +88,7 @@
             when 'FOREIGN KEY' then 'R'
             when 'CHECK' then 'C'
             when 'UNIQUE' then 'U'
-            else 'X'
+            else k.constraint_type
         end as CONSTRAINT_TYPE,
         kcu.COLUMN_NAME,
         ccu.table_name as R_TABLE_NAME,

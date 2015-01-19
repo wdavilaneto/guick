@@ -125,7 +125,7 @@
 
     <div id="login-holder">
 
-        <div class="form-box" id="login-box" >
+        <div class="form-box" id="login-box" ng-controller="loginController">
             <div class="header">Área Restrita</div>
             <form>
                 <div class="body bg-gray">
