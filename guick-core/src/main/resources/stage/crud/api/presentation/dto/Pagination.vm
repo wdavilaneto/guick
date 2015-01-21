@@ -60,9 +60,9 @@ public class Pagination {
         // Page is -1 becouse Spring pagination deal with Pagination as an array representation (0..size-1)
         // And presentation pagination starts 'with page 1'
         if (sort == null || "".equals(sort.trim())){
-            return new PageRequest((page - 1), size);
+            return new PageRequest(((page < 1 ? 1 : page) - 1), size);
         }
-        return new PageRequest((page - 1), size, new Sort(sort));
+        return new PageRequest(((page < 1 ? 1 : page) - 1), size, new Sort(sort));
     }
 
 

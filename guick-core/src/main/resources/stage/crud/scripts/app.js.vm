@@ -19,6 +19,7 @@ var app = angular.module('${project.name}App', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ckeditor',
     'ui.select',
     'ui.bootstrap',
     'ui.date',

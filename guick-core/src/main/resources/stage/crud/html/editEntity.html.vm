@@ -21,7 +21,7 @@
                                 <div class="box-header"><h3 class="box-title"></h3></div>
                                 <div class="box-body">
                                     <div class="row">
-                                            <div ng-include src="'views/crud/${entity.name}/${entity.name}Fieldset.html'"></div>
+                                        <div ng-include src="'views/crud/${entity.name}/${entity.name}Fieldset.html'"></div>
                                     </div>
                                 </div>
                                 <div class="box-footer">
@@ -35,33 +35,99 @@
                         </div>
                     </div>
                 </tab>
-#if( ${entity.looksLikeMainEntity()} )
-#foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
-#set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
-                <tab heading="${complexProperty.title}" ng-click="find${complexProperty.referedEntity.name}()">
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isOneToMany()} || ${complexProperty.isManyToMany()} )
+                <tab heading="${complexProperty.title}" ng-controller="${entity.beanName}ExtController" ng-click="find${complexProperty.referedEntity.name}()" ng-show="${entity.looksLikeMainEntity()}">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box box-primary">
-                                <div class="box-header"><h3 class="box-title">Lista de ${complexProperty.referedEntity.name}</h3></div>
+                            <div class="box box-primary" ng-show="selected">
+                                <div class="box-header"><h3 class="box-title"></h3></div>
                                 <div class="box-body">
-                                    <div class="gridStyle" ng-grid="grid${beanName}Options"></div>
+                                    <div class="row">
+                                        <!-- div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Fieldset.html'"></div -->
+##parse( "stage/crud/html/components/crud/entityFieldSet.html.vm" )
+                                    </div>
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
-                                        <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
+                                        <button class="btn btn-primary" ng-click="clear()"><span class="fa fa-chevron-circle-left"></span>Cancelar</button>
+                                        <button class="btn btn-danger" ng-click="remove${complexProperty.referedEntity.name}()"><span class="fa fa-sign-out"></span> Remover</button>
                                         <button class="btn btn-success" ng-click="save()"><span class="fa fa-save"></span> Gravar</button>
                                     </div>
                                 </div>
                             </div>
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3 class="box-title">Lista de ${complexProperty.referedEntity.name}</h3>
+                                    <div class="box-tools">
+                                        <form ng-submit="search()">
+                                            <button type="button" class="btn btn-primary btn-sm pull-right" ng-click="edit${complexProperty.referedEntity.name}()"><i class="fa fa-plus-circle"></i> Adicionar</button>
+                                            <div class="input-group">
+                                                <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default" ng-click="search${complexProperty.referedEntity.name}()"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!--div class="gridStyle" ng-gr id="grid${complexProperty.referedEntity.name}Options"></div-->
+                                            <table class="table table-hover">
+                                                <tr>
+#foreach( ${complex} in ${complexProperty.referedEntity.getDistinctedAllComplexProperties()})
+#if(${complex.isManyToOne()} && ${complex.referedEntity.name} != ${entity.name})
+#if( ${complex.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <td>${complex.referedEntity.getAllImageProperties()[0].title}</td>
+#end
+                                                    <th>${complex.Title}</th>
+#end
+#end
+#foreach( ${property} in ${complexProperty.referedEntity.getDistinctedProperties()})
+                                                    <th>${property.Title}</th>
+#end
+                                                 </tr>
+                                                <tr ng-repeat="${complexProperty.referedEntity.beanName} in resultPage.content" ng-click="select(${complexProperty.referedEntity.beanName})" ng-class="{selected: ${complexProperty.referedEntity.beanName}}">
+#foreach( ${complex} in ${complexProperty.referedEntity.getDistinctedAllComplexProperties()})
+#if(${complex.isManyToOne()} && ${complex.referedEntity.name} != ${entity.name})
+#if( ${complex.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <td><img ng-src="data:image/*;base64,{{${complexProperty.referedEntity.beanName}.${complex.referedEntity.beanName}.${complex.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
+#end
+                                                    <td><p>{{${complexProperty.referedEntity.beanName}.${complex.referedEntity.beanName}.${complex.referedEntity.getMostDescritiveProperties()[0]}}}<p></td>
+#end
+#end
+#foreach( ${property} in ${complexProperty.referedEntity.getDistinctedProperties()})
+                                                    <td><p>{{${complexProperty.referedEntity.beanName}.${property}}}<p></td>
+#end
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                        <li><a href="#">&laquo;</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </tab>
 #end
+#end
+
+
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-                <tab heading="${complexProperty.title}" >
+                <tab heading="${complexProperty.title}" ng-show="${entity.looksLikeMainEntity()}">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
@@ -82,7 +148,6 @@
                         </div>
                     </div>
                 </tab>
-#end
 #end
 #end
             </tabset>

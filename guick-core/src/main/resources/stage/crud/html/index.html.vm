@@ -124,7 +124,6 @@
 <div id="content-outer">
 
     <div id="login-holder">
-
         <div class="form-box" id="login-box" ng-controller="loginController">
             <div class="header">Área Restrita</div>
             <form>
@@ -140,10 +139,9 @@
 ##                    </div>
                 </div>
                 <div class="footer">
-                    <button type="submit" ng-click="submit()" class="btn bg-olive btn-block">Sign me in</button>
+                    <button type="submit" ng-click="submit()" class="btn bg-olive btn-block">Autenticar</button>
                 </div>
             </form>
-
             <div class="margin text-center">
             </div>
         </div>
@@ -268,6 +266,8 @@
 <script src="bower_components/angular-ui-select/dist/select.js"></script>
 <script src="bower_components/ng-grid/build/ng-grid.js"></script>
 <script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+<script src="bower_components/ckeditor/ckeditor.js"></script>
 <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
 <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
 <script src="bower_components/jsog/lib/JSOG.js"></script>
@@ -304,7 +304,6 @@
 <!-- controllers -->
     <script src="scripts/controllers/MainController.js"></script>
     <script src="scripts/controllers/support/ActivitiController.js"></script>
-    <script src="scripts/controllers/ModalController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>
     <script src="scripts/controllers/support/LoginController.js"></script>
@@ -316,6 +315,7 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
     <script src="scripts/controllers/crud/${entity.name}Controller.js"></script>
+    <script src="scripts/controllers/crud/${entity.name}ExtController.js"></script>
 #end
 #end
 

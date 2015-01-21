@@ -15,8 +15,8 @@
 
 var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
-${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'paginationService',
-    function ($resource, paginationService) {
+${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gridService',
+    function ($resource, gridService) {
         var service = $resource('/${projectBeanName}/api/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entity.name}', isArray: false},
             'search': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/search', isArray: false},
@@ -49,16 +49,6 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 
             };
             return e;
-        };
-
-        var baseOptions = {
-            data: 'resultPage.content',
-            enablePaging: true,
-            showFooter: true,
-            multiSelect: false,
-            enableColumnResize: true,
-            totalServerItems: 'resultPage.totalElements',
-            i18n: 'pt-br'
         };
 
         service.factorySearchSelect = function (){
@@ -112,7 +102,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 ##                }
 #end
 #end
-
+#######################
 #foreach( ${complexProperty} in ${entity.id.getManyToOneProperties()} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
                 if (ref && ref.id && searchSelects.id.${complexProperty.name}.originalObject) {
@@ -131,7 +121,6 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 
             };
             searchSelects.fromEntity = function (ref) {
-                var grid
                 console.log(ref);
 #foreach( ${complexProperty} in ${searchedEntitys} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
@@ -153,13 +142,8 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
             return searchSelects;
         };
 
-        service.factoryGridOptions = function (pagingOptions , entitySelected, isEditMode){
-            if (!isEditMode) {
-                isEditMode = false;
-            }
-            var options = baseOptions;
-            options.selectedItems = entitySelected;
-            options.pagingOptions = pagingOptions;
+        service.createGridOptions = function (entitySelected, isEditMode){
+            var options = gridService.createGridOptions(isEditMode);
 #if(!${entity.looksLikeEnum()})
             options.rowTemplate= '<div ng-dblclick="detalhar(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
 #else
@@ -176,7 +160,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 #end
 #end
 #end
-
+######################
 #if (${entity.properties.size()} <5)
 #set( $foo = ${properties.addAll( ${entity.properties} )} )
 #else
@@ -186,7 +170,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 #end
 #end
 #end
-
+######################
 #if( ${entity.table.getFieldThatPointsParentPk()} && ${entity.table.getFieldThatPointsParentPk().size()} >=1)
 #foreach( ${property} in ${entity.properties})
 #if( ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column})
@@ -194,7 +178,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 #end
 #end
 #end
-
+######################
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
                 {field: 'id', displayName: 'id', sortable: false},
 #end
@@ -203,30 +187,36 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'pa
 #foreach( ${property} in ${properties})
 #set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
-#if( !(${property.type} == 'Long' && ${property.column.constraint} ))
-                {field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if(($counter < $size) || (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )),
+#if( !(${property.type} == 'Long' && ${property.column.constraint} )  && ${property.type} != 'byte[]')
+                {field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if($counter < $size) ,
 #end
 #end
 #end
-
-#if (${entity.looksLikeDomain()} && ${entity.getManyToOneProperties().size()} >=1 )
+#####################
+#if (${properties.size()} < 4 && (${entity.getManyToOneProperties().size()} >=1 || ${entity.parent.getManyToOneProperties().size()} >=1) )
+#if (${entity.getManyToOneProperties().size()} >=1)
 #set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
+#else
+#if(${entity.parent.getManyToOneProperties().size()} >=1)
+#set( $toOneProperty = ${entity.parent.getManyToOneProperties()[0]} )
+#end
+#end
 ### find first StringField
 #set ( $stringField = 'id' )
 #foreach( ${prop} in ${toOneProperty.referedEntity.properties})
 #if(${prop.type} == 'String' && $stringField == 'id' )
 #set ($stringField = ${prop})
 #end
-#end
+#end ,
+
                 {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}', sortable: false#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
 #end
 
             ];
+            // This options MUST always exists since tables and Cells does not have Doubld Click
+            options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
             if (isEditMode) {
-#if(!${entity.looksLikeEnum()})
-                options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
-#else
-                //options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+#if(${entity.looksLikeEnum()})
                 options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-twitch"></i></a>', width : '35', resizable: false});
 #end
                 options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); remove${entity.name}(row.entity);"><i class="fa fa-remove"></i></a>', width : '35', resizable: false});

@@ -38,15 +38,21 @@
                                             <label class="control-label" for="searchField.text">Busca por texto
                                                 <i popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
                                             </label>
-                                            <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="search()"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
 #if(${entity.getActiveProperty()})
-                                        <div class="checkbox col-md-4">
-                                            <label class="control-label" for="actives">
-                                                ${entity.getActiveProperty().title}
-                                            </label>
-                                            <p><input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo</p>
-                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
+                                                </label>
+                                            </div>
+                                        </div
 #end
 
 #if(${entity.getAllDeadlineProperties().size()} >= 1 )
@@ -103,7 +109,7 @@
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                        <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
@@ -124,7 +130,7 @@
                         <div class="box-header"><h3 class="box-title">Resultado da Busca</h3></div>
                         <div class="gridStyle" ng-grid="gridOptions"></div>
                     </div>
-                </div>a
+                </div>
             </div>
         </div>
     </div>

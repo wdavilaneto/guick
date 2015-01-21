@@ -1,6 +1,17 @@
-<div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}" ng-if="entity.${idAgragation}${property}">
-    <div class="form-group">
-        <label class="control-label">${property.title}</label>
-        <div ng-if="entity.${idAgragation}${property}"> {{entity.${idAgragation}${property}}}</div>
-    </div>
-</div>
+#if ( ${property.getType().equalsIgnoreCase('byte[]')} )
+                                <div class="col-md-3 form-group#if(!${property.column.nullable}) has-warning#{end}">
+                                    <div class="form-group">
+                                        <label for="${idAgragation}${property}">${property.title}</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="entity.${property}" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+#else
+                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}" ng-if="entity.${idAgragation}${property}">
+                                    <div class="form-group">
+                                        <label class="control-label">${property.title}</label>
+                                        <div ng-if="entity.${idAgragation}${property}"> {{entity.${idAgragation}${property}}}</div>
+                                    </div>
+                                </div>
+#end

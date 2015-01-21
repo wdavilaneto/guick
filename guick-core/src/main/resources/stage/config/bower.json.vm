@@ -20,6 +20,8 @@
     "angular-ui-utils": "latest",
     "angular-file-upload": "latest",
     "angularjs-toaster": "latest",
+    "angular-ckeditor": "latest",
+    "ckeditor": "latest",
     "ng-grid": "latest",
     "angucomplete-alt": "latest",
     "angular-i18n": "~1.3.1",
@@ -35,7 +37,7 @@
   },
   "appPath": "app",
   "resolutions": {
-    "angular": ">=1.3.4",
+    "angular": ">=1.3.9",
     "d3": "~3.4"
   }
 }

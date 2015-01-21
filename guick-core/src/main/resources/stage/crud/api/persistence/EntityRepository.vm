@@ -130,7 +130,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
         criteria.add( Restrictions.disjunction()
-#foreach( ${property} in ${entity.getProperties()})
+#foreach( ${property} in ${entity.getDistinctedProperties()})
 #if( $property.type == 'String' )
             .add(Restrictions.ilike("${property.getName()}", text, MatchMode.ANYWHERE))
 #end

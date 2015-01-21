@@ -10,48 +10,39 @@
 #end
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
-#if(${property.column.length} >= 500)
+#if(${property.column.length} >= ${bigFieldSize})
+##parse( "stage/crud/html/property.html.vm" )
                 <div class="col-md-4">
                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end} id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                     </div>
                 </div>
-#else
-#if(${property.column.length} >= ${bigFieldSize})
-#parse( "stage/crud/html/property.html.vm" )
-#end
 #end
 #end
 
 #foreach( ${property} in ${entity.parent.getProperties()})
-#if(${property.column.length} >= 500)
+#if(${property.column.length} >= ${bigFieldSize})
+##parse( "stage/crud/html/property.html.vm" )
                 <div class="col-md-4">
                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end} id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                     </div>
                 </div>
-#else
-#if(${property.column.length} >= ${bigFieldSize})
-#parse( "stage/crud/html/property.html.vm" )
-#end
 #end
 #end
 
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
-#if(${property.column.length} >= 500)
+#if(${property.column.length} >= ${bigFieldSize})
+##parse( "stage/crud/html/property.html.vm" )
                 <div class="col-md-4">
                     <div class="form-group#if(!${property.column.nullable}) has-warning#{end}">
                         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
                         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end} id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
                     </div>
                 </div>
-#else
-#if(${property.column.length} >= ${bigFieldSize})
-#parse( "stage/crud/html/property.html.vm" )
-#end
 #end
 #end
 #set( $idAgragation = '' )

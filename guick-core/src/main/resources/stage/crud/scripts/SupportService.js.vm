@@ -16,19 +16,63 @@ var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 ${projectBeanName}Services.factory('paginationService', ['$resource',
     function ($resource) {
         var service = {};
-        var grid = {
-            pagingOptions:{pageSizes: [10, 20, 50], pageSize: 10, currentPage: 1},
-            selected:[],
-            result:{}
-        };
-        grid.getPageRequest = function (){
-            return {page: grid.pagingOptions.currentPage , size: grid.pagingOptions.pageSize}
+        var _pageSizes= [10, 20, 50]
+        var _pageSize= 10;
+
+        // Create new instance of pagination
+        service.createPagination= function(){
+            var pagination = {
+                pageSizes: _pageSizes,
+                pageSize: _pageSize,
+                currentPage: 1,
+                selected:[],
+                result:{}
+            };
+            pagination.getPageRequest = function (){
+                return {page: this.currentPage , size: this.pageSize}
+            };
+            return pagination;
         };
 
-        service.createGrid= function(){
-            grid.selected = [];
-            grid.result = {};
-            return grid;
+        return service;
+    }
+]);
+
+${projectBeanName}Services.factory('gridService', ['$resource', 'paginationService',
+    function ($resource, paginationService) {
+        var service = {};
+
+        // Create an new Grid Options
+        service.createGridOptions = function (isEditMode) {
+            var pagination = paginationService.createPagination();
+            var baseOptions = {
+                data: 'resultPage.content',
+                enablePaging: true,
+                showFooter: true,
+                multiSelect: false,
+                enableColumnResize: true,
+                totalServerItems: 'resultPage.totalElements',
+                i18n: 'pt-br'
+            };
+
+            // get pagination from pagination factory
+            baseOptions.getPagination = function (){
+                // Delegate to pagination
+                return pagination;
+            };
+            // Delegation method to get Request Page Parameter(from pagination) to send to backend api
+            baseOptions.getPageRequest = function (){
+                // Delegate to pagination
+                return pagination.getPageRequest();
+            };
+
+            if (!isEditMode) {
+                isEditMode = false;
+            }
+            var options = baseOptions;
+            options.selectedItems = pagination.selected;
+            options.pagingOptions = pagination;
+            return options;
         };
 
         return service;

@@ -14,11 +14,14 @@ def useWorkflow = (project.config != null && project.config.useWorkflow);
 
 guick {
     domain {
-
+        // [input: "stage/domain/${lang}/entityFilter.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}Filter.${lang}"]
         for (def entity : entityList) {
             "domain layer" {
                 object entity
-                templates = [[input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]]
+                templates = [
+                    [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]
+
+                ]
             }
         }
         for (def entity : embeddedList) {
@@ -91,7 +94,6 @@ guick {
                     [input: "stage/crud/scripts/ActivitiService.js.vm", output: "/front-end/app/scripts/service/support/ActivitiService.js"],
                     [input: "stage/crud/scripts/ActivitiController.js.vm", output: "/front-end/app/scripts/controllers/support/ActivitiController.js"],
 
-                    [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
                     [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],
 
                     [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
@@ -108,13 +110,14 @@ guick {
                 object entity
                 templates = [
                         [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/crud/${entity.name}Controller.js"],
+                        [input: "stage/crud/scripts/controllerExt.js.vm", output: "/front-end/app/scripts/controllers/crud/${entity.name}ExtController.js"],
                         [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/crud/${entity.name}Service.js"],
                         [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
                         [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
                         [input: "stage/crud/html/components/crud/entityFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityFieldCols.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FieldCols.html"],
                         [input: "stage/crud/html/components/crud/entityFilterFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FilterFieldset.html"],
                         [input: "stage/crud/html/components/crud/entityShowFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityToOneFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
                         [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
                 ]
