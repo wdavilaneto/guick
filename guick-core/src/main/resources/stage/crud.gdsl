@@ -74,8 +74,8 @@ guick {
 
         "repository" {
             templates = [
-                    [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/reports/DashboardRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/reports/DashboardRepository.xml"]
+                    [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/mybatis/DashboardRepository.${lang}"],
+                    [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/mybatis/DashboardRepository.xml"]
             ]
         }
 //        [input: "stage/workflow/SimpleProccessCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/SimpleProccessCommand.${lang}"],

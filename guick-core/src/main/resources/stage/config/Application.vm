@@ -30,7 +30,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "${project.group}.${project.name}.api")
 @Configuration
 @EnableWebMvc
-@MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.reports")
+@MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.mybatis")
 @EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence")
 @EnableAutoConfiguration
 @EnableTransactionManagement
@@ -76,6 +76,7 @@ public class Application extends SpringBootServletInitializer {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
+        sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis-settings.xml"));
         return (SqlSessionFactory) sqlSessionFactory.getObject();
     }
 

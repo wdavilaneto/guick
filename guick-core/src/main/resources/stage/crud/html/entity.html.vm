@@ -52,7 +52,7 @@
                                                     <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
                                                 </label>
                                             </div>
-                                        </div
+                                        </div>
 #end
 
 #if(${entity.getAllDeadlineProperties().size()} >= 1 )

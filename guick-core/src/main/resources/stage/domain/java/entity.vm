@@ -79,17 +79,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Inheritance(strategy= InheritanceType.JOINED)
 #end
 #if( ${entity.getParent()} )
-#if ( ${entity.table.getPk().size()} == 0 && ${entity.table.getFieldThatPointsParentPk().size()} == 1 )
+#if ( ${entity.table.getPk().size()} == 0 )
+#if (${entity.table.getFieldThatPointsParentPk().size()} == 1 )
 #set( $strangeKey = ${entity.table.getFieldThatPointsParentPk()[0]} )
 @PrimaryKeyJoinColumn( name="${strangeKey.name}" )
 #else
-#####  // TODO Multiple pseudo Key for @PrimaryKeyJoinColumn(name="$ { entity.table.getPk()[0].name } ") heim ?
+// TODO Implementar Multiple pseudo/strang Key
 #end
 #else
 #if (${entity.parent.table.getPk().size()} ==1)
 @PrimaryKeyJoinColumn(name="${entity.table.pk[0].name}")
 #else
-#######    // TODO implementar Primary key join column para com chave composta ?? heim ??
+// TODO implementar Primary key join column para com chave composta
+@PrimaryKeyJoinColumns({
+        @PrimaryKeyJoinColumn(name="CUST_ID", referencedColumnName="ID"),
+        @PrimaryKeyJoinColumn(name="CUST_TYPE",referencedColumnName="TYPE")
+})
+#end
 #end
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )

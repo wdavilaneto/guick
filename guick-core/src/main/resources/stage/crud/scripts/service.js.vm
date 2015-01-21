@@ -174,7 +174,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 #else
 #set($counter = $counter + 1)
 ##                // (($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )
-                #if(($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )//#{end}options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}});
+                #if(($counter > 6) || ( (${size} > 6) && (${property.column.length} < 10 || ${property.column.length} > 1000) ) )//#{end}options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}});
 #end
 #end
 #####################
@@ -182,7 +182,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 #foreach( ${property} in ${entity.getDistinctedAllComplexProperties()})
 #if(${property.isManyToOne()})
 #set($counter = $counter + 1)
-                #if($counter > 2)//#{end}options.columnDefs.push({field: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0]}', displayName: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0].title}', sortable: false#if (${property.referedEntity.getMostDescritiveProperties()[0].name.length()} < 5 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 5), width: 30#{end}});
+                #if($counter > 2)//#{end}options.columnDefs.push({field: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0]}', displayName: '${property.title}', sortable: false#if (${property.referedEntity.getMostDescritiveProperties()[0].name.length()} < 5 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 5), width: 30#{end}});
 #end
 #end
             // This options MUST always exists since tables and Cells does not have Doubld Click by default

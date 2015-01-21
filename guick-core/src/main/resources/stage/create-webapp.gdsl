@@ -54,6 +54,8 @@ guick {
             templates = [
                     [input: "stage/config/application.properties.vm", output: "/api/src/main/resources/application.properties"],
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "stage/config/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
+                    [input: "stage/localization/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
                     [input: "archetype/resources/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
                     [input: "archetype/testResources/logback-test.xml.vm", output: "/api/src/test/resources/logback-test.xml.vm"]
             ]

@@ -9,7 +9,7 @@
  */
 package ${project.group}.${project.name}.api.rest.reports;
 
-import ${project.group}.${project.name}.api.persistence.reports.DashboardRepository;
+import ${project.group}.${project.name}.api.persistence.mybatis.DashboardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

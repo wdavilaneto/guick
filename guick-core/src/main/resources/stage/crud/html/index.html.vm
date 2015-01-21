@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="bower_components/adminlte/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/adminlte/css/ionicons.min.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
-    <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="css/main.css">
     <!-- endbuild -->
