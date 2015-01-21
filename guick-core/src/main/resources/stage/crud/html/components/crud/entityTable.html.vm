@@ -1,0 +1,28 @@
+                                            <table class="table table-hover">
+                                                <tr>
+#foreach( ${property} in ${entity.getDistinctedAllComplexProperties()})
+#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
+#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <td>${property.referedEntity.getAllImageProperties()[0].title}</td>
+#end
+                                                    <th>${property.Title}</th>
+#end
+#end
+#foreach( ${property} in ${entity.getDistinctedProperties()})
+                                                    <th>${property.Title}</th>
+#end
+                                                 </tr>
+                                                <tr dir-paginate="${entity.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entity.beanName})" ng-class="{selected: ${entity.beanName}}">
+#foreach( ${property} in ${entity.getDistinctedAllComplexProperties()})
+#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
+#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <td><img ng-src="data:image/*;base64,{{${entity.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
+#end
+                                                    <td><p>{{${entity.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}<p></td>
+#end
+#end
+#foreach( ${property} in ${entity.getDistinctedProperties()})
+                                                    <td><p>{{${entity.beanName}.${property}}}<p></td>
+#end
+                                                </tr>
+                                            </table>

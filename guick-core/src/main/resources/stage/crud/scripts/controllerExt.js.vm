@@ -38,8 +38,9 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
 #if( ${ent.isOneToMany()} || ${ent.isManyToMany()})
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
     ${js}scope.grid${ent.referedEntity.name}Options = ${beanName}Service.createGridOptions(true);
+    ${js}scope.${beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();
     ${js}scope.find${ent.referedEntity.name} = function() {
-        console.log('Realizando busca de 1 x N( $beanName.${entityBeanName}.id):' + ${js}scope.entity.id);
+        console.log('Realizando busca de 1 x N( ${beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
         ${js}scope.resultPage = {};
         ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
@@ -48,7 +49,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
     };
     ${js}scope.search${ent.referedEntity.name} = function() {
         // TODO Implement query search with fields
-        console.log('Realizando busca de 1 x N( $beanName.${entityBeanName}.id):' + ${js}scope.entity.id);
+        console.log('Realizando busca de 1 x N( ${beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
         ${js}scope.resultPage = {};
         ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
@@ -85,6 +86,17 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
             //dismiss
         });
     };
+
+    $scope.${beanName}PaginationChanged = function(newPage) {
+        $scope.${beanName}Pagination.currentPage = newPage;
+    };
+
+    // watches
+    ${js}scope.${js}watch('${beanName}Pagination', function (newVal, oldVal) {
+        if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
+            ${js}scope.find${ent.referedEntity.name}();
+        }
+    }, true);
 #{end}
 #{end}
 #end

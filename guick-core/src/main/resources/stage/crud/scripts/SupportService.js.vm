@@ -13,7 +13,7 @@
 
 var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
-${projectBeanName}Services.factory('paginationService', ['$resource',
+${projectBeanName}Services.factory('pagingService', ['$resource',
     function ($resource) {
         var service = {};
         var _pageSizes= [10, 20, 50]
@@ -25,6 +25,7 @@ ${projectBeanName}Services.factory('paginationService', ['$resource',
                 pageSizes: _pageSizes,
                 pageSize: _pageSize,
                 currentPage: 1,
+                totalElements: 0,
                 selected:[],
                 result:{}
             };
@@ -33,18 +34,17 @@ ${projectBeanName}Services.factory('paginationService', ['$resource',
             };
             return pagination;
         };
-
         return service;
     }
 ]);
 
-${projectBeanName}Services.factory('gridService', ['$resource', 'paginationService',
-    function ($resource, paginationService) {
+${projectBeanName}Services.factory('gridService', ['$resource', 'pagingService',
+    function ($resource, pagingService) {
         var service = {};
 
         // Create an new Grid Options
         service.createGridOptions = function (isEditMode) {
-            var pagination = paginationService.createPagination();
+            var pagination = pagingService.createPagination();
             var baseOptions = {
                 data: 'resultPage.content',
                 enablePaging: true,

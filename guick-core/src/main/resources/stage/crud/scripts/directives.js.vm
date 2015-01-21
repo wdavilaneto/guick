@@ -158,8 +158,7 @@ angular.module('${project.acronym}App')
                 });
                 scope.$on('event:auth-loginConfirmed', function() {
                     main.show();
-                    menu.show();
-                    userArea.show();
+                    menu.show();                    userArea.show();
                     login.slideUp();
                 });
             }

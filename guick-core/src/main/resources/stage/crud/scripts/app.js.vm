@@ -28,6 +28,7 @@ var app = angular.module('${project.name}App', [
     'toaster',
     'angucomplete-alt',
     'nvd3',
+    'angularUtils.directives.dirPagination',
     '${project.name}Services'
   ])
   .config(function ($routeProvider) {

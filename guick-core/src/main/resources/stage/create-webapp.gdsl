@@ -28,6 +28,9 @@ guick {
                     [input: "stage/images/", output: "/front-end/app/images/"],
 
                     [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
+
+                    [input: "stage/crud/html/components/directives/dirPagination.tpl.html.vm", output: "/front-end/app/components/directives/dirPagination.tpl.html"],
+
                     [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
                     [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
                     [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],

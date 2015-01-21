@@ -137,15 +137,13 @@ class Entity extends Clazz {
         Map<String, String> map = new HashMap<String, String>();
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>()
         for (ComplexProperty property : complexProperties) {
-            if (!map.containsKey(property.name)) {
-                //if (!map.containsKey(property.referedEntity.name)) {
+            if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.referedEntity.name, property.name);
                 returnList.add(property);
             }
         }
         for (ComplexProperty property : parent?.complexProperties) {
-            if (!map.containsKey(property.name)) {
-                //if (!map.containsKey(property.referedEntity.name)) {
+            if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.referedEntity.name, property.name);
                 returnList.add(property);
             }
@@ -158,14 +156,12 @@ class Entity extends Clazz {
         List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
         for (RelationshipProperty property : properties) {
             if (!map.containsKey(property.name)) {
-                //if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.name, property.name);
                 returnList.add(property);
             }
         }
         for (RelationshipProperty property : parent?.properties) {
             if (!map.containsKey(property.name)) {
-                //if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.name, property.name);
                 returnList.add(property);
             }

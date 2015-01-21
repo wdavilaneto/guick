@@ -214,12 +214,19 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
        ${js}scope.textSearchActive = value;
     };
 
+        $scope.pageChanged = function(newPage) {
+            pagination.currentPage = newPage;
+        };
+
+
     // watches
     ${js}scope.${js}watch('pagination', function (newVal, oldVal) {
         if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
             ${js}scope.search();
         }
     }, true);
+
+
 
 }]);
 

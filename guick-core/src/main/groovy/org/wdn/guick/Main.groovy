@@ -33,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../electio/")
+            main.project.initialize("../mprj-gsi-listatelefonica/")
 
 //            main.setTarget("stage/create-webapp")
 //            main.run()
