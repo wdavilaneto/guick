@@ -149,27 +149,9 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 #else
             options.rowTemplate= '<div ng-dblclick="edit${entity.name}(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
 #end
-            options.columnDefs = [
-#set($properties = [])
-#if (${entity.parent} && ${entity.parent.properties.size()} < 3 )
-#set($properties =  ${entity.parent.properties})
-#else
-#foreach( ${property} in ${entity.parent.properties})
-#if( ${property.column.length} > 3 )
-#set( $foo = ${properties.add( $property )} )
-#end
-#end
-#end
-######################
-#if (${entity.properties.size()} <5)
-#set( $foo = ${properties.addAll( ${entity.properties} )} )
-#else
-#foreach( ${property} in ${entity.properties})
-#if( !( ${property.type} == 'String' && ${property.column.length} < 2) )
-#set( $foo = ${properties.add( $property )} )
-#end
-#end
-#end
+            options.columnDefs = [];
+
+#set($properties = ${entity.getDistinctedProperties()} )
 ######################
 #if( ${entity.table.getFieldThatPointsParentPk()} && ${entity.table.getFieldThatPointsParentPk().size()} >=1)
 #foreach( ${property} in ${entity.properties})
@@ -180,40 +162,30 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 #end
 ######################
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
-                {field: 'id', displayName: 'id', sortable: false},
+                options.columnDefs.push({field: 'id', displayName: 'id', sortable: false});
 #end
+######################
 #set($size = ${properties.size()} )
 #set($counter = 0)
 #foreach( ${property} in ${properties})
-#set($counter = $counter + 1)
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
-#if( !(${property.type} == 'Long' && ${property.column.constraint} )  && ${property.type} != 'byte[]')
-                {field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}}#if($counter < $size) ,
-#end
+#if( (${property.type} == 'Long' && ${property.column.constraint}) || ${property.type} == 'byte[]')
+                //options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}} );
+#else
+#set($counter = $counter + 1)
+##                // (($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )
+                #if(($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )//#{end}options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}});
 #end
 #end
 #####################
-#if (${properties.size()} < 4 && (${entity.getManyToOneProperties().size()} >=1 || ${entity.parent.getManyToOneProperties().size()} >=1) )
-#if (${entity.getManyToOneProperties().size()} >=1)
-#set( $toOneProperty = ${entity.getManyToOneProperties()[0]} )
-#else
-#if(${entity.parent.getManyToOneProperties().size()} >=1)
-#set( $toOneProperty = ${entity.parent.getManyToOneProperties()[0]} )
+#set($counter = 0)
+#foreach( ${property} in ${entity.getDistinctedAllComplexProperties()})
+#if(${property.isManyToOne()})
+#set($counter = $counter + 1)
+                #if($counter > 2)//#{end}options.columnDefs.push({field: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0]}', displayName: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0].title}', sortable: false#if (${property.referedEntity.getMostDescritiveProperties()[0].name.length()} < 5 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 5), width: 30#{end}});
 #end
 #end
-### find first StringField
-#set ( $stringField = 'id' )
-#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
-#if(${prop.type} == 'String' && $stringField == 'id' )
-#set ($stringField = ${prop})
-#end
-#end ,
-
-                {field: '${toOneProperty.name}.${stringField}', displayName: '${toOneProperty.referedEntity.title}', sortable: false#if (${stringField.name.length()} < 5 && ${stringField.column.length} < 5), width: 30#{end}}
-#end
-
-            ];
-            // This options MUST always exists since tables and Cells does not have Doubld Click
+            // This options MUST always exists since tables and Cells does not have Doubld Click by default
             options.columnDefs.push({field:'', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
             if (isEditMode) {
 #if(${entity.looksLikeEnum()})

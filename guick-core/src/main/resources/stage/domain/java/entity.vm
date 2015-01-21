@@ -95,8 +95,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
 #end
 #if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
-//@Cacheable
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+// @Immutable
 #end
 @JsonIdentityInfo(generator=JSOGGenerator.class)
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -40,8 +40,7 @@
 
     Subdirectories can be specified below the property e.g. java.io.tmpdir/one
     -->
-    <diskStore path="java.io.tmpdir"/>
-
+    <diskStore path="java.io.tmpdir/ehcache"/>
 
     <!--
     Cache configuration
@@ -131,19 +130,26 @@
 
     The defaultCache has an implicit name "default" which is a reserved cache name.
     -->
-    <defaultCache maxElementsInMemory="100" eternal="false" diskPersistent="false" timeToIdleSeconds="120"
-                  timeToLiveSeconds="120" diskSpoolBufferSizeMB="30" />
+    <defaultCache maxElementsInMemory="10000" eternal="false" diskPersistent="false" timeToIdleSeconds="120"
+                  timeToLiveSeconds="120" diskSpoolBufferSizeMB="60" />
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache" maxElementsInMemory="1000"
+            eternal="false" timeToIdleSeconds="360" timeToLiveSeconds="360">
+    </cache>
+
+    <!-- Extracted from docs: Tracks the timestamps of the most recent updates to particular tables. It is important that the cache timeout of the underlying cache implementation be set to a higher value than the timeouts of any of the query caches. In fact, it is recommend that the the underlying cache not be configured for expiry at all -->
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache" eternal="true"> </cache>
 
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-#if( ${entityBeanName} == 'endereco' )
-    <cache name="${entityBeanName}" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
+#if( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' )
+    <cache name="${project.group}.${project.name}.domain.${entity.name}" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
            timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
     <cache name="${entityBeanName}List" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
               timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
 #end
 #if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
-    <cache name="${entityBeanName}" maxElementsInMemory="600" eternal="false" diskPersistent="false"
+    <cache name="${project.group}.${project.name}.domain.${entity.name}" maxElementsInMemory="600" eternal="false" diskPersistent="false"
            timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
     <cache name="${entityBeanName}List" maxElementsInMemory="600" eternal="false" diskPersistent="false"
            timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>

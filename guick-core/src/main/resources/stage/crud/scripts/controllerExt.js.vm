@@ -87,16 +87,11 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         });
     };
 
-    $scope.${beanName}PaginationChanged = function(newPage) {
-        $scope.${beanName}Pagination.currentPage = newPage;
+    $scope.${ent.referedEntity.beanName}PaginationChanged = function(newPage) {
+        $scope.${ent.referedEntity.beanName}Pagination.currentPage = newPage;
+        ${js}scope.find${ent.referedEntity.name}();
     };
 
-    // watches
-    ${js}scope.${js}watch('${beanName}Pagination', function (newVal, oldVal) {
-        if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
-            ${js}scope.find${ent.referedEntity.name}();
-        }
-    }, true);
 #{end}
 #{end}
 #end

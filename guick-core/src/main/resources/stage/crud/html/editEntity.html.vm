@@ -37,7 +37,7 @@
                 </tab>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} || ${complexProperty.isManyToMany()} )
-                <tab heading="${complexProperty.title}" ng-controller="${entity.beanName}ExtController" ng-click="find${complexProperty.referedEntity.name}()" ng-show="${entity.looksLikeMainEntity()}">
+                <tab heading="${complexProperty.title}" ng-controller="${entity.beanName}ExtController" ng-click="clear();find${complexProperty.referedEntity.name}()" ng-show="${entity.looksLikeMainEntity()}">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary" ng-show="selected">
@@ -70,78 +70,8 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="box-body table-responsive no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!--div class="gridStyle" ng-gr id="grid${complexProperty.referedEntity.name}Options"></div-->
-                                            <table class="table table-hover">
-                                                <tr>
-#set($counter = 0)
-#set($size = ${complexProperty.referedEntity.getDistinctedAllComplexProperties().size()})
-#foreach( ${complex} in ${complexProperty.referedEntity.getDistinctedAllComplexProperties()})
-    #if(${complex.isManyToOne()} && ${complex.referedEntity.name} != ${entity.name})
-        #if( ${complex.referedEntity.getAllImageProperties().size()} > 0 )
-                                                    <th>${complex.referedEntity.getAllImageProperties()[0].title}</th>
-        #end
-        #if( ${size} < 3 || (${complex.column.length} > 30 && ${complex.column.length} < 500) )
-                                                    <th>${complex.Title}</th>
-            #set($counter = $counter+1)
-            #if($counter > 4)
-                #break
-            #end
-        #end
-    #end
-#end
-############################################
-#set($counter = 0)
-#set($size = ${complexProperty.referedEntity.getDistinctedProperties().size()})
-#foreach( ${property} in ${complexProperty.referedEntity.getDistinctedProperties()})
-    #if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500) ) ## case too many fields prefer long string
-                                                    <th>${property.Title}</th>
-        #set($counter = $counter+1)
-        #if($counter > 4)
-            #break
-        #end
-    #{end}
-#end
-                                                </tr>
-                                                <tr dir-paginate="${complexProperty.referedEntity.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${complexProperty.referedEntity.beanName})" ng-class="{selected: ${complexProperty.referedEntity.beanName}}">
-#set($counter = 0)
-#set($size = ${complexProperty.referedEntity.getDistinctedAllComplexProperties().size()})
-#foreach( ${complex} in ${complexProperty.referedEntity.getDistinctedAllComplexProperties()})
-    #if(${complex.isManyToOne()} && ${complex.referedEntity.name} != ${entity.name})
-        #if( ${complex.referedEntity.getAllImageProperties().size()} > 0 )
-                                                    <td><img ng-src="data:image/*;base64,{{${complexProperty.referedEntity.beanName}.${complex.referedEntity.beanName}.${complex.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
-        #end
-        #if( ${size} < 3 || (${complex.column.length} > 30 && ${complex.column.length} < 500) )
-                                                    <td><p>{{${complexProperty.referedEntity.beanName}.${complex.referedEntity.beanName}.${complex.referedEntity.getMostDescritiveProperties()[0]}}}<p></td>
-            #set($counter = $counter+1)
-            #if($counter > 4)
-                #break
-            #end
-        #end
-    #{end}
-#end
-############################################
-#set($counter = 0)
-#set($size = ${complexProperty.referedEntity.getDistinctedProperties().size()})
-#foreach( ${property} in ${complexProperty.referedEntity.getDistinctedProperties()})
-    #if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
-                                                    <td><p>{{${complexProperty.referedEntity.beanName}.${property}}}<p></td>
-        #set($counter = $counter+1)
-        #if($counter > 4)
-            #break
-        #end
-    #end
-#end
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div><!-- /.box-body -->
-                                <div class="box-footer clearfix">
-                                    <dir-pagination-controls on-page-change="${complexProperty.referedEntity.beanName}PaginationChanged(newPageNumber)" boundary-links="true" template-url="components/directives/dirPagination.tpl.html"></dir-pagination-controls>
-                                </div>
+                                <!--<div class="gridStyle" ng-grid="grid${complexProperty.referedEntity.name}Options"></div>-->
+                                <div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Table.html'"></div>
                             </div>
 
                         </div>
@@ -149,7 +79,6 @@
                 </tab>
 #end
 #end
-
 
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
