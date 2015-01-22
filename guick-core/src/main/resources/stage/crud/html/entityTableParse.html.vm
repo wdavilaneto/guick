@@ -1,0 +1,87 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+#set($counter = 0)
+#set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
+#foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
+#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entityParameter.name})
+#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <th>${property.referedEntity.getAllImageProperties()[0].title}</th>
+#end
+#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
+                                                    <th>${property.Title}</th>
+#set($counter = $counter+1)
+#if($counter == 6)
+    <!--
+#end
+#end
+#end
+#end
+#if($counter > 5)
+    -->
+#end
+############################################
+#set($counter = 0)
+#set($size = ${entityParameter.getDistinctedProperties().size()})
+#foreach( ${property} in ${entityParameter.getDistinctedProperties()})
+#if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500) ) ## case too many fields prefer long string
+                                                    <th>${property.Title}</th>
+#set($counter = $counter+1)
+#if($counter == 6)
+    <!--
+#end
+#{end}
+#end
+#if($counter > 5)
+    -->
+#end
+                                                </tr>
+                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}" ng-class="{selected: ${entityParameter.beanName}}">
+#set($counter = 0)
+#set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
+#foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
+#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entityParameter.name})
+#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <td><img ng-src="data:image/*;base64,{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
+#end
+#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
+                                                    <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}<p></td>
+#set($counter = $counter+1)
+#if($counter == 6)
+    <!--
+#end
+#end
+#{end}
+#end
+#if($counter > 5)
+    -->
+#end
+############################################
+#set($counter = 0)
+#set($size = ${entityParameter.getDistinctedProperties().size()})
+#foreach( ${property} in ${entityParameter.getDistinctedProperties()})
+#if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
+                                                    <td><p>{{${entityParameter.beanName}.${property}}}<p></td>
+#set($counter = $counter+1)
+#if($counter == 6)
+    <!--
+#end
+#end
+#end
+#if($counter > 5)
+    -->
+#end
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="${entityParameter.beanName}PaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="components/directives/dirPagination.tpl.html"
+                                        pagination-id="${entityParameter.beanName}"></dir-pagination-controls>
+                                </div>

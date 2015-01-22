@@ -52,3 +52,14 @@ create table if not exists candidatura (
     descricao varchar(600),
     proposta text
 );
+
+alter table candidatura ADD UNIQUE (candidato, eleicao);
+
+create table if not exists voto (
+    id integer primary key,
+    data_criacao timestamp not null default current_timestamp,
+    eleicao integer references eleicao not null,
+    candidato integer references funcionario,
+    funcionario integer references funcionario
+);
+alter table voto ADD UNIQUE (candidato, eleicao, funcionario);

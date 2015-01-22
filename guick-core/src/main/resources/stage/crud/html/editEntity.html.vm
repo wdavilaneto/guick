@@ -71,7 +71,8 @@
                                     </div>
                                 </div>
                                 <!--<div class="gridStyle" ng-grid="grid${complexProperty.referedEntity.name}Options"></div>-->
-                                <div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Table.html'"></div>
+                                <!--<div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Table.html'"></div>-->
+
                             </div>
 
                         </div>
