@@ -142,17 +142,11 @@
 
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-#if( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' )
-    <cache name="${project.group}.${project.name}.domain.${entity.name}" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
-           timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
-    <cache name="${entityBeanName}List" maxElementsInMemory="1000" eternal="false" diskPersistent="false"
-              timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
-#end
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
-    <cache name="${project.group}.${project.name}.domain.${entity.name}" maxElementsInMemory="600" eternal="false" diskPersistent="false"
-           timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
-    <cache name="${entityBeanName}List" maxElementsInMemory="600" eternal="false" diskPersistent="false"
-           timeToIdleSeconds="6000" timeToLiveSeconds="6000"/>
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
+    <cache name="${project.group}.${project.name}.domain.${entity.name}" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="${entityBeanName}List" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
 
 #end
 #end

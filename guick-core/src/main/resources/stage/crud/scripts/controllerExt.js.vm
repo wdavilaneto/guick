@@ -33,9 +33,8 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
     // ******************************************************************************************
     // Master Details: Operations for Search and  editing of OneToMany/ManyToMany
     // ******************************************************************************************
-#if( ${entity.looksLikeMainEntity()} )
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( ${ent.isOneToMany()} || ${ent.isManyToMany()})
+#if( ${ent.isOneToMany()} ) ## || ${ent.isManyToMany()} TODO Many to many needs to change services/repository
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
     ${js}scope.grid${ent.referedEntity.name}Options = ${beanName}Service.createGridOptions(true);
     ${js}scope.${beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();
@@ -94,7 +93,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
 
 #{end}
 #{end}
-#end
 
     ${js}scope.clear = function () {
         ${js}scope.selected = null;

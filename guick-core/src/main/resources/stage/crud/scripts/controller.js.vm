@@ -19,7 +19,7 @@
  */
 angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
-    ${js}scope.dateFormat = "dd/MM/yyyy";
+    ${js}scope.dateFormat = 'dd/MM/yyyy';
     ${js}scope.options = { language: 'en', allowedContent: true,entities: false };
     ${js}scope.editMode = false;
     ${js}scope.maxSelectBoxSize = 300;
@@ -110,11 +110,11 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     };
 
     $scope.detalhar = function (${entityBeanName}) {
-        //if (${js}scope.editMode === true && !confirm("Deseja realmente sair do modo de edição do cadastro de ${entity.name}?")){
+        //if (${js}scope.editMode === true && !confirm('Deseja realmente sair do modo de edição do cadastro de ${entity.name}?')){
         //    return false;
         //}
         console.log('Redirecting to edit ${entityBeanName} with id:' + ${entityBeanName}.id);
-        ${js}location.path('/edit${entity.name}/' + ${entityBeanName}.id );
+        ${js}location.path('/${entity.name}/' + ${entityBeanName}.id );
     };
 
     $scope.save = function() {
@@ -188,9 +188,8 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         });
     };
 
-#if( (${entity.getOneToManyProperties().size()} == 0 && ${entity.getManyToManyProperties().size()} == 0  ) || ${entity.looksLikeEnum()})
     // *********************************************************************************************
-    // Inline Update Operations: Since this entity, at generation time, had no Master/Details
+    // Inline Update Modal
     // *********************************************************************************************
     ${js}scope.edit${entity.name} = function (obj) {
         var modalInstance = ${js}modal.open({
@@ -209,7 +208,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         });
     };
 
-#end
     ${js}scope.setTextSearchActive = function (value) {
        ${js}scope.textSearchActive = value;
     };

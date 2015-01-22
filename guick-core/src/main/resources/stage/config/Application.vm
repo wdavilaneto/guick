@@ -69,7 +69,7 @@ public class Application extends SpringBootServletInitializer {
     @Profile("jboss")
     public DataSource dataSource() {
         JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-        return dataSourceLookup.getDataSource("java:jboss/custeioDS");
+        return dataSourceLookup.getDataSource("java:jboss/${project.beanName}DS");
     }
 
     @Bean

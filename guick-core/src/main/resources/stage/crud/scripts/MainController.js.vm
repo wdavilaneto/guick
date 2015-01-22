@@ -61,7 +61,7 @@ angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}sc
   };
 });
 
-angular.module('${project.name}App').controller('DatepickerDemoCtrl', function (${js}scope) {
+angular.module('${project.name}App').controller('StandardDatepickerController', function (${js}scope) {
     ${js}scope.today = function() {
         ${js}scope.dt = new Date();
     };

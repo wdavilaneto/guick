@@ -77,6 +77,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #{end}## Knowable GEnerator Sequence
 #if( $entity.childrens.size() > 0 )
 @Inheritance(strategy= InheritanceType.JOINED)
+## TODO melhorar o if para filtrar filhos com img
+#if(  ${entity.childrens[0].name} == 'FuncImg' )
+@SecondaryTables({@SecondaryTable(name="RH_FUNC_IMG", pkJoinColumns={@PrimaryKeyJoinColumn(name="CDMATRICULA", referencedColumnName="CDMATRICULA")})})
+#else
+//@SecondaryTables({@SecondaryTable(name="RH_FUNC_IMG", pkJoinColumns={@PrimaryKeyJoinColumn(name="CDMATRICULA", referencedColumnName="CDMATRICULA")})})
+#end
 #end
 #if( ${entity.getParent()} )
 #if ( ${entity.table.getPk().size()} == 0 )
@@ -100,15 +106,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #end
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
 #end
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} )
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entity.beanName} == 'endereco' || ${entity.beanName} == 'orgao' ))
+// @Immutable ?
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-// @Immutable
 #end
 @JsonIdentityInfo(generator=JSOGGenerator.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.getParent().getName()}#{else} implements Serializable#{end} {
-
 
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
 #if($entity.getId().isEmbeddable() )
@@ -143,6 +148,13 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #end
 #parse( "stage/domain/java/manyToOneProperties.vm" )
 #parse( "stage/domain/java/manyToManyProperties.vm" )
+
+#if(  ${entity.childrens.size()} > 0 && ${entity.childrens[0].name} == 'FuncImg' )
+    @Column(name = "FOTO", table = "RH_FUNC_IMG", updatable = false, insertable = false)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    byte[] foto;
+#end
 
 #if(!$entity.isEmbeddable() and !$entity.getParent() )
     /**
@@ -388,6 +400,16 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
         this.id.set${property.getSimpleProperty().capitalizedName}(value);
     }
 
+#end
+
+#if(  ${entity.childrens.size()} > 0 && ${entity.childrens[0].name} == 'FuncImg' )
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 #end
 
     /**

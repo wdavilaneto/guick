@@ -16,7 +16,7 @@ body.waiting-for-angular div#initializing-panel {
 }
 /* modificado 14.10.14 */
 body{transitions:0.5;-webkit-transitions:0.5s;-moz-transitions:0.5s;padding-bottom:70px;}
-a.logo-control{text-indent:-9999px; color: #fff;float: left;font-family: 'Marcellus SC', serif; font-size: 1.1em; margin: 14px 0 0 11;text-shadow: 1px 1px 5px #666;}
+a.logo-control{display:none;width:220px;height:50px;text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat center center;}
 .skin-blue  a.logo, .skin-blue  a.logo:hover{text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat center center;}
 .skin-blue .navbar.navbar-footer{background:#f4f4f4 !important; min-height:20px !important;box-shadow:10px -20px 30px #fff;color:#999;}
 .navbar.navbar-footer p small{height:24px;padding:3px 0 3px 80px;text-transform: uppercase;font-size: 0.65em;letter-spacing: 1pt;background:url(../images/logotipo-footer.svg)no-repeat left center;}
@@ -35,6 +35,9 @@ body > .header .navbar{min-width:320px;height:50px;background:#007AAF;}
 .gridStyle {border: 1px solid rgb(212,212,212);min-height: 500px;}
 .gridStyle .ngViewport {overflow-x: hidden;}
 .gridStyle button{padding:2px 6px !important;margin:2px !important;}
+.grid-align-right{text-align: right !important;}
+.grid-align-center{text-align: center !important;}
+
 header{background:#007aaf;width:100%;}
 .angucomplete-dropdown {overflow-y: auto;max-height: 200px;width: 100%;}
 .popover{}
@@ -94,7 +97,6 @@ a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 /*.nav > li > a{padding:3px 15px;}*/
 .nav-tabs-custom > .nav-tabs > li.active{border-top-color: #3c8dbc  !important;}
 
-
 /* SLIDE CONTENT */
 .content{ position: relative;top:2px;-ms-animation:animate-content o.5s;-moz-animation:animate-content o.5s; -webkit-animation: animate-content 0.5s; /* Chrome, Safari, Opera */animation: animate-content 0.5s;}
 .form-box .header{background:#007aaf;}
@@ -139,4 +141,8 @@ a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 [images-drop]{
     border: 2px dotted;
     color: red;
+}
+@media (max-width: 560px) {
+  a.logo-control{display:block !important;}
+  .skin-blue  a.logo, .skin-blue  a.logo:hover{display:none !important;}
 }

@@ -144,11 +144,8 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 
         service.createGridOptions = function (entitySelected, isEditMode){
             var options = gridService.createGridOptions(isEditMode);
-#if(!${entity.looksLikeEnum()})
             options.rowTemplate= '<div ng-dblclick="detalhar(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
-#else
-            options.rowTemplate= '<div ng-dblclick="edit${entity.name}(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
-#end
+            //options.rowTemplate= '<div ng-dblclick="edit${entity.name}(row.entity)" ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell></div></div>';
             options.columnDefs = [];
 
 #set($properties = ${entity.getDistinctedProperties()} )

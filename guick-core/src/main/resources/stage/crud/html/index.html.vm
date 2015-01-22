@@ -1,7 +1,6 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!doctype html>
-<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="pt"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang="pt"> <![endif]-->
@@ -172,12 +171,11 @@
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-
+                    <li><a href="#/"><i class="fa fa-home"></i> Inicial </a></li>
 #if( ${project.config.useWorkflow} == true )
                     <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
 #end
                     <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
-
 #if (${project.getAllMainEntities().size()} > 0)
                     <li class="treeview">
                         <a href="#">
@@ -193,36 +191,42 @@
                         </ul>
                     </li>
 #end
-#if (${project.getAllDomainEntities().size()} > 0)
                     <li class="treeview">
                         <a href="#">
-                            <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                            <i class="glyphicon glyphicon-wrench"></i> <span>Administração</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
+#if (${project.getAllDomainEntities().size()} > 0)
                         <ul class="treeview-menu">
+                             <li class="treeview">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllDomainEntities()})
 #if (!${entity.isEmbeddable()})
-                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                                    <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
 #end
 #end
-                        </ul>
-                    </li>
+                                </ul>
+                            </li>
 #end
-
 #if (${project.getAllEnumLikeEntities().size()} > 0)
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
-                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                                    <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+#end
+                                 </ul>
+                            </li>
 #end
                         </ul>
                     </li>
-#end
-
                 </ul>
             </section>
             <!-- /.sidebar -->

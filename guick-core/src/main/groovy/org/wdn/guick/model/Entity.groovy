@@ -249,7 +249,7 @@ class Entity extends Clazz {
 
     public boolean looksLikeDomain() {
         if (_looksLikeDomain == null) {
-            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum() && parent == null );
+            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum() && parent == null || (!looksLikeEnum() && (name.toLowerCase().startsWith("tipo") || name.toLowerCase().startsWith("type") || name.toLowerCase().endsWith("type") ) ) );
         }
         return _looksLikeDomain;
     }

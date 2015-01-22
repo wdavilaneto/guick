@@ -6,9 +6,12 @@
 #set($counter = 0)
 #set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
 #foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
-#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entityParameter.name})
+#if( ${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
 #if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
                                                     <th>${property.referedEntity.getAllImageProperties()[0].title}</th>
+#end
+#if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
+                                                    <th>Foto</th>
 #end
 #if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
                                                     <th>${property.Title}</th>
@@ -39,15 +42,18 @@
 #end
                                                 </tr>
                                                 <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}" ng-class="{selected: ${entityParameter.beanName}}">
+#if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
+                                                    <td><img ng-src="data:image/*;base64,{{funcionario.foto}}" ng-show="funcionario.foto" width="80px" /></td>
+#end
 #set($counter = 0)
 #set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
 #foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
-#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entityParameter.name})
+#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
 #if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
                                                     <td><img ng-src="data:image/*;base64,{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
 #end
 #if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
-                                                    <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}<p></td>
+                                                    <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</p></td>
 #set($counter = $counter+1)
 #if($counter == 6)
     <!--
@@ -63,7 +69,7 @@
 #set($size = ${entityParameter.getDistinctedProperties().size()})
 #foreach( ${property} in ${entityParameter.getDistinctedProperties()})
 #if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
-                                                    <td><p>{{${entityParameter.beanName}.${property}}}<p></td>
+                                                    <td><p>{{${entityParameter.beanName}.${property}}}</p></td>
 #set($counter = $counter+1)
 #if($counter == 6)
     <!--
