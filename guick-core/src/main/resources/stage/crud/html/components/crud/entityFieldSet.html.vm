@@ -35,6 +35,7 @@
                                         <label class="control-label">${complexProperty.title}
                                         </label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                                              initial-value="entity.${complexProperty}"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
                                               name="${beanName}"
                                               pause="400"
@@ -89,6 +90,7 @@
                                         <label class="control-label">${complexProperty.title}
                                         </label>
                                         <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                                              initial-value="entity.${complexProperty}"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
                                               name="${beanName}"
                                               pause="400"

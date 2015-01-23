@@ -1,0 +1,32 @@
+                    <div class="row">
+#set( $mainEntities = ${project.getAllMainEntities()} )
+#foreach( ${entity} in ${mainEntities} )
+#foreach( ${e} in ${entity.getOneToManyProperties()} )
+#set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
+#set($capitalizedName = $util.capitalize( ${e.name} ) )
+#set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
+#set($capitalizedName = $util.capitalize( ${e.name} ) )
+#set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " data="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " data="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+#if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
+#set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
+                        <div class="col-md-6">
+                            <nvd3 options="options${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " data="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp} " class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+#end
+
+#end
+#end
+
+                    </div>

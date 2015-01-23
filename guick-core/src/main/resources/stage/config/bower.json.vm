@@ -17,6 +17,7 @@
     "angular-ui-date": "latest",
     "angular-ui-select": "~0.9.0",
     "angular-nvd3": "latest",
+##    "angular-ui-chart": "latest",
     "angular-ui-utils": "latest",
     "angular-file-upload": "latest",
     "angular-utils-pagination": "0.5.0",

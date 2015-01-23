@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
     @Resource
-    AppUserDetailService appUserDetailService;
+    ScaAuthenticationProvider scaAuthenticationProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,8 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(appUserDetailService);
+        auth.authenticationProvider(scaAuthenticationProvider);
     }
 
     @Override

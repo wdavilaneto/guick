@@ -10,10 +10,11 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content" >
     <div ng-controller="${entityBeanName}Controller">
+        <div ng-controller="${entity.beanName}ExtController">
         <form name="${entityBeanName}Form" novalidate>
-            <tabset>
+            <tabset ng-show="#set( $size = ${entity.getDistinctedAllComplexProperties().size()} )#set( $counter = 0)#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )#if( ${ent.isOneToMany()} )!selected${ent.referedEntity.name}#set($counter = $counter + 1)#if($counter < $size ) && #end#end#end">
                 <tab heading="Principal">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
@@ -45,7 +46,7 @@
                                     <h3 class="box-title">Lista de ${complexProperty.referedEntity.name}</h3>
                                     <div class="box-tools">
                                         <form ng-submit="search()">
-                                            <button type="button" class="btn btn-primary btn-sm pull-right" ng-click="edit${complexProperty.referedEntity.name}()"><i class="fa fa-plus-circle"></i> Adicionar</button>
+                                            <button type="button" class="btn btn-primary btn-sm pull-right" ng-click="create${complexProperty.referedEntity.name}()"><i class="fa fa-plus-circle"></i> Adicionar</button>
                                             <div class="input-group">
                                                 <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                                 <div class="input-group-btn">
@@ -95,7 +96,30 @@
 #end
             </tabset>
         </form>
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
 
+            <div class="nav-tabs-custom"  ng-show="selected${complexProperty.referedEntity.name}">
+                <div class="tab-content">
+                    <div class="box box-primary">
+                        <div class="box-header"><h3 class="box-title"></h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                caralhos me fodam!
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <div class="form-group">
+                                <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
+                                <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
+                                <button class="btn btn-success" ng-click="save()"><span class="fa fa-save"></span> Gravar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+#end
+#end
+        </div>
     </div>
 </section>
-

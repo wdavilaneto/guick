@@ -78,7 +78,6 @@ guick {
                     [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
                     [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
 
-
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
 

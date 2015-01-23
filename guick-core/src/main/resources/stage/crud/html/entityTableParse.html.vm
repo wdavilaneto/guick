@@ -53,7 +53,7 @@
     -->
 #end
                                                 </tr>
-                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}">
+                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="edit${entityParameter.name}(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}">
 ####### TODO Teste TEMPORARIO REMOVER!!!
 #if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
                                                     <td><img ng-src="data:image/*;base64,{{funcionario.foto}}" ng-show="funcionario.foto" width="80px" /></td>
