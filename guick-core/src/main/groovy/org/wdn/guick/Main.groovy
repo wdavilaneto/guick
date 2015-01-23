@@ -23,7 +23,6 @@ class Main {
 
     Main() {
         context = new AnnotationConfigApplicationContext();
-
         context.scan(GUICK_CONTEXT_CLASSPATH);
         context.refresh();
         guick = (DslArchitecture) context.getBean("dslArchitecture");
@@ -34,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../cespae/")
+            main.project.initialize("../electio/")
 
 //            main.setTarget("stage/create-webapp")
 //            main.run()

@@ -26,8 +26,8 @@ class PatternConverterFacade {
         return getPatternConverter().getBeanName(table)
     }
 
-    public static String getBeanType(String columnType) {
-        return getPatternConverter().getBeanType(columnType)
+    public static String getBeanType(Column column) {
+        return getPatternConverter().getBeanType(column)
     }
 
     public static String columnToPropertyName(Column column) {

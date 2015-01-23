@@ -1,7 +1,11 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!doctype html>
-<html ng-app="${project.name}App" lang="pt">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="pt"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="pt"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
+<html lang="pt">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title ng-scope>MPRJ - ${project.name}</title>
@@ -20,17 +24,16 @@
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
     <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
     <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
     <link rel="stylesheet" href="bower_components/adminlte/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/adminlte/css/ionicons.min.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="css/main.css">
     <!-- endbuild -->
 </head>
-<body class="skin-blue">
+<body class="skin-blue authenticated-application waiting-for-angular" ng-app="${project.name}App">
 <toaster-container></toaster-container>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -38,7 +41,7 @@
 <![endif]-->
 
 
- <header class="header">
+<header class="header">
     <a href="#/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
         ${project.name}
@@ -51,9 +54,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </a><a class="logo-control" href="#">#if (${project.name} == 'msm') MÓDULO DE SAÚDE MENTAL#else ${project.name} #end</a>
-        <div class="navbar-right">
-            <ul class="nav navbar-nav">
+        </a><a class="logo-control" href="#">${project.name} </a>
+        <div class="navbar-right" ng-controller="loginController" id="user-area">
+            <ul class="nav navbar-nav" ng-show="user.username != null">
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
                 <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -80,13 +83,15 @@
                 </li>
 #end
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu"><a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>Usuário MPRJ<i class="caret"></i></span></a>
+                <li class="dropdown user user-menu" >
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i><span>{{user.name}}<i class="caret"></i></span></a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header bg-light-blue"><img src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
-                            <p>
-                                Fulano<small>Usuário desde Nov. 2012</small>
-                            </p></li>
+                        <li class="user-header bg-light-blue">
+                            <img ng-show="user.foto == null" src="bower_components/adminlte/img/avatar5.png" class="img-circle" alt="Imagem do usuário">
+                            <img ng-show="user.foto != null" ng-src="data:image/jpeg;base64,{{user.foto}}"  class="img-circle" alt="Imagem do usuário" />
+                            <p> {{user.name}} <small>Usuário desde Nov. 2012</small></p>
+                        </li>
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
@@ -112,83 +117,131 @@
     </nav>
 </header>
 
-<div class="div.wrapper row-offcanvas row-offcanvas-left">
-    <aside class="left-side sidebar-offcanvas">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-##            <!-- Sidebar user panel -->
-##            <div class="user-panel">
-##                <div class="pull-left info">
-##                    <p>Olá, bem vindo!</p>
-##                </div>
-##            </div>
+<div id="initializing-panel"></div>
 
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+<div id="content-outer">
 
-##                <li><a href="#/"><i class="glyphicon glyphicon-cog"></i>Atividades</a></li>
-                <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
-#if (${project.name} == 'msm')
-                <li><a href="#/manterPaciente"><i class="fa fa-user"></i>Paciente</a></li>
-                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-plus-sign"></i>Instituição</a></li>
-                <li><a href="#/manterInstituicao"><i class="glyphicon glyphicon-step-forward"></i>Movimentação</a></li>
+    <div id="login-holder">
+        <div class="form-box" id="login-box" ng-controller="loginController">
+            <div class="header">Área Restrita</div>
+            <form>
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="text" name="username" ng-model="username" class="form-control" placeholder="Login"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" ng-model="password" class="form-control" placeholder="Senha"/>
+                    </div>
+##                    <div class="form-group">
+##                        <input type="checkbox" name="remember_me"/> Lembrar Senha
+##                    </div>
+                </div>
+                <div class="footer">
+                    <button type="submit" ng-click="submit()" class="btn bg-olive btn-block">Autenticar</button>
+                </div>
+            </form>
+            <div class="margin text-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="div.wrapper row-offcanvas row-offcanvas-left" id="menu">
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+##                    <div class="user-panel">
+##                        <div class="pull-left image">
+##                            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+##                        </div>
+##                        <div class="pull-left info">
+##                            <p>Hello, Jane</p>
+##                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+##                        </div>
+##                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li><a href="#/"><i class="fa fa-home"></i> Inicial </a></li>
+#if( ${project.config.useWorkflow} == true )
+                    <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
 #end
-
+                    <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
 #if (${project.getAllMainEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-group"></i> <span>Principal</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-group"></i> <span>Principal</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllMainEntities()})
 #if (!${entity.isEmbeddable()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
+                            <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.title}</a></li>
 #end
 #end
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 #end
-
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-wrench"></i> <span>Administração</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
 #if (${project.getAllDomainEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                        <ul class="treeview-menu">
+                             <li class="treeview">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllDomainEntities()})
 #if (!${entity.isEmbeddable()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                                    <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
 #end
 #end
-                    </ul>
-                </li>
+                                </ul>
+                            </li>
 #end
-
 #if (${project.getAllEnumLikeEntities().size()} > 0)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
-                        <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
+                                    <li><a href="#/${entity.name}"><i class="fa fa-angle-double-right"></i>${entity.name}</a></li>
 #end
-                    </ul>
-                </li>
+                                 </ul>
+                            </li>
 #end
-
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-    <div ng-include src="'views/modals.html'"></div>
-    <aside class="right-side" id="home" ng-view></aside>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <div ng-include src="'views/modals.html'"></div>
+        <aside class="right-side" id="content" ng-view></aside>
+    </div>
 </div>
-
-<!-- rodape <div ng-include src="'components/footer/footer.html'"></div>-->
+<footer>
+    <nav class="navbar navbar-footer navbar-default navbar-fixed-bottom ">
+        <div class="container">
+            <p class="text-center"><small>Ministério Público do Estado do Rio de Janeiro | 2015</small></p>
+        </div>
+    </nav>
+</footer>
 
 <!-- build:js(.) scripts/oldieshim.js -->
 <!--[if lt IE 9]>
@@ -201,27 +254,31 @@
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script src="bower_components/angular-ui-date/src/date.js"></script>
 <script src="bower_components/angular-ui-select/dist/select.js"></script>
-<script src="bower_components/ng-grid/build/ng-grid.js"></script>
-<script src="bower_components/angularjs-toaster/toaster.js"></script>
-<script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
-<script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
-<script src="bower_components/jsog/lib/JSOG.js"></script>
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/nvd3/nv.d3.js"></script>
 <script src="bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
 <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
-<script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+<script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+<script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+<script src="bower_components/ckeditor/ckeditor.js"></script>
+<script src="bower_components/ng-grid/build/ng-grid.js"></script>
+<script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+<script src="bower_components/jsog/lib/JSOG.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
 <script src="bower_components/adminlte/js/app.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
@@ -232,35 +289,41 @@
 <script src="scripts/app.js"></script>
 
 <!-- servicos -->
+    <script src="scripts/service/support/ActivitiService.js"></script>
     <script src="scripts/service/dashboards/DashboardService.js"></script>
-    <script src="scripts/service/monitor/MonitorService.js"></script>
     <script src="scripts/service/support/SupportService.js"></script>
+    <script src="scripts/service/support/truncate.js"></script>
+    <script src="scripts/service/support/utils.js"></script>
+    <script src="scripts/service/support/constants.js"></script>
+    <script src="scripts/service/support/LoginService.js"></script>
+    <script src="scripts/service/monitor/MonitorService.js"></script>
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
-    <script src="scripts/service/${entity.name}Service.js"></script>
+    <script src="scripts/service/crud/${entity.name}Service.js"></script>
 #end
 #end
 
 <!-- controllers -->
     <script src="scripts/controllers/MainController.js"></script>
-    <script src="scripts/controllers/ModalController.js"></script>
+    <script src="scripts/controllers/support/ActivitiController.js"></script>
     <script src="scripts/controllers/dashboards/DashboardController.js"></script>
     <script src="scripts/controllers/monitor/MonitorController.js"></script>
+    <script src="scripts/controllers/support/LoginController.js"></script>
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
     <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
 #end
-#if (${project.name} == 'msm')
-    <script src="scripts/controllers/PacienteController.js"></script>
-#end
+
 #foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
-    <script src="scripts/controllers/${entity.name}Controller.js"></script>
+    <script src="scripts/controllers/crud/${entity.name}Controller.js"></script>
+    <script src="scripts/controllers/crud/${entity.name}ExtController.js"></script>
 #end
 #end
 
 <!-- diretrizes -->
+<script src="scripts/directives/directives.js"></script>
 #foreach( ${entity} in ${project.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})

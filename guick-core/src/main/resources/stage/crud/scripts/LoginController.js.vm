@@ -1,0 +1,30 @@
+#set( $js  = "$")
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ * @ngdoc function
+ * @name rhApp.controller:loginController
+ * @description
+ * # loginController
+ * Controller of the rhApp
+ */
+angular.module('${projectBeanName}App').controller('loginController', ['$scope', 'loginService' , 'authService', function ($scope, loginService , authService) {
+
+    $scope.submit = function() {
+        loginService.login( {'username':$scope.username , 'password':$scope.password, ignoreAuthModule: 'ignoreAuthModule'} , function (data) {
+            loginService.activateLogin(data);
+        }, function (data) {
+            loginService.logout(data);
+        });
+    };
+
+}]);

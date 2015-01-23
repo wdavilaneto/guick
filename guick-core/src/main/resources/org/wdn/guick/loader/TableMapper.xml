@@ -72,7 +72,19 @@
         order by cols.table_name, cc.position, cols.column_id
     </select>
 
-    <select id="findContraints" resultType="hashmap">
+    <resultMap id="constraintResultMap" type="org.wdn.guick.model.ConstraintDto">
+        <result property="name" column="CONSTRAINT_NAME"/>
+        <result property="type" column="CONSTRAINT_TYPE"/>
+        <result property="tableName" column="TABLE_NAME"/>
+        <result property="rTableName" column="R_TABLE_NAME"/>
+        <result property="columnName" column="COLUMN_NAME"/>
+        <result property="rColumnName" column="R_COLUMN_NAME"/>
+        <result property="searchCondition" column="SEARCH_CONDITION" />
+    </resultMap>
+
+    <!-- select * from DBA_DEPENDENCIES dep where dep.name LIKE upper('xxx')-->
+
+    <select id="findContraints" resultMap="constraintResultMap">
         select
         k.constraint_name,
         k.table_name, c.column_name, k.constraint_type ,
@@ -84,8 +96,7 @@
         left join ALL_cons_columns cr on r.owner = cr.owner and r.constraint_name = cr.constraint_name and r.table_name = cr.table_name
         and c.position = cr.position
         where   (k.table_name not like 'AD$%' and k.table_name NOT LIKE 'BIN$%')
-            and k.constraint_type not in ( 'P' )
-            AND
+            and k.constraint_type not in ( 'P' ) and
         <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
             (   k.owner = upper(#{table.owner})
                 <if test="table.tableName != null and table.tableName != ''"> AND k.table_name = UPPER(#{table.tableName}) </if>

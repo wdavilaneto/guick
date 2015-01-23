@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.wdn.guick.loader.PostgresTableMapper">
+
+    <resultMap id="tableResultMap" type="org.wdn.guick.model.Table">
+        <id property="name" column="table_name"/>
+        <id property="owner" column="table_catalog"/>
+        <result property="comment" column="table_comments"/>
+        <collection property="columns" resultMap="columnResultMap"  />
+    </resultMap>
+
+    <resultMap id="columnResultMap" type="org.wdn.guick.model.Column">
+        <id property="name" column="column_name"/>
+        <id property="table.name" column="table_name"/>
+        <id property="table.owner" column="table_catalog"/>
+        <result property="length" column="length"/>
+        <result property="nullable" column="nullable"/>
+        <result property="position" column="position"/>
+        <result property="precision" column="numeric_precision"/>
+        <result property="scale" column="numeric_scale"/>
+        <result property="type" column="data_type"/>
+        <result property="defaultValue" column="column_default" />
+    </resultMap>
+
+    <select id="findTableAndColumns" resultMap="tableResultMap" parameterType="string">
+        select
+        tab.table_name,
+        cols.table_catalog,
+        cols.column_name,
+        case cols.is_nullable when 'YES' then 1 else 0 end as nullable,
+        cols.data_type ,
+        COALESCE ( cols.character_octet_length ,0 ) as length,
+        cols.numeric_precision,
+        cols.numeric_precision_radix,
+        cols.numeric_scale,
+        cols.is_updatable,
+        kcu.constraint_name,
+        cols.column_default,
+        case when (tc.constraint_type = 'PRIMARY KEY' and kcu.ordinal_position is not null) then kcu.ordinal_position else NULL end as position
+        from information_schema.tables tab
+        inner join information_schema.columns cols on
+            (cols.table_name = tab.table_name)
+        left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
+            ON kcu.table_catalog = cols.table_catalog
+            AND kcu.table_schema = cols.table_schema
+            AND kcu.table_name = cols.table_name
+            and kcu.column_name = cols.column_name
+        left join INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
+            ON tc.table_catalog = tab.table_catalog
+            AND tc.table_schema = tab.table_schema
+            AND tc.table_name = tab.table_name
+            AND tc.constraint_name = KCU.constraint_name
+            AND tc.constraint_type = 'PRIMARY KEY'
+        where
+            tab.table_type = 'BASE TABLE'
+            and tab.table_schema = 'public'
+            and ( lower(tab.table_name) not like lower('Jbpm%'))
+            and ( lower(tab.table_name) not like lower('act\_%') escape '\')
+            and
+        <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
+            (   cols.table_catalog = lower(#{table.owner})
+                <if test="table.tableName != null and table.tableName != ''"> AND cols.table_name = UPPER(#{table.tableName}) </if>
+            )
+        </foreach>
+        ORDER BY tab.table_catalog,
+            tab.table_schema,
+            tab.table_name,
+        case when (tc.constraint_type = 'PRIMARY KEY' and kcu.ordinal_position is not null) then kcu.ordinal_position else NULL end ,
+            cols.column_name
+    </select>
+
+    <resultMap id="constraintResultMap" type="org.wdn.guick.model.ConstraintDto">
+        <result property="name" column="CONSTRAINT_NAME"/>
+        <result property="type" column="CONSTRAINT_TYPE"/>
+        <result property="tableName" column="TABLE_NAME"/>
+        <result property="rTableName" column="R_TABLE_NAME"/>
+        <result property="columnName" column="COLUMN_NAME"/>
+        <result property="rColumnName" column="R_COLUMN_NAME"/>
+    </resultMap>
+
+
+    <select id="findContraints" resultMap="constraintResultMap">
+        select k.CONSTRAINT_NAME , k.TABLE_CATALOG, k.TABLE_NAME,
+        case k.constraint_type
+            when 'FOREIGN KEY' then 'R'
+            when 'CHECK' then 'C'
+            when 'UNIQUE' then 'U'
+            else k.constraint_type
+        end as CONSTRAINT_TYPE,
+        kcu.COLUMN_NAME,
+        ccu.table_name as R_TABLE_NAME,
+        ccu.column_name as R_COLUMN_NAME,
+        kcu.ORDINAL_POSITION , kcu.POSITION_IN_UNIQUE_CONSTRAINT
+        from information_schema.TABLE_CONSTRAINTS k
+        LEFT JOIN information_schema.key_column_usage AS kcu
+            ON k.constraint_name = kcu.constraint_name
+        LEFT JOIN information_schema.constraint_column_usage AS ccu
+            ON ccu.constraint_name = k.constraint_name
+        where
+            k.constraint_type <![CDATA[ <> ]]> 'PRIMARY KEY'
+            and k.table_schema = 'public'
+            and ( lower(k.table_name) not like lower('jbpm%'))
+            and ( lower(k.table_name) not like lower('act\_%') escape '\')
+            AND
+        <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
+            (   k.table_catalog = lower(#{table.owner})
+                <if test="table.tableName != null and table.tableName != ''"> AND k.table_name = UPPER(#{table.tableName}) </if>
+            )
+        </foreach>
+        order by
+        k.table_catalog,
+        k.table_name,
+        ccu.table_name , kcu.ordinal_position
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT COUNT(*)  FROM ${owner}.${table}
+    </select>
+
+</mapper>

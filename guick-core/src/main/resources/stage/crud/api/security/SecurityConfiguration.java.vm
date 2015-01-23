@@ -1,0 +1,109 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.api.security;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.annotation.Resource;
+
+
+/**
+ * Application Security Configuration
+ */
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Resource
+    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+
+    @Resource
+    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
+
+    @Resource
+    private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
+
+    @Resource
+    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+
+    @Resource
+    AppUserDetailService appUserDetailService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(appUserDetailService);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic()
+                .realmName("${project.group}")
+            .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+                .authorizeRequests()
+                .antMatchers("/")
+                .permitAll()
+            .and()
+                .formLogin()
+                .loginProcessingUrl("/api/authentication")
+                .successHandler(ajaxAuthenticationSuccessHandler)
+                .failureHandler(ajaxAuthenticationFailureHandler)
+                .permitAll()
+            .and()
+                .logout()
+                .logoutUrl("/api/logout")
+                .logoutSuccessHandler(ajaxLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            .and()
+                .authorizeRequests()
+                .antMatchers("/api/authentication").permitAll()
+                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/**").hasAnyAuthority("ROLE_USER")
+                .anyRequest().authenticated()
+            .and()
+                .csrf()
+                .disable()
+                .headers()
+                .frameOptions()
+                .disable()
+        ;
+
+
+//        .usernameParameter("j_username")
+//                .passwordParameter("j_password")
+    }
+
+    @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
+    private static class GlobalSecurityConfiguration extends GlobalMethodSecurityConfiguration {
+
+    }
+
+}

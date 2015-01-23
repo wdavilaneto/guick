@@ -10,14 +10,18 @@ def enumList = []
 entities.each { entity -> enumList.addAll(entity.enums) }
 
 def lang = "java" //TODO to parametrize
+def useWorkflow = (project.config != null && project.config.useWorkflow);
 
 guick {
     domain {
-
+        // [input: "stage/domain/${lang}/entityFilter.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}Filter.${lang}"]
         for (def entity : entityList) {
             "domain layer" {
                 object entity
-                templates = [[input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]]
+                templates = [
+                    [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]
+
+                ]
             }
         }
         for (def entity : embeddedList) {
@@ -47,15 +51,13 @@ guick {
             }
         }
         for (def entity : entityList) {
-            if (entity.looksLikeMainEntity()) {
-
+            if (entity.looksLikeMainEntity() && useWorkflow) {
                 "geracao de workflows" {
                     object entity
                     templates = [
-                            [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/bpm/${entity.name}.bpmn20.xml"]
+                            [input: "stage/workflow/entity.bpmn20.xml.vm", output: "/api/src/main/resources/processes/${entity.name}.bpmn20.xml"]
                     ]
                 }
-
             }
         }
         for (def entity : entityList) {
@@ -72,44 +74,31 @@ guick {
 
         "repository" {
             templates = [
-                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/PageableHelper.${lang}"],
-                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/CoreRepositoryFactoryBean.${lang}"],
-                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/support/ICoreRepository.${lang}"],
-
-                    [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/reports/DashboardRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/reports/DashboardRepository.xml"]
+                    [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/mybatis/DashboardRepository.${lang}"],
+                    [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/mybatis/DashboardRepository.xml"]
             ]
         }
 //        [input: "stage/workflow/SimpleProccessCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/SimpleProccessCommand.${lang}"],
 //        [input: "stage/workflow/IWorkflowCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/IWorkflowCommand.${lang}"],
 //        [input: "stage/workflow/ActivitiTransferObject.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/ActivitiTransferObject.${lang}"],
+        //[input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
         "single-generateds" {
             templates = [
 
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
-                    [input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
-                    [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
-                    [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/api/aop/OnSuccessAdvice.${lang}"],
-                    [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/api/filter/CorsFilter.${lang}"],
-
-                    [input: "stage/support/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/exception/BusinessException.${lang}"],
-
-                    [input: "stage/support/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/DefaultExceptionHandler.${lang}"],
-                    [input: "stage/support/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/support/RestFieldMessageDTO.${lang}"],
-
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
-
                     [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
-                    [input: "stage/crud/scripts/modalController.js.vm", output: "/front-end/app/scripts/controllers/ModalController.js"],
+
+                    [input: "stage/crud/scripts/ActivitiService.js.vm", output: "/front-end/app/scripts/service/support/ActivitiService.js"],
+                    [input: "stage/crud/scripts/ActivitiController.js.vm", output: "/front-end/app/scripts/controllers/support/ActivitiController.js"],
+
                     [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],
 
-                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
+                    [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
 
-                    [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
+                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
                     [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/crud/html/modals.html.vm", output: "/front-end/app/views/modals.html"]
 
@@ -120,14 +109,15 @@ guick {
             "geracao de front-end" {
                 object entity
                 templates = [
-                        [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/${entity.name}Controller.js"],
-                        [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/${entity.name}Service.js"],
+                        [input: "stage/crud/scripts/controller.js.vm", output: "/front-end/app/scripts/controllers/crud/${entity.name}Controller.js"],
+                        [input: "stage/crud/scripts/controllerExt.js.vm", output: "/front-end/app/scripts/controllers/crud/${entity.name}ExtController.js"],
+                        [input: "stage/crud/scripts/service.js.vm", output: "/front-end/app/scripts/service/crud/${entity.name}Service.js"],
                         [input: "stage/crud/html/entity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}.html"],
                         [input: "stage/crud/html/editEntity.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Edit.html"],
                         [input: "stage/crud/html/components/crud/entityFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Fieldset.html"],
+                        [input: "stage/crud/html/components/crud/entityTable.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}Table.html"],
                         [input: "stage/crud/html/components/crud/entityFilterFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FilterFieldset.html"],
                         [input: "stage/crud/html/components/crud/entityShowFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
-                        [input: "stage/crud/html/components/crud/entityToOneFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ToOneFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
                         [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
                 ]
@@ -158,6 +148,7 @@ guick {
                 ]
             }
         }
+
         "single-tests" {
             templates = [
                     [input: "stage/crud/test/index.html.vm", output: "/api/src/test/resources/index.html"]

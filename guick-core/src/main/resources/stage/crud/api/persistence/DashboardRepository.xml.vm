@@ -1,6 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="${project.group}.${project.name}.api.persistence.reports.DashboardRepository">
+<mapper namespace="${project.group}.${project.name}.api.persistence.mybatis.DashboardRepository">
 
 	<select id="allCount" resultType="hashmap">
 #set( $mainEntities = ${project.getAllMainEntities()} )
@@ -13,7 +13,7 @@
 #end
 #end
 
-        )
+        ) allCount
 	</select>
 
 #foreach( ${entity} in ${mainEntities} )

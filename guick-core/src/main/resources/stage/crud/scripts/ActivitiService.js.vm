@@ -1,0 +1,45 @@
+#set( $js  = '$')
+#set( $open  = '${')
+#set( $close = '}')
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+'use strict';
+
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:dashboardController
+ * @description
+ * # dashboardController
+ * Controller of the ${projectBeanName}App
+ */
+var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+
+${projectBeanName}Services.factory('activitiService', ['$resource',
+    function ($resource) {
+        var service = $resource('/actdoc/api/repository/deployments/:id', {deploymentId:'@id'}, {
+            'findAllDeployments': { method: 'GET', isArray: false},
+            'findAllResources': { method: 'GET', url:"/actdoc/api/repository/deployments/:id/resources", isArray: true},
+            'findResources': { method: 'GET', url:"/actdoc/api/repository/deployments/:id/resources", isArray: true},
+            'findProccessDefinitions':{method: 'GET', url:"/actdoc/api/repository/process-definitions", isArray:false},
+            'getProccessDefinition':{method: 'GET', url:"/actdoc/api/repository/process-definitions/:id", isArray:false},
+            'getProccessDefinitionModel':{method: 'GET', url:"/actdoc/api/repository/process-definitions/:id/model", isArray:false},
+            'getProccessDefinitionStarters':{method: 'GET', url:"/actdoc/api/repository/process-definitions/:id/identitylinks", isArray:true}
+        });
+        return service;
+    }
+]);
+
+${projectBeanName}Services.factory('userService', function ($resource) {
+    var data = $resource('/${projectBeanName}/api/identity/users/:user', {user: "@user"});
+    return data;
+});
+
+${projectBeanName}Services.factory('groupService', function ($resource) {
+    var data = $resource('/${projectBeanName}/api/identity/groups/:group', {group: "@group"});
+    return data;
+});

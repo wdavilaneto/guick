@@ -16,23 +16,39 @@ angular.module('${projectBeanName}App').controller('mainController', function($s
     $scope.pageClass = 'page-home';
 });
 
-
 angular.module('${project.name}App').controller('TabsDemoCtrl', function (${js}scope, ${js}window) {
-  ${js}scope.tabs = [
-    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  ];
+    ${js}scope.tabs = [
+      { title:'Dynamic Title 1', content:'Dynamic content 1' },
+      { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+    ];
 
-  ${js}scope.alertMe = function() {
-    setTimeout(function() {
-      ${js}window.alert('You\'ve selected the alert tab!');
-    });
-  };
+    ${js}scope.alertMe = function() {
+      setTimeout(function() {
+        ${js}window.alert('You\'ve selected the alert tab!');
+      });
+    };
 });
+
+angular.module('${project.name}App').controller('LoginController', function ($scope, $location, AuthenticationSharedService) {
+    $scope.rememberMe = true;
+    $scope.login = function () {
+        AuthenticationSharedService.login({
+            username: $scope.username,
+            password: $scope.password,
+            rememberMe: $scope.rememberMe
+        });
+    };
+});
+
+angular.module('${project.name}App').controller('LogoutController', function ($location, AuthenticationSharedService) {
+    AuthenticationSharedService.logout();
+});
+
 angular.module('${project.name}App').controller('PopoverDemoCtrl', function ($scope) {
   $scope.dynamicPopover = 'Hello, World!';
   $scope.dynamicPopoverTitle = 'Title';
 });
+
 angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}scope) {
   ${js}scope.singleModel = 1;
 
@@ -44,38 +60,39 @@ angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}sc
     right: false
   };
 });
-angular.module('${project.name}App').controller('DatepickerDemoCtrl', function (${js}scope) {
-  ${js}scope.today = function() {
-    ${js}scope.dt = new Date();
-  };
-  ${js}scope.today();
 
-  ${js}scope.clear = function () {
-    ${js}scope.dt = null;
-  };
+angular.module('${project.name}App').controller('StandardDatepickerController', function (${js}scope) {
+    ${js}scope.today = function() {
+        ${js}scope.dt = new Date();
+    };
+    ${js}scope.today();
 
-  // Disable weekend selection
-  ${js}scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
+    ${js}scope.clear = function () {
+        ${js}scope.dt = null;
+    };
 
-  ${js}scope.toggleMin = function() {
-    ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
-  };
-  ${js}scope.toggleMin();
+    // Disable weekend selection
+    ${js}scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
 
-  ${js}scope.open = function(${js}event) {
+    ${js}scope.toggleMin = function() {
+        ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
+    };
+    ${js}scope.toggleMin();
+
+    ${js}scope.open = function(${js}event) {
     ${js}event.preventDefault();
     ${js}event.stopPropagation();
 
     ${js}scope.opened = true;
-  };
+    };
 
-  ${js}scope.dateOptions = {
+    ${js}scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
-  };
+    };
 
-  ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  ${js}scope.format = ${js}scope.formats[0];
+    ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    ${js}scope.format = ${js}scope.formats[0];
 });

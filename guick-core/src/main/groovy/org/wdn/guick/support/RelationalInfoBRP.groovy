@@ -22,18 +22,18 @@ class RelationalInfoBRP implements IBusinessRulesProcessor {
                     column.table = table;
                 }
                 // limpa informacoes desnecessarias para campo do tipo String
-                if (PatternConverterFacade.getBeanType(column.type).equals("String")) {
+                if (PatternConverterFacade.getBeanType(column).equals("String")) {
                     column.precision = null;
                     column.scale = null;
                 }
                 // limpa informacoes desnecessarias para campo do tipo Date
-                if (PatternConverterFacade.getBeanType(column.type).equals("Date")) {
+                if (PatternConverterFacade.getBeanType(column).equals("Date")) {
                     column.precision = null;
                     column.scale = null;
                     //column.length = null; //comentei pq preciso desse valor para o template JSF
                 }
                 // limpa informacoes desnecessarias para campo do tipo Long
-                if (PatternConverterFacade.getBeanType(column.type).equals("Long")) {
+                if (PatternConverterFacade.getBeanType(column).equals("Long")) {
                     //column.length = null; //comentei pq preciso desse valor para o template JSF
                     // se nao tiver informacao de precision o scale e inutil neste caso...
                     if (column.precision == null) {

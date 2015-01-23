@@ -56,7 +56,24 @@ class Entity extends Clazz {
     public List<RelationshipProperty> getAllNumericProperties() {
         List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
         for (RelationshipProperty property : properties) {
-            if (property.type == 'Long' || property.type == 'BigDecimal') {
+            if (property.type == 'Long' || property.type == 'Integer' || property.type == 'BigDecimal'  ) {
+                returnList.add(property);
+            }
+        }
+        return returnList;
+    }
+
+    public List<RelationshipProperty> getAllImageProperties() {
+        List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
+        for (RelationshipProperty property : properties) {
+            if (property.type == 'byte[]' && (property.name.toLowerCase().contains("photo")
+                    || property.name.toLowerCase().contains("foto")
+                    || property.name.toLowerCase().contains("image")
+                    || property.name.toLowerCase().contains("imagem")
+                    || property.name.toLowerCase().contains("icon")
+                    || property.name.toLowerCase().contains("portrait")
+                    || property.name.toLowerCase().contains("pitcture"))
+            ) {
                 returnList.add(property);
             }
         }
@@ -69,10 +86,28 @@ class Entity extends Clazz {
         if (_mostDescritiveProperties == null) {
             _mostDescritiveProperties = new ArrayList<RelationshipProperty>()
             for (RelationshipProperty property : properties) {
-                if (property.type == 'String') {
+                if (property.type == 'String' && (property.name.startsWith("nome") || property.name.startsWith("name"))  ) {
                     _mostDescritiveProperties.add(property);
                 }
             }
+            for (RelationshipProperty property : parent?.properties) {
+                if (property.type == 'String' && (property.name.startsWith("nome") || property.name.startsWith("name"))  ) {
+                    _mostDescritiveProperties.add(property);
+                }
+            }
+            for (RelationshipProperty property : properties) {
+                if (property.type == 'String' && (!property.name.startsWith("nome") && !property.name.startsWith("name"))) {
+                    _mostDescritiveProperties.add(property);
+                }
+            }
+            for (RelationshipProperty property : parent?.properties) {
+                if (property.type == 'String' && (!property.name.startsWith("nome") && !property.name.startsWith("name"))) {
+                    _mostDescritiveProperties.add(property);
+                }
+            }
+//            if (_mostDescritiveProperties.size() == 0){
+//                _mostDescritiveProperties.add(id);
+//            }
             // Todo order for significance...
         }
         return _mostDescritiveProperties;
@@ -100,8 +135,14 @@ class Entity extends Clazz {
 
     public List<ComplexProperty> getDistinctedAllComplexProperties() {
         Map<String, String> map = new HashMap<String, String>();
-        List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
+        List<ComplexProperty> returnList = new ArrayList<ComplexProperty>()
         for (ComplexProperty property : complexProperties) {
+            if (!map.containsKey(property.referedEntity.name)) {
+                map.put(property.referedEntity.name, property.name);
+                returnList.add(property);
+            }
+        }
+        for (ComplexProperty property : parent?.complexProperties) {
             if (!map.containsKey(property.referedEntity.name)) {
                 map.put(property.referedEntity.name, property.name);
                 returnList.add(property);
@@ -110,6 +151,23 @@ class Entity extends Clazz {
         return returnList;
     }
 
+    public List<RelationshipProperty> getDistinctedProperties() {
+        Map<String, String> map = new HashMap<String, String>();
+        List<RelationshipProperty> returnList = new ArrayList<RelationshipProperty>()
+        for (RelationshipProperty property : properties) {
+            if (!map.containsKey(property.name)) {
+                map.put(property.name, property.name);
+                returnList.add(property);
+            }
+        }
+        for (RelationshipProperty property : parent?.properties) {
+            if (!map.containsKey(property.name)) {
+                map.put(property.name, property.name);
+                returnList.add(property);
+            }
+        }
+        return returnList;
+    }
 
     public List<ComplexProperty> getManyToManyProperties() {
         List<ComplexProperty> returnList = new ArrayList<ComplexProperty>(complexProperties.size())
@@ -182,7 +240,7 @@ class Entity extends Clazz {
 
     public boolean looksLikeEnum() {
         if (_looksLikeEnum == null) {
-            (_looksLikeEnum = properties.size() == 1 && getManyToOneProperties().size() == 0) || (_looksLikeEnum = properties.size() == 2 && name.startsWith("Tipo"));
+            _looksLikeEnum = ( properties.size() == 1 && getManyToOneProperties().size() == 0 && parent == null && getEmbeddedId() == null ) || (_looksLikeEnum = properties.size() == 2 && name.startsWith("Tipo"));
         }
         return _looksLikeEnum;
     }
@@ -191,7 +249,7 @@ class Entity extends Clazz {
 
     public boolean looksLikeDomain() {
         if (_looksLikeDomain == null) {
-            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum());
+            (_looksLikeDomain = properties.size() < 3 && !looksLikeEnum() && parent == null || (!looksLikeEnum() && (name.toLowerCase().startsWith("tipo") || name.toLowerCase().startsWith("type") || name.toLowerCase().endsWith("type") ) ) );
         }
         return _looksLikeDomain;
     }
@@ -246,7 +304,7 @@ class Entity extends Clazz {
         }
         return false
     }
-    
+
     public Clazz getPropertyWithName(String name){
         for (RelationshipProperty prop : properties) {
             if (prop.name.equals(name)) {
@@ -260,7 +318,7 @@ class Entity extends Clazz {
         }
         return null;
     }
-    
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().

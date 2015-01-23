@@ -12,6 +12,8 @@
 
     <properties>
         <start-class>${project.group}.Application</start-class>
+        <sonar.java.coveragePlugin>cobertura</sonar.java.coveragePlugin>
+        <sonar.junit.reportsPath>${project.build.directory}/surefire-reports/</sonar.junit.reportsPath>
     </properties>
 
     <build>
@@ -24,26 +26,37 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <showWarnings>true</showWarnings>
+##                    <compilerId>groovy-eclipse-compiler</compilerId>
+##                    <showWarnings>true</showWarnings>
                 </configuration>
-                <dependencies>
-                   <dependency>
-                       <groupId>org.codehaus.groovy</groupId>
-                       <artifactId>groovy-eclipse-compiler</artifactId>
-                       <version>2.8.0-01</version>
-                   </dependency>
-                   <dependency>
-                       <groupId>org.codehaus.groovy</groupId>
-                       <artifactId>groovy-eclipse-batch</artifactId>
-                       <version>2.1.5-03</version>
-                   </dependency>
-                </dependencies>
+##               <dependencies>
+##                  <dependency>
+##                      <groupId>org.codehaus.groovy</groupId>
+##                      <artifactId>groovy-eclipse-compiler</artifactId>
+##                      <version>2.8.0-01</version>
+##                  </dependency>
+##                  <dependency>
+##                      <groupId>org.codehaus.groovy</groupId>
+##                      <artifactId>groovy-eclipse-batch</artifactId>
+##                      <version>2.1.5-03</version>
+##                  </dependency>
+##                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.6</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
             </plugin>
         </plugins>
     </build>
@@ -59,43 +72,48 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-engine</artifactId>
-            <version>5.16.4</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+<!--
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.0.5.RELEASE</version>
+        </dependency>
+-->
 
+
+
+#if( ${project.config.useWorkflow} == true )
         <dependency>
             <groupId>org.activiti</groupId>
-            <artifactId>activiti-spring</artifactId>
-            <version>5.16.4</version>
+            <artifactId>spring-boot-starter-basic</artifactId>
+            <version>5.17.0</version>
         </dependency>
-
+<!--
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>spring-boot-starter-rest-api</artifactId>
+            <version>5.17.0</version>
+        </dependency>
+-->
+#end
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.2.16.Final</version>
         </dependency>
         <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.9.0</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>4.2.16.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
             <version>1.3.2</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>4.2.16.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        -->
         <dependency>
         	<groupId>org.mybatis</groupId>
         	<artifactId>mybatis</artifactId>
@@ -118,21 +136,35 @@
             <version>2.6</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
             <version>1.0.1</version>
         </dependency>
+
+#if( ${project.config.guickConnectionInfo.dialect} == 'org.hibernate.dialect.PostgreSQLDialect')
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
+#else
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.14.0</version>
-            <scope>provided</scope>
-        </dependency>
+#end
+##       <dependency>
+##           <groupId>org.projectlombok</groupId>
+##           <artifactId>lombok</artifactId>
+##           <version>1.14.0</version>
+##           <scope>provided</scope>
+##       </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -271,45 +303,45 @@
                     <artifactId>spring-boot-starter-web</artifactId>
                 </dependency>
             </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>3.0</version>
-                        <executions>
-                            <execution>
-                                <id>update-database-integration-test</id>
-                                <phase>test-compile</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                    <goal>migrate</goal>
-                                </goals>
-                                <configuration>
-                                    <driver>oracle.jdbc.OracleDriver</driver>
-                                    <url>jdbc:oracle:thin:@localhost:1521:xe</url>
-                                    <user>MGP2</user>
-                                    <schemas>
-                                        <schema>MGP2</schema>
-                                    </schemas>
-                                    <password>MGP2</password>
-                                    <locations>
-                                        <location>filesystem:${project.basedir}/src/main/resources/db/migration</location>
-                                    </locations>
-                                    <table>SCHEMA_VERSION</table>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.oracle</groupId>
-                                <artifactId>ojdbc6</artifactId>
-                                <version>11.2.0.3</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
+##            <build>
+##                <plugins>
+##                    <plugin>
+##                        <groupId>org.flywaydb</groupId>
+##                        <artifactId>flyway-maven-plugin</artifactId>
+##                        <version>3.0</version>
+##                        <executions>
+##                            <execution>
+##                                <id>update-database-integration-test</id>
+##                                <phase>test-compile</phase>
+##                                <goals>
+##                                    <goal>clean</goal>
+##                                    <goal>migrate</goal>
+##                                </goals>
+##                                <configuration>
+##                                    <driver>oracle.jdbc.OracleDriver</driver>
+##                                    <url>jdbc:oracle:thin:@localhost:1521:xe</url>
+##                                    <user>MGP2</user>
+##                                    <schemas>
+##                                        <schema>MGP2</schema>
+##                                    </schemas>
+##                                    <password>MGP2</password>
+##                                    <locations>
+##                                        <location>filesystem:${project.basedir}/src/main/resources/db/migration</location>
+##                                    </locations>
+##                                    <table>SCHEMA_VERSION</table>
+##                                </configuration>
+##                            </execution>
+##                        </executions>
+##                        <dependencies>
+##                            <dependency>
+##                                <groupId>com.oracle</groupId>
+##                                <artifactId>ojdbc6</artifactId>
+##                                <version>11.2.0.3</version>
+##                            </dependency>
+##                        </dependencies>
+##                    </plugin>
+##                </plugins>
+##            </build>
         </profile>
 
         <profile>
@@ -396,15 +428,17 @@
             </dependencies>
         </profile>
 
-        <profile>
-            <id>integracao-continua</id>
-            <properties>
-                <test.database.url>jdbc:oracle:thin:@d-dbora11gic01:1521:dbmpic</test.database.url>
-                <test.database.user>INTG</test.database.user>
-                <test.database.password>INTG</test.database.password>
-                <spring.profiles.active>ci</spring.profiles.active>
-            </properties>
-        </profile>
+##        <!--
+##        <profile>
+##            <id>integracao-continua</id>
+##            <properties>
+##                <test.database.url>jdbc:oracle:thin:@d-dbora11gic01:1521:dbmpic</test.database.url>
+##                <test.database.user>INTG</test.database.user>
+##                <test.database.password>INTG</test.database.password>
+##                <spring.profiles.active>ci</spring.profiles.active>
+##            </properties>
+##        </profile>
+##        -->
 
     </profiles>
 

@@ -1,5 +1,11 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-package ${project.group}.${project.name}.api.aop;
+package ${project.group}.commons.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -37,7 +43,7 @@ import java.util.Locale;
 public class OnSuccessAdvice {
 
     public static final String SUCESSO_TITLE = "Sucesso!";
-    public static final String SUCESSO_MSG = "Opera&#231;&#227;o realizada com sucesso!";
+    public static final String SUCESSO_MSG = "SucessoDefault";
 
     public static final String TITLE = "title";
     public static final String MESSAGE = "message";
@@ -57,39 +63,54 @@ public class OnSuccessAdvice {
         }
 
         boolean containsGet = Arrays.asList(requestMapping.method()).contains(RequestMethod.GET);
-        if (containsGet && length > 1){
+        if (containsGet && length > 1) {
             throw new IllegalArgumentException(ERRO_GET);
         }
 
-        HttpEntity returnObject = null;
+        Object object = null;
         Object objectBody = null;
         HttpStatus httpStatus = HttpStatus.OK;
 
-        if (!containsGet) {
+        String methodName = pjp.getSignature().getName();
+
+        if (!containsGet && !methodName.startsWith("find") && !methodName.startsWith("search")) {
+
+            object = pjp.proceed();
+
+            HttpEntity httpEntity;
+            ResponseEntity responseEntity;
 
             MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
             Locale locale = LocaleContextHolder.getLocale();
 
-            String prefixCode = ON_SUCCESS + pjp.getTarget().getClass().getSimpleName() + "." + pjp.getSignature().getName();
+            String prefixCode = ON_SUCCESS + pjp.getTarget().getClass().getSimpleName() + "." + methodName;
 
             String titleCode = prefixCode + "." + TITLE;
             String messageCode = prefixCode + "." + MESSAGE;
 
             if (!pjp.getSignature().toString().startsWith("void")) {
-                returnObject = (HttpEntity) pjp.proceed();
 
-                httpStatus = returnObject == null ? HttpStatus.NO_CONTENT : HttpStatus.CREATED;
-                if (HttpStatus.CREATED.equals(httpStatus)) objectBody = returnObject.getBody();
+                if (object instanceof ResponseEntity) {
+                    responseEntity = (ResponseEntity) object;
+                    httpStatus = responseEntity.getStatusCode();
+                    objectBody = responseEntity.getBody();
+                } else if (object instanceof HttpEntity) {
+                    httpEntity = (HttpEntity) object;
+
+                    httpStatus = httpEntity == null ? HttpStatus.NO_CONTENT : HttpStatus.CREATED;
+                    if (HttpStatus.CREATED.equals(httpStatus)) objectBody = httpEntity.getBody();
+                }
 
                 String title = messageSource.getMessage(titleCode, null, SUCESSO_TITLE, locale);
                 headers.add(TITLE, title);
 
-                String message = messageSource.getMessage(messageCode, null, SUCESSO_MSG, locale);
+                String sucessoDefault = messageSource.getMessage(SUCESSO_MSG, null, locale);
+                String message = messageSource.getMessage(messageCode, null, sucessoDefault, locale);
                 headers.add(MESSAGE, message);
+
                 return new ResponseEntity(objectBody, headers, httpStatus);
             } else {
                 //Métodos do tipo void, não tem como fazer nada, o desenvolvedor decidiu retornar 200
-                pjp.proceed();
                 return null;
             }
 
@@ -97,11 +118,9 @@ public class OnSuccessAdvice {
 
         return httpGetEntity(pjp, objectBody, httpStatus);
 
-
     }
 
     /**
-     *
      * Para métodos do tipo GET, eu verifico se o retorno é nulo ou vazio (no caso de lista)
      * retorna um status NOT_FOUND que pode ser tratado na tela
      *
@@ -129,8 +148,13 @@ public class OnSuccessAdvice {
             }
         }
 
-        if (!found) httpStatus = HttpStatus.NOT_FOUND;
+        ResponseEntity responseEntity = null;
+        if (returnObject instanceof ResponseEntity) {
+            responseEntity = (ResponseEntity) returnObject;
+            httpStatus = responseEntity.getStatusCode();
+        }
+
+        if (!found && responseEntity == null) httpStatus = HttpStatus.NOT_FOUND;
         return new ResponseEntity(objectBody, httpStatus);
     }
-
 }

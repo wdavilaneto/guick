@@ -7,9 +7,10 @@
  */
 package ${project.group}.${project.name}.api.persistence.core;
 
-import ${project.group}.${project.name}.api.persistence.support.PageableHelper;
+import java.math.BigDecimal;
+import ${project.group}.commons.persistence.PageableHelper;
 import ${project.group}.${project.name}.domain.${entity.name};
-#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date' && ${entity.id.type} != 'BigDecimal')
 import ${project.group}.${project.name}.domain.${entity.id.type};
 #end
 import org.hibernate.Criteria;
@@ -130,7 +131,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
         criteria.add( Restrictions.disjunction()
-#foreach( ${property} in ${entity.getProperties()})
+#foreach( ${property} in ${entity.getDistinctedProperties()})
 #if( $property.type == 'String' )
             .add(Restrictions.ilike("${property.getName()}", text, MatchMode.ANYWHERE))
 #end

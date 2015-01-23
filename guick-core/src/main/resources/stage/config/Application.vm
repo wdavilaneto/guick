@@ -9,7 +9,7 @@ package ${project.group}.${project.name};
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import ${project.group}.${project.name}.api.aop.OnSuccessAdvice;
+import ${project.group}.commons.aop.OnSuccessAdvice;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -30,7 +30,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "${project.group}.${project.name}.api")
 @Configuration
 @EnableWebMvc
-@MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.reports")
+@MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.mybatis")
 @EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence")
 @EnableAutoConfiguration
 @EnableTransactionManagement
@@ -69,13 +69,14 @@ public class Application extends SpringBootServletInitializer {
     @Profile("jboss")
     public DataSource dataSource() {
         JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-        return dataSourceLookup.getDataSource("java:jboss/custeioDS");
+        return dataSourceLookup.getDataSource("java:jboss/${project.beanName}DS");
     }
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
+        sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis-settings.xml"));
         return (SqlSessionFactory) sqlSessionFactory.getObject();
     }
 

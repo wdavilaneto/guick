@@ -12,12 +12,14 @@
  * Main module of the application.
  */
 var app = angular.module('${project.name}App', [
+    'http-auth-interceptor',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ckeditor',
     'ui.select',
     'ui.bootstrap',
     'ui.date',
@@ -26,11 +28,13 @@ var app = angular.module('${project.name}App', [
     'toaster',
     'angucomplete-alt',
     'nvd3',
+    'angularUtils.directives.dirPagination',
     '${project.name}Services'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {templateUrl: 'views/main.html'})
+      .when('/activiti/deployment', {templateUrl: 'views/activiti/deployment.html'})
       .when('/dashboard', {templateUrl: 'views/dashboards/dashboard.html'})
 ##TODO REVMOVER!
 #if (${project.name} == 'msm')
@@ -42,7 +46,12 @@ var app = angular.module('${project.name}App', [
 #foreach( ${entity} in ${project.metadata.entities})
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
       .when('/${entity.name}', {templateUrl: 'views/crud/${entity.name}/${entity.name}.html'})
-      .when('/edit${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+      .when('/${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isOneToMany()} || ${ent.isManyToMany()})
+      .when('/${entity.name}/:id/${ent.referedEntity.name}/:${ent.referedEntity.beanName}Id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+#end
+#end
 #end
       .when('/monitor/health', {templateUrl: 'views/monitor/health.html'})
       .when('/monitor/metrics', {templateUrl: 'views/monitor/metrics.html'})
@@ -87,11 +96,11 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
                                 });
                                 toaster.pop('warning', nomeApp, errorResponse.data.error);
                                 break;
-                            case 401: // 401-Unauthorized - Falta autenticacao
-                                ${js}window.location.href = '/index.html';
-                                break;
+##                            case 401: // 401-Unauthorized - Falta autenticacao
+##                                ${js}window.location.href = '/index.html';
+##                                break;
                             case 403: // 403-Forbidden - Tem autenticacao, mas, o acesso é proibido para este usuario.
-                                toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo');
+                                toaster.pop('warning', nomeApp, 'Você não tem permissão para acessar este conteúdo, ou partes, do conteudo, que foi requisitado.');
                                 break;
                             case 404:
                                 toaster.pop('info', nomeApp, 'Nenhum registro encontrado');

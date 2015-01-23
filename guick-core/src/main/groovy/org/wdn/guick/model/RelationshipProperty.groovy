@@ -21,11 +21,7 @@ public class RelationshipProperty extends Clazz {
 
     @Override
     public String getType() {
-        String basicType = PatternConverterFacade.getBeanType(column.type)
-        if ('Long'.equals(basicType) && column.scale > 0) {
-            return 'BigDecimal'
-        }
-        return basicType;
+        return PatternConverterFacade.getBeanType(column)
     }
 
     @Override
@@ -60,7 +56,7 @@ public class RelationshipProperty extends Clazz {
             if (!'Date'.equals(type)) {
                 return _looksLikeEndDate;
             }
-            for (def word : ["endDate", "end", "dataFim", "dataEncerramento" , "termino", "fim", "expirationDate" ,"expireDate", "dataDesligamento", "desligamento", "dataDemissao", "demissao"]) {
+            for (def word : ["endDate", "end", "dataFim", "dataSaida","dataEncerramento" , "termino", "fim", "expirationDate" ,"expireDate", "dataDesligamento", "desligamento", "dataDemissao", "demissao"]) {
                 if (name.contains(word)) {
                     _looksLikeEndDate = true;
                     return _looksLikeEndDate;

@@ -9,8 +9,10 @@
  */
 package ${project.group}.${project.name}.api.service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import ${project.group}.${project.name}.domain.${entity.name};
-#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date')
+#if(!$entity.isEmbeddable() and !$entity.getParent() && ${entity.id.type} != 'Long' && ${entity.id.type} != 'String' && ${entity.id.type} != 'Date' && ${entity.id.type} != 'BigDecimal')
 import ${project.group}.${project.name}.domain.${entity.id.type};
 #end
 import org.slf4j.Logger;
@@ -41,7 +43,7 @@ public interface I${entity.name}Service {
      * @param pageable
      * @return
      */
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
     @Cacheable(value = "${entityBeanName}List")
 #end
     public Page<${entity.name}> findAll(Pageable pageable);
@@ -52,7 +54,7 @@ public interface I${entity.name}Service {
     * @param pageable
     * @return
     */
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
     @Cacheable(value = "${entityBeanName}List")
 #end
     public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable);
@@ -63,7 +65,7 @@ public interface I${entity.name}Service {
     * @param pageable
     * @return
     */
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
     @Cacheable(value = "${entityBeanName}List")
 #end
     public Page<${entity.name}> searchText(String text , Pageable pageable);
@@ -80,7 +82,7 @@ public interface I${entity.name}Service {
      * @param id
      * @return
      */
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
     @CacheEvict(value="${entityBeanName}List", allEntries=true)
 #end
     public void delete(${entity.id.type} id);
@@ -90,7 +92,7 @@ public interface I${entity.name}Service {
      * @param ${entityBeanName}
      * @return
      */
-#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()})
+#if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entityBeanName} == 'endereco' || ${entityBeanName} == 'orgao' ||  ${entityBeanName} == 'cargo' ))
     @CacheEvict(value="${entityBeanName}List", allEntries=true)
 #end
     public ${entity.name} save(${entity.name} ${entityBeanName});

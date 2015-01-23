@@ -13,24 +13,151 @@
 
 var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
 
-${projectBeanName}Services.factory('paginationService', ['$resource',
+${projectBeanName}Services.factory('pagingService', ['$resource',
     function ($resource) {
         var service = {};
-        var grid = {
-            pagingOptions:{pageSizes: [10, 20, 50], pageSize: 10, currentPage: 1},
-            selected:[],
-            result:{}
-        };
-        grid.getPageRequest = function (){
-            return {page: pagingOptions.currentPage , size: pagingOptions.pageSize}
-        };
+        var _pageSizes= [10, 20, 50]
+        var _pageSize= 10;
 
-        service.createGrid= function(){
-            grid.selected = [];
-            grid.result = {};
-            return grid;
+        // Create new instance of pagination
+        service.createPagination= function(){
+            var pagination = {
+                pageSizes: _pageSizes,
+                pageSize: _pageSize,
+                currentPage: 1,
+                totalElements: 0,
+                selected:[],
+                result:{}
+            };
+            pagination.getPageRequest = function (){
+                return {page: this.currentPage , size: this.pageSize}
+            };
+            return pagination;
+        };
+        return service;
+    }
+]);
+
+${projectBeanName}Services.factory('gridService', ['$resource', 'pagingService',
+    function ($resource, pagingService) {
+        var service = {};
+
+        // Create an new Grid Options
+        service.createGridOptions = function (isEditMode) {
+            var pagination = pagingService.createPagination();
+            var baseOptions = {
+                data: 'resultPage.content',
+                enablePaging: true,
+                showFooter: true,
+                multiSelect: false,
+                enableColumnResize: true,
+                totalServerItems: 'resultPage.totalElements',
+                i18n: 'pt-br'
+            };
+
+            // get pagination from pagination factory
+            baseOptions.getPagination = function (){
+                // Delegate to pagination
+                return pagination;
+            };
+            // Delegation method to get Request Page Parameter(from pagination) to send to backend api
+            baseOptions.getPageRequest = function (){
+                // Delegate to pagination
+                return pagination.getPageRequest();
+            };
+
+            if (!isEditMode) {
+                isEditMode = false;
+            }
+            var options = baseOptions;
+            options.selectedItems = pagination.selected;
+            options.pagingOptions = pagination;
+            return options;
         };
 
         return service;
     }
 ]);
+
+${projectBeanName}Services.factory('AuthenticationSharedService', function (${js}rootScope, ${js}http, authService, Session, Account) {
+    return {
+        login: function (param) {
+            var data ="j_username=" + encodeURIComponent(param.username) +"&j_password=" + encodeURIComponent(param.password) +"&_spring_security_remember_me=" + param.rememberMe +"&submit=Login";
+            ${js}http.post('app/authentication', data, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                ignoreAuthModule: 'ignoreAuthModule'
+            }).success(function (data, status, headers, config) {
+                Account.get(function(data) {
+                    Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                    ${js}rootScope.account = Session;
+                    authService.loginConfirmed(data);
+                });
+            }).error(function (data, status, headers, config) {
+                ${js}rootScope.authenticationError = true;
+                Session.invalidate();
+            });
+        },
+        valid: function (authorizedRoles) {
+
+            ${js}http.get('protected/authentication_check.gif', {
+                ignoreAuthModule: 'ignoreAuthModule'
+            }).success(function (data, status, headers, config) {
+                if (!Session.login) {
+                    Account.get(function(data) {
+                        Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                        ${js}rootScope.account = Session;
+                        if (!${js}rootScope.isAuthorized(authorizedRoles)) {
+                            // user is not allowed
+                           ${js}rootScope.${js}broadcast("event:auth-notAuthorized");
+                        } else {
+                            ${js}rootScope.${js}broadcast("event:auth-loginConfirmed");
+                        }
+                    });
+                }else{
+                    if (!${js}rootScope.isAuthorized(authorizedRoles)) {
+                            // user is not allowed
+                            ${js}rootScope.${js}broadcast("event:auth-notAuthorized");
+                    } else {
+                            ${js}rootScope.${js}broadcast("event:auth-loginConfirmed");
+                    }
+                }
+            }).error(function (data, status, headers, config) {
+                if (!${js}rootScope.isAuthorized(authorizedRoles)) {
+                    ${js}rootScope.${js}broadcast('event:auth-loginRequired', data);
+                }
+            });
+        },
+        isAuthorized: function (authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                if (authorizedRoles == '*') {
+                    return true;
+                }
+
+                authorizedRoles = [authorizedRoles];
+            }
+
+            var isAuthorized = false;
+            angular.forEach(authorizedRoles, function(authorizedRole) {
+                var authorized = (!!Session.login &&
+                    Session.userRoles.indexOf(authorizedRole) !== -1);
+
+                if (authorized || authorizedRole == '*') {
+                    isAuthorized = true;
+                }
+            });
+
+            return isAuthorized;
+        },
+        logout: function () {
+            ${js}rootScope.authenticationError = false;
+            ${js}rootScope.authenticated = false;
+            ${js}rootScope.account = null;
+
+            ${js}http.get('app/logout');
+            Session.invalidate();
+            authService.loginCancelled();
+        }
+    };
+});

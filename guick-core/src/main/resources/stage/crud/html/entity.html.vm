@@ -3,16 +3,29 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <i class="fa fa-search"></i> : <small> ${entity.title} </small>
+    <i class="fa fa-search"></i> :
+        <small>
+#if(${entity.title} == 'Proc asses executiva')
+        Processos na assesoria executiva
+#else
+        ${entity.title}
+#end
+        </small>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">${entity.title}</li>
+        <li><a href="#"><i class="fa fa-home"></i> Inicial </a></li>
+        <li class="active">
+#if(${entity.title} == 'Proc asses executiva')
+        Processos
+#else
+        ${entity.title}
+#end
+        </li>
     </ol>
 </section>
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
-        <form name="${entityBeanName}Form" novalidate>
+        <form name="${entityBeanName}Form" novalidate ng-submit="search()" >
             <tabset>
                 <tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
                     <div class="nav-tabs-custom">
@@ -21,29 +34,62 @@
                                 <div class="box-header"><h2 class="box-title"></h2></div>
                                 <div class="box-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label" for="searchField.text" popover-trigger="mouseenter">Busca por texto</label>
-                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"
-                                                    popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto"
-                                                />
+                                        <div class="form-group col-md-6">
+                                            <label class="control-label" for="searchField.text">Busca por texto
+                                                <i popover-trigger="mouseenter"  popover-placement="top" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
+                                            </label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" ng-click="search()"><i class="fa fa-search"></i></button>
+                                                </div>
                                             </div>
                                         </div>
 #if(${entity.getActiveProperty()})
-                                        <div class="col-md-6">
+                                        <div class="form-group col-md-4">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" ng-model="searchField.active"> Ativo
+                                                    <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
                                                 </label>
                                             </div>
                                         </div>
+#end
+
+#if(${entity.getAllDeadlineProperties().size()} >= 1 )
+#set($activeProperty = ${entity.getAllDeadlineProperties()[0]})
+#if(${activeProperty})
+                                    </div>
+                                    <div class="row">
+                                        <div ng-controller="DatepickerDemoCtrl">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label" for="">${activeProperty} a partir de</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-controller="DatepickerDemoCtrl">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label" for="">Até</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+#end
 #end
                                     </div>
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                        <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                        <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
                                 </div>
@@ -63,8 +109,8 @@
                                 </div>
                                 <div class="box-footer">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="search()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                        <div class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</div>
+                                        <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                        <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
                                         <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
                                     </div>
                                 </div>
@@ -74,6 +120,7 @@
                 </tab>
             </tabset>
         </form>
+
         <!-- fim sessão -->
         <!-- sessão -->
         <div class="col-xs-12">

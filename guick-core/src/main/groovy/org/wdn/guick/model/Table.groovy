@@ -41,8 +41,21 @@ class Table {
         return pks;
     }
 
+    public List<Column> getFieldThatPointsParentPk() {
+        List<Column> pks = new ArrayList<Column>();
+        // Ok, esta tabela nao definiu primary key .. mas pode ter parent...
+        // Busca todas as foreing keys que apontam para primary
+        // Se achar, eh nossa chave  candidata
+        for (Constraint cons : this.constraints) {
+            if (cons.referedSideColumns[0] != null && cons.referedSideColumns[0].isKey()) {
+                pks.addAll(cons.thisSideColumns[0]);
+            }
+        }
+        return pks;
+    }
+
     /**
-     * Metodo "de negocio" que retorna se a tabela eh  uma tabela de relacionamento N x M
+     * Metodo "de negocio" que retorna se a tabela eh uma tabela de relacionamento N x M
      * @return
      */
     private Boolean _isNamRelationship;
@@ -77,11 +90,17 @@ class Table {
         return _isNamRelationship;
     }
 
-    public String getPrefix() {
+    def getPrefix() {
+        if (project.config?.tablePrefix) {
+            return project.config.tablePrefix;
+        }
         if (name.split("_")[0] == owner) {
             return owner;
         }
-        return getPk()[0].getPrefix();
+        if (getPk()[0]) {
+            getPk()[0].getPrefix();
+        }
+        return "";
     }
 
     /**

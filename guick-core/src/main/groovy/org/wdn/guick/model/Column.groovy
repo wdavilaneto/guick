@@ -21,7 +21,10 @@ class Column {
     boolean nullable = true
     Long position
     String comment
+    String defaultValue
     boolean unique = false
+    boolean generated = false
+    boolean useUUID = false;
 
     // Bidirectional RelationShips
     RelationshipProperty simpleProperty
@@ -32,10 +35,16 @@ class Column {
     List<String> checkValues
 
     public boolean isUpdatable() {
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+            return false;
+        }
         return true; // TODO
     }
 
     public boolean isInsertable() {
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+            return false;
+        }
         return true; // TODO
     }
 
@@ -50,7 +59,7 @@ class Column {
         if (name.split("_")[0] == table.owner) {
             return table.owner;
         }
-        if (!isKey()) {
+        if (!isKey() && table.getPk()[0] != null) {
             otherPrefixes = table.getPk()[0].name.split("_")[0];
             if (name.split("_")[0] == otherPrefixes) {
                 return otherPrefixes;
