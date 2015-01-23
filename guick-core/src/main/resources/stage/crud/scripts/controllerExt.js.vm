@@ -19,10 +19,6 @@
  */
 angular.module('${projectBeanName}App').controller('${entityBeanName}ExtController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
-    ${js}scope.select = function ( obj ) {
-        ${js}scope.selected = obj;
-    };
-
     ${js}scope.create = function ( parent ) {
         ${js}scope.selected = null;
         ${js}scope.selected = {
@@ -38,21 +34,32 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
     ${js}scope.grid${ent.referedEntity.name}Options = ${beanName}Service.createGridOptions(true);
     ${js}scope.${beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();
+
     ${js}scope.find${ent.referedEntity.name} = function() {
         console.log('Realizando busca de 1 x N( ${beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
-        ${js}scope.resultPage = {};
-        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${js}scope.resultPage = null;
+        ${beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}scope.entity.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
-            ${js}scope.resultPage.content = jsog.decode(data.content);
+            try {
+                ${js}scope.resultPage.content = jsog.decode(data.content);
+            } catch (exception) {
+                console.log('Object with self rererence');
+                ${js}scope.resultPage.content = data.content;
+            }
         });
     };
     ${js}scope.search${ent.referedEntity.name} = function() {
         // TODO Implement query search with fields
         console.log('Realizando busca de 1 x N( ${beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
-        ${js}scope.resultPage = {};
-        ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${js}scope.resultPage = null;
+        ${beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}scope.entity.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
-            ${js}scope.resultPage.content = jsog.decode(data.content);
+            try {
+                ${js}scope.resultPage.content = jsog.decode(data.content);
+            } catch (exception) {
+                console.log('Object with self rererence');
+                ${js}scope.resultPage.content = data.content;
+            }
         });
     };
     $scope.remove${ent.referedEntity.name} = function (obj){
@@ -68,22 +75,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
                 ${entityBeanName}:parent
             };
         }
-        var modalInstance = ${js}modal.open({
-            templateUrl: 'create${ent.referedEntity.name}Modal.html', controller: 'Modal${ent.referedEntity.name}Controller', size: 'lg',
-            resolve: {
-                data: function () {return obj;}
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            ${js}scope.selected = selectedItem;
-            // Refreshing Result List
-            ${beanName}Service.search( {'content':{ '${entityBeanName}':${js}scope.entity },'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
-                ${js}scope.resultPage = data;
-                ${js}scope.resultPage.content = jsog.decode(data.content);
-            });
-        }, function () {
-            //dismiss
-        });
+        ${js}location.path('${ent.referedEntity.name}/' + ${entityBeanName}.id );
     };
 
     $scope.${ent.referedEntity.beanName}PaginationChanged = function(newPage) {

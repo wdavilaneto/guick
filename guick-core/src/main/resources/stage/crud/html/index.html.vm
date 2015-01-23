@@ -193,14 +193,14 @@
 #end
                     <li class="treeview">
                         <a href="#">
-                            <i class="glyphicon glyphicon-wrench"></i> <span>Administração</span>
+                            <i class="fa fa-cog"></i> <span>Administração</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
 #if (${project.getAllDomainEntities().size()} > 0)
                         <ul class="treeview-menu">
                              <li class="treeview">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tabelas Dominio</span>
+                                    <i class="fa fa-wrench"></i> <span>Tabelas Dominio</span>
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
@@ -215,7 +215,7 @@
 #if (${project.getAllEnumLikeEntities().size()} > 0)
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-wrench"></i> <span>Tipos</span>
+                                    <i class="fa fa-cogs"></i> <span>Tipos</span>
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
@@ -227,6 +227,7 @@
 #end
                         </ul>
                     </li>
+                    <li><a href="#/sobre"><i class="fa fa-question-circle"></i>Sobre</a></li>
                 </ul>
             </section>
             <!-- /.sidebar -->

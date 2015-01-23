@@ -3,80 +3,96 @@
                                         <div class="col-md-12">
                                             <table class="table table-hover">
                                                 <tr>
-#set($counter = 0)
-#set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
-#foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
-#if( ${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
-#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
-                                                    <th>${property.referedEntity.getAllImageProperties()[0].title}</th>
-#end
+####### TODO Teste TEMPORARIO REMOVER!!!
 #if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
                                                     <th>Foto</th>
 #end
-#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
+#set(${properties} = [] )
+#foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
+#if( ${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
+#set( $foo = ${properties.add( $property )} )
+#end
+#end
+#set($counter = 0)
+#set($size = ${properties.size()})
+######################################
+#foreach( ${property} in ${properties})
+#if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
+                                                    <th>${property.referedEntity.getAllImageProperties()[0].title}</th>
+#end
+#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 10 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 1000) )
                                                     <th>${property.Title}</th>
+#else
+                                                    #if($counter < 6)<!--<th>${property.Title}</th>-->
+                                                    #end
 #set($counter = $counter+1)
-#if($counter == 6)
+#if($counter == 6 && ${size} != 6)
     <!--
 #end
 #end
 #end
-#end
-#if($counter > 5)
+#if($counter > 5 && ${size} != 6)
     -->
 #end
 ############################################
 #set($counter = 0)
 #set($size = ${entityParameter.getDistinctedProperties().size()})
 #foreach( ${property} in ${entityParameter.getDistinctedProperties()})
-#if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500) ) ## case too many fields prefer long string
+#if( ${size} < 5 || (${property.column.length} > 30 && ${property.column.length} < 500) ) ## case too many fields prefer long string
                                                     <th>${property.Title}</th>
+#else                                                    
+                                                    #if($counter < 6)<!-- <th>${property.Title}</th> -->
+                                                    #end
+#{end}
 #set($counter = $counter+1)
-#if($counter == 6)
+#if($counter == 6 && ${size} != 6)
     <!--
 #end
-#{end}
 #end
-#if($counter > 5)
+#if($counter > 5 && ${size} != 6)
     -->
 #end
                                                 </tr>
-                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}" ng-class="{selected: ${entityParameter.beanName}}">
+                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}">
+####### TODO Teste TEMPORARIO REMOVER!!!
 #if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
                                                     <td><img ng-src="data:image/*;base64,{{funcionario.foto}}" ng-show="funcionario.foto" width="80px" /></td>
 #end
 #set($counter = 0)
-#set($size = ${entityParameter.getDistinctedAllComplexProperties().size()})
-#foreach( ${property} in ${entityParameter.getDistinctedAllComplexProperties()})
-#if(${property.isManyToOne()} && ${property.referedEntity.name} != ${entity.name})
+#foreach( ${property} in ${properties})
 #if( ${property.referedEntity.getAllImageProperties().size()} > 0 )
                                                     <td><img ng-src="data:image/*;base64,{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
 #end
-#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 30 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 500) )
+#if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 10 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 1000) )
                                                     <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</p></td>
+#else
+                                                    #if($counter < 6)<!-- <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</p></td> -->
+                                                    #end
 #set($counter = $counter+1)
-#if($counter == 6)
+#if($counter == 6 && ${size} != 6)
     <!--
 #end
 #end
 #{end}
-#end
-#if($counter > 5)
+#if($counter > 5 && ${size} != 6)
     -->
 #end
 ############################################
 #set($counter = 0)
 #set($size = ${entityParameter.getDistinctedProperties().size()})
 #foreach( ${property} in ${entityParameter.getDistinctedProperties()})
-#if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
+#if( ${size} < 5 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
                                                     <td><p>{{${entityParameter.beanName}.${property}}}</p></td>
+#else
+                                                    #if($counter < 6)<!--<td><p>{{${entityParameter.beanName}.${property}}}</p></td>-->
+                                                    #end
+#end
 #set($counter = $counter+1)
-#if($counter == 6)
+#if($counter == 6 && ${size} != 6)
     <!--
 #end
 #end
-#end
-#if($counter > 5)
+#if($counter > 5 && ${size} != 6)
     -->
 #end
                                                 </tr>

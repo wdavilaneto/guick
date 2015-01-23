@@ -6,6 +6,10 @@
  */
 package ${entity.getPackage()};
 
+import ${project.group}.commons.json.JsonDateDeserializer;
+import ${project.group}.commons.json.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

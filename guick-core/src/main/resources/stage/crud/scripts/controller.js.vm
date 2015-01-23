@@ -104,7 +104,11 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
 
             ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
                 ${js}scope.resultPage = data;
-                ${js}scope.resultPage.content = jsog.decode(data.content);
+                try {
+                    ${js}scope.resultPage.content = jsog.decode(data.content);
+                } catch (exception) {
+                    ${js}scope.resultPage.content = data.content;
+                }
             });
         }
     };

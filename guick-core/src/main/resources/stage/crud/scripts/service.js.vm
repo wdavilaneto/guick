@@ -54,6 +54,7 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
         service.factorySearchSelect = function (){
             // Factory SearchSelect Object for all "search text properties"
             var searchSelects = {
+#set($idToOneSize = ${entity.id.getManyToOneProperties().size()} )
 #set($searchedEntitys = [])
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()} )
 #set( $foo = ${searchedEntitys.add( $complexProperty )} )
@@ -65,20 +66,19 @@ ${projectBeanName}Services.factory('${entityBeanName}Service', ['$resource', 'gr
 #set($counter = 0)
 #foreach( ${complexProperty} in ${searchedEntitys} )
 #set($counter = $counter + 1)
-                ${complexProperty.name}:{}#if($counter < $size || (${entity.id.ManyToOneProperties()} )),
+                ${complexProperty.name}:{}#if($counter < $size || (${idToOneSize} > 0 )),
 #end
 #end
-#set($idToManySize = ${entity.id.getManyToOneProperties().size()} )
-#if($idToManySize && $idToManySize > 0)
+#if($idToOneSize && $idToOneSize > 0)
                 id:{
 #end
 #set($counter = 0)
 #foreach( ${complexProperty} in ${entity.id.getManyToOneProperties()} )
 #set($counter = $counter + 1)
-                    ${complexProperty.name}:{}#if($counter < $idToManySize ),
+                    ${complexProperty.name}:{}#if($counter < $idToOneSize ),
 #end
 #end
-#if($idToManySize && $idToManySize > 0)
+#if($idToOneSize && $idToOneSize > 0)
 
                 }
 #end

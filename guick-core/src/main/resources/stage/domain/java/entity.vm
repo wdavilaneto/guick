@@ -425,7 +425,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(${property.name})
 #end
 #foreach( ${property} in ${entity.id.getProperties()})
-                .append(id.${property.name})
+##                .append(id.${property.name})
 #end
 #foreach( ${property} in ${entity.properties})
 #if ( !${strangeKey}  || ${property.column} != ${strangeKey} )
@@ -439,7 +439,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(get${property.capitalizedName}())
 #end
 #foreach( ${property} in ${entity.id.getManyToOneProperties()})
-                .append(id.get${property.capitalizedName}())
+##                .append(id.get${property.capitalizedName}())
 #end
                .toHashCode();
     }
@@ -476,7 +476,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #end
 #foreach( ${property} in ${entity.id.properties})
 #set( $name = $util.capitalize( ${property.name} ))
-                .append(id.get${name}(), rhs.id.get${name}())
+##                .append(id.get${name}(), rhs.id.get${name}())
 #end
 #foreach( ${property} in ${entity.getManyToOneProperties()})
                 .append(${property.name}, rhs.${property.name})
@@ -485,7 +485,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
                 .append(get${property.capitalizedName}(), rhs.get${property.capitalizedName}())
 #end
 #foreach( ${property} in ${entity.id.getManyToOneProperties()})
-                .append(id.get${property.capitalizedName}(), rhs.getId().get${property.capitalizedName}())
+##                .append(id.get${property.capitalizedName}(), rhs.getId().get${property.capitalizedName}())
 #end
                 .isEquals();
 #else
