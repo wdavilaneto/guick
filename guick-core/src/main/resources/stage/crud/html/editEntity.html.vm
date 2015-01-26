@@ -13,26 +13,27 @@
 <section class="content" >
     <div ng-controller="${entityBeanName}Controller">
         <div ng-controller="${entity.beanName}ExtController">
-        <form name="${entityBeanName}Form" novalidate>
             <tabset ng-show="#set( $size = ${entity.getDistinctedAllComplexProperties().size()} )#set( $counter = 0)#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )#if( ${ent.isOneToMany()} )!selected${ent.referedEntity.name}#set($counter = $counter + 1)#if($counter < $size ) && #end#end#end">
                 <tab heading="Principal">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box box-primary">
-                                <div class="box-header"><h3 class="box-title"></h3></div>
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div ng-include src="'views/crud/${entity.name}/${entity.name}Fieldset.html'"></div>
+                            <form name="${entity.beanName}">
+                                <div class="box box-primary">
+                                    <div class="box-header"><h3 class="box-title"></h3></div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div ng-include src="'views/crud/${entity.name}/${entity.name}Fieldset.html'"></div>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
+                                            <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
+                                            <button class="btn btn-success" ng-click="save()" ng-disabled="userForm.$invalid">><span class="fa fa-save"></span> Gravar</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="box-footer">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
-                                        <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
-                                        <button class="btn btn-success" ng-click="save()"><span class="fa fa-save"></span> Gravar</button>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </tab>
@@ -95,17 +96,16 @@
 #end
 #end
             </tabset>
-        </form>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
 
-            <div class="nav-tabs-custom"  ng-show="selected${complexProperty.referedEntity.name}">
+            <div class="nav-tabs-custom" ng-show="selected${complexProperty.referedEntity.name}">
                 <div class="tab-content">
                     <div class="box box-primary">
                         <div class="box-header"><h3 class="box-title"></h3></div>
                         <div class="box-body">
                             <div class="row">
-                                caralhos me fodam!
+                                <${complexProperty.referedEntity.beanName}-fieldset ng-model="${complexProperty.referedEntity.beanName}"/>
                             </div>
                         </div>
                         <div class="box-footer">

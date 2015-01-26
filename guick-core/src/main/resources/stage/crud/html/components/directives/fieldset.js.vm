@@ -9,9 +9,9 @@
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
 
-app.directive('${entityBeanName.toLowerCase()}Select', function(){
+app.directive('${entityBeanName.toLowerCase()}Fieldset', function(){
     return {
         restrict: 'E',
-        templateUrl: 'components/directives/${entityBeanName}/select.html'
+        templateUrl: 'components/directives/${entityBeanName}/fieldset.html'
     };
 });

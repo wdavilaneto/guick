@@ -124,13 +124,15 @@
     <div id="login-holder">
         <div class="form-box" id="login-box" ng-controller="loginController">
             <div class="header">Área Restrita</div>
-            <form>
+            <form name="loginForm">
                 <div class="body bg-gray">
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <input type="text" name="username" ng-model="username" class="form-control" placeholder="Login"/>
+                        <span class="help-block" ng-show="loginForm.username.$error.required">Obrigatório</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" show-errors>
                         <input type="password" name="password" ng-model="password" class="form-control" placeholder="Senha"/>
+                        <span class="help-block" ng-show="loginForm.password.$error.required">Obrigatório</span>
                     </div>
 ##                    <div class="form-group">
 ##                        <input type="checkbox" name="remember_me"/> Lembrar Senha
@@ -329,6 +331,7 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #if (!${entity.isEmbeddable()})
 <script src="components/directives/${entityBeanName}/select.js"></script>
+<script src="components/directives/${entityBeanName}/fieldset.js"></script>
 #end
 #end
 <!-- endbuild -->

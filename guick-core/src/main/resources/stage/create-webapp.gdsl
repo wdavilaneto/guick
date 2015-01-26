@@ -84,6 +84,8 @@ guick {
 
                     [input: "stage/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
 
+                    [input: "stage/crud/api/presentation/AccountController.java.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/AccountController." + lang],
+
                     [input: "stage/crud/api/presentation/dto/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
                     [input: "stage/crud/api/presentation/dto/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
 

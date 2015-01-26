@@ -119,7 +119,9 @@ guick {
                         [input: "stage/crud/html/components/crud/entityFilterFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}FilterFieldset.html"],
                         [input: "stage/crud/html/components/crud/entityShowFieldSet.html.vm", output: "/front-end/app/views/crud/${entity.name}/${entity.name}ShowFieldset.html"],
                         [input: "stage/crud/html/components/directives/select.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.html"],
-                        [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"]
+                        [input: "stage/crud/html/components/directives/select.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/select.js"],
+                        [input: "stage/crud/html/components/directives/fieldset.html.vm", output: "/front-end/app/components/directives/${entity.beanName}/fieldset.html"],
+                        [input: "stage/crud/html/components/directives/fieldset.js.vm", output: "/front-end/app/components/directives/${entity.beanName}/fieldset.js"]
                 ]
             }
         }

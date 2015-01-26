@@ -44,6 +44,7 @@
                                                     <button class="btn btn-default" ng-click="search()"><i class="fa fa-search"></i></button>
                                                 </div>
                                             </div>
+                                            <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
                                         </div>
 #if(${entity.getActiveProperty()})
                                         <div class="form-group col-md-4">

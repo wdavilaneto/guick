@@ -40,10 +40,6 @@ angular.module('${project.name}App').controller('LoginController', function ($sc
     };
 });
 
-angular.module('${project.name}App').controller('LogoutController', function ($location, AuthenticationSharedService) {
-    AuthenticationSharedService.logout();
-});
-
 angular.module('${project.name}App').controller('PopoverDemoCtrl', function ($scope) {
   $scope.dynamicPopover = 'Hello, World!';
   $scope.dynamicPopoverTitle = 'Title';
@@ -61,7 +57,7 @@ angular.module('${project.name}App').controller('ButtonsCtrl', function (${js}sc
   };
 });
 
-angular.module('${project.name}App').controller('StandardDatepickerController', function (${js}scope) {
+angular.module('${project.name}App').controller('DefaultDatepickerController', function (${js}scope) {
     ${js}scope.today = function() {
         ${js}scope.dt = new Date();
     };
@@ -89,10 +85,10 @@ angular.module('${project.name}App').controller('StandardDatepickerController', 
     };
 
     ${js}scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
+        formatYear: 'dd/MM/yyyy',
+        startingDay: 1
     };
 
-    ${js}scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    ${js}scope.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'dd.MM.yyyy', 'shortDate'];
     ${js}scope.format = ${js}scope.formats[0];
 });

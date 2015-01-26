@@ -32,10 +32,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )
 #if( ${ent.isOneToMany()} ) #### || ent.isManyToMany()  TODO Many to many needs to change services/repository
 
-    if (${js}routeParams.${ent.referedEntity.beanName}Id) {
-        ${js}scope.masterDetail = ${js}routeParams.child;  // TODO fade out ?
-        ${js}scope.get${ent.referedEntity.name}( ${js}routeParams.${ent.referedEntity.beanName}Id );
-    }
 
     ${js}scope.get${ent.referedEntity.name} = function ( ${ent.referedEntity.beanName}Id ) {
         ${ent.referedEntity.beanName}Service.get( {'id':${ent.referedEntity.beanName}Id} , function (data) {
@@ -47,6 +43,10 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         });
     };
 
+    if (${js}routeParams.child == '${ent.referedEntity.name}' && ${js}routeParams.${ent.referedEntity.beanName}Id) {
+        ${js}scope.masterDetail = ${js}routeParams.child;  // TODO fade out ?
+        ${js}scope.get${ent.referedEntity.name}( ${js}routeParams.${ent.referedEntity.beanName}Id );
+    }
 
     ${js}scope.grid${ent.referedEntity.name}Options = ${ent.referedEntity.beanName}Service.createGridOptions(true);
     ${js}scope.${ent.referedEntity.beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();

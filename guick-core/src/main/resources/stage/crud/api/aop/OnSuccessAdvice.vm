@@ -132,6 +132,12 @@ public class OnSuccessAdvice {
      */
     private HttpEntity httpGetEntity(ProceedingJoinPoint pjp, Object objectBody, HttpStatus httpStatus) throws Throwable {
         HttpEntity returnObject;
+
+        if (!(pjp.proceed() instanceof HttpEntity)) {
+            httpStatus = HttpStatus.NOT_FOUND;
+            return new ResponseEntity(objectBody, httpStatus);
+        }
+
         returnObject = (HttpEntity) pjp.proceed();
         boolean found = false;
         if (returnObject != null) {

@@ -19,11 +19,11 @@ ${projectBeanName}Services.factory('loginService', ['$resource','authService',
     function ($resource, authService) {
         var service = $resource('/${projectBeanName}/api/authentication', {'username':'@username','password':'@password'}, {
             'login': { method: 'POST', isArray: false, headers:{'Content-Type':'application/x-www-form-urlencoded'} ,ignoreAuthModule: 'ignoreAuthModule'},
-            'logout': { method: 'GET', url:"/'${projectBeanName}/api/logout", isArray: true, ignoreAuthModule: 'ignoreAuthModule'}
+            'logout': { method: 'GET', url:"/'${projectBeanName}/api/logout", isArray: false, ignoreAuthModule: 'ignoreAuthModule'},
+            'authenticate': { method: 'GET', url:"/${projectBeanName}/api/authenticate", isArray: false, ignoreAuthModule: 'ignoreAuthModule'}
         })
 
-        var currentUser = {
-        };
+        var currentUser = null;
 
         service.getCurrentUser = function (){
             return currentUser;
@@ -31,13 +31,13 @@ ${projectBeanName}Services.factory('loginService', ['$resource','authService',
 
         service.activateLogin = function (obj){
             authService.loginConfirmed(obj);
-            currentUser.isAuthenticated = 'true';
-            currentUser.username = obj.username;
+            currentUser = {isAuthenticated:'true', username:obj.username};
         };
 
         service.logout = function (data) {
-            currentUser.isAuthenticated = 'false';
+            //currentUser.isAuthenticated = 'false';
             authService.loginCancelled(data);
+            currentUser = null;
         };
         return service;
     }

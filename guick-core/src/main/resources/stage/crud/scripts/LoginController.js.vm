@@ -20,7 +20,10 @@
 angular.module('${projectBeanName}App').controller('loginController', ['$scope', 'loginService' , 'authService', function ($scope, loginService , authService) {
 
     $scope.submit = function() {
-        loginService.login( {'username':$scope.username , 'password':$scope.password, ignoreAuthModule: 'ignoreAuthModule'} , function (data) {
+        $scope.$broadcast('show-errors-check-validity');
+                // if any invalid validation
+        if ($scope.loginForm.$invalid) { return; }
+        loginService.login( {'username':$scope.username , 'password':$scope.password} , function (data) {
             loginService.activateLogin(data);
         }, function (data) {
             loginService.logout(data);

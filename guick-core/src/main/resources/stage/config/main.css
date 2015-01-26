@@ -90,6 +90,10 @@ a.btn-detail{ padding:3px 7px;margin:3px 0 0 7px; }
 .form-group.form-group-primary-clean label{}
 .form-group.form-group-primary-clean input{border-top:2px solid #337ab7;}
 .form-group.form-group-primary-clean .fa-search{color:#337ab7!important;}
+
+.form-group .help-block {display: none;}
+.form-group.has-error .help-block {display: block;}
+
 .list-group{margin-bottom:0px;margin-top:1px;}
 .list-group-item{padding:5px 10px !important;font-size:0.65em;letter-spacing:1.0px;}
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{border-top:1px solid #ededed !important;border-right:1px solid #ededed  !important;border-left:1px solid #ededed !important;}

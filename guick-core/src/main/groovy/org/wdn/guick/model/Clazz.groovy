@@ -51,6 +51,8 @@ class Clazz implements Serializable {
                     [chave:"Responsavel",acentuado: "Responsável"],
                     [chave:"instituicao",acentuado: "instituição"],
                     [chave:"Instituicao",acentuado: "Instituição"],
+                    [chave:"inicio",acentuado: "início"],
+                    [chave:"votacao",acentuado: "votação"],
             ]){
                 if (word.contains(map.chave)){
                     word = word.replaceFirst(map.chave,map.acentuado);
@@ -59,7 +61,7 @@ class Clazz implements Serializable {
         }
         return StringUtils.capitalize(word);
     }
-    
+
     public String getCapitalizedName(){
         return  StringUtils.capitalize(name);
     }
