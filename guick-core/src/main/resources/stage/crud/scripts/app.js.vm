@@ -68,8 +68,8 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
     var nomeApp = '${project.name}';
 
     ${js}httpProvider.interceptors.push(
-        ['${js}q', 'toaster', '${js}window','${js}injector',
-            function(${js}q, toaster, ${js}window, ${js}injector) {
+        ['${js}q', 'toaster', '${js}window',
+            function(${js}q, toaster, ${js}window) {
 
                 return {
                     'response': function(response) {
@@ -124,7 +124,7 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
             }]);
 }]);
 
-app.directive('back', ['$window', function($window) {
+app.directive('back', [ function() {
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
@@ -135,25 +135,7 @@ app.directive('back', ['$window', function($window) {
     };
 }]);
 
-/**
- * A generic confirmation for risky actions.
- * Usage: Add attributes: ng-really-message="Are you sure"? ng-really-click="takeAction()" function
- */
-app.directive('ngReallyClick', [function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('click', function() {
-                var message = attrs.ngReallyMessage;
-                if (message && confirm(message)) {
-                    scope.$apply(attrs.ngReallyClick);
-                }
-            });
-        }
-    };
-}]);
-
-app.factory('jsog', function ($resource) {
+app.factory('jsog', function () {
         return JSOG;
     }
 );

@@ -6,137 +6,13 @@
 'use strict';
 
 angular.module('${project.acronym}App')
-    .directive('activeMenu', function(${js}translate, ${js}locale, tmhDynamicLocale) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs, controller) {
-                var language = attrs.activeMenu;
-
-                scope.${js}watch(function() {
-                    return ${js}translate.use();
-                }, function(selectedLanguage) {
-                    if (language === selectedLanguage) {
-                        tmhDynamicLocale.set(language);
-                        element.addClass('active');
-                    } else {
-                        element.removeClass('active');
-                    }
-                });
-            }
-        };
-    })
-    .directive('activeLink', function(location) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs, controller) {
-                var clazz = attrs.activeLink;
-                var path = attrs.href;
-                path = path.substring(1); //hack because path does bot return including hashbang
-                scope.location = location;
-                scope.${js}watch('location.path()', function(newPath) {
-                    if (path === newPath) {
-                        element.addClass(clazz);
-                    } else {
-                        element.removeClass(clazz);
-                    }
-                });
-            }
-        };
-    }).directive('passwordStrengthBar', function() {
-        return {
-            replace: true,
-            restrict: 'E',
-            template: '<div id="strength">' +
-                      '<small translate="global.messages.validate.newpassword.strength">Password strength:</small>' +
-                      '<ul id="strengthBar">' +
-                        '<li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li>' +
-                      '</ul>' +
-                    '</div>',
-            link: function(scope, iElement, attr) {
-                var strength = {
-                    colors: ['#F00', '#F90', '#FF0', '#9F0', '#0F0'],
-                    mesureStrength: function (p) {
-
-                        var _force = 0;
-                        var _regex = /[${js}-/:-?{-~!"^_`\[\]]/g; // "
-
-                        var _lowerLetters = /[a-z]+/.test(p);
-                        var _upperLetters = /[A-Z]+/.test(p);
-                        var _numbers = /[0-9]+/.test(p);
-                        var _symbols = _regex.test(p);
-
-                        var _flags = [_lowerLetters, _upperLetters, _numbers, _symbols];
-                        var _passedMatches = ${js}.grep(_flags, function (el) { return el === true; }).length;
-
-                        _force += 2 * p.length + ((p.length >= 10) ? 1 : 0);
-                        _force += _passedMatches * 10;
-
-                        // penality (short password)
-                        _force = (p.length <= 6) ? Math.min(_force, 10) : _force;
-
-                        // penality (poor variety of characters)
-                        _force = (_passedMatches === 1) ? Math.min(_force, 10) : _force;
-                        _force = (_passedMatches === 2) ? Math.min(_force, 20) : _force;
-                        _force = (_passedMatches === 3) ? Math.min(_force, 40) : _force;
-
-                        return _force;
-
-                    },
-                    getColor: function (s) {
-
-                        var idx = 0;
-                        if (s <= 10) { idx = 0; }
-                        else if (s <= 20) { idx = 1; }
-                        else if (s <= 30) { idx = 2; }
-                        else if (s <= 40) { idx = 3; }
-                        else { idx = 4; }
-
-                        return { idx: idx + 1, col: this.colors[idx] };
-                    }
-                };
-                scope.${js}watch(attr.passwordToCheck, function(password) {
-                    if (password) {
-                        var c = strength.getColor(strength.mesureStrength(password));
-                        iElement.removeClass('ng-hide');
-                        iElement.find('ul').children('li')
-                            .css({ 'background': '#DDD' })
-                            .slice(0, c.idx)
-                            .css({ 'background': c.col });
-                    }
-                });
-            }
-        }
-    })
-    .directive('showValidation', function() {
-        return {
-            restrict: 'A',
-            require:'form',
-            link: function(scope, element, attrs, formCtrl) {
-                element.find('.form-group').each(function() {
-                    var ${js}formGroup=${js}(this);
-                    var ${js}inputs = ${js}formGroup.find('input[ng-model],textarea[ng-model],select[ng-model]');
-
-                    if (${js}inputs.length > 0) {
-                        ${js}inputs.each(function() {
-                            var ${js}input=${js}(this);
-                            scope.${js}watch(function() {
-                                return ${js}input.hasClass('ng-invalid') && ${js}input.hasClass('ng-dirty');
-                            }, function(isInvalid) {
-                                ${js}formGroup.toggleClass('has-error', isInvalid);
-                            });
-                        });
-                    }
-                });
-            }
-        };
-    })
     .directive('showErrors', function() {
         return {
             restrict: 'A',
             require:  '^form',
             link: function (scope, el, attrs, formCtrl) {
                 // find the text box element, which has the 'name' attribute
-                var inputEl   = el[0].querySelector("[name]");
+                var inputEl   = el[0].querySelector('[name]');
                 // convert the native text box element to an angular element
                 var inputNgEl = angular.element(inputEl);
                 // get the name on the text box so we know the property to check
@@ -162,7 +38,7 @@ angular.module('${project.acronym}App')
             }
         }
       })
-    .directive('authenticatedApplication', function($rootScope, loginService) {
+    .directive('authenticatedApplication', [ '$rootScope', 'loginService', function($rootScope, loginService) {
         return {
             restrict: 'C', link: function(scope, elem, attrs) {
                 //once Angular is started, remove class:
@@ -172,23 +48,20 @@ angular.module('${project.acronym}App')
                 var menu = elem.find('#menu');
                 var userArea = elem.find('#user-area');
 
-                if ( loginService.getCurrentUser() == null) {
+                if ( loginService.getCurrentUser() === null || loginService.getCurrentUser().username === null || loginService.getCurrentUser().username === '') {
                     main.hide();
                     menu.hide();
                     userArea.hide();
+                    login.hide();
                     loginService.authenticate( {} , function (data) {
-                        //loginService.activateLogin(data);
-                        login.hide();
                         main.show();
                         menu.show();
                         userArea.show();
                     }, function (data) {
-                        //loginService.logout(data);
                         login.show();
                     });
                 } else {
                     login.hide();
-                    userArea.hide();
                 }
 
                 elem.removeClass('waiting-for-angular');
@@ -207,7 +80,7 @@ angular.module('${project.acronym}App')
                 });
             }
         }
-    })
+    }])
     .directive('fileread', [function () {
         return {
             scope: {

@@ -123,7 +123,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         // if any invalid validation
-        if ($scope.${entityBeanName}Form.$invalid) { return; }
+        if (!$scope.${entityBeanName}Form || $scope.${entityBeanName}Form.$invalid) { return; }
 
         console.log('Requesting asve on ${entityBeanName}');
         ${js}scope.searchSelects.toEntity(${js}scope.entity);

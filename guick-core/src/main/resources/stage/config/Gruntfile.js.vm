@@ -122,32 +122,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    /* Alteração url api */
-    rewrite: {
-      js: {
-        src: '<%= yeoman.dist %>/scripts/*.js',
-        editor: function(contents, filePath) {
-          return contents.replace('localhost:8080', appConfig.apiUrl);
-        }
-      },
-      html: {
-              src: '<%= yeoman.dist %>/views/**/*.html',
-              editor: function(contents, filePath) {
-                return contents.replace('localhost:8080', appConfig.apiUrl);
-              }
-            }
-    },
-//    replace: {
-//      js: {
-//        src: ['<%= yeoman.dist %>/scripts/scripts.js'],             // source files array (supports minimatch)
-//        overwrite: true,
-//        replacements: [{
-//          from: 'localhost:8080',                   // string replacement
-//          to: '<%= yeoman.apiUrl %>'
-//        }]
-//      }
-//    },
-
     // Make sure code css are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -439,8 +413,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
-    'rewrite'
+    'htmlmin'
 
   ]);
 
