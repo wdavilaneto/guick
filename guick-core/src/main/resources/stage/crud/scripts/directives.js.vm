@@ -81,6 +81,16 @@ angular.module('${project.acronym}App')
             }
         }
     }])
+    .directive('back', ['$window', function($window) {
+        return {
+            restrict: 'A',
+            link: function (scope, elem, attrs) {
+                elem.bind('click', function () {
+                    $window.history.back();
+                });
+            }
+        };
+    }])
     .directive('fileread', [function () {
         return {
             scope: {

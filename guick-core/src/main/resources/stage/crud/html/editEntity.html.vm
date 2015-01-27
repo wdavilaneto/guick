@@ -13,7 +13,7 @@
 <section class="content" >
     <div ng-controller="${entityBeanName}Controller">
         <div ng-controller="${entity.beanName}ExtController">
-            <tabset ng-show="#set( $size = ${entity.getDistinctedAllComplexProperties().size()} )#set( $counter = 0)#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )#if( ${ent.isOneToMany()} )!selected${ent.referedEntity.name}#set($counter = $counter + 1)#if($counter < $size ) && #end#end#end">
+            <tabset ng-show="masterDetail == null">
                 <tab heading="Principal">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">

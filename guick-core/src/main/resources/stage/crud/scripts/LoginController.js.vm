@@ -17,17 +17,28 @@
  * # loginController
  * Controller of the rhApp
  */
-angular.module('${projectBeanName}App').controller('loginController', ['$scope', 'loginService' , 'authService', function ($scope, loginService , authService) {
+angular.module('${projectBeanName}App').controller('loginController', ['$scope', 'loginService' , 'authService' , '$document', '$animate',
+    function ($scope, loginService , authService,$document, $animate) {
 
     $scope.submit = function() {
-        $scope.$broadcast('show-errors-check-validity');
-                // if any invalid validation
-        if ($scope.loginForm.$invalid) { return; }
+##        $scope.$broadcast('show-errors-check-validity');
+##         // if any invalid validation
+##        if ($scope.loginForm.$invalid) { return; }
+
+        var element = angular.element($document[0].querySelector('#login-holder'));
+        $animate.removeClass(element, 'shake');
+
         loginService.login( {'username':$scope.username , 'password':$scope.password} , function (data) {
             loginService.activateLogin(data);
         }, function (data) {
-            loginService.logout(data);
+            $animate.addClass(element, 'shake');
+            loginService.logoff(data);
         });
+    };
+
+    $scope.logout = function() {
+        loginService.logoff(data);
+        loginService.logout( {'username':$scope.username , 'password':$scope.password} , function (data) {});
     };
 
 }]);

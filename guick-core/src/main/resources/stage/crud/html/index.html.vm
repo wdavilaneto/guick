@@ -19,11 +19,9 @@
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
-    <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
     <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
-    <link rel="stylesheet" href="bower_components/adminlte/css/ionicons.min.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
@@ -54,7 +52,7 @@
             <span class="icon-bar"></span>
         </a><a class="logo-control" href="#">${project.name} </a>
         <div class="navbar-right" ng-controller="loginController" id="user-area">
-            <ul class="nav navbar-nav" ng-show="user.username != null">
+            <ul class="nav navbar-nav">
 #foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
                 <li class="dropdown tasks-menu" ng-controller="${entity.beanName}AlertController">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -81,7 +79,7 @@
                 </li>
 #end
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu" >
+                <li class="dropdown user user-menu">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i><span>{{user.name}}<i class="caret"></i></span></a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -191,13 +189,14 @@
                         </ul>
                     </li>
 #end
+#if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cog"></i> <span>Administração</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-#if (${project.getAllDomainEntities().size()} > 0)
                         <ul class="treeview-menu">
+#if (${project.getAllDomainEntities().size()} > 0)
                              <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-wrench"></i> <span>Tabelas Dominio</span>
@@ -227,6 +226,7 @@
 #end
                         </ul>
                     </li>
+#end
                     <li><a href="#/sobre"><i class="fa fa-question-circle"></i>Sobre</a></li>
                 </ul>
             </section>

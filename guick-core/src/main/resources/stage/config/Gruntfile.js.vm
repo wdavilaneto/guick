@@ -19,7 +19,7 @@ module.exports = function (grunt) {
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist',
-    apiUrl: 'aaaa'
+    apiUrl: 'h-apps.mprj.mp.br'
   };
 
   // Define the configuration for all the tasks
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/css/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/imagens/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -69,7 +69,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0',
+        hostname: 'localhost',
         livereload: 35729
       },
       livereload: {
@@ -86,22 +86,21 @@ module.exports = function (grunt) {
         }
       },
       proxies: [
-          {
-              context: '/${project.beanName}/api',
-              host: 'localhost',
-              port: 8080,
-              https: false,
-              changeOrigin: false,
-              xforward: false,
-              headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Origin, Content-type, Accept, Authorization, X-Eequested-With, X-Redmine-Api-Key',
-                'Access-Control-Allow-Methods':'POST, GET, OPTIONS, DELETE, PUT',
-                'Access-Control-Expose-Headers': 'title, message',
-                'Access-Control-Max-Age':'3600'
-              }
-          }
-      ],
+            {
+                context: '/${project.beanName}/api',
+                host: 'localhost',
+                port: 8080,
+                https: false,
+                changeOrigin: false,
+                xforward: false,
+                headers: {
+                  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Max-Age":"3600",
+                  "Access-Control-Expose-Headers": "title, message"
+                }
+            }
+        ],
       test: {
         options: {
           port: 9001,
@@ -122,6 +121,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     // Make sure code css are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -142,6 +142,9 @@ module.exports = function (grunt) {
         src: ['test/spec/{,*/}*.js']
       }
     },
+
+
+
 
     // Empties folders to start fresh
     clean: {
@@ -272,6 +275,7 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
+		  removeComments: true,
           collapseWhitespace: true,
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
@@ -281,7 +285,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html','components/*{,*/}*.html'],
+          src: ['**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -312,15 +316,18 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
-            'components/*{,*/}*.html',
-            'images/{,*/}*.{webp}',
+	
+            'views/**/*.html',
+            'views/*.html',
+            'components/**/*.html',
+            'components/*.html',
+            'imagens/**/*.{webp}',
             'fonts/*'
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
+          cwd: '.tmp/imagens',
+          dest: '<%= yeoman.dist %>/imagens',
           src: ['generated/*']
         }, {
           expand: true,
@@ -349,19 +356,19 @@ module.exports = function (grunt) {
       ],
       test: [
         'copy:css'
-      ],
-      dist: [
-        'copy:css',
-        'imagemin',
-        'svgmin'
-      ]
+      ]//,
+ //     dist: [
+ //       'copy:css',
+ //       'imagemin',
+ //       'svgmin'
+ //     ]
     },
 
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
-        singleRun: true
+        configFile: 'karma.conf.js',
+        singleRun: false
       }
     }
   });
@@ -385,10 +392,6 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
 
   grunt.registerTask('test', [
     'clean:server',
@@ -400,21 +403,21 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+	'copy:css',
+    'imagemin',
+    'svgmin',
+    //'concurrent:dist',
     'autoprefixer',
     'concat',
     'ngAnnotate',
     'copy:dist',
-
     'cssmin',
     'uglify',
     'filerev',
     'usemin',
     'htmlmin'
-
   ]);
 
   grunt.registerTask('default', [

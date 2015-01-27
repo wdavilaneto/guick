@@ -34,8 +34,7 @@ ${projectBeanName}Services.factory('loginService', ['$resource','authService',
             currentUser = {isAuthenticated:'true', username:obj.username};
         };
 
-        service.logout = function (data) {
-            //currentUser.isAuthenticated = 'false';
+        service.logoff = function (data) {
             authService.loginCancelled(data);
             currentUser = null;
         };

@@ -12,6 +12,7 @@
  * Main module of the application.
  */
 var app = angular.module('${project.name}App', [
+    'pascalprecht.translate',
     'http-auth-interceptor',
     'ngAnimate',
     'ngCookies',
@@ -68,8 +69,7 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
     var nomeApp = '${project.name}';
 
     ${js}httpProvider.interceptors.push(
-        ['${js}q', 'toaster', '${js}window',
-            function(${js}q, toaster, ${js}window) {
+        ['${js}q', 'toaster', '${js}window', function(${js}q, toaster, ${js}window) {
 
                 return {
                     'response': function(response) {
