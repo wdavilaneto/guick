@@ -281,6 +281,7 @@
 <script src="bower_components/jsog/lib/JSOG.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
+<script src="bower_components/adminlte/js/app.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 <!-- endbuild -->
 
