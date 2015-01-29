@@ -263,10 +263,10 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
 #if( (${ent.isManyToOne()}) && (${ent.referedEntity.table.count} < 200 || !${ent.referedEntity.looksLikeMainEntity()})) ## Caso nao seja muito grande e portanto caiba num select box ...
 #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-        ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-             ${js}scope.${beanName}List = data.content;
-        });
-#{end}
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
 #end
     }
     // end block

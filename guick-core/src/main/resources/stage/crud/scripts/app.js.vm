@@ -12,7 +12,7 @@
  * Main module of the application.
  */
 var app = angular.module('${project.name}App', [
-    'pascalprecht.translate',
+##    'pascalprecht.translate',
     'http-auth-interceptor',
     'ngAnimate',
     'ngCookies',

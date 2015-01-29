@@ -81,7 +81,8 @@ public class OnSuccessAdvice {
             ResponseEntity responseEntity;
 
             MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-            Locale locale = LocaleContextHolder.getLocale();
+##            Locale locale = LocaleContextHolder.getLocale();
+            Locale locale = new Locale("pt_BR");
 
             String prefixCode = ON_SUCCESS + pjp.getTarget().getClass().getSimpleName() + "." + methodName;
 
