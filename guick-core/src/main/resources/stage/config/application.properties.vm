@@ -22,5 +22,5 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.max_fetch_depth=3
 spring.jpa.properties.hibernate.cache.use_query_cache=true
 spring.jpa.properties.hibernate.cache.use_second_level_cach=true
-#spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
-spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
+#spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory

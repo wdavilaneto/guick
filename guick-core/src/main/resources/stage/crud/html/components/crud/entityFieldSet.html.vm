@@ -4,6 +4,8 @@
 #set( $bigFieldSize = 100)
 #set( $isFilter = false )
 #set( $idAgragation = '' )
+#set( $rowSize = 0)
+
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
 #set( $property = ${entity.id} )
 #parse( "stage/crud/html/property.html.vm" )

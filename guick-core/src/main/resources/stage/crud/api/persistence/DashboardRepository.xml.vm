@@ -9,7 +9,7 @@
         select * from (
 #foreach( ${entity} in ${mainEntities} )
 #set($counter = $counter + 1)
-            (select '${entity.name}' as label, count(*) as value from ${entity.table.name})#if($counter < $size) union
+            (select '${entity.title}' as label, count(*) as value from ${entity.table.name})#if($counter < $size) union
 #end
 #end
 
@@ -34,7 +34,7 @@
 #end
                 NVL( sum(o${e.mappedBy}.${numericProperties[0].column.name}), 0) as value
             from ${entity.table.name} ${entity}
-            inner join ${e.referedEntity.table.name} o${e.mappedBy} on o${e.mappedBy}.${e.referedEntity.table.pk[0].name} = ${entity.name}.${entity.table.pk[0].name}
+            inner join ${e.referedEntity.table.name} o on o.${e.referedEntity.table.pk[0].name} = ${entity.name}.${entity.table.pk[0].name}
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
             group by ${entity.name}.${entity.table.pk[0].name}, ${entity.name}.${entity.getMostDescritiveProperties()[0].column.name}
 #else

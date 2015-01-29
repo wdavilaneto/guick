@@ -12,7 +12,7 @@
  * Main module of the application.
  */
 var app = angular.module('${project.name}App', [
-##    'pascalprecht.translate',
+    'pascalprecht.translate',
     'http-auth-interceptor',
     'ngAnimate',
     'ngCookies',
@@ -33,7 +33,7 @@ var app = angular.module('${project.name}App', [
     'angularUtils.directives.dirPagination',
     '${project.name}Services'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $translateProvider) {
     $routeProvider
       .when('/', {templateUrl: 'views/main.html'})
       .when('/activiti/deployment', {templateUrl: 'views/activiti/deployment.html'})
@@ -59,6 +59,11 @@ var app = angular.module('${project.name}App', [
       .when('/monitor/metrics', {templateUrl: 'views/monitor/metrics.html'})
       .when('/monitor/audits', {templateUrl: 'views/monitor/audits.html'})
       .otherwise({redirectTo: '/'});
+
+    $translateProvider.useStaticFilesLoader({prefix: '/',suffix: '.json'});
+    $translateProvider.preferredLanguage('pt-BR');
+
+
   });
 
 angular.module('${projectBeanName}Services', ['ngResource']);

@@ -20,7 +20,7 @@
                                 <div class="icon">
                                     <i class="ion ion-ios-pulse-strong"></i>
                                 </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=1 )${project.getAllMainEntities()[0]} #{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="#/#if(${project.getAllMainEntities().size()} >=1 )${project.getAllMainEntities()[0]}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
@@ -33,7 +33,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=2 ) ${project.getAllMainEntities()[1]} #{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="#/#if(${project.getAllMainEntities().size()} >=2 )${project.getAllMainEntities()[1]}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
@@ -46,7 +46,7 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=3 )${project.getAllMainEntities()[2]} #{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="#/#if(${project.getAllMainEntities().size()} >=3 )${project.getAllMainEntities()[2]}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
@@ -59,7 +59,7 @@
                                 <div class="icon">
                                     <i class="ion ion-ios-speedometer"></i>
                                 </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=4 )${project.getAllMainEntities()[3]} #{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="#/#if(${project.getAllMainEntities().size()} >=4 )${project.getAllMainEntities()[3]}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>

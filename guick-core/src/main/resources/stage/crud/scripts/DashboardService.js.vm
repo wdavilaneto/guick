@@ -22,14 +22,14 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
                 type: 'discreteBarChart',
                 title: {
                     enable: true,
-                    text: "Graficos ${project.name}"
+                    text: "Graficos cfrequencia"
                 },
-                height: 450,
+                height: 400,
                 margin : {
                     top: 20,
                     right: 20,
-                    bottom: 60,
-                    left: 55
+                    bottom: 65,
+                    left: 80
                 },
                 x: function(d){return d.LABEL;},
                 y: function(d){return parseInt(d.VALUE);},
@@ -39,7 +39,7 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
                     rotateLabels: -25
                 },
                 yAxis: {
-                    axisLabelDistance: 25
+                    axisLabelDistance: 10
                 }
             }
         };

@@ -22,6 +22,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
+import org.springframework.orm.jpa.support.SharedEntityManagerBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -55,6 +56,8 @@ public class Application extends SpringBootServletInitializer {
     public EhCacheManagerFactoryBean cacheFactoryBean() {
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
         ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource(EHCACHE_FILE));
+        ehCacheManagerFactoryBean.setShared(false);
+        ehCacheManagerFactoryBean.setCacheManagerName("${project.name}_cache");
         return ehCacheManagerFactoryBean;
     }
 
@@ -63,6 +66,12 @@ public class Application extends SpringBootServletInitializer {
         EhCacheCacheManager cacheManager = new EhCacheCacheManager();
         cacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
         return cacheManager;
+    }
+
+    @Bean(name = "entityManager")
+    public SharedEntityManagerBean entityManager() {
+        SharedEntityManagerBean sharedEntityManagerBean = new SharedEntityManagerBean();
+        return sharedEntityManagerBean;
     }
 
     @Bean
