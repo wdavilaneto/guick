@@ -27,7 +27,7 @@
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
         <label for="${idAgragation}${property}">${property.title}</label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{dateFormat}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>

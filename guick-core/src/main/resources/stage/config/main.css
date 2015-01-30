@@ -189,6 +189,15 @@ body > .header .navbar .sidebar-toggle{transition:0.2s;-moz-transition:0.2s;-web
   animation: shake 500ms ease-in-out;
 }
 
+html.login, html.login body{background:#007aaf!important;}
+.box.box-success.box-login{margin-top:20%;background:#fff;}
+.box-footer.box-footer-login{background:#fff;}
+.alert-dismissable, .alert-dismissible{font-size:0.8em;}
+h1.logo-login{background:url(../imagens/logo-login.png) no-repeat top center;width:100%;height:100px;}
+.form-box{box-shadow: -3px 3px 7px #ccc;}
+.form-box .header{background: #007aaf !important;}
+
+
 /**
 .form-group .help-block {display: none;}
 .form-group.has-error .help-block {display: block;}

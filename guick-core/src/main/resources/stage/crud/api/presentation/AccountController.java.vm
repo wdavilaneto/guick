@@ -42,7 +42,7 @@ public class AccountController {
     public HttpEntity<Map> isAuthenticated(HttpServletRequest request) {
         String username = request.getRemoteUser();
         if (username == null){
-            return new ResponseEntity<Map>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Map>(HttpStatus.UNAUTHORIZED);
         }
         Map<String,String> result = new HashMap<String,String>();
         result.put(USERNAME,request.getRemoteUser());
