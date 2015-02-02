@@ -22,8 +22,8 @@ a.logo-control:hover{background-position:0px -50px;}
 .skin-blue  a.logo, .skin-blue  a.logo:hover{transition:0.3;-webkit-transition:0.3s;-moz-transition:0.3s;text-indent:-9999px; background:#007aaf url(../images/logo.png) no-repeat}
 .skin-blue  a.logo{background-position:0px 0px;}
  .skin-blue  a.logo:hover{background-position:0px -50px;}
-.skin-blue .navbar.navbar-footer{background:#f4f4f4 !important; min-height:20px !important;box-shadow:10px -20px 30px #fff;color:#007aaf;}
-.navbar.navbar-footer p small{height:24px;padding:3px 0 3px 3px;text-transform: uppercase;font-size: 0.65em;letter-spacing: 1pt;/*background:url(../images/logotipo-footer.svg)no-repeat left center;*/}
+.skin-blue .navbar.navbar-footer{background:#f4f4f4 !important; min-height:20px !important;box-shadow:10px -20px 30px #fff;color:#888;}
+.navbar.navbar-footer p small{height:24px;padding:3px 0 3px 80px;text-transform: uppercase;font-size: 0.65em;letter-spacing: 1pt;background:url(../images/logotipo-footer.svg)no-repeat left center;}
 .logo-control span{font-size: 2em;}
 .row{margin-left: -7px;margin-right: -7px;}
 .info-graphic{min-height:435px;border:none;}

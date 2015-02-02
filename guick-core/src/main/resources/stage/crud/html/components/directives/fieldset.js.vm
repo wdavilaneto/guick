@@ -12,6 +12,9 @@
 app.directive('${entityBeanName.toLowerCase()}Fieldset', function(){
     return {
         restrict: 'E',
+        scope: {
+            entity: '=model'
+        },
         templateUrl: 'components/directives/${entityBeanName}/fieldset.html'
     };
 });

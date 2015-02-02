@@ -43,9 +43,10 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             id = ${js}routeParams.id;
         }
         ${entityBeanName}Service.get( {'id':id} , function (data) {
-            ${js}scope.entity = jsog.decode(data);
+            ${js}scope.entity = data;
             ${js}scope.searchSelects.fromEntity(${js}scope.entity);
-        }, function (data){
+        }, function (error){
+            console.log(error)
             // Case error or not found ..back to search filter
             ${js}location.path('/${entity.name}');
         });
@@ -83,7 +84,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     // end block
 
     // Search By Example Method
-    ${js}scope.search = function() {
+    ${js}scope.search = function(page) {
         console.log('Realizando busca');
         // prepare page request
         if (${js}scope.textSearchActive) {
@@ -112,6 +113,11 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         }
     };
 
+    $scope.newSearch = function(){
+        $scope.pagination.currentPage = 1;
+        $scope.search()
+    }
+
     $scope.detalhar = function (${entityBeanName}) {
         //if (${js}scope.editMode === true && !confirm('Deseja realmente sair do modo de edição do cadastro de ${entity.name}?')){
         //    return false;
@@ -123,9 +129,12 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         // if any invalid validation
-        if (!$scope.${entityBeanName}Form || $scope.${entityBeanName}Form.$invalid) { return; }
+        if (!$scope.mainForm || $scope.mainForm.$invalid) {
+            console.log('Validation Error');
+            return;
+        }
 
-        console.log('Requesting asve on ${entityBeanName}');
+        console.log('Requesting save on ${entityBeanName}');
         ${js}scope.searchSelects.toEntity(${js}scope.entity);
         ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
             console.log(successResult);

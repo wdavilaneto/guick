@@ -74,6 +74,7 @@ guick {
 
         "repository" {
             templates = [
+                    [input: "stage/domain/${lang}/HistogramDto.java.vm", output: "/api/src/main/${lang}/${packageBase}/domain/dto/HistogramDto.${lang}"],
                     [input: "stage/crud/api/persistence/DashboardRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/mybatis/DashboardRepository.${lang}"],
                     [input: "stage/crud/api/persistence/DashboardRepository.xml.vm", output: "/api/src/main/resources/${packageBase}/api/persistence/mybatis/DashboardRepository.xml"]
             ]

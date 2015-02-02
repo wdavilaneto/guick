@@ -49,6 +49,7 @@ var app = angular.module('${project.name}App', [
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
       .when('/${entity.name}', {templateUrl: 'views/crud/${entity.name}/${entity.name}.html'})
       .when('/${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+      .when('/${entity.name}/:id/:child', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
 #if( ${ent.isOneToMany()} || ${ent.isManyToMany()})
       .when('/${entity.name}/:id/:child/:${ent.referedEntity.beanName}Id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})

@@ -31,8 +31,8 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
                     bottom: 65,
                     left: 80
                 },
-                x: function(d){return d.LABEL;},
-                y: function(d){return parseInt(d.VALUE);},
+                x: function(d){return d.label;},
+                y: function(d){return parseInt(d.value);},
                 showValues: true,
                 transitionDuration: 500,
                 xAxis: {

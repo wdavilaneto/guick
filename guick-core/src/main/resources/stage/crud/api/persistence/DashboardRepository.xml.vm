@@ -2,7 +2,12 @@
 
 <mapper namespace="${project.group}.${project.name}.api.persistence.mybatis.DashboardRepository">
 
-	<select id="allCount" resultType="hashmap">
+    <resultMap id="histogramDto" type="org.wdn.electio.domain.dto.HistogramDto">
+        <result column="label" property="label"/>
+        <result column="value" property="value"/>
+    </resultMap>
+
+	<select id="allCount" resultMap="histogramDto">
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #set( $size = ${mainEntities.size()} )
 #set( $counter = 0)
@@ -23,7 +28,7 @@
 #set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
 #set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultMap="histogramDto">
         select * from (
             select
 #if( ${entity.getMostDescritiveProperties().size()} > 0 )
@@ -46,7 +51,7 @@
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultMap="histogramDto">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )
@@ -69,7 +74,7 @@
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultType="hashmap">
+    <select id="get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}" resultMap="histogramDto">
         select * from (
             select
 #if(${entity.getMostDescritiveProperties().size()} > 0  )

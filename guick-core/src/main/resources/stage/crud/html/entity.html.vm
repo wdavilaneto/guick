@@ -3,7 +3,7 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <i class="fa fa-search"></i> :
+        <i class="fa fa-search"></i> :
         <small>
 #if(${entity.title} == 'Proc asses executiva')
         Processos na assesoria executiva
@@ -25,20 +25,20 @@
 
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
-        <form name="${entityBeanName}Form" novalidate ng-submit="search()" >
+        <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()" >
             <tabset>
                 <tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label" for="searchField.text"> Busca por texto <i class="fa fa-asterisk fa-sm"></i>
-                                        <i popover-trigger="mouseenter"  popover-placement="left" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
+                                    <label class="control-label" for="searchField.text"> Busca por texto</i>
+                                    <i popover-trigger="mouseenter"  popover-placement="left" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
                                     </label>
                                     <div class="input-group">
                                         <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
                                         <div class="input-group-btn">
-                                            <button class="btn btn-default" ng-click="search()"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-default" ng-click="newSearch()"><i class="fa fa-search"></i></button>
                                             <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
                                         </div>
                                     </div>

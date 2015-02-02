@@ -33,29 +33,31 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
     // ******************************************************************************************
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )
 #if( ${ent.isOneToMany()} ) #### || ent.isManyToMany()  TODO Many to many needs to change services/repository
-
+    ${js}scope.selected${ent.referedEntity.name} = null;
 
     ${js}scope.get${ent.referedEntity.name} = function ( ${ent.referedEntity.beanName}Id ) {
         ${ent.referedEntity.beanName}Service.get( {'id':${ent.referedEntity.beanName}Id} , function (data) {
-            ${js}scope.selected${ent.referedEntity.name}  = jsog.decode(data);
+            ${js}scope.selected${ent.referedEntity.name} = data;
         }, function (data){
             // Case error or not found ..back to search filter
-            ${js}location.path('/Cargos/'+ ${js}routeParams.id);
+            ${js}location.path('/${entity}/'+ ${js}routeParams.id);
         });
     };
 
     if (${js}routeParams.child == '${ent.referedEntity.name}' && ${js}routeParams.${ent.referedEntity.beanName}Id) {
-        ${js}scope.masterDetail = ${js}routeParams.child;  // TODO fade out ?
-        ${js}scope.get${ent.referedEntity.name}( ${js}routeParams.${ent.referedEntity.beanName}Id );
+        ${js}scope.masterDetail = ${js}routeParams.child;
+        if (${js}routeParams.${ent.referedEntity.beanName}Id) {
+            ${js}scope.get${ent.referedEntity.name}( ${js}routeParams.${ent.referedEntity.beanName}Id );
+        }
     }
 
     ${js}scope.grid${ent.referedEntity.name}Options = ${ent.referedEntity.beanName}Service.createGridOptions(true);
     ${js}scope.${ent.referedEntity.beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();
 
     ${js}scope.find${ent.referedEntity.name} = function() {
-        console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
+        console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}routeParams.id);
         ${js}scope.resultPage = null;
-        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}scope.entity.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}routeParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
             try {
                 ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -69,7 +71,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         // TODO Implement query search with fields
         console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
         ${js}scope.resultPage = null;
-        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}scope.entity.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}routeParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
             try {
                 ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -84,6 +86,26 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         ${ent.referedEntity.beanName}Service.remove( obj , function ( successResult) {
             console.log(successResult);
             ${js}scope.entity = {};
+        });
+    };
+    ${js}scope.save${ent.referedEntity.name} = function (){
+        console.log('Requesting save on ${${ent.referedEntity.beanName}}');
+        $scope.$broadcast('show-errors-check-validity');
+        // if any invalid validation
+        if (!$scope.mainForm || $scope.mainForm.$invalid) {
+            console.log('Validation Error');
+            return;
+        }
+
+        ${js}scope.searchSelects.toEntity(${js}scope.selected${ent.referedEntity.name});
+        ${ent.referedEntity.beanName}Service.save( ${js}scope.selected${ent.referedEntity.name} , function (successResult) {
+            console.log(successResult);
+            ${js}scope.entity = ${ent.referedEntity.beanName}Service.create();
+            if (!${js}scope.editMode) {
+                ${js}scope.search${ent.referedEntity.name}();
+            } else {
+                ${js}location.path('/${entity.name}/'+ ${js}routeParams.id + '/${ent.referedEntity.name}');
+            }
         });
     };
     ${js}scope.edit${ent.referedEntity.name} = function (obj) {
@@ -101,8 +123,20 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         ${js}scope.find${ent.referedEntity.name}();
     };
 
+    ${js}scope.is${ent.referedEntity.name}Active = (${js}routeParams.child === '${ent.referedEntity.name}') ;
+
 #{end}
 #{end}
+
+
+    ${js}scope.back = function (){
+        if (${js}routeParams.child) {
+            console.log('Redirecting to /${entity}/'+ $routeParams.id + '/' + $routeParams.child);
+            ${js}location.path('/${entity}/'+ ${js}routeParams.id + '/' + ${js}routeParams.child);
+        } else {
+            ${js}window.history.back();
+        }
+    };
 
     ${js}scope.clear = function () {
         ${js}scope.selected = null;
