@@ -1,3 +1,4 @@
+titulo.sucesso=Sucesso!
 SucessoDefault=Opera\u00e7\u00e3o realizada com sucesso!
 ValidationFailure=Erro de valida\u00e7\u00e3o
 DataIntegrityError=Erro de integridade de dados
@@ -44,5 +45,5 @@ Falha.save.grupo.objetoEmpenho.diferente= N\u00e3o pode ser migrado para objeto 
 Falha.save.grupo.objetoEmpenho.avulsa= N\u00e3o pode migra nota avulsa!
 Falha.save.controle.processoPagamento=Este Processo de Pagamento pertence a outro credor
 Falha.save.empenho.notaEmpenho.existente=Esta Nota de Empenho j\u00e1 est\u00e1 sendo utilizada neste Processo
-Falha.save.empenho.notaEmpenho.saldo.insuficiente=Não h\u00e1 saldo dispon\u00edvel na Nota de Empenho para realizar este pagamento
+Falha.save.empenho.notaEmpenho.saldo.insuficiente=Nï¿½o h\u00e1 saldo dispon\u00edvel na Nota de Empenho para realizar este pagamento
 Falha.save.empenho.notaEmpenho.valor.superior=O valor informado \u00e9 superior ao saldo a pagar do Processo

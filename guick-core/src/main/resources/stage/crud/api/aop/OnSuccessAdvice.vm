@@ -10,9 +10,7 @@ package ${project.group}.commons.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -81,7 +79,6 @@ public class OnSuccessAdvice {
             ResponseEntity responseEntity;
 
             MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-##            Locale locale = LocaleContextHolder.getLocale();
             Locale locale = new Locale("pt_BR");
 
             String prefixCode = ON_SUCCESS + pjp.getTarget().getClass().getSimpleName() + "." + methodName;
@@ -133,11 +130,6 @@ public class OnSuccessAdvice {
      */
     private HttpEntity httpGetEntity(ProceedingJoinPoint pjp, Object objectBody, HttpStatus httpStatus) throws Throwable {
         HttpEntity returnObject;
-
-        if (!(pjp.proceed() instanceof HttpEntity)) {
-            httpStatus = HttpStatus.NOT_FOUND;
-            return new ResponseEntity(objectBody, httpStatus);
-        }
 
         returnObject = (HttpEntity) pjp.proceed();
         boolean found = false;

@@ -2,8 +2,10 @@
 server.context-path=/${project.name}
 server.servlet-path=/api
 
+#spring.profiles.active=jboss
 spring.groovy.template.check-template-location=false
 spring.velocity.checkTemplateLocation=false
+spring.jta.enabled = false
 
 spring.datasource.url=${project.config.generatedDatasourceInfo.url}
 spring.datasource.username=${project.config.generatedDatasourceInfo.user}
@@ -24,3 +26,6 @@ spring.jpa.properties.hibernate.cache.use_query_cache=true
 spring.jpa.properties.hibernate.cache.use_second_level_cach=true
 spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
 #spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
+email.sender=sistema.${project.name}@${project.group}
+email.to=${project.name}@${project.group}

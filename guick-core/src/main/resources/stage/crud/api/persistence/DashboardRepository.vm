@@ -7,6 +7,7 @@
 package ${project.group}.${project.name}.api.persistence.mybatis;
 
 import ${project.group}.${project.name}.domain.dto.HistogramDto;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import java.util.Map;
  */
 public interface DashboardRepository {
 
+    @Transactional(readOnly = true)
     List<HistogramDto> allCount();
 
 #set( $mainEntities = ${project.getAllMainEntities()} )
@@ -25,14 +27,17 @@ public interface DashboardRepository {
 #set($numericProperties = ${e.referedEntity.getAllNumericProperties()} )
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 0 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
+    @Transactional(readOnly = true)
     List<HistogramDto> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
+    @Transactional(readOnly = true)
     List<HistogramDto> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
+    @Transactional(readOnly = true)
     List<HistogramDto> get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}();
 #end
 #end

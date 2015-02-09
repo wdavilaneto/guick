@@ -61,7 +61,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     // Paged result for search filter
     ${js}scope.resultPage = {};
 
-    // Search de todos os elementos incial ( quando entra na tela )
+    // Search de todos os elementos inicial ( quando entra na tela )
 #if( ${entity.table.count} < 10000)
     if (!${js}scope.editMode) {
         ${entityBeanName}Service.findAll( ${js}scope.pagination.getPageRequest() , function (data) {
@@ -74,7 +74,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     // Selects to Fullfill select boxes
     // Begin block
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( (${ent.isManyToOne()}) && (${ent.referedEntity.table.count} < 200 || !${ent.referedEntity.looksLikeMainEntity()})) ## Caso nao seja muito grande e portanto caiba num select box ...
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
 #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
     ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
          ${js}scope.${beanName}List = jsog.decode(data.content);
@@ -270,7 +270,7 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
     // Selects to Fullfill select boxes
     // Begin block
 #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( (${ent.isManyToOne()}) && (${ent.referedEntity.table.count} < 200 || !${ent.referedEntity.looksLikeMainEntity()})) ## Caso nao seja muito grande e portanto caiba num select box ...
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
 #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
     ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
          ${js}scope.${beanName}List = jsog.decode(data.content);

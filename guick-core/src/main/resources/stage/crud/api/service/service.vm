@@ -41,26 +41,31 @@ class ${entity.name}Service implements I${entity.name}Service {
     private ${entity.name}Repository ${entityBeanName}Repository;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<${entity.name}> findAll(Pageable pageable) {
         return ${entityBeanName}Repository.findAll(pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<${entity.name}> search(${entity.name} $entityBeanName , Pageable pageable) {
         return ${entityBeanName}Repository.search($entityBeanName, pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<${entity.name}> searchText(String text , Pageable pageable) {
         return ${entityBeanName}Repository.searchText(text, pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ${entity.name} findOne(${entity.id.type} id) {
         return ${entityBeanName}Repository.findOne(id);
     }
 
     @Override
+    @Transactional
     public void delete(${entity.id.type} id) {
         ${entityBeanName}Repository.delete(id);
     }
@@ -80,6 +85,8 @@ class ${entity.name}Service implements I${entity.name}Service {
     }
 
 #if (${entity.hasDeadline()})
+    @Override
+    @Transactional(readOnly = true)
     public Page<${entity.name}> overdue(Pageable pageable) {
         return ${entityBeanName}Repository.overdue(pageable);
     }

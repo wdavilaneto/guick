@@ -2,7 +2,7 @@
 
 <mapper namespace="${project.group}.${project.name}.api.persistence.mybatis.DashboardRepository">
 
-    <resultMap id="histogramDto" type="org.wdn.electio.domain.dto.HistogramDto">
+    <resultMap id="histogramDto" type="${project.group}.${project.name}.domain.dto.HistogramDto">
         <result column="label" property="label"/>
         <result column="value" property="value"/>
     </resultMap>

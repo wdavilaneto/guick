@@ -105,9 +105,9 @@ class Entity extends Clazz {
                     _mostDescritiveProperties.add(property);
                 }
             }
-//            if (_mostDescritiveProperties.size() == 0){
-//                _mostDescritiveProperties.add(id);
-//            }
+            if (_mostDescritiveProperties.size() == 0){
+                _mostDescritiveProperties.add(id);
+            }
             // Todo order for significance...
         }
         return _mostDescritiveProperties;

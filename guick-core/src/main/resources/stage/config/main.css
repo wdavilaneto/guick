@@ -1,3 +1,10 @@
+html, body {
+  overflow-x: hidden!important;
+  font-family: 'Source Sans Pro', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  background: #f9f9f9;
+}
 body.waiting-for-angular div#content-outer {
   display: none;
 }
@@ -184,6 +191,27 @@ body > .header .navbar .sidebar-toggle{transition:0.2s;-moz-transition:0.2s;-web
   62.5% {transform: translateX(-3px) rotateY(-2deg)}
   87.5% {transform: translateX(2px) rotateY(1deg)}
   100% {transform: translateX(0)}
+}
+@font-face {
+  font-family: 'Kaushan Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Kaushan Script'), local('KaushanScript-Regular'), url(../fonts/kaushan-script.woff2) format('woff2');
+}
+
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: bold;
+  src: url(../fonts/SourceSansPro-Bold.ttf);
 }
 .shake {
   animation: shake 500ms ease-in-out;

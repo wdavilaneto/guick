@@ -22,6 +22,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.orm.jpa.support.SharedEntityManagerBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -34,6 +35,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "${project.group}.${project.name}.api.persistence.mybatis")
 @EnableJpaRepositories(basePackages = "${project.group}.${project.name}.api.persistence")
 @EnableAutoConfiguration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @EnableCaching
