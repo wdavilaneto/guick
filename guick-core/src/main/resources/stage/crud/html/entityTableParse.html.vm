@@ -40,7 +40,7 @@
 #foreach( ${property} in ${entityParameter.getDistinctedProperties()})
 #if( ${size} < 5 || (${property.column.length} > 30 && ${property.column.length} < 500) ) ## case too many fields prefer long string
                                                     <th>${property.Title}</th>
-#else                                                    
+#else
                                                     #if($counter < 6)<!-- <th>${property.Title}</th> -->
                                                     #end
 #{end}
@@ -51,9 +51,9 @@
 #end
 #if($counter > 5 && ${size} != 6)
     -->
-#end
+#end                                                <th></th>
                                                 </tr>
-                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="edit${entityParameter.name}(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}">
+                                                <tr dir-paginate="${entityParameter.beanName} in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-dblclick="edit${entityParameter.name}(${entityParameter.beanName})" pagination-id="${entityParameter.beanName}">
 ####### TODO Teste TEMPORARIO REMOVER!!!
 #if(  ${entityParameter.childrens.size()} > 0 && ${entityParameter.childrens[0].name} == 'FuncImg' )
                                                     <td><img ng-src="data:image/*;base64,{{funcionario.foto}}" ng-show="funcionario.foto" width="80px" /></td>
@@ -64,7 +64,7 @@
                                                     <td><img ng-src="data:image/*;base64,{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getAllImageProperties()[0]}}}" width="80px" /></td>
 #end
 #if( ${size} < 3 || (${property.referedEntity.getMostDescritiveProperties()[0].column.length} > 10 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 1000) )
-                                                    <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</p></td>
+                                                    <td><span>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</span></td>
 #else
                                                     #if($counter < 6)<!-- <td><p>{{${entityParameter.beanName}.${property.referedEntity.beanName}.${property.referedEntity.getMostDescritiveProperties()[0]}}}</p></td> -->
                                                     #end
@@ -95,6 +95,7 @@
 #if($counter > 5 && ${size} != 6)
     -->
 #end
+                                                    <td><a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
                                             </table>
                                         </div>

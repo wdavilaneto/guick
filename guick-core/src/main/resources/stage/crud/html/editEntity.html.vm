@@ -38,7 +38,7 @@
                 </tab>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
-                <tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}();" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
+                <tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
