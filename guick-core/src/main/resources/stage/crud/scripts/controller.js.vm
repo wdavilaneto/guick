@@ -19,25 +19,26 @@
  */
 angular.module('${projectBeanName}App').controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
+    // ***************************
+    // Model Initializations
+    // ***************************
+    ${js}scope.entity = ${entityBeanName}Service.create();
     ${js}scope.options = { language: 'en', allowedContent: true,entities: false };
     ${js}scope.editMode = false;
     ${js}scope.maxSelectBoxSize = 300;
     ${js}scope.textSearchActive = true;
     ${js}scope.searchField = {text:''};
-
-    // For select boxes on screen TODO ...
-    ${js}scope.entity = ${entityBeanName}Service.create();
+    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
+    ${js}scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
+    ${js}scope.pagination = ${js}scope.gridOptions.getPagination(); // just for ease use/access
+    ${js}scope.resultPage = {}; // Paged result for search filter
 #if(${entity.getActiveProperty()})
     ${js}scope.entity.boolActive = true;
 #end
 
-    // Text Search Select utility Object
-    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
-
-    ${js}scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
-    ${js}scope.pagination = ${js}scope.gridOptions.getPagination(); // just for ease use/access
-
-    // get by an given ${entityBeanName} by it ID
+    // ***************************************
+    // Controller Methods definitions
+    // ****************************************
     ${js}scope.get = function( id ) {
         if (!id) {
             id = ${js}routeParams.id;
@@ -51,38 +52,6 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             ${js}location.path('/${entity.name}');
         });
     };
-
-    // if in edit mode get the wanted ${entityBeanName}
-    if (${js}routeParams.id) {
-        ${js}scope.editMode = true;
-        ${js}scope.get( ${js}routeParams.id);
-    }
-
-    // Paged result for search filter
-    ${js}scope.resultPage = {};
-
-    // Search de todos os elementos inicial ( quando entra na tela )
-#if( ${entity.table.count} < 10000)
-    if (!${js}scope.editMode) {
-        ${entityBeanName}Service.findAll( ${js}scope.pagination.getPageRequest() , function (data) {
-            ${js}scope.resultPage = data;
-            ${js}scope.resultPage.content = jsog.decode(data.content);
-        });
-    }
-#end
-
-    // Selects to Fullfill select boxes
-    // Begin block
-#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
-#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-         ${js}scope.${beanName}List = jsog.decode(data.content);
-    });
-#end
-#end
-    // end block
-
     // Search By Example Method
     ${js}scope.search = function(page) {
         console.log('Realizando busca');
@@ -145,7 +114,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
                 ${js}location.path('/${entity.name}/');
             }
         });
-     };
+    };
 
     $scope.clearForm = function () {
         console.log('Limpando form filter');
@@ -155,7 +124,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
     };
 
     // ******************************************************************************************
-    // Modals
+    // Modals methods definitions
     // ******************************************************************************************
     // Create ${entity.name} Modal Window
     ${js}scope.open = function (size) {
@@ -204,9 +173,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
         });
     };
 
-    // *********************************************************************************************
     // Inline Update Modal
-    // *********************************************************************************************
     ${js}scope.edit${entity.name} = function (obj) {
         var modalInstance = ${js}modal.open({
             templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
@@ -223,24 +190,53 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}Controller'
             //dismiss
         });
     };
-
     ${js}scope.setTextSearchActive = function (value) {
        ${js}scope.textSearchActive = value;
     };
 
-        $scope.pageChanged = function(newPage) {
-            pagination.currentPage = newPage;
-        };
+    $scope.pageChanged = function(newPage) {
+        pagination.currentPage = newPage;
+    };
 
+    // ****************************************
+    // Controller init (on load) service calls
+    // ****************************************
+    // if in edit mode get the wanted ${entityBeanName}
+    if (${js}routeParams.id) {
+        ${js}scope.editMode = true;
+        ${js}scope.get( ${js}routeParams.id);
+    }
 
+    // Search de todos os elementos inicial ( quando entra na tela )
+#if( ${entity.table.count} < 10000)
+    if (!${js}scope.editMode) {
+        ${entityBeanName}Service.findAll( ${js}scope.pagination.getPageRequest() , function (data) {
+            ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
+        });
+    }
+#end
+
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
+#end
+    // end block
+
+    // ************************************
     // watches
+    // ************************************
     ${js}scope.${js}watch('pagination', function (newVal, oldVal) {
         if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
             ${js}scope.search();
         }
     }, true);
-
-
 
 }]);
 

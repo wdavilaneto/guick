@@ -14,8 +14,8 @@
     <form name="mainForm" novalidate >
     <div ng-controller="${entityBeanName}Controller">
         <div ng-controller="${entity.beanName}ExtController">
-            <tabset ng-show="masterDetail == null">
-                <tab heading="Principal">
+            <div tabset ng-show="masterDetail == null">
+                <div tab heading="Principal">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
@@ -35,10 +35,10 @@
                             </div>
                         </div>
                     </div>
-                </tab>
+                </div>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
-                <tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
+                <div tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
@@ -63,14 +63,14 @@
                             </div>
                         </div>
                     </div>
-                </tab>
+                </div>
 #end
 #end
 
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-                <tab heading="${complexProperty.title}" ng-show="${entity.looksLikeMainEntity()}">
+                <div tab heading="${complexProperty.title}" ng-show="${entity.looksLikeMainEntity()}">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box box-primary">
@@ -90,10 +90,10 @@
                             </div>
                         </div>
                     </div>
-                </tab>
+                </div>
 #end
 #end
-            </tabset>
+            </div>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
 

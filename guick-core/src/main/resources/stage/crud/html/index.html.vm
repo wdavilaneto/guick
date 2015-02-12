@@ -21,21 +21,28 @@
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
-    <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
+##    <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="css/main.css">
     <!-- endbuild -->
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
 </head>
 <body class="skin-blue authenticated-application waiting-for-angular" ng-app="${project.name}App">
-<toaster-container></toaster-container>
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-
+<div toaster-container></div>
+##<!--[if lt IE 8]>
+##<p class="browsehappy">O browser que você esta utilizando é muito <strong>ultrapassado</strong>. . Por favor, considere a possibilidade de utilizar um <a href="http://browsehappy.com/">navegador</a> moderno e que possibilite uma melhor experiência.</p>
+##<![endif]-->
 
 <header class="header">
     <a href="#/" class="logo">
@@ -144,7 +151,7 @@
     </div>
 
     <div class="div.wrapper row-offcanvas row-offcanvas-left" id="menu">
-        <aside class="left-side sidebar-offcanvas">
+        <div aside class="left-side sidebar-offcanvas">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
 ##                    <div class="user-panel">
@@ -156,16 +163,16 @@
 ##                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 ##                        </div>
 ##                    </div>
-                    <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- /.search form -->
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                        <span class="input-group-btn">
+                            <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
@@ -173,7 +180,7 @@
 #if( ${project.config.useWorkflow} == true )
                     <li><a href="#/activiti/deployment"><i class="glyphicon glyphicon-cog"></i>Processos</a></li>
 #end
-                    <li><a href="#/dashboard"><i class="glyphicon glyphicon-signal"></i>Painel de Controle</a></li>
+                    <li><a href="#/dashboard"><i class="fa fa-bar-chart-o"></i>Painel de Controle</a></li>
 #if (${project.getAllMainEntities().size()} > 0)
                     <li class="treeview">
                         <a href="#">
@@ -231,9 +238,9 @@
                 </ul>
             </section>
             <!-- /.sidebar -->
-        </aside>
+        </div>
         <div ng-include src="'views/modals.html'"></div>
-        <aside class="right-side" id="content" ng-view></aside>
+        <div aside class="right-side" id="content" ng-view></div>
     </div>
 </div>
 <footer>
@@ -243,13 +250,6 @@
         </div>
     </nav>
 </footer>
-
-<!-- build:js(.) scripts/oldieshim.js -->
-<!--[if lt IE 9]>
-<script src="bower_components/es5-shim/es5-shim.js"></script>
-<script src="bower_components/json3/lib/json3.js"></script>
-<![endif]-->
-<!-- endbuild -->
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
@@ -270,8 +270,8 @@
 <script src="bower_components/angular-translate/angular-translate.js"></script>
 <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-<script src="bower_components/d3/d3.js"></script>
-<script src="bower_components/nvd3/nv.d3.js"></script>
+##<script src="bower_components/d3/d3.js"></script>
+##<script src="bower_components/nvd3/nv.d3.js"></script>
 <script src="bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
 <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
@@ -284,8 +284,7 @@
 <script src="bower_components/jsog/lib/JSOG.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
-##<script src="bower_components/adminlte/js/app.js"></script>
-<script src="bower_components/adminlte/js/AdminLTE/app.js"></script>
+<script src="bower_components/adminlte/js/app.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 <!-- endbuild -->
 

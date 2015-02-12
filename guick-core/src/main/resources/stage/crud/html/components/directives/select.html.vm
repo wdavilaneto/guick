@@ -18,9 +18,9 @@
 ##    <a class="btn-detail" ng-click="view('lg','${entity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 ###end
 ##</label>
-<ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" ng-required="true">
-    <ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
-    <ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
+<div ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" ng-required="true">
+    <div ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</div>
+    <div ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
 #if ($stringField == '' )
         <div ng-bind-html="item.id | highlight: ${js}select.search"></div>
 #else
@@ -29,5 +29,5 @@
         <small ng-bind-html="item.${secondStringField} |  highlight: $select.search "></small>
 #end
 #end
-    </ui-select-choices>
-</ui-select>
+    </div>
+</div>

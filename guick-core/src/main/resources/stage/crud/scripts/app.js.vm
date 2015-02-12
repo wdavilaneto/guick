@@ -29,7 +29,7 @@ var app = angular.module('${project.name}App', [
     'ngGrid',
     'toaster',
     'angucomplete-alt',
-    'nvd3',
+##    'nvd3',
     'angularUtils.directives.dirPagination',
     '${project.name}Services'
   ])
@@ -128,17 +128,6 @@ app.config(['${js}httpProvider', function(${js}httpProvider) {
                     }
                 };
             }]);
-}]);
-
-app.directive('back', [ function() {
-    return {
-        restrict: 'A',
-        link: function (scope, elem, attrs) {
-            elem.bind('click', function () {
-                $window.history.back();
-            });
-        }
-    };
 }]);
 
 app.factory('jsog', function () {

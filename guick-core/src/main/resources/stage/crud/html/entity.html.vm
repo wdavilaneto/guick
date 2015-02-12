@@ -26,8 +26,8 @@
 <section class="content">
     <div ng-controller="${entityBeanName}Controller">
         <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()" >
-            <tabset>
-                <tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
+            <div tabset>
+                <div tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="row">
@@ -93,8 +93,8 @@
                             </div>
                         </div>
                     </div>
-                </tab>
-                <tab heading="Busca Avançada" ng-click="setTextSearchActive(false)">
+                </div>
+                <div tab heading="Busca Avançada" ng-click="setTextSearchActive(false)">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="row">
@@ -109,8 +109,8 @@
                             </div>
                         </div>
                     </div>
-                </tab>
-            </tabset>
+                </div>
+            </div>
         </form>
 
         <!-- fim sessão -->

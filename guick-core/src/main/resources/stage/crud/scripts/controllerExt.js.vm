@@ -123,7 +123,7 @@ angular.module('${projectBeanName}App').controller('${entityBeanName}ExtControll
         ${js}scope.find${ent.referedEntity.name}();
     };
 
-    ${js}scope.is${ent.referedEntity.name}Active = (${js}routeParams.child === '${ent.referedEntity.name}') ;
+    ${js}scope.is${ent.referedEntity.name}Active = (${js}routeParams.child === '${ent.referedEntity.name}' && ${js}routeParams.${ent.referedEntity.beanName}Id) ;
 
 #{end}
 #{end}

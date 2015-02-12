@@ -36,7 +36,7 @@
                                     <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
                                         <label class="control-label">${complexProperty.title}
                                         </label>
-                                        <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                                        <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                                               initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
                                               name="${beanName}"
@@ -75,7 +75,7 @@
 #end
                                         </label>
 #if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
-                                        <${complexProperty.referedEntity.beanName}-select></${complexProperty.referedEntity.beanName}-select>
+                                        <div ${complexProperty.referedEntity.beanName}-select></div>
 #else
 #parse( "stage/crud/html/selectProperty.html.vm" )
 #end
@@ -91,7 +91,7 @@
                                     <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
                                         <label class="control-label">${complexProperty.title}
                                         </label>
-                                        <angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                                        <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                                               initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
                                               placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
                                               name="${beanName}"
@@ -130,7 +130,7 @@
 #end
                                         </label>
 #if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
-                                        <${complexProperty.referedEntity.beanName}-select></${complexProperty.referedEntity.beanName}-select>
+                                        <div ${complexProperty.referedEntity.beanName}-select></div>
 #else
 #parse( "stage/crud/html/selectProperty.html.vm" )
 #end

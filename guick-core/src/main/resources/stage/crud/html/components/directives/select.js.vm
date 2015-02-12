@@ -11,7 +11,7 @@
 
 app.directive('${entityBeanName.toLowerCase()}Select', function(){
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: 'components/directives/${entityBeanName}/select.html'
     };
 });
