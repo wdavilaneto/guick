@@ -1,0 +1,50 @@
+<div ng-controller="AccordionMenu">
+    <div accordion close-others="oneAtATime">
+        <div accordion-group is-open="status.isFirstOpen" ng-if="hasPermission['ROLE_agrupamento']">
+            <div accordion-heading>
+                <i class="fa fa-group"></i> <span>Agrupamento</span>
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': status.isFirstOpen, 'glyphicon-chevron-right': !status.isFirstOpen}"></i>
+            </div>
+            <a accesskey="a" href="#/manterGrupo"><i class="fa fa-angle-double-right"></i>Cadastro</a>
+            <a accesskey="g" href="#/manterGrupoMedidor"><i class="fa fa-angle-double-right"></i>Migrar Medidores</a>
+        </div>
+        <div accordion-group is-open="status.isSecondOpen" ng-if="hasPermission['ROLE_concessionaria']">
+            <div accordion-heading>
+                <i class="fa fa-bolt"></i> <span>Concessionária</span>
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': status.isSecondOpen, 'glyphicon-chevron-right': !status.isSecondOpen}"></i>
+            </div>
+            <a accesskey="c" href="#/manterConcessionaria"><i class="fa fa-angle-double-right"></i> Cadastro</a>
+        </div>
+        <div accordion-group is-open="status.isThirdOpen" ng-if="hasPermission['ROLE_medidor']">
+            <div accordion-heading>
+                <i class="fa fa-tachometer"></i> <span>Medidor</span>
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': status.isThirdOpen, 'glyphicon-chevron-right': !status.isThirdOpen}"></i>
+            </div>
+            <a accesskey="r" href="#/manterMedidor"><i class="fa fa-angle-double-right"></i> Cadastro</a>
+            <a accesskey="t" href="#/manterControle"><i class="fa fa-angle-double-right"></i> Lançamento Valores</a>
+        </div>
+        <div accordion-group is-open="status.isFourthOpen" ng-if="hasPermission['ROLE_empenho']">
+            <div accordion-heading>
+                <i class="fa fa-money"></i> <span>Empenho</span>
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': status.isFourthOpen, 'glyphicon-chevron-right': !status.isFourthOpen}"></i>
+            </div>
+            <a accesskey="e" href="#/manterNotaEmpenho"><i class="fa fa-angle-double-right"></i> Cadastro</a>
+            <a accesskey="p" href="#/manterProcessoPagamento"><i class="fa fa-angle-double-right"></i> Processo de
+                Pagamento</a>
+        </div>
+        <div accordion-group is-open="status.isFifthOpen" ng-if="hasPermission['ROLE_despesa']">
+            <div accordion-heading>
+                <i class="fa fa-money"></i> <span>Controle de Despesas</span>
+                <i class="pull-right glyphicon"
+                   ng-class="{'glyphicon-chevron-down': status.isFifthOpen, 'glyphicon-chevron-right': !status.isFifthOpen}"></i>
+            </div>
+            <a accesskey="d" href="#/manterConcessao" ng-if="hasPermission['ROLE_fornecerConcessao']"><i class="fa fa-angle-double-right"></i> Concessão ao
+                Tomador</a>
+            <a accesskey="m" href="#/manterMapaDD"><i class="fa fa-angle-double-right"></i> Mapa de Despesas</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+#set( $open  = "${")
+#set( $close = "}")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${project.group}.${project.name}.domain;
+
+import org.apache.commons.lang.SerializationUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.util.Assert;
+import ${project.group}.${project.name}.ApplicationTestConfiguration;
+
+import static org.junit.Assert.*;
+
+public class SerializationTest extends ApplicationTestConfiguration {
+
+#foreach( ${entity} in ${project.entities} )
+    @Test
+    public void test${entity}Serialization() {
+        Assert.isTrue(SerializationUtils.serialize(new ${entity}()).length > 0);
+    }
+#end
+}
