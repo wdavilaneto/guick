@@ -9,7 +9,7 @@ import javax.annotation.Resource
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 29/05/12
  * Time: 17:48
  * To change this template use File | Settings | File Templates.

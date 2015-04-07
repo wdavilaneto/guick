@@ -22,7 +22,7 @@ import javax.sql.DataSource
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 2/27/14
  * Time: 2:11 PM
  * To change this template use File | Settings | File Templates.

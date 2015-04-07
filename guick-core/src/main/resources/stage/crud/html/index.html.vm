@@ -8,8 +8,8 @@
 <html lang="pt">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title ng-scope>MPRJ - ${project.name}</title>
-    <meta name="description" content="MPRJ - Módulo de Saúde Mental">
+    <title ng-scope> - ${project.name}</title>
+    <meta name="description" content=" - Módulo de Saúde Mental">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->

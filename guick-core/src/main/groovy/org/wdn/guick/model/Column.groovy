@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 
 /**
  * Created by IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 10/02/12
  * Time: 18:24
  * To change this template use File | Settings | File Templates.

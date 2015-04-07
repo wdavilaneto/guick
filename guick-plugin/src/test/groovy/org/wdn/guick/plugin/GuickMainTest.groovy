@@ -4,7 +4,7 @@ import org.junit.Test
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 05/09/13
  * Time: 17:31
  * To change this template use File | Settings | File Templates.
@@ -12,7 +12,7 @@ import org.junit.Test
 class GuickMainTest {
 
     private static final DEFAULT_PROJECT_ROOT = "../mgp/"
-    private static final GROUP = "br.mprj"
+    private static final GROUP = "br."
     private static final NAME = "mgp"
 
     void testMigrateToDb() {

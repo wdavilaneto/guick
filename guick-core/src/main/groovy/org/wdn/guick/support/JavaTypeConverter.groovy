@@ -6,7 +6,7 @@ import org.wdn.guick.model.Column
 
 /**
  * Created by IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 02/03/12
  * Time: 18:59
  * To change this template use File | Settings | File Templates.

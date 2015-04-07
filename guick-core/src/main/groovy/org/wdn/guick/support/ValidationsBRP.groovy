@@ -5,7 +5,7 @@ import org.wdn.guick.model.*
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 15/05/12
  * Time: 10:24
  * To change this template use File | Settings | File Templates.

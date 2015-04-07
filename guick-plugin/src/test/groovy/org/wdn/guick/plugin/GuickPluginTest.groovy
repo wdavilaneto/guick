@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 04/09/13
  * Time: 13:00
  * To change this template use File | Settings | File Templates.

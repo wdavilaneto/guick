@@ -7,7 +7,7 @@ import org.wdn.guick.model.Project
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 9/25/13
  * Time: 6:05 PM
  * To change this template use File | Settings | File Templates.
@@ -33,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../mprj-gsi-controle-frequencia/")
+            main.project.initialize("../controle-frequencia/")
 
             main.setTarget("stage/create-webapp")
             main.run()

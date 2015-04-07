@@ -2,7 +2,7 @@ package org.wdn.guick.model
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 06/06/12
  * Time: 10:50
  * To change this template use File | Settings | File Templates.

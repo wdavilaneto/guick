@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("br.mprj.custeio")
+@ComponentScan("br..custeio")
 class MainWebConfig extends WebMvcConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(MainWebConfig.class);

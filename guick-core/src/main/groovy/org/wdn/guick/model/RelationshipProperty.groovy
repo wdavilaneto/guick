@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder
  * Classe de modelo que representa uma propriedade simples de uma classe ou entidade
  * Por propriedade simples entende-se propriedades do "tipo" ou de uma "Classe" da própria linguagem de programacao
  * Ex: String, Long, Date e etc
- * @author Y1Z5
+ * @author wdavilaneto
  */
 public class RelationshipProperty extends Clazz {
 

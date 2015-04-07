@@ -4,7 +4,7 @@ import org.wdn.guick.core.ResourceReader
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 06/09/13
  * Time: 18:11
  * To change this template use File | Settings | File Templates.

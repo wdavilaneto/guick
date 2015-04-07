@@ -6,7 +6,7 @@
  */
 package ${project.group}.${project.name}.api.service.support;
 
-import br.gov.mprj.mgp2.domain.Parametro;
+import br.gov..mgp2.domain.Parametro;
 
 public interface IWorkflowCommand {
 

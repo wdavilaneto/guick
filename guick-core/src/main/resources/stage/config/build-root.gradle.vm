@@ -13,7 +13,7 @@ apply plugin: 'groovy'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
 
-group = 'br.mprj'
+group = 'br.'
 version = '1.0.0-SNAPSHOT'
 
 repositories {

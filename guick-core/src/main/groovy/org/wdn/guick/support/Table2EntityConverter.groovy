@@ -8,7 +8,7 @@ import javax.annotation.Resource
 
 /**
  * Classe responsavel por ler um conjunto de tabelas e gerar as entidades ( modelo) da aplicacao
- * User: y1z5
+ * User: wdavilaneto
  */
 @Component
 @Scope("prototype")

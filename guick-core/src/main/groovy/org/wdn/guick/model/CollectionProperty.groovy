@@ -4,7 +4,7 @@ import org.apache.commons.lang.builder.EqualsBuilder
 
 /**
  * Created with IntelliJ IDEA.
- * User: y1z5
+ * User: wdavilaneto
  * Date: 05/06/12
  * Time: 10:23
  * To change this template use File | Settings | File Templates.
