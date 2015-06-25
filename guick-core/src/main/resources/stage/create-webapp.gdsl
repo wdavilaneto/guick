@@ -5,17 +5,17 @@ def lang = "java" //TODO to parametrize
 guick {
 
     installPom {
-        // [input: "stage/config/settings.gradle.vm",  output: "/settings.gradle"],
-        // [input: "stage/config/build-root.gradle.vm",  output: "/build.gradle"],
-        // [input: "stage/config/build.gradle.vm",  output: "/api/build.gradle"],
+        //[input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
+        //[input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
+        //[input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
         "configs" {
             templates = [
-                    [input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
-                    [input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
+                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
+                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
+                    [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
                     [input: "stage/config/context.xml.ftl", output: "/api/src/main/webapp/META-INF/context.xml"],
                     [input: "stage/config/web.xml.ftl", output: "/api/src/main/webapp/WEB-INF/web.xml"],
 
-                    [input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
                     [input: "stage/config/.jshintrc", output: "/front-end/.jshintrc"],
                     [input: "stage/config/.gitignore", output: "/front-end/.gitignore"],
@@ -49,7 +49,7 @@ guick {
 
                     [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/crud/html/metrics.html", output: "/front-end/app/views/monitor/metrics.html"],
-                    [input: "stage/crud/html/health.html", output:  "/front-end/app/views/monitor/health.html"]
+                    [input: "stage/crud/html/health.html", output: "/front-end/app/views/monitor/health.html"]
             ]
         }
 
@@ -103,7 +103,7 @@ guick {
             templates = [
                     [input: "stage/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
                     [input: "stage/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
-                    [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"] ,
+                    [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
 
                     [input: "stage/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
                     [input: "stage/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]

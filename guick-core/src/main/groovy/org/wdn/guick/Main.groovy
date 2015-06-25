@@ -33,14 +33,13 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../controle-frequencia/")
+            main.project.initialize("../mgp2/")
 
             main.setTarget("stage/create-webapp")
             main.run()
 
-            main.setTarget("stage/crud")
-            main.run()
-
+//            main.setTarget("stage/crud")
+//            main.run()
 //            main.project.persist();
         } catch (RuntimeException e) {
             e.printStackTrace()

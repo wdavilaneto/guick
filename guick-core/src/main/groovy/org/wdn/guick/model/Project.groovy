@@ -48,11 +48,9 @@ class Project implements Serializable {
 //            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/classes/main/"))
 //            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/resources/main/"))
 //            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/src/main/resources"))
-
 //            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/classes/main/") );
 //            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/resources/main/") );
 //            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/src/main/resources") );
-
         }
         File guickFile = new File(path)
         if (!guickFile.exists()) {
@@ -73,7 +71,7 @@ class Project implements Serializable {
                 config.name = pom.artifactId.toString();
             } else {
                 config.group = "org.wdn.configure";
-                config.name = "configure-me";
+                config.name = "configureme";
             }
             config.guickConnectionInfo = new DatasourceInfo()
             config.generatedDatasourceInfo = new DatasourceInfo()
