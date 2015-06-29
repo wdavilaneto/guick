@@ -9,7 +9,7 @@ def embeddedList = entities.findAll { entity -> entity.isEmbeddable() }
 def enumList = []
 entities.each { entity -> enumList.addAll(entity.enums) }
 
-def lang = "java" //TODO to parametrize
+def lang = project.config.generationLanguage
 def useWorkflow = (project.config != null && project.config.useWorkflow);
 
 guick {
@@ -20,7 +20,6 @@ guick {
                 object entity
                 templates = [
                     [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]
-
                 ]
             }
         }
@@ -41,7 +40,7 @@ guick {
             "geracao de services" {
                 object entity
                 templates = [
-                        [input: "stage/crud/api/persistence/repository.${lang}.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
+                        [input: "stage/crud/api/persistence/repository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/${entity.name}Repository.${lang}"],
                         [input: "stage/crud/api/persistence/EntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryImpl.${lang}"],
                         [input: "stage/crud/api/persistence/IEntityRepository.vm", output: "/api/src/main/${lang}/${packageBase}/api/persistence/core/${entity.name}RepositoryCustom.${lang}"],
                         [input: "stage/crud/api/service/service.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/core/${entity.name}Service.${lang}"],
@@ -138,7 +137,6 @@ guick {
 
                         [input: "stage/crud/test/AcceptanceSuiteTest.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuiteTest.${lang}"],
                         [input: "stage/crud/test/AcceptanceSuite.html.vm", output: "/api/src/test/resources/specs/${entity.name.toLowerCase()}/${entity.name}AcceptanceSuite.html"],
-
 
                         [input: "stage/crud/test/CreateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Create${entity.name}WithRequiredAcceptanceCriteria.${lang}"],
                         [input: "stage/crud/test/UpdateWithRequiredAcceptanceCriteria.vm", output: "/api/src/test/${lang}/specs/${entity.name.toLowerCase()}/Update${entity.name}WithRequiredAcceptanceCriteria.${lang}"],

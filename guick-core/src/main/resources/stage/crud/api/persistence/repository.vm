@@ -22,7 +22,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ${entity.name}Repository extends JpaRepository<${entity.name}, ${entity.id.type} >, ${entity.name}RepositoryCustom  {
 ##public interface I${entity.name}Repository, ${entity.name}Repository {
-
 ##     /**
 ##     * Returns an full, but Paged, list of all entities (${entity.name})
 ##     * @param pageable

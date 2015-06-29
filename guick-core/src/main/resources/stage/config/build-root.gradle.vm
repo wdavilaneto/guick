@@ -1,29 +1,26 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url "http://repo.spring.io/libs-release" }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.7.RELEASE")
-    }
-}
-
 apply plugin: 'groovy'
-apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
 
-group = 'br.'
+group = 'br.mp.mprj'
 version = '1.0.0-SNAPSHOT'
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
+    maven { url 'http://repo.spring.io/libs-release' }
+    maven { url 'http://p-intcont01.pgj.rj.gov.br/nexus/content/groups/public' }
+    maven { url 'http://p-intcont01.pgj.rj.gov.br/nexus/content/repositories/snapshots/' }
+    maven { url 'http://p-intcont01.pgj.rj.gov.br/nexus/content/repositories/releases' }
+    maven { url 'http://p-intcont01.pgj.rj.gov.br/nexus/content/repositories/local-snapshots' }
 }
 
 dependencies {
-    testCompile("junit:junit")
+    //testCompile("junit:junit")
+}
+
+allprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }
 
 task wrapper(type: Wrapper) {

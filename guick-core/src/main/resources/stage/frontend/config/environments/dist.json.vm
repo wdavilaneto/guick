@@ -1,0 +1,4 @@
+{
+  "baseURL": "/sistema/${project.name}/",
+  "preferredLanguage":"pt-BR"
+}

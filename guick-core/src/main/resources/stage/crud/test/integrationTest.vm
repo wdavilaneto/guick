@@ -65,6 +65,7 @@ public class ${entity.name}IntegrationTest extends DatabaseIntegrationTestBase {
     @Test
     @Sql(scripts = "dml-${entityBeanName}.sql")
     public void testUpdate(){
+/*
         ${entity.name} ${entityBeanName}Existente = ${entityBeanName}Service.findOne(1001L);
 
         ${entityBeanName}Existente.setNome("NOME ALTERADO");
@@ -75,6 +76,7 @@ public class ${entity.name}IntegrationTest extends DatabaseIntegrationTestBase {
         Assert.assertThat(${entityBeanName}Alterado.getId(), Is.is(${entityBeanName}Existente.getId()));
         Assert.assertThat(${entityBeanName}Alterado.getNome(), Is.is("NOME ALTERADO"));
         Assert.assertThat(${entityBeanName}Alterado.getDescricao(), Is.is("DESCRICAO ALTERADA"));
+*/
     }
 
     @Test
