@@ -1,15 +1,11 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="pt"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="pt"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt"> <!--<![endif]-->
-<html lang="pt">
+<html class="no-js" lang="pt">
+<html lang="pt" ng-app="${project.name}App" ng-strict-di>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title ng-scope> - ${project.name}</title>
-    <meta name="description" content=" - Módulo de Saúde Mental">
+    <meta name="description" content=" - ${project.name}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -40,7 +36,7 @@
     <!-- endbuild -->
 
 </head>
-<body class="skin-blue authenticated-application waiting-for-angular" ng-app="${project.name}App">
+<body class="skin-blue authenticated-application waiting-for-angular">
 <div toaster-container></div>
 ##<!--[if lt IE 8]>
 ##<p class="browsehappy">O browser que você esta utilizando é muito <strong>ultrapassado</strong>. . Por favor, considere a possibilidade de utilizar um <a href="http://browsehappy.com/">navegador</a> moderno e que possibilite uma melhor experiência.</p>

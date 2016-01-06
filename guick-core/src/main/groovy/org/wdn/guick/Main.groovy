@@ -22,25 +22,31 @@ class Main {
     String target
 
     Main() {
-        context = new AnnotationConfigApplicationContext();
-        context.scan(GUICK_CONTEXT_CLASSPATH);
-        context.refresh();
-        guick = (DslArchitecture) context.getBean("dslArchitecture");
-        project = context.getBean("project");
+        context = new AnnotationConfigApplicationContext()
+        context.scan(GUICK_CONTEXT_CLASSPATH)
+        context.refresh()
+        guick = (DslArchitecture) context.getBean("dslArchitecture")
+        project = context.getBean("project")
     }
 
     public static void main(String[] args) {
+
         ExpandoMetaClass.disableGlobally()
+
+        Main main = new Main();
         try {
-            Main main = new Main();
-            main.project.initialize("../adocao/")
+            main.project.initialize("../mml/")
+        } catch (RuntimeException e) {
+            //e.printStackTrace()
+        }
+
+        try {
 
             main.setTarget("stage/create-webapp")
             main.run()
 
-            main.setTarget("stage/crud")
-            main.run()
-
+//            main.setTarget("stage/crud")
+//            main.run()
 //            main.project.persist();
 
         } catch (RuntimeException e) {
