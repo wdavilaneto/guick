@@ -11,8 +11,12 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-// apply plugin: 'spring-boot' // Just for runnable jars
-apply plugin: 'war'
+apply plugin: 'spring-boot' // Just for runnable jars
+//apply plugin: 'war'
+apply plugin: 'application'
+
+mainClassName = "${project.group}.${project.name}.Application"
+
 apply plugin: 'net.saliman.cobertura'
 
 war {

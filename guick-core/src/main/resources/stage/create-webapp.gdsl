@@ -10,8 +10,6 @@ guick {
         //[input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
         "configs" {
             templates = [
-                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
-                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
                     [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
 
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
@@ -22,9 +20,6 @@ guick {
                     [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],
                     [input: "stage/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
                     [input: "stage/config/package.json.vm", output: "/front-end/package.json"],
-
-                    [input: "stage/images/", output: "/front-end/app/images/"],
-                    [input: "stage/fonts/", output: "/front-end/app/fonts/"],
 
                     [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
 

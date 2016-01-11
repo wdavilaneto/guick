@@ -1,0 +1,172 @@
+
+/*ANIMAÇÕES*/
+    @-webkit-keyframes animeMenuMobile {
+        0%   {left:-225px;top:0px;}
+        100% {left:0px; top:0px;}
+        }
+    @keyframes animeSearchFilter {
+        0%   {left:-225px;top:0px;}
+        100% {left:0px; top:0px;}
+        }
+    @-webkit-keyframes animeSearchFilter {
+        0%   {left:-225px;top:0px;}
+        100% {left:0px; top:0px;}
+        }
+    @-webkit-keyframes fechaAnimado {
+        0%   {left:0px;top:0px;}
+        100% {left:-320px; top:0px;}
+        }
+    @-webkit-keyframes login-animate {
+        0%   {top: -9999px; left:0px;}
+        90%  {top:30px; left:0px;}
+        100%  {top:0px; left:0px;}
+        }
+    @keyframes login-animate {
+        0%   {top: -9999px; left:0;}
+        90%  {top:30px; left:0px;}
+        100%  {top:0px; left:0px;}
+        }
+    @keyframes shake {
+        0% {transform: translateX(0);}
+        12.5% {transform: translateX(-6px) rotateY(-5deg)}
+        37.5% {transform: translateX(5px) rotateY(4deg)}
+        62.5% {transform: translateX(-3px) rotateY(-2deg)}
+        87.5% {transform: translateX(2px) rotateY(1deg)}
+        100% {transform: translateX(0)}
+        }
+    .shake {
+        animation: shake 500ms ease-in-out;
+        }
+
+    /*animação conteúdo padrão*/
+    @-webkit-keyframes animate-content {
+        0% {opacity: 0;-webkit-transform: translateX(2000px);transform: translateX(2000px);}
+        60% {opacity: 1;-webkit-transform: translateX(-30px);transform: translateX(-30px);}
+        80% {-webkit-transform: translateX(10px);transform: translateX(10px);}
+        100% {-webkit-transform: translateX(0);transform: translateX(0);}
+        }
+    @keyframes animate-content {
+        0% {opacity: 0;-webkit-transform: translateX(2000px);transform: translateX(2000px);}
+        60% {opacity: 1;-webkit-transform: translateX(-30px);transform: translateX(-30px);}
+        80% {-webkit-transform: translateX(10px);transform: translateX(10px);}
+        100% {-webkit-transform: translateX(0);transform: translateX(0);}
+        }
+    /**/
+        /*animação conteúdo padrão tabs*/
+            @-webkit-keyframes animate-tab-content {
+                0% {opacity: 0;-webkit-transform: translateX(2000px);transform: translateX(2000px);}
+                60% {opacity: 1;-webkit-transform: translateX(-30px);transform: translateX(-30px);}
+                80% {-webkit-transform: translateX(10px);transform: translateX(10px);}
+                100% {-webkit-transform: translateX(0);transform: translateX(0);}
+                }
+            @keyframes animate-tab-content {
+                0% {opacity: 0;-webkit-transform: translateX(2000px);transform: translateX(2000px);}
+                60% {opacity: 1;-webkit-transform: translateX(-30px);transform: translateX(-30px);}
+                80% {-webkit-transform: translateX(10px);transform: translateX(10px);}
+                100% {-webkit-transform: translateX(0);transform: translateX(0);}
+                }
+            /**/
+    /*animação conteúdo cédula*/
+    @-webkit-keyframes animate-content-cell{
+        0% {opacity: 0;-webkit-transform: translateY(-2000px);transform: translateY(-2000px);}
+        60% {opacity: 1;-webkit-transform: translateY(30px);transform: translateY(30px);}
+        80% {-webkit-transform: translateY(-10px);transform: translateY(-10px);}
+        100% {-webkit-transform: translateY(0);transform: translateY(0);}
+        }
+    @keyframes animate-content-cell{
+        0% {opacity: 0;-webkit-transform: translateY(-2000px);transform: translateY(-2000px);}
+        60% {opacity: 1;-webkit-transform: translateY(30px);transform: translateY(30px);}
+        80% {-webkit-transform: translateY(-10px);transform: translateY(-10px);}
+        100% {-webkit-transform: translateY(0);transform: translateY(0);}
+        }
+    /**/
+    /*animação botões*/
+    @-webkit-keyframes animate-buttons {
+        0% {-webkit-transform: scale(1);transform: scale(1);}
+        50% {-webkit-transform: scale(1.1);transform: scale(1.1);}
+        100% {-webkit-transform: scale(1);transform: scale(1);}
+        }
+    @keyframes animate-buttons {
+        0% {-webkit-transform: scale(1);transform: scale(1);}
+        50% {-webkit-transform: scale(1.1);transform: scale(1.1);}
+        100% {-webkit-transform: scale(1);transform: scale(1);}
+        }
+    /**/
+
+    @-webkit-keyframes animate-orderfilter {
+        0% {
+            -webkit-transform: perspective(400px) rotateX(90deg);
+            transform: perspective(400px) rotateX(90deg);
+            opacity: 0;
+            }
+        40% {
+            -webkit-transform: perspective(400px) rotateX(-10deg);
+            transform: perspective(400px) rotateX(-10deg);
+        }
+        70% {
+            -webkit-transform: perspective(400px) rotateX(10deg);
+            transform: perspective(400px) rotateX(10deg);
+        }
+        100% {
+            -webkit-transform: perspective(400px) rotateX(0deg);
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1;
+        }
+    }
+    @keyframes animate-orderfilter {
+        0% {
+                -webkit-transform: perspective(400px) rotateX(90deg);
+                transform: perspective(400px) rotateX(90deg);
+                opacity: 0;
+        }
+        40% {
+            -webkit-transform: perspective(400px) rotateX(-10deg);
+            transform: perspective(400px) rotateX(-10deg);
+        }
+        70% {
+            -webkit-transform: perspective(400px) rotateX(10deg);
+            transform: perspective(400px) rotateX(10deg);
+        }
+        100% {
+            -webkit-transform: perspective(400px) rotateX(0deg);
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1;
+        }
+    }
+
+
+
+
+@-webkit-keyframes animate-ding {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes animate-ding {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        -ms-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+
+
+

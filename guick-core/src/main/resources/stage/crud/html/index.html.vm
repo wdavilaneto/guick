@@ -1,10 +1,11 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
+<!doctype html>
 <html class="no-js" lang="pt">
 <html lang="pt" ng-app="${project.name}App" ng-strict-di>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title ng-scope> - ${project.name}</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>${project.lastGroup.toUpperCase()} - ${project.description}</title>
     <meta name="description" content=" - ${project.name}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,9 +23,19 @@
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <!-- endbower -->
-    <link rel="stylesheet" href="bower_components/adminlte/css/AdminLTE.css" />
+    <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="bower_components/imperavi-redactor/redactor/redactor.css">
+    <link rel="stylesheet" href="layout/css/ng-joyride-mgpe.css" />
+    <link rel="stylesheet" href="layout/css/animate.css">
+    <link rel="stylesheet" href="layout/css/media-querie.css">
+    <link rel="stylesheet" href="layout/css/botoes.css">
+    <link rel="stylesheet" href="layout/css/main.css">
+    <link rel="stylesheet" href="layout/css/mgpe.css">
+    <link rel="stylesheet" href="layout/css/reset.css">
+    <link rel="stylesheet" href="layout/css/menu.css">
+    <link rel="stylesheet" href="layout/css/mini-field.css">
+    <link rel="stylesheet" href="layout/css/load.css">
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/oldieshim.js -->

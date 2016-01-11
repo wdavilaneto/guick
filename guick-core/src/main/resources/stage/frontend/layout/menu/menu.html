@@ -1,0 +1,86 @@
+<span class="app-name">
+    <span></span>
+    <p ng-bind-html="'aplicacao'|translate">{{"nome.aplicacao" | translate}}</p>
+</span>
+<div class="menu" accordion>
+
+    <!--<div accordion-group ng-if="isAuthenticated">
+        <div accordion-heading>
+            <span>
+                {{"menu.ged" | translate}}
+            </span>
+            <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+        </div>
+        <a href="#/ged/lista">
+            {{"menu.meusDocumentos" | translate}}
+        </a>
+    </div>-->
+
+    <div accordion-group ng-if="isAuthenticated">
+        <div accordion-heading>
+            <span>
+                {{"menu.avisos" | translate}}
+            </span>
+            <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+        </div>
+
+        <a href="#/avisos" title="Intimações">
+           <i class="mdi mdi-file-document-box"></i> {{"menu.avisos" | translate}}
+        </a>
+       <!-- <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Dropdown
+                <span class="mdi mdi-chevron-down pull-right"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>-->
+        <a href="#/avisos/declinados/" title="Intimações declinadas">
+            <i class="mdi mdi-undo-variant"></i> {{"menu.avisosDeclinados" | translate}}
+        </a>
+    </div>
+    <div accordion-group ng-if="isAuthenticated">
+        <div accordion-heading>
+            <span>
+                {{"menu.peticoes" | translate}}
+            </span>
+            <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+        </div>
+
+        <a href="#/peticoes" title="Peticionar">
+            <i class="mdi mdi-file-document"></i> {{"menu.peticionar" | translate}}
+        </a>
+
+        <a href="#/peticoes/historico" title="Histórico de petições">
+            <i class="mdi mdi-clock-fast"></i> {{"menu.peticoeshistorico" | translate}}
+        </a>
+    </div>
+    <div accordion-group ng-if="isAuthenticated">
+        <div accordion-heading>
+            <span>
+                {{"menu.dashboard" | translate}}
+            </span>
+            <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+        </div>
+        <a href="#/dashboard" title="Painel informativo">
+            <i class="mdi mdi-view-dashboard"></i> {{"menu.dashboard.um" | translate}}
+        </a>
+    </div>
+
+    <div accordion-group ng-if="isAuthenticated">
+        <div accordion-heading>
+            <span>
+                {{"menu.pecas" | translate}}
+            </span>
+            <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+        </div>
+        <a href="#/pecas" title="Painel informativo">
+            <i class="fa fa-files-o"></i> {{"menu.pecas.parecer" | translate}}
+        </a>
+    </div>
+
+</div>
