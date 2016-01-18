@@ -1,6 +1,8 @@
 def packageBase = project.packageBase
 
 def lang = project.config.generationLanguage
+def orgName = project.lastGroup
+def acronym = project.acronym
 
 guick {
 
@@ -21,16 +23,18 @@ guick {
                     [input: "stage/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
                     [input: "stage/config/package.json.vm", output: "/front-end/package.json"],
 
-                    [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
+                    [input: "stage/frontend/app", output: "/front-end/app"],
+                    [input: "stage/frontend/config", output: "/front-end/config"],
 
-                    [input: "stage/crud/html/components/directives/dirPagination.tpl.html.vm", output: "/front-end/app/components/directives/dirPagination.tpl.html"],
+                    [input: "stage/frontend/css/org.css", output: "/front-end/app/layout/css/main.css"],
+                    [input: "stage/frontend/css/project.css", output: "/front-end/app/layout/css/${acronym}.css"],
+
+                    [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
 
                     [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
                     [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
                     [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
 
-                    [input: "stage/crud/scripts/LoginController.js.vm", output: "/front-end/app/scripts/controllers/support/LoginController.js"],
-                    [input: "stage/crud/scripts/LoginService.js.vm", output: "/front-end/app/scripts/service/support/LoginService.js"],
 
                     [input: "stage/crud/scripts/truncate.js.vm", output: "/front-end/app/scripts/service/support/truncate.js"],
                     [input: "stage/crud/scripts/constants.js.vm", output: "/front-end/app/scripts/service/support/constants.js"],
@@ -38,12 +42,10 @@ guick {
                     [input: "stage/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/directives/directives.js"],
                     [input: "stage/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
 
-                    [input: "stage/localization/pt-BR.json.vm", output: "/front-end/app/pt-BR.json"],
+                    [input: "stage/localization/pt-BR.json.vm", output: "/front-end/app/i18n/locale-pt-BR.json"],
 
-                    [input: "stage/crud/html/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/crud/html/metrics.html", output: "/front-end/app/views/monitor/metrics.html"],
-                    [input: "stage/crud/html/health.html", output: "/front-end/app/views/monitor/health.html"],
-                    [input: "stage/frontend/", output: "/front-end"],
+                    [input: "stage/crud/html/health.html", output: "/front-end/app/views/monitor/health.html"]
             ]
         }
 
@@ -72,12 +74,8 @@ guick {
                     [input: "stage/support/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
                     [input: "stage/support/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
 
-                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
-                    [input: "stage/config/main.css", output: "/front-end/app/css/main.css"],
-
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
-
 
                     [input: "stage/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
 
@@ -87,21 +85,24 @@ guick {
                     [input: "stage/crud/api/presentation/dto/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
 
                     [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/PageableHelper.${lang}"],
+
                     [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepository.${lang}"],
                     [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepositoryFactoryBean.${lang}"],
                     [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/ICoreRepository.${lang}"]
             ]
         }
 
-        "test-single-generateds" {
-            templates = [
-                    [input: "stage/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
-                    [input: "stage/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
-                    [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
 
-                    [input: "stage/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
-                    [input: "stage/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]
-            ]
-        }
     }
 }
+
+//"test-single-generateds" {
+//    templates = [
+//            [input: "stage/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
+//            [input: "stage/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
+//            [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
+//
+//            [input: "stage/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
+//            [input: "stage/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]
+//    ]
+//}

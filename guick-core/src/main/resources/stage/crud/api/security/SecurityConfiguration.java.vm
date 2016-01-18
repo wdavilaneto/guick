@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
     @Resource
-    ScaAuthenticationProvider scaAuthenticationProvider;
+    SecurityAuthenticationProvider securityAuthenticationProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(scaAuthenticationProvider);
+        auth.authenticationProvider(securityAuthenticationProvider);
     }
 
     @Override
@@ -100,9 +100,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .passwordParameter("j_password")
     }
 
-    @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
-    private static class GlobalSecurityConfiguration extends GlobalMethodSecurityConfiguration {
-
-    }
+//    @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
+//    private static class GlobalSecurityConfiguration extends GlobalMethodSecurityConfiguration {
+//    }
 
 }

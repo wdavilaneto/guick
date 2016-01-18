@@ -1,0 +1,14 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+(function() {
+   'use strict';
+
+    angular.module('${project.name}App')
+	    .config(['${js}routeProvider', function(${js}routeProvider) {
+		    ${js}routeProvider
+		      .otherwise({redirectTo: '/'});
+
+ 	}]);
+
+})();

@@ -1,0 +1,49 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+(function () {
+    'use strict';
+
+    angular.module('${project.name}App.main').controller('MainController', MainController);
+## AvisoService,
+    function MainController(${js}scope, ${js}location, loginService, ENV_CONFIG, toaster, ${js}filter, ${js}translate) {
+
+        var self = this;
+
+        // Public Metods
+        this.toggle = toggle;
+        this.isAuthenticated = isAuthenticated;
+
+        ${js}scope.${js}on('event:auth-loginConfirmed', function () {
+            //var resultado = AvisoService.alertaAoLogar();
+            //resultado.${js}promise.then(function (data) {
+            //    if (data.valor) {
+            //        ${js}translate('aviso.quantidade.avisos.nao.analisados', {value: data.valor}).then(function (translation) {
+            //            toaster.pop('success', ${js}filter('translate')('sucesso'), translation);
+            //        });
+            //    }
+            //});
+        });
+
+        ${js}scope.${js}on('event:userLogout', function () {
+            ${js}scope.hasPermission = {};
+            ${js}location.path('/');
+        });
+
+        ${js}scope.${js}on('event:userDetailsPrepared', function () {
+            self.hasPermission = loginService.getCurrentUser().permissions;
+        });
+
+        function toggle () {
+            self.boxOpen = !$scope.boxOpen;
+        };
+
+        function isAuthenticated (){
+            return loginService.getCurrentUser();
+        }
+
+        this.envConfig = ENV_CONFIG;
+        this.boxOpen = true;
+    }
+
+})();

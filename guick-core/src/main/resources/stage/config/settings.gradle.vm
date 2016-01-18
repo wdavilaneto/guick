@@ -1,1 +1,2 @@
-include "${project.name}-api"
+## include "${project.name}-api"
+rootProject.name = '${project.name}'

@@ -1,0 +1,59 @@
+        <script type="text/ng-template" id="create${entity.name}Modal.html">
+            <form name="create${entity.name}ModalForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="$event.stopPropagation(); cancel()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">${entity.title}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-primary">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div ng-include src="'modules/${entity.name}/${entity.name}Fieldset.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" ng-click="$event.stopPropagation(); cancel()"><i class="fa fa-ban"></i> Cancelar </button>
+                    <button class="btn btn-success" ng-click="$event.stopPropagation(); save()"><i class="fa fa-save"></i> Gravar </button>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/ng-template" id="view${entity.name}Modal.html">
+            <div class="modal-header">
+                <h4 class="modal-title">${entity.name}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div class="box-header"></div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div ng-include src="'modules/${entity.beanNaem}/${entity.name}ShowFieldset.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </script>
+        <script type="text/ng-template" id="confirmRemove${entity.name}Modal.html">
+            <div class="modal-header">
+                <h4 class="modal-title has-warning">Atenção: Deseja excluir o registro ?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                     <div class="box-header"></div>
+                     <div class="box-body">
+                         <div class="row">
+                            <div ng-include src="'modules/${entity.name}/${entity.name}ShowFieldset.html'"></div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" ng-click="$event.stopPropagation(); cancel()"><i class="fa-chevron-circle-left"></i> Cancelar</button>
+                <button class="btn btn-danger" ng-click="$event.stopPropagation(); remove()"><i class="fa fa-ban"></i> Remover </button>
+            </div>
+        </script>

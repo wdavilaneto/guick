@@ -1,0 +1,16 @@
+#set( $js  = "$")
+(function() {
+	'use strict';
+
+	angular.module('${project.acronym}App.${entity.beanName}')
+		.config(['${js}routeProvider', function(${js}routeProvider) {
+			$routeProvider
+				.when('/${entity.beanName}', {
+					templateUrl: 'modules/${entity.beanName}/${entity.beanName}.html',
+					controller: '${entity.beanName}Controller',
+					controllerAs: '${entity.beanName}Controller'
+				})
+                .when('/${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+                .when('/${entity.name}/:id/:child', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+		}]);
+})();

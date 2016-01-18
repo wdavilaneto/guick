@@ -19,15 +19,22 @@ import java.io.Serializable;
  * The class CoreRepositoryFactoryBean
  */
 @SuppressWarnings("unchecked")
+#if ( ${project.config.generationLanguage} == 'java')
 public class CoreRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I extends Serializable>
     extends JpaRepositoryFactoryBean<R, T, I> {
+#else
+public class CoreRepositoryFactoryBean extends JpaRepositoryFactoryBean{
+#end
 
     protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
 
     return new CoreRepositoryFactory(entityManager);
     }
-
+#if ( ${project.config.generationLanguage} == 'java')
     private static class CoreRepositoryFactory<T, I extends Serializable> extends JpaRepositoryFactory {
+#else
+    private static class CoreRepositoryFactory extends JpaRepositoryFactory {
+#end
         private EntityManager entityManager;
 
         public CoreRepositoryFactory(EntityManager entityManager) {
@@ -36,7 +43,11 @@ public class CoreRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I exten
         }
 
         protected Object getTargetRepository(RepositoryMetadata metadata) {
+#if ( ${project.config.generationLanguage} == 'java')
             return new CoreRepository<T, I>((Class<T>) metadata.getDomainType(), entityManager);
+#else
+            return new CoreRepository(metadata.getDomainType(), entityManager);
+#end
         }
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
             // The RepositoryMetadata can be safely ignored, it is used by the JpaRepositoryFactory

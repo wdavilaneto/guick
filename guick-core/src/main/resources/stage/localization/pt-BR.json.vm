@@ -1,0 +1,82 @@
+{
+  "aplicacao":" ${project.description} ",
+
+  "home": "Tela inicial",
+
+  "menu.principal": "Principal",
+  "menu.administracao": "Administração",
+  "menu.tipos": "Tipos",
+  "menu.sair": "Sair",
+#foreach( ${entity} in ${project.entities})
+  "menu.${entity.beanName}": "${entity.title}",
+#end
+  "menu.sobre": "Sobre",
+  "menu.restapi": "REST API",
+
+  "sucesso" : "Sucesso",
+  "erro" : "Erro",
+  "atencao" : "Atenção",
+
+  "ate":"Até",
+  "de": "De",
+  "hoje": "Hoje",
+  "calendario.hint" : "Abre um calendàrio para facilitar o preenchimento de campos data",
+
+
+  "atualizar" : "Atualizar",
+  "atualizar.hint" : "Atualiza os resultados da pesquisa",
+  "filtro" : "Filtro",
+  "filtro.hint" : "Exibe critérios avançados de pesquisa",
+  "buscar" : "Buscar",
+  "buscar.hint" : "Realiza a busca conforme filtros informados",
+  "limpar" : "Limpar",
+  "limpar.hint" : "Limpa os campos preenchidos",
+
+  "acoesGrid" : "Ações",
+
+  "ajuda.busca.intimacao" : "Ajuda - Busca de intimações",
+  "ajuda.bem.vindo.ajuda" : "&nbsp;&nbsp;Nesta tela podemos visualizar todas as intimações de responsabilidade de uma Procuradoria.&nbsp;&nbsp;",
+  "ajuda.clique.atualiza.lista.intimacao" : "Neste botão, atualizamos a tela com a lista de intimações feitas pelo TJ com até 5 minutos de atraso.",
+  "ajuda.digite.texto.pesquisa" : "O texto digitado filtratá os resultados da busca. A busca é realizada em todas as colunas da tabela de resultados.",
+  "ajuda.helpPesquisa" : "Após digitar o texto da busca no campo Busca avisos, clique aqui para efetuar a pesquisa.",
+  "ajuda.helpPesquisaAvancada" : "Este botão abre uma tela de pesquisa avançada (Nº do processo e período da intimação).",
+  "ajuda.helpAbrirIntimacao" : "Este botão abre a intimação, dando início à contagem do prazo de resposta (possui o mesmo efeito da abertura de intimação do Portal do TJ).",
+
+  "botao.buscar" : "Buscar",
+
+  "processoEletronico.naoConfirmada": "Não Confirmada",
+  "processoEletronico.confirmada": "Confirmada",
+
+  "ROLE_MEMBRO" : "Membro",
+  "ROLE_USER" : "Usuário",
+  "ROLE_TECNICO_PROCESSUAL" : "Tecnico Processual",
+
+  "cancelar" : "Cancelar",
+  "cancelar.hint" : "Cancela a operação retornando à tela inicial da funcionalidade",
+
+  "descricao": "Descrição",
+  "mensagens.de.erro" : "Mensagens de erro",
+  "mensagens.de.warn" : "Mensagens de advertência",
+  "mensagens.de.info" : "Informações",
+  "campos.obrigatorios" : "Os campos com ( * ) são considerados campos obrigatórios.",
+
+
+  "pagina.atual" : "Página atual",
+  "pagina.anterior" : "Página anterior",
+  "proxima.pagina" : "Próxima página",
+  "botao.consultar" : "CONSULTAR",
+
+  "voltar" : "Voltar",
+  "voltar.hint" : "Voltar à tela anterior",
+
+  "fechar" : "Fechar",
+
+  "confirmaOperacao" : "Confirma a operação?",
+
+  "proximo" : "Avançar",
+  "proximo.etapa" : "Confirmação do preenchimento dos dados da petição",
+
+  "menu.dashboard" : "Painel informativo",
+  "menu.dashboard.um" : "Painel informativo 1"
+
+}

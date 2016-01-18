@@ -1,0 +1,306 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+(function() {
+	'use strict';
+
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:${entityBeanName}Controller
+ * @description
+ * # ${entityBeanName}Controller
+ * Controller of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App')
+    .controller('${entityBeanName}Controller', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+
+    // ***************************
+    // Model Initializations
+    // ***************************
+    ${js}scope.entity = ${entityBeanName}Service.create();
+    ${js}scope.options = { language: 'en', allowedContent: true,entities: false };
+    ${js}scope.editMode = false;
+    ${js}scope.maxSelectBoxSize = 300;
+    ${js}scope.textSearchActive = true;
+    ${js}scope.searchField = {text:''};
+    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
+    ${js}scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
+    ${js}scope.pagination = ${js}scope.gridOptions.getPagination(); // just for ease use/access
+    ${js}scope.resultPage = {}; // Paged result for search filter
+#if(${entity.getActiveProperty()})
+    ${js}scope.entity.boolActive = true;
+#end
+
+    // ***************************************
+    // Controller Methods definitions
+    // ****************************************
+    ${js}scope.get = function( id ) {
+        if (!id) {
+            id = ${js}routeParams.id;
+        }
+        ${entityBeanName}Service.get( {'id':id} , function (data) {
+            ${js}scope.entity = data;
+            ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+        }, function (error){
+            console.log(error)
+            // Case error or not found ..back to search filter
+            ${js}location.path('/${entity.name}');
+        });
+    };
+    // Search By Example Method
+    ${js}scope.search = function(page) {
+        console.log('Realizando busca');
+        // prepare page request
+        if (${js}scope.textSearchActive) {
+#if( ${entity.table.count} > 10000)
+            if (${js}scope.searchField.text.length > 3) {
+#end
+                ${entityBeanName}Service.searchText( {'content': ${js}scope.searchField.text ,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
+                    ${js}scope.resultPage = data;
+                    ${js}scope.resultPage.content = jsog.decode(data.content);
+                });
+#if( ${entity.table.count} > 10000)
+            }
+#end
+        } else {
+            // prepare search(d) text object
+            ${js}scope.searchSelects.toEntity(${js}scope.entity);
+
+            ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
+                ${js}scope.resultPage = data;
+                try {
+                    ${js}scope.resultPage.content = jsog.decode(data.content);
+                } catch (exception) {
+                    ${js}scope.resultPage.content = data.content;
+                }
+            });
+        }
+    };
+
+    $scope.newSearch = function(){
+        $scope.pagination.currentPage = 1;
+        $scope.search()
+    }
+
+    $scope.detalhar = function (${entityBeanName}) {
+        //if (${js}scope.editMode === true && !confirm('Deseja realmente sair do modo de edição do cadastro de ${entity.name}?')){
+        //    return false;
+        //}
+        console.log('Redirecting to edit ${entityBeanName} with id:' + ${entityBeanName}.id);
+        ${js}location.path('/${entity.name}/' + ${entityBeanName}.id );
+    };
+
+    $scope.save = function() {
+        $scope.$broadcast('show-errors-check-validity');
+        // if any invalid validation
+        if (!$scope.mainForm || $scope.mainForm.$invalid) {
+            console.log('Validation Error');
+            return;
+        }
+
+        console.log('Requesting save on ${entityBeanName}');
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
+            ${js}scope.entity = ${entityBeanName}Service.create();
+            if (!${js}scope.editMode) {
+                ${js}scope.search();
+            } else {
+                ${js}location.path('/${entity.name}/');
+            }
+        });
+    };
+
+    $scope.clearForm = function () {
+        console.log('Limpando form filter');
+        ${js}scope.entity = ${entityBeanName}Service.create();
+        ${js}scope.searchField.text = '';
+        ${js}scope.searchSelects.clear();
+    };
+
+    // ******************************************************************************************
+    // Modals methods definitions
+    // ******************************************************************************************
+    // Create ${entity.name} Modal Window
+    ${js}scope.open = function (size) {
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
+            resolve: {
+                data: function () {return $scope.entity;}
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.selected = selectedItem;
+            // Refreshing Result List
+            ${js}scope.entity = ${entityBeanName}Service.create();
+            ${js}scope.search();
+        }, function () {
+            //dismiss
+        });
+    };
+
+    // Create ${entity.name} Modal Window
+    ${js}scope.view = function (size, entityName) {
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        var modalInstance = ${js}modal.open({
+            templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' +entityName+ 'Controller', size: size,
+            resolve: {
+                data: function () {
+                    return $scope.entity;
+                }
+            }
+        });
+    };
+
+    $scope.remove = function (obj){
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'confirmRemove${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
+            resolve: {
+                data: function () {return $scope.entity;},
+                readonly: function() {return true;}
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.search();
+        }, function () {
+            //dismiss
+        });
+    };
+
+    // Inline Update Modal
+    ${js}scope.edit${entity.name} = function (obj) {
+        var modalInstance = ${js}modal.open({
+            templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
+            resolve: {
+                data: function () {return obj;},
+                readonly: function() {return false;}
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            ${js}scope.selected = selectedItem;
+             // Refreshing Result List
+            ${js}scope.search();
+        }, function () {
+            //dismiss
+        });
+    };
+    ${js}scope.setTextSearchActive = function (value) {
+       ${js}scope.textSearchActive = value;
+    };
+
+    $scope.pageChanged = function(newPage) {
+        pagination.currentPage = newPage;
+    };
+
+    // ****************************************
+    // Controller init (on load) service calls
+    // ****************************************
+    // if in edit mode get the wanted ${entityBeanName}
+    if (${js}routeParams.id) {
+        ${js}scope.editMode = true;
+        ${js}scope.get( ${js}routeParams.id);
+    }
+
+    // Search de todos os elementos inicial ( quando entra na tela )
+#if( ${entity.table.count} < 10000)
+    if (!${js}scope.editMode) {
+        ${entityBeanName}Service.findAll( ${js}scope.pagination.getPageRequest() , function (data) {
+            ${js}scope.resultPage = data;
+            ${js}scope.resultPage.content = jsog.decode(data.content);
+        });
+    }
+#end
+
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
+#end
+    // end block
+
+    // ************************************
+    // watches
+    // ************************************
+    ${js}scope.${js}watch('pagination', function (newVal, oldVal) {
+        if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
+            ${js}scope.search();
+        }
+    }, true);
+
+}]);
+
+
+
+
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ * @ngdoc function
+ * @name ${projectBeanName}App.controller:${entityBeanName}Controller
+ * @description
+ * # ${entityBeanName}Controller
+ * Modal Controller for ${entity.name} of the ${projectBeanName}App
+ */
+angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}location', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',  function (${js}scope, ${js}location, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data, readonly) {
+    console.log('View/Editing Modal' );
+    console.log(data);
+    ${js}scope.entity = data;//.${entity.beanName};
+    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
+    ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+
+    if (!readonly) {
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
+#end
+    }
+    // end block
+
+    ${js}scope.save = function () {
+        console.log('Saving Modal' );
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
+            ${js}scope.entity = {};
+            ${js}modalInstance.close(${js}scope.entity);
+        });
+    };
+
+    $scope.remove = function (){
+       console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
+       ${entityBeanName}Service.remove( {id:${js}scope.entity.id}  , function ( successResult) {
+           console.log(successResult);
+           ${js}scope.entity = ${entityBeanName}Service.create();
+           ${js}modalInstance.close(${js}scope.entity);
+           ${js}location.path('/${entity.name}/');
+       });
+    };
+
+    ${js}scope.cancel = function () {
+        ${js}modalInstance.dismiss('cancel');
+    };
+}]);
+
+
+})();

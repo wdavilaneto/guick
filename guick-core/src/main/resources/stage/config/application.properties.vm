@@ -20,6 +20,7 @@ spring.datasource.min-idle=10
 spring.datasource.max-active=300
 
 #JPA/HIbernate
+spring.data.jpa.repositories.enabled=true
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.max_fetch_depth=3
 spring.jpa.properties.hibernate.cache.use_query_cache=true
