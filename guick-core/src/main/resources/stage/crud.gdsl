@@ -88,7 +88,7 @@ guick {
                     [input: "stage/frontend/app/layout/menu/menu.html.vm", output: "/front-end/app/layout/menu/menu.html" ],
                     [input: "stage/frontend/app/app.module.js.vm", output: "/front-end/app/app.module.js"],
 
-                    [input: "stage/localization/pt-BR.json.vm", output: "/front-end/app/i18n/locale-pt-BR.json"],
+                    [input: "stage/frontend/app/i18n/", output: "/front-end/app/i18n"],
 
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],

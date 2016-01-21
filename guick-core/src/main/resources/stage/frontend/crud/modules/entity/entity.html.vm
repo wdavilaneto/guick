@@ -86,12 +86,22 @@
 #end
 #end
                             </div>
-                            <div class="box-footer">
+
+                            <div class="box-footer hidden-sm hidden-xs">
                                 <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <!-- button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button-->
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
-                                        <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> Novo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> </a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> </a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> </a>
                                     </div>
                                 </div>
                             </div>
@@ -129,6 +139,8 @@
             <div class="gridStyle" ng-grid="gridOptions"></div>
         </div>
     </div>
+
+    <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.modal.html'"></div>
 
 </section>
 

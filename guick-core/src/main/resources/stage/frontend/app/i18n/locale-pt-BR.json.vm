@@ -12,6 +12,13 @@
 #end
   "menu.sobre": "Sobre",
   "menu.restapi": "REST API",
+  "menu.sistema": "Sistema",
+
+  "login.restricted_area": "Área Restrita",
+  "login.obrigatorio": "Obrigatório",
+  "login.login": "Login",
+  "login.senha": "Senha",
+  "login.authenticate": "Autenticar",
 
   "sucesso" : "Sucesso",
   "erro" : "Erro",
@@ -34,14 +41,8 @@
 
   "acoesGrid" : "Ações",
 
-  "ajuda.busca.intimacao" : "Ajuda - Busca de intimações",
-  "ajuda.bem.vindo.ajuda" : "&nbsp;&nbsp;Nesta tela podemos visualizar todas as intimações de responsabilidade de uma Procuradoria.&nbsp;&nbsp;",
-  "ajuda.clique.atualiza.lista.intimacao" : "Neste botão, atualizamos a tela com a lista de intimações feitas pelo TJ com até 5 minutos de atraso.",
   "ajuda.digite.texto.pesquisa" : "O texto digitado filtratá os resultados da busca. A busca é realizada em todas as colunas da tabela de resultados.",
   "ajuda.helpPesquisa" : "Após digitar o texto da busca no campo Busca avisos, clique aqui para efetuar a pesquisa.",
-  "ajuda.helpPesquisaAvancada" : "Este botão abre uma tela de pesquisa avançada (Nº do processo e período da intimação).",
-  "ajuda.helpAbrirIntimacao" : "Este botão abre a intimação, dando início à contagem do prazo de resposta (possui o mesmo efeito da abertura de intimação do Portal do TJ).",
-
   "botao.buscar" : "Buscar",
 
   "processoEletronico.naoConfirmada": "Não Confirmada",

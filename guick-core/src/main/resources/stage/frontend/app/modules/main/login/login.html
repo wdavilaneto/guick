@@ -5,16 +5,16 @@
             <div class="form-group" show-errors>
                 <input type="text" name="username" ng-model="username" class="form-control"
                        placeholder="Login"/>
-                <span class="help-block" ng-show="loginForm.username.$error.required">Obrigatório</span>
+                <span class="help-block" ng-show="loginForm.username.$error.required"> {{"login.obrigatorio" | translate}}</span>
             </div>
             <div class="form-group" show-errors>
                 <input type="password" name="password" ng-model="password" class="form-control"
                        placeholder="Senha"/>
-                <span class="help-block" ng-show="loginForm.password.$error.required">Obrigatório</span>
+                <span class="help-block" ng-show="loginForm.password.$error.required"> {{"login.obrigatorio" | translate}}</span>
             </div>
         </div>
         <div class="footer bg-gray">
-            <button type="submit" ng-click="submit()" class="btn btn-primary btn-block">Autenticar</button>
+            <button type="submit" ng-click="submit()" class="btn btn-primary btn-block"> {{"login.authenticate" | translate}}</button>
             <div class="alert alert-danger alert-dismissable" ng-show="authenticationError">
                 <b>Usuário ou senha inválido!</b>
             </div>
