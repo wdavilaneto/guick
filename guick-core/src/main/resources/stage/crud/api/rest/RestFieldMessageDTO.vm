@@ -4,7 +4,7 @@
  *  This source is free under The Apache Software License, Version 2.0
  *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
  */
-package ${project.group}.commons.rest;
+package ${project.group}.commons.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

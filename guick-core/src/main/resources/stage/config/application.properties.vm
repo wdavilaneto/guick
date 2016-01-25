@@ -30,3 +30,14 @@ spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.e
 
 email.sender=sistema.${project.name}@${project.group}
 email.to=${project.name}@${project.group}
+
+# MULTIPART (MultipartProperties)
+#multipart.enabled=true
+#multipart.file-size-threshold=0 # Threshold after which files will be written to disk.
+#multipart.location= # Intermediate location of uploaded files.
+multipart.max-file-size=6Mb
+#validar "multipart.max-request-size" existencia de restricao no JBoss e Nginx
+multipart.max-request-size=20Mb
+
+#JSON
+spring.jackson.serialization.indent_output=true

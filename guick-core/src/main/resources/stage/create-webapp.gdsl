@@ -13,10 +13,12 @@ guick {
         "configs" {
             templates = [
                     [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
+                    [input: "stage/config/settings.gradle.vm", output: "/api/settings.gradle"],
 
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
                     [input: "stage/config/.jshintrc", output: "/front-end/.jshintrc"],
                     [input: "stage/config/.gitignore", output: "/front-end/.gitignore"],
+                    [input: "stage/config/.gitignore2", output: "/api/.gitignore"],
                     [input: "stage/config/.gitattributes", output: "/front-end/.gitattributes"],
 
                     [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],
@@ -64,11 +66,19 @@ guick {
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
                     [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/aop/OnSuccessAdvice.${lang}"],
                     [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/filter/CorsFilter.${lang}"],
-                    [input: "stage/support/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/BusinessException.${lang}"],
-                    [input: "stage/support/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/DefaultExceptionHandler.${lang}"],
-                    [input: "stage/support/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/RestFieldMessageDTO.${lang}"],
-                    [input: "stage/support/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
-                    [input: "stage/support/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
+
+                    [input: "stage/crud/api/exception/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/BusinessException.${lang}"],
+                    [input: "stage/crud/api/exception/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/DefaultExceptionHandler.${lang}"],
+
+                    [input: "stage/crud/api/rest/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/RestFieldMessageDTO.${lang}"],
+                    [input: "stage/crud/api/rest/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
+                    [input: "stage/crud/api/rest/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
+
+                    [input: "stage/crud/api/json/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
+                    [input: "stage/crud/api/json/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
+                    [input: "stage/crud/api/json/JsonDateListSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateListSerializer.${lang}"],
+                    [input: "stage/crud/api/json/CustomBigDecimalDeserializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalDeserializer.${lang}"],
+                    [input: "stage/crud/api/json/CustomBigDecimalSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalSerializer.${lang}"],
 
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
@@ -76,9 +86,6 @@ guick {
                     [input: "stage/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
 
                     [input: "stage/crud/api/presentation/AccountController.java.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/AccountController." + lang],
-
-                    [input: "stage/crud/api/presentation/dto/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
-                    [input: "stage/crud/api/presentation/dto/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
 
                     [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/PageableHelper.${lang}"],
 

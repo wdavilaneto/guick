@@ -13,6 +13,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -41,13 +42,13 @@ import java.util.Locale;
 public class OnSuccessAdvice {
 
     public static final String SUCESSO_TITLE = "Sucesso!";
-    public static final String SUCESSO_MSG = "SucessoDefault";
+    public static final String SUCESSO_MSG = "Opera\u00E7\u00E3o realizada com sucesso!";
 
     public static final String TITLE = "title";
     public static final String MESSAGE = "message";
     public static final String ON_SUCCESS = "OnSuccess.";
-    public static final String ERRO_GET = "Um método não pode aceitar requisições GET com outros tipos";
-    public static final String ERRO_SEM_METODO_DEFINIDO = "É necessário definir um RequestMethod.method() em sua annotation";
+    public static final String ERRO_GET = "Um m\u00E9todo n\u00E3o pode aceitar requisições GET com outros tipos";
+    public static final String ERRO_SEM_METODO_DEFINIDO = "\u00C9 necessário definir um RequestMethod.method() em sua annotation";
 
     @Resource
     MessageSource messageSource;
@@ -79,7 +80,7 @@ public class OnSuccessAdvice {
             ResponseEntity responseEntity;
 
             MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-            Locale locale = new Locale("pt_BR");
+            Locale locale = LocaleContextHolder.getLocale();
 
             String prefixCode = ON_SUCCESS + pjp.getTarget().getClass().getSimpleName() + "." + methodName;
 
@@ -102,8 +103,7 @@ public class OnSuccessAdvice {
                 String title = messageSource.getMessage(titleCode, null, SUCESSO_TITLE, locale);
                 headers.add(TITLE, title);
 
-                String sucessoDefault = messageSource.getMessage(SUCESSO_MSG, null, locale);
-                String message = messageSource.getMessage(messageCode, null, sucessoDefault, locale);
+                String message = messageSource.getMessage(messageCode, null, SUCESSO_MSG, locale);
                 headers.add(MESSAGE, message);
 
                 return new ResponseEntity(objectBody, headers, httpStatus);
@@ -130,30 +130,34 @@ public class OnSuccessAdvice {
      */
     private HttpEntity httpGetEntity(ProceedingJoinPoint pjp, Object objectBody, HttpStatus httpStatus) throws Throwable {
         HttpEntity returnObject;
-
         returnObject = (HttpEntity) pjp.proceed();
+        HttpHeaders headers = null;
         boolean found = false;
         if (returnObject != null) {
+            headers = returnObject.getHeaders();
             objectBody = returnObject.getBody();
             if (objectBody != null) {
                 if (objectBody instanceof List) {
                     List objectList = (List) objectBody;
                     found = !objectList.isEmpty();
-                } else if (objectBody instanceof Page) {
-                    found = ((Page) objectBody).getTotalElements() != 0;
+//                } else if (objectBody instanceof Page) {
+//                    found = ((Page) objectBody).getTotalElements() != 0;
                 } else {
                     found = true;
                 }
             }
         }
 
+
         ResponseEntity responseEntity = null;
+
         if (returnObject instanceof ResponseEntity) {
             responseEntity = (ResponseEntity) returnObject;
             httpStatus = responseEntity.getStatusCode();
         }
 
         if (!found && responseEntity == null) httpStatus = HttpStatus.NOT_FOUND;
-        return new ResponseEntity(objectBody, httpStatus);
+        return new ResponseEntity(objectBody, headers, httpStatus);
     }
+
 }

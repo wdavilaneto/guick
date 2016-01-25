@@ -64,7 +64,7 @@
          */
         .config(['${js}httpProvider', function (${js}httpProvider) {
 
-            var nomeApp = '${js}{project.name}';
+            var nomeApp = '${project.name}';
 
             ${js}httpProvider.interceptors.push(
                 ['${js}q', 'toaster', '${js}window', '${js}location', function (${js}q, toaster, ${js}window, ${js}location) {
