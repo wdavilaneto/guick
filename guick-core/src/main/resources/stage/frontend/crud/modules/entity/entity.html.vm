@@ -5,22 +5,13 @@
 <section class="content-header">
         <i class="fa fa-search"></i> :
         <small>
-#if(${entity.title} == 'Proc asses executiva')
-        Processos na assesoria executiva
-#else
-        ${entity.title}
-#end
+            ${entity.title}
         </small>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Inicial </a></li>
-        <li class="active">
-#if(${entity.title} == 'Proc asses executiva')
-        Processos
-#else
-        ${entity.title}
-#end
-        </li>
+        <li><a href="#"> Inicial </a></li>
+        <li class="active">${entity.title}</li>
     </ol>
+
 </section>
 
 <section class="content">
