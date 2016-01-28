@@ -3,15 +3,11 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-        <i class="fa fa-search"></i> :
-        <small>
-            ${entity.title}
-        </small>
+    <i class="fa fa-search"></i> : <small> ${entity.title} </small>
     <ol class="breadcrumb">
         <li><a href="#"> Inicial </a></li>
         <li class="active">${entity.title}</li>
     </ol>
-
 </section>
 
 <section class="content">
@@ -36,14 +32,13 @@
                                         </div>
                                     </div>
 #if(${entity.getActiveProperty()})
-                                    <div class="form-group col-md-4">
-                                        <div class="checkbox">
+                                    <div class="form-group col-md-4"> <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
                                             </label>
                                         </div>
                                     </div>
-#end
+#{end}
                                 </div>
 
 #if(${entity.getAllDeadlineProperties().size()} >= 1 )

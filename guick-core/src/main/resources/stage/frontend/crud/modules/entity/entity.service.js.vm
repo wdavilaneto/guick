@@ -157,7 +157,7 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$r
 #end
 ######################
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
-                options.columnDefs.push({field: 'id', displayName: 'id', sortable: false});
+            options.columnDefs.push({field: 'id', displayName: 'id', sortable: false});
 #end
 ######################
 #set($size = ${properties.size()} )
@@ -165,7 +165,7 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$r
 #foreach( ${property} in ${properties})
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
 #if( (${property.type} == 'Long' && ${property.column.constraint}) || ${property.type} == 'byte[]')
-                //options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}} );
+            //options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}} );
 #else
 #set($counter = $counter + 1)
 ##                // (($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )
