@@ -12,13 +12,15 @@ guick {
         //[input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
         "configs" {
             templates = [
+                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
+                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
                     [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
-                    [input: "stage/config/settings.gradle.vm", output: "/api/settings.gradle"],
 
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
                     [input: "stage/config/.jshintrc", output: "/front-end/.jshintrc"],
                     [input: "stage/config/.gitignore", output: "/front-end/.gitignore"],
                     [input: "stage/config/.gitignore2", output: "/api/.gitignore"],
+                    [input: "stage/config/.gitignore2", output: "/.gitignore"],
                     [input: "stage/config/.gitattributes", output: "/front-end/.gitattributes"],
 
                     [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],

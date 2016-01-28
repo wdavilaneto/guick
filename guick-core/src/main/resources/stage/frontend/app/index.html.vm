@@ -24,17 +24,18 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="bower_components/imperavi-redactor/redactor/redactor.css">
+    <link rel="stylesheet" href="bower_components/imperavi-redactor/redactor/redactor.css" />
     <link rel="stylesheet" href="layout/css/ng-joyride-mgpe.css" />
-    <link rel="stylesheet" href="layout/css/animate.css">
-    <link rel="stylesheet" href="layout/css/media-querie.css">
-    <link rel="stylesheet" href="layout/css/botoes.css">
-    <link rel="stylesheet" href="layout/css/reset.css">
-    <link rel="stylesheet" href="layout/css/menu.css">
-    <link rel="stylesheet" href="layout/css/mini-field.css">
-    <link rel="stylesheet" href="layout/css/load.css">
-    <link rel="stylesheet" href="layout/css/main.css">
-    <link rel="stylesheet" href="layout/css/${project.acronym}.css">
+    <link rel="stylesheet" href="layout/css/animate.css" />
+    <link rel="stylesheet" href="layout/css/media-querie.css" />
+    <link rel="stylesheet" href="layout/css/${project.acronym}.css" />
+    <link rel="stylesheet" href="layout/css/main.css" />
+    <link rel="stylesheet" href="layout/css/grid.css" />
+    <link rel="stylesheet" href="layout/css/menu.css" />
+    <link rel="stylesheet" href="layout/css/mini-field.css" />
+    <link rel="stylesheet" href="layout/css/reset.css" />
+    <link rel="stylesheet" href="layout/css/load.css" />
+    <link rel="stylesheet" href="layout/css/botoes.css" />
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -120,10 +121,6 @@
   <script src="bower_components/angularjs-toaster/toaster.js"></script>
   <script src="bower_components/angularjs-toaster/toaster.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
-  <script src="bower_components/angular-base64/angular-base64.js"></script>
-  <script src="bower_components/angular-base64/angular-base64.min.js"></script>
-##  <script src="bower_components/sca-ngular/sca-ngular.js"></script>
   <script src="bower_components/angular-redactor/angular-redactor.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -164,6 +161,7 @@
   <script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
   <script src="bower_components/Chart.js/Chart.js"></script>
   <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
   <!-- endbower -->
   <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
   <!-- endbuild -->
@@ -216,6 +214,7 @@
   <!-- commons:services -->
   <script src="common/services/services.module.js"></script>
   <script src="common/services/base64.srv.js"></script>
+  <script src="common/services/grid.service.js"></script>
   <script src="scripts/service/support/SupportService.js"></script>
   <script src="scripts/service/support/truncate.js"></script>
   <script src="scripts/service/support/utils.js"></script>

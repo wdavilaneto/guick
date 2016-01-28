@@ -103,7 +103,6 @@ guick {
 
                     [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
 
-                    [input: "stage/crud/scripts/app.js.vm", output: "/front-end/app/scripts/app.js"],
                     [input: "stage/crud/html/modals.html.vm", output: "/front-end/app/views/modals.html"]
 
             ]

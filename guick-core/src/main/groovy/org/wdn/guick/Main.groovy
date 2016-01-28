@@ -36,11 +36,9 @@ class Main {
             //main.project.initialize("../mprj-gsi-portfolio/")
             main.project.initialize("../java/mprj-gsi-medicamentos")
 
-            main.setTarget("stage/create-webapp")
-            main.run()
+            main.setTarget("stage/create-webapp").run()
 
-            main.setTarget("stage/crud")
-            main.run()
+            main.setTarget("stage/crud").run()
 
 //            main.project.persist();
 
@@ -51,6 +49,11 @@ class Main {
 
     public void run() {
         guick.runEngine(target)
+    }
+
+    public Main setTarget(String lvalue){
+        target = lvalue;
+        return this;
     }
 
 }

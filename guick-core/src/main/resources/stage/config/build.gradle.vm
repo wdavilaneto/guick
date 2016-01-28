@@ -90,6 +90,3 @@ dependencies {
     runtime 'com.oracle:ojdbc6:11.2.0.3'
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.9'
-}
