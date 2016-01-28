@@ -1,5 +1,8 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'application'
+
+mainClassName = "org.wdn.guick.Main"
 
 dependencies {
 

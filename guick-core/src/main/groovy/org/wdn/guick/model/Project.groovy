@@ -24,6 +24,7 @@ class Project implements Serializable {
     String group
     String name
     String path
+    String description
     List<Table> tables = new ArrayList<Table>();
     List<Entity> entities = new ArrayList<Entity>();
     List<Clazz> classes = new ArrayList<Clazz>();
@@ -64,6 +65,7 @@ class Project implements Serializable {
             name = config.name
             this.database = config.guickConnectionInfo;
             this.targetTables = config.tables;
+            this.description = config.description;
         } else {
             if (new File(path + "/pom.xml").exists()) {
                 pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
@@ -79,6 +81,7 @@ class Project implements Serializable {
             config.tablePrefix = "TB";
             config.useWorkflow ="false";
             config.tables = [[owner:"schema", tableName:"example_table"]];
+            config.description = "Project Description";
 
             // if no pom nither guick.json exists, create one and stop any generation
             def json = new JsonBuilder(config).toPrettyString();
@@ -118,6 +121,14 @@ class Project implements Serializable {
         }
         return getName()
     }
+
+    public String getLastGroup() {
+        if (this.group != null) {
+            return this.group.split("\\.")?.last();
+        }
+        return getName()
+    }
+
 
     public String getSourcePath() {
         return EngineConstants.DEFAULT_JAVA_SRC_WITH_PACKAGE + "/" + getAcronym()

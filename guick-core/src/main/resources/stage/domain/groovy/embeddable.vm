@@ -1,0 +1,188 @@
+/**
+ *  Guick Generate class: https://github.com/wdavilaneto/guick
+ *  Author: service-wdavilaneto@redhat.com
+ *  This source is free under The Apache Software License, Version 2.0
+ *  license url http://www.apache.org/licenses/LICENSE-2.0.txt
+ */
+package ${entity.getPackage()};
+
+import ${project.group}.commons.json.JsonDateDeserializer;
+import ${project.group}.commons.json.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+##import lombok.AllArgsConstructor;
+##import lombok.Getter;
+##import lombok.NoArgsConstructor;
+##import lombok.Setter;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+import javax.persistence.Basic;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.format.annotation.DateTimeFormat;
+#foreach( ${property} in ${entity.getEnums()})
+import ${entity.getPackage()}.domain.${property.getName()};
+#end
+
+/**
+ * ${entity.getName()}
+ * A classe ${entity.getName()} representa o mapeamento Objeto-Relacional
+ * da entidade de negocio armazenada na tabela ${entity.getTable().getName()}.
+ */
+##@Getter
+##@Setter
+##@NoArgsConstructor
+##@AllArgsConstructor
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Embeddable
+public class ${entity.getName()} implements java.io.Serializable {
+
+#parse( "stage/domain/groovy/simpleProperties.vm" )
+#foreach( ${property} in ${entity.getEnums()})
+    @Enumerated(EnumType.STRING)
+    @Column(name = "${property.getSimpleProperty().getColumn().getName()}"#if(!${property.getSimpleProperty().getColumn().getNullable()}), nullable = false#{end}#if(${property.getSimpleProperty().column.precision}), precision = ${property.getSimpleProperty().column.precision}#{end}#if(${property.getSimpleProperty().column.scale}), scale = ${property.getSimpleProperty().column.scale}#{end}#if(${property.getSimpleProperty().column.length}), length = ${property.getSimpleProperty().column.length}#{end}#if( !${property.getSimpleProperty().getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getSimpleProperty().getColumn().isUpdatable()}), updatable = false #end)
+    ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
+
+#end
+#foreach( ${property} in ${entity.getOneToManyProperties()})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.isEmbeddable()})id.#{end}$util.uncapitalize( ${property.mappedBy} )")
+    List<$property.type> $property.getName() = new ArrayList<$property.type>(0);
+
+#end
+#parse( "stage/domain/groovy/manyToOneProperties.vm" )
+#parse( "stage/domain/groovy/manyToManyProperties.vm" )
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+    /**
+     * Getter para id.
+     * @return valor do campo
+     */
+    public ${entity.getId().getType()} getId() {
+        return this.id;
+    }
+
+    /**
+     * Setter para id.
+     * @param value valor para id
+     */
+    public void setId(${entity.getId().getType()} value) {
+        this.id = value;
+    }
+
+#end
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+                .append(id)
+#end
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.id.getProperties()})
+                .append(id.${property.name})
+#end
+#foreach( ${property} in ${entity.properties})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+                .append(${property.name})
+#end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.capitalizedName}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.capitalizedName}())
+#end
+               .toHashCode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj == this) { return true; }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+#if ( !${entity.properties.empty})
+        ${entity.getName()} rhs = (${entity.getName()}) obj;
+
+#if(!$entity.isEmbeddable() and !$entity.getParent() )
+        // For performance reasons we first eliminate @id (primary key) difference
+        if (id != null && (!id.equals(rhs.id)) ) {
+            return false;
+        }
+#end
+        // so lets check all properties
+        return new EqualsBuilder()
+#foreach( ${property} in ${entity.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.parent.properties})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.id.properties})
+#set( $name = $util.capitalize( ${property.name} ))
+                .append(id.get${name}(), rhs.id.get${name}())
+#end
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+                .append(${property.name}, rhs.${property.name})
+#end
+#foreach( ${property} in ${entity.parent.getManyToOneProperties()})
+                .append(get${property.capitalizedName}(), rhs.get${property.capitalizedName}())
+#end
+#foreach( ${property} in ${entity.id.getManyToOneProperties()})
+                .append(id.get${property.capitalizedName}(), rhs.getId().get${property.capitalizedName}())
+#end
+                .isEquals();
+#else
+        return true;
+#end
+
+    }
+}

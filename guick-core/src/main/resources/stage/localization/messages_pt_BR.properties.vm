@@ -11,39 +11,3 @@ NotNull=N\u00e3o pode ser nulo ou vazio
 Size=Tamanho inv\u00e1lido do campo
 NotBlank=N\u00e3o pode ser em branco
 NotUniqueObject=J\u00e1 existe um objeto igual cadastrado
-
-NotNull.migracaoMedidor.grupoDestino.concessionaria=Concessionaria deve estar preenchida
-grupo.apagarGrupo.erro.emUso=N\u00e3o \u00e9 poss\u00edvel remover grupo, pois ele est\u00e1 vinculado a um Medidor
-
-OnSuccess.GrupoMedidorController.migrarMedidores.title=Medidores - Migra\u00e7\u00e3o
-OnSuccess.GrupoMedidorController.migrarMedidores.message=Medidores migrados com sucesso
-
-OnSuccess.GrupoController.inativar.title=Agrupamento - Inativar
-OnSuccess.GrupoController.inativar.message=Agrupamento inativado com sucesso
-
-OnSuccess.GrupoController.saveOrUpdate.title=Agrupamento - Salvar
-
-Falha.delete.medidor.vinculo.controle=O medidor n\u00e3o pode ser removido pois possui valores vinculados
-Falha.migracaoMedidor.objetoEmpenho.divergente=O Objeto de Empenho do Grupo de origem deve ser o mesmo do Grupo de destino
-Falha.migracaoMedidor.anoMesReferencia.after=O campo Refer\u00eancia Espec\u00edfica deve ser utilizado apenas para migra\u00e7\u00e3o retroativa
-Falha.save.grupo.mesmo.nome=J\u00e1 existe um agrupamento com o mesmo nome
-
-NotUnique.medidor.nome.concessionaria=J\u00e1 existe um medidor com o c\u00f3digo "{0}" informado para a concession\u00e1ria "{1}"Falha.migracaoMedidor.anoMesReferencia.after=O campo Refer\u00eancia Espec\u00edfica deve ser utilizado apenas para migra\u00e7\u00e3o retroativa
-Falha.migracaoMedidor.grupoOrigem.igual.grupoDestino=O Grupo de Origem n\u00e3o pode ser igual ao Grupo de Destino
-Falha.save.controle.camposObrigatorios=N\u00e3o \u00e9 poss\u00edvel salvar um registro com valor sem preencher o Processo de Pagamento e a Nota Fiscal
-
-Falha.save.concessionaria.mesmo.nome= Concession\u00e1ria j\u00e1 existe!
-
-Falha.excluir.nota.avulsa = N\u00e3o \u00e9 permitido excluir nota avulsa!
-Falha.processoPagamento.confirmarPagamento=N\u00e3o \u00e9 poss\u00edvel confirmar o pagamento do Processo pois o mesmo j\u00e1 se encontra pago
-Falha.processoPagamento.confirmarLiquidacao=N\u00e3o \u00e9 poss\u00edvel confirmar a liquida\u00e7\u00e3o do Processo pois o mesmo j\u00e1 se encontra liquidado
-
-Before.medidor.dataDesligamento.dataInstalacao=A Data de Desligamento n\u00e3o pode ser anterior \u00e0 Data de Instala\u00e7\u00e3o
-After.medidor.dataInstalacao.controle.anoMesReferencia=O Medidor possui valores associados com data anterior \u00e0 Data de Instala\u00e7\u00e3o especificada
-
-Falha.save.grupo.objetoEmpenho.diferente= N\u00e3o pode ser migrado para objeto de Empenho diferente pois ja existe medidores!
-Falha.save.grupo.objetoEmpenho.avulsa= N\u00e3o pode migra nota avulsa!
-Falha.save.controle.processoPagamento=Este Processo de Pagamento pertence a outro credor
-Falha.save.empenho.notaEmpenho.existente=Esta Nota de Empenho j\u00e1 est\u00e1 sendo utilizada neste Processo
-Falha.save.empenho.notaEmpenho.saldo.insuficiente=N�o h\u00e1 saldo dispon\u00edvel na Nota de Empenho para realizar este pagamento
-Falha.save.empenho.notaEmpenho.valor.superior=O valor informado \u00e9 superior ao saldo a pagar do Processo

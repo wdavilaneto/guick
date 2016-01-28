@@ -1,0 +1,37 @@
+#set( $js  = "$")
+(function() {
+    'use strict';
+
+    angular.module('${project.name}App').controller('MenuController', ['${js}rootScope', '${js}scope', '${js}http', '${js}interval', 'jsog',
+        function(${js}rootScope, ${js}scope, ${js}http, ${js}interval, jsog ) {
+
+        var vm = this;
+
+        vm.totalDocumentos = 0;
+        vm.totalAvisosPendentes = 0;
+
+
+      //  ${js}interval( ${js}scope.countDocumentos, 50000 );
+      //  ${js}interval( ${js}scope.countAvisosPendentes(), 50000 );
+
+    }]);
+
+    angular.module('${project.name}App').controller('MenuControllerMobile',  ['${js}scope', function(${js}scope) {
+        ${js}scope.boxOpen = true;
+        ${js}scope.toggle = function() {
+            ${js}scope.boxOpen = !${js}scope.boxOpen;
+        };
+        ${js}scope.toothlet = function(){
+            ${js}(".left-side, .right-side, .left-bar, nav.navbar.navbar-default.navbar-fixed-top").toggleClass("stash");
+          };
+    }]);
+
+    angular.module('${project.name}App').controller('MenuControllerSearchFilter',  ['${js}scope', function(${js}scope) {
+        ${js}scope.searchOpen = true;
+        ${js}scope.toggle = function() {
+            ${js}scope.searchOpen = !${js}scope.searchOpen;
+        };
+
+    }]);
+
+})();

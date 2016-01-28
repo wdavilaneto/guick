@@ -1,0 +1,132 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+<!-- sessões -->
+<section class="content-header">
+    <i class="fa fa-search"></i> : <small> ${entity.title} </small>
+    <ol class="breadcrumb">
+        <li><a href="#"> Inicial </a></li>
+        <li class="active">${entity.title}</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()" >
+            <div tabset>
+                <div tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label" for="searchField.text"> Busca por texto</i>
+                                            <i popover-trigger="mouseenter"  popover-placement="left" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
+                                        </label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-default" ng-click="newSearch()"><i class="fa fa-search"></i></button>
+                                                <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+#if(${entity.getActiveProperty()})
+                                    <div class="form-group col-md-4"> <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
+                                            </label>
+                                        </div>
+                                    </div>
+#{end}
+                                </div>
+
+#if(${entity.getAllDeadlineProperties().size()} >= 1 )
+#set($activeProperty = ${entity.getAllDeadlineProperties()[0]})
+#if(${activeProperty})
+
+                                <div class="row">
+                                    <div ng-controller="DatepickerDemoCtrl">
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label" for="">${activeProperty} a partir de</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"/>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-controller="DatepickerDemoCtrl">
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label" for="">Até</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"/>
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-default btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+#end
+#end
+                            </div>
+
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> Novo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> </a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> </a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div tab heading="Busca Avançada" ng-click="setTextSearchActive(false)">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="row">
+                                <div ng-include src="'modules/${entity.beanName}/components/${entity.beanName}.filter.html'"></div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- fim sessão -->
+
+    <!-- sessão -->
+    <div class="box box-primary">
+        <div class="box-heading">
+            <div class="box-header"><h3 class="box-title">Resultado da Busca</h3></div>
+        </div>
+        <div class="box-body">
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+        </div>
+    </div>
+
+    <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.modal.html'"></div>
+
+</section>
+

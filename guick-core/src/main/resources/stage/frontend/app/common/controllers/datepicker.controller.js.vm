@@ -1,0 +1,45 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+(function () {
+    'use strict';
+
+    angular.module('${project.name}App').controller('DefaultDatepickerController', function (${js}scope) {
+
+        ${js}scope.today = function() {
+            ${js}scope.dt = new Date();
+        };
+
+        ${js}scope.today();
+
+        ${js}scope.clear = function () {
+            ${js}scope.dt = null;
+        };
+
+        // Disable weekend selection
+        ${js}scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+        ${js}scope.toggleMin = function() {
+            ${js}scope.minDate = ${js}scope.minDate ? null : new Date();
+        };
+        ${js}scope.toggleMin();
+
+        ${js}scope.open = function(${js}event) {
+        ${js}event.preventDefault();
+        ${js}event.stopPropagation();
+
+        ${js}scope.opened = true;
+        };
+
+        ${js}scope.dateOptions = {
+            formatYear: 'dd/MM/yyyy',
+            startingDay: 1
+        };
+
+        ${js}scope.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'dd.MM.yyyy', 'shortDate'];
+        ${js}scope.format = ${js}scope.formats[0];
+    });
+
+})();

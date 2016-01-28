@@ -1,0 +1,42 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+(function() {
+    'use strict';
+
+    angular.module('${project.name}App', [
+
+#if( ${project.config.useWorkflow} == true )
+        '${project.name}App.${entity.beanName}',
+#end
+#if (${project.getAllMainEntities().size()} > 0)
+#foreach( ${entity} in ${project.getAllMainEntities()})
+#if (!${entity.isEmbeddable()})
+        '${project.name}App.${entity.beanName}',
+#end
+#end
+#end
+#if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
+#if (${project.getAllDomainEntities().size()} > 0)
+#foreach( ${entity} in ${project.getAllDomainEntities()})
+#if (!${entity.isEmbeddable()})
+        '${project.name}App.${entity.beanName}',
+#end
+#end
+#end
+#if (${project.getAllEnumLikeEntities().size()} > 0)
+#foreach( ${entity} in ${project.getAllEnumLikeEntities()})
+        '${project.name}App.${entity.beanName}',
+#end
+#end
+#end
+        '${project.name}App.main'
+
+      ]);
+##        '${project.name}App.peticao',
+##        '${project.name}App.pecas',
+##        '${project.name}App.dashboard',
+##        '${project.name}App.statusMNI',
+##        '${project.name}App.avisos'
+
+})();

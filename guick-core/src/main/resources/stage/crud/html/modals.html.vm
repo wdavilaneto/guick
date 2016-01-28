@@ -16,8 +16,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" ng-click="$event.stopPropagation(); cancel()"><i class="fa fa-ban"></i> Cancelar</button>
-                    <button class="btn btn-success" ng-click="$event.stopPropagation(); save()"><i class="fa fa-save"></i> Gravar</button>
+                    <button class="btn btn-danger" ng-click="$event.stopPropagation(); cancel()"><i class="fa fa-ban"></i> Cancelar </button>
+                    <button class="btn btn-success" ng-click="$event.stopPropagation(); save()"><i class="fa fa-save"></i> Gravar </button>
                 </div>
             </form>
         </script>

@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:2.3.6"
+    compile "org.codehaus.groovy:groovy-all:2.4.4"
 }
 
 subprojects {
@@ -42,7 +42,7 @@ subprojects {
     }
 
     dependencies {
-        compile "org.codehaus.groovy:groovy-all:2.3.6"
+        compile "org.codehaus.groovy:groovy-all:2.4.4"
         testCompile "junit:junit:4.11"
 
         // logging ..
@@ -97,5 +97,5 @@ install {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.9'
 }

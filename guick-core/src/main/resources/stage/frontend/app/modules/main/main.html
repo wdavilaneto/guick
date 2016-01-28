@@ -1,0 +1,30 @@
+<!-- sessões -->
+<section class="content-header">
+    <h1><i class="fa fa-home"></i> Inicial </h1>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h4 class="pd14">--COusa--</h4>
+
+                    <tabset>
+                        <tab ng-repeat="tab in tabs" >
+                            <tab-heading class="{{tab.tab == tabSelected ? 'tab-selected' : 'tab-title'}}" ng-click="changeTab(tab.tab)">
+                                <i class="mdi {{tab.icon}}"></i>
+                    <span>
+                      {{tab.title}}
+                    </span>
+                            </tab-heading>
+                            <div ui-view></div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

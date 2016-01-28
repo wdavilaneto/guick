@@ -130,20 +130,20 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #end
     @Column(name="$entity.id.column.name"#if(${entity.id.column.precision}), precision = ${entity.id.column.precision}#{end}#if(${entity.id.column.scale}), scale = ${entity.id.column.scale}#{end} )
 #end
-    private ${entity.getId().getType()} id;
+    ${entity.getId().getType()} id;
 
 #end
 #parse( "stage/domain/groovy/simpleProperties.vm" )
 #foreach( ${property} in ${entity.getEnums()})
     @Enumerated(EnumType.STRING)
     @Column(name = "${property.getSimpleProperty().getColumn().getName()}"#if(!${property.getSimpleProperty().getColumn().getNullable()}), nullable = false#{end}#if(${property.getSimpleProperty().column.precision}), precision = ${property.getSimpleProperty().column.precision}#{end}#if(${property.getSimpleProperty().column.scale}), scale = ${property.getSimpleProperty().column.scale}#{end}#if(${property.getSimpleProperty().column.length}), length = ${property.getSimpleProperty().column.length}#{end}#if( !${property.getSimpleProperty().getColumn().isInsertable()}), insertable = false #{end}#if(!${property.getSimpleProperty().getColumn().isUpdatable()}), updatable = false #end)
-    private ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
+    ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
 
 #end
 #foreach( ${property} in ${entity.getOneToManyProperties()})
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "#if( ${property.referedEntity.id.containsPropertyName( $util.uncapitalize( ${property.mappedBy} ) )}  )id.#{end}$util.uncapitalize( ${property.mappedBy} )")
-    private List<$property.type> $property.getName();## = new ArrayList<$property.type>(0);
+    List<$property.type> $property.getName();## = new ArrayList<$property.type>(0);
 
 #end
 #parse( "stage/domain/groovy/manyToOneProperties.vm" )
