@@ -12,9 +12,9 @@
  * Factory in the ${projectBeanName}App.
  */
 
-angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$resource', 'gridService',
+angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$resource', 'gridService', 'ENV_CONFIG',
 
-    function ($resource, gridService) {
+    function ($resource, gridService, ENV_CONFIG) {
         var service = $resource('/${projectBeanName}/api/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entity.name}', isArray: false},
             'search': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/search', isArray: false},
@@ -180,13 +180,12 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$r
             #if($counter > 2)//#{end}options.columnDefs.push({field: '${property.name}.${property.referedEntity.getMostDescritiveProperties()[0]}', displayName: '${property.title}', sortable: false#if (${property.referedEntity.getMostDescritiveProperties()[0].name.length()} < 5 && ${property.referedEntity.getMostDescritiveProperties()[0].column.length} < 5), width: 30#{end}});
 #end
 #end
-            // This options MUST always exists since tables and Cells does not have Doubld Click by default
-            options.columnDefs.push({name:'btn_detail', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); detalhar(row.entity);"><i class="fa fa-edit"></i></a>', width : '35', resizable: false});
+            options.columnDefs.push({name:'btn_detail', displayName: '', enableColumnResizing: false, enableSorting: false, enableFiltering: false, cellTemplate: ENV_CONFIG.baseURL + 'modules/${entity.beanName}/components/${entity.beanName}.grid.cell.detalhar.html', width : '35', resizable: false});
             if (isEditMode) {
 #if(${entity.looksLikeEnum()})
-                options.columnDefs.push({name:'btn_edit', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); edit${entity.name}(row.entity);"><i class="fa fa-twitch"></i></a>', width : '35', resizable: false});
+                options.columnDefs.push({name:'btn_edit', displayName: '', enableColumnResizing: false, enableSorting: false, enableFiltering: false, cellTemplate: ENV_CONFIG.baseURL + 'modules/${entity.beanName}/components/${entity.beanName}.grid.cell.edit.html', width : '35', resizable: false});
 #end
-                options.columnDefs.push({name:'btn_delete', displayName: '', cellTemplate: '<a class="btn-detail" ng-click="$event.stopPropagation(); remove${entity.name}(row.entity);"><i class="fa fa-remove"></i></a>', width : '35', resizable: false});
+                options.columnDefs.push({name:'btn_delete', displayName: '', enableColumnResizing: false, enableSorting: false, enableFiltering: false,  cellTemplate: ENV_CONFIG.baseURL + 'modules/${entity.beanName}/components/${entity.beanName}.grid.cell.delete.html' , width : '35', resizable: false});
             }
             return options;
         };

@@ -50,7 +50,7 @@ angular.module('${projectBeanName}App')
         }, function (error){
             console.log(error)
             // Case error or not found ..back to search filter
-            ${js}location.path('/${entity.name}');
+            ${js}location.path('/${entity.beanName}');
         });
     };
     // Search By Example Method
@@ -71,7 +71,6 @@ angular.module('${projectBeanName}App')
         } else {
             // prepare search(d) text object
             ${js}scope.searchSelects.toEntity(${js}scope.entity);
-
             ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
                 ${js}scope.resultPage = data;
                 try {
@@ -93,16 +92,16 @@ angular.module('${projectBeanName}App')
         //    return false;
         //}
         console.log('Redirecting to edit ${entityBeanName} with id:' + ${entityBeanName}.id);
-        ${js}location.path('/${entity.name}/' + ${entityBeanName}.id );
+        ${js}location.path('/${entity.beanName}/' + ${entityBeanName}.id );
     };
 
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         // if any invalid validation
-        if (!$scope.mainForm || $scope.mainForm.$invalid) {
-            console.log('Validation Error');
-            return;
-        }
+        //if (!$scope.mainForm || $scope.mainForm.$invalid) {
+        console.log('TODO: Validate Errors');
+        //    return;
+        //}
 
         console.log('Requesting save on ${entityBeanName}');
         ${js}scope.searchSelects.toEntity(${js}scope.entity);
@@ -112,7 +111,7 @@ angular.module('${projectBeanName}App')
             if (!${js}scope.editMode) {
                 ${js}scope.search();
             } else {
-                ${js}location.path('/${entity.name}/');
+                ${js}location.path('/${entity.beanName}/');
             }
         });
     };
@@ -293,7 +292,7 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
            console.log(successResult);
            ${js}scope.entity = ${entityBeanName}Service.create();
            ${js}modalInstance.close(${js}scope.entity);
-           ${js}location.path('/${entity.name}/');
+           ${js}location.path('/${entity.beanName}/');
        });
     };
 

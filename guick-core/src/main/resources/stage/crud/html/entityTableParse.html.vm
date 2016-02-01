@@ -105,6 +105,6 @@
                                     <dir-pagination-controls
                                         on-page-change="${entityParameter.beanName}PaginationChanged(newPageNumber)"
                                         boundary-links="true"
-                                        template-url="components/directives/dirPagination.tpl.html"
+                                        template-url="layout/dir-pagination.html"
                                         pagination-id="${entityParameter.beanName}"></dir-pagination-controls>
                                 </div>

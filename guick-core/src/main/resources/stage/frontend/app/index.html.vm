@@ -12,30 +12,37 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
-    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.css" />
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.min.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
-##    <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="bower_components/angular-timeline/dist/angular-timeline.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css" />
+    <link rel="stylesheet" href="bower_components/ng-joyride/ng-joyride.css" />
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/imperavi-redactor/redactor/redactor.css" />
-    <link rel="stylesheet" href="layout/css/ng-joyride-mgpe.css" />
-    <link rel="stylesheet" href="layout/css/animate.css" />
-    <link rel="stylesheet" href="layout/css/media-querie.css" />
-    <link rel="stylesheet" href="layout/css/${project.acronym}.css" />
+    <link rel="stylesheet" href="layout/css/ng-joyride.css" />
     <link rel="stylesheet" href="layout/css/main.css" />
     <link rel="stylesheet" href="layout/css/grid.css" />
+    <link rel="stylesheet" href="layout/css/media-querie.css" />
+    <link rel="stylesheet" href="layout/css/${project.acronym}.css" />
     <link rel="stylesheet" href="layout/css/menu.css" />
     <link rel="stylesheet" href="layout/css/mini-field.css" />
+    <link rel="stylesheet" href="layout/css/animate.css" />
     <link rel="stylesheet" href="layout/css/reset.css" />
-    <link rel="stylesheet" href="layout/css/load.css" />
     <link rel="stylesheet" href="layout/css/botoes.css" />
+    <link rel="stylesheet" href="layout/css/load.css" />
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/oldieshim.js -->

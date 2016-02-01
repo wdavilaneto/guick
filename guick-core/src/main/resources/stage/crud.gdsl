@@ -124,6 +124,9 @@ guick {
                         [input: "stage/frontend/crud/modules/entity/components/entity.filter.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.filter.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.readonly.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.readonly.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.modal.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.modal.html"],
+                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.delete.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.delete.html"],
+                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.detalhar.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.detalhar.html"],
+                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.edit.html"],
 
                         [input: "stage/frontend/crud/modules/entity/directives/select.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.html"],
                         [input: "stage/frontend/crud/modules/entity/directives/select.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.js"],

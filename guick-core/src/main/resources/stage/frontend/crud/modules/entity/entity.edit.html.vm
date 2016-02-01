@@ -3,14 +3,16 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <i class="fa fa-edit"></i> : ${entity.title}
+    <h1 class="color-asphalt"><i class="mdi mdi-file-find"></i> ${entity.title}</h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">${entity.title}</li>
+        <li><a href="#/"> <i class="mdi mdi-home"></i> {{"menu.inicial" | translate}} </a></li>
+        <li><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}}</a></li>
+        <li class="active"> {{"alterar" | translate}} </li>
     </ol>
 </section>
 
 <section class="content">
+    <div class="box box-primary">
     <form name="mainForm" novalidate >
     <div ng-controller="${entityBeanName}Controller">
         <div ng-controller="${entity.beanName}ExtController">
@@ -18,30 +20,41 @@
                 <div tab heading="Principal">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box box-primary">
-                                <div class="box-header"><h3 class="box-title"></h3></div>
-                                <div class="box-body">
-                                    <div class="row">
-                                         <${entity.beanName}-fieldset model="entity"/>
-                                    </div>
+
+                            <div class="box-header"><h3 class="box-title"></h3></div>
+                            <div class="box-body">
+                                <div class="row">
+                                     <${entity.beanName}-fieldset model="entity"/>
                                 </div>
-                                <div class="box-footer">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" back><span class="fa fa-chevron-circle-left"></span> Voltar</button>
-                                        <button class="btn btn-danger" ng-click="remove()"><span class="fa fa-sign-out"></span> Remover</button>
-                                        <button class="btn btn-success" ng-click="save()" ng-disabled="userForm.$invalid">><span class="fa fa-save"></span> Gravar</button>
+                            </div>
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
+                                        <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i>{{"remover" | translate}}</button>
+                                        <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid">><i class="mdi mdi-content-save"></i> {{"gravar" | translate}}</button>
                                     </div>
                                 </div>
                             </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i></button>
+                                        <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i></button>
+                                        <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid">><i class="mdi mdi-content-save"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
                 <div tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box box-primary">
+
                                 <div class="box-header">
                                     <h3 class="box-title">Lista de ${complexProperty.referedEntity.name}</h3>
                                     <div class="box-tools">
@@ -60,7 +73,7 @@
                                 <!--<div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Table.html'"></div>-->
 #set($entityParameter = ${complexProperty.referedEntity} )
 #parse('stage/crud/html/entityTableParse.html.vm')
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -73,7 +86,7 @@
                 <div tab heading="${complexProperty.title}" ng-show="${entity.looksLikeMainEntity()}">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box box-primary">
+
                                 <div class="box-header"><h3 class="box-title">${complexProperty.referedEntity.title}</h3></div>
                                 <div class="box-body">
                                     <div class="row">
@@ -87,7 +100,7 @@
 #end
                                     </div>
                                 </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -99,7 +112,7 @@
 
             <div class="nav-tabs-custom" ng-show="masterDetail=='${complexProperty.referedEntity.name}' && selected${complexProperty.referedEntity.name} != null ">
                 <div class="tab-content">
-                    <div class="box box-primary">
+
                         <div class="box-header"><h3 class="box-title"></h3></div>
                         <div class="box-body">
                             <div class="row">
@@ -108,12 +121,12 @@
                         </div>
                         <div class="box-footer">
                             <div class="form-group">
-                                <button class="btn btn-primary" ng-click="back()"><span class="fa fa-chevron-circle-left"></span> Voltar</button>
-                                <button class="btn btn-danger" ng-click="remove${complexProperty.referedEntity.name}()"><span class="fa fa-sign-out"></span> Remover</button>
-                                <button class="btn btn-success" ng-click="save${complexProperty.referedEntity.name}()"><span class="fa fa-save"></span> Gravar</button>
+                                <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
+                                <button type="button" class="bt bt-alizarin" ng-click="remove${complexProperty.referedEntity.name}()"><span class="fa fa-sign-out"></span> Remover</button>
+                                <button type="button" class="bt bt-indigo" ng-click="save${complexProperty.referedEntity.name}()"><span class="fa fa-save"></span> Gravar</button>
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
 #end
@@ -121,4 +134,5 @@
         </div>
     </div>
     </form>
+    </div>
 </section>

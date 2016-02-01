@@ -10,7 +10,7 @@
 					controller: '${entity.beanName}Controller',
 					controllerAs: '${entity.beanName}Controller'
 				})
-                .when('/${entity.name}/:id', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
-                .when('/${entity.name}/:id/:child', {templateUrl: 'views/crud/${entity.name}/${entity.name}Edit.html'})
+                .when('/${entity.beanName}/:id', {templateUrl: 'modules/${entity.beanName}/${entity.beanName}.edit.html'})
+                .when('/${entity.beanName}/:id/:child', {templateUrl: 'modules/${entity.beanName}/${entity.name}.edit.html'})
 		}]);
 })();

@@ -82,6 +82,6 @@
                                     <dir-pagination-controls
                                         on-page-change="${entity.beanName}PaginationChanged(newPageNumber)"
                                         boundary-links="true"
-                                        template-url="components/directives/dirPagination.tpl.html"
+                                        template-url="layout/dir-pagination.html"
                                         pagination-id="${entity.beanName}"></dir-pagination-controls>
                                 </div>

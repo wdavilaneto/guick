@@ -37,6 +37,9 @@
   "filtro.hint" : "Exibe critérios avançados de pesquisa",
   "buscar" : "Buscar",
   "buscar.hint" : "Realiza a busca conforme filtros informados",
+  "alterar" : "Alterar" ,
+  "edit" : "Editar" ,
+  "query" : "Consultar",
   "limpar" : "Limpar",
   "limpar.hint" : "Limpa os campos preenchidos",
 

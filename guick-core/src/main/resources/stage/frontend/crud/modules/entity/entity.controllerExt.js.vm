@@ -42,7 +42,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
             ${js}scope.selected${ent.referedEntity.name} = data;
         }, function (data){
             // Case error or not found ..back to search filter
-            ${js}location.path('/${entity}/'+ ${js}routeParams.id);
+            ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id);
         });
     };
 
@@ -106,18 +106,18 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
             if (!${js}scope.editMode) {
                 ${js}scope.search${ent.referedEntity.name}();
             } else {
-                ${js}location.path('/${entity.name}/'+ ${js}routeParams.id + '/${ent.referedEntity.name}');
+                ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id + '/${ent.referedEntity.name}');
             }
         });
     };
     ${js}scope.edit${ent.referedEntity.name} = function (obj) {
         ${js}scope.selected${ent.referedEntity.name} = obj
-        ${js}location.path('/${entity.name}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/' + obj.id );
+        ${js}location.path('/${entity.beanName}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/' + obj.id );
     };
     ${js}scope.create${ent.referedEntity.name} = function (obj) {
         ${js}scope.selected${ent.referedEntity.name} = ${ent.referedEntity.beanName}Service.create();
         ${js}scope.selected${ent.referedEntity.name}.${entity.beanName} = ${js}scope.entity;
-        ${js}location.path('/${entity.name}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/');
+        ${js}location.path('/${entity.beanName}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/');
     };
 
     ${js}scope.${ent.referedEntity.beanName}PaginationChanged = function(newPage) {
@@ -134,7 +134,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
     ${js}scope.back = function (){
         if (${js}routeParams.child) {
             console.log('Redirecting to /${entity}/'+ $routeParams.id + '/' + $routeParams.child);
-            ${js}location.path('/${entity}/'+ ${js}routeParams.id + '/' + ${js}routeParams.child);
+            ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id + '/' + ${js}routeParams.child);
         } else {
             ${js}window.history.back();
         }

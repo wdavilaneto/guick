@@ -3,10 +3,10 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <h1><i class="fa fa-home"></i> ${entity.title}</h1>
+    <h1 class="color-asphalt"><i class="mdi mdi-file-find"></i> ${entity.title}</h1>
     <ol class="breadcrumb">
-        <li><a href="#/"> Inicial </a></li>
-        <li class="active">${entity.title}</li>
+        <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
+        <li class="active"><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}} </a></li>
     </ol>
 </section>
 
@@ -101,11 +101,22 @@
                             <div class="row">
                                 <div ng-include src="'modules/${entity.beanName}/components/${entity.beanName}.filter.html'"></div>
                             </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                                    <button type="button" class="btn btn-primary btn-sm" ng-click="clearForm()"><i class="glyphicon glyphicon-trash"></i> Limpar Filtro</button>
-                                    <button type="button" class="btn btn-primary btn-sm" ng-click="open('lg')"><i class="fa fa-plus-circle"></i> Cadastrar Novo</button>
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> Novo</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> </a>
+                                        <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> </a>
+                                        <a class="bt bt-metal" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
