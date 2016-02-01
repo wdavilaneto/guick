@@ -14,6 +14,7 @@ guick {
             templates = [
                     [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
                     [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
+                    [input: "stage/config/settings2.gradle.vm", output: "/api/settings.gradle"],
                     [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
 
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
@@ -45,7 +46,6 @@ guick {
                     [input: "stage/crud/scripts/utils.js.vm", output: "/front-end/app/scripts/service/support/utils.js"],
                     [input: "stage/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/directives/directives.js"],
                     [input: "stage/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
-
             ]
         }
 

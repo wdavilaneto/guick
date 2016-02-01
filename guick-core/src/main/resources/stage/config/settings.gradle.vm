@@ -1,4 +1,2 @@
-##include "${project.name}-api"
-##include "front-end"
 include "api"
 rootProject.name = '${project.name}'
