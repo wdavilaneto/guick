@@ -29,7 +29,7 @@
     "angular-translate-loader-static-files": "2.6.1",
     "angular-utils-pagination": "0.7.0",
     "angular-flot": "0.0.6",
-    "angucomplete-alt": "0.0.39",
+    "angucomplete-alt": "0.0.33",
     "html5shiv": "~3.7.2",
     "imperavi-redactor": "10.0.9",
     "ng-tags-input": "~2.3.0",

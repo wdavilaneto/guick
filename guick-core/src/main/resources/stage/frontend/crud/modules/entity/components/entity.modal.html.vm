@@ -54,6 +54,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="bt bt-metal" ng-click="$event.stopPropagation(); cancel()"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
-                <button type="button" class="bt bt-alizarin" ng-click="$event.stopPropagation(); remove()"><i class="fa fa-ban"></i> Remover </button>
+                <button type="button" class="bt bt-alizarin" ng-click="$event.stopPropagation(); remove()"><i class="mdi mdi-close-circle"></i> Remover </button>
             </div>
         </script>

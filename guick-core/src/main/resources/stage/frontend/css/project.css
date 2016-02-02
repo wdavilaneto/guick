@@ -21,7 +21,7 @@
 .ng-joyride-title{top:30%;left:0;right:0;margin:0 auto;}
 /**/
 
-/*ÁREA DE APRESENTAÇÃO DO PDF*/
+/*ï¿½REA DE APRESENTAï¿½ï¿½O DO PDF*/
 .area {width: 100%;padding: 15px;}
 
 #documentArea {border: 2px dashed #bbb;-webkit-border-radius: 5px;border-radius: 5px;padding: 50px;text-align: center;font: 21pt bold ;color: #bbb;height: 600px;font-family:'roboto-light';}
@@ -30,7 +30,7 @@
 .panel-page-pdf-content{width: 100%;height:768px!important;}
 /**/
 
-/*ULTIMA ATUALIZAÇÃO*/
+/*ULTIMA ATUALIZAï¿½ï¿½O*/
 .box-update {font-size: 0.65em;font-weight: bold;}
 /**/
 
@@ -64,42 +64,39 @@ ul.list-process li a.bt-river{color:#fff;margin-top:0;}
     display: none;
 }
 .mpswitch-label {
-    display: block;
-    cursor: pointer;
-    padding: 0;
-    line-height: 14px;
-    width:30px;
-    height:30px;
-    border: 0px solid #FFFFFF;
-    background: #ededed;
-    transition: 0.1s;
-    -webkit-transition: 0.1s;
-    -moz-transition: 0.1s;
-    border: 1px solid #ccc;
+    display: block; cursor: pointer;
+    height: 14px; padding: 0; line-height: 14px;
+    border: 0px solid #FFFFFF; border-radius: 22px;
+    background-color: #BDC3C7;
+    transition:0.5s;
+    -webkit-transition:0.5s;
+    -moz-transition:0.5s;
 }
 .mpswitch-label:before {
-
+    content: "";
+    display: block; width: 22px; margin: -4px;
+    background: #ecf0f1;
+    position: absolute; top: 0; bottom: 0;
+    right: 25px;
+    border-radius: 22px;
+    box-shadow: 0 6px 12px 0px #757575;
+    border:1px solid #bdc3c7;
 }
 .mpswitch-checkbox:checked + .mpswitch-label {
+    background-color: #27AE60;
 }
 .mpswitch-checkbox:checked + .mpswitch-label, .mpswitch-checkbox:checked + .mpswitch-label:before {
-     content:'\2713';
-      font-size: 1.5em;
-      width:30px;
-      overflow:hidden;
-      height:30px;
-      background-color: transparent !important;
-      font-family: 'Roboto-Thin';
-      padding: 6px 2px 2px 2px ;
-      color:#3498db;
+   border-color: #27AE60;
 }
 .mpswitch-checkbox:checked + .mpswitch-label .mpswitch-inner {
     margin-left: 0;
 }
 .mpswitch-checkbox:checked + .mpswitch-label:before {
     right: 0px;
-    background-color: transparent;
+    background-color: #ECF0F1;
+    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
 }
+/**/
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{/*border-bottom:1px solid #e74c3c;*/}
 

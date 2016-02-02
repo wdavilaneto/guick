@@ -3,6 +3,7 @@
 
   "home": "Tela inicial",
 
+  "menu.inicial": "Início",
   "menu.principal": "Principal",
   "menu.administracao": "Administração",
   "menu.tipos": "Tipos",
@@ -37,6 +38,8 @@
   "filtro.hint" : "Exibe critérios avançados de pesquisa",
   "buscar" : "Buscar",
   "buscar.hint" : "Realiza a busca conforme filtros informados",
+  "filtro_busca" : "Filtro de Busca",
+  "busca_avancada" : "Busca Avançada",
   "alterar" : "Alterar" ,
   "edit" : "Editar" ,
   "query" : "Consultar",

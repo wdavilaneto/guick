@@ -17,7 +17,8 @@
     <div ng-controller="${entityBeanName}Controller">
         <div ng-controller="${entity.beanName}ExtController">
             <div tabset ng-show="masterDetail == null">
-                <div tab heading="Principal">
+                <div tab>
+                    <div tab-heading><i class="mdi mdi-file-document-box"></i> {{"menu.principal" | translate}}</div>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
 
@@ -32,7 +33,7 @@
                                     <div class="col-md-12">
                                         <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
                                         <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i>{{"remover" | translate}}</button>
-                                        <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid">><i class="mdi mdi-content-save"></i> {{"gravar" | translate}}</button>
+                                        <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"gravar" | translate}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +52,8 @@
                 </div>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-                <div tab heading="${complexProperty.title}" select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
+                <div tab select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
+                    <div tab-heading><i class="mdi mdi-file-document-box"></i> ${complexProperty.title}</div>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
 
@@ -83,7 +85,8 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-                <div tab heading="${complexProperty.title}" ng-show="${entity.looksLikeMainEntity()}">
+                <div tab ng-show="${entity.looksLikeMainEntity()}">
+                    <div tab-heading><i class="mdi mdi-file-document-box"></i> ${complexProperty.title} </div>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
 

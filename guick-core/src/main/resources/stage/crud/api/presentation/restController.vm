@@ -20,22 +20,22 @@ import ${project.group}.${project.name}.domain.${entity.id.type};
 import ${project.group}.${project.name}.api.service.I${entity.name}Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 /**
  *  CRUD Rest Json 'Controller' for entity${entity.name}
@@ -48,7 +48,6 @@ import javax.validation.Valid;
 public class ${entity.name}Controller {
 
     private static PageRequest DEFAULT_PAGE = new PageRequest(0,20);
-
     private static final Logger LOGGER = LoggerFactory.getLogger(${entity.name}Controller.class);
 
     @Resource(name = "${entityBeanName}Service")
@@ -59,9 +58,13 @@ public class ${entity.name}Controller {
      * @param pagination
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = GET)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<Page<${entity.name}>> findAll(Pagination pagination) {
-        return new HttpEntity(${entityBeanName}Service.findAll(pagination.getPageable()));
+#else
+    def findAll(Pagination pagination) {
+#end
+        return new ResponseEntity(${entityBeanName}Service.findAll(pagination.getPageable()), OK);
     }
 
     /**
@@ -69,9 +72,13 @@ public class ${entity.name}Controller {
      * @param filter
      * @return
      */
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/search", method = POST)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<Page<${entity.name}>> search(@RequestBody SearchFilter<${entity.name}> filter) {
-        return new ResponseEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()), HttpStatus.OK);
+#else
+    def search(@RequestBody SearchFilter<${entity.name}> filter) {
+#end
+        return new ResponseEntity(${entityBeanName}Service.search(filter.getContent() , filter.getPageable()), OK);
     }
 
     /**
@@ -79,9 +86,13 @@ public class ${entity.name}Controller {
      * @param text
      * @return
      */
-    @RequestMapping(value = "/searchText", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchText", method = GET)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<Page<${entity.name}>> searchTextGet(String text) {
-        return new HttpEntity(${entityBeanName}Service.searchText(text , DEFAULT_PAGE ));
+#else
+    def searchTextGet(String text) {
+#end
+        return new ResponseEntity(${entityBeanName}Service.searchText(text , DEFAULT_PAGE ), OK);
     }
     /**
      * Returns a paged and filtered list with an given example (ignoring relationship examples beyond id)
@@ -89,17 +100,25 @@ public class ${entity.name}Controller {
      * @return
      */
     @RequestMapping(value = "/searchText", method = RequestMethod.POST)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<Page<${entity.name}>> searchText(@RequestBody SearchFilter<String> filter) {
-        return new HttpEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()));
+#else
+    def searchText(@RequestBody SearchFilter<String> filter) {
+#end
+        return new ResponseEntity(${entityBeanName}Service.searchText(filter.getContent() , filter.getPageable()), OK);
     }
     /**
      * Return an entity,${entity.name} ,with an Given ID
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = GET)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<${entity.name}> get(@PathVariable ${entity.id.type} id) {
-        return new HttpEntity<>(${entityBeanName}Service.findOne(id));
+#else
+    def get(@PathVariable ${entity.id.type} id) {
+#end
+        return new ResponseEntity(${entityBeanName}Service.findOne(id), OK);
     }
 
     /**
@@ -107,8 +126,12 @@ public class ${entity.name}Controller {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = DELETE)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity delete(@PathVariable ${entity.id.type} id) {
+#else
+    def delete(@PathVariable ${entity.id.type} id) {
+#end
         ${entityBeanName}Service.delete(id);
         return new HttpEntity(null);
     }
@@ -118,10 +141,14 @@ public class ${entity.name}Controller {
      * @param ${entityBeanName}
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = POST)
+#if ( ${project.config.generationLanguage} == 'java')
     public HttpEntity<${entity.name}> save(@RequestBody ${entity.name} ${entityBeanName}) {
+#else
+    def save(@RequestBody ${entity.name} ${entityBeanName}) {
+#end
         ${entityBeanName}Service.save(${entityBeanName});
-        return new HttpEntity<${entity.name}>(${entityBeanName});
+        return new ResponseEntity(${entityBeanName}, OK);
     }
 #if (${entity.hasDeadline()})
 
@@ -130,9 +157,14 @@ public class ${entity.name}Controller {
      * @param pagination
      * @return
      */
-    @RequestMapping(value = "/overdue", method = RequestMethod.GET)
-    public HttpEntity<Page<${entity.name}>> overdue(Pagination pagination) {
-        return new ResponseEntity(${entityBeanName}Service.overdue(pagination.getPageable()), HttpStatus.OK);
+    @RequestMapping(value = "/overdue", method = GET)
+#if ( ${project.config.generationLanguage} == 'java')
+    public HttpEntity<${entity.name}> overdue(Pagination pagination) {
+#else
+    def overdue(Pagination pagination) {
+#end
+    }
+        return new ResponseEntity(${entityBeanName}Service.overdue(pagination.getPageable()), OK);
     }
 #end
 

@@ -33,6 +33,16 @@
         }])
 
         /**
+         * Configs do Spinner BlockUI
+         */
+        .config(['blockUIConfig', function (blockUIConfig) {
+            blockUIConfig.autoInjectBodyBlock = false;
+            blockUIConfig.message = '';
+            blockUIConfig.blockBrowserNavigation = true;
+            blockUIConfig.delay = 100;
+        }])
+
+        /**
          * Configs Datepicker
          */
         .config(function (datepickerConfig, datepickerPopupConfig) {

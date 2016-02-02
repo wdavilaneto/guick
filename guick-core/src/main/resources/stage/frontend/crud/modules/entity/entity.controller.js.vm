@@ -96,8 +96,8 @@ angular.module('${projectBeanName}App')
     };
 
     $scope.save = function() {
-        $scope.$broadcast('show-errors-check-validity');
-        // if any invalid validation
+        //$scope.$broadcast('show-errors-check-validity');
+        //if any invalid validation
         //if (!$scope.mainForm || $scope.mainForm.$invalid) {
         console.log('TODO: Validate Errors');
         //    return;

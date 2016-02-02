@@ -14,7 +14,8 @@
     <div class="box box-primary">
         <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()" >
             <div tabset>
-                <div tab heading="Filtro de busca" ng-click="setTextSearchActive(true)">
+                <div tab ng-click="setTextSearchActive(true)">
+                    <div tab-heading><i class="mdi mdi-filter"></i> {{"filtro_busca" | translate}}</div>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box-body">
@@ -23,19 +24,20 @@
                                         <label class="control-label" for="searchField.text"> Busca por texto</i>
                                             <i popover-trigger="mouseenter"  popover-placement="left" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
                                         </label>
-                                        <div class="input-group">
+##                                        <div class="input-group">
                                             <input class="form-control" type="text" ng-model="searchField.text" placeholder="busca por texto.." id="searchField.text"/>
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-default" ng-click="newSearch()"><i class="fa fa-search"></i></button>
-                                                <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
-                                            </div>
-                                        </div>
+##                                            <div class="input-group-btn">
+##                                                <button class="btn btn-default" ng-click="newSearch()"><i class="fa fa-search"></i></button>
+##                                                <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
+##                                            </div>
+##                                        </div>
                                     </div>
 #if(${entity.getActiveProperty()})
-                                    <div class="form-group col-md-4"> <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="actives" ng-model="entity.boolActive" checked> Ativo (${entity.getActiveProperty().title})
-                                            </label>
+                                    <div class="form-group col-md-2">
+                                        <label class="control-label" for="${entity.getActiveProperty()}">${entity.getActiveProperty().title}</label>
+                                        <div class="mpswitch mt-14">
+                                            <input  ng-model="entity.boolActive" type="checkbox" name="mpswitch{{$index}}" class="mpswitch-checkbox" id="${entity.getActiveProperty()}">
+                                            <label class="mpswitch-label" for="${entity.getActiveProperty()}"></label>
                                         </div>
                                     </div>
 #{end}
@@ -91,15 +93,17 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-                <div tab heading="Busca Avançada" ng-click="setTextSearchActive(false)">
+                <div tab ng-click="setTextSearchActive(false)">
+                    <tab-heading><i class="mdi mdi-file-find"></i> {{"busca_avancada" | translate}}</tab-heading>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="row">
-                                <div ng-include src="'modules/${entity.beanName}/components/${entity.beanName}.filter.html'"></div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div ng-include src="'modules/${entity.beanName}/components/${entity.beanName}.filter.html'"></div>
+                                </div>
                             </div>
                             <div class="box-footer hidden-sm hidden-xs">
                                 <div class="row">
@@ -126,18 +130,14 @@
         </form>
     </div>
     <!-- fim sessão -->
-
     <!-- sessão -->
     <div class="box box-primary">
         <div class="box-body">
             <div class="box-header">
                 <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
             </div>
-            <div ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize ></div>
+            <div ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\\${entity.name}/.*/"></div>
         </div>
     </div>
-
     <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.modal.html'"></div>
-
 </section>
-

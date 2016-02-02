@@ -1,7 +1,7 @@
 #if( !(${entity.table.getFieldThatPointsParentPk().size()} ==1 && ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column}) )
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
     <!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
-    <div class="class="col-md-3" show-errors>
+    <div class="class="col-md-3 form-group" show-errors>
         <label class="control-label" for="${idAgragation}${property}">${property.title}  #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required#{end}#if(${property.name} != 'numeroProcesso') placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
 #if(!${property.column.nullable})
@@ -12,7 +12,7 @@
 #else
 #if ( ${property.getType().equalsIgnoreCase('byte[]')} )
     <div class="col-md-3 form-group" show-errors>
-        <label for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+        <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
             <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="entity.${property}" width="80px" />
             <input type="file" fileread="entity.${property}" filetype="entity.${idAgragation}${property}Type" id="${idAgragation}${property}"/>
@@ -25,7 +25,7 @@
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
 #if (${property.column.insertable})
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+        <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
@@ -43,7 +43,7 @@
 <div class="col-md-3 form-group" show-errors>
     <div class="col-md-3">
         <div class="row">
-            <label>${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+            <label class="control-label">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         </div>
     </div>
     <div class="col-md-12" ng-controller="ButtonsCtrl">
@@ -61,7 +61,7 @@
 #else
 #if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
 <div class="col-md-3 form-group" show-errors>
-    <label for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
     <input type="email" class="form-control" ng-maxlength="${property.column.length}" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" >
 #if(!${property.column.nullable})
      <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
@@ -86,7 +86,7 @@
 #{end}
 </div>
 #else
-<div class="col-md-3" show-errors>
+<div class="col-md-3 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
     <input class="form-control" type="text" ng-maxlength="${property.column.length}" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
 #if(!${property.column.nullable})

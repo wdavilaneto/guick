@@ -33,7 +33,7 @@
             if (url && url.length > 1) {
                 url = decodeURIComponent(url[1]);
             } else {
-                url = "http://localhost:9000/${project.name}/api/v2/api-docs";
+                url = "http://0.0.0.0:9000/${project.name}/api/v2/api-docs";
             }
 
             // Pre load translate...

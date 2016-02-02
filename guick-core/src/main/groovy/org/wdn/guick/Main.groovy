@@ -33,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            //main.project.initialize("../mprj-gsi-portfolio/")
+            //main.project.initialize("../java/mprj-gsi-portfolio/")
             main.project.initialize("../java/mprj-gsi-medicamentos")
 
             main.setTarget("stage/create-webapp").run()

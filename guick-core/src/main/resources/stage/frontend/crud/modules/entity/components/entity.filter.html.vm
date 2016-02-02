@@ -22,7 +22,7 @@
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} >= ${bigFieldSize})
 ##parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
-    <div class="col-md-3 form-group#if(!${property.column.nullable}) #{end}">
+    <div class="col-md-3 form-group#if(!${property.column.nullable})*#{end}">
         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
     </div>
@@ -33,7 +33,7 @@
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} >= ${bigFieldSize})
 ##parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
-    <div class="col-md-3 form-group#if(!${property.column.nullable}) #{end}">
+    <div class="col-md-3 form-group#if(!${property.column.nullable})*#{end}">
         <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
         <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
     </div>
@@ -80,7 +80,7 @@
     </div>
 #else
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label>${complexProperty.title}
+        <label class="control-label">${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -133,7 +133,7 @@
     </div>
 #else
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label>${complexProperty.title}
+        <label class="control-label">${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -189,7 +189,7 @@
     </div>
 #else
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label>${complexProperty.title}
+        <label class="control-label">${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
