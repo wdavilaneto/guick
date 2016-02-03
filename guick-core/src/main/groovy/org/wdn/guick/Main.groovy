@@ -33,15 +33,12 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            main.project.initialize("../java/mprj-gsi-portfolio/")
+            //main.project.initialize("../java/mprj-gsi-portfolio/")
+            main.project.initialize("../java/mprj-gsi-medicamentos")
             //main.project.initialize("../java/mprj-gsi-medicamentos")
-
             main.setTarget("stage/create-webapp").run()
-
             main.setTarget("stage/crud").run()
-
 //            main.project.persist();
-
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
@@ -51,7 +48,7 @@ class Main {
         guick.runEngine(target)
     }
 
-    public Main setTarget(String lvalue){
+    public Main setTarget(String lvalue) {
         target = lvalue;
         return this;
     }

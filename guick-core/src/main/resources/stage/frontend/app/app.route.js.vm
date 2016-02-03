@@ -4,11 +4,23 @@
 (function() {
    'use strict';
 
-    angular.module('${project.name}App')
-	    .config(['${js}routeProvider', function(${js}routeProvider) {
-		    ${js}routeProvider
-		      .otherwise({redirectTo: '/'});
+	angular.module('medicamentosApp').config(Config);
 
- 	}]);
+    function Config($translateProvider, $urlRouterProvider, $stateProvider) {
+
+        $stateProvider
+            .state('main', {
+                url: "/",
+                controller: 'MainController',
+                controllerAs: 'mainController',
+                templateUrl: "modules/main/main.html"
+            })
+        ;
+
+        $urlRouterProvider.otherwise("/");
+        $translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
+        $translateProvider.preferredLanguage('i18n/locale-pt-BR');
+
+    }
 
 })();

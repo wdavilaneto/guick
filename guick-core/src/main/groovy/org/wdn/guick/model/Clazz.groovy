@@ -119,5 +119,9 @@ class Clazz implements Serializable {
         return name
     }
 
+    public String getBeanName() {
+        return StringUtils.uncapitalize(name);
+    }
+
 }
 

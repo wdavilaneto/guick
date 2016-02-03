@@ -1,16 +1,8 @@
 #set( $js  = "$")
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
 (function() {
+
 	'use strict';
 
-	angular.module('${project.name}App.main')
-		.config(['$routeProvider', function($routeProvider) {
-			$routeProvider
-				.when('/', {
-					templateUrl: 'modules/main/main.html',
-					controller: 'MainController',
-					controllerAs: 'mainController'
-			})
-		}]);
 })();

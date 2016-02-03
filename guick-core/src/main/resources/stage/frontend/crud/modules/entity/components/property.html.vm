@@ -25,7 +25,7 @@
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
 #if (${property.column.insertable})
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+        <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
@@ -80,10 +80,10 @@
 #if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
 <div class="col-md-12 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-    <textarea ckeditor="options" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" ></textarea>
+    <def text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
 #if(!${property.column.nullable})
-    <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
-#{end}
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}core
 </div>
 #else
 <div class="col-md-3 form-group" show-errors>

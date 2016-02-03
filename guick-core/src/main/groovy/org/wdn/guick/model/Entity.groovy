@@ -1,5 +1,6 @@
 package org.wdn.guick.model
 
+import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 import org.wdn.guick.util.StringUtil
@@ -346,7 +347,7 @@ class Entity extends Clazz {
     }
 
     public String getBeanName() {
-        return stringUtil.uncapitalize(name);
+        return StringUtils.uncapitalize(name);
     }
 
 }

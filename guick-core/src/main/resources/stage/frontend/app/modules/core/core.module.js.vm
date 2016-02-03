@@ -14,7 +14,8 @@
         'ngAnimate',
         'ngCookies',
         'ngResource',
-        'ngRoute',
+##        'ngRoute',
+        'ui.router',
         'ngSanitize',
         'ngTouch',
 
@@ -38,12 +39,12 @@
         'ngTagsInput',
         'pdf',
         'pascalprecht.translate',
-        'angular-redactor',
         'angular-timeline',
         'xeditable',
         'dialogs.main',
         'ngFileUpload',
         'chart.js',
+        'textAngular',
 
         /*
          * Commons app modules

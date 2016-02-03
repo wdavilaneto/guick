@@ -36,7 +36,7 @@
                                     <div class="form-group col-md-2">
                                         <label class="control-label" for="${entity.getActiveProperty()}">${entity.getActiveProperty().title}</label>
                                         <div class="mpswitch mt-14">
-                                            <input  ng-model="entity.boolActive" type="checkbox" name="mpswitch{{$index}}" class="mpswitch-checkbox" id="${entity.getActiveProperty()}">
+                                            <input  ng-model="entity.boolActive" type="checkbox" name="mpswitch{{${js}index}}" class="mpswitch-checkbox" id="${entity.getActiveProperty()}">
                                             <label class="mpswitch-label" for="${entity.getActiveProperty()}"></label>
                                         </div>
                                     </div>

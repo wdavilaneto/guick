@@ -112,6 +112,7 @@ guick {
             "geracao de front-end" {
                 templates = [
                         [input: "stage/frontend/crud/modules/entity/entity.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.controller.js"],
+                        [input: "stage/frontend/crud/modules/entity/entity.edit.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.controller.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.controllerExt.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.extController.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.service.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.service.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.module.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.module.js"],

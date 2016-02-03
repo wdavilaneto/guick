@@ -19,7 +19,7 @@
  * # ${entityBeanName}ExtController
  * Extended Controller pr Master Detail and other specific operations of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('${entity.beanName}ExtController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+angular.module('${projectBeanName}App').controller('${entity.beanName}ExtController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
     $scope.masterDetail = null;
 

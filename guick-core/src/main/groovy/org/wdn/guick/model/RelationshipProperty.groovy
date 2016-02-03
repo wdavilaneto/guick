@@ -33,13 +33,14 @@ public class RelationshipProperty extends Clazz {
     }
 
     private Boolean _looksLikeDeadline = null;
+
     public boolean looksDeadline() {
         if (_looksLikeDeadline == null) {
             _looksLikeDeadline = false;
             if (!'Date'.equals(type)) {
                 return _looksLikeDeadline;
             }
-            for (def word : ["deadline", "prazo", "dateDeadLine", "deadlineDate" , "dataPrazo", "prazoData"]) {
+            for (def word : ["deadline", "prazo", "dateDeadLine", "deadlineDate", "dataPrazo", "prazoData"]) {
                 if (name.contains(word)) {
                     _looksLikeDeadline = true;
                     return _looksLikeDeadline;
@@ -50,13 +51,15 @@ public class RelationshipProperty extends Clazz {
     }
 
     private Boolean _looksLikeEndDate = null;
+
     public boolean looksLikeEndDate() {
         if (_looksLikeEndDate == null) {
             _looksLikeEndDate = false;
             if (!'Date'.equals(type)) {
                 return _looksLikeEndDate;
             }
-            for (def word : ["endDate", "end", "dataFim", "dataSaida","dataEncerramento" , "termino", "fim", "expirationDate" ,"expireDate", "dataDesligamento", "desligamento", "dataDemissao", "demissao"]) {
+            for (
+                    def word : ["endDate", "end", "dataFim", "dataSaida", "dataEncerramento", "termino", "fim", "expirationDate", "expireDate", "dataDesligamento", "desligamento", "dataDemissao", "demissao"]) {
                 if (name.contains(word)) {
                     _looksLikeEndDate = true;
                     return _looksLikeEndDate;
@@ -67,13 +70,14 @@ public class RelationshipProperty extends Clazz {
     }
 
     private Boolean _looksLikeBeginDate = null;
+
     public boolean looksLikeBeginDate() {
         if (_looksLikeBeginDate == null) {
             _looksLikeBeginDate = false;
             if (!'Date'.equals(type)) {
                 return _looksLikeBeginDate;
             }
-            for (def word : ["beginDate", "begin", "dataInicio", "dataInicial" , "hiringDate", "inicio"]) {
+            for (def word : ["beginDate", "begin", "dataInicio", "dataInicial", "hiringDate", "inicio"]) {
                 if (name.contains(word)) {
                     _looksLikeBeginDate = true;
                     return _looksLikeBeginDate;

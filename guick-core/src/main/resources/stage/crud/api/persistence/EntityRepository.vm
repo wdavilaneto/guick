@@ -45,6 +45,9 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         }
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
+#if( ${entity.getMostDescritiveProperties().size()} > 0 )
+        criteria.addOrder(new Order("${entity.getMostDescritiveProperties()[0]}",true));
+#end
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
@@ -120,6 +123,9 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         }
 
 #end
+#if( ${entity.getMostDescritiveProperties().size()} > 0 )
+        criteria.addOrder(new Order("${entity.getMostDescritiveProperties()[0]}",true));
+#end
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
@@ -147,6 +153,9 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
 #end
 #end
         );
+#if( ${entity.getMostDescritiveProperties().size()} > 0 )
+        criteria.addOrder(new Order("${entity.getMostDescritiveProperties()[0]}",true));
+#end
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
@@ -185,6 +194,7 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(${entity.getName()}.class);
         criteria.add( Restrictions.le("${entity.getAllDeadlineProperties()[0]}", today ) );
+        criteria.addOrder(new Order("${entity.getAllDeadlineProperties()[0]}",true));
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 #end

@@ -1,4 +1,4 @@
-<a class="btn-grid-change" ng-click="$event.stopPropagation(); grid.appScope.detalhar(row.entity);"
+<a ui-sref="${entity.beanName}.edit({id: row.entity.id})" class="btn-grid-change"
     popover="{{'alterar' | translate}}"
     popover-placement="left"
     popover-trigger="mouseenter"

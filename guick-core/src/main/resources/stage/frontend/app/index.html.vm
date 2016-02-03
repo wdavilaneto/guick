@@ -28,10 +28,10 @@
     <link rel="stylesheet" href="bower_components/ng-joyride/ng-joyride.css" />
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="bower_components/imperavi-redactor/redactor/redactor.css" />
     <link rel="stylesheet" href="layout/css/ng-joyride.css" />
     <link rel="stylesheet" href="layout/css/main.css" />
     <link rel="stylesheet" href="layout/css/grid.css" />
@@ -104,7 +104,7 @@
               <div ng-include="'layout/menu/menu.html'"></div>
           </aside>
           <aside class="right-side" >
-              <div id="content" ng-view ng-if="isAuthenticated || true"></div>
+              <div id="content" ui-view ng-if="isAuthenticated || true"></div>
           </aside>
       </div>
   </div>
@@ -134,6 +134,7 @@
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="bower_components/angular-ui-date/src/date.js"></script>
@@ -169,6 +170,15 @@
   <script src="bower_components/Chart.js/Chart.js"></script>
   <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
   <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+  <script src="bower_components/rangy/rangy-core.js"></script>
+  <script src="bower_components/rangy/rangy-classapplier.js"></script>
+  <script src="bower_components/rangy/rangy-highlighter.js"></script>
+  <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+  <script src="bower_components/rangy/rangy-serializer.js"></script>
+  <script src="bower_components/rangy/rangy-textrange.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+  <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
   <!-- endbower -->
   <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
   <!-- endbuild -->
@@ -237,6 +247,7 @@
 #if (!${entity.isEmbeddable()})
     <script src="modules/${entityBeanName}/${entity.beanName}.service.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.controller.js"></script>
+    <script src="modules/${entityBeanName}/${entity.beanName}.edit.controller.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.extController.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.module.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.route.js"></script>

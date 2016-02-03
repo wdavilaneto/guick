@@ -1,16 +1,41 @@
 #set( $js  = "$")
 (function() {
+
 	'use strict';
 
-	angular.module('${project.acronym}App.${entity.beanName}')
-		.config(['${js}routeProvider', function(${js}routeProvider) {
-			$routeProvider
-				.when('/${entity.beanName}', {
-					templateUrl: 'modules/${entity.beanName}/${entity.beanName}.html',
-					controller: '${entity.beanName}Controller',
-					controllerAs: '${entity.beanName}Controller'
-				})
-                .when('/${entity.beanName}/:id', {templateUrl: 'modules/${entity.beanName}/${entity.beanName}.edit.html'})
-                .when('/${entity.beanName}/:id/:child', {templateUrl: 'modules/${entity.beanName}/${entity.name}.edit.html'})
-		}]);
+    angular.module('${project.acronym}App.${entity.beanName}').config(Config);
+
+    function Config(${js}translateProvider, ${js}urlRouterProvider, ${js}stateProvider) {
+
+        ${js}stateProvider
+            .state('${entity.beanName}', {
+                abstract: true,
+                url: "/${entity.beanName}",
+                controller: '${entity.beanName}Controller',
+                controllerAs: '${entity.beanName}Controller',
+                template: "<div ui-view />"
+            })
+            .state('${entity.beanName}.main', {
+                url: "",
+                controller: '${entity.beanName}Controller',
+                controllerAs: '${entity.beanName}Controller',
+                templateUrl: "modules/${entity.beanName}/${entity.beanName}.html"
+            })
+            .state('${entity.beanName}.edit', {
+                url: "/{id}",
+                controller: '${entity.beanName}Controller',
+                controllerAs: '${entity.beanName}Controller',
+                templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
+            })
+            .state('${entity.beanName}.masterDeatil', {
+                url: "/{id}/{child}",
+                controller: '${entity.beanName}ExtController',
+                controllerAs: '${entity.beanName}ExtController',
+                templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
+            })
+        ;
+
+    }
+
+
 })();

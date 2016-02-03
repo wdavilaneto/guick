@@ -18,31 +18,23 @@
  * Controller of the ${projectBeanName}App
  */
 angular.module('${projectBeanName}App')
-    .controller('${entityBeanName}Controller', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+
+    .controller('${entityBeanName}EditController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
     // ***************************
     // Model Initializations
     // ***************************
     ${js}scope.entity = ${entityBeanName}Service.create();
-    ${js}scope.options = { language: 'en', allowedContent: true,entities: false };
     ${js}scope.editMode = false;
     ${js}scope.maxSelectBoxSize = 300;
-    ${js}scope.textSearchActive = true;
-    ${js}scope.searchField = {text:''};
-    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
-    ${js}scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
-    ${js}scope.pagination = ${js}scope.gridOptions.getPagination(); // just for ease use/access
-    ${js}scope.resultPage = {}; // Paged result for search filter
-#if(${entity.getActiveProperty()})
-    ${js}scope.entity.boolActive = true;
-#end
+
 
     // ***************************************
     // Controller Methods definitions
     // ****************************************
     ${js}scope.get = function( id ) {
         if (!id) {
-            id = ${js}routeParams.id;
+            id = ${js}stateParams.id;
         }
         ${entityBeanName}Service.get( {'id':id} , function (data) {
             ${js}scope.entity = data;
@@ -50,42 +42,9 @@ angular.module('${projectBeanName}App')
         }, function (error){
             console.log(error)
             // Case error or not found ..back to search filter
-            ${js}location.path('/${entity.beanName}');
+            // ${js}location.path('/${entity.beanName}');
         });
     };
-    // Search By Example Method
-    ${js}scope.search = function(page) {
-        console.log('Realizando busca');
-        // prepare page request
-        if (${js}scope.textSearchActive) {
-#if( ${entity.table.count} > 10000)
-            if (${js}scope.searchField.text.length > 3) {
-#end
-                ${entityBeanName}Service.searchText( {'content': ${js}scope.searchField.text ,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
-                    ${js}scope.resultPage = data;
-                    ${js}scope.resultPage.content = jsog.decode(data.content);
-                });
-#if( ${entity.table.count} > 10000)
-            }
-#end
-        } else {
-            // prepare search(d) text object
-            ${js}scope.searchSelects.toEntity(${js}scope.entity);
-            ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
-                ${js}scope.resultPage = data;
-                try {
-                    ${js}scope.resultPage.content = jsog.decode(data.content);
-                } catch (exception) {
-                    ${js}scope.resultPage.content = data.content;
-                }
-            });
-        }
-    };
-
-    $scope.newSearch = function(){
-        $scope.pagination.currentPage = 1;
-        $scope.search()
-    }
 
     $scope.save = function() {
         //$scope.$broadcast('show-errors-check-validity');
@@ -103,7 +62,7 @@ angular.module('${projectBeanName}App')
             if (!${js}scope.editMode) {
                 ${js}scope.search();
             } else {
-                ${js}location.path('/${entity.beanName}');
+                ${js}location.path('/${entity.beanName}/');
             }
         });
     };
