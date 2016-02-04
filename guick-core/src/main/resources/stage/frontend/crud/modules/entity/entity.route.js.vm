@@ -27,12 +27,27 @@
                 controllerAs: '${entity.beanName}EditController',
                 templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
             })
-            .state('${entity.beanName}.masterDeatil', {
-                url: "/{id}/{child}",
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#if(!${complexProperty.referedEntity.looksLikeEnum()} )
+            .state('${entity.beanName}.${complexProperty.beanName}', {
+                url: "/{id}/:${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
                 controllerAs: '${entity.beanName}ExtController',
-                templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
+                templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
             })
+#end
+#end
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
+            .state('${entity.beanName}.${complexProperty.beanName}', {
+                url: "/{id}/:${complexProperty.beanName}",
+                controller: '${entity.beanName}ExtController',
+                controllerAs: '${entity.beanName}ExtController',
+                templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
+            })
+#end
+#end
+
         ;
 
     }

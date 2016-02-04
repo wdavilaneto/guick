@@ -188,10 +188,29 @@ angular.module('${projectBeanName}App')
         }
     }, true);
 
+    $scope.changeTab = function (tab) {
+      $state.go(tab);
+      $scope.tabSelected = tab;
+    }
+
     // ****************************************
     // Controller init (on load) service calls
     // ****************************************
     ${js}scope.get( ${js}stateParams.id);
+
+    ${js}scope.tabs = [];
+    ${js}scope.tabs.push({title: "Principal", tab: "${entity.beanName}.edit", icon: "mdi-home"});
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#if(!${complexProperty.referedEntity.looksLikeEnum()} )
+    ${js}scope.tabs.push({title: "${complexProperty.title}", tab: "${entity.beanName}.${complexProperty.beanName}", icon: "mdi-eye"});
+#end
+#end
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
+    ${js}scope.tabs.push({title: "${complexProperty.title}", tab: "${entity.beanName}.${complexProperty.beanName}", icon: "mdi-label"});
+#end
+#end
+    ${js}scope.tabSelected = '${entity.beanName}.main';
 
 }]);
 
