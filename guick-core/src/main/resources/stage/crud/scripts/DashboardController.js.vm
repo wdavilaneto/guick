@@ -17,7 +17,7 @@
  * # dashboardController
  * Controller of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('dashboardController', ['${js}scope', '${js}routeParams', '${js}modal', '${js}location', 'dashboardService', function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, dashboardService ) {
+angular.module('${projectBeanName}App').controller('dashboardController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'dashboardService', function (${js}scope, ${js}stateParams , ${js}modal, ${js}location, dashboardService ) {
 
     ${js}scope.allCount = [];
     ${js}scope.options = dashboardService.getBasicOptions();

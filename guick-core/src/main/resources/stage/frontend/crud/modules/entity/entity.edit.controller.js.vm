@@ -19,30 +19,31 @@
  */
 angular.module('${projectBeanName}App')
 
-    .controller('${entityBeanName}EditController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+    .controller('${entityBeanName}EditController', ['${js}scope', '${js}state', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}
+     function (${js}scope, ${js}state, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
     // ***************************
     // Model Initializations
     // ***************************
     ${js}scope.entity = ${entityBeanName}Service.create();
-    ${js}scope.editMode = false;
+    ${js}scope.editMode = true;
     ${js}scope.maxSelectBoxSize = 300;
+    ${js}scope.original = {};
 
-
-    // ***************************************
+    // ***************************************${entity.beanName}
     // Controller Methods definitions
-    // ****************************************
+    // ***************************************
     ${js}scope.get = function( id ) {
         if (!id) {
-            id = ${js}stateParams.id;
+            id = ${js}stateParams.id;                           // get id parameter from ui-router
         }
+        console.log('retrieving rename.id = ' + id  );
         ${entityBeanName}Service.get( {'id':id} , function (data) {
-            ${js}scope.entity = data;
-            ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+            ${js}scope.entity = data;                           // set managed entity from service
+            ${js}scope.original = ${js}scope.entity;                // backup original values;
+            ${js}scope.searchSelects.fromEntity(${js}scope.entity); // update search selects values;
         }, function (error){
-            console.log(error)
-            // Case error or not found ..back to search filter
-            // ${js}location.path('/${entity.beanName}');
+            console.log(error);                             // TODO:
         });
     };
 
@@ -62,16 +63,13 @@ angular.module('${projectBeanName}App')
             if (!${js}scope.editMode) {
                 ${js}scope.search();
             } else {
-                ${js}location.path('/${entity.beanName}/');
+                ${js}state.go('${entity.beanName}.main', {}, {reload: true});
             }
         });
     };
 
     $scope.clearForm = function () {
-        console.log('Limpando form filter');
-        ${js}scope.entity = ${entityBeanName}Service.create();
-        ${js}scope.searchField.text = '';
-        ${js}scope.searchSelects.clear();
+        $scope.entity = $scope.original;
     };
 
     // ******************************************************************************************
@@ -118,7 +116,8 @@ angular.module('${projectBeanName}App')
             }
         });
         modalInstance.result.then(function (selectedItem) {
-            ${js}scope.search();
+            //${js}scope.search();
+            ${js}state.go('admin.supplier', {}, {reload: true});
         }, function () {
             //dismiss
         });
@@ -153,9 +152,9 @@ angular.module('${projectBeanName}App')
     // Controller init (on load) service calls
     // ****************************************
     // if in edit mode get the wanted ${entityBeanName}
-    if (${js}routeParams.id) {
+    if (${js}stateParams.id) {
         ${js}scope.editMode = true;
-        ${js}scope.get( ${js}routeParams.id);
+        ${js}scope.get( ${js}stateParams.id);
     }
 
     // Search de todos os elementos inicial ( quando entra na tela )
@@ -188,6 +187,11 @@ angular.module('${projectBeanName}App')
             ${js}scope.search();
         }
     }, true);
+
+    // ****************************************
+    // Controller init (on load) service calls
+    // ****************************************
+    ${js}scope.get( ${js}stateParams.id);
 
 }]);
 
@@ -241,15 +245,15 @@ angular.module('${projectBeanName}App').controller('Modal${entity.name}Controlle
        console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
        ${entityBeanName}Service.remove( {id:${js}scope.entity.id}  , function ( successResult) {
            console.log(successResult);
-           ${js}scope.entity = ${entityBeanName}Service.create();
            ${js}modalInstance.close(${js}scope.entity);
-           ${js}location.path('/${entity.beanName}/');
+           ${js}state.go('${entity.beanName}.main', {}, {reload: true});
        });
     };
 
     ${js}scope.cancel = function () {
         ${js}modalInstance.dismiss('cancel');
     };
+
 }]);
 
 

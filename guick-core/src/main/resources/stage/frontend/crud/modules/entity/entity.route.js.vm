@@ -23,8 +23,8 @@
             })
             .state('${entity.beanName}.edit', {
                 url: "/{id}",
-                controller: '${entity.beanName}Controller',
-                controllerAs: '${entity.beanName}Controller',
+                controller: '${entity.beanName}EditController',
+                controllerAs: '${entity.beanName}EditController',
                 templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
             })
             .state('${entity.beanName}.masterDeatil', {

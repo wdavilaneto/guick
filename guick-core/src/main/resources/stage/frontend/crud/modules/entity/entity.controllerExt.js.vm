@@ -19,7 +19,7 @@
  * # ${entityBeanName}ExtController
  * Extended Controller pr Master Detail and other specific operations of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('${entity.beanName}ExtController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}routeParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+angular.module('${projectBeanName}App').controller('${entity.beanName}ExtController', ['${js}scope', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}  function (${js}scope, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
     $scope.masterDetail = null;
 
@@ -42,14 +42,14 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
             ${js}scope.selected${ent.referedEntity.name} = data;
         }, function (data){
             // Case error or not found ..back to search filter
-            ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id);
+            ${js}location.path('/${entity.beanName}/'+ ${js}stateParams.id);
         });
     };
 
-    if (${js}routeParams.child == '${ent.referedEntity.name}' && ${js}routeParams.${ent.referedEntity.beanName}Id) {
-        ${js}scope.masterDetail = ${js}routeParams.child;
-        if (${js}routeParams.${ent.referedEntity.beanName}Id) {
-            ${js}scope.get${ent.referedEntity.name}( ${js}routeParams.${ent.referedEntity.beanName}Id );
+    if (${js}stateParams.child == '${ent.referedEntity.name}' && ${js}stateParams.${ent.referedEntity.beanName}Id) {
+        ${js}scope.masterDetail = ${js}stateParams.child;
+        if (${js}stateParams.${ent.referedEntity.beanName}Id) {
+            ${js}scope.get${ent.referedEntity.name}( ${js}stateParams.${ent.referedEntity.beanName}Id );
         }
     }
 
@@ -57,9 +57,9 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
     ${js}scope.${ent.referedEntity.beanName}Pagination = ${js}scope.grid${ent.referedEntity.name}Options.getPagination();
 
     ${js}scope.find${ent.referedEntity.name} = function() {
-        console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}routeParams.id);
+        console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}stateParams.id);
         ${js}scope.resultPage = null;
-        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}routeParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}stateParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
             try {
                 ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -73,7 +73,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
         // TODO Implement query search with fields
         console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
         ${js}scope.resultPage = null;
-        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}routeParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
+        ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}stateParams.id }},'pagination':${js}scope.grid${ent.referedEntity.name}Options.getPageRequest()}  , function (data) {
             ${js}scope.resultPage = data;
             try {
                 ${js}scope.resultPage.content = jsog.decode(data.content);
@@ -106,7 +106,7 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
             if (!${js}scope.editMode) {
                 ${js}scope.search${ent.referedEntity.name}();
             } else {
-                ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id + '/${ent.referedEntity.name}');
+                ${js}location.path('/${entity.beanName}/'+ ${js}stateParams.id + '/${ent.referedEntity.name}');
             }
         });
     };
@@ -125,16 +125,16 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
         ${js}scope.find${ent.referedEntity.name}();
     };
 
-    ${js}scope.is${ent.referedEntity.name}Active = (${js}routeParams.child === '${ent.referedEntity.name}' && ${js}routeParams.${ent.referedEntity.beanName}Id) ;
+    ${js}scope.is${ent.referedEntity.name}Active = (${js}stateParams.child === '${ent.referedEntity.name}' && ${js}stateParams.${ent.referedEntity.beanName}Id) ;
 
 #{end}
 #{end}
 
 
     ${js}scope.back = function (){
-        if (${js}routeParams.child) {
-            console.log('Redirecting to /${entity}/'+ $routeParams.id + '/' + $routeParams.child);
-            ${js}location.path('/${entity.beanName}/'+ ${js}routeParams.id + '/' + ${js}routeParams.child);
+        if (${js}stateParams.child) {
+            console.log('Redirecting to /${entity}/'+ $stateParams.id + '/' + $stateParams.child);
+            ${js}location.path('/${entity.beanName}/'+ ${js}stateParams.id + '/' + ${js}stateParams.child);
         } else {
             ${js}window.history.back();
         }

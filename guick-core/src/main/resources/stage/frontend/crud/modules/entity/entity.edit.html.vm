@@ -13,9 +13,7 @@
 
 <section class="content">
     <div class="box box-primary">
-    <form name="mainForm" novalidate >
-    <div ng-controller="${entityBeanName}Controller">
-        <div ng-controller="${entity.beanName}ExtController">
+        <form name="mainForm" novalidate >
             <div tabset ng-show="masterDetail == null">
                 <div tab>
                     <div tab-heading><i class="mdi mdi-file-document-box"></i> {{"menu.principal" | translate}}</div>
@@ -50,92 +48,7 @@
                         </div>
                     </div>
                 </div>
-#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-                <div tab select="find${complexProperty.referedEntity.name}" ng-show="!${entity.looksLikeEnum()}" active="is${complexProperty.referedEntity.name}Active">
-                    <div tab-heading><i class="mdi mdi-file-document-box"></i> ${complexProperty.title}</div>
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-
-                                <div class="box-header">
-                                    <h3 class="box-title">Lista de ${complexProperty.referedEntity.name}</h3>
-                                    <div class="box-tools">
-                                        <form ng-submit="search()">
-                                            <button type="button" class="btn btn-primary btn-sm pull-right" ng-click="create${complexProperty.referedEntity.name}()"><i class="fa fa-plus-circle"></i> Adicionar</button>
-                                            <div class="input-group">
-                                                <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                                <div class="input-group-btn">
-                                                    <button class="btn btn-sm btn-default" ng-click="search${complexProperty.referedEntity.name}()"><i class="fa fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!--<div class="gridStyle" ng-grid="grid${complexProperty.referedEntity.name}Options"></div>-->
-                                <!--<div ng-include src="'views/crud/${complexProperty.referedEntity.name}/${complexProperty.referedEntity.name}Table.html'"></div>-->
-#set($entityParameter = ${complexProperty.referedEntity} )
-#parse('stage/crud/html/entityTableParse.html.vm')
-
-                        </div>
-                    </div>
-                </div>
-#end
-#end
-
-#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
-#if(!${complexProperty.referedEntity.looksLikeEnum()} )
-#set( $beanName = ${util.uncapitalize(${ent.referedEntity.name})} )
-                <div tab ng-show="${entity.looksLikeMainEntity()}">
-                    <div tab-heading><i class="mdi mdi-file-document-box"></i> ${complexProperty.title} </div>
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-
-                                <div class="box-header"><h3 class="box-title">${complexProperty.referedEntity.title}</h3></div>
-                                <div class="box-body">
-                                    <div class="row">
-#foreach( ${property} in ${complexProperty.referedEntity.properties})
-                                        <div class="col-md-#if(${property.column.length} >= 100)4#{else}3#{end}">
-                                            <div class="form-group">
-                                                <label class="control-label">${property.title}</label>
-                                                {{entity.${complexProperty}.${property}}}
-                                            </div>
-                                        </div>
-#end
-                                    </div>
-                                </div>
-
-                        </div>
-                    </div>
-                </div>
-#end
-#end
             </div>
-#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
-
-            <div class="nav-tabs-custom" ng-show="masterDetail=='${complexProperty.referedEntity.name}' && selected${complexProperty.referedEntity.name} != null ">
-                <div class="tab-content">
-
-                        <div class="box-header"><h3 class="box-title"></h3></div>
-                        <div class="box-body">
-                            <div class="row">
-                                <${complexProperty.referedEntity.beanName}-fieldset model="selected${complexProperty.referedEntity.name}"/>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <div class="form-group">
-                                <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
-                                <button type="button" class="bt bt-alizarin" ng-click="remove${complexProperty.referedEntity.name}()"><span class="fa fa-sign-out"></span> Remover</button>
-                                <button type="button" class="bt bt-indigo" ng-click="save${complexProperty.referedEntity.name}()"><span class="fa fa-save"></span> Gravar</button>
-                            </div>
-                        </div>
-
-                </div>
-            </div>
-#end
-#end
-        </div>
-    </div>
-    </form>
+        </form>
     </div>
 </section>

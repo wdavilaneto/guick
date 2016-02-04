@@ -17,7 +17,7 @@
  * # activitiController
  * Controller of the ${projectBeanName}App
  */
-angular.module('${projectBeanName}App').controller('activitiController', ['${js}scope', '$routeParams', '$modal', '$location', 'jsog', 'activitiService',   function (${js}scope, $routeParams , $modal, $location, jsog, activitiService  ) {
+angular.module('${projectBeanName}App').controller('activitiController', ['${js}scope', '$stateParams', '$modal', '$location', 'jsog', 'activitiService',   function (${js}scope, $$stateParams , $modal, $location, jsog, activitiService  ) {
 
     // For select boxes on screen TODO ...
     $scope.entity = {};
