@@ -15,7 +15,6 @@
         'ngCookies',
         'ngResource',
 ##        'ngRoute',
-        'ui.router',
         'ngSanitize',
         'ngTouch',
 
@@ -27,6 +26,8 @@
         'ui.utils',
         'ui.select',
         'ui.grid',
+        'ui.router',
+        'ui.router.tabs',
         'blockUI',
 
         /*

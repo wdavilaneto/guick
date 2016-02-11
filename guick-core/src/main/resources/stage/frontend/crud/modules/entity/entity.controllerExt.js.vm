@@ -130,7 +130,6 @@ angular.module('${projectBeanName}App').controller('${entity.beanName}ExtControl
 #{end}
 #{end}
 
-
     ${js}scope.back = function (){
         if (${js}stateParams.child) {
             console.log('Redirecting to /${entity}/'+ $stateParams.id + '/' + $stateParams.child);

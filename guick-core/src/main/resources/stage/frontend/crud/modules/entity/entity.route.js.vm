@@ -7,49 +7,48 @@
 
     function Config(${js}translateProvider, ${js}urlRouterProvider, ${js}stateProvider) {
 
+        var ${entity.beanName}Search = {
+            name: "${entity.beanName}Search",
+            url: "/${entity.beanName}",
+            controller: '${entity.beanName}Controller',
+            templateUrl: "modules/${entity.beanName}/${entity.beanName}.html"
+        };
+        var ${entity.beanName}Edit = {
+            abstract: true,
+            name: "${entity.beanName}Edit",
+            url: "/${entity.beanName}/{id}",
+            controller: '${entity.beanName}EditController',
+            templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
+        };
+        var ${entity.beanName}EditMain = {name: "${entity.beanName}Edit.main",
+            url: "",
+            controller: '${entity.beanName}EditMainController',
+            templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.main.html",
+        };
+
         ${js}stateProvider
-            .state('${entity.beanName}', {
-                abstract: true,
-                url: "/${entity.beanName}",
-                controller: '${entity.beanName}Controller',
-                controllerAs: '${entity.beanName}Controller',
-                template: "<div ui-view />"
-            })
-            .state('${entity.beanName}.main', {
-                url: "",
-                controller: '${entity.beanName}Controller',
-                controllerAs: '${entity.beanName}Controller',
-                templateUrl: "modules/${entity.beanName}/${entity.beanName}.html"
-            })
-            .state('${entity.beanName}.edit', {
-                url: "/{id}",
-                controller: '${entity.beanName}EditController',
-                controllerAs: '${entity.beanName}EditController',
-                templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
-            })
+            .state( ${entity.beanName}Search )
+            .state( ${entity.beanName}Edit )
+            .state( ${entity.beanName}EditMain )
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
-            .state('${entity.beanName}.${complexProperty.beanName}', {
-                url: "/{id}/:${complexProperty.beanName}",
+            .state('${entity.beanName}Edit.${complexProperty.beanName}', {
+                url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
-                controllerAs: '${entity.beanName}ExtController',
                 templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
             })
 #end
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
-            .state('${entity.beanName}.${complexProperty.beanName}', {
-                url: "/{id}/:${complexProperty.beanName}",
+            .state('${entity.beanName}Edit.${complexProperty.beanName}', {
+                url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
-                controllerAs: '${entity.beanName}ExtController',
                 templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
             })
 #end
 #end
-
         ;
-
     }
 
 

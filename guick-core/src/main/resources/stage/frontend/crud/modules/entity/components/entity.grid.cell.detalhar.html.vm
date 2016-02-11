@@ -1,4 +1,4 @@
-<a ui-sref="${entity.beanName}.edit({id: row.entity.id})" class="btn-grid-change"
+<a ui-sref="${entity.beanName}Edit.main({id: row.entity.id})" class="btn-grid-change"
     popover="{{'alterar' | translate}}"
     popover-placement="left"
     popover-trigger="mouseenter"

@@ -113,12 +113,14 @@ guick {
                 templates = [
                         [input: "stage/frontend/crud/modules/entity/entity.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.controller.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.edit.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.controller.js"],
+                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.controller.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.controllerExt.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.extController.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.service.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.service.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.module.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.module.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.route.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.route.js"],
                         [input: "stage/frontend/crud/modules/entity/entity.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.html"],
                         [input: "stage/frontend/crud/modules/entity/entity.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.html"],
+                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.html"],
 
                         [input: "stage/frontend/crud/modules/entity/components/entity.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.fieldset.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.table.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.table.html"],

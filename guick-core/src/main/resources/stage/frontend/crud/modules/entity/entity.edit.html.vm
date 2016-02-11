@@ -16,12 +16,14 @@
         <form name="mainForm" novalidate>
             <tabset>
                 <tab ng-repeat="tab in tabs">
-                    <div tab-heading class="{{tab.tab == tabSelected ? 'tab-selected' : 'tab-title'}}" ng-click="changeTab(tab.tab)">
-                        <i class="mdi {{tab.icon}}"></i><span>{{tab.title}}</span>
-                    </div>
-                    <div ui-view />
+                    <tab-heading class="{{tab.route == tabSelected ? 'tab-selected' : 'tab-title'}}" ng-click="changeTab(tab.route)">
+                        <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
+                    </tab-heading>
                 </tab>
             </tabset>
+            <div class="row">
+                <ui-view />
+            </div>
         </form>
     </div>
 </section>
