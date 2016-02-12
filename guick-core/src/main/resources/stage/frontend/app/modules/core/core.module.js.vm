@@ -27,7 +27,7 @@
         'ui.select',
         'ui.grid',
         'ui.router',
-        'ui.router.tabs',
+##        'ui.router.tabs',
         'blockUI',
 
         /*

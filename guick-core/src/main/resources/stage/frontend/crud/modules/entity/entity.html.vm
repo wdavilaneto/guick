@@ -80,7 +80,8 @@
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
                                         <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
-                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> Novo</a>
+                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> Novo </a>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +90,8 @@
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> </a>
                                         <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> </a>
-                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> </a>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +112,8 @@
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
                                         <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
-                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> Novo</a>
+                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> Novo </a>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +122,8 @@
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="clearForm()"><i class="mdi mdi-eraser"></i> </a>
                                         <a class="bt bt-emerald" href="" ng-click="newSearch()"><i class="mdi mdi-magnify"></i> </a>
-                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-plus"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ng-click="open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> </a>
                                     </div>
                                 </div>
                             </div>

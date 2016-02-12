@@ -30,23 +30,6 @@ angular.module('${projectBeanName}App')
     ${js}scope.entity = ${entityBeanName}Service.create();
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
 
-    // ***************************************${entity.beanName}
-    // Controller Methods definitions
-    // ***************************************
-    ${js}scope.get = function( id ) {
-        if (!id) {
-            id = ${js}stateParams.id;                           // get id parameter from ui-router
-        }
-        console.log('retrieving rename.id = ' + id  );
-        ${entityBeanName}Service.get( {'id':id} , function (data) {
-            ${js}scope.entity = data;                           // set managed entity from service
-            ${js}scope.original = ${js}scope.entity;                // backup original values;
-            ${js}scope.searchSelects.fromEntity(${js}scope.entity); // update search selects values;
-        }, function (error){
-            console.log(error);                             // TODO:
-        });
-    };
-
     $scope.save = function() {
         //$scope.$broadcast('show-errors-check-validity');
         //if any invalid validation
@@ -62,10 +45,6 @@ angular.module('${projectBeanName}App')
             ${js}scope.entity = ${entityBeanName}Service.create();
             ${js}state.go('${entity.beanName}Search', {}, {reload: true});
         });
-    };
-
-    $scope.clearForm = function () {
-        $scope.entity = $scope.original;
     };
 
     // ******************************************************************************************
@@ -142,6 +121,8 @@ angular.module('${projectBeanName}App')
     // ****************************************
     // if in edit mode get the wanted ${entityBeanName}
     if (${js}stateParams.id) {
+        // This controller exped get method declared on Parent Controller ${entity.beanName}.edit.controller
+        // parent controller is declared on ${entity.beanName}.route
         ${js}scope.get( ${js}stateParams.id);
     }
 

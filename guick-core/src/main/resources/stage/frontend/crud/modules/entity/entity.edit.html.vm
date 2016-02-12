@@ -7,7 +7,9 @@
     <ol class="breadcrumb">
         <li><a href="#/"> <i class="mdi mdi-home"></i> {{"menu.inicial" | translate}} </a></li>
         <li><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}}</a></li>
-        <li class="active"> {{"alterar" | translate}} </li>
+        <li class="active" ng-if="entity.id == null"> {{"create" | translate}} {{entity.id}}</li>
+        <li class="active" ng-if="entity.id != null"> {{"edit" | translate}} </li>
+
     </ol>
 </section>
 

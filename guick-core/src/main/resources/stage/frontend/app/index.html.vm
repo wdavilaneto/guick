@@ -179,7 +179,7 @@
   <script src="bower_components/textAngular/dist/textAngular.js"></script>
   <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
   <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
-  <script src="bower_components/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
+##  <script src="bower_components/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
   <!-- endbower -->
   <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
   <!-- endbuild -->
@@ -248,6 +248,7 @@
 #if (!${entity.isEmbeddable()})
     <script src="modules/${entityBeanName}/${entity.beanName}.service.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.controller.js"></script>
+    <script src="modules/${entityBeanName}/${entity.beanName}.modal.controller.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.edit.controller.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.edit.main.controller.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.extController.js"></script>
