@@ -26,8 +26,6 @@ angular.module('${projectBeanName}App')
     // Model Initializations
     // ***************************
     ${js}scope.maxSelectBoxSize = 300;
-    ${js}scope.original = {};
-    ${js}scope.entity = ${entityBeanName}Service.create();
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
 
     $scope.save = function() {
