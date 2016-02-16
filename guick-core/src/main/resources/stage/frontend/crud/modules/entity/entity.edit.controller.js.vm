@@ -63,16 +63,16 @@ angular.module('${projectBeanName}App')
     // Controller init (on load) service calls
     // ****************************************
     ${js}scope.tabs = [];
-    ${js}scope.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home"});
+    ${js}scope.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
-    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye"});
+    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: "true"});
 #end
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
 ##TODO Many to many needs special query
-    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label"});
+    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label", visible: ${js}stateParams.id});
 #end
 #end
     ${js}scope.tabSelected = '${entity.beanName}.main';
