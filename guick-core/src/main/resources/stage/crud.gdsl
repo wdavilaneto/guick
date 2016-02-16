@@ -84,6 +84,9 @@ guick {
         //[input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
         "single-generateds" {
             templates = [
+
+                    [input: "stage/frontend/app/modules/main/main.html.vm", output: "/front-end/app/modules/main/main.html"],
+
                     [input: "stage/frontend/app/index.html.vm", output: "/front-end/app/index.html"],
                     [input: "stage/frontend/app/layout/menu/menu.html.vm", output: "/front-end/app/layout/menu/menu.html" ],
                     [input: "stage/frontend/app/app.module.js.vm", output: "/front-end/app/app.module.js"],

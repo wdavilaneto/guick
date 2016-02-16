@@ -45,6 +45,23 @@ angular.module('${projectBeanName}App')
         });
     };
 
+    $scope.saveContinue = function() {
+        //$scope.$broadcast('show-errors-check-validity');
+        //if any invalid validation
+        //if (!$scope.mainForm || $scope.mainForm.$invalid) {
+        console.log('TODO: Validate Errors');
+        //    return;
+        //}
+
+        console.log('Requesting save on ${entityBeanName}');
+        ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
+            console.log(successResult);
+            ${js}state.go('${entity.beanName}Edit.main', {id: successResult.id }, {reload: true});
+
+        });
+    };
+
     // ******************************************************************************************
     // Modals methods definitions
     // ******************************************************************************************
@@ -90,7 +107,7 @@ angular.module('${projectBeanName}App')
         });
         modalInstance.result.then(function (selectedItem) {
             //${js}scope.search();
-            ${js}state.go('admin.supplier', {}, {reload: true});
+            ${js}state.go('${entityBeanName}Search', {}, {reload: true});
         }, function () {
             //dismiss
         });

@@ -34,12 +34,9 @@ guick {
                     [input: "stage/frontend/css/org.css", output: "/front-end/app/layout/css/main.css"],
                     [input: "stage/frontend/css/project.css", output: "/front-end/app/layout/css/${acronym}.css"],
 
-                    [input: "stage/crud/html/main.html", output: "/front-end/app/views/main.html"],
-
                     [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
                     [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
                     [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
-
 
                     [input: "stage/crud/scripts/truncate.js.vm", output: "/front-end/app/scripts/service/support/truncate.js"],
                     [input: "stage/crud/scripts/constants.js.vm", output: "/front-end/app/scripts/service/support/constants.js"],

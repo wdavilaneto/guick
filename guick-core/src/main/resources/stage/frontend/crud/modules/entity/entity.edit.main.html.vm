@@ -11,7 +11,7 @@
                 <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
                 <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i>{{"remover" | translate}}</button>
                 <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"save" | translate}}</button>
-                <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"saveContinu" | translate}}</button>
+                <button type="button" class="bt bt-indigo" ng-click="saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"saveContinu" | translate}}</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
                 <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i></button>
                 <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i></button>
                 <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid">><i class="mdi mdi-content-save"></i></button>
-                <button type="button" class="bt bt-indigo" ng-click="save()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
+                <button type="button" class="bt bt-indigo" ng-click="saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
             </div>
         </div>
     </div>
