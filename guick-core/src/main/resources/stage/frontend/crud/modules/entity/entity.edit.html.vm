@@ -17,7 +17,7 @@
     <div class="box box-primary">
         <form name="mainForm" novalidate>
             <tabset>
-                <tab ng-repeat="tab in tabs" ng-click="changeTab(tab.route)">
+                <tab ng-repeat="tab in tabs" ng-click="changeTab(tab.route)" ng-show="tab.visible">
                     <tab-heading>
                         <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
                     </tab-heading>
