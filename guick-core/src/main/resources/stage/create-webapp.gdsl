@@ -43,6 +43,9 @@ guick {
                     [input: "stage/crud/scripts/utils.js.vm", output: "/front-end/app/scripts/service/support/utils.js"],
                     [input: "stage/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/directives/directives.js"],
                     [input: "stage/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
+
+                    [input: "stage/frontend/test/karma.conf.js.vm", output: "/front-end/test/karma.conf.js"],
+                    [input: "stage/frontend/test/unit/hello.spec.js.vm", output: "/front-end/test/unit/hello.spec.js"],
             ]
         }
 
