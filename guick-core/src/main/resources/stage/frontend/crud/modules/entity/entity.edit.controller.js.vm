@@ -29,6 +29,7 @@ angular.module('${projectBeanName}App')
     ${js}scope.original = {};
     ${js}scope.entity = ${entityBeanName}Service.create();
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
+    ${js}scope.searchSelects.fromEntity(${js}scope.entity);
 
     // ***************************************${entity.beanName}
     // Controller Methods definitions
@@ -66,7 +67,7 @@ angular.module('${projectBeanName}App')
     ${js}scope.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
-    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: "true"});
+    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
 #end
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
@@ -76,6 +77,18 @@ angular.module('${projectBeanName}App')
 #end
 #end
     ${js}scope.tabSelected = '${entity.beanName}.main';
+
+
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
+#end
 
 }]);
 

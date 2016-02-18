@@ -32,6 +32,7 @@
             .state( ${entity.beanName}EditMain )
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
+#set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
                 url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
@@ -41,10 +42,11 @@
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
+#set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
                 url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
-                templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
+                templateUrl: "modules/${beanName}/components/${beanName}.table.html"
             })
 #end
 #end

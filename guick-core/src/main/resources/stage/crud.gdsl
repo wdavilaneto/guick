@@ -125,6 +125,7 @@ guick {
                         [input: "stage/frontend/crud/modules/entity/entity.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.html"],
                         [input: "stage/frontend/crud/modules/entity/entity.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.html"],
                         [input: "stage/frontend/crud/modules/entity/entity.edit.main.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.html"],
+                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.html"],
 
                         [input: "stage/frontend/crud/modules/entity/components/entity.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.fieldset.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.table.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.table.html"],

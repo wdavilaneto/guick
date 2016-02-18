@@ -38,6 +38,8 @@ angular.module('${projectBeanName}App')
     ${js}scope.entity.boolActive = true;
 #end
 
+
+
     // Search By Example Method
     ${js}scope.search = function(page) {
         console.log('Realizando busca');
@@ -131,6 +133,18 @@ angular.module('${projectBeanName}App')
         });
     }
 #end
+
+    // Selects to Fullfill select boxes
+    // Begin block
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
+         ${js}scope.${beanName}List = jsog.decode(data.content);
+    });
+#end
+#end
+    // end block
 
     // ************************************
     // watches

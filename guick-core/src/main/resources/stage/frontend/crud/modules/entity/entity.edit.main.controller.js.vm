@@ -26,7 +26,6 @@ angular.module('${projectBeanName}App')
     // Model Initializations
     // ***************************
     ${js}scope.maxSelectBoxSize = 300;
-    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
 
     $scope.save = function() {
         //$scope.$broadcast('show-errors-check-validity');
@@ -140,18 +139,6 @@ angular.module('${projectBeanName}App')
         // parent controller is declared on ${entity.beanName}.route
         ${js}scope.get( ${js}stateParams.id);
     }
-
-    // Selects to Fullfill select boxes
-    // Begin block
-#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
-#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-         ${js}scope.${beanName}List = jsog.decode(data.content);
-    });
-#end
-#end
-    // end block
 
 }]);
 

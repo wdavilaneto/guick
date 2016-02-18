@@ -18,8 +18,8 @@
 
 	'use strict';
 
-    angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}location', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',
-    function (${js}scope, ${js}location, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data, readonly) {
+    angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}state', '${js}location', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',
+    function (${js}scope, ${js}state, ${js}location, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data, readonly) {
 
     ${js}scope.entity = data;  //.${entity.beanName};
     ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();

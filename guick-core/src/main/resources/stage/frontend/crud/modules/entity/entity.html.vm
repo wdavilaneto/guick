@@ -12,7 +12,7 @@
 
 <section class="content">
     <div class="box box-primary">
-        <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()" >
+        <form name="${entityBeanName}Form" novalidate ng-submit="newSearch()">
             <div tabset>
                 <div tab ng-click="setTextSearchActive(true)">
                     <div tab-heading><i class="mdi mdi-filter"></i> {{"filtro_busca" | translate}}</div>
