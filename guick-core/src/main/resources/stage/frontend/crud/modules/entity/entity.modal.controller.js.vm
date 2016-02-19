@@ -54,7 +54,7 @@
        ${entityBeanName}Service.remove( {id:${js}scope.entity.id}  , function ( successResult) {
            console.log(successResult);
            ${js}modalInstance.close(${js}scope.entity);
-           ${js}state.go('${entity.beanName}.main', {}, {reload: true});
+           ${js}state.go('${entity.beanName}Edit.main', {}, {reload: true});
        });
     };
 

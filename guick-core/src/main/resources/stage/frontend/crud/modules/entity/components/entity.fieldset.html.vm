@@ -45,7 +45,7 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
-    <div class="col-md-6">
+    <div class="col-md-3" show-errors>
         <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
             <label class="control-label">${complexProperty.title}</label>
             <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
@@ -67,12 +67,12 @@
 #set ($stringField = ${prop})
 #end
 #end
-                description-field="${toOneProperty.name}.${stringField}"
+                      description-field="${toOneProperty.name}.${stringField}"
 #end
 #if( ${complexProperty.referedEntity.table.count} > 10000)
-                minlength="7"
+                      minlength="7"
 #else
-                minlength="2"
+                      minlength="2"
 #end
                 input-class="form-control"
 #if(!$isFilter)
@@ -84,7 +84,7 @@
     </div>
 </div>
 #else
-    <div class="col-md-6">
+    <div class="col-md-3">
         <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
             <label class="control-label">${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
@@ -104,7 +104,7 @@
 #foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
-    <div class="col-md-6">
+    <div class="col-md-3">
         <div class="form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) has-warning#{end}">
             <label class="control-label">${complexProperty.title}
             </label>

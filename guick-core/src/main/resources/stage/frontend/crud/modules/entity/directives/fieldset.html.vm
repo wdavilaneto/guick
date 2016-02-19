@@ -36,6 +36,7 @@
 #end
 #########
 #foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
 #if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
 #end
@@ -137,18 +138,19 @@
             <div class="col-md-3 form-group" show-errors>
                 <label>${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
-                    <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+                <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
-                </label>
+            </label>
 #if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
-                <div ${complexProperty.referedEntity.beanName}-select></div>
+            <div ${complexProperty.referedEntity.beanName}-select></div>
 #else
 #parse( "stage/frontend/crud/modules/entity/components/selectProperty.html.vm" )
 #end
-            </div>
+        </div>
+    </div>
 #end
 #end
-########################
+#########
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} < ${bigFieldSize})
