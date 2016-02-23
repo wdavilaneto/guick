@@ -206,6 +206,10 @@ class PatternConverter {
                 }
             }
         }
+        // TODO remover este bacalhau !
+//        if (tableName.startsWith("TB")) {
+//            return tableName.replaceFirst("tb".toLowerCase(), "");
+//        }
         return tableName;
     }
 

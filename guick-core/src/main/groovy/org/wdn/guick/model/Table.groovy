@@ -98,7 +98,7 @@ class Table {
             return owner;
         }
         if (getPk()[0]) {
-            getPk()[0].getPrefix();
+            return getPk()[0].getPrefix();
         }
         return "";
     }

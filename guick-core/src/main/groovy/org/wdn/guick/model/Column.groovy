@@ -35,14 +35,14 @@ class Column {
     List<String> checkValues
 
     public boolean isUpdatable() {
-        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable) {
             return false;
         }
         return true; // TODO
     }
 
     public boolean isInsertable() {
-        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable){
+        if (("now()".equals(defaultValue) || "SYSDATE".equals(defaultValue)) && !nullable) {
             return false;
         }
         return true; // TODO

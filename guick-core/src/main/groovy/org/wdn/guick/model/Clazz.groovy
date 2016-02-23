@@ -15,6 +15,8 @@ class Clazz implements Serializable {
     private static final PACKAGE_SEPARATOR = "."
 
     private String codePackage;
+    private title = null;
+
     String name
     String inheritedClass
 
@@ -33,6 +35,9 @@ class Clazz implements Serializable {
     Project project
 
     public String getTitle() {
+        if (title != null) {
+            return title;
+        }
         // TODO: remove to business rule processor
         def arry = StringUtils.splitByCharacterTypeCamelCase(name).toList();
         if ((arry[0].equals("texto") || arry[0].equals("sigla")) && arry.size() > 1) {
@@ -42,28 +47,39 @@ class Clazz implements Serializable {
         if (word.endsWith("collection")) {
             word = word.replaceFirst("collection", "")
         }
-        if (word.equals("cpf") || word.equals("cep") || word.equals("cnpj")) {
-            return word.toUpperCase();
+        if (word.equals("cpf") || word.equals("cep") || word.equals("cnpj") || word.equals("pdf")) {
+            title =  word.toUpperCase()
+            return title
         } else {
             for (def map in [
                     [chave: "descricao", acentuado: "descrição"],
                     [chave: "classificacao", acentuado: "classificação"],
                     [chave: "servico", acentuado: "serviço"],
+                    [chave: "funcionario", acentuado: "funcionário"],
                     [chave: "responsavel", acentuado: "responsável"],
                     [chave: "responsavel", acentuado: "responsável"],
+                    [chave: "endereco", acentuado: "endereço"],
                     [chave: "analise", acentuado: "análise"],
                     [chave: "tecnico", acentuado: "técnico"],
+                    [chave: "tecnica", acentuado: "técnica"],
                     [chave: "solicitacao", acentuado: "solicitação"],
                     [chave: "instituicao", acentuado: "instituição"],
                     [chave: "inicio", acentuado: "início"],
-                    [chave: "votacao", acentuado: "votação"]
+                    [chave: "orgao", acentuado: "orgão"],
+                    [chave: "votacao", acentuado: "votação"],
+                    [chave: "orgi", acentuado: "orgão"],
+                    [chave: "secao", acentuado: "seção"],
+                    [chave: "sessao", acentuado: "sessão"],
+                    [chave: "nm", acentuado: "nome"],
+                    [chave: "cd", acentuado: "código"]
             ]) {
                 if (word.contains(map.chave)) {
                     word = word.replaceFirst(map.chave, map.acentuado);
                 }
             }
         }
-        return WordUtils.capitalize(word);
+        title = WordUtils.capitalize(word)
+        return title
     }
 
     public String getCapitalizedName() {

@@ -1,5 +1,7 @@
 package org.wdn.guick.support
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import org.wdn.guick.model.*
@@ -13,6 +15,8 @@ import javax.annotation.Resource
 @Component
 @Scope("prototype")
 class Table2EntityConverter {
+
+    private static final Logger logger = LoggerFactory.getLogger(Table2EntityConverter.class);
 
     @Resource
     private MetadataFactory metadataFactory;
@@ -140,6 +144,20 @@ class Table2EntityConverter {
         }
         // Se nao tiver heranca preciso processar os campos chave
         if (table.inheritanceTable == null) {
+
+            // FIXME this is junkcode
+            if (table.pk == null || table.pk.size() ==0 ) {
+                logger.warn("NO PRIMARY KEY FOUND, PLEASE FIX THE MODEL ${table.name} !!!! - Guessing a possible alternative")
+                def possibleFormations = ["ID_${table.name}", "PK_${table.name}", "${table.name}_ID", "${table.name}_PK", "ID", "PK","ID_TB${table.name}"];
+                for (Column column : table.getColumns()) {
+                    if (column in possibleFormations) {
+                        column.position = 1;
+                        logger.warn("Guessing ${column.name} for ${table.name}" );
+                        break;
+                    }
+                }
+            }
+
             if (table.pk.size() == 1) {
                 RelationshipProperty property = metadataFactory.createSimpleProperty(entity, table.pk[0])
                 // removemos da lista de propriedades e passamo-la para o campo ID
