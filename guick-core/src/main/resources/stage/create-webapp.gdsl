@@ -10,6 +10,13 @@ guick {
         //[input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
         //[input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
         //[input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
+
+        "license" {
+            templates = [
+                    [input: "stage/license/LICENSE.txt", output: "/LICENSE.txt"]
+            ]
+        }
+
         "configs" {
             templates = [
                     [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],

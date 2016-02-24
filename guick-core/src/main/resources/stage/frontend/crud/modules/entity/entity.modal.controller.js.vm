@@ -13,55 +13,58 @@
  * # ${entityBeanName}Controller
  * Modal Controller for ${entity.name} of the ${projectBeanName}App
  */
-
 (function() {
 
 	'use strict';
 
-    angular.module('${projectBeanName}App').controller('Modal${entity.name}Controller', ['${js}scope', '${js}state', '${js}location', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end} 'data',
-    function (${js}scope, ${js}state, ${js}location, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data, readonly) {
+    angular.module('${projectBeanName}App')
+        .controller('Modal${entity.name}Controller', Modal${entity.name}Controller);
 
-    ${js}scope.entity = data;  //.${entity.beanName};
-    ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
-    ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+    Modal${entity.name}Controller.$inject = ['${js}scope', '${js}state', '${js}location', '${js}modalInstance', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}'data'];
 
-    if (!readonly) {
-    // Selects to Fullfill select boxes
-    // Begin block
-#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
-#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-        ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-             ${js}scope.${beanName}List = jsog.decode(data.content);
-        });
-#end
-#end
+    function Modal${entity.name}Controller(${js}scope, ${js}state, ${js}location, ${js}modalInstance, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} , data, readonly) {
+
+            ${js}scope.entity = data;  //.${entity.beanName};
+            ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect();
+            ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+
+        if (!readonly) {
+            // Selects to Fullfill select boxes
+            // Begin block
+            #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+                #if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()}) ## Caso nao seja muito grande e portanto caiba num select box ...
+                    #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+                        ${beanName}Service.findAll({page: 1, size: ${js}scope.maxSelectBoxSize}, function (data) {
+                            ${js}scope.${beanName}List = jsog.decode(data.content);
+                    });
+                #end
+            #end
+        }
+        // end block
+
+            ${js}scope.save = function () {
+            console.log('Saving Modal');
+                ${js}scope.searchSelects.toEntity(${js}scope.entity);
+                ${entityBeanName}Service.save(${js}scope.entity, function (successResult) {
+                console.log(successResult);
+                    ${js}scope.entity = {};
+                    ${js}modalInstance.close(${js}scope.entity);
+            });
+        };
+
+        $scope.remove = function () {
+            console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
+                ${entityBeanName}Service.remove({id: ${js}scope.entity.id}, function (successResult) {
+                console.log(successResult);
+                    ${js}modalInstance.close(${js}scope.entity);
+                    ${js}state.go('${entity.beanName}Edit.main', {}, {reload: true});
+            });
+        };
+
+            ${js}scope.cancel = function () {
+                ${js}modalInstance.dismiss('cancel');
+        };
+
     }
-    // end block
-
-    ${js}scope.save = function () {
-        console.log('Saving Modal' );
-        ${js}scope.searchSelects.toEntity(${js}scope.entity);
-        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
-            console.log(successResult);
-            ${js}scope.entity = {};
-            ${js}modalInstance.close(${js}scope.entity);
-        });
-    };
-
-    $scope.remove = function (){
-       console.log('Deleting ${entityBeanName} with id:' + ${js}scope.entity.id);
-       ${entityBeanName}Service.remove( {id:${js}scope.entity.id}  , function ( successResult) {
-           console.log(successResult);
-           ${js}modalInstance.close(${js}scope.entity);
-           ${js}state.go('${entity.beanName}Edit.main', {}, {reload: true});
-       });
-    };
-
-    ${js}scope.cancel = function () {
-        ${js}modalInstance.dismiss('cancel');
-    };
-
-}]);
 
 })();

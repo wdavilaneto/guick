@@ -18,128 +18,144 @@
  * Controller of the ${projectBeanName}App
  */
 angular.module('${projectBeanName}App')
+    .controller('${entityBeanName}EditMainController', ${entityBeanName}EditMainController);
 
-    .controller('${entityBeanName}EditMainController', ['${js}scope', '${js}state', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service', #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName})'${beanName}Service', #{end}#{end}
-     function (${js}scope, ${js}state, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
+    ${entityBeanName}EditMainController.$inject = ['${js}scope', '${js}state', '${js}stateParams', '${js}modal', '${js}location', 'jsog', '${entityBeanName}Service'#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), '${beanName}Service'#{end}#{end}];
 
-    // ***************************
-    // Model Initializations
-    // ***************************
-    ${js}scope.maxSelectBoxSize = 300;
+    function ${entityBeanName}EditMainController(${js}scope, ${js}state, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
-    $scope.save = function() {
-        //$scope.$broadcast('show-errors-check-validity');
-        //if any invalid validation
-        //if (!$scope.mainForm || $scope.mainForm.$invalid) {
-        console.log('TODO: Validate Errors');
-        //    return;
-        //}
+        // ***************************
+        // Model Initializations
+        // ***************************
+            ${js}scope.maxSelectBoxSize = 300;
 
-        console.log('Requesting save on ${entityBeanName}');
-        ${js}scope.searchSelects.toEntity(${js}scope.entity);
-        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
-            console.log(successResult);
-            ${js}scope.entity = ${entityBeanName}Service.create();
-            ${js}state.go('${entity.beanName}Search', {}, {reload: true});
-        });
-    };
+        $scope.save = function () {
+            //$scope.$broadcast('show-errors-check-validity');
+            //if any invalid validation
+            //if (!$scope.mainForm || $scope.mainForm.$invalid) {
+            console.log('TODO: Validate Errors');
+            //    return;
+            //}
 
-    $scope.saveContinue = function() {
-        //$scope.$broadcast('show-errors-check-validity');
-        //if any invalid validation
-        //if (!$scope.mainForm || $scope.mainForm.$invalid) {
-        console.log('TODO: Validate Errors');
-        //    return;
-        //}
+            console.log('Requesting save on ${entityBeanName}');
+                ${js}scope.searchSelects.toEntity(${js}scope.entity);
+                ${entityBeanName}Service.save(${js}scope.entity, function (successResult) {
+                console.log(successResult);
+                    ${js}scope.entity = ${entityBeanName}Service.create();
+                    ${js}state.go('${entity.beanName}Search', {}, {reload: true});
+            });
+        };
 
-        console.log('Requesting save on ${entityBeanName}');
-        ${js}scope.searchSelects.toEntity(${js}scope.entity);
-        ${entityBeanName}Service.save( ${js}scope.entity , function (successResult) {
-            console.log(successResult);
-            ${js}state.go('${entity.beanName}Edit.main', {id: successResult.id }, {reload: true});
+        $scope.saveContinue = function () {
+            //$scope.$broadcast('show-errors-check-validity');
+            //if any invalid validation
+            //if (!$scope.mainForm || $scope.mainForm.$invalid) {
+            console.log('TODO: Validate Errors');
+            //    return;
+            //}
 
-        });
-    };
+            console.log('Requesting save on ${entityBeanName}');
+                ${js}scope.searchSelects.toEntity(${js}scope.entity);
+                ${entityBeanName}Service.save(${js}scope.entity, function (successResult) {
+                console.log(successResult);
+                    ${js}state.go('${entity.beanName}Edit.main', {id: successResult.id}, {reload: true});
 
-    // ******************************************************************************************
-    // Modals methods definitions
-    // ******************************************************************************************
-    // Create ${entity.name} Modal Window
-    ${js}scope.open = function (size) {
-        ${js}scope.searchSelects.toEntity(${js}scope.entity);
-        var modalInstance = ${js}modal.open({
-            templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
-            resolve: {
-                data: function () {return $scope.entity;}
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            ${js}scope.selected = selectedItem;
-            // Refreshing Result List
-            ${js}scope.entity = ${entityBeanName}Service.create();
-            ${js}scope.search();
-        }, function () {
-            //dismiss
-        });
-    };
+            });
+        };
 
-    // Create ${entity.name} Modal Window
-    ${js}scope.view = function (size, entityName) {
-        ${js}scope.searchSelects.toEntity(${js}scope.entity);
-        var modalInstance = ${js}modal.open({
-            templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' +entityName+ 'Controller', size: size,
-            resolve: {
-                data: function () {
-                    return $scope.entity;
+        // ******************************************************************************************
+        // Modals methods definitions
+        // ******************************************************************************************
+        // Create ${entity.name} Modal Window
+            ${js}scope.open = function (size) {
+                ${js}scope.searchSelects.toEntity(${js}scope.entity);
+            var modalInstance = ${js}modal.open({
+                templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
+                resolve: {
+                    data: function () {
+                        return $scope.entity;
+                    }
                 }
-            }
-        });
-    };
+            });
+            modalInstance.result.then(function (selectedItem) {
+                    ${js}scope.selected = selectedItem;
+                // Refreshing Result List
+                    ${js}scope.entity = ${entityBeanName}Service.create();
+                    ${js}scope.search();
+            }, function () {
+                //dismiss
+            });
+        };
 
-    $scope.remove = function (obj){
-        var modalInstance = ${js}modal.open({
-            templateUrl: 'confirmRemove${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
-            resolve: {
-                data: function () {return $scope.entity;},
-                readonly: function() {return true;}
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            //${js}scope.search();
-            ${js}state.go('${entityBeanName}Search', {}, {reload: true});
-        }, function () {
-            //dismiss
-        });
-    };
+        // Create ${entity.name} Modal Window
+            ${js}scope.view = function (size, entityName) {
+                ${js}scope.searchSelects.toEntity(${js}scope.entity);
+            var modalInstance = ${js}modal.open({
+                templateUrl: ('view' + entityName + 'Modal.html'),
+                controller: 'Modal' + entityName + 'Controller',
+                size: size,
+                resolve: {
+                    data: function () {
+                        return $scope.entity;
+                    }
+                }
+            });
+        };
 
-    // Inline Update Modal
-    ${js}scope.edit${entity.name} = function (obj) {
-        var modalInstance = ${js}modal.open({
-            templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
-            resolve: {
-                data: function () {return obj;},
-                readonly: function() {return false;}
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            ${js}scope.selected = selectedItem;
-             // Refreshing Result List
-            ${js}scope.search();
-        }, function () {
-            //dismiss
-        });
-    };
+        $scope.remove = function (obj) {
+            var modalInstance = ${js}modal.open({
+                templateUrl: 'confirmRemove${entity.name}Modal.html',
+                controller: 'Modal${entity.name}Controller',
+                size: 'lg',
+                resolve: {
+                    data: function () {
+                        return $scope.entity;
+                    },
+                    readonly: function () {
+                        return true;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                //${js}scope.search();
+                    ${js}state.go('${entityBeanName}Search', {}, {reload: true});
+            }, function () {
+                //dismiss
+            });
+        };
 
-    // ****************************************
-    // Controller init (on load) service calls
-    // ****************************************
-    // if in edit mode get the wanted ${entityBeanName}
-    if (${js}stateParams.id) {
-        // This controller exped get method declared on Parent Controller ${entity.beanName}.edit.controller
-        // parent controller is declared on ${entity.beanName}.route
-        ${js}scope.get( ${js}stateParams.id);
+        // Inline Update Modal
+            ${js}scope.edit${entity.name} = function (obj) {
+            var modalInstance = ${js}modal.open({
+                templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: 'lg',
+                resolve: {
+                    data: function () {
+                        return obj;
+                    },
+                    readonly: function () {
+                        return false;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                    ${js}scope.selected = selectedItem;
+                // Refreshing Result List
+                    ${js}scope.search();
+            }, function () {
+                //dismiss
+            });
+        };
+
+        // ****************************************
+        // Controller init (on load) service calls
+        // ****************************************
+        // if in edit mode get the wanted ${entityBeanName}
+        if (${js}stateParams.id) {
+            // This controller exped get method declared on Parent Controller ${entity.beanName}.edit.controller
+            // parent controller is declared on ${entity.beanName}.route
+                ${js}scope.get(${js}stateParams.id);
+        }
+
     }
-
-}]);
 
 })();
