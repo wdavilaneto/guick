@@ -45,18 +45,19 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
-            <div class="col-md-3 form-group" show-errors>
-                <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-                <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
-                      input-name="${idAgragation}${beanName}AutoComplete"
-                      initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
-                      placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
-                      name="${beanName}"
-                      pause="400"
-                      remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
-                      selected-object="searchSelects.${complexProperty}"
-                      remote-url-data-field="content"
-                      title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size || $counter < 3),#{end}#if($counter == 3)#break #{end}#{end}"
+    <div class="col-md-3 form-group" show-errors>
+
+            <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+            <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                input-name="${idAgragation}${beanName}AutoComplete"
+                initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
+                placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}"
+                name="${beanName}"
+                pause="400"
+                remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
+                selected-object="searchSelects.${complexProperty}"
+                remote-url-data-field="content"
+                title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size || $counter < 3),#{end}#if($counter == 3)#break #{end}#{end}"
 #if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
 #set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
 ### find first StringField
@@ -73,45 +74,48 @@
 #else
                       minlength="2"
 #end
-                      input-class="form-control"
-##                    field-required="true"
-                      text-no-results="Nenhum registro encontrado"
-                      text-searching="Buscando"
-                      auto-match="true"/>
-           </div>
+                input-class="form-control"
+#if(!$isFilter)
+                field-required="true"
+#end
+                text-no-results="Nenhum registro encontrado"
+                text-searching="Buscando"
+                auto-match="true"/>
+   </div>
 
 #else
-            <div class="col-md-3 form-group" show-errors>
-                <label>${complexProperty.title}  #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}
+    <div class="col-md-3 form-group" show-errors>
+        <label>${complexProperty.title}  #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
-                    <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
+                <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
-                </label>
+            </label>
 #if( ${complexProperty.referedEntity.name} ==  ${complexProperty.capitalizedName})
-                <div ${complexProperty.referedEntity.beanName}-select></div>
+            <div ${complexProperty.referedEntity.beanName}-select></div>
 #else
 #parse( "stage/frontend/crud/modules/entity/components/selectProperty.html.vm" )
 #end
 
-            </div>
+        </div>
 #end
 #end
 
 #foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
-            <div class="col-md-3 form-group" show-errors>
-                <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-                <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
-                      input-name="${idAgragation}${beanName}AutoComplete"
-                      initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
-                      placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop.title}#if($counter < $size ) ou #{end}#{end}#{end}"
-                      name="${beanName}"
-                      pause="400"
-                      remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
-                      selected-object="searchSelects.${complexProperty}"
-                      remote-url-data-field="content"
-                      title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size || $counter < 3),#{end}#if($counter == 3)#break #{end}#{end}"
+    <div class="col-md-3 form-group" show-errors>
+
+            <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+            <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
+                  input-name="${idAgragation}${beanName}AutoComplete"
+                  initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
+                  placeholder="Busca por #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String')${prop.title}#if($counter < $size ) ou #{end}#{end}#{end}"
+                  name="${beanName}"
+                  pause="400"
+                  remote-url="/${projectBeanName}/api/${complexProperty.referedEntity.name}/searchText?text="
+                  selected-object="searchSelects.${complexProperty}"
+                  remote-url-data-field="content"
+                  title-field="#set($size = ${complexProperty.referedEntity.getMostDescritiveProperties().size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.getMostDescritiveProperties()})#set($counter = $counter + 1)${prop}#if($counter < $size || $counter < 3),#{end}#if($counter == 3)#break #{end}#{end}"
 #if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
 #set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
 ### find first StringField
@@ -121,22 +125,25 @@
 #set ($stringField = ${prop})
 #end
 #end
-                      description-field="${toOneProperty.name}.${stringField}"
+                  description-field="${toOneProperty.name}.${stringField}"
 #end
 #if( ${complexProperty.referedEntity.table.count} > 10000)
-                      minlength="7"
+                  minlength="7"
 #else
-                      minlength="2"
+                  minlength="2"
 #end
-                      input-class="form-control"
-##                    field-required="true"
-                      text-no-results="Nenhum registro encontrado"
-                      text-searching="Buscando"
-                      auto-match="true"/>
-            </div>
+                  input-class="form-control"
+#if(!$isFilter)
+                  field-required="true"
+#end
+                  text-no-results="Nenhum registro encontrado"
+                  text-searching="Buscando"
+                  auto-match="true"/>
+        </div>
+
 #else
-            <div class="col-md-3 form-group" show-errors>
-                <label>${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}
+        <div class="col-md-3 form-group" show-errors>
+            <label>${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
                 <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -168,5 +175,45 @@
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} < ${bigFieldSize})
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
+#end
+#end
+
+#######################################
+## now text areas
+#######################################
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
 #end
 #end

@@ -47,6 +47,12 @@ class Clazz implements Serializable {
         if (word.endsWith("collection")) {
             word = word.replaceFirst("collection", "")
         }
+
+        if (word.size() > 5 && word.startsWith("tb")) {
+            // FIXME remover bacalhau feito para o contrato
+            word = word.replaceFirst("tb", "");
+        }
+
         if (word.equals("cpf") || word.equals("cep") || word.equals("cnpj") || word.equals("pdf")) {
             title =  word.toUpperCase()
             return title
@@ -58,6 +64,8 @@ class Clazz implements Serializable {
                     [chave: "funcionario", acentuado: "funcionário"],
                     [chave: "responsavel", acentuado: "responsável"],
                     [chave: "responsavel", acentuado: "responsável"],
+                    [chave: "formacao", acentuado: "formação"],
+                    [chave: "medicao", acentuado: "medição"],
                     [chave: "endereco", acentuado: "endereço"],
                     [chave: "analise", acentuado: "análise"],
                     [chave: "tecnico", acentuado: "técnico"],

@@ -22,7 +22,7 @@
 #set( $property = ${entity.id} )
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
 #end
-##########  HERE wh stasrt
+##########  HERE we start
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= ${bigFieldSize})
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
@@ -178,5 +178,45 @@
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} < ${bigFieldSize})
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
+#end
+#end
+
+#######################################
+## now text areas
+#######################################
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+<div class="col-md-12 form-group" show-errors>
+    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+</div>
 #end
 #end

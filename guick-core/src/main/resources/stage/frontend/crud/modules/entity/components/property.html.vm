@@ -78,13 +78,13 @@
 </div>
 #else
 #if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
-<div class="col-md-12 form-group" show-errors>
-    <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-    <def text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#####<div class="col-md-12 form-group" show-errors>
+#####    <label class="control-label" for="entity.${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+#####    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
 #if(!${property.column.nullable})
-    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
-#{end}core
-</div>
+#####    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+#####</div>
 #else
 <div class="col-md-3 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
