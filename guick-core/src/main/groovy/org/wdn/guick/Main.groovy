@@ -34,7 +34,7 @@ class Main {
         try {
             Main main = new Main();
             //main.project.initialize("../java/mprj-gsi-portfolio/")
-            main.project.initialize("../java/mprj-gsi-medicamentos")
+            main.project.initialize("../mprj-gsi-medicamentos")
             //main.project.initialize("../java/mprj-gsi-atualizacontato")
             //main.project.initialize("../java/mprj-gsi-contratos")
             //main.project.initialize("../java/mprj-gsi-msm")
