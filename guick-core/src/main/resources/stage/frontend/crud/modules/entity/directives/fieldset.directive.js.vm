@@ -20,7 +20,7 @@
             scope: {
                 entity: '=model'
             },
-            templateUrl: 'modules/${entityBeanName}/directives/${entityBeanName}.fieldset.html'
+            templateUrl: 'modules/${entityBeanName}/directives/${entityBeanName}.fieldset.directive.html'
         };
     });
 

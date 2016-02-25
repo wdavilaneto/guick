@@ -136,10 +136,10 @@ guick {
                         [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.detalhar.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.detalhar.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.edit.html"],
 
-                        [input: "stage/frontend/crud/modules/entity/directives/select.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.html"],
-                        [input: "stage/frontend/crud/modules/entity/directives/select.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.js"],
-                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.js"],
-                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.html"]
+                        [input: "stage/frontend/crud/modules/entity/directives/select.directive.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.directive.html"],
+                        [input: "stage/frontend/crud/modules/entity/directives/select.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.directive.js"],
+                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.js"],
+                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.html"]
                 ]
                 object entity
             }
