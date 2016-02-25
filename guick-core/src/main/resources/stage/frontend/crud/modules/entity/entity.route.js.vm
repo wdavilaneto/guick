@@ -11,6 +11,7 @@
             name: "${entity.beanName}Search",
             url: "/${entity.beanName}",
             controller: '${entity.beanName}Controller',
+            controllerAs: 'vm',
             templateUrl: "modules/${entity.beanName}/${entity.beanName}.html"
         };
         var ${entity.beanName}Edit = {
@@ -18,11 +19,13 @@
             name: "${entity.beanName}Edit",
             url: "/${entity.beanName}/{id}",
             controller: '${entity.beanName}EditController',
+            controllerAs: 'vm',
             templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.html"
         };
         var ${entity.beanName}EditMain = {name: "${entity.beanName}Edit.main",
             url: "",
             controller: '${entity.beanName}EditMainController',
+            controllerAs: 'vm',
             templateUrl: "modules/${entity.beanName}/${entity.beanName}.edit.main.html",
         };
 
@@ -36,6 +39,7 @@
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
                 url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
+                controllerAs: 'vm',
                 templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
             })
 #end
@@ -46,6 +50,7 @@
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
                 url: "/{id}/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
+                controllerAs: 'vm',
                 templateUrl: "modules/${beanName}/components/${beanName}.table.html"
             })
 #end

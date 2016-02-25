@@ -17,7 +17,7 @@
     .directive('${entityBeanName.toLowerCase()}Select', function(){
         return {
             restrict: 'EA',
-            templateUrl: 'modules/${entityBeanName}/directives/${entityBeanName}.select.html'
+            templateUrl: 'modules/${entityBeanName}/directives/${entityBeanName}.select.directive.html'
         };
     });
 

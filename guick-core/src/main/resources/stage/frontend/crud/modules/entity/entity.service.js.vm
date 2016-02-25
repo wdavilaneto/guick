@@ -11,10 +11,11 @@
  * # myService
  * Factory in the ${projectBeanName}App.
  */
+angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ${entityBeanName}Service);
 
-angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$resource', 'gridService', 'ENV_CONFIG',
+    ${entityBeanName}Service.$inject = ['$resource', 'gridService', 'ENV_CONFIG'];
 
-    function ($resource, gridService, ENV_CONFIG) {
+    function ${entityBeanName}Service($resource, gridService, ENV_CONFIG) {
         var service = $resource('/${projectBeanName}/api/${entity.name}/:id', {}, {
             'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entity.name}', isArray: false},
             'search': { method: 'POST', url: '/${projectBeanName}/api/${entity.name}/search', isArray: false},
@@ -191,6 +192,5 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ['$r
         };
         return service;
     }
-]);
 
 })();
