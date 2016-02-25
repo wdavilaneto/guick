@@ -166,11 +166,11 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ${en
 #foreach( ${property} in ${properties})
 ## Caso seja uma Long ( pode ser foreing key ) e eh uma constriaint, portanto para uma entidade nao mapeada ( oculta-se a chave )
 #if( (${property.type} == 'Long' && ${property.column.constraint}) || ${property.type} == 'byte[]')
-            //options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}} );
+            //options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 6 && ${property.column.length} < 6), width: 30#{end}} );
 #else
 #set($counter = $counter + 1)
 ##                // (($counter > 6) || ( (${size} > 6) && (${property.column.length} < 30 || ${property.column.length} > 500) ) )
-            #if(($counter > 6) || ( (${size} > 6) && (${property.column.length} < 10 || ${property.column.length} > 1000) ) )//#{end}options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 5 && ${property.column.length} < 5), width: 30#{end}});
+            #if(($counter > 7) || ( (${size} > 7) && (${property.column.length} < 10 || ${property.column.length} > 1000) ) )//#{end}options.columnDefs.push({field: '${property}', displayName: '${property.title}', sortable: false#if (${property.name.length()} < 6 && ${property.column.length} < 6), width: 30#{end}});
 #end
 #end
 #####################

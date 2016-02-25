@@ -34,10 +34,12 @@ class Main {
         try {
             Main main = new Main();
             //main.project.initialize("../java/mprj-gsi-portfolio/")
-            main.project.initialize("../java/mprj-gsi-medicamentos")
+            //main.project.initialize("../java/mprj-gsi-medicamentos")
             //main.project.initialize("../java/mprj-gsi-atualizacontato")
             //main.project.initialize("../java/mprj-gsi-contratos")
             //main.project.initialize("../java/mprj-gsi-msm")
+
+            main.project.initialize("../java/mprj-gsi-ouvidoria")
 
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()

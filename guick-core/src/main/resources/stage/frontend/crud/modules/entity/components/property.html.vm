@@ -10,17 +10,26 @@
     </div>
     -->
 #else
+################# PDF OR IMAGE
 #if ( ${property.getType().equalsIgnoreCase('byte[]')} )
+
+#if (  ${property.name.toLowerCase().contains('pdf')} )
+    <div class="col-md-3 form-group" show-errors>
+        <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+        <div class="input-group">
+            PDF
+        </div>
+    </div>
+#else
     <div class="col-md-3 form-group" show-errors>
         <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
             <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="entity.${property}" width="80px" />
             <input type="file" fileread="entity.${property}" filetype="entity.${idAgragation}${property}Type" id="${idAgragation}${property}"/>
-#if(!${property.column.nullable})
-         <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
-#{end}
         </div>
     </div>
+#end
+
 #else
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
 #if (${property.column.insertable})

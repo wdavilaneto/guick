@@ -47,7 +47,7 @@
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
     <div class="col-md-3 form-group" show-errors>
 
-            <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+            <label class="control-label" for="${idAgragation}${beanName}AutoComplete">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
             <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                 input-name="${idAgragation}${beanName}AutoComplete"
                 initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
@@ -105,7 +105,7 @@
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
     <div class="col-md-3 form-group" show-errors>
 
-            <label class="control-label">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+            <label class="control-label" for="${idAgragation}${beanName}AutoComplete">${complexProperty.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
             <div angucomplete-alt id="${idAgragation}${beanName}AutoComplete"
                   input-name="${idAgragation}${beanName}AutoComplete"
                   initial-value="{{entity.${complexProperty}.${complexProperty.referedEntity.getMostDescritiveProperties()[0]}}}"
