@@ -35,9 +35,11 @@ angular.module('${projectBeanName}App')
         vm.textSearchActive = true;
         vm.searchField = {text: ''};
         vm.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
-        vm.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
-        vm.pagination = vm.gridOptions.getPagination(); // just for ease use/access
-        vm.resultPage = {}; // Paged result for search filter
+
+        // Elementos usados pelo ui-grid DEVEM estar no $scope
+        $scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
+        $scope.pagination = $scope.gridOptions.getPagination(); // just for ease use/access
+        $scope.resultPage = {}; // Paged result for search filter
     #if(${entity.getActiveProperty()})
         vm.entity.boolActive = true;
     #end
@@ -50,9 +52,9 @@ angular.module('${projectBeanName}App')
     #if( ${entity.table.count} > 10000)
                 if (vm.searchField.text.length > 3) {
     #end
-                    ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':vm.pagination.getPageRequest()} , function (data) {
-                        vm.resultPage = data;
-                        vm.resultPage.content = jsog.decode(data.content);
+                    ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                        $scope.resultPage = data;
+                        $scope.resultPage.content = jsog.decode(data.content);
                     });
     #if( ${entity.table.count} > 10000)
                 }
@@ -60,19 +62,19 @@ angular.module('${projectBeanName}App')
             } else {
                 // prepare search(d) text object
                 vm.searchSelects.toEntity(vm.entity);
-                ${entityBeanName}Service.search( {'content':vm.entity,'pagination':vm.pagination.getPageRequest()} , function (data) {
-                    vm.resultPage = data;
+                ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                    $scope.resultPage = data;
                     try {
-                        vm.resultPage.content = jsog.decode(data.content);
+                        $scope.resultPage.content = jsog.decode(data.content);
                     } catch (exception) {
-                        vm.resultPage.content = data.content;
+                        $scope.resultPage.content = data.content;
                     }
                 });
             }
         };
 
         vm.newSearch = function() {
-            vm.pagination.currentPage = 1;
+            $scope.pagination.currentPage = 1;
             vm.search();
         };
 
@@ -123,15 +125,15 @@ angular.module('${projectBeanName}App')
         };
 
         vm.pageChanged = function(newPage) {
-            vm.pagination.currentPage = newPage;
+            $scope.pagination.currentPage = newPage;
         };
 
         // Search de todos os elementos inicial ( quando entra na tela )
     #if( ${entity.table.count} < 10000)
         if (!vm.editMode) {
-            ${entityBeanName}Service.findAll( vm.pagination.getPageRequest() , function (data) {
-                vm.resultPage = data;
-                vm.resultPage.content = jsog.decode(data.content);
+            ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
+                $scope.resultPage = data;
+                $scope.resultPage.content = jsog.decode(data.content);
             });
         }
     #end
