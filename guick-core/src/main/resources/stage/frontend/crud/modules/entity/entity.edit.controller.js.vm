@@ -20,70 +20,72 @@
 
         function ${entityBeanName}EditController(${js}scope, ${js}state, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
+            var vm = this;
+
             // ***************************
             // Model Initializations
             // ***************************
-            ${js}scope.maxSelectBoxSize = 300;
-            ${js}scope.original = {};
-            ${js}scope.entity = ${entityBeanName}Service.create();
-            ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
-            ${js}scope.searchSelects.fromEntity(${js}scope.entity);
+            vm.maxSelectBoxSize = 300;
+            vm.original = {};
+            vm.entity = ${entityBeanName}Service.create();
+            vm.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
+            vm.searchSelects.fromEntity(vm.entity);
 
             // ***************************************${entity.beanName}
             // Controller Methods definitions
             // ***************************************
-            ${js}scope.get = function( id ) {
+            vm.get = function( id ) {
                 if (!id) {
                     id = ${js}stateParams.id;                           // get id parameter from ui-router
                 }
                 console.log('retrieving rename.id = ' + id  );
                 ${entityBeanName}Service.get( {'id':id} , function (data) {
-                    ${js}scope.entity = data;                           // set managed entity from service
-                    ${js}scope.original = ${js}scope.entity;                // backup original values;
-                    ${js}scope.searchSelects.fromEntity(${js}scope.entity); // update search selects values;
+                    vm.entity = data;                           // set managed entity from service
+                    vm.original = ${js}scope.entity;                // backup original values;
+                    vm.searchSelects.fromEntity(${js}scope.entity); // update search selects values;
                 }, function (error){
                     console.log(error);                             // TODO:
                 });
             };
 
-            $scope.clearForm = function () {
-                $scope.entity = $scope.original;
+            vm.clearForm = function () {
+                vm.entity = vm.original;
             };
 
             // ************************************
             // watches
             // ************************************
-            $scope.changeTab = function (tab) {
-              $state.go(tab);
-              $scope.tabSelected = tab;
+            vm.changeTab = function (tab) {
+                $state.go(tab);
+                vm.tabSelected = tab;
             }
 
             // ****************************************
             // Controller init (on load) service calls
             // ****************************************
-            ${js}scope.tabs = [];
-            ${js}scope.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
+            vm.tabs = [];
+            vm.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
     #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
     #if(!${complexProperty.referedEntity.looksLikeEnum()} )
-    ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
+    vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
     #end
     #end
             #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
             #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
             ##TODO Many to many needs special query
-            ${js}scope.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label", visible: ${js}stateParams.id});
+            vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label", visible: ${js}stateParams.id});
             #end
             #end
 
-            ${js}scope.tabSelected = '${entity.beanName}Edit.main';
+            vm.tabSelected = '${entity.beanName}Edit.main';
 
             // Selects to Fullfill select boxes
             // Begin block
             #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
             #if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
             #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-    ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}, function (data) {
-            ${js}scope.${beanName}List = jsog.decode(data.content);
+    ${beanName}Service.findAll( {page:1 , size:vm.maxSelectBoxSize}, function (data) {
+            vm.${beanName}List = jsog.decode(data.content);
             });
             #end
             #end

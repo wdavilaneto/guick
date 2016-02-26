@@ -3,7 +3,7 @@
     <!-- Commented Becouse this foreing Key is unkown to generator and points to and nullable property
     <div class="class="col-md-3 form-group" show-errors>
         <label class="control-label" for="${idAgragation}${property}">${property.title}  #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-        <input class="form-control" type="text" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required#{end}#if(${property.name} != 'numeroProcesso') placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
+        <input class="form-control" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required#{end}#if(${property.name} != 'numeroProcesso') placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
 #if(!${property.column.nullable})
        <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
 #{end}
@@ -24,8 +24,8 @@
     <div class="col-md-3 form-group" show-errors>
         <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
-            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="entity.${property}" width="80px" />
-            <input type="file" fileread="entity.${property}" filetype="entity.${idAgragation}${property}Type" id="${idAgragation}${property}"/>
+            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="vm.entity.${property}" width="80px" />
+            <input type="file" fileread="vm.entity.${property}" filetype="vm.entity.${idAgragation}${property}Type" id="${idAgragation}${property}"/>
         </div>
     </div>
 #end
@@ -37,9 +37,9 @@
         <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
-                ng-model="entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
+                ng-model="vm.entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
 #if(!${property.column.nullable})
             <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
@@ -58,8 +58,8 @@
     <div class="col-md-12" ng-controller="ButtonsCtrl">
         <div class="row">
             <div class="btn-group btn-group-justified">
-                <label class="btn btn-default btn-sm" uncheckable ng-model="entity.${idAgragation}${property}" data-value="M" ng- btn-radio="'M'">Masculino</label>
-                <label class="btn btn-default btn-sm" uncheckable ng-model="entity.${idAgragation}${property}" data-value="F" ng- btn-radio="'F'">Feminino</label>
+                <label class="btn btn-default btn-sm" uncheckable ng-model="vm.entity.${idAgragation}${property}" data-value="M" ng- btn-radio="'M'">Masculino</label>
+                <label class="btn btn-default btn-sm" uncheckable ng-model="vm.entity.${idAgragation}${property}" data-value="F" ng- btn-radio="'F'">Feminino</label>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
 #if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
 <div class="col-md-3 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-    <input type="email" class="form-control" ng-maxlength="${property.column.length}" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" >
+    <input type="email" class="form-control" ng-maxlength="${property.column.length}" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" >
 #if(!${property.column.nullable})
      <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
 #{end}
@@ -80,7 +80,7 @@
 #if(${property.column.length} >= 1000 && (${property.column.type.toLowerCase()} != 'clob' && ${property.column.type.toLowerCase()} != 'text' ) )
 <div class="col-md-3 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-    <textarea class="form-control" rows="3" ng-maxlength="${property.column.length}" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" ></textarea>
+    <textarea class="form-control" rows="3" ng-maxlength="${property.column.length}" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" ></textarea>
 #if(!${property.column.nullable})
     <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
 #{end}
@@ -89,7 +89,7 @@
 #if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
 #####<div class="col-md-12 form-group" show-errors>
 #####    <label class="control-label" for="entity.${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-#####    <div text-angular class="form-control" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
+#####    <div text-angular class="form-control" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" />
 #if(!${property.column.nullable})
 #####    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
 #{end}
@@ -97,7 +97,7 @@
 #else
 <div class="col-md-3 form-group" show-errors>
     <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
-    <input class="form-control" type="text" ng-maxlength="${property.column.length}" ng-model="entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
+    <input class="form-control" type="text" ng-maxlength="${property.column.length}" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}" #end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
 #if(!${property.column.nullable})
     <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
 #{end}
