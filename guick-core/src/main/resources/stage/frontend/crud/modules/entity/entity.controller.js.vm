@@ -23,113 +23,132 @@ angular.module('${projectBeanName}App')
 
     function ${entityBeanName}Controller(${js}scope, ${js}stateParams , ${js}modal, ${js}location, jsog, ${entityBeanName}Service #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )#if(${beanName} != ${entityBeanName}), ${beanName}Service#{end}#{end} ) {
 
+        var vm = this;
+
         // ***************************
         // Model Initializations
         // ***************************
-        ${js}scope.entity = ${entityBeanName}Service.create();
-        ${js}scope.options = { language: 'en', allowedContent: true, entities: false };
-        ${js}scope.editMode = false;
-        ${js}scope.maxSelectBoxSize = 300;
-        ${js}scope.textSearchActive = true;
-        ${js}scope.searchField = {text: ''};
-        ${js}scope.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
-        ${js}scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
-        ${js}scope.pagination = ${js}scope.gridOptions.getPagination(); // just for ease use/access
-        ${js}scope.resultPage = {}; // Paged result for search filter
+        vm.entity = ${entityBeanName}Service.create();
+        vm.options = { language: 'en', allowedContent: true, entities: false };
+        vm.editMode = false;
+        vm.maxSelectBoxSize = 300;
+        vm.textSearchActive = true;
+        vm.searchField = {text: ''};
+        vm.searchSelects = ${entityBeanName}Service.factorySearchSelect(); // Text Search Select utility Object
+
+        // Elementos usados pelo ui-grid DEVEM estar no $scope
+        $scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
+        $scope.pagination = $scope.gridOptions.getPagination(); // just for ease use/access
+        $scope.resultPage = {}; // Paged result for search filter
     #if(${entity.getActiveProperty()})
-        ${js}scope.entity.boolActive = true;
+        vm.entity.boolActive = true;
     #end
 
         // Search By Example Method
-        ${js}scope.search = function(page) {
-            console.log('Realizando busca');
-            // prepare page request
-            if (${js}scope.textSearchActive) {
-    #if( ${entity.table.count} > 10000)
-                if (${js}scope.searchField.text.length > 3) {
-    #end
-                    ${entityBeanName}Service.searchText( {'content': ${js}scope.searchField.text ,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
-                        ${js}scope.resultPage = data;
-                        ${js}scope.resultPage.content = jsog.decode(data.content);
-                    });
-    #if( ${entity.table.count} > 10000)
-                }
-    #end
-            } else {
-                // prepare search(d) text object
-                ${js}scope.searchSelects.toEntity(${js}scope.entity);
-                ${entityBeanName}Service.search( {'content':${js}scope.entity,'pagination':${js}scope.pagination.getPageRequest()} , function (data) {
-                    ${js}scope.resultPage = data;
-                    try {
-                        ${js}scope.resultPage.content = jsog.decode(data.content);
-                    } catch (exception) {
-                        ${js}scope.resultPage.content = data.content;
-                    }
-                });
-            }
-        };
+        vm.search = search;
 
-        $scope.newSearch = function() {
-            $scope.pagination.currentPage = 1;
-            $scope.search();
-        }
+        vm.newSearch = newSearch;
 
-        $scope.clearForm = function () {
-            console.log('Limpando form filter');
-            ${js}scope.entity = ${entityBeanName}Service.create();
-            ${js}scope.searchField.text = '';
-            ${js}scope.searchSelects.clear();
-        };
+        vm.clearForm = clearForm;
 
         // ******************************************************************************************
         // Modals methods definitions
         // ******************************************************************************************
         // Create ${entity.name} Modal Window
-        ${js}scope.open = function (size) {
-            ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        vm.open = open;
+
+        // Create ${entity.name} Modal Window
+        vm.view = view;
+
+        vm.setTextSearchActive = setTextSearchActive;
+
+        vm.pageChanged = pageChanged;
+
+
+        function search(page) {
+            console.log('Realizando busca');
+            // prepare page request
+            if (vm.textSearchActive) {
+                #if( ${entity.table.count} > 10000)
+                if (vm.searchField.text.length > 3) {
+                #end
+                    ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                    $scope.resultPage = data;
+                    $scope.resultPage.content = jsog.decode(data.content);
+                });
+                #if( ${entity.table.count} > 10000)
+                }
+                #end
+            } else {
+                // prepare search(d) text object
+                vm.searchSelects.toEntity(vm.entity);
+                    ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                    $scope.resultPage = data;
+                    try {
+                        $scope.resultPage.content = jsog.decode(data.content);
+                    } catch (exception) {
+                        $scope.resultPage.content = data.content;
+                    }
+                });
+            }
+        }
+
+        function newSearch() {
+            $scope.pagination.currentPage = 1;
+            vm.search();
+        }
+
+        function clearForm() {
+            console.log('Limpando form filter');
+            vm.entity = ${entityBeanName}Service.create();
+            vm.searchField.text = '';
+            vm.searchSelects.clear();
+        }
+
+        function open(size) {
+            vm.searchSelects.toEntity(vm.entity);
             var modalInstance = ${js}modal.open({
                 templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
                 resolve: {
-                    data: function () {return $scope.entity;}
+                    data: function () {return vm.entity;}
                 }
             });
             modalInstance.result.then(function (selectedItem) {
-                ${js}scope.selected = selectedItem;
+                vm.selected = selectedItem;
                 // Refreshing Result List
-                ${js}scope.entity = ${entityBeanName}Service.create();
-                ${js}scope.search();
+                vm.entity = ${entityBeanName}Service.create();
+                vm.search();
             }, function () {
                 //dismiss
             });
-        };
+        }
 
-        // Create ${entity.name} Modal Window
-        ${js}scope.view = function (size, entityName) {
-            ${js}scope.searchSelects.toEntity(${js}scope.entity);
+        function view(size, entityName) {
+            vm.searchSelects.toEntity(vm.entity);
             var modalInstance = ${js}modal.open({
-                templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' +entityName+ 'Controller', size: size,
+                templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' + entityName + 'Controller', size: size,
                 resolve: {
                     data: function () {
-                        return $scope.entity;
+                        return vm.entity;
                     }
                 }
             });
-        };
+        }
 
-        ${js}scope.setTextSearchActive = function (value) {
-           ${js}scope.textSearchActive = value;
-        };
+        function setTextSearchActive(value) {
+            vm.textSearchActive = value;
+        }
 
-        $scope.pageChanged = function(newPage) {
-            pagination.currentPage = newPage;
-        };
+        function pageChanged(newPage) {
+            $scope.pagination.currentPage = newPage;
+        }
 
         // Search de todos os elementos inicial ( quando entra na tela )
     #if( ${entity.table.count} < 10000)
-        if (!${js}scope.editMode) {
-            ${entityBeanName}Service.findAll( ${js}scope.pagination.getPageRequest() , function (data) {
-                ${js}scope.resultPage = data;
-                ${js}scope.resultPage.content = jsog.decode(data.content);
+    if (!vm.editMode) {
+            ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
+                $scope.resultPage = data;
+                $scope.resultPage.content = jsog.decode(data.content);
             });
         }
     #end
@@ -139,8 +158,8 @@ angular.module('${projectBeanName}App')
     #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
     #if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
     #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-        ${beanName}Service.findAll( {page:1 , size:${js}scope.maxSelectBoxSize}  , function (data) {
-             ${js}scope.${beanName}List = jsog.decode(data.content);
+        ${beanName}Service.findAll( {page:1 , size: vm.maxSelectBoxSize}  , function (data) {
+             vm.${beanName}List = jsog.decode(data.content);
         });
     #end
     #end
@@ -151,11 +170,10 @@ angular.module('${projectBeanName}App')
         // ************************************
         ${js}scope.${js}watch('pagination', function (newVal, oldVal) {
             if ((newVal.pageSize !== oldVal.pageSize) || (newVal.currentPage !== oldVal.currentPage)) {
-                ${js}scope.search();
+                vm.search();
             }
         }, true);
 
     }
-
 
 })();

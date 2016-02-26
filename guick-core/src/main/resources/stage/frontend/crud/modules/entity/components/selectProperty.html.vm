@@ -12,7 +12,7 @@
 #end
 #end
 
-                                    <ui-select ng-model="entity.${complexProperty.name}" ng-disabled="${complexProperty.referedEntity.beanName}List.length < 1" ng-required="true">
+                                    <ui-select ng-model="vm.entity.${complexProperty.name}" ng-disabled="${complexProperty.referedEntity.beanName}List.length < 1" ng-required="true">
                                         <ui-select-match placeholder="Escolha ${complexProperty.title}...">{{${js}select.selected.${stringField}}}</ui-select-match>
                                         <ui-select-choices repeat="item in ${complexProperty.referedEntity.beanName}List | filter: ${js}select.search">
 #if ($stringField == '' )
