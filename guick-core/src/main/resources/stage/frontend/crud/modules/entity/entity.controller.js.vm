@@ -45,24 +45,44 @@ angular.module('${projectBeanName}App')
     #end
 
         // Search By Example Method
-        vm.search = function(page) {
+        vm.search = search;
+
+        vm.newSearch = newSearch;
+
+        vm.clearForm = clearForm;
+
+        // ******************************************************************************************
+        // Modals methods definitions
+        // ******************************************************************************************
+        // Create ${entity.name} Modal Window
+        vm.open = open;
+
+        // Create ${entity.name} Modal Window
+        vm.view = view;
+
+        vm.setTextSearchActive = setTextSearchActive;
+
+        vm.pageChanged = pageChanged;
+
+
+        function search(page) {
             console.log('Realizando busca');
             // prepare page request
             if (vm.textSearchActive) {
-    #if( ${entity.table.count} > 10000)
+                #if( ${entity.table.count} > 10000)
                 if (vm.searchField.text.length > 3) {
-    #end
+                #end
                     ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':$scope.pagination.getPageRequest()} , function (data) {
-                        $scope.resultPage = data;
-                        $scope.resultPage.content = jsog.decode(data.content);
-                    });
-    #if( ${entity.table.count} > 10000)
+                    $scope.resultPage = data;
+                    $scope.resultPage.content = jsog.decode(data.content);
+                });
+                #if( ${entity.table.count} > 10000)
                 }
-    #end
+                #end
             } else {
                 // prepare search(d) text object
                 vm.searchSelects.toEntity(vm.entity);
-                ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                    ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
                     $scope.resultPage = data;
                     try {
                         $scope.resultPage.content = jsog.decode(data.content);
@@ -71,25 +91,21 @@ angular.module('${projectBeanName}App')
                     }
                 });
             }
-        };
+        }
 
-        vm.newSearch = function() {
+        function newSearch() {
             $scope.pagination.currentPage = 1;
             vm.search();
-        };
+        }
 
-        vm.clearForm = function () {
+        function clearForm() {
             console.log('Limpando form filter');
             vm.entity = ${entityBeanName}Service.create();
             vm.searchField.text = '';
             vm.searchSelects.clear();
-        };
+        }
 
-        // ******************************************************************************************
-        // Modals methods definitions
-        // ******************************************************************************************
-        // Create ${entity.name} Modal Window
-        vm.open = function (size) {
+        function open(size) {
             vm.searchSelects.toEntity(vm.entity);
             var modalInstance = ${js}modal.open({
                 templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
@@ -105,10 +121,9 @@ angular.module('${projectBeanName}App')
             }, function () {
                 //dismiss
             });
-        };
+        }
 
-        // Create ${entity.name} Modal Window
-        vm.view = function (size, entityName) {
+        function view(size, entityName) {
             vm.searchSelects.toEntity(vm.entity);
             var modalInstance = ${js}modal.open({
                 templateUrl: ('view' +entityName+ 'Modal.html'), controller: 'Modal' + entityName + 'Controller', size: size,
@@ -118,19 +133,19 @@ angular.module('${projectBeanName}App')
                     }
                 }
             });
-        };
+        }
 
-        vm.setTextSearchActive = function (value) {
-           vm.textSearchActive = value;
-        };
+        function setTextSearchActive(value) {
+            vm.textSearchActive = value;
+        }
 
-        vm.pageChanged = function(newPage) {
+        function pageChanged(newPage) {
             $scope.pagination.currentPage = newPage;
-        };
+        }
 
         // Search de todos os elementos inicial ( quando entra na tela )
     #if( ${entity.table.count} < 10000)
-        if (!vm.editMode) {
+    if (!vm.editMode) {
             ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
