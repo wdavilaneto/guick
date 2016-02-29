@@ -44,7 +44,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
  *  Author: service-wdavilaneto@redhat.com
  */
 @RestController
-@RequestMapping(value="/${util.uncapitalize($entity.name)}")
+@RequestMapping(value="/${entityBeanName}")
 public class ${entity.name}Controller {
 
     private static PageRequest DEFAULT_PAGE = new PageRequest(0,20);
