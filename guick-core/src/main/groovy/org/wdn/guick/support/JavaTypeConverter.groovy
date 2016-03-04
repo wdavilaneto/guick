@@ -41,6 +41,7 @@ class JavaTypeConverter {
                "OID"                              : "Long",
                "BOOLEAN"                          : "Boolean",
                "DOUBLE"                           : "Double",
+               "FLOAT"                            : "Double",
                "DOUBLE PRECISION"                 : "Double",
                "BYTEA"                            : "byte[]",
                "TIMESTAMP WITHOUT TIME ZONE"      : "Date",

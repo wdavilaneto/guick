@@ -19,7 +19,7 @@ guick {
             "domain layer" {
                 object entity
                 templates = [
-                    [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]
+                        [input: "stage/domain/${lang}/entity.vm", output: "/api/src/main/${lang}/${packageBase}/domain/${entity.name}.${lang}"]
                 ]
             }
         }
@@ -88,7 +88,7 @@ guick {
                     [input: "stage/frontend/app/modules/main/main.html.vm", output: "/front-end/app/modules/main/main.html"],
 
                     [input: "stage/frontend/app/index.html.vm", output: "/front-end/app/index.html"],
-                    [input: "stage/frontend/app/layout/menu/menu.html.vm", output: "/front-end/app/layout/menu/menu.html" ],
+                    [input: "stage/frontend/app/layout/menu/menu.html.vm", output: "/front-end/app/layout/menu/menu.html"],
                     [input: "stage/frontend/app/app.module.js.vm", output: "/front-end/app/app.module.js"],
 
                     [input: "stage/frontend/app/i18n/", output: "/front-end/app/i18n"],
@@ -140,6 +140,21 @@ guick {
                         [input: "stage/frontend/crud/modules/entity/directives/select.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.directive.js"],
                         [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.js"],
                         [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.html"]
+                ]
+                object entity
+            }
+        }
+
+        // for (def property : entity.getManyToOneProperties())
+        for (def entity : entityList) {
+            "geracao de front-end" {
+                templates = [
+                        [input: "stage/frontend/crud/modules/entity/detail/tomany.controller.js.vm",
+                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.child.controller.js"],
+                        [input: "stage/frontend/crud/modules/entity/detail/tomany.child.html.vm",
+                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.child.html"],
+                        [input: "stage/frontend/crud/modules/entity/detail/tomany.compound.html.vm",
+                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.compound.html"]
                 ]
                 object entity
             }

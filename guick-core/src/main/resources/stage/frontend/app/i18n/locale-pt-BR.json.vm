@@ -15,6 +15,11 @@
   "menu.restapi": "REST API",
   "menu.sistema": "Sistema",
 
+  "add":"Adicionar",
+  "remove":"Remover",
+  "associate":"Associar",
+  "disassociate":"Desassociar",
+
   "login.restricted_area": "Área Restrita",
   "login.obrigatorio": "Obrigatório",
   "login.login": "Login",

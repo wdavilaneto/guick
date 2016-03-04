@@ -25,6 +25,7 @@
             // ***************************
             // Model Initializations
             // ***************************
+            vm.master = '${entityBeanName}';
             vm.maxSelectBoxSize = 300;
             vm.original = {};
             vm.entity = ${entityBeanName}Service.create();
@@ -41,7 +42,7 @@
                 console.log('retrieving rename.id = ' + id  );
                 ${entityBeanName}Service.get( {'id':id} , function (data) {
                     vm.entity = data;                           // set managed entity from service
-                    vm.original = ${js}scope.entity;                // backup original values;
+                    vm.original = angular.copy(vm.entity);                // backup original values;
                     vm.searchSelects.fromEntity(${js}scope.entity); // update search selects values;
                 }, function (error){
                     console.log(error);                             // TODO:
@@ -49,7 +50,7 @@
             };
 
             vm.clearForm = function () {
-                vm.entity = vm.original;
+                vm.entity = angular.copy(vm.original);
             };
 
             // ************************************
@@ -65,30 +66,131 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
-    #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
-    #if(!${complexProperty.referedEntity.looksLikeEnum()} )
-    vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
-    #end
-    #end
-            #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-            #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-            ##TODO Many to many needs special query
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#if(!${complexProperty.referedEntity.looksLikeEnum()} )
+            vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
+#end
+#end
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
+##TODO Many to many needs special query
             vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label", visible: ${js}stateParams.id});
-            #end
-            #end
+#end
+#end
 
             vm.tabSelected = '${entity.beanName}Edit.main';
 
+            // ******************************************************************************************
+            // Master Details: Operations for Search and  editing of OneToMany/ManyToMany
+            // ******************************************************************************************
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )
+#if( ${ent.isOneToMany()} ) #### || ent.isManyToMany()  TODO Many to many needs to change services/repository
+            ${js}scope.selected${ent.referedEntity.name} = null;
+
+            ${js}scope.get${ent.referedEntity.name} = function ( ${ent.referedEntity.beanName}Id ) {
+                ${ent.referedEntity.beanName}Service.get( {'id':${ent.referedEntity.beanName}Id} , function (data) {
+                    ${js}scope.selected${ent.referedEntity.name} = data;
+                }, function (data){
+                    // Case error or not found ..back to search filter
+                    ${js}location.path('/${entity.beanName}/'+ ${js}stateParams.id);
+                });
+            };
+
+            if (${js}stateParams.child == '${ent.referedEntity.name}' && ${js}stateParams.${ent.referedEntity.beanName}Id) {
+                ${js}scope.masterDetail = ${js}stateParams.child;
+                if (${js}stateParams.${ent.referedEntity.beanName}Id) {
+                    ${js}scope.get${ent.referedEntity.name}( ${js}stateParams.${ent.referedEntity.beanName}Id );
+                }
+            }
+
+            ${js}scope.find${ent.referedEntity.name} = function() {
+                console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}stateParams.id);
+
+                ${js}scope.gridOptions = ${ent.referedEntity.beanName}Service.createGridOptions(true);
+                ${js}scope.${ent.referedEntity.beanName}Pagination = ${js}scope.gridOptions.getPagination();
+
+                ${js}scope.resultPage = null;
+                ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}stateParams.id }},'pagination':${js}scope.gridOptions.getPageRequest()}  , function (data) {
+                    ${js}scope.resultPage = data;
+                    try {
+                        ${js}scope.resultPage.content = jsog.decode(data.content);
+                    } catch (exception) {
+                        console.log('Object with self rererence');
+                        ${js}scope.resultPage.content = data.content;
+                    }
+                });
+            };
+            ${js}scope.search${ent.referedEntity.name} = function() {
+                // TODO Implement query search with fields
+                console.log('Realizando busca de 1 x N( ${ent.referedEntity.beanName}.${entityBeanName}.id):' + ${js}scope.entity.id);
+                ${js}scope.resultPage = null;
+                ${ent.referedEntity.beanName}Service.search( {'content':{ '${entityBeanName}':{id:${js}stateParams.id }},'pagination':${js}scope.gridOptions.getPageRequest()}  , function (data) {
+                    ${js}scope.resultPage = data;
+                    try {
+                        ${js}scope.resultPage.content = jsog.decode(data.content);
+                    } catch (exception) {
+                        console.log('Object with self rererence');
+                        ${js}scope.resultPage.content = data.content;
+                    }
+                });
+            };
+            ${js}scope.remove${ent.referedEntity.name} = function (obj){
+                console.log('Deleting ${ent.referedEntity.beanName} with id:' + obj.id);
+                ${ent.referedEntity.beanName}Service.remove( obj , function ( successResult) {
+                    console.log(successResult);
+                    ${js}scope.entity = {};
+                });
+            };
+            ${js}scope.save${ent.referedEntity.name} = function (){
+                console.log('Requesting save on ${${ent.referedEntity.beanName}}');
+                $scope.$broadcast('show-errors-check-validity');
+                // if any invalid validation
+                if (!$scope.mainForm || $scope.mainForm.$invalid) {
+                    console.log('Validation Error');
+                    return;
+                }
+
+                ${js}scope.searchSelects.toEntity(${js}scope.selected);
+                ${ent.referedEntity.beanName}Service.save( ${js}scope.selected , function (successResult) {
+                    console.log(successResult);
+                    ${js}scope.entity = ${ent.referedEntity.beanName}Service.create();
+                    if (!${js}scope.editMode) {
+                        ${js}scope.search${ent.referedEntity.name}();
+                    } else {
+                        ${js}location.path('/${entity.beanName}/'+ ${js}stateParams.id + '/${ent.referedEntity.name}');
+                    }
+                });
+            };
+            ${js}scope.edit${ent.referedEntity.name} = function (obj) {
+                ${js}scope.selected${ent.referedEntity.name} = obj
+                ${js}location.path('/${entity.beanName}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/' + obj.id );
+            };
+            ${js}scope.create${ent.referedEntity.name} = function (obj) {
+                ${js}scope.selected${ent.referedEntity.name} = ${ent.referedEntity.beanName}Service.create();
+                ${js}scope.selected${ent.referedEntity.name}.${entity.beanName} = ${js}scope.entity;
+                ${js}location.path('/${entity.beanName}/'+ ${js}scope.entity.id +'/${ent.referedEntity.name}/');
+            };
+
+            ${js}scope.${ent.referedEntity.beanName}PaginationChanged = function(newPage) {
+                ${js}scope.${ent.referedEntity.beanName}Pagination.currentPage = newPage;
+                ${js}scope.find${ent.referedEntity.name}();
+            };
+
+            ${js}scope.is${ent.referedEntity.name}Active = (${js}stateParams.child === '${ent.referedEntity.name}' && ${js}stateParams.${ent.referedEntity.beanName}Id) ;
+#{end}
+#{end}
+
+
             // Selects to Fullfill select boxes
             // Begin block
-            #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-            #if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
-            #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
-    ${beanName}Service.findAll( {page:1 , size:vm.maxSelectBoxSize}, function (data) {
-            vm.${beanName}List = jsog.decode(data.content);
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+            ${beanName}Service.findAll( {page:1 , size:vm.maxSelectBoxSize}, function (data) {
+                vm.${beanName}List = jsog.decode(data.content);
             });
-            #end
-            #end
+#end
+#end
 
         }
 

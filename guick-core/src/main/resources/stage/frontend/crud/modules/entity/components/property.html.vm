@@ -24,7 +24,7 @@
     <div class="col-md-3 form-group" show-errors>
         <label class="control-label" for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         <div class="input-group">
-            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="vm.entity.${property}" width="80px" />
+            <img ng-src="data:image/*;base64,{{vm.entity.${property}}}" ng-show="vm.entity.${property}" width="80px" />
             <input type="file" fileread="vm.entity.${property}" filetype="vm.entity.${idAgragation}${property}Type" id="${idAgragation}${property}"/>
         </div>
     </div>

@@ -37,8 +37,8 @@
         // ******************************************************************************************
         // Master Details: Operations for Search and  editing of OneToMany/ManyToMany
         // ******************************************************************************************
-    #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )
-    #if( ${ent.isOneToMany()} ) #### || ent.isManyToMany()  TODO Many to many needs to change services/repository
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()} )
+#if( ${ent.isOneToMany()} ) #### || ent.isManyToMany()  TODO Many to many needs to change services/repository
         ${js}scope.selected${ent.referedEntity.name} = null;
 
         ${js}scope.get${ent.referedEntity.name} = function ( ${ent.referedEntity.beanName}Id ) {
@@ -131,8 +131,8 @@
 
         ${js}scope.is${ent.referedEntity.name}Active = (${js}stateParams.child === '${ent.referedEntity.name}' && ${js}stateParams.${ent.referedEntity.beanName}Id) ;
 
-    #{end}
-    #{end}
+#{end}
+#{end}
 
         ${js}scope.back = function (){
             if (${js}stateParams.child) {

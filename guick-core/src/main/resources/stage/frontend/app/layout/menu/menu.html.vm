@@ -23,7 +23,7 @@
         </div>
 #end
 #if (${project.getAllMainEntities().size()} > 0)
-        <div accordion-group ng-if="isAuthenticated || true">
+        <div accordion-group ng-if="isAuthenticated || true" scope>
             <div accordion-heading>
                 <span>
                     {{"menu.principal" | translate}}

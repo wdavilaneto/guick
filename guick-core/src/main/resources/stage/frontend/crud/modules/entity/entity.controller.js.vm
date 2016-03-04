@@ -40,9 +40,9 @@ angular.module('${projectBeanName}App')
         $scope.gridOptions = ${entityBeanName}Service.createGridOptions( #if(${entity.getOneToManyProperties().size()} > 0 && !${entity.looksLikeEnum()} ) false #{else}true#{end});
         $scope.pagination = $scope.gridOptions.getPagination(); // just for ease use/access
         $scope.resultPage = {}; // Paged result for search filter
-    #if(${entity.getActiveProperty()})
+#if(${entity.getActiveProperty()})
         vm.entity.boolActive = true;
-    #end
+#end
 
         // Search By Example Method
         vm.search = search;
@@ -69,16 +69,16 @@ angular.module('${projectBeanName}App')
             console.log('Realizando busca');
             // prepare page request
             if (vm.textSearchActive) {
-                #if( ${entity.table.count} > 10000)
+#if( ${entity.table.count} > 10000)
                 if (vm.searchField.text.length > 3) {
-                #end
+#end
                     ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':$scope.pagination.getPageRequest()} , function (data) {
                     $scope.resultPage = data;
                     $scope.resultPage.content = jsog.decode(data.content);
                 });
-                #if( ${entity.table.count} > 10000)
+#if( ${entity.table.count} > 10000)
                 }
-                #end
+#end
             } else {
                 // prepare search(d) text object
                 vm.searchSelects.toEntity(vm.entity);
@@ -144,25 +144,25 @@ angular.module('${projectBeanName}App')
         }
 
         // Search de todos os elementos inicial ( quando entra na tela )
-    #if( ${entity.table.count} < 10000)
+#if( ${entity.table.count} < 10000)
     if (!vm.editMode) {
             ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
             });
         }
-    #end
+#end
 
         // Selects to Fullfill select boxes
         // Begin block
-    #foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
-    #if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
-    #set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
+#foreach( ${ent} in ${entity.getDistinctedAllComplexProperties()})
+#if( ${ent.isManyToOne()} && !${ent.referedEntity.looksLikeMainEntity()})## Caso nao seja muito grande e portanto caiba num select box ...
+#set( $beanName = ${util.uncapitalize($ent.referedEntity.name)} )
         ${beanName}Service.findAll( {page:1 , size: vm.maxSelectBoxSize}  , function (data) {
              vm.${beanName}List = jsog.decode(data.content);
         });
-    #end
-    #end
+#end
+#end
         // end block
 
         // ************************************

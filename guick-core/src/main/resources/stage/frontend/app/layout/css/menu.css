@@ -24,7 +24,7 @@
 .menu .accordion-toggle .glyphicon {color: #fff;font-size: 0.7em;}
     /*DROPDOWN*/
     .menu .panel .dropdown .btn {background-color: transparent;border: 0;color: #fff;text-shadow: 0px 0px 2px #000;font-size: 0.7em;padding: 5px 0 0px 7px;width: 100%;text-align: left;}
-    .menu .panel .dropdown .dropdown-menu {background-color: #0467A2;left:5px;width: 235px;margin: 0;padding: 7px;font-size: 0.9em;opacity: 0.9;border-radius: 0px 0px 0px 6px;box-shadow:none;}
+    .menu .panel .dropdown .dropdown-menu {background-color: #0467A2;left:5px;width: 235px;margin: 0;padding: 7px;font-size: 0.9em;opacity: 0.9;border-radius: 0px 0px 0px 6px;box-shadow:none;overflow: auto;}
     .menu .panel .dropdown .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background:#0277BD;}
     /**/
 .sidebar-menu .treeview .treeview-menu li a {margin-left: 10px !important;}

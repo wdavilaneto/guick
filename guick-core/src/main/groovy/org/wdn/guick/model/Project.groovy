@@ -162,10 +162,11 @@ class Project implements Serializable {
     }
 
     private boolean hasHibernateIssue(Entity entity) {
-        if (entity.parent?.id instanceof Entity) {
-            Entity parentId = (Entity) entity.parent.id
-            return parentId.isEmbeddable();
-        }
+//        if (entity.parent?.id instanceof Entity) {
+//            Entity parentId = (Entity) entity.parent.id
+//            return parentId.isEmbeddable();
+//        }
+//        return false;
         return false;
     }
 

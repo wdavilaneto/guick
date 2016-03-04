@@ -37,21 +37,21 @@
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
-                url: "/{id}/${complexProperty.beanName}",
+                url: "/${complexProperty.beanName}",
                 controller: '${entity.beanName}ExtController',
                 controllerAs: 'vm',
-                templateUrl: "modules/${entity.beanName}/details/${entity.beanName}.details.html"
+                templateUrl: "modules/${beanName}/details/${beanName}.compound.html"
             })
 #end
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
+#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()} TODO Many to many needs special query
 #set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
-                url: "/{id}/${complexProperty.beanName}",
-                controller: '${entity.beanName}ExtController',
+                url: "/${complexProperty.beanName}",
+                controller: '${beanName}ChildController',
                 controllerAs: 'vm',
-                templateUrl: "modules/${beanName}/components/${beanName}.table.html"
+                templateUrl: "modules/${beanName}/details/${beanName}.child.html"
             })
 #end
 #end

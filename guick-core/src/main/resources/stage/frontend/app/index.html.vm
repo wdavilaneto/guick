@@ -253,6 +253,7 @@
     <script src="modules/${entityBeanName}/${entity.beanName}.extController.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.module.js"></script>
     <script src="modules/${entityBeanName}/${entity.beanName}.route.js"></script>
+    <script src="modules/${entityBeanName}/details/${entity.beanName}.child.controller.js"></script>
     <script src="modules/${entityBeanName}/directives/${entity.beanName}.select.directive.js"></script>
     <script src="modules/${entityBeanName}/directives/${entity.beanName}.fieldset.directive.js"></script>
 #end

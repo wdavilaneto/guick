@@ -53,7 +53,7 @@ class Clazz implements Serializable {
             word = word.replaceFirst("tb", "");
         }
 
-        if (word.equals("cpf") || word.equals("cep") || word.equals("cnpj") || word.equals("pdf")) {
+        if (word.equals("cpf") || word.equals("cep") || word.equals("cnpj") || word.equals("pdf") || word.equals("uf")) {
             title =  word.toUpperCase()
             return title
         } else {
@@ -78,6 +78,11 @@ class Clazz implements Serializable {
                     [chave: "orgi", acentuado: "orgão"],
                     [chave: "secao", acentuado: "seção"],
                     [chave: "sessao", acentuado: "sessão"],
+                    [chave: "inspecao", acentuado: "inspeção"],
+                    [chave: "convenio", acentuado: "convênio"],
+                    [chave: "fisica", acentuado: "física"],
+                    [chave: "saude", acentuado: "saúde"],
+                    [chave: "alimentacao", acentuado: "alimentação"],
                     [chave: "nm", acentuado: "nome"],
                     [chave: "cd", acentuado: "código"]
             ]) {
