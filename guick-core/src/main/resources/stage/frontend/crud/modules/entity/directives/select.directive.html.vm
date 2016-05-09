@@ -18,15 +18,15 @@
 ##    <a class="btn-detail" ng-click="view('lg','${entity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 ###end
 ##</label>
-<div ui-select ng-model="entity.${entityBeanName}" ng-disabled="${entityBeanName}List.length < 1" ng-required="true">
+<div ui-select ng-model="vm.entity.${entityBeanName}" ng-disabled="vm.${entityBeanName}List.length < 1" ng-required="true">
     <div ui-select-match placeholder="Escolha ${entity.title}...">{{${js}select.selected.${stringField}}}</div>
-    <div ui-select-choices repeat="item in ${entityBeanName}List | filter: ${js}select.search">
+    <div ui-select-choices repeat="item in vm.${entityBeanName}List | filter: vm.${js}select.search">
 #if ($stringField == '' )
-        <div ng-bind-html="item.id | highlight: ${js}select.search"></div>
+        <div ng-bind-html="item.id | highlight: vm.${js}select.search"></div>
 #else
-        <div ng-bind-html="item.${stringField} | highlight: ${js}select.search"></div>
+        <div ng-bind-html="item.${stringField} | highlight: vm.${js}select.search"></div>
 #if($secondStringField != '')
-        <small ng-bind-html="item.${secondStringField} |  highlight: $select.search "></small>
+        <small ng-bind-html="item.${secondStringField} |  highlight: vm.${js}select.search "></small>
 #end
 #end
     </div>

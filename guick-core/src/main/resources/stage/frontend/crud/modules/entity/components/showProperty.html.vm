@@ -3,15 +3,15 @@
                                     <div class="form-group">
                                         <label for="${idAgragation}${property}">${property.title}</label>
                                         <div class="input-group">
-                                            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="entity.${property}" width="80px" />
+                                            <img ng-src="data:image/*;base64,{{entity.${property}}}" ng-show="vm.entity.${property}" width="80px" />
                                         </div>
                                     </div>
                                 </div>
 #else
-                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}" ng-if="entity.${idAgragation}${property}">
+                                <div class="col-md-#if(${property.column.length} >= 100)4#{else}#if(${property.column.length} > 5)3#{else}2#{end}#{end}" ng-if="vm.entity.${idAgragation}${property}">
                                     <div class="form-group">
                                         <label class="control-label">${property.title}</label>
-                                        <div ng-if="entity.${idAgragation}${property}"> {{entity.${idAgragation}${property}}}</div>
+                                        <div ng-if="vm.entity.${idAgragation}${property}"> {{entity.${idAgragation}${property}}}</div>
                                     </div>
                                 </div>
 #end

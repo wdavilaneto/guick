@@ -40,8 +40,8 @@ class Main {
             //main.project.initialize("../java/mprj-gsi-msm")
             //main.project.initialize("../java/mprj-gsi-ouvidoria")
             //main.project.initialize("../java/mprj-gsi-mid")
-            //main.project.initialize("../java/mprj-gsi-mgt")
-            main.project.initialize("../java/mprj-gsi-inquerito")
+            main.project.initialize("../java/mprj-gsi-ongs")
+            //main.project.initialize("../java/jarvis")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
 //            main.project.persist();

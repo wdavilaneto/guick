@@ -82,7 +82,7 @@ angular.module('${projectBeanName}App')
             } else {
                 // prepare search(d) text object
                 vm.searchSelects.toEntity(vm.entity);
-                    ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                ${entityBeanName}Service.search( {'content':vm.entity,'pagination':$scope.pagination.getPageRequest()} , function (data) {
                     $scope.resultPage = data;
                     try {
                         $scope.resultPage.content = jsog.decode(data.content);
