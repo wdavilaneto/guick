@@ -33,15 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main();
-            //main.project.initialize("../mprj-gsi-portfolio/")
-            //main.project.initialize("../mprj-gsi-medicamentos")
-            //main.project.initialize("../mprj-gsi-atualizacontato")
-            //main.project.initialize("../mprj-gsi-contratos")
-            //main.project.initialize("../mprj-gsi-msm")
-            //main.project.initialize("../mprj-gsi-ouvidoria")
-            //main.project.initialize("../mprj-gsi-mid")
-            main.project.initialize("../mprj-gsi-mca")
-            //main.project.initialize("../java/jarvis")
+            main.project.initialize("../../mprj-gsi-mca")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
 //            main.project.persist();
