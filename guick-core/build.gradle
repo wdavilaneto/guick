@@ -1,8 +1,23 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE'
+    }
+}
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'application'
 
 mainClassName = "org.wdn.guick.Main"
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.spring.platform:platform-bom:Athens-RELEASE'
+    }
+}
 
 dependencies {
 
@@ -13,10 +28,11 @@ dependencies {
     compile "commons-lang:commons-lang:2.6"
     compile 'xstream:xstream:1.2.2'
 
-    compile "org.springframework:spring-context:3.2.3.RELEASE"
-    runtime "org.springframework:spring-tx:3.2.3.RELEASE"
-    runtime "org.springframework:spring-orm:3.2.3.RELEASE"
-    runtime "org.springframework:spring-jdbc:3.2.3.RELEASE"
+    compile 'org.springframework:spring-core'
+    compile "org.springframework:spring-context"
+    runtime "org.springframework:spring-tx"
+    runtime "org.springframework:spring-orm"
+    runtime "org.springframework:spring-jdbc"
 
     compile "org.hibernate:hibernate-entitymanager:4.2.4.Final"
 
@@ -30,7 +46,7 @@ dependencies {
 
     compile group: 'com.jolbox', name: 'bonecp-spring', version: '0.8.0.RELEASE'
     runtime 'com.h2database:h2:1.3.173'
-    compile 'com.oracle:ojdbc6:11.2.0.3'
+    compile 'com.oracle:ojdbc7:12.1.0.1.0'
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 
 }

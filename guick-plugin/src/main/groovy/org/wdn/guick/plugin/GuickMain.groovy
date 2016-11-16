@@ -1,8 +1,8 @@
-package org.wdn.guick.plugin
+package org.wdn.guick.plugin;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.wdn.guick.core.DslArchitecture
-import org.wdn.guick.model.Project
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.wdn.guick.core.DslArchitecture;
+import org.wdn.guick.model.Project;
 
 /**
  * Created with IntelliJ IDEA.

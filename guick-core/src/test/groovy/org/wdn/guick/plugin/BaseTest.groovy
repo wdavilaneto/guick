@@ -1,4 +1,5 @@
 package org.wdn.guick.plugin
+
 import org.hibernate.cfg.Configuration
 import org.hibernate.tool.hbm2ddl.SchemaExport
 import org.hibernate.tool.hbm2ddl.Target
