@@ -1,36 +1,60 @@
-CREATE TABLE escola.ESC_PESSOA
+/*************************************************************/
+/*                       SCHEMA ESCOLA                      */
+/*************************************************************/
+
+/* CAUTION The command below drops a user and all owned objects. */
+--DROP USER ESCO CASCADE;
+CREATE USER ESCO IDENTIFIED BY esco;
+GRANT UNLIMITED TABLESPACE TO ESCO;
+GRANT create session to ESCO;
+
+/*CREATE TABLES*/
+CREATE TABLE ESCO.ESCO_PESSOA
 (
-  id_pessoa   integer,
-  nome         varchar2(20),
-  cpf            varchar2(14)  
+  EPES_DK   integer,
+  EPES_NM_PESSOA         varchar2(20),
+  EPES_CPF            varchar2(14)
 );
 
-CREATE TABLE escola.ESC_CURSO
+CREATE TABLE ESCO.ESCO_CURSO
 (
-  id_curso   integer,
-  nome       varchar2(20)
+  ECUR_DK   integer,
+  ECUR_NM_CURSO       varchar2(20)
 );
 
-CREATE TABLE escola.ESC_MENSALIDADE
+CREATE TABLE ESCO.ESCO_MENSALIDADE
 (
-  id_curso      integer,
-  id_Pessoa    integer,
-  valor           number(5,2)  
+  EMEN_DK integer,
+  EMEN_ECUR_DK      integer,
+  EMEN_EPES_DK    integer,
+  EMEN_VALOR           number(5,2)
 );
 
-Insert into escola.ESC_Pessoa values(1,'Eliézio Mesquita','11109865424');
-Insert into escola.ESC_Pessoa values(2,'Maria Joaquina','93104465334');
-Insert into escola.ESC_Pessoa values(3,'José da Silva','14109835424');
+/* CREATE KEYS */
+Alter table ESCO.ESCO_Pessoa add constraint EPES_PK primary key (EPES_DK);
+Alter table ESCO.ESCO_Curso add constraint ECUR_PK primary key (ECUR_DK);
+Alter table ESCO.ESCO_Mensalidade add constraint EMEN_PK primary key (EMEN_DK);
+alter table ESCO.ESCO_Mensalidade add constraints EMEN_EPES_FK FOREIGN KEY(EMEN_EPES_DK) references ESCO.ESCO_Pessoa(EPES_DK);
+alter table ESCO.ESCO_Mensalidade add constraints EMEN_ECUR_FK FOREIGN KEY(EMEN_ECUR_DK) references ESCO.ESCO_Curso(ECUR_DK);
 
-Insert into escola.ESC_curso values(1,'Sistemas');
-Insert into escola.ESC_curso values(2,'Administração');
-Insert into escola.ESC_curso values(3,'Filosofia');
+/* INSERT LINES */
+Insert into ESCO.ESCO_Pessoa values(1,'EliÃ©zio Mesquita','11109865424');
+Insert into ESCO.ESCO_Pessoa values(2,'Maria Joaquina','93104465334');
+Insert into ESCO.ESCO_Pessoa values(3,'JosÃ© da Silva','14109835424');
 
-Insert into escola.ESC_mensalidade values(1,1,345.45);
-Insert into escola.ESC_mensalidade values(2,3,500);
-Insert into escola.ESC_mensalidade values(3,2,831.28);
+Insert into ESCO.ESCO_curso values(1,'Sistemas');
+Insert into ESCO.ESCO_curso values(2,'AdministraÃ§Ã£o');
+Insert into ESCO.ESCO_curso values(3,'Filosofia');
 
-Alter table escola.ESC_Pessoa add constraint ID_PESSOA_PK primary key (ID_PESSOA);
-Alter table escola.ESC_Curso add constraint ID_CURSO_PK primary key (ID_CURSO);
-alter table escola.ESC_Mensalidade add constraints ID_PESSOA_FK FOREIGN KEY(Id_Pessoa) references escola.ESC_Pessoa(Id_Pessoa);
-alter table escola.ESC_Mensalidade add constraints ID_CURSO_FK FOREIGN KEY(Id_Curso) references escola.ESC_Curso(Id_Curso);
+Insert into ESCO.ESCO_mensalidade values(1,1,1,345.45);
+Insert into ESCO.ESCO_mensalidade values(2,2,3,500);
+Insert into ESCO.ESCO_mensalidade values(3,3,2,831.28);
+
+/* CREATE SEQUENCES */
+CREATE SEQUENCE ESCO.ESCO_SQ_EPES_DK START WITH 4 INCREMENT BY   1;
+CREATE SEQUENCE ESCO.ESCO_SQ_EMEN_DK START WITH 4 INCREMENT BY   1;
+CREATE SEQUENCE ESCO.ESCO_SQ_ECUR_DK START WITH 4 INCREMENT BY   1;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON ESCO.ESCO_pessoa TO ESCO;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ESCO.ESCO_curso TO ESCO;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ESCO.ESCO_mensalidade TO ESCO;
