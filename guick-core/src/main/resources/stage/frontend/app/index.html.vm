@@ -50,7 +50,7 @@
     <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
-    <!--[endif]-->
+    <![endif]-->
     <!--endbuild -->
 
 </head>
@@ -62,7 +62,7 @@
        Você está utilizando um navegador<strong>desatualizado</strong>.
        Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para aperfeiçoar sua experiência no sistema.
    </p>
-   <!--[endif]-->
+   <![endif]-->
 
   <header>
      <nav class="navbar navbar-default navbar-fixed-top">
