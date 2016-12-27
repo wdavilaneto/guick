@@ -61,8 +61,13 @@
         .btn{
             visibility:hidden;
             }
-        .modal{
-            display:table;width:100% important!;margin:0;padding:0;position:absolute;
-            }
+        .modal
+        {
+            display:table;
+            width:100% !important;
+            margin:0;
+            padding:0;
+            position:absolute;
+        }
         }
         /**/
