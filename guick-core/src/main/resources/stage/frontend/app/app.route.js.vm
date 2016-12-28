@@ -17,9 +17,9 @@
             })
         ;
 
-        $urlRouterProvider.otherwise("/");
-        $translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
-        $translateProvider.preferredLanguage('i18n/locale-pt-BR');
+    ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao
+    #*$translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
+    $translateProvider.preferredLanguage('i18n/locale-pt-BR');*#
 
     }
 
