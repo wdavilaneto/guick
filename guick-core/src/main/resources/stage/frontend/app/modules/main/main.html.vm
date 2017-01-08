@@ -3,22 +3,28 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <h1><i class="fa fa-home"></i> Inicial </h1>
+    <h1 class="color-river">
+        <i class="mdi mdi-home"></i>
+        Página Padrão
+        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list " href="">
+            <i class="mdi mdi-view-list"></i>
+            <!--<i class="mdi mdi-view-grid"></i>-->
+        </a>
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            texto
+        </li>
+        <li>
+            <a href="">
+                link
+            </a>
+        </li>
+    </ol>
 </section>
 
 <section class="content">
-    <div class="box box-primary">
-        <form name="mainForm" novalidate>
-            <tabset>
-                <tab ng-repeat="tab in tabs" ng-click="changeTab(tab.route)">
-                    <tab-heading>
-                        <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
-                    </tab-heading>
-                </tab>
-            </tabset>
-            <div class="row">
-                <ui-view />
-            </div>
-        </form>
+    <div class="row">
+
     </div>
 </section>

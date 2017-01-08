@@ -32,15 +32,13 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="layout/css/ng-joyride.css" />
+    <link rel="stylesheet" href="layout/css/reset.css" />
     <link rel="stylesheet" href="layout/css/main.css" />
     <link rel="stylesheet" href="layout/css/grid.css" />
     <link rel="stylesheet" href="layout/css/media-querie.css" />
     <link rel="stylesheet" href="layout/css/${project.acronym}.css" />
     <link rel="stylesheet" href="layout/css/menu.css" />
-    <link rel="stylesheet" href="layout/css/mini-field.css" />
     <link rel="stylesheet" href="layout/css/animate.css" />
-    <link rel="stylesheet" href="layout/css/reset.css" />
     <link rel="stylesheet" href="layout/css/botoes.css" />
     <link rel="stylesheet" href="layout/css/load.css" />
     <!-- endbuild -->
@@ -50,216 +48,195 @@
     <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
-    <!--[endif]-->
+    <![endif]-->
     <!--endbuild -->
 
 </head>
-<body class="skin-blue authenticated-application waiting-for-angular" authenticated-application ng-controller="MainController as mainController">
+<body class="authenticated-application waiting-for-angular" authenticated-application ng-controller="MainController as mainController">
 
-  <toaster-container></toaster-container>
-  <!--[if lt IE 7]>
-   <p class="browsehappy">
-       Você está utilizando um navegador<strong>desatualizado</strong>.
-       Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para aperfeiçoar sua experiência no sistema.
-   </p>
-   <!--[endif]-->
-
-  <header>
-     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header" ng-controller="MenuControllerMobile" >
-                <button class="toothlet" ng-click="toothlet()" ><i class="fa fa-reorder"></i></button>
-                <a class="navbar-brand " href="index.html">Brand</a>
-                <a class="app-name-header hidden-lg hidden-md " href="index.html"></a>
-            </div>
-            <div ng-include="'layout/menu/menu-icones-topo.html'"></div>
-        </div>
-        <!-- /.container-fluid -->
-     </nav>
-##foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
-##                                    <a href="#/">
-##                                          <p>{{${entity.beanName}.#if(${entity.getMostDescritiveProperties().size()}>0)${entity.getMostDescritiveProperties()[0]}#{else}id#{end}}} <small><i class="fa fa-clock-o"></i> {{${entity.beanName}.${entity.getAllDeadlineProperties()[0]}}}</small></p>
-##                                          <p>{{#if(${entity.getMostDescritiveProperties().size()}>1)${entity.getMostDescritiveProperties()[1]}#{else}id#{end}}}</p>
-##                                    </a>
-###end
-  </header>
-
-  <div id="initializing-panel"></div>
-
-  <div ui-i18n="{{'pt-br'}}" id="content-outer">
-
-     <div id="login-holder">
+<toaster-container></toaster-container>
+<!--[if lt IE 7]>
+<p class="browsehappy">
+    Você está utilizando um navegador<strong>desatualizado</strong>.
+    Por favor, <a href="http://browsehappy.com/">atualize seu navegador</a> para aperfeiçoar sua experiência no sistema.
+</p>
+<![endif]-->
+<div id="initializing-panel"></div>
+<div class="totalContentWrapper" ui-i18n="{{'pt-br'}}" id="content-outer">
+    <div id="login-holder">
         <div ng-include="'modules/main/login/login.html'"></div>
-     </div>
-
-      <div class="" id="menu" ng-controller="MenuControllerMobile" >
-          <aside class="left-side-mobile hidden-md hidden-lg stash" ng-controller="MenuControllerMobile" ng-if="isAuthenticated || true">
-              <div ng-include="'layout/menu/menu-mobile.html'"></div>
-          </aside>
-          <aside class="left-bar">
-              <div ng-include="'layout/menu/menu-small.html'"></div>
-          </aside>
-          <aside class="left-side hidden-sm hidden-xs" >
-              <div ng-include="'layout/menu/menu.html'"></div>
-          </aside>
-          <aside class="right-side" >
-              <div id="content" ui-view ng-if="isAuthenticated || true"></div>
-          </aside>
-      </div>
-  </div>
-
-  <footer>
-      <nav class="navbar navbar-footer navbar-default navbar-fixed-bottom ">
-          <div class="container">
-              <p class="text-center">
-                  <small>Ministério Público do Estado do Rio de Janeiro | 2015</small>
-              </p>
-          </div>
-      </nav>
-  </footer>
-  <!-- build:js(.) scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/jsog/lib/JSOG.js"></script>
-  <script src="bower_components/flot/jquery.flot.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angularjs-toaster/toaster.js"></script>
-  <script src="bower_components/angularjs-toaster/toaster.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular-redactor/angular-redactor.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-  <script src="bower_components/angular-ui-date/src/date.js"></script>
-  <script src="bower_components/br-validations/releases/br-validations.js"></script>
-  <script src="bower_components/string-mask/src/string-mask.js"></script>
-  <script src="bower_components/angular-input-masks/angular-input-masks.js"></script>
-  <script src="bower_components/angular-ui-select/dist/select.js"></script>
-  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
-  <script src="bower_components/angular-translate/angular-translate.js"></script>
-  <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-  <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
-  <script src="bower_components/angular-flot/angular-flot.js"></script>
-  <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
-  <script src="bower_components/imperavi-redactor/redactor/redactor.min.js"></script>
-  <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-  <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
-  <script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
-  <script src="bower_components/angular-pdf-viewer/dist/angular-pdf-viewer.min.js"></script>
-  <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
-  <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
-  <script src="bower_components/angular-timeline/dist/angular-timeline.js"></script>
-  <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-  <script src="bower_components/angular-dialog-service/dist/dialogs.min.js"></script>
-  <script src="bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
-  <script src="bower_components/ng-joyride/ng-joyride.js"></script>
-  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-  <script src="bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js"></script>
-  <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
-  <script src="bower_components/jquery-html5-placeholder-shim/jquery.html5-placeholder-shim.js"></script>
-  <script src="bower_components/angular-placeholder-shim/angular-placeholder-shim.js"></script>
-  <script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
-  <script src="bower_components/Chart.js/Chart.js"></script>
-  <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-  <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
-  <script src="bower_components/rangy/rangy-core.js"></script>
-  <script src="bower_components/rangy/rangy-classapplier.js"></script>
-  <script src="bower_components/rangy/rangy-highlighter.js"></script>
-  <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
-  <script src="bower_components/rangy/rangy-serializer.js"></script>
-  <script src="bower_components/rangy/rangy-textrange.js"></script>
-  <script src="bower_components/textAngular/dist/textAngular.js"></script>
-  <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
-  <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+    </div>
+    <div class="contentWrapper" id="menu" ng-controller="MenuController" >
+        <aside class="left-bar">
+            <div ng-include="'layout/menu/menu-mobile.html'"></div>
+        </aside>
+        <aside class="left-side hidden-sm hidden-xs">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header" ng-controller="MenuController">
+                    <a class="navbar-brand "  href="#/">Brand</a>
+                </div>
+                <div ng-include="'layout/menu/menu-icones-topo.html'"></div>
+            </nav>
+            <div class="app-name">
+                <span></span>
+                <p ng-bind-html="'aplicacao'|translate">{{"nome.aplicacao" | translate}} </p>
+            </div>
+            <div ng-include="'layout/menu/menu.html'"></div>
+        </aside>
+        <aside class="right-side" id="content" ui-view ></aside>
+    </div>
+</div>
+<footer>
+    <nav class="navbar navbar-footer navbar-default">
+        <div class="container">
+            <p class="text-center">
+                <small>Ministério Público do Estado do Rio de Janeiro | <span ng-bind="mainController.currentDate | date: 'yyyy'"></span></small>
+            </p>
+        </div>
+    </nav>
+</footer>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jsog/lib/JSOG.js"></script>
+<script src="bower_components/flot/jquery.flot.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-redactor/angular-redactor.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/angular-ui-date/src/date.js"></script>
+<script src="bower_components/br-validations/releases/br-validations.js"></script>
+<script src="bower_components/string-mask/src/string-mask.js"></script>
+<script src="bower_components/angular-input-masks/angular-input-masks.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+<script src="bower_components/angular-flot/angular-flot.js"></script>
+<script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+<script src="bower_components/imperavi-redactor/redactor/redactor.min.js"></script>
+<script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+<script src="bower_components/pdfjs-dist/build/pdf.js"></script>
+<script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
+<script src="bower_components/angular-pdf-viewer/dist/angular-pdf-viewer.min.js"></script>
+<script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+<script src="bower_components/angular-timeline/dist/angular-timeline.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/angular-dialog-service/dist/dialogs.min.js"></script>
+<script src="bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
+<script src="bower_components/ng-joyride/ng-joyride.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js"></script>
+<script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+<script src="bower_components/jquery-html5-placeholder-shim/jquery.html5-placeholder-shim.js"></script>
+<script src="bower_components/angular-placeholder-shim/angular-placeholder-shim.js"></script>
+<script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+<script src="bower_components/rangy/rangy-core.js"></script>
+<script src="bower_components/rangy/rangy-classapplier.js"></script>
+<script src="bower_components/rangy/rangy-highlighter.js"></script>
+<script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+<script src="bower_components/rangy/rangy-serializer.js"></script>
+<script src="bower_components/rangy/rangy-textrange.js"></script>
+<script src="bower_components/textAngular/dist/textAngular.js"></script>
+<script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+<script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
 ##  <script src="bower_components/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
-  <!-- endbower -->
-  <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
-  <!-- endbuild -->
+<!-- endbower -->
+<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+<!-- endbuild -->
 
-  <!-- build:js({.tmp,app}) scripts/scripts.js -->
-  <!-- base -->
-  <script src="app.module.js"></script>
-  <script src="app.env.config.js"></script>
-  <script src="app.config.js"></script>
-  <script src="app.route.js"></script>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<!-- base -->
+<script src="app.module.js"></script>
+<script src="app.env.config.js"></script>
+<script src="app.config.js"></script>
+<script src="app.route.js"></script>
 
-  <!-- commons:directives -->
+<!-- commons:directives -->
 
-  <script src="common/directives/directives.module.js"></script>
-  <script src="common/directives/back.drv.js"></script>
-  <script src="common/directives/file-read.drv.js"></script>
-  <script src="common/directives/new-scope.drv.js"></script>
-  <script src="common/directives/show-errors.drv.js"></script>
-  <script src="common/directives/valida-periodo.drv.js"></script>
-  <script src="common/directives/ng-joyride-mgpe.js"></script>
-  <script src="scripts/directives/directives.js"></script>
+<script src="common/directives/directives.module.js"></script>
+<script src="common/directives/back.drv.js"></script>
+<script src="common/directives/file-read.drv.js"></script>
+<script src="common/directives/new-scope.drv.js"></script>
+<script src="common/directives/show-errors.drv.js"></script>
+<script src="common/directives/valida-periodo.drv.js"></script>
+<script src="common/directives/ng-joyride-mgpe.js"></script>
+<script src="scripts/directives/directives.js"></script>
 
-  <!-- commons:filters -->
-  <script src="common/filters/filters.module.js"></script>
-  <script src="common/filters/bytes.flt.js"></script>
-  <script src="common/filters/characters.flt.js"></script>
-  <script src="common/filters/mask.flt.js"></script>
-  <script src="common/filters/words.flt.js"></script>
+<!-- commons:filters -->
+<script src="common/filters/filters.module.js"></script>
+<script src="common/filters/bytes.flt.js"></script>
+<script src="common/filters/characters.flt.js"></script>
+<script src="common/filters/mask.flt.js"></script>
+<script src="common/filters/words.flt.js"></script>
 
-  <!-- core -->
-  <script src="modules/core/core.module.js"></script>
-  
-  <!-- main -->
-  <script src="modules/main/main.module.js"></script>
-  <script src="modules/main/main.route.js"></script>
-  <script src="modules/main/main.controller.js"></script>
-  <script src="layout/menu/menu.ctrl.js"></script>
+<!-- core -->
+<script src="modules/core/core.module.js"></script>
+
+<!-- main -->
+<script src="modules/main/main.module.js"></script>
+<script src="modules/main/main.route.js"></script>
+<script src="modules/main/main.controller.js"></script>
+<script src="layout/menu/menu.ctrl.js"></script>
 ##  <script src="layout/menu/alertas-topo.controller.js"></script>
-  <script src="modules/main/login/login.controller.js"></script>
-  <script src="modules/main/login/login.service.js"></script>
+<script src="modules/main/login/login.controller.js"></script>
+<script src="modules/main/login/login.service.js"></script>
 
-  <!-- commons:controllers -->
-    <script src="common/controllers/controllers.module.js"></script>
-    <script src="common/controllers/datepicker.controller.js"></script>
+<!-- commons:controllers -->
+<script src="common/controllers/controllers.module.js"></script>
+<script src="common/controllers/datepicker.controller.js"></script>
 ## <script src="scripts/controllers/MainController.js"></script>
 ## <script src="scripts/controllers/monitor/MonitorController.js"></script>
 ## <script src="scripts/controllers/dashboards/DashboardController.js"></script>
 ##  <script src="scripts/controllers/support/ActivitiController.js"></script>
 
-  <!-- commons:services -->
-  <script src="common/services/services.module.js"></script>
-  <script src="common/services/base64.srv.js"></script>
-  <script src="common/services/grid.service.js"></script>
-  <script src="scripts/service/support/SupportService.js"></script>
-  <script src="scripts/service/support/truncate.js"></script>
-  <script src="scripts/service/support/utils.js"></script>
-  <script src="scripts/service/support/constants.js"></script>
+<!-- commons:services -->
+<script src="common/services/services.module.js"></script>
+<script src="common/services/base64.srv.js"></script>
+<script src="common/services/grid.service.js"></script>
+<script src="scripts/service/support/SupportService.js"></script>
+<script src="scripts/service/support/truncate.js"></script>
+<script src="scripts/service/support/utils.js"></script>
+<script src="scripts/service/support/constants.js"></script>
 ## <script src="scripts/service/monitor/MonitorService.js"></script>
 ## <script src="scripts/service/dashboards/DashboardService.js"></script>
 ## <script src="scripts/service/support/ActivitiService.js"></script>
 
-  <!-- Modules -->
-#foreach( ${entity} in ${project.entities})
-#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+<!-- Modules -->
+    #foreach( ${entity} in ${project.entities})
+        #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
     <!-- ${entityBeanName} -->
-#if (!${entity.isEmbeddable()})
-    <script src="modules/${entityBeanName}/${entity.beanName}.service.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.controller.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.modal.controller.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.edit.controller.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.edit.main.controller.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.extController.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.module.js"></script>
-    <script src="modules/${entityBeanName}/${entity.beanName}.route.js"></script>
-    <script src="modules/${entityBeanName}/details/${entity.beanName}.child.controller.js"></script>
-    <script src="modules/${entityBeanName}/directives/${entity.beanName}.select.directive.js"></script>
-    <script src="modules/${entityBeanName}/directives/${entity.beanName}.fieldset.directive.js"></script>
-#end
-#end
+        #if (!${entity.isEmbeddable()})
+        <script src="modules/${entityBeanName}/${entity.beanName}.service.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.controller.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.modal.controller.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.edit.controller.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.edit.main.controller.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.extController.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.module.js"></script>
+        <script src="modules/${entityBeanName}/${entity.beanName}.route.js"></script>
+        <script src="modules/${entityBeanName}/details/${entity.beanName}.child.controller.js"></script>
+        <script src="modules/${entityBeanName}/directives/${entity.beanName}.select.directive.js"></script>
+        <script src="modules/${entityBeanName}/directives/${entity.beanName}.fieldset.directive.js"></script>
+        #end
+    #end
 
-  <!-- alerts -->
+<!-- alerts -->
 ##foreach( ${entity} in ${project.getAllEntitiesWithDeadline()} )
 ##  <script src="scripts/controllers/support/${entity.name}AlertController.js"></script>
 ##end
