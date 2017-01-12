@@ -13,7 +13,7 @@
  * Factory in the ${projectBeanName}App.
  */
 
-var ${projectBeanName}Services = angular.module('${projectBeanName}Services');
+var ${projectBeanName}Services = angular.module('${projectBeanName}App');
 
 ${projectBeanName}Services.factory('dashboardService', ['$resource',
     function ($resource) {

@@ -430,7 +430,7 @@ footer
     background: linear-gradient(-150deg,  #0277bd 0%,#0277bd 51%,#016fb0 51%,#016fb0 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0277bd', endColorstr='#016fb0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-.dropdown-menu{background:#fff;border: 0;}
+.dropdown-menu{background:#fff;border: 0; left:0 !important;}
 a.dropdown-toggle {background-color: transparent !important;border-top: 0 !important;padding: 14px !important;transition:0.3s;-webkit-transition:0.3s;-moz-transition:0.3s;color:#fff !important;}
 a.dropdown-toggle:hover, a.dropdown-toggle:focus{border:0 !important;color:#fff !important;opacity:0.6;background-color: #016FB0 !important;}
 .user-header {color: #fff;padding: 7px;text-align: center;}

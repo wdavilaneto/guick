@@ -10,7 +10,7 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content bounceIn">
     <div class="box box-primary">
         <form name="${entityBeanName}Form" novalidate ng-submit="vm.newSearch()">
             <div tabset>
@@ -21,8 +21,7 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="control-label" for="searchField.text"> Busca por texto</i>
-                                            <i popover-trigger="mouseenter"  popover-placement="left" popover="Busca por texto" class="fa fa-info-circle pull-right"></i>
+                                        <label class="control-label" for="searchField.text"> Busca por texto
                                         </label>
 ##                                        <div class="input-group">
                                             <input class="form-control" type="text" ng-model="vm.searchField.text" placeholder="busca por texto.." id="searchField.text"/>

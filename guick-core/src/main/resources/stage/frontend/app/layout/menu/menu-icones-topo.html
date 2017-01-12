@@ -1,5 +1,5 @@
 <div class="navbar-right navbar-right-user" >
-    <ul class="nav navbar-nav" >
+<!--    <ul class="nav navbar-nav" >
         <li class="dropdown user user-menu">
             <a href="" class="dropdown-toggle"
                popover="Alertas" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true"
@@ -44,6 +44,28 @@
         <li class="dropdown user user-menu">
             <a href="" class="dropdown-toggle"
                popover="Usuário" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true">
+                <i class="mdi mdi-logout"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="user-header bg-light-blue">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class=" img-responsive avatar-usuario" alt="" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="fs2">Perfil: </h4>
+                            <h4>{{mainController.user.login}}</h4>
+                            <small>{{mainController.user.perfil | translate}}</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>
+            </ul>
+        </li>
+    </ul>-->
+    <ul class="nav navbar-nav" >
+        <li class="dropdown user user-menu">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" popover-append-to-body="true">
                 <i class="mdi mdi-logout"></i>
             </a>
             <ul class="dropdown-menu">
