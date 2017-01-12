@@ -8,11 +8,11 @@
             <li class="active"><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}} </a></li>
         </ol>
 </section>
-<section class="content">
+<section class="content fadeInRight">
     <div class="col-xs-12" ng-controller="dashboardController">
         <div class="row">
             <div class="col-md-3 ">
-                <div class="card card-river">
+                <div class="card card-river bounceIn" >
                     <div class="card-content">
                         <h4>
                            #if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[0].value}} #else #end
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-md-3 ">
-                <div class="card card-amethyst">
+                <div class="card card-amethyst bounceIn">
                     <div class="card-content">
                         <h4>
                            #if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[1].value}} #else #end
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="col-md-3 ">
-                <div class="card card-asphalt">
+                <div class="card card-asphalt bounceIn">
                     <div class="card-content">
                         <h4>
                             #if( ${project.getAllMainEntities().size()} >=3 ) {{allCount[0].values[2].value}} #else #end
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="col-md-3 ">
-                <div class="card card-emerald">
+                <div class="card card-emerald bounceIn">
                     <div class="card-content">
                         <h4>
                             #if( ${project.getAllMainEntities().size()} >=4 ) {{allCount[0].values[3].value}} #else #end

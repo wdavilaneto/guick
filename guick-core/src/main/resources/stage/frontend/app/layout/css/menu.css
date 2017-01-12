@@ -116,7 +116,7 @@
         /* font-size: 1.2em; */
         margin: 7px 7px 0 0;
         float: right;
-        line-height: 3.0em;
+        line-height: 3.6em;
         border-radius: 45px;
         height: 44px;
     }
@@ -175,7 +175,7 @@
         width: 40px;
         height: 44px;
         color: #0277BD;
-        line-height: 3.1em;
+        line-height: 3.6em;
         text-align: center;
         margin: 1px 0 2px 3px;
         transition: 0.3s;
@@ -184,6 +184,7 @@
         /* text-shadow: 1px 1px #000; */
         background: #FAFAFA;
         border-radius: 27px;
+        cursor:pointer;
     }
 .menu-bar a:hover
     {
