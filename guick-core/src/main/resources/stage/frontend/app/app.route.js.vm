@@ -21,6 +21,12 @@
                 controllerAs: 'dashboardController',
                 templateUrl: "views/dashboards/dashboard.html"
             })
+            .state('layout', {
+                            url: "/cards",
+                            controller: 'prototipoController',
+                            controllerAs: 'prototipoController',
+                            templateUrl: "layout/prototipo/cards.html"
+                        })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao

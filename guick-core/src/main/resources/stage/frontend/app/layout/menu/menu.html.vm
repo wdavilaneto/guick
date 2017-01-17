@@ -1,19 +1,23 @@
 <div class="menu" accordion>
-    <div accordion close-others="oneAtATime">
-        <div class="panel panel-default ng-scope">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a href="#/dashboard" class="ng-binding"><i class="mdi mdi-chart"></i> Painel de Controle</a>
-                </h4>
-            </div>
+    <div class="panel panel-default ng-scope">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a href="#/dashboard" class="ng-binding"><i class="mdi mdi-home"></i> pagina padrao</a>
+            </h4>
         </div>
-        <div class="panel panel-default ng-scope">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a href="#/dashboard" class="ng-binding"><i class="mdi mdi-home"></i> pagina padrao</a>
-                </h4>
-            </div>
-        </div>
+    </div>
+        <accordion>
+            <accordion-group>
+                <accordion-heading>
+                    <span>
+                        Prototipo
+                    </span>
+                     <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
+                <a href="#/cards" class="ng-binding"><i class="mdi mdi-home"></i> Cards</a>
+            </accordion-group>
+        </accordion>
+
     ## FIXME remove all || true for auth
         #if( ${project.config.useWorkflow} == true )
             <div class="panel panel-default ng-scope">

@@ -137,7 +137,7 @@
     <div class="box box-primary">
         <div class="box-body">
             <div class="box-header">
-                <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.t itulo" | translate}}</h3>
+                <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
             </div>
             <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\\${entity.name}/.*/"></div>
         </div>
