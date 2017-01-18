@@ -23,8 +23,8 @@
             })
             .state('layout', {
                             url: "/cards",
-                            controller: 'prototipoController',
-                            controllerAs: 'prototipoController',
+                            controller: 'CardsController',
+                            controllerAs: 'vm',
                             templateUrl: "layout/prototipo/cards.html"
                         })
         ;

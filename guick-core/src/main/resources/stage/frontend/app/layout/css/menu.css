@@ -71,6 +71,7 @@
 .menu .panel-group .panel + .panel
     {
         margin-top: 0px;
+
     }
 .menu .panel-heading
     {
@@ -410,3 +411,7 @@ ul.nav.nav-tabs
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
+.panel-group
+    {
+        margin-bottom:0px !important;
+    }

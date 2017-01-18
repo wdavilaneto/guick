@@ -46,6 +46,7 @@
         'ngFileUpload',
         'chart.js',
         'textAngular',
+        "infinite-scroll",
 
         /*
          * Commons app modules
