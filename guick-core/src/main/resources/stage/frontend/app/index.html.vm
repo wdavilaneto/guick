@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="layout/css/animate.css" />
     <link rel="stylesheet" href="layout/css/botoes.css" />
     <link rel="stylesheet" href="layout/css/load.css" />
+
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -83,6 +84,7 @@
             </div>
             <div ng-include="'layout/menu/menu.html'"></div>
         </aside>
+        <div class="content-logout-page"></div>
         <aside class="right-side" id="content" ui-view ></aside>
     </div>
 </div>
@@ -197,6 +199,8 @@
 <script src="modules/main/login/login.controller.js"></script>
 <script src="modules/main/login/login.service.js"></script>
 <script src="layout/prototipo/cards.controller.js"></script>
+<script src="layout/prototipo/book.controller.js"></script>
+<script src="layout/js/booklet.js"></script>
 
 <!-- commons:controllers -->
 <script src="common/controllers/controllers.module.js"></script>

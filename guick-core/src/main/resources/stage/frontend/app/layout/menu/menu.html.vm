@@ -10,6 +10,7 @@
                      <i class="pull-right mdi mdi-chevron-right"></i>
                 </accordion-heading>
                 <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
+                <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
             </accordion-group>
         </accordion>
         <div class="panel panel-default ng-scope">

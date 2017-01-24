@@ -121,6 +121,65 @@
         border-radius: 45px;
         height: 44px;
     }
+.bt-logout
+    {
+        background-color: #fafafa;
+        width: 40px;
+        border: 0;
+        color: #0277BD;
+        /* font-size: 1.2em; */
+        margin: 7px 7px 0 0;
+        float: right;
+        line-height: 3.6em;
+        border-radius: 45px;
+        height: 44px;
+    }
+.content-logout-page
+    {
+    width: 80%;
+    height: 96%;
+    position: fixed;
+    padding: 5%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    transform: translate(125%, 0);
+    transition: 1s;
+    -webkit-transition: 1s;
+    }
+.content-logout-page.stash
+    {
+        transform:translate(25%, 0);
+    }
+    .content-logout
+    {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    padding:5%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    transform:translate(0, -100%);
+    transition:1s;
+    -webkit-transition:1s;
+    }
+.content-logout.stash
+    {
+    transform:translate(0, 0%);
+    }
+.content-logout h4
+    {
+        color:#fff;
+        font-size:1.5em;
+        margin-bottom:7px;
+    }
+.content-logout p
+    {
+        color:#fff;
+        font-size:0.9em;
+        line-height:1.3em;
+        margin-bottom:14px;
+    }
 .btn-toothlet
     {
         float: right;

@@ -22,11 +22,17 @@
                 templateUrl: "views/dashboards/dashboard.html"
             })
             .state('layout', {
-                            url: "/cards",
-                            controller: 'CardsController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/cards.html"
-                        })
+                url: "/cards",
+                controller: 'CardsController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/cards.html"
+            })
+            .state('book', {
+                url: "/book",
+                controller: 'BookController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/book.html"
+            })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao

@@ -7,86 +7,86 @@
             <i class="mdi mdi-view-grid"></i>
         </a>-->
     </h1>
-
 </section>
-
 <section class="content fadeInLeft">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alarm alarm-river">
-                <h4>
-                    ...
-                </h4>
+    <div class="h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alarm alarm-river">
+                    <h4>
+                        ...
+                    </h4>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row-form">
-                <div class="col-md-4 form-group">
-                    <div class="inputMaterialGroup">
-                        <input id="firstField" type="text" class="inputMaterial" required/>
-                        <span class="bar"></span>
-                        <span class="highlight"></span>
-                        <label for="firstField">
-                            Campo Texto
-                        </label>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row-form">
+                    <div class="col-md-4 form-group">
+                        <div class="inputMaterialGroup">
+                            <input id="firstField" type="text" class="inputMaterial" required/>
+                            <span class="bar"></span>
+                            <span class="highlight"></span>
+                            <label for="firstField">
+                                Campo Texto
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <div class="inputMaterialGroup">
+                            <input id="secondField" type="text" class="inputMaterial" required/>
+                            <span class="bar"></span>
+                            <span class="highlight"></span>
+                            <label for="secondField">
+                                Campo texto
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <div class="inputMaterialGroup">
+                            <input id="thirdField" type="text" class="inputMaterial" required/>
+                            <span class="bar"></span>
+                            <span class="highlight"></span>
+                            <label for="thirdField">
+                                Campo texto
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 form-group">
-                    <div class="inputMaterialGroup">
-                        <input id="secondField" type="text" class="inputMaterial" required/>
-                        <span class="bar"></span>
-                        <span class="highlight"></span>
-                        <label for="secondField">
-                            Campo texto
-                        </label>
+                <hr/>
+                <div class="row-form">
+                    <div class="col-md-12">
+                        <button class="bt bt-emerald">
+                            <i class="mdi mdi-magnify"></i>
+                            Buscar
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-4 form-group">
-                    <div class="inputMaterialGroup">
-                        <input id="thirdField" type="text" class="inputMaterial" required/>
-                        <span class="bar"></span>
-                        <span class="highlight"></span>
-                        <label for="thirdField">
-                            Campo texto
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <hr/>
-            <div class="row-form">
-                <div class="col-md-12">
-                    <button class="bt bt-emerald">
-                        <i class="mdi mdi-magnify"></i>
-                        Buscar
-                    </button>
-                </div>
-            </div>
-            <h4 class="title">
-                Resultado da Busca
-            </h4>
-            <div class="row-form">
-                <div class="col-md-4" ng-repeat="card in vm.cards">
-                    <div class="card bounceIn">
-                        <h4 class="status {{vm.cssClassByStatus(card.status)}}">
-                            {{card.status}}
-                        </h4>
-                        <div class="card-content">
-                            <h4>
-                                {{card.processo}}<br>
-                                {{card.nome}}<br>
-                                {{card.procuradoria}}
+                <h4 class="title">
+                    Resultado da Busca
+                </h4>
+                <div class="row-form">
+                    <div class="col-md-4" ng-repeat="card in vm.cards">
+                        <div class="card bounceIn">
+                            <h4 class="status {{vm.cssClassByStatus(card.status)}}">
+                                {{card.status}}
                             </h4>
-                        </div>
-                        <div class="card-footer">
-                            <a href="">
-                                <i class="mdi mdi-magnify"></i>
-                            </a>
+                            <div class="card-content">
+                                <h4>
+                                    {{card.processo}}<br>
+                                    {{card.nome}}<br>
+                                    {{card.procuradoria}}
+                                </h4>
+                            </div>
+                            <div class="card-footer">
+                                <a href="">
+                                    <i class="mdi mdi-magnify"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>

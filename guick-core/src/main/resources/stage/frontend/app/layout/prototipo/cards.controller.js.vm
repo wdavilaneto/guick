@@ -14,6 +14,7 @@
         var vm = this;
 
 
+
         vm.cards = [
             {processo: '123456789', nome: 'RAIMUNDO FAGNER', procuradoria: '10ª PROCURADORIA DA CASA CIVEL', status: 'PENDENTE'},
             {processo: '984756783', nome: 'RAIMUNDO FAGNER', procuradoria: '8ª PROCURADORIA DA CASA CIVEL', status: 'CONCLUIDO'},

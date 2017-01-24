@@ -69,6 +69,14 @@ footer nav.navbar-default
     border:0;
     /*box-shadow:-5px 1px 5px #000;*/
     z-index:999;
+    transition:0.5s;
+    -webkit-transition:0.5s;
+}
+footer nav.navbar.stash
+    {
+        background:#333;
+        transition:0.5s;
+        -webkit-transition:0.5s;
 }
 footer nav.navbar
 {

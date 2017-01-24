@@ -63,30 +63,31 @@
             </ul>
         </li>
     </ul>-->
-    <ul class="nav navbar-nav" >
-        <li class="dropdown user user-menu">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" popover-append-to-body="true">
-                <i class="mdi mdi-logout"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="user-header bg-light-blue">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img class=" img-responsive avatar-usuario" alt="" />
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="fs2">Perfil: </h4>
-                            <h4>{{mainController.user.login}}</h4>
-                            <small>{{mainController.user.perfil | translate}}</small>
-                        </div>
-                    </div>
-                </li>
-                <li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>
-            </ul>
-        </li>
-    </ul>
     <button class="toothlet" ng-click="toothlet()"
             popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
         <i class="mdi mdi-menu"></i>
     </button>
+    <button class="bt-logout" ng-click="openLogout()">
+        <i class="mdi mdi-account-circle"></i>
+    </button>
+    <div class="content-logout">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    olá, Gustavo Carvalho
+                </h4>
+                <p>
+                    Deseja sair do sistema?
+                </p>
+            </div>
+            <div class="col-md-12">
+                <button class="bt bt-emerald">
+                    sim
+                </button>
+                <button class="bt bt-alizarin" ng-click="openLogout()">
+                    nao
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
