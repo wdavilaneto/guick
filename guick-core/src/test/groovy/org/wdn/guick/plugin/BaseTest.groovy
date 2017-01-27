@@ -4,7 +4,6 @@ import org.hibernate.cfg.Configuration
 import org.hibernate.tool.hbm2ddl.SchemaExport
 import org.hibernate.tool.hbm2ddl.Target
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
@@ -18,7 +17,6 @@ import org.wdn.guick.model.Project
  * Time: 12:02 AM
  * To change this template use File | Settings | File Templates.
  */
-@Ignore
 class BaseTest {
 
     static final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

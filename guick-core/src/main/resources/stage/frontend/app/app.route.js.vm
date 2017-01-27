@@ -33,6 +33,12 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/book.html"
             })
+             .state('slick', {
+                            url: "/slick",
+                            controller: 'SlickController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/slick.html"
+                        })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao

@@ -201,6 +201,7 @@
 <script src="layout/prototipo/cards.controller.js"></script>
 <script src="layout/prototipo/book.controller.js"></script>
 <script src="layout/js/booklet.js"></script>
+<script src="layout/prototipo/slick.controller.js"></script>
 
 <!-- commons:controllers -->
 <script src="common/controllers/controllers.module.js"></script>
