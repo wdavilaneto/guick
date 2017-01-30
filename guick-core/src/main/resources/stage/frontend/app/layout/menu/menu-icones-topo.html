@@ -1,5 +1,5 @@
 <div class="navbar-right navbar-right-user" >
-    <ul class="nav navbar-nav" >
+<!--    <ul class="nav navbar-nav" >
         <li class="dropdown user user-menu">
             <a href="" class="dropdown-toggle"
                popover="Alertas" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true"
@@ -62,9 +62,32 @@
                 <li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>
             </ul>
         </li>
-    </ul>
+    </ul>-->
     <button class="toothlet" ng-click="toothlet()"
             popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
-        <i class="fa fa-reorder"></i>
+        <i class="mdi mdi-menu"></i>
     </button>
+    <button class="bt-logout" ng-click="openLogout()">
+        <i class="mdi mdi-account-circle"></i>
+    </button>
+    <div class="content-logout">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    olá, Gustavo Carvalho
+                </h4>
+                <p>
+                    Deseja sair do sistema?
+                </p>
+            </div>
+            <div class="col-md-12">
+                <button class="bt bt-emerald">
+                    sim
+                </button>
+                <button class="bt bt-alizarin" ng-click="openLogout()">
+                    nao
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

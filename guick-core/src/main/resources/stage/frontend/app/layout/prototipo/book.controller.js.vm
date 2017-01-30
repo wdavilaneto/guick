@@ -1,0 +1,35 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+(function () {
+
+    'use strict';
+
+    angular.module('${project.name}App').controller('BookController', BookController);
+
+
+    function BookController() {
+
+
+         //single book
+            ${js}('#mybook').booklet({
+                width:'100%',
+                height:'600px',
+                tabs:  true,
+                tabWidth:  180,
+                tabHeight:  20,
+                menu: '#custom-menu',
+                pageSelector: true
+
+            });
+
+            //multiple books with ID's
+            ${js}('#mybook1, #mybook2').booklet();
+
+            //multiple books with a class
+            ${js}('.mycustombooks').booklet();
+
+    }
+
+})();

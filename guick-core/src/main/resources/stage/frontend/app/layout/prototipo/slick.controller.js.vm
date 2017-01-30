@@ -1,0 +1,17 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+(function () {
+
+    'use strict';
+
+    angular.module('${project.name}App').controller('SlickController', SlickController);
+
+
+    function SlickController() {
+        var vm = this;
+
+    }
+
+})();

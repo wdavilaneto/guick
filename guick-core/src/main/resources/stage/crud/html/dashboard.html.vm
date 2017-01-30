@@ -1,68 +1,81 @@
 <!-- sessões -->
 <section class="content-header">
     <h1>
-        <small>Painel de Controle</small>
+        Painel de Controle
     </h1>
+     <ol class="breadcrumb">
+            <li><a href="#/"> {{"menu.inicial" | translate}} </a></li>
+            <li class="active"><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}} </a></li>
+        </ol>
 </section>
-<section class="content">
+<section class="content fadeInRight">
     <div class="col-xs-12" ng-controller="dashboardController">
         <div class="row">
+            <div class="col-md-3 ">
+                <div class="card card-river bounceIn" >
+                    <div class="card-content">
+                        <h4>
+                           #if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[0].value}} #else #end
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[0].label}}(s)
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/#if(${project.getAllMainEntities().size()} >=1 ){{allCount[0].values[0].label}}#{end}" >
+                            <i class=" mdi mdi-magnify"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-amethyst bounceIn">
+                    <div class="card-content">
+                        <h4>
+                           #if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[1].value}} #else #end
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[1].label}}(s)
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/#if(${project.getAllMainEntities().size()} >=2 ){{allCount[0].values[1].label}}#{end}"><i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-asphalt bounceIn">
+                    <div class="card-content">
+                        <h4>
+                            #if( ${project.getAllMainEntities().size()} >=3 ) {{allCount[0].values[2].value}} #else #end
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[2].label}}(s)
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/#if(${project.getAllMainEntities().size()} >=3 ){{allCount[0].values[2].label}}#{end}" >  <i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-emerald bounceIn">
+                    <div class="card-content">
+                        <h4>
+                            #if( ${project.getAllMainEntities().size()} >=4 ) {{allCount[0].values[3].value}} #else #end
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[3].label}}(s)
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/#if(${project.getAllMainEntities().size()} >=4 ){{allCount[0].values[3].label}}#{end}"><i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="box box-primary">
                 <div class="box-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>#if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[0].value}} #else #end</h3>
-                                    <p>{{allCount[0].values[0].label}}(s)</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-ios-pulse-strong"></i>
-                                </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=1 ){{allCount[0].values[0].label}}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                   <h3>#if( ${project.getAllMainEntities().size()} >=1 ) {{allCount[0].values[1].value}} #else #end</h3>
-                                   <p>{{allCount[0].values[1].label}}(s)</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=2 ){{allCount[0].values[1].label}}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>#if( ${project.getAllMainEntities().size()} >=3 ) {{allCount[0].values[2].value}} #else #end</h3>
-                                    <p>{{allCount[0].values[2].label}}(s)</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=3 ){{allCount[0].values[2].label}}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>#if( ${project.getAllMainEntities().size()} >=4 ) {{allCount[0].values[3].value}} #else #end</h3>
-                                    <p>{{allCount[0].values[3].label}}(s)</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-ios-speedometer"></i>
-                                </div>
-                                <a href="#/#if(${project.getAllMainEntities().size()} >=4 ){{allCount[0].values[3].label}}#{end}" class="small-box-footer"> Mais Informações <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <nvd3 options="options" data="allCount" class="with-3d-shadow with-transitions"></nvd3>
