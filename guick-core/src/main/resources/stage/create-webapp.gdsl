@@ -19,10 +19,14 @@ guick {
 
         "configs" {
             templates = [
-                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
-                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
-                    [input: "stage/config/settings2.gradle.vm", output: "/api/settings.gradle"],
-                    [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
+//                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
+//                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
+//                    [input: "stage/config/settings2.gradle.vm", output: "/api/settings.gradle"],
+//                    [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
+
+                    [input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
+                    [input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
+                    [input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
 
                     [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
                     [input: "stage/config/.jshintrc", output: "/front-end/.jshintrc"],

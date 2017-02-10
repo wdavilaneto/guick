@@ -14,7 +14,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
+        private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
 
     AnnotationConfigApplicationContext context
     DslArchitecture guick
@@ -33,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("../../mprj-gsi-ind")
+            main.project.initialize("../mprj-gsi-ind")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
 //            main.project.persist()
