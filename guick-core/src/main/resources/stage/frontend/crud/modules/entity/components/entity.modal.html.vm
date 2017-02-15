@@ -1,7 +1,7 @@
         <script type="text/ng-template" id="create${entity.name}Modal.html">
             <form name="create${entity.name}ModalForm">
                 <div class="modal-header">
-                    <button type="button" class="close" ng-click="$event.stopPropagation(); cancel()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" ng-click="$event.stopPropagation(); vm.cancel()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">${entity.title}</h4>
                 </div>
                 <div class="modal-body">
@@ -15,8 +15,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bt bt-metal" ng-click="$event.stopPropagation(); cancel()"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
-                    <button type="button" class="bt bt-indigo" ng-click="$event.stopPropagation(); save()"><i class="mdi mdi-content-save"></i> {{"gravar" | translate}}</button>
+                    <button type="button" class="bt bt-metal" ng-click="$event.stopPropagation(); vm.cancel()"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
+                    <button type="button" class="bt bt-indigo" ng-click="$event.stopPropagation(); vm.save()"><i class="mdi mdi-content-save"></i> {{"gravar" | translate}}</button>
                 </div>
             </form>
         </script>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="bt bt-metal" ng-click="$event.stopPropagation(); cancel()"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
-                <button type="button" class="bt bt-alizarin" ng-click="$event.stopPropagation(); remove()"><i class="mdi mdi-close-circle"></i> Remover </button>
+                <button type="button" class="bt bt-metal" ng-click="$event.stopPropagation(); vm.cancel()"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
+                <button type="button" class="bt bt-alizarin" ng-click="$event.stopPropagation(); vm.remove()"><i class="mdi mdi-close-circle"></i> Remover </button>
             </div>
         </script>

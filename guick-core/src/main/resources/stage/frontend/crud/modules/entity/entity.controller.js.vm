@@ -108,7 +108,7 @@ angular.module('${projectBeanName}App')
         function open(size) {
             vm.searchSelects.toEntity(vm.entity);
             var modalInstance = ${js}modal.open({
-                templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller', size: size,
+                templateUrl: 'create${entity.name}Modal.html', controller: 'Modal${entity.name}Controller as vm', size: size,
                 resolve: {
                     data: function () {return vm.entity;}
                 }
