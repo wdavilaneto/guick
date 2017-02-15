@@ -1,0 +1,33 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+
+(function () {
+
+    'use strict';
+
+    angular.module('${project.name}App').controller('CardsController', CardsController);
+
+
+    function CardsController() {
+
+        var vm = this;
+
+
+
+        vm.cards = [
+            {processo: '123456789', nome: 'RAIMUNDO FAGNER', procuradoria: '10ª PROCURADORIA DA CASA CIVEL', status: 'PENDENTE'},
+            {processo: '984756783', nome: 'RAIMUNDO FAGNER', procuradoria: '8ª PROCURADORIA DA CASA CIVEL', status: 'CONCLUIDO'},
+            {processo: '125489763', nome: 'RAIMUNDO FAGNER', procuradoria: '5ª PROCURADORIA DA CASA CIVEL', status: 'CANCELADO'}
+        ];
+
+        vm.cssClassByStatus = function(status) {
+            var cssClasses = {PENDENTE: 'bkg-amethyst', CONCLUIDO: 'bkg-river', CANCELADO: 'bkg-silver'};
+            return cssClasses[status];
+        }
+
+
+
+    }
+
+})();

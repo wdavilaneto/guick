@@ -1,54 +1,93 @@
-<div class="navbar-right navbar-right-mgpe" ng-controller="loginController" ng-show="isAuthenticated">
-    <!--<ul class="nav navbar-nav" ng-controller="AlertasTopoController as alertasTopoCtrl">-->
-        <!--<li class="dropdown user user-menu">-->
-            <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" title="Intimações não respondidas e com perda de prazo">-->
-                <!--<i class="mdi mdi-flag"><small class="label label-header label-danger">{{alertasTopoCtrl.gridIntimacoesVencidas.data.length}}</small></i>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu bkg-cloud-white color-river pd7 ding">-->
-                <!--<span class="ding-arrow"></span>-->
-                <!--<h3 class="pd7 color-cloud bkg-river brdb-cloud fs1 text-center">Intimações não respondidas e com perda de prazo</h3>-->
-                <!--<li class="mb-7" ng-repeat="alerta in alertasTopoCtrl.gridIntimacoesVencidas.data">-->
-                    <!--<a class="color-river pd14 brdb-cloud" ng-href="#/avisos/{{alerta.idAviso}}/processos/{{alerta.numeroProcesso}}">{{alerta.dataRecebimento}} - {{alerta.numeroProcesso | mask:'#######-##.####.#.##.####'}}</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li class="dropdown user user-menu">-->
-            <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" title="Intimações com prazo de resposta próximo do término">-->
-                <!--<i class="mdi mdi-bell"><small class="label label-header label-danger">{{alertasTopoCtrl.gridIntimacoesComVencimentoProximo.data.length}}</small></i>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu bkg-cloud-white color-river pd7 ding">-->
-                <!--<span class="ding-arrow"></span>-->
-                <!--<h3 class="pd7 color-cloud bkg-river brdb-cloud fs1 text-center">Intimações com prazo de resposta próximo do término</h3>-->
-                <!--<li class="pd7 " ng-repeat="alerta in alertasTopoCtrl.gridIntimacoesComVencimentoProximo.data">-->
-                    <!--<a class="color-river pd14 brdb-cloud" ng-href="#/avisos/{{alerta.idAviso}}/processos/{{alerta.numeroProcesso}}">{{alerta.dataRecebimento}} - {{alerta.numeroProcesso | mask:'#######-##.####.#.##.####'}}</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li class="dropdown user user-menu">-->
-            <!--<a href class="dropdown-toggle" data-toggle="dropdown" title="Novas intimações não visualizadas">-->
-                <!--<i class="mdi mdi-email-outline"><small class="label label-header label-danger">{{alertasTopoCtrl.gridIntimacoesNaoVisualizadas.data.length}}</small></i>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu bkg-cloud-white color-river pd7 ding">-->
-                <!--<span class="ding-arrow"></span>-->
-                <!--<h3 class="pd7 color-cloud bkg-river brdb-cloud fs1 text-center ">Novas intimações não visualizadas</h3>-->
-                <!--<li class="pd7 " ng-repeat="alerta in alertasTopoCtrl.gridIntimacoesNaoVisualizadas.data">-->
-                    <!--<a class="color-river pd14 brdb-cloud" ng-href="#/avisos/{{alerta.idAviso}}/processos/{{alerta.numeroProcesso}}">{{alerta.dataRecebimento}} - {{alerta.numeroProcesso | mask:'#######-##.####.#.##.####'}}</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li class="dropdown user user-menu">-->
-            <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" title="Usuário conectado">-->
-                <!--<i class="mdi mdi-account"></i>-->
-                <!--<span class="user-name" ng-bind="user.login"></span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu">-->
-                <!--<li class="user-header bg-light-blue" style="height: auto;">-->
-                    <!--<h4>Perfil:</h4>-->
-                    <!--<h3>{{user.login}}</h3>-->
-                    <!--<small ng-repeat="perfil in user.perfil">{{perfil | translate}}</small>-->
-                <!--</li>-->
-                <!--<li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>-->
-            <!--</ul>-->
-        <!--</li>-->
-    <!--</ul>-->
+<div class="navbar-right navbar-right-user" >
+<!--    <ul class="nav navbar-nav" >
+        <li class="dropdown user user-menu">
+            <a href="" class="dropdown-toggle"
+               popover="Alertas" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true"
+               ng-click="">
+                <i class="mdi mdi-bell">
+                    <small class="label label-header label-danger" ng-if="">{{notificacoesController.totalNotificacoesNaoVisualizadas}}</small>
+                </i>
+            </a>
+            <ul class="dropdown-menu bkg-cloud-white color-river pd7 ding" >
+                <span class="ding-arrow"></span>
+                <h3 class="pd7 color-cloud bkg-river fs1 text-center">Notificações</h3>
+                <li class="pd7"><span>Nenhuma notificação</span></li>
+                <li class="pd7 " ng-repeat="">
+                    <a class="color-river pd14 brdb-cloud" ng-if="" ng-href="#">{{notificacao.mensagem}}</a>
+                    <span ng-if="">{{notificacao.mensagem}}</span>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown user user-menu">
+            <a href class="dropdown-toggle"
+               popover="Notificações de erros" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true">
+                <i class="mdi mdi-close-circle-outline">
+                    <small class="label label-header label-danger" ng-if="notificacoesController.notificacoesDeErro.length">{{notificacoesController.notificacoesDeErro.length}}</small>
+                </i>
+            </a>
+            <ul class="dropdown-menu bkg-cloud-white color-river pd7 ding" style="width:619px">
+                <span class="ding-arrow"></span>
+                <h3 class="pd7 color-cloud bkg-river brdb-cloud fs1 text-center ">Notificações de erros</h3>
+                <li class="pd7" ng-if="!notificacoesController.notificacoesDeErro.length"><span>Nenhuma notificação</span></li>
+                <li class="pd7 " ng-repeat="notificacao in notificacoesController.notificacoesDeErro">
+                    <a class="color-river pd14 brdb-cloud" title="Clique aqui para remover esta mensagem"
+                       ng-click="notificacoesController.marcaComoVisualizada(notificacoesController.notificacoesDeErro, notificacao.id)">{{notificacao.mensagem}}
+                        <i class="mdi mdi-close-circle-outline" style="cursor:pointer">
+                            <small class="label label-header label-danger"></small>
+                        </i>
+                    </a>
+
+                    </i>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown user user-menu">
+            <a href="" class="dropdown-toggle"
+               popover="Usuário" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true">
+                <i class="mdi mdi-logout"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="user-header bg-light-blue">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class=" img-responsive avatar-usuario" alt="" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="fs2">Perfil: </h4>
+                            <h4>{{mainController.user.login}}</h4>
+                            <small>{{mainController.user.perfil | translate}}</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>
+            </ul>
+        </li>
+    </ul>-->
+    <button class="toothlet" ng-click="toothlet()"
+            popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
+        <i class="mdi mdi-menu"></i>
+    </button>
+    <button class="bt-logout" ng-click="openLogout()">
+        <i class="mdi mdi-account-circle"></i>
+    </button>
+    <div class="content-logout">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    olá, Gustavo Carvalho
+                </h4>
+                <p>
+                    Deseja sair do sistema?
+                </p>
+            </div>
+            <div class="col-md-12">
+                <button class="bt bt-emerald">
+                    sim
+                </button>
+                <button class="bt bt-alizarin" ng-click="openLogout()">
+                    nao
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

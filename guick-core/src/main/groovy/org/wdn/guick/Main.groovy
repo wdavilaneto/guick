@@ -14,7 +14,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
+        private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
 
     AnnotationConfigApplicationContext context
     DslArchitecture guick
@@ -22,21 +22,21 @@ class Main {
     String target
 
     Main() {
-        context = new AnnotationConfigApplicationContext();
-        context.scan(GUICK_CONTEXT_CLASSPATH);
-        context.refresh();
-        guick = (DslArchitecture) context.getBean("dslArchitecture");
-        project = context.getBean("project");
+        context = new AnnotationConfigApplicationContext()
+        context.scan(GUICK_CONTEXT_CLASSPATH)
+        context.refresh()
+        guick = (DslArchitecture) context.getBean("dslArchitecture")
+        project = context.getBean("project")
     }
 
     public static void main(String[] args) {
         ExpandoMetaClass.disableGlobally()
         try {
-            Main main = new Main();
-            main.project.initialize("../../mprj-gsi-mca")
+            Main main = new Main()
+            main.project.initialize("../mprj-gsi-ind")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
-//            main.project.persist();
+//            main.project.persist()
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
@@ -47,8 +47,8 @@ class Main {
     }
 
     public Main setTarget(String lvalue) {
-        target = lvalue;
-        return this;
+        target = lvalue
+        return this
     }
 
 }

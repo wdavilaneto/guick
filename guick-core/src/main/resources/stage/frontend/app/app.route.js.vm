@@ -15,11 +15,35 @@
                 controllerAs: 'mainController',
                 templateUrl: "modules/main/main.html"
             })
+            .state('dashboard', {
+                url: "/dashboard",
+                controller: 'dashboardController',
+                controllerAs: 'dashboardController',
+                templateUrl: "views/dashboards/dashboard.html"
+            })
+            .state('layout', {
+                url: "/cards",
+                controller: 'CardsController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/cards.html"
+            })
+            .state('book', {
+                url: "/book",
+                controller: 'BookController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/book.html"
+            })
+             .state('slick', {
+                            url: "/slick",
+                            controller: 'SlickController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/slick.html"
+                        })
         ;
 
-        $urlRouterProvider.otherwise("/");
-        $translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
-        $translateProvider.preferredLanguage('i18n/locale-pt-BR');
+    ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao
+    #*$translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
+    $translateProvider.preferredLanguage('i18n/locale-pt-BR');*#
 
     }
 

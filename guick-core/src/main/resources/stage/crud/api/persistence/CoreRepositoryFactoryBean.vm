@@ -22,13 +22,15 @@ import java.io.Serializable;
 #if ( ${project.config.generationLanguage} == 'java')
 public class CoreRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I extends Serializable>
     extends JpaRepositoryFactoryBean<R, T, I> {
+
+    public CoreRepositoryFactoryBean(Class<? extends R> repositoryInterface) {
+        super(repositoryInterface);
+    }
 #else
 public class CoreRepositoryFactoryBean extends JpaRepositoryFactoryBean{
 #end
-
     protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
-
-    return new CoreRepositoryFactory(entityManager);
+        return new CoreRepositoryFactory(entityManager);
     }
 #if ( ${project.config.generationLanguage} == 'java')
     private static class CoreRepositoryFactory<T, I extends Serializable> extends JpaRepositoryFactory {

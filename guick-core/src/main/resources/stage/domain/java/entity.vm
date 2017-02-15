@@ -51,8 +51,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 /**
@@ -107,9 +107,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 #if(${entity.beanName} == 'orgao' || ${entity.beanName.startsWith('tipo')} || ${entity.beanName} == 'enderecos'  )
 #end
 #if( ${entity.looksLikeEnum()} || ${entity.looksLikeDomain()} || ( ${entity.beanName} == 'endereco' || ${entity.beanName} == 'orgao' ))
-// @Immutable ?
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Immutable ?
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 #end
 @JsonIdentityInfo(generator=JSOGGenerator.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
