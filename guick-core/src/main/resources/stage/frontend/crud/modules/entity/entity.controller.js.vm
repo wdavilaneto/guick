@@ -72,7 +72,7 @@ angular.module('${projectBeanName}App')
 #if( ${entity.table.count} > 10000)
                 if (vm.searchField.text.length > 3) {
 #end
-                    ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':$scope.pagination.getPageRequest()} , function (data) {
+                    ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':page} , function (data) {
                     $scope.resultPage = data;
                     $scope.resultPage.content = jsog.decode(data.content);
                 });
@@ -173,6 +173,15 @@ angular.module('${projectBeanName}App')
                 vm.search();
             }
         }, true);
+
+        var onRegisterApi = function(gridApi) {
+                ${js}scope.gridApi = gridApi;
+            gridApi.pagination.on.paginationChanged(${js}scope, function (newPage, pageSize) {
+                var pageable = {page: newPage, size: pageSize};
+                vm.search(pageable);
+            });
+        }
+            ${js}scope.gridOptions.onRegisterApi = onRegisterApi;
 
     }
 

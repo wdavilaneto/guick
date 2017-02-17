@@ -55,7 +55,13 @@
         'commons.directives',
         'commons.filters',
         'commons.controllers',
-        'commons.services'
+        'commons.services',
+        'ui.grid',
+        'ui.grid.pagination',
+        'ui.grid.selection',
+        'ui.grid.pagination',
+        'blockUI'
+
     ]);
 
 })();

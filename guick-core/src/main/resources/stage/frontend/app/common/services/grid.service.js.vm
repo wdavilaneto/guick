@@ -42,6 +42,7 @@
                     data: 'resultPage.content',
                     // enableCellSelection: false,
                     enableRowSelection: false,
+                    useExternalPagination: true,
                     //   multiSelect: false,
                     //   selectWithCheckboxOnly: false,
                     //   showSelectionCheckbox: false,
