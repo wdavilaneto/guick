@@ -1837,3 +1837,14 @@ a.color-cloud:hover
 }
 /**/
 
+/*CONTEUDO INTIMACAO*/
+.bt-card-list i.mdi.mdi-view-list,
+.bt-card-list i.mdi.mdi-view-grid.stash
+    {
+        display:block;
+    }
+.bt-card-list i.mdi.mdi-view-list.stash,
+.bt-card-list i.mdi.mdi-view-grid.
+    {
+        display::none;
+    }
