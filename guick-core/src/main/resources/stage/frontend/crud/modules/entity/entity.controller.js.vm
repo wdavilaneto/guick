@@ -75,6 +75,7 @@ angular.module('${projectBeanName}App')
                     ${entityBeanName}Service.searchText( {'content': vm.searchField.text ,'pagination':page} , function (data) {
                     $scope.resultPage = data;
                     $scope.resultPage.content = jsog.decode(data.content);
+                    $scope.gridOptions.totalItems = $scope.resultPage.totalElements;
                 });
 #if( ${entity.table.count} > 10000)
                 }
@@ -149,6 +150,7 @@ angular.module('${projectBeanName}App')
             ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
+                $scope.gridOptions.totalItems = $scope.resultPage.totalElements;
             });
         }
 #end
