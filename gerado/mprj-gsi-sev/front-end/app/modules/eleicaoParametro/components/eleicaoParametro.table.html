@@ -1,0 +1,25 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Eleicao</th>
+                                                    <th>Parametro</th>
+                                                     <th>Valor Parametro</th>
+                                                </tr>
+                                                <tr dir-paginate="eleicaoParametro in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(eleicaoParametro)" pagination-id="eleicaoParametro" ng-class="{selected: eleicaoParametro}">
+                                                    <td><p>{{eleicaoParametro.eleicao.nome}}<p></td>
+                                                    <td><p>{{eleicaoParametro.parametro.descricao}}<p></td>
+                                                     <td><p>{{eleicaoParametro.valorParametro}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="eleicaoParametroPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="eleicaoParametro"></dir-pagination-controls>
+                                </div>

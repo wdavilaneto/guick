@@ -1,0 +1,39 @@
+    <div class="col-md-3 form-group ">
+        <label class="control-label" for="consulta">Consulta</label>
+        <input class="form-control" type="text" ng-model="vm.entity.consulta" ng-required="true"placeholder="Consulta" id="consulta" />
+    </div>
+
+
+
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Eleicao
+            <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
+        </label>
+        <div angucomplete-alt id="eleicaoAutoComplete"
+              placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+              name="eleicao"
+              pause="500"
+              remote-url="/sev/api/eleicao/searchText?text="
+              selected-object="vm.searchSelects.eleicao"
+              remote-url-data-field="content"
+              title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+              input-class="form-control"
+              field-required="true"
+              text-no-results="Nenhum registro encontrado"
+              text-searching="Buscando"
+              auto-match="true"/>
+    </div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="descricaoTipoFiltro">Descrição Tipo Filtro </label>
+    <input class="form-control" type="text" ng-maxlength="50" ng-model="vm.entity.descricaoTipoFiltro" placeholder="Descrição Tipo Filtro"  id="descricaoTipoFiltro" />
+</div>
+
+
+
+
+
+

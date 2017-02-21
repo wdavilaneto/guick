@@ -1,0 +1,61 @@
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="nome">Nome <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="145" ng-model="vm.entity.nome" required placeholder="Nome"  id="nome" />
+    <span class="help-block" ng-show="nome.$error.required">Obrigatório</span>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="email">Email <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input type="email" class="form-control" ng-maxlength="200" ng-model="vm.entity.email" required placeholder="Email"  id="email" >
+     <span class="help-block" ng-show="email.$error.required">Obrigatório</span>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="login">Login <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="200" ng-model="vm.entity.login" required placeholder="Login"  id="login" />
+    <span class="help-block" ng-show="login.$error.required">Obrigatório</span>
+</div>
+    <div class="col-md-3" show-errors>
+        <div class="form-group has-warning">
+            <label class="control-label">Eleicao</label>
+            <div angucomplete-alt id="eleicaoAutoComplete"
+                input-name="eleicaoAutoComplete"
+                initial-value="{{entity.eleicao.nome}}"
+                placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+                name="eleicao"
+                pause="400"
+                remote-url="/sev/api/Eleicao/searchText?text="
+                selected-object="vm.searchSelects.eleicao"
+                remote-url-data-field="content"
+                title-field="nome,descricao,descricaoOrientacao,natureza,criterioDesempate,textoEmailConvite,statusApuracao"
+                      minlength="2"
+                input-class="form-control"
+                field-required="true"
+                text-no-results="Nenhum registro encontrado"
+                text-searching="Buscando"
+                auto-match="true"/>
+    </div>
+</div>
+    <div class="col-md-3">
+        <div class="form-group has-warning">
+            <label class="control-label">Tipo Integrante Comissao
+            </label>
+            <div tipoIntegranteComissao-select></div>
+        </div>
+    </div>
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="cdmatricula">Códigomatricula <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="8" ng-model="vm.entity.cdmatricula" required placeholder="Códigomatricula"  id="cdmatricula" />
+    <span class="help-block" ng-show="cdmatricula.$error.required">Obrigatório</span>
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataValidacao">Data Validacao </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataValidacao" current-text="Hoje" clear-text="Limpar"  id="dataValidacao" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+

@@ -1,0 +1,32 @@
+    <div class="col-md-3 form-group ">
+        <label class="control-label" for="msgCriptografada">Msg Criptografada</label>
+        <input class="form-control" type="text" ng-model="vm.entity.msgCriptografada" ng-required="true"placeholder="Msg Criptografada" id="msgCriptografada" />
+    </div>
+
+
+
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Urna
+        </label>
+        <div urna-select></div>
+    </div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="versao">Versao </label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" required placeholder="Versao"  id="versao" />
+    <span class="help-block" ng-show="versao.$error.required">Obrigatório</span>
+</div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="calculada">Calculada </label>
+    <input class="form-control" type="text" ng-maxlength="1" ng-model="vm.entity.calculada" required placeholder="Calculada"  id="calculada" />
+    <span class="help-block" ng-show="calculada.$error.required">Obrigatório</span>
+</div>
+
+

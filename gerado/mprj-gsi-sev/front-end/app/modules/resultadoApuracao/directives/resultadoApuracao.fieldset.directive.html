@@ -1,0 +1,29 @@
+
+    <div class="col-md-3 form-group" show-errors>
+
+            <label class="control-label" for="candidatoAutoComplete">Candidato <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+            <div angucomplete-alt id="candidatoAutoComplete"
+                input-name="candidatoAutoComplete"
+                initial-value="{{vm.entity.candidato.nome}}"
+                placeholder="Busca por Códigomatricula ou Nome ou Email ou Nome Completo ou Login"
+                name="candidato"
+                pause="400"
+                remote-url="/sev/api/candidato/searchText?text="
+                selected-object="vm.searchSelects.candidato"
+                remote-url-data-field="content"
+                title-field="nome,nomeCompleto,cdmatricula,"
+                      minlength="2"
+                input-class="form-control"
+                field-required="true"
+                text-no-results="Nenhum registro encontrado"
+                text-searching="Buscando"
+                auto-match="true"/>
+   </div>
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="qtVotos">Qt Votos <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.qtVotos" required placeholder="Qt Votos"  id="qtVotos" />
+    <span class="help-block" ng-show="qtVotos.$error.required">Obrigatório</span>
+</div>
+

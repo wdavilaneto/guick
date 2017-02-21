@@ -1,0 +1,29 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Eleicao</th>
+                                                    <th>Evento</th>
+                                                    <th>Tipo Relatorio</th>
+                                                     <th>Data Criacao</th>
+                                                     <th>Arquivo</th>
+                                                </tr>
+                                                <tr dir-paginate="arquivoRelatorio in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(arquivoRelatorio)" pagination-id="arquivoRelatorio" ng-class="{selected: arquivoRelatorio}">
+                                                    <td><p>{{arquivoRelatorio.eleicao.nome}}<p></td>
+                                                    <td><p>{{arquivoRelatorio.evento.ocorrencia}}<p></td>
+                                                    <td><p>{{arquivoRelatorio.tipoRelatorio.descricao}}<p></td>
+                                                     <td><p>{{arquivoRelatorio.dataCriacao}}<p></td>
+                                                     <td><p>{{arquivoRelatorio.arquivo}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="arquivoRelatorioPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="arquivoRelatorio"></dir-pagination-controls>
+                                </div>

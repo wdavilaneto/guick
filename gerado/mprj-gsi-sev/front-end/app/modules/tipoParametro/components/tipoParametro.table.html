@@ -1,0 +1,21 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                     <th>Descrição</th>
+                                                </tr>
+                                                <tr dir-paginate="tipoParametro in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(tipoParametro)" pagination-id="tipoParametro" ng-class="{selected: tipoParametro}">
+                                                     <td><p>{{tipoParametro.descricao}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="tipoParametroPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="tipoParametro"></dir-pagination-controls>
+                                </div>

@@ -1,0 +1,74 @@
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="nome">Nome</label>
+        <input class="form-control" type="text" ng-model="vm.entity.nome" placeholder="Nome" id="nome" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="foto">Foto</label>
+        <input class="form-control" type="text" ng-model="vm.entity.foto" placeholder="Foto" id="foto" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="email">Email</label>
+        <input class="form-control" type="text" ng-model="vm.entity.email" placeholder="Email" id="email" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="nomeCompleto">Nome Completo</label>
+        <input class="form-control" type="text" ng-model="vm.entity.nomeCompleto" placeholder="Nome Completo" id="nomeCompleto" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="login">Login</label>
+        <input class="form-control" type="text" ng-model="vm.entity.login" placeholder="Login" id="login" />
+    </div>
+
+
+
+    <div class="col-md-3 form-group">
+        <label class="control-label">Candidato Padrao
+        </label>
+        <div candidatoPadrao-select></div>
+    </div>
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Eleicao
+            <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
+        </label>
+        <div angucomplete-alt id="eleicaoAutoComplete"
+              placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+              name="eleicao"
+              pause="500"
+              remote-url="/sev/api/eleicao/searchText?text="
+              selected-object="vm.searchSelects.eleicao"
+              remote-url-data-field="content"
+              title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+              input-class="form-control"
+              field-required="true"
+              text-no-results="Nenhum registro encontrado"
+              text-searching="Buscando"
+              auto-match="true"/>
+    </div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="cdmatricula">Códigomatricula </label>
+    <input class="form-control" type="text" ng-maxlength="8" ng-model="vm.entity.cdmatricula" placeholder="Códigomatricula"  id="cdmatricula" />
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataNascimento">Data Nascimento </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="criterioDesempate">Criterio Desempate </label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.criterioDesempate" placeholder="Criterio Desempate"  id="criterioDesempate" />
+</div>
+
+
+
+
+
+

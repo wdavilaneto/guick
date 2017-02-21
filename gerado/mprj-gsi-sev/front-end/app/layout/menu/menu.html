@@ -1,0 +1,114 @@
+<div class="menu" accordion>
+
+        <accordion>
+            <accordion-group>
+                <accordion-heading>
+                    <span>
+                        <i class="mdi mdi-projector-screen"></i>
+                        Prototipo
+                    </span>
+                     <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
+                <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
+                <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
+                <a href="#/slick" class="ng-binding"><i class="mdi mdi-book"></i>Slick</a>
+            </accordion-group>
+        </accordion>
+        <div class="panel panel-default ng-scope">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#/dashboard" class="ng-binding"><i class="mdi mdi-home"></i> pagina padrao</a>
+                    </h4>
+                </div>
+            </div>
+                                <div accordion-group ng-if="isAuthenticated || true" scope>
+                <div accordion-heading>
+                <span>
+                    {{"menu.principal" | translate}}
+                </span>
+                    <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+                </div>
+                                                            <a href="#/candidato" title="Candidato">
+                            <i class="mdi mdi-file-document"></i> {{"menu.candidato" | translate}}
+                        </a>
+                                                                                <a href="#/cedula" title="Cedula">
+                            <i class="mdi mdi-file-document"></i> {{"menu.cedula" | translate}}
+                        </a>
+                                                                                <a href="#/eleicao" title="Eleicao">
+                            <i class="mdi mdi-file-document"></i> {{"menu.eleicao" | translate}}
+                        </a>
+                                                                                <a href="#/eleitor" title="Eleitor">
+                            <i class="mdi mdi-file-document"></i> {{"menu.eleitor" | translate}}
+                        </a>
+                                                                                <a href="#/evento" title="Evento">
+                            <i class="mdi mdi-file-document"></i> {{"menu.evento" | translate}}
+                        </a>
+                                                                                <a href="#/integranteComissao" title="Integrante Comissao">
+                            <i class="mdi mdi-file-document"></i> {{"menu.integranteComissao" | translate}}
+                        </a>
+                                                </div>
+        
+                                    <div accordion-group ng-if="isAuthenticated || true">
+                    <div accordion-heading>
+                <span>
+                    {{"menu.administracao" | translate}}
+                </span>
+                        <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+                    </div>
+                                                                        <a href="#/arquivoRelatorio" title="Arquivo Relatorio">
+                                <i class="mdi mdi-file-document"></i> {{"menu.arquivoRelatorio" | translate}}
+                            </a>
+                                                                                                <a href="#/candidatoPadrao" title="Candidato Padrao">
+                                <i class="mdi mdi-file-document"></i> {{"menu.candidatoPadrao" | translate}}
+                            </a>
+                                                                                                <a href="#/eleicaoParametro" title="Eleicao Parametro">
+                                <i class="mdi mdi-file-document"></i> {{"menu.eleicaoParametro" | translate}}
+                            </a>
+                                                                                                <a href="#/parametro" title="Parametro">
+                                <i class="mdi mdi-file-document"></i> {{"menu.parametro" | translate}}
+                            </a>
+                                                                                                <a href="#/resultadoApuracao" title="Resultado Apuracao">
+                                <i class="mdi mdi-file-document"></i> {{"menu.resultadoApuracao" | translate}}
+                            </a>
+                                                                                                <a href="#/urna" title="Urna">
+                                <i class="mdi mdi-file-document"></i> {{"menu.urna" | translate}}
+                            </a>
+                                                            </div>
+            
+                            <div accordion-group ng-if="isAuthenticated || true">
+                    <div accordion-heading>
+                <span>
+                    {{"menu.tipos" | translate}}
+                </span>
+                        <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+                    </div>
+                                            <a href="#/situacaoEleicao" title="Situacao Eleicao">
+                            <i class="mdi mdi-file-document"></i> {{"menu.situacaoEleicao" | translate}}
+                        </a>
+                                            <a href="#/tipoEvento" title="Tipo Evento">
+                            <i class="mdi mdi-file-document"></i> {{"menu.tipoEvento" | translate}}
+                        </a>
+                                            <a href="#/tipoFiltroPessoa" title="Tipo Filtro Pessoa">
+                            <i class="mdi mdi-file-document"></i> {{"menu.tipoFiltroPessoa" | translate}}
+                        </a>
+                                            <a href="#/tipoIntegranteComissao" title="Tipo Integrante Comissao">
+                            <i class="mdi mdi-file-document"></i> {{"menu.tipoIntegranteComissao" | translate}}
+                        </a>
+                                            <a href="#/tipoParametro" title="Tipo Parametro">
+                            <i class="mdi mdi-file-document"></i> {{"menu.tipoParametro" | translate}}
+                        </a>
+                                            <a href="#/tipoRelatorio" title="Tipo Relatorio">
+                            <i class="mdi mdi-file-document"></i> {{"menu.tipoRelatorio" | translate}}
+                        </a>
+                                    </div>
+                            <div accordion-group>
+            <div accordion-heading>
+                <span>{{"menu.sistema" | translate}}</span>
+                <i class="pull-right mdi"></i>
+            </div>
+            <a href="#/sobre"><i class="mdi mdi-apps"></i>{{"menu.sobre" | translate}}</a>
+            <a href="/swagger-ui" target="_blank"><i class="mdi mdi-apps"></i>{{"menu.restapi" | translate}}</a>
+        </div>
+
+    </div>
+</div>

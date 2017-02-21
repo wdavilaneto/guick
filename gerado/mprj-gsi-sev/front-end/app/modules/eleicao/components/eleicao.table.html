@@ -1,0 +1,27 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Situacao Eleicao</th>
+                                                     <th>Nome</th>
+                                                     <th>Descrição</th>
+                                                     <th>Criterio Desempate</th>
+                                                </tr>
+                                                <tr dir-paginate="eleicao in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(eleicao)" pagination-id="eleicao" ng-class="{selected: eleicao}">
+                                                    <td><p>{{eleicao.situacaoEleicao.descricaoSituacao}}<p></td>
+                                                     <td><p>{{eleicao.nome}}<p></td>
+                                                     <td><p>{{eleicao.descricao}}<p></td>
+                                                     <td><p>{{eleicao.criterioDesempate}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="eleicaoPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="eleicao"></dir-pagination-controls>
+                                </div>

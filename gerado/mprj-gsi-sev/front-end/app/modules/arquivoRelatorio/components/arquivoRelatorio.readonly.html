@@ -1,0 +1,20 @@
+                                <div class="col-md-3 form-group">
+                                    <div class="form-group">
+                                        <label for="arquivo">Arquivo</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{entity.arquivo}}" ng-show="vm.entity.arquivo" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3" ng-if="vm.entity.dataCriacao">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Criacao</label>
+                                        <div ng-if="vm.entity.dataCriacao"> {{entity.dataCriacao}}</div>
+                                    </div>
+                                </div>
+
+

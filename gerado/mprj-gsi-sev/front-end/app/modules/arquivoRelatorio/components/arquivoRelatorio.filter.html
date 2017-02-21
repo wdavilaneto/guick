@@ -1,0 +1,69 @@
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="arquivo">Arquivo</label>
+        <input class="form-control" type="text" ng-model="vm.entity.arquivo" placeholder="Arquivo" id="arquivo" />
+    </div>
+
+
+
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Eleicao
+            <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
+        </label>
+        <div angucomplete-alt id="eleicaoAutoComplete"
+              placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+              name="eleicao"
+              pause="500"
+              remote-url="/sev/api/eleicao/searchText?text="
+              selected-object="vm.searchSelects.eleicao"
+              remote-url-data-field="content"
+              title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+              input-class="form-control"
+              field-required="true"
+              text-no-results="Nenhum registro encontrado"
+              text-searching="Buscando"
+              auto-match="true"/>
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label">Evento
+            <a class="btn-detail" ng-show="vm.searchSelects.evento.id != null" ng-click="$event.stopPropagation(); view('lg','Evento');"><i class="fa fa-fw fa-search-plus"></i></a>
+        </label>
+        <div angucomplete-alt id="eventoAutoComplete"
+              placeholder="Busca por Ocorrencia ou Justificativa ou Login"
+              name="evento"
+              pause="500"
+              remote-url="/sev/api/evento/searchText?text="
+              selected-object="vm.searchSelects.evento"
+              remote-url-data-field="content"
+              title-field="ocorrencia,justificativa,login"
+              input-class="form-control"
+              field-required="true"
+              text-no-results="Nenhum registro encontrado"
+              text-searching="Buscando"
+              auto-match="true"/>
+    </div>
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Tipo Relatorio
+        </label>
+        <div tipoRelatorio-select></div>
+    </div>
+
+
+
+
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataCriacao">Data Criacao </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataCriacao" current-text="Hoje" clear-text="Limpar" required id="dataCriacao" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="help-block" ng-show="dataCriacao.$error.required">Obrigatório</span>
+        </div>
+    </div>
+
+
+
+
+
+

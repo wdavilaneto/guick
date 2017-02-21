@@ -1,0 +1,25 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Eleicao</th>
+                                                     <th>Descrição Tipo Filtro</th>
+                                                     <th>Consulta</th>
+                                                </tr>
+                                                <tr dir-paginate="tipoFiltroPessoa in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(tipoFiltroPessoa)" pagination-id="tipoFiltroPessoa" ng-class="{selected: tipoFiltroPessoa}">
+                                                    <td><p>{{tipoFiltroPessoa.eleicao.nome}}<p></td>
+                                                     <td><p>{{tipoFiltroPessoa.descricaoTipoFiltro}}<p></td>
+                                                     <td><p>{{tipoFiltroPessoa.consulta}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="tipoFiltroPessoaPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="tipoFiltroPessoa"></dir-pagination-controls>
+                                </div>
