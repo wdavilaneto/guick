@@ -1,0 +1,36 @@
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="valorParametro">Valor Parametro <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <textarea class="form-control" rows="3" ng-maxlength="4000" ng-model="vm.entity.valorParametro" required placeholder="Valor Parametro"  id="valorParametro" ></textarea>
+    <span class="help-block" ng-show="valorParametro.$error.required">Obrigatório</span>
+</div>
+    <div class="col-md-3" show-errors>
+        <div class="form-group has-warning">
+            <label class="control-label">Eleicao</label>
+            <div angucomplete-alt id="eleicaoAutoComplete"
+                input-name="eleicaoAutoComplete"
+                initial-value="{{entity.eleicao.nome}}"
+                placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+                name="eleicao"
+                pause="400"
+                remote-url="/sev/api/Eleicao/searchText?text="
+                selected-object="vm.searchSelects.eleicao"
+                remote-url-data-field="content"
+                title-field="nome,descricao,descricaoOrientacao,natureza,criterioDesempate,textoEmailConvite,statusApuracao"
+                      minlength="2"
+                input-class="form-control"
+                field-required="true"
+                text-no-results="Nenhum registro encontrado"
+                text-searching="Buscando"
+                auto-match="true"/>
+    </div>
+</div>
+    <div class="col-md-3">
+        <div class="form-group has-warning">
+            <label class="control-label">Parametro
+            </label>
+            <div parametro-select></div>
+        </div>
+    </div>
+
+

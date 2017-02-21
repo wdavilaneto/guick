@@ -1,0 +1,68 @@
+                                <div class="col-md-4" ng-if="vm.entity.codigoAutenticacao">
+                                    <div class="form-group">
+                                        <label class="control-label">Codigo Autenticacao</label>
+                                        <div ng-if="vm.entity.codigoAutenticacao"> {{entity.codigoAutenticacao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.enderecoIp">
+                                    <div class="form-group">
+                                        <label class="control-label">Endereço Ip</label>
+                                        <div ng-if="vm.entity.enderecoIp"> {{entity.enderecoIp}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <div class="form-group">
+                                        <label for="comprovanteVotacao">Comprovante Votação</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{entity.comprovanteVotacao}}" ng-show="vm.entity.comprovanteVotacao" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.nome">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome</label>
+                                        <div ng-if="vm.entity.nome"> {{entity.nome}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.email">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <div ng-if="vm.entity.email"> {{entity.email}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.descricaoCargo">
+                                    <div class="form-group">
+                                        <label class="control-label">Descrição Cargo</label>
+                                        <div ng-if="vm.entity.descricaoCargo"> {{entity.descricaoCargo}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.login">
+                                    <div class="form-group">
+                                        <label class="control-label">Login</label>
+                                        <div ng-if="vm.entity.login"> {{entity.login}}</div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3" ng-if="vm.entity.cdmatricula">
+                                    <div class="form-group">
+                                        <label class="control-label">Códigomatricula</label>
+                                        <div ng-if="vm.entity.cdmatricula"> {{entity.cdmatricula}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataVoto">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Voto</label>
+                                        <div ng-if="vm.entity.dataVoto"> {{entity.dataVoto}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.versao">
+                                    <div class="form-group">
+                                        <label class="control-label">Versao</label>
+                                        <div ng-if="vm.entity.versao"> {{entity.versao}}</div>
+                                    </div>
+                                </div>
+
+

@@ -1,0 +1,28 @@
+<!-- sessões -->
+<section class="content-header">
+    <h1 class="color-asphalt"><i class="mdi mdi-file-find"></i> Eleitor</h1>
+    <ol class="breadcrumb">
+        <li><a href="#/"> <i class="mdi mdi-home"></i> {{"menu.inicial" | translate}} </a></li>
+        <li><a href="#/eleitor"> {{"filtro" | translate}} {{"menu.eleitor" | translate}}</a></li>
+        <li class="active" ng-if="vm.entity.id == null"> {{"create" | translate}} {{entity.id}}</li>
+        <li class="active" ng-if="vm.entity.id != null"> {{"edit" | translate}} </li>
+
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box box-primary">
+        <form name="mainForm" novalidate>
+            <tabset>
+                <tab ng-repeat="tab in vm.tabs" ng-click="vm.changeTab(tab.route)" ng-show="tab.visible">
+                    <tab-heading>
+                        <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
+                    </tab-heading>
+                </tab>
+            </tabset>
+            <div class="row">
+                <ui-view />
+            </div>
+        </form>
+    </div>
+</section>

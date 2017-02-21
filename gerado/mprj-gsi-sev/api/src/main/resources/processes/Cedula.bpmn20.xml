@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/processdef">
+
+    <process id="processCedula">
+
+        <startEvent id="iniciarProcessoCedula"/>
+
+            <sequenceFlow sourceRef="iniciarProcessoCedula" targetRef="criarCedula"/>
+
+            <serviceTask id="criarCedula"
+                         name="Incluir Cedula"
+                         activiti:expression="${CedulaService.create(nomeCedula, descricaoCedula)}"
+                         activiti:resultVariable="result"/>
+
+            <sequenceFlow sourceRef="criarCedula" targetRef="avaliarInclusaoCedula"/>
+
+            <userTask id="avaliarInclusaoCedula" name="Avaliar Inclusão de Cedula"/>
+
+            <sequenceFlow sourceRef="avaliarInclusaoCedula" targetRef="finalizarProcessoCedula"/>
+
+        <endEvent id="finalizarProcessoCedula"/>
+
+    </process>
+
+</definitions>

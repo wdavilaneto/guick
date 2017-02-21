@@ -1,0 +1,84 @@
+
+<div class="box-header"><h3 class="box-title"></h3></div>
+    <div class="box-body">
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="box-footer hidden-sm hidden-xs">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> {{"add" | translate}}</button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"associate" | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer hidden-md hidden-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> </button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-body">
+                                <div class="col-md-4" ng-if="vm.entity.nome">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome</label>
+                                        <div ng-if="vm.entity.nome"> {{entity.nome}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <div class="form-group">
+                                        <label for="foto">Foto</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{entity.foto}}" ng-show="vm.entity.foto" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.email">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <div ng-if="vm.entity.email"> {{entity.email}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.nomeCompleto">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome Completo</label>
+                                        <div ng-if="vm.entity.nomeCompleto"> {{entity.nomeCompleto}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.login">
+                                    <div class="form-group">
+                                        <label class="control-label">Login</label>
+                                        <div ng-if="vm.entity.login"> {{entity.login}}</div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3" ng-if="vm.entity.cdmatricula">
+                                    <div class="form-group">
+                                        <label class="control-label">Códigomatricula</label>
+                                        <div ng-if="vm.entity.cdmatricula"> {{entity.cdmatricula}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataNascimento">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Nascimento</label>
+                                        <div ng-if="vm.entity.dataNascimento"> {{entity.dataNascimento}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.criterioDesempate">
+                                    <div class="form-group">
+                                        <label class="control-label">Criterio Desempate</label>
+                                        <div ng-if="vm.entity.criterioDesempate"> {{entity.criterioDesempate}}</div>
+                                    </div>
+                                </div>
+
+
+    </div>
+</div>

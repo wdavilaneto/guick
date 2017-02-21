@@ -1,0 +1,8 @@
+
+<div ui-select ng-model="vm.entity.integranteComissao" ng-disabled="vm.integranteComissaoList.length < 1" ng-required="true">
+    <div ui-select-match placeholder="Escolha Integrante Comissao...">{{$select.selected.cdmatricula}}</div>
+    <div ui-select-choices repeat="item in vm.integranteComissaoList | filter: vm.$select.search">
+        <div ng-bind-html="item.cdmatricula | highlight: vm.$select.search"></div>
+        <small ng-bind-html="item.login |  highlight: vm.$select.search "></small>
+    </div>
+</div>

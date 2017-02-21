@@ -1,0 +1,132 @@
+
+/*NG-GRID*********************************************************************************************************/
+
+.gridStyle {
+    border: 1px solid #ededed;
+}
+
+.gridStyle .ngViewport {
+    overflow-x: hidden;
+}
+
+.gridStyle button.btn.btn-danger {
+    padding: 2px !important;
+    margin: 2px !important;
+}
+
+.grid-align-right {
+    text-align: right !important;
+}
+
+.grid-align-center {
+    text-align: center !important;
+}
+
+.gridTotais {
+    border: 1px solid rgb(212, 212, 212);
+    min-height: 85px !important;
+}
+
+.ngTopPanel {
+    background: #fff;
+}
+
+.ngFooterPanel {
+    background: #fff;
+}
+
+.ngPagerContainer.ngNoMultiSelect {
+    float: right !important;
+    margin: 5px 0px 0 0px !important;
+}
+
+.ngFooterPanel span {
+    text-indent: -9999px
+}
+
+.ngFooterPanel select {
+    margin: 0;
+    padding: 0;
+    width: 43px !important;
+    margin-left: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.ngRowCountPicker {
+    margin-right: 3px !important;
+}
+
+.ngHeaderContainer {
+    border-bottom: 1px dotted #ededed;
+    font-weight: 600;
+    text-align: center;
+}
+.ngGridMaxPagesNumber {
+    vertical-align: top;
+}
+
+input.ngPagerCurrent {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fafafa;
+    max-width: 33px;
+}
+
+.ngPagerButton {
+    height: 25px;
+    min-width: 26px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.ngTotalSelectContainer {
+    margin: 0px;
+    width: 100%;
+    background: #fafafa;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0px 3px;
+    text-align: right;
+}
+
+.ngHeaderText {
+    white-space: normal !important;
+    padding:8px !important;
+}
+
+.ngViewport.ng-scope {
+    height: auto !important;
+    overflow-y: hidden;
+}
+
+.ngSortButtonDown{top:0;}
+
+/*FIM DA NG-GRID****************************************************************************************************/
+
+/*UI GRID***********************************************************************************************************/
+
+.ui-grid{
+    height:auto !important;
+    min-height:30px;
+    padding-bottom:39px;
+}
+
+.ui-grid-pager-panel{
+    /* background:#fafafa; */
+}
+
+.ui-grid-viewport{
+    height:auto !important;
+    max-height:375px !important;
+}
+
+.ui-grid-pager-control button{
+    border:0 !important;
+}
+
+
+/*FIM DA UI GRID****************************************************************************************************/

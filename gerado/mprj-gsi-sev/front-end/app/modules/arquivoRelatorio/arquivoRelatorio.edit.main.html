@@ -1,0 +1,28 @@
+
+<div class="box-header"><h3 class="box-title"></h3></div>
+    <div class="box-body">
+        <div class="row">
+             <div ng-include src="'modules/arquivoRelatorio/directives/arquivoRelatorio.fieldset.directive.html'"></div>
+        </div>
+    </div>
+    <div class="box-footer hidden-sm hidden-xs">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i> {{"voltar" | translate}}</button>
+                <button type="button" class="bt bt-alizarin" ng-click="remove()"><i class="mdi mdi-close-circle"></i>{{"remover" | translate}}</button>
+                <button type="button" class="bt bt-indigo" ng-click="vm.save()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"save" | translate}}</button>
+                <button type="button" class="bt bt-indigo" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"saveContinu" | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer hidden-md hidden-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-keyboard-return"></i></button>
+                <button type="button" class="bt bt-alizarin" ng-click="vm.remove()"><i class="mdi mdi-close-circle"></i></button>
+                <button type="button" class="bt bt-indigo" ng-click="vm.save()" ng-disabled="userForm.$invalid">><i class="mdi mdi-content-save"></i></button>
+                <button type="button" class="bt bt-indigo" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

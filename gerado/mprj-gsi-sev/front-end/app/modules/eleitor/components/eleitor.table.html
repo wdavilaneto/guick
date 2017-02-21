@@ -1,0 +1,37 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Eleicao</th>
+                                                     <th>Codigo Autenticacao</th>
+                                                     <th>Endereço Ip</th>
+                                                     <th>Nome</th>
+                                                     <th>Email</th>
+                                                     <th>Descrição Cargo</th>
+                                                     <th>Login</th>
+    <!--
+    -->
+                                                </tr>
+                                                <tr dir-paginate="eleitor in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(eleitor)" pagination-id="eleitor" ng-class="{selected: eleitor}">
+                                                    <td><p>{{eleitor.eleicao.nome}}<p></td>
+                                                     <td><p>{{eleitor.codigoAutenticacao}}<p></td>
+                                                     <td><p>{{eleitor.enderecoIp}}<p></td>
+                                                     <td><p>{{eleitor.nome}}<p></td>
+                                                     <td><p>{{eleitor.email}}<p></td>
+                                                     <td><p>{{eleitor.descricaoCargo}}<p></td>
+                                                     <td><p>{{eleitor.login}}<p></td>
+    <!--
+    -->
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="eleitorPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="eleitor"></dir-pagination-controls>
+                                </div>

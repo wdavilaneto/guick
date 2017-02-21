@@ -1,0 +1,112 @@
+{
+  "aplicacao":" Sistema de Votação Eletrônica ",
+
+  "home": "Tela inicial",
+
+  "menu.inicial": "Início",
+  "menu.principal": "Principal",
+  "menu.administracao": "Administração",
+  "menu.tipos": "Tipos",
+  "menu.sair": "Sair",
+  "menu.arquivoRelatorio": "Arquivo Relatorio",
+  "menu.candidato": "Candidato",
+  "menu.candidatoPadrao": "Candidato Padrao",
+  "menu.cedula": "Cedula",
+  "menu.eleicao": "Eleicao",
+  "menu.eleicaoParametro": "Eleicao Parametro",
+  "menu.eleitor": "Eleitor",
+  "menu.evento": "Evento",
+  "menu.integranteComissao": "Integrante Comissao",
+  "menu.parametro": "Parametro",
+  "menu.resultadoApuracao": "Resultado Apuracao",
+  "menu.situacaoEleicao": "Situacao Eleicao",
+  "menu.tipoEvento": "Tipo Evento",
+  "menu.tipoFiltroPessoa": "Tipo Filtro Pessoa",
+  "menu.tipoIntegranteComissao": "Tipo Integrante Comissao",
+  "menu.tipoParametro": "Tipo Parametro",
+  "menu.tipoRelatorio": "Tipo Relatorio",
+  "menu.urna": "Urna",
+  "menu.sobre": "Sobre",
+  "menu.restapi": "REST API",
+  "menu.sistema": "Sistema",
+
+  "add":"Adicionar",
+  "remove":"Remover",
+  "associate":"Associar",
+  "disassociate":"Desassociar",
+
+  "login.restricted_area": "Área Restrita",
+  "login.obrigatorio": "Obrigatório",
+  "login.login": "Login",
+  "login.senha": "Senha",
+  "login.authenticate": "Autenticar",
+
+  "sucesso" : "Sucesso",
+  "erro" : "Erro",
+  "atencao" : "Atenção",
+
+  "ate":"Até",
+  "de": "De",
+  "hoje": "Hoje",
+  "calendario.hint" : "Abre um calendàrio para facilitar o preenchimento de campos data",
+
+  "grid.titulo": "Resultado da Busca",
+
+  "atualizar" : "Atualizar",
+  "atualizar.hint" : "Atualiza os resultados da pesquisa",
+  "filtro" : "Filtro",
+  "filtro.hint" : "Exibe critérios avançados de pesquisa",
+  "buscar" : "Buscar",
+  "buscar.hint" : "Realiza a busca conforme filtros informados",
+  "filtro_busca" : "Filtro de Busca",
+  "busca_avancada" : "Busca Avançada",
+  "create" : "Cadastrar novo" ,
+  "edit" : "Alterar" ,
+  "save" : "Gravar",
+  "saveContinue" : "Gravar & Continuar",
+  "query" : "Consultar",
+  "limpar" : "Limpar",
+  "limpar.hint" : "Limpa os campos preenchidos",
+
+  "acoesGrid" : "Ações",
+
+  "ajuda.digite.texto.pesquisa" : "O texto digitado filtratá os resultados da busca. A busca é realizada em todas as colunas da tabela de resultados.",
+  "ajuda.helpPesquisa" : "Após digitar o texto da busca no campo Busca avisos, clique aqui para efetuar a pesquisa.",
+  "botao.buscar" : "Buscar",
+
+  "processoEletronico.naoConfirmada": "Não Confirmada",
+  "processoEletronico.confirmada": "Confirmada",
+
+  "ROLE_MEMBRO" : "Membro",
+  "ROLE_USER" : "Usuário",
+  "ROLE_TECNICO_PROCESSUAL" : "Tecnico Processual",
+
+  "cancelar" : "Cancelar",
+  "cancelar.hint" : "Cancela a operação retornando à tela inicial da funcionalidade",
+
+  "descricao": "Descrição",
+  "mensagens.de.erro" : "Mensagens de erro",
+  "mensagens.de.warn" : "Mensagens de advertência",
+  "mensagens.de.info" : "Informações",
+  "campos.obrigatorios" : "Os campos com ( * ) são considerados campos obrigatórios.",
+
+
+  "pagina.atual" : "Página atual",
+  "pagina.anterior" : "Página anterior",
+  "proxima.pagina" : "Próxima página",
+  "botao.consultar" : "CONSULTAR",
+
+  "voltar" : "Voltar",
+  "voltar.hint" : "Voltar à tela anterior",
+
+  "fechar" : "Fechar",
+
+  "confirmaOperacao" : "Confirma a operação?",
+
+  "proximo" : "Avançar",
+  "proximo.etapa" : "Confirmação do preenchimento dos dados da petição",
+
+  "menu.dashboard" : "Painel informativo",
+  "menu.dashboard.um" : "Painel informativo 1"
+
+}

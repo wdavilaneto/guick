@@ -1,0 +1,83 @@
+<!-- sessões -->
+<section class="content-header">
+    <h1>
+        Painel de Controle
+    </h1>
+     <ol class="breadcrumb">
+            <li><a href="#/"> {{"menu.inicial" | translate}} </a></li>
+            <li class="active"><a href="#/integranteComissao"> {{"filtro" | translate}} {{"menu.integranteComissao" | translate}} </a></li>
+        </ol>
+</section>
+<section class="content fadeInRight">
+    <div class="col-xs-12" ng-controller="dashboardController">
+        <div class="row">
+            <div class="col-md-3 ">
+                <div class="card card-river bounceIn" >
+                    <div class="card-content">
+                        <h4>
+                            {{allCount[0].values[0].label}}(s)
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[0].value}}                         </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/{{allCount[0].values[0].label}}" >
+                            <i class=" mdi mdi-magnify"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-amethyst bounceIn">
+                    <div class="card-content">
+                        <h4>
+                            {{allCount[0].values[1].label}}(s)
+                        </h4>
+                        <h4 class="fs3">
+                            {{allCount[0].values[1].value}}                         </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/{{allCount[0].values[1].label}}"><i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-asphalt bounceIn">
+                    <div class="card-content">
+                        <h4 >
+                            {{allCount[0].values[2].label}}(s)
+                        </h4>
+                        <h4 class="fs3">
+                             {{allCount[0].values[2].value}}                         </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/{{allCount[0].values[2].label}}" >  <i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-emerald bounceIn">
+                    <div class="card-content">
+                        <h4>
+                            {{allCount[0].values[3].label}}(s)
+                        </h4>
+                        <h4 class="fs3">
+                             {{allCount[0].values[3].value}}                         </h4>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#/{{allCount[0].values[3].label}}"><i class="mdi mdi-magnify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <nvd3 options="options" data="allCount" class="with-3d-shadow with-transitions"></nvd3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

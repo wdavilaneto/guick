@@ -1,0 +1,32 @@
+
+<div class="box-header"><h3 class="box-title"></h3></div>
+    <div class="box-body">
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="box-footer hidden-sm hidden-xs">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> {{"add" | translate}}</button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"associate" | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer hidden-md hidden-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> </button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-body">
+        <div class="box-header">
+            <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
+        </div>
+        <div ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\Cedula/.*/"></div>
+    </div>
+</div>

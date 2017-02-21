@@ -1,0 +1,124 @@
+
+<div class="box-header"><h3 class="box-title"></h3></div>
+    <div class="box-body">
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="box-footer hidden-sm hidden-xs">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> {{"add" | translate}}</button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"associate" | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer hidden-md hidden-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> </button>
+                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-body">
+                                <div class="col-md-4" ng-if="vm.entity.nome">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome</label>
+                                        <div ng-if="vm.entity.nome"> {{entity.nome}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.descricao">
+                                    <div class="form-group">
+                                        <label class="control-label">Descrição</label>
+                                        <div ng-if="vm.entity.descricao"> {{entity.descricao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.descricaoOrientacao">
+                                    <div class="form-group">
+                                        <label class="control-label">Descrição Orientacao</label>
+                                        <div ng-if="vm.entity.descricaoOrientacao"> {{entity.descricaoOrientacao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.criterioDesempate">
+                                    <div class="form-group">
+                                        <label class="control-label">Criterio Desempate</label>
+                                        <div ng-if="vm.entity.criterioDesempate"> {{entity.criterioDesempate}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.textoEmailConvite">
+                                    <div class="form-group">
+                                        <label class="control-label">Email Convite</label>
+                                        <div ng-if="vm.entity.textoEmailConvite"> {{entity.textoEmailConvite}}</div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3" ng-if="vm.entity.dataInicio">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Início</label>
+                                        <div ng-if="vm.entity.dataInicio"> {{entity.dataInicio}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataFim">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Fim</label>
+                                        <div ng-if="vm.entity.dataFim"> {{entity.dataFim}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.qtdeMaxVotos">
+                                    <div class="form-group">
+                                        <label class="control-label">Qtde Max Votos</label>
+                                        <div ng-if="vm.entity.qtdeMaxVotos"> {{entity.qtdeMaxVotos}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataInicioApuracao">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Início Apuracao</label>
+                                        <div ng-if="vm.entity.dataInicioApuracao"> {{entity.dataInicioApuracao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataFimApuracao">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Fim Apuracao</label>
+                                        <div ng-if="vm.entity.dataFimApuracao"> {{entity.dataFimApuracao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" ng-if="vm.entity.natureza">
+                                    <div class="form-group">
+                                        <label class="control-label">Natureza</label>
+                                        <div ng-if="vm.entity.natureza"> {{entity.natureza}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataInicioPrev">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Início Prev</label>
+                                        <div ng-if="vm.entity.dataInicioPrev"> {{entity.dataInicioPrev}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.dataFimPrev">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Fim Prev</label>
+                                        <div ng-if="vm.entity.dataFimPrev"> {{entity.dataFimPrev}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.versao">
+                                    <div class="form-group">
+                                        <label class="control-label">Versao</label>
+                                        <div ng-if="vm.entity.versao"> {{entity.versao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" ng-if="vm.entity.statusApuracao">
+                                    <div class="form-group">
+                                        <label class="control-label">Status Apuracao</label>
+                                        <div ng-if="vm.entity.statusApuracao"> {{entity.statusApuracao}}</div>
+                                    </div>
+                                </div>
+
+
+    </div>
+</div>

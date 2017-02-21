@@ -1,0 +1,23 @@
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="msgCriptografada">Msg Criptografada <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <textarea class="form-control" rows="3" ng-maxlength="4000" ng-model="vm.entity.msgCriptografada" required placeholder="Msg Criptografada"  id="msgCriptografada" ></textarea>
+    <span class="help-block" ng-show="msgCriptografada.$error.required">Obrigatório</span>
+</div>
+    <div class="col-md-3 form-group" show-errors>
+        <label>Urna  <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>            </label>
+            <div urna-select></div>
+
+        </div>
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="calculada">Calculada <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="1" ng-model="vm.entity.calculada" required placeholder="Calculada"  id="calculada" />
+    <span class="help-block" ng-show="calculada.$error.required">Obrigatório</span>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="versao">Versao <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" required placeholder="Versao"  id="versao" />
+    <span class="help-block" ng-show="versao.$error.required">Obrigatório</span>
+</div>
+

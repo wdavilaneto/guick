@@ -1,0 +1,122 @@
+    <div class="col-md-3 form-group ">
+        <label class="control-label" for="nome">Nome</label>
+        <input class="form-control" type="text" ng-model="vm.entity.nome" ng-required="true"placeholder="Nome" id="nome" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="descricao">Descrição</label>
+        <input class="form-control" type="text" ng-model="vm.entity.descricao" placeholder="Descrição" id="descricao" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="descricaoOrientacao">Descrição Orientacao</label>
+        <input class="form-control" type="text" ng-model="vm.entity.descricaoOrientacao" placeholder="Descrição Orientacao" id="descricaoOrientacao" />
+    </div>
+    <div class="col-md-3 form-group">
+        <label class="control-label" for="criterioDesempate">Criterio Desempate</label>
+        <input class="form-control" type="text" ng-model="vm.entity.criterioDesempate" placeholder="Criterio Desempate" id="criterioDesempate" />
+    </div>
+    <div class="col-md-3 form-group ">
+        <label class="control-label" for="textoEmailConvite">Email Convite</label>
+        <input class="form-control" type="text" ng-model="vm.entity.textoEmailConvite" ng-required="true"placeholder="Email Convite" id="textoEmailConvite" />
+    </div>
+
+
+
+    <div class="col-md-3 form-group ">
+        <label class="control-label">Situacao Eleicao
+        </label>
+        <div situacaoEleicao-select></div>
+    </div>
+
+
+
+
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataInicio">Data Início </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicio" current-text="Hoje" clear-text="Limpar" required id="dataInicio" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="help-block" ng-show="dataInicio.$error.required">Obrigatório</span>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataFim">Data Fim </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFim" current-text="Hoje" clear-text="Limpar" required id="dataFim" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="help-block" ng-show="dataFim.$error.required">Obrigatório</span>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="qtdeMaxVotos">Qtde Max Votos </label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.qtdeMaxVotos" required placeholder="Qtde Max Votos"  id="qtdeMaxVotos" />
+    <span class="help-block" ng-show="qtdeMaxVotos.$error.required">Obrigatório</span>
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataInicioApuracao">Data Início Apuracao </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicioApuracao" current-text="Hoje" clear-text="Limpar"  id="dataInicioApuracao" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataFimApuracao">Data Fim Apuracao </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFimApuracao" current-text="Hoje" clear-text="Limpar"  id="dataFimApuracao" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataInicioPrev">Data Início Prev </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicioPrev" current-text="Hoje" clear-text="Limpar" required id="dataInicioPrev" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="help-block" ng-show="dataInicioPrev.$error.required">Obrigatório</span>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <label class="control-label" for="dataFimPrev">Data Fim Prev </label>
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFimPrev" current-text="Hoje" clear-text="Limpar" required id="dataFimPrev" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="help-block" ng-show="dataFimPrev.$error.required">Obrigatório</span>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="versao">Versao </label>
+    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" required placeholder="Versao"  id="versao" />
+    <span class="help-block" ng-show="versao.$error.required">Obrigatório</span>
+</div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="natureza">Natureza </label>
+    <input class="form-control" type="text" ng-maxlength="1" ng-model="vm.entity.natureza" required placeholder="Natureza"  id="natureza" />
+    <span class="help-block" ng-show="natureza.$error.required">Obrigatório</span>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <label class="control-label" for="statusApuracao">Status Apuracao </label>
+    <input class="form-control" type="text" ng-maxlength="1" ng-model="vm.entity.statusApuracao" required placeholder="Status Apuracao"  id="statusApuracao" />
+    <span class="help-block" ng-show="statusApuracao.$error.required">Obrigatório</span>
+</div>
+
+
