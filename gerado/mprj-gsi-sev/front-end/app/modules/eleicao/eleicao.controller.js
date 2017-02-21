@@ -67,6 +67,7 @@ angular.module('sevApp')
                     eleicaoService.searchText( {'content': vm.searchField.text ,'pagination':page} , function (data) {
                     $scope.resultPage = data;
                     $scope.resultPage.content = jsog.decode(data.content);
+                    $scope.gridOptions.totalItems = $scope.resultPage.totalElements;
                 });
             } else {
                 // prepare search(d) text object
@@ -137,6 +138,7 @@ angular.module('sevApp')
             eleicaoService.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
+                $scope.gridOptions.totalItems = $scope.resultPage.totalElements;
             });
         }
 
