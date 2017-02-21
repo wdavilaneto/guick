@@ -231,3 +231,24 @@ ul.list-process li a.bt-river{color:#fff;margin-top:0;}
 	.b-selector a:hover          {color:#fff;}
 
 
+/*CONTEUDO INTIMACAO*/
+.bt-card-list i.mdi.mdi-view-list,
+.bt-card-list i.mdi.mdi-view-grid.stash
+    {
+        display:block;
+    }
+.bt-card-list i.mdi.mdi-view-list.stash,
+.bt-card-list i.mdi.mdi-view-grid.
+    {
+        display::none;
+    }
+    .bt-card-list
+        {
+            position: fixed;
+            top: 7px;
+            right: 60px;
+        }
+h1 a.bt
+	{
+		font-size:0.65em;
+	}
