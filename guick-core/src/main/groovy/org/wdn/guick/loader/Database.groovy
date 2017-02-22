@@ -45,7 +45,7 @@ class Database {
     @Resource Table2EntityConverter entityConverter
 
     @Resource
-    private BusinessRulesManager businessRulesManager;
+    private BusinessRulesManager businessRulesManager
 
     @Autowired
     @Lazy
@@ -54,28 +54,28 @@ class Database {
     @Autowired
     private ResourceLoader resourceLoader
 
-    public List<Table> loadTables(def owners = null) {
+    List<Table> loadTables(def owners = null) {
         List<Table> tables = tableRetriever.execute(createSession(), owners == null ? user : owners)
         project.tables.clear()
         project.tables.addAll(tables)
         return tables
     }
 
-    public List<Entity> generateModel() {
+    List<Entity> generateModel() {
         // Fixem merge? ?
-        project.entities = entityConverter.generateModel(loadTables());
-        businessRulesManager.handleRules(project);
+        project.entities = entityConverter.generateModel(loadTables())
+        businessRulesManager.handleRules(project)
         return project.entities
     }
 
     private DataSource getDatasource() {
 
         if (driverName != url && url != user && url != null) {
-            return new BoneCPDataSource(driverClass: driverName, jdbcUrl: url, username: user, password: password);
+            return new BoneCPDataSource(driverClass: driverName, jdbcUrl: url, username: user, password: password)
         }
         if (project.database != null && project.database.url != null) {
             user = project.database.user
-            return new BoneCPDataSource(driverClass: project.database.driverName, jdbcUrl: project.database.url, username: project.database.user, password: project.database.password);
+            return new BoneCPDataSource(driverClass: project.database.driverName, jdbcUrl: project.database.url, username: project.database.user, password: project.database.password)
         }
         user = env.getProperty('database.url')
         return new BoneCPDataSource(
@@ -86,7 +86,7 @@ class Database {
         )
     }
 
-    public SqlSession createSession() {
+    SqlSession createSession() {
         def dataSource = getDatasource()
         org.apache.ibatis.mapping.Environment environment = new org.apache.ibatis.mapping.Environment(DEFAULT_ENVIRONMENT, new JdbcTransactionFactory(), dataSource)
         Configuration configuration = new Configuration(environment)

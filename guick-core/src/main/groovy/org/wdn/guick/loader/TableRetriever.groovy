@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 import javax.annotation.Resource
 import java.sql.SQLException
-import org.wdn.guick.model.*;
+import org.wdn.guick.model.*
 
 
 /**
@@ -19,7 +19,7 @@ import org.wdn.guick.model.*;
 class TableRetriever {
 
     @Resource
-    private Project project;
+    private Project project
 
     private static final Logger logger = LoggerFactory.getLogger(TableRetriever.class)
 
@@ -42,26 +42,26 @@ class TableRetriever {
         try {
             logger.info("Retrieving information from schema: " + project.config.tables )
 
-            tableList = mapper.findTableAndColumns(project.config.tables);
-            Map<String, Table> tables = new HashMap<String, Table>();
+            tableList = mapper.findTableAndColumns(project.config.tables)
+            Map<String, Table> tables = new HashMap<String, Table>()
 
             for (Table table : tableList) {
                 // Retrieve a statistic count from the given table for better euristics...
                 try {
-                    //table.count = mapper.count(table.owner, table.name);
+                    //table.count = mapper.count(table.owner, table.name)
                 } catch (Exception e) {
                     // ignore
                 }
 
-                tables.put(table.getName(), table);
+                tables.put(table.getName(), table)
                 // ajust bidirectional Association
                 for (def column : table.columns) {
-                    column.table = table;
+                    column.table = table
                 }
-                table.project = project;
+                table.project = project
             }
-            List<ConstraintDto> contraints = mapper.findContraints(project.config.tables);
-            processTables(tables, contraints);
+            List<ConstraintDto> contraints = mapper.findContraints(project.config.tables)
+            processTables(tables, contraints)
 
             for (Table table : tableList) {
                 table.inheritanceTable = getInheritanceTable(table)
@@ -91,7 +91,7 @@ class TableRetriever {
         for (ConstraintDto dto : contraints) {
 
             // Obtem da lista de tabelas a tabel com o name alvo
-            tabelaPai = tabelas.get((String) dto.tableName);
+            tabelaPai = tabelas.get((String) dto.tableName)
 
             // para ignorar tabelas como internas como BIN$!@#$....
             if (tabelaPai != null) {
@@ -100,42 +100,42 @@ class TableRetriever {
                     case 'R':
                         // !contraint["TABLE_NAME"].equals(tabelaPai?.getName())
                         if (!dto.name?.toString()?.equalsIgnoreCase(lastContraintsName)) {
-                            lastContraintsName = dto.name;
+                            lastContraintsName = dto.name
 
                             // Instanciamos uma nova constraint ( obtem do hash via name)
-                            constraint = new Constraint();
+                            constraint = new Constraint()
 
                             // FIXME p*rr@ !! referencia uma tabela sem PRIMARY KEY!!!!
                             if (tabelaPai != null) {
-                                tabelaPai.getConstraints().add(constraint);
+                                tabelaPai.getConstraints().add(constraint)
                             } else {
-                                //println "nlas";
+                                //println "nlas"
                             }
 
-                            tabelaReferenciada = tabelas.get((String) dto.rTableName);
+                            tabelaReferenciada = tabelas.get((String) dto.rTableName)
 
                             // atribui o name da contratint
-                            constraint.setName(dto.name.toString());
+                            constraint.setName(dto.name.toString())
                             //tipo da contraint ( tipo relacionamento ou code contraint )
-                            constraint.setTipo(ConstraintType.fromValue(dto.type.toString()));
+                            constraint.setTipo(ConstraintType.fromValue(dto.type.toString()))
 
                             // seta a table (pai) da contraint em questao)
-                            constraint.setTable(tabelaPai);
+                            constraint.setTable(tabelaPai)
                             // seta a table referenciada tambem da lista de tabelas ( obtem do hash via name)
-                            constraint.setReferedTable(tabelaReferenciada);
+                            constraint.setReferedTable(tabelaReferenciada)
 
                         }
 
                         // obtem da lista de columnPairs da table pai a coluna de name xxxx
-                        column = getColumnByName(constraint.getTable(), (String) dto.columnName);
-                        colunaReferenciada = getColumnByName(constraint.getReferedTable(), (String) dto.rColumnName);
+                        column = getColumnByName(constraint.getTable(), (String) dto.columnName)
+                        colunaReferenciada = getColumnByName(constraint.getReferedTable(), (String) dto.rColumnName)
                         if (column == null) {
-                            logger.warn('Column ' + dto.columnName+ ' not found on table: ' + constraint.getTable() );
-                            logger.warn('Constraint Name: ' + constraint.name);
-                            logger.warn('R Column: ' + colunaReferenciada);
+                            logger.warn('Column ' + dto.columnName+ ' not found on table: ' + constraint.getTable() )
+                            logger.warn('Constraint Name: ' + constraint.name)
+                            logger.warn('R Column: ' + colunaReferenciada)
                         }
                         // Adiciona um par de coluna na contraint
-                        constraint.getColumnPairs().add(new ColumnPair(column, colunaReferenciada));
+                        constraint.getColumnPairs().add(new ColumnPair(column, colunaReferenciada))
                         break
 
                     case 'U':

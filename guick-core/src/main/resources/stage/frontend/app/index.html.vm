@@ -13,21 +13,22 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.min.css" />
-    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
-    <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="bower_components/angular-timeline/dist/angular-timeline.css" />
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
     <link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css" />
-    <link rel="stylesheet" href="bower_components/ng-joyride/ng-joyride.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
     <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
     <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
+    <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+    <link rel="stylesheet" href="bower_components/ng-joyride/ng-joyride.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -103,6 +104,7 @@
 <script src="bower_components/jsog/lib/JSOG.js"></script>
 <script src="bower_components/flot/jquery.flot.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
 <script src="bower_components/angularjs-toaster/toaster.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-redactor/angular-redactor.js"></script>
@@ -130,13 +132,13 @@
 <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
 <script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
 <script src="bower_components/angular-pdf-viewer/dist/angular-pdf-viewer.min.js"></script>
-<script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
 <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
 <script src="bower_components/angular-timeline/dist/angular-timeline.js"></script>
 <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script src="bower_components/angular-dialog-service/dist/dialogs.min.js"></script>
 <script src="bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js"></script>
-<script src="bower_components/ng-joyride/ng-joyride.js"></script>
+<script src="bower_components/slick-carousel/slick/slick.js"></script>
+<script src="bower_components/angular-slick-carousel/dist/angular-slick.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
 <script src="bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js"></script>
 <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
@@ -155,7 +157,11 @@
 <script src="bower_components/textAngular/dist/textAngular.js"></script>
 <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
 <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
-##  <script src="bower_components/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
+<script src="bower_components/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
+<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
+<script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+<script src="bower_components/ng-joyride/ng-joyride.js"></script>
 <!-- endbower -->
 <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 <!-- endbuild -->

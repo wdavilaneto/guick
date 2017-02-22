@@ -26,9 +26,15 @@ class PropertyNamesBRP implements IBusinessRulesProcessor {
         for (def entity : project.entities) {
             if (entity.parent != null) {
                 for (Clazz property : entity.parent.properties) {
-                    propertyToChangeName = getPropertyByName( entity.properties , property.name)
+                    propertyToChangeName = getPropertyByName(entity.properties, property.name)
                     if (propertyToChangeName != null) {
-                        propertyToChangeName.name = PatternConverterFacade.getBeanPatternWithPrefix(propertyToChangeName.column.name)
+                        String nameWithPrefix = PatternConverterFacade.getBeanPatternWithPrefix(propertyToChangeName.column.name)
+                        if (nameWithPrefix.equals(propertyToChangeName.name)) {
+                            // TODO or TOTHINK ...
+                            println " TODO: ********** name to chang ?"  +propertyToChangeName.name
+                        } else {
+                            propertyToChangeName.name = PatternConverterFacade.getBeanPatternWithPrefix(propertyToChangeName.column.name)
+                        }
                     }
                 }
             }

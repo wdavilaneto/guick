@@ -14,7 +14,7 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-        private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
+    private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
 
     AnnotationConfigApplicationContext context
     DslArchitecture guick
@@ -29,11 +29,11 @@ class Main {
         project = context.getBean("project")
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("gerado/mprj-gsi-sev")
+            main.project.initialize("../sev")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
 //            main.project.persist()
@@ -42,11 +42,11 @@ class Main {
         }
     }
 
-    public void run() {
+    void run() {
         guick.runEngine(target)
     }
 
-    public Main setTarget(String lvalue) {
+    Main setTarget(String lvalue) {
         target = lvalue
         return this
     }

@@ -18,27 +18,27 @@ class ValidationsBRP implements IBusinessRulesProcessor {
 
         for (Entity entity : project.entities) {
 
-            processProperties(entity.properties);
+            processProperties(entity.properties)
 
             processComplexProperties(entity.complexProperties)
 
         }
-        return project;
+        return project
     }
 
     private void processProperties(List<RelationshipProperty> properties) {
-        Validation validation;
+        Validation validation
         for (def simpleProperty : properties) {
             if (!simpleProperty.column.nullable) {
 
                 validation = new Validation()
                 validation.setName("NotNull")
-                simpleProperty.validations.add(validation);
+                simpleProperty.validations.add(validation)
 
 //                if (simpleProperty.getType().equals("String")) {
 //                    validation = new Validation()
 //                    validation.setName("NotBlank")
-//                    simpleProperty.validations.add(validation);
+//                    simpleProperty.validations.add(validation)
 //                }
             }
 
@@ -46,24 +46,24 @@ class ValidationsBRP implements IBusinessRulesProcessor {
                 validation = new Validation()
                 validation.setName("Size")
                 validation.parameters.put("max", simpleProperty.column.length)
-                simpleProperty.validations.add(validation);
+                simpleProperty.validations.add(validation)
             }
 
 //            if ("cpf".equalsIgnoreCase(simpleProperty.name) || "numerocpf".equalsIgnoreCase(simpleProperty.name)) {
 //                validation = new Validation()
 //                validation.setName("CPF")
-//                simpleProperty.validations.add(validation);
+//                simpleProperty.validations.add(validation)
 //            }
         }
     }
 
     private void processComplexProperties(List<ComplexProperty> complexProperties) {
-        Validation validation;
+        Validation validation
         for (def complexProperty : complexProperties) {
             if (isNotNullConstraintColumn(complexProperty.getConstraint())) {
                 validation = new Validation()
                 validation.setName("NotNull")
-                complexProperty.validations.add(validation);
+                complexProperty.validations.add(validation)
             }
         }
     }

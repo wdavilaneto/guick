@@ -14,8 +14,8 @@ class BusinessRulesManager {
     @Resource
     List<IBusinessRulesProcessor> processorList
 
-    public Project handleRules(Project project) {
-        for (IBusinessRulesProcessor iProcessor : processorList) {
+    Project handleRules(Project project) {
+        for (def iProcessor : processorList) {
             iProcessor.doProcess(project)
         }
         return project

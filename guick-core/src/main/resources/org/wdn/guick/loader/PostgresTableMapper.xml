@@ -56,12 +56,11 @@
             AND tc.constraint_type = 'PRIMARY KEY'
         where
             tab.table_type = 'BASE TABLE'
-            and tab.table_schema = 'public'
             and ( lower(tab.table_name) not like lower('Jbpm%'))
             and ( lower(tab.table_name) not like lower('act\_%') escape '\')
             and
         <foreach item="table" collection="tables" open="(" separator=" OR " close=")">
-            (   cols.table_catalog = lower(#{table.owner})
+            (   cols.table_schema = lower(#{table.owner})
                 <if test="table.tableName != null and table.tableName != ''"> AND cols.table_name = UPPER(#{table.tableName}) </if>
             )
         </foreach>

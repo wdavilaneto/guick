@@ -8,6 +8,7 @@
 
 ####### TODO Teste TEMPORARIO REMOVER!!!
 #if(  ${entity.childrens.size()} > 0 && ${entity.childrens[0].name} == 'FuncImg' )
+<!--
         <div class="col-md-3 form-group">
             <div class="form-group">
                 <label for="foto">Foto</label>
@@ -17,6 +18,7 @@
                 </div>
             </div>
         </div>
+-->
 #end
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
 #set( $property = ${entity.id} )
