@@ -39,7 +39,7 @@
             <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.${idAgragation}${property}" current-text="Hoje" clear-text="Limpar" #if(!${property.column.nullable})required#{end} id="${idAgragation}${property}" />
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default btn-sm" ng-click="open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open(${js}event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
 #if(!${property.column.nullable})
             <span class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>

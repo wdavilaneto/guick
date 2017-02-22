@@ -23,11 +23,11 @@
             select
                 Candidato.SCAD_DK ,
                 Candidato.SCAD_NM_CANDIDATO as label,
-                NVL( sum(ocandidato.REAP_QT_VOTOS), 0) as value
+                NVL( sum(o.REAP_QT_VOTOS), 0) as value
             from SEVO_CANDIDATO Candidato
             inner join SEVO_RESULTADO_APURACAO o on o.REAP_DK = Candidato.SCAD_DK
             group by Candidato.SCAD_DK, Candidato.SCAD_NM_CANDIDATO
-            order by sum(ocandidato.REAP_QT_VOTOS) desc
+            order by sum(o.REAP_QT_VOTOS) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
     <select id="getCandidatoCollectionWithSumEleicaoCriterioDesempate" resultMap="histogramDto">
@@ -35,11 +35,11 @@
             select
                 Eleicao.SELE_DK ,
                 Eleicao.SELE_NM_ELEICAO as label,
-                NVL( sum(oeleicao.SCAD_CRITERIO_DESEMPATE), 0) as value
+                NVL( sum(o.SCAD_CRITERIO_DESEMPATE), 0) as value
             from SEVO_ELEICAO Eleicao
             inner join SEVO_CANDIDATO o on o.SCAD_DK = Eleicao.SELE_DK
             group by Eleicao.SELE_DK, Eleicao.SELE_NM_ELEICAO
-            order by sum(oeleicao.SCAD_CRITERIO_DESEMPATE) desc
+            order by sum(o.SCAD_CRITERIO_DESEMPATE) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
     <select id="getEleitorCollectionWithSumEleicaoVersao" resultMap="histogramDto">
@@ -47,11 +47,11 @@
             select
                 Eleicao.SELE_DK ,
                 Eleicao.SELE_NM_ELEICAO as label,
-                NVL( sum(oeleicao.SEIT_VERSAO), 0) as value
+                NVL( sum(o.SEIT_VERSAO), 0) as value
             from SEVO_ELEICAO Eleicao
             inner join SEVO_ELEITOR o on o.SEIT_DK = Eleicao.SELE_DK
             group by Eleicao.SELE_DK, Eleicao.SELE_NM_ELEICAO
-            order by sum(oeleicao.SEIT_VERSAO) desc
+            order by sum(o.SEIT_VERSAO) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
     <select id="getUrnaCollectionWithSumEleicaoVersao" resultMap="histogramDto">
@@ -59,11 +59,11 @@
             select
                 Eleicao.SELE_DK ,
                 Eleicao.SELE_NM_ELEICAO as label,
-                NVL( sum(oeleicao.URNA_VERSAO), 0) as value
+                NVL( sum(o.URNA_VERSAO), 0) as value
             from SEVO_ELEICAO Eleicao
             inner join SEVO_URNA o on o.URNA_DK = Eleicao.SELE_DK
             group by Eleicao.SELE_DK, Eleicao.SELE_NM_ELEICAO
-            order by sum(oeleicao.URNA_VERSAO) desc
+            order by sum(o.URNA_VERSAO) desc
         ) where rownum <![CDATA[ < ]]> 11
     </select>
 
