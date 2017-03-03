@@ -42,9 +42,9 @@
         overflow-x:hidden;
     }
     .menu .panel-default > .panel-heading + .panel-collapse > .panel-body:hover
-        {
-            overflow-y:auto;
-        }
+    {
+        overflow-y:auto;
+    }
 .menu .panel-default > .panel-heading + .panel-collapse > .panel-body a
     {
         padding: 9px 0px 9px 7px;

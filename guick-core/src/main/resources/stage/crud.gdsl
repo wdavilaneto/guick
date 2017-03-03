@@ -130,6 +130,7 @@ guick {
                         [input: "stage/frontend/crud/modules/entity/components/entity.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.fieldset.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.table.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.table.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.filter.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.filter.html"],
+                        [input: "stage/frontend/crud/modules/entity/components/entity.card.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.card.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.readonly.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.readonly.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.modal.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.modal.html"],
                         [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.delete.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.delete.html"],

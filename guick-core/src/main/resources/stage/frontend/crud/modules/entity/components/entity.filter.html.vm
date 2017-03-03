@@ -5,6 +5,9 @@
 #set( $isFilter = true )
 #set( $idAgragation = '' )
 #set( $rowSize = 0)
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
 #if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
 #set( $property = ${entity.id} )
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
@@ -12,20 +15,32 @@
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= ${bigFieldSize})
-    <div class="col-md-3 form-group#if(!${property.column.nullable}) #{end}">
-        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-        <input class="form-control" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
-    </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" required #{end} id="${idAgragation}${property}" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="${idAgragation}${property}">
+                        ${property.title}
+                    </label>
+                </div>
+            </div>
 #end
 #end
 
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} >= ${bigFieldSize})
 ##parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
-    <div class="col-md-3 form-group#if(!${property.column.nullable})*#{end}">
-        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-        <input class="form-control" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
-    </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true" required #{end}id="${idAgragation}${property}"/>
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="${idAgragation}${property}">
+                        ${property.title}
+                    </label>
+                </div>
+            </div>
 #end
 #end
 
@@ -33,10 +48,16 @@
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} >= ${bigFieldSize})
 ##parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
-    <div class="col-md-3 form-group#if(!${property.column.nullable})*#{end}">
-        <label class="control-label" for="${idAgragation}${property}">${property.title}</label>
-        <input class="form-control" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end}#if(${property.name} != 'numeroProcesso')placeholder="${property.title}"#end id="${idAgragation}${property}" #if(${property.name} == 'numeroProcesso')ui-mask="9999 99999999" #{end}/>
-    </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})ng-required="true"#{end} id="${idAgragation}${property}"/>
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="${idAgragation}${property}">
+                        ${property.title}
+                    </label>
+                </div>
+            </div>
 #end
 #end
 #set( $idAgragation = '' )
@@ -45,7 +66,7 @@
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label class="control-label">${complexProperty.title}
+        <label>${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-show="vm.searchSelects.${complexProperty.referedEntity.beanName}.id != null" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -80,7 +101,7 @@
     </div>
 #else
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label class="control-label">${complexProperty.title}
+        <label>${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -98,7 +119,7 @@
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label class="control-label">${complexProperty.title}
+        <label>${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -154,7 +175,7 @@
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
 #if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label class="control-label">${complexProperty.title}
+        <label>${complexProperty.title}
 ##if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
 ##                                            <a class="btn-detail" ng-click="$event.stopPropagation(); view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 ##end
@@ -189,7 +210,7 @@
     </div>
 #else
     <div class="col-md-3 form-group#if(!${complexProperty.constraint.singleColumnPair.coluna.nullable}) #{end}">
-        <label class="control-label">${complexProperty.title}
+        <label>${complexProperty.title}
 #if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
             <a class="btn-detail" ng-click="view('lg','${complexProperty.referedEntity.name}');"><i class="fa fa-fw fa-search-plus"></i></a>
 #end
@@ -231,7 +252,7 @@
 #if( ${property.column.length} <= 5)
 #if(${activeProperty} eq ${property})
     <div class="form-group col-md-2">
-        <label class="control-label" for="${property}">${property.title}</label>
+        <label for="${property}">${property.title}</label>
         <div class="mpswitch mt-14">
             <input ng-model="vm.entity.${property}" type="checkbox" name="mpswitch{{${js}index}}" class="mpswitch-checkbox" id="${property}">
             <label class="mpswitch-label" for="${property}"></label>
@@ -255,3 +276,6 @@
 #parse( "stage/frontend/crud/modules/entity/components/property.html.vm" )
 #end
 #end
+</div>
+</div>
+</div>

@@ -3,14 +3,25 @@
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
 <section class="content-header">
-    <h1 class="color-asphalt"><i class="mdi mdi-file-find"></i> ${entity.title}</h1>
+    <h1>
+        <i class="mdi mdi-view-grid"></i>
+        ${entity.title}
+        <!-- <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+             <i class="mdi mdi-view-list"></i>
+             <i class="mdi mdi-view-grid"></i>
+         </a>-->
+        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+            <i class="mdi mdi-view-list"></i>
+            <!--<i class="mdi mdi-view-grid"></i>-->
+        </a>
+    </h1>
     <ol class="breadcrumb">
         <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
         <li class="active"><a href="#/${entity.beanName}"> {{"filtro" | translate}} {{"menu.${entity.beanName}" | translate}} </a></li>
     </ol>
 </section>
 
-<section class="content fadeInRight">
+<section ng-scrollbars ng-scrollbars-config="config" class="content fadeInLeft">
     <div class="box box-primary">
         <form name="${entityBeanName}Form" novalidate ng-submit="vm.newSearch()">
             <div tabset>
@@ -20,28 +31,28 @@
                         <div class="tab-content">
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="searchField.text"> Busca por texto
-                                        </label>
-##                                        <div class="input-group">
-                                            <input class="form-control" type="text" ng-model="vm.searchField.text" placeholder="busca por texto.." id="searchField.text"/>
-##                                            <div class="input-group-btn">
-##                                                <button class="btn btn-default" ng-click="newSearch()"><i class="fa fa-search"></i></button>
-##                                                <span class="help-block"><small>Busca indexada pelos principais campos.</small></span>
-##                                            </div>
-##                                        </div>
-                                    </div>
-#if(${vm.entity.getActiveProperty()})
-                                    <div class="form-group col-md-2">
-                                        <label class="control-label" for="${vm.entity.getActiveProperty()}">${vm.entity.getActiveProperty().title}</label>
-                                        <div class="mpswitch mt-14">
-                                            <input  ng-model="vm.entity.boolActive" type="checkbox" name="mpswitch{{${js}index}}" class="mpswitch-checkbox" id="${vm.entity.getActiveProperty()}">
-                                            <label class="mpswitch-label" for="${vm.entity.getActiveProperty()}"></label>
+                                    <div class="row-form">
+                                        <div class="col-md-6 form-group">
+                                            <div class="inputMaterialGroup">
+                                                <input id="searchField.text" type="text" class="inputMaterial" required ng-model="vm.searchField.text"/>
+                                                <span class="bar"></span>
+                                                <span class="highlight"></span>
+                                                <label for="searchField.text">
+                                                    Busca por texto
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+#if(${vm.entity.getActiveProperty()})
+                                        <div class="col-md-6 form-group">
+                                            <label class="control-label" for="${vm.entity.getActiveProperty()}">${vm.entity.getActiveProperty().title}</label>
+                                            <div class="mpswitch mt-14">
+                                                <input  ng-model="vm.entity.boolActive" type="checkbox" name="mpswitch{{${js}index}}" class="mpswitch-checkbox" id="${vm.entity.getActiveProperty()}">
+                                                <label class="mpswitch-label" for="${vm.entity.getActiveProperty()}"></label>
+                                            </div>
+                                        </div>
 #{end}
+                                    </div>
                                 </div>
-
 #if(${vm.entity.getAllDeadlineProperties().size()} >= 1 )
 #set($activeProperty = ${vm.entity.getAllDeadlineProperties()[0]})
 #if(${activeProperty})
@@ -142,5 +153,8 @@
             <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\\${entity.name}/.*/"></div>
         </div>
     </div>
+    <!-- Para desenvolvimento dos cards
+    <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.card.html'"></div>
+    -->
     <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.modal.html'"></div>
 </section>

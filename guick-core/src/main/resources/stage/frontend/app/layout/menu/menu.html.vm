@@ -1,5 +1,4 @@
 <div class="menu" accordion>
-
         <accordion>
             <accordion-group>
                 <accordion-heading>
@@ -21,8 +20,8 @@
                     </h4>
                 </div>
             </div>
-    ## FIXME remove all || true for auth
-        #if( ${project.config.useWorkflow} == true )
+## FIXME remove all || true for auth
+#if( ${project.config.useWorkflow} == true )
             <div class="panel panel-default ng-scope">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -30,60 +29,58 @@
                     </h4>
                 </div>
             </div>
-        #end
-        #if (${project.getAllMainEntities().size()} > 0)
+#end
+#if (${project.getAllMainEntities().size()} > 0)
             <div accordion-group ng-if="isAuthenticated || true" scope>
                 <div accordion-heading>
-                <span>
-                    {{"menu.principal" | translate}}
-                </span>
+                    <span>
+                        {{"menu.principal" | translate}}
+                    </span>
                     <i class="pull-right glyphicon glyphicon-chevron-right"></i>
                 </div>
-                #foreach( ${entity} in ${project.getAllMainEntities()})
-                    #if (!${entity.isEmbeddable()})
-                        <a href="#/${entity.beanName}" title="${entity.title}">
-                            <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
-                        </a>
-                    #end
-                #end
+#foreach( ${entity} in ${project.getAllMainEntities()})
+#if (!${entity.isEmbeddable()})
+                <a href="#/${entity.beanName}" title="${entity.title}">
+                    <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
+                </a>
+#end
+#end
             </div>
-        #end
-
-        #if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
-            #if (${project.getAllDomainEntities().size()} > 0)
+#end
+#if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
+#if (${project.getAllDomainEntities().size()} > 0)
                 <div accordion-group ng-if="isAuthenticated || true">
                     <div accordion-heading>
-                <span>
-                    {{"menu.administracao" | translate}}
-                </span>
+                        <span>
+                            {{"menu.administracao" | translate}}
+                        </span>
                         <i class="pull-right glyphicon glyphicon-chevron-right"></i>
                     </div>
-                    #foreach( ${entity} in ${project.getAllDomainEntities()})
-                        #if (!${entity.isEmbeddable()})
-                            <a href="#/${entity.beanName}" title="${entity.title}">
-                                <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
-                            </a>
-                        #end
-                    #end
+#foreach( ${entity} in ${project.getAllDomainEntities()})
+#if (!${entity.isEmbeddable()})
+                    <a href="#/${entity.beanName}" title="${entity.title}">
+                        <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
+                    </a>
+#end
+#end
                 </div>
-            #end
-
-            #if (${project.getAllEnumLikeEntities().size()} > 0)
+#end
+#if (${project.getAllEnumLikeEntities().size()} > 0)
                 <div accordion-group ng-if="isAuthenticated || true">
                     <div accordion-heading>
-                <span>
-                    {{"menu.tipos" | translate}}
-                </span>
+                        <span>
+                            {{"menu.tipos" | translate}}
+                        </span>
                         <i class="pull-right glyphicon glyphicon-chevron-right"></i>
                     </div>
-                    #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
-                        <a href="#/${entity.beanName}" title="${entity.title}">
-                            <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
-                        </a>
-                    #end
+#foreach( ${entity} in ${project.getAllEnumLikeEntities()})
+                    <a href="#/${entity.beanName}" title="${entity.title}">
+                        <i class="mdi mdi-file-document"></i> {{"menu.${entity.beanName}" | translate}}
+                    </a>
+#end
                 </div>
-            #end
-        #end
+#end
+#end
         <div accordion-group>
             <div accordion-heading>
                 <span>{{"menu.sistema" | translate}}</span>

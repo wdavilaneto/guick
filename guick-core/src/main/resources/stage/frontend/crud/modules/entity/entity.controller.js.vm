@@ -146,7 +146,7 @@ angular.module('${projectBeanName}App')
 
         // Search de todos os elementos inicial ( quando entra na tela )
 #if( ${entity.table.count} < 10000)
-    if (!vm.editMode) {
+        if (!vm.editMode) {
             ${entityBeanName}Service.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
@@ -183,8 +183,19 @@ angular.module('${projectBeanName}App')
                 vm.search(pageable);
             });
         }
-            ${js}scope.gridOptions.onRegisterApi = onRegisterApi;
 
+        vm.cssClassByStatus = cssClassByStatus;
+
+        function cssClassByStatus(status) {
+            var cssClasses = {PENDENTE: 'bkg-amethyst', CONCLUIDO: 'bkg-river', CANCELADO: 'bkg-silver'};
+            try {
+                return cssClasses[status];
+            } catch (ex){
+                return 'bkg-amethyst';
+            }
+        }
+
+        ${js}scope.gridOptions.onRegisterApi = onRegisterApi;
     }
 
 })();
