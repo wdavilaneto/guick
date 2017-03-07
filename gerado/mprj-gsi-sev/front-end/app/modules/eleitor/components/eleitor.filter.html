@@ -1,32 +1,71 @@
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="codigoAutenticacao">Codigo Autenticacao</label>
-        <input class="form-control" type="text" ng-model="vm.entity.codigoAutenticacao" placeholder="Codigo Autenticacao" id="codigoAutenticacao" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="enderecoIp">Endereço Ip</label>
-        <input class="form-control" type="text" ng-model="vm.entity.enderecoIp" placeholder="Endereço Ip" id="enderecoIp" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="comprovanteVotacao">Comprovante Votação</label>
-        <input class="form-control" type="text" ng-model="vm.entity.comprovanteVotacao" placeholder="Comprovante Votação" id="comprovanteVotacao" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="nome">Nome</label>
-        <input class="form-control" type="text" ng-model="vm.entity.nome" ng-required="true"placeholder="Nome" id="nome" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="email">Email</label>
-        <input class="form-control" type="text" ng-model="vm.entity.email" ng-required="true"placeholder="Email" id="email" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="login">Login</label>
-        <input class="form-control" type="text" ng-model="vm.entity.login" ng-required="true"placeholder="Login" id="login" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.codigoAutenticacao"  id="codigoAutenticacao" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="codigoAutenticacao">
+                        Codigo Autenticacao
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.enderecoIp"  id="enderecoIp" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="enderecoIp">
+                        Endereço Ip
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.comprovanteVotacao"  id="comprovanteVotacao" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="comprovanteVotacao">
+                        Comprovante Votação
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.nome" ng-required="true" required  id="nome" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="nome">
+                        Nome
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.email" ng-required="true" required  id="email" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="email">
+                        Email
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.login" ng-required="true" required  id="login" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="login">
+                        Login
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -48,14 +87,18 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="cdmatricula">Códigomatricula </label>
-    <input class="form-control" type="text" ng-maxlength="8" ng-model="vm.entity.cdmatricula" required placeholder="Códigomatricula"  id="cdmatricula" />
-    <span class="help-block" ng-show="cdmatricula.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="cdmatricula" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="cdmatricula">
+            Códigomatricula        </label>
+    </div>
 </div>
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="dataVoto">Data Voto </label>
+        <label for="dataVoto">Data Voto </label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataVoto" current-text="Hoje" clear-text="Limpar"  id="dataVoto" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -63,12 +106,22 @@
         </div>
     </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="descricaoCargo">Descrição Cargo </label>
-    <input class="form-control" type="text" ng-maxlength="60" ng-model="vm.entity.descricaoCargo" placeholder="Descrição Cargo"  id="descricaoCargo" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricaoCargo" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricaoCargo">
+            Descrição Cargo        </label>
+    </div>
 </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="versao">Versao </label>
-    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" placeholder="Versao"  id="versao" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao        </label>
+    </div>
 </div>
 
 
@@ -76,3 +129,6 @@
 
 
 
+</div>
+</div>
+</div>

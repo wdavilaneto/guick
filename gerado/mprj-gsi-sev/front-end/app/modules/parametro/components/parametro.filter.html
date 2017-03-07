@@ -1,12 +1,21 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="descricao">Descrição</label>
-        <input class="form-control" type="text" ng-model="vm.entity.descricao" ng-required="true"placeholder="Descrição" id="descricao" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.descricao" ng-required="true" required  id="descricao" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="descricao">
+                        Descrição
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Tipo Parametro
+        <label>Tipo Parametro
         </label>
         <div tipoParametro-select></div>
     </div>
@@ -20,3 +29,6 @@
 
 
 
+</div>
+</div>
+</div>

@@ -1,17 +1,30 @@
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="ocorrencia">Ocorrencia <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
-    <input class="form-control" type="text" ng-maxlength="250" ng-model="vm.entity.ocorrencia" required placeholder="Ocorrencia"  id="ocorrencia" />
-    <span class="help-block" ng-show="ocorrencia.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="ocorrencia" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="ocorrencia">
+            Ocorrencia*        </label>
+    </div>
 </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="justificativa">Justificativa </label>
-    <input class="form-control" type="text" ng-maxlength="250" ng-model="vm.entity.justificativa" placeholder="Justificativa"  id="justificativa" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="justificativa" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="justificativa">
+            Justificativa        </label>
+    </div>
 </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="login">Login <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
-    <input class="form-control" type="text" ng-maxlength="200" ng-model="vm.entity.login" required placeholder="Login"  id="login" />
-    <span class="help-block" ng-show="login.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="login" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="login">
+            Login*        </label>
+    </div>
 </div>
     <div class="col-md-3 form-group" show-errors>
 
@@ -41,14 +54,13 @@
         </div>
 
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="dataRegistro">Data Registro <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        <label for="dataRegistro">Data Registro <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataRegistro" current-text="Hoje" clear-text="Limpar" required id="dataRegistro" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
-            <span class="help-block" ng-show="dataRegistro.$error.required">Obrigatório</span>
         </div>
     </div>
 

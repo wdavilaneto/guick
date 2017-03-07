@@ -1,12 +1,21 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="valorParametro">Valor Parametro</label>
-        <input class="form-control" type="text" ng-model="vm.entity.valorParametro" ng-required="true"placeholder="Valor Parametro" id="valorParametro" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.valorParametro" ng-required="true" required  id="valorParametro" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="valorParametro">
+                        Valor Parametro
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -24,7 +33,7 @@
               auto-match="true"/>
     </div>
     <div class="col-md-3 form-group ">
-        <label class="control-label">Parametro
+        <label>Parametro
         </label>
         <div parametro-select></div>
     </div>
@@ -38,3 +47,6 @@
 
 
 
+</div>
+</div>
+</div>

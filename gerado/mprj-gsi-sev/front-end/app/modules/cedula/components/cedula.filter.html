@@ -1,12 +1,21 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="msgCriptografada">Msg Criptografada</label>
-        <input class="form-control" type="text" ng-model="vm.entity.msgCriptografada" ng-required="true"placeholder="Msg Criptografada" id="msgCriptografada" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.msgCriptografada" ng-required="true" required  id="msgCriptografada" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="msgCriptografada">
+                        Msg Criptografada
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Urna
+        <label>Urna
         </label>
         <div urna-select></div>
     </div>
@@ -15,18 +24,29 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="versao">Versao </label>
-    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" required placeholder="Versao"  id="versao" />
-    <span class="help-block" ng-show="versao.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao        </label>
+    </div>
 </div>
 
 
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="calculada">Calculada </label>
-    <input class="form-control" type="text" ng-maxlength="1" ng-model="vm.entity.calculada" required placeholder="Calculada"  id="calculada" />
-    <span class="help-block" ng-show="calculada.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="calculada" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="calculada">
+            Calculada        </label>
+    </div>
 </div>
 
 
+</div>
+</div>
+</div>

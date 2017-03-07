@@ -1,13 +1,24 @@
 <!-- sessões -->
 <section class="content-header">
-    <h1 class="color-asphalt"><i class="mdi mdi-file-find"></i> Tipo Relatorio</h1>
+    <h1>
+        <i class="mdi mdi-view-grid"></i>
+        Tipo Relatorio
+        <!-- <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+             <i class="mdi mdi-view-list"></i>
+             <i class="mdi mdi-view-grid"></i>
+         </a>-->
+        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+            <i class="mdi mdi-view-list"></i>
+            <!--<i class="mdi mdi-view-grid"></i>-->
+        </a>
+    </h1>
     <ol class="breadcrumb">
         <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
         <li class="active"><a href="#/tipoRelatorio"> {{"filtro" | translate}} {{"menu.tipoRelatorio" | translate}} </a></li>
     </ol>
 </section>
 
-<section class="content fadeInRight">
+<section ng-scrollbars ng-scrollbars-config="config" class="content fadeInLeft">
     <div class="box box-primary">
         <form name="tipoRelatorioForm" novalidate ng-submit="vm.newSearch()">
             <div tabset>
@@ -17,13 +28,19 @@
                         <div class="tab-content">
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="searchField.text"> Busca por texto
-                                        </label>
-                                            <input class="form-control" type="text" ng-model="vm.searchField.text" placeholder="busca por texto.." id="searchField.text"/>
+                                    <div class="row-form">
+                                        <div class="col-md-6 form-group">
+                                            <div class="inputMaterialGroup">
+                                                <input id="searchField.text" type="text" class="inputMaterial" required ng-model="vm.searchField.text"/>
+                                                <span class="bar"></span>
+                                                <span class="highlight"></span>
+                                                <label for="searchField.text">
+                                                    Busca por texto
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="box-footer hidden-sm hidden-xs">
@@ -94,5 +111,8 @@
             <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\TipoRelatorio/.*/"></div>
         </div>
     </div>
+    <!-- Para desenvolvimento dos cards
+    <div ng-include="'modules/tipoRelatorio/components/tipoRelatorio.card.html'"></div>
+    -->
     <div ng-include="'modules/tipoRelatorio/components/tipoRelatorio.modal.html'"></div>
 </section>

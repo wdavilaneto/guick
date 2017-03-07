@@ -1,20 +1,41 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="nome">Nome</label>
-        <input class="form-control" type="text" ng-model="vm.entity.nome" ng-required="true"placeholder="Nome" id="nome" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="email">Email</label>
-        <input class="form-control" type="text" ng-model="vm.entity.email" ng-required="true"placeholder="Email" id="email" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="login">Login</label>
-        <input class="form-control" type="text" ng-model="vm.entity.login" ng-required="true"placeholder="Login" id="login" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.nome" ng-required="true" required  id="nome" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="nome">
+                        Nome
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.email" ng-required="true" required  id="email" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="email">
+                        Email
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.login" ng-required="true" required  id="login" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="login">
+                        Login
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -32,7 +53,7 @@
               auto-match="true"/>
     </div>
     <div class="col-md-3 form-group ">
-        <label class="control-label">Tipo Integrante Comissao
+        <label>Tipo Integrante Comissao
         </label>
         <div tipoIntegranteComissao-select></div>
     </div>
@@ -41,14 +62,18 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="cdmatricula">Códigomatricula </label>
-    <input class="form-control" type="text" ng-maxlength="8" ng-model="vm.entity.cdmatricula" required placeholder="Códigomatricula"  id="cdmatricula" />
-    <span class="help-block" ng-show="cdmatricula.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="cdmatricula" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="cdmatricula">
+            Códigomatricula        </label>
+    </div>
 </div>
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="dataValidacao">Data Validacao </label>
+        <label for="dataValidacao">Data Validacao </label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataValidacao" current-text="Hoje" clear-text="Limpar"  id="dataValidacao" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -61,3 +86,6 @@
 
 
 
+</div>
+</div>
+</div>

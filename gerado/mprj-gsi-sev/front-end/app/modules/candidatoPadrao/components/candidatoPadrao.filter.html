@@ -1,7 +1,16 @@
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="foto">Foto</label>
-        <input class="form-control" type="text" ng-model="vm.entity.foto" placeholder="Foto" id="foto" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.foto"  id="foto" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="foto">
+                        Foto
+                    </label>
+                </div>
+            </div>
 
 
 
@@ -10,9 +19,13 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="descricao">Descrição </label>
-    <input class="form-control" type="text" ng-maxlength="50" ng-model="vm.entity.descricao" required placeholder="Descrição"  id="descricao" />
-    <span class="help-block" ng-show="descricao.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricao">
+            Descrição        </label>
+    </div>
 </div>
 
 
@@ -20,3 +33,6 @@
 
 
 
+</div>
+</div>
+</div>

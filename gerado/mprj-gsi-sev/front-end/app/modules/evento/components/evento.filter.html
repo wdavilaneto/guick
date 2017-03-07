@@ -1,20 +1,41 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="ocorrencia">Ocorrencia</label>
-        <input class="form-control" type="text" ng-model="vm.entity.ocorrencia" ng-required="true"placeholder="Ocorrencia" id="ocorrencia" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="justificativa">Justificativa</label>
-        <input class="form-control" type="text" ng-model="vm.entity.justificativa" placeholder="Justificativa" id="justificativa" />
-    </div>
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="login">Login</label>
-        <input class="form-control" type="text" ng-model="vm.entity.login" ng-required="true"placeholder="Login" id="login" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.ocorrencia" ng-required="true" required  id="ocorrencia" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="ocorrencia">
+                        Ocorrencia
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.justificativa"  id="justificativa" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="justificativa">
+                        Justificativa
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.login" ng-required="true" required  id="login" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="login">
+                        Login
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -32,7 +53,7 @@
               auto-match="true"/>
     </div>
     <div class="col-md-3 form-group ">
-        <label class="control-label">Tipo Evento
+        <label>Tipo Evento
         </label>
         <div tipoEvento-select></div>
     </div>
@@ -41,14 +62,13 @@
 
 
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="dataRegistro">Data Registro </label>
+        <label for="dataRegistro">Data Registro </label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataRegistro" current-text="Hoje" clear-text="Limpar" required id="dataRegistro" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
-            <span class="help-block" ng-show="dataRegistro.$error.required">Obrigatório</span>
         </div>
     </div>
 
@@ -57,3 +77,6 @@
 
 
 
+</div>
+</div>
+</div>

@@ -1,33 +1,66 @@
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="nome">Nome</label>
-        <input class="form-control" type="text" ng-model="vm.entity.nome" placeholder="Nome" id="nome" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="foto">Foto</label>
-        <input class="form-control" type="text" ng-model="vm.entity.foto" placeholder="Foto" id="foto" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="email">Email</label>
-        <input class="form-control" type="text" ng-model="vm.entity.email" placeholder="Email" id="email" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="nomeCompleto">Nome Completo</label>
-        <input class="form-control" type="text" ng-model="vm.entity.nomeCompleto" placeholder="Nome Completo" id="nomeCompleto" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="login">Login</label>
-        <input class="form-control" type="text" ng-model="vm.entity.login" placeholder="Login" id="login" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.nome"  id="nome" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="nome">
+                        Nome
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.foto"  id="foto" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="foto">
+                        Foto
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.email"  id="email" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="email">
+                        Email
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.nomeCompleto"  id="nomeCompleto" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="nomeCompleto">
+                        Nome Completo
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.login"  id="login" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="login">
+                        Login
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group">
-        <label class="control-label">Candidato Padrao
+        <label>Candidato Padrao
         </label>
         <div candidatoPadrao-select></div>
     </div>
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -49,13 +82,18 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="cdmatricula">Códigomatricula </label>
-    <input class="form-control" type="text" ng-maxlength="8" ng-model="vm.entity.cdmatricula" placeholder="Códigomatricula"  id="cdmatricula" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="cdmatricula" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="cdmatricula">
+            Códigomatricula        </label>
+    </div>
 </div>
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label class="control-label" for="dataNascimento">Data Nascimento </label>
+        <label for="dataNascimento">Data Nascimento </label>
         <div class="input-group">
-            <input type="text" class="form-control input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -63,8 +101,13 @@
         </div>
     </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="criterioDesempate">Criterio Desempate </label>
-    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.criterioDesempate" placeholder="Criterio Desempate"  id="criterioDesempate" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="criterioDesempate" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="criterioDesempate">
+            Criterio Desempate        </label>
+    </div>
 </div>
 
 
@@ -72,3 +115,6 @@
 
 
 
+</div>
+</div>
+</div>

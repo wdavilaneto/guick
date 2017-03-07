@@ -1,8 +1,12 @@
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="consulta">Consulta <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
-    <textarea class="form-control" rows="3" ng-maxlength="4000" ng-model="vm.entity.consulta" required placeholder="Consulta"  id="consulta" ></textarea>
-    <span class="help-block" ng-show="consulta.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <textarea class="inputMaterial" rows="3" ng-maxlength="4000" ng-model="vm.entity.consulta" required   id="consulta" ></textarea>
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="consulta">
+            Consulta*        </label>
+    </div>
 </div>
     <div class="col-md-3 form-group" show-errors>
 
@@ -27,7 +31,12 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="descricaoTipoFiltro">Descrição Tipo Filtro </label>
-    <input class="form-control" type="text" ng-maxlength="50" ng-model="vm.entity.descricaoTipoFiltro" placeholder="Descrição Tipo Filtro"  id="descricaoTipoFiltro" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricaoTipoFiltro" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricaoTipoFiltro">
+            Descrição Tipo Filtro        </label>
+    </div>
 </div>
 

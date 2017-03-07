@@ -1,11 +1,26 @@
-    <div class="col-md-3 form-group ">
-        <label class="control-label" for="nomeTipoIntegrante">Nome Tipo Integrante</label>
-        <input class="form-control" type="text" ng-model="vm.entity.nomeTipoIntegrante" ng-required="true"placeholder="Nome Tipo Integrante" id="nomeTipoIntegrante" />
-    </div>
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="descricaoTipoIntegrante">Descrição Tipo Integrante</label>
-        <input class="form-control" type="text" ng-model="vm.entity.descricaoTipoIntegrante" placeholder="Descrição Tipo Integrante" id="descricaoTipoIntegrante" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.nomeTipoIntegrante" ng-required="true" required  id="nomeTipoIntegrante" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="nomeTipoIntegrante">
+                        Nome Tipo Integrante
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.descricaoTipoIntegrante"  id="descricaoTipoIntegrante" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="descricaoTipoIntegrante">
+                        Descrição Tipo Integrante
+                    </label>
+                </div>
+            </div>
 
 
 
@@ -19,3 +34,6 @@
 
 
 
+</div>
+</div>
+</div>

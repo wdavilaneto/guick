@@ -1,12 +1,21 @@
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="nomeTipoIntegrante">Nome Tipo Integrante <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
-    <input class="form-control" type="text" ng-maxlength="145" ng-model="vm.entity.nomeTipoIntegrante" required placeholder="Nome Tipo Integrante"  id="nomeTipoIntegrante" />
-    <span class="help-block" ng-show="nomeTipoIntegrante.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="nomeTipoIntegrante" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="nomeTipoIntegrante">
+            Nome Tipo Integrante*        </label>
+    </div>
 </div>
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="descricaoTipoIntegrante">Descrição Tipo Integrante </label>
-    <input class="form-control" type="text" ng-maxlength="250" ng-model="vm.entity.descricaoTipoIntegrante" placeholder="Descrição Tipo Integrante"  id="descricaoTipoIntegrante" />
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricaoTipoIntegrante" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricaoTipoIntegrante">
+            Descrição Tipo Integrante        </label>
+    </div>
 </div>
 
 

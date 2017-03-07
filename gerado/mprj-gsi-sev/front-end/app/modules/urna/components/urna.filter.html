@@ -1,12 +1,21 @@
-    <div class="col-md-3 form-group">
-        <label class="control-label" for="msgComposta">Msg Composta</label>
-        <input class="form-control" type="text" ng-model="vm.entity.msgComposta" placeholder="Msg Composta" id="msgComposta" />
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.msgComposta"  id="msgComposta" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="msgComposta">
+                        Msg Composta
+                    </label>
+                </div>
+            </div>
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Eleicao
+        <label>Eleicao
             <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="eleicaoAutoComplete"
@@ -28,9 +37,13 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="versao">Versao </label>
-    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.versao" required placeholder="Versao"  id="versao" />
-    <span class="help-block" ng-show="versao.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao        </label>
+    </div>
 </div>
 
 
@@ -38,3 +51,6 @@
 
 
 
+</div>
+</div>
+</div>

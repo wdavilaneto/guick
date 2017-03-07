@@ -134,7 +134,7 @@ angular.module('sevApp')
         }
 
         // Search de todos os elementos inicial ( quando entra na tela )
-    if (!vm.editMode) {
+        if (!vm.editMode) {
             eleicaoService.findAll( $scope.pagination.getPageRequest() , function (data) {
                 $scope.resultPage = data;
                 $scope.resultPage.content = jsog.decode(data.content);
@@ -165,8 +165,19 @@ angular.module('sevApp')
                 vm.search(pageable);
             });
         }
-            $scope.gridOptions.onRegisterApi = onRegisterApi;
 
+        vm.cssClassByStatus = cssClassByStatus;
+
+        function cssClassByStatus(status) {
+            var cssClasses = {PENDENTE: 'bkg-amethyst', CONCLUIDO: 'bkg-river', CANCELADO: 'bkg-silver'};
+            try {
+                return cssClasses[status];
+            } catch (ex){
+                return 'bkg-amethyst';
+            }
+        }
+
+        $scope.gridOptions.onRegisterApi = onRegisterApi;
     }
 
 })();

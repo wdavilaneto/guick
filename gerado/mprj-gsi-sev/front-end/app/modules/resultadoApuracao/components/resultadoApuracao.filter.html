@@ -1,8 +1,11 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
 
 
 
     <div class="col-md-3 form-group ">
-        <label class="control-label">Candidato
+        <label>Candidato
             <a class="btn-detail" ng-show="vm.searchSelects.candidato.id != null" ng-click="$event.stopPropagation(); view('lg','Candidato');"><i class="fa fa-fw fa-search-plus"></i></a>
         </label>
         <div angucomplete-alt id="candidatoAutoComplete"
@@ -24,9 +27,13 @@
 
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="qtVotos">Qt Votos </label>
-    <input class="form-control" type="text" ng-maxlength="22" ng-model="vm.entity.qtVotos" required placeholder="Qt Votos"  id="qtVotos" />
-    <span class="help-block" ng-show="qtVotos.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="qtVotos" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="qtVotos">
+            Qt Votos        </label>
+    </div>
 </div>
 
 
@@ -34,3 +41,6 @@
 
 
 
+</div>
+</div>
+</div>

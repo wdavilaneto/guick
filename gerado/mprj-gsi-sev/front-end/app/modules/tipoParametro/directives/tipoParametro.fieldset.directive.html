@@ -1,8 +1,12 @@
 
 <div class="col-md-3 form-group" show-errors>
-    <label class="control-label" for="descricao">Descrição <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/></label>
-    <input class="form-control" type="text" ng-maxlength="256" ng-model="vm.entity.descricao" required placeholder="Descrição"  id="descricao" />
-    <span class="help-block" ng-show="descricao.$error.required">Obrigatório</span>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricao" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricao">
+            Descrição*        </label>
+    </div>
 </div>
 
 
