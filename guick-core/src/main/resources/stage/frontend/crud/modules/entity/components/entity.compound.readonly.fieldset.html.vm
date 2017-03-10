@@ -5,20 +5,20 @@
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} >= 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
 
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} >= 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
 
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} >= 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
 
@@ -26,19 +26,19 @@
 
 #foreach( ${property} in ${entity.properties})
 #if(${property.column.length} < 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
 
 #foreach( ${property} in ${entity.parent.getProperties()})
 #if(${property.column.length} < 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
 
 #foreach( ${property} in ${entity.id.getProperties()})
 #set( $idAgragation = 'id.' )
 #if(${property.column.length} < 50)
-#parse( "stage/frontend/crud/modules/entity/components/showProperty.html.vm" )
+#parse( "stage/frontend/crud/modules/entity/components/showPropertyCompound.html.vm" )
 #end
 #end
