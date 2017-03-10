@@ -115,7 +115,7 @@
 #else
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="${idAgragation}${property}" type="text" #if(!${property.column.nullable} && !$isFilter)required#{end} />
+        <input class="inputMaterial" id="${idAgragation}${property}" ng-model="vm.entity.${idAgragation}${property}" type="text" #if(!${property.column.nullable} && !$isFilter)required#{end} />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="${idAgragation}${property}">

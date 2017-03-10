@@ -24,6 +24,6 @@
 </div>
 <div class="box box-primary">
     <div class="box-body">
-#parse("stage/frontend/crud/modules/entity/components/entity.readonly.fieldset.html.vm")
+#parse("stage/frontend/crud/modules/entity/components/entity.compound.readonly.fieldset.html.vm")
     </div>
 </div>

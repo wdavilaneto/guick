@@ -66,17 +66,19 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "${entity.beanName}Edit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
             vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-eye", visible: ${js}stateParams.id});
 #end
 #end
+            // One to Many:
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-##TODO Many to many needs special query
             vm.tabs.push({heading: "${complexProperty.title}", route: "${entity.beanName}Edit.${complexProperty.beanName}", icon: "mdi-label", visible: ${js}stateParams.id});
 #end
 #end
+## TODO MANY TO MANY ...
 
             vm.tabSelected = '${entity.beanName}Edit.main';
 
