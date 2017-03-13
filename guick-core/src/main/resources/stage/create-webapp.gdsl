@@ -42,7 +42,7 @@ guick {
                     [input: "stage/frontend/app", output: "/front-end/app"],
                     [input: "stage/frontend/config", output: "/front-end/config"],
 
-                    [input: "stage/frontend/css/org.css", output: "/front-end/app/layout/css/main.css"],
+                    [input: "stage/frontend/css/org.css", output: "/front-end/app/layout/css/mprj.css"],
                     [input: "stage/frontend/css/project.css", output: "/front-end/app/layout/css/${acronym}.css"],
 
                     [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],

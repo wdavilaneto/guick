@@ -1,63 +1,50 @@
-<div class="menu-security" tabset>
-    <div tab>
+<tabset class="menu-security">
+    <tab>
         <div tab-heading>
             <i class="mdi mdi-account-key"></i>
         </div>
-        <div class="menu" accordion>
-            <accordion>
-                <accordion-group>
-                    <accordion-heading>
-                    <span>
-                        <i class="mdi mdi-projector-screen"></i>
-                        Prototipo
-                    </span>
-                        <i class="pull-right mdi mdi-chevron-right"></i>
-                    </accordion-heading>
-                    <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
-                    <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
-                    <a href="#/slick" class="ng-binding"><i class="mdi mdi-book"></i>Slick</a>
-                </accordion-group>
-            </accordion>
+
+        <accordion class="menu">
+
             <div class="panel panel-default ng-scope">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a href="#/dashboard" class="ng-binding"><i class="mdi mdi-home"></i> pagina padrao</a>
+                        <a href="#/dashboard" class="ng-binding"> <span>{{"menu.painelInicial" | translate}}</span></a>
                     </h4>
                 </div>
             </div>
-            <div accordion-group ng-if="isAuthenticated || true" scope>
-                <div accordion-heading>
-                    <span>
-                        {{"menu.principal" | translate}}
-                    </span>
-                    <i class="pull-right glyphicon glyphicon-chevron-right"></i>
-                </div>
+
+            <accordion-group ng-if="isAuthenticated || true" scope>
+                <accordion-heading>
+                    <span> {{"menu.principal" | translate}} </span>
+                    <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
                 <a href="#/candidato" title="Candidato">
-                    <i class="mdi mdi-file-document"></i> {{"menu.candidato" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.candidato" | translate}}
                 </a>
                 <a href="#/cedula" title="Cedula">
-                    <i class="mdi mdi-file-document"></i> {{"menu.cedula" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.cedula" | translate}}
                 </a>
                 <a href="#/eleicao" title="Eleicao">
-                    <i class="mdi mdi-file-document"></i> {{"menu.eleicao" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.eleicao" | translate}}
                 </a>
                 <a href="#/eleitor" title="Eleitor">
-                    <i class="mdi mdi-file-document"></i> {{"menu.eleitor" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.eleitor" | translate}}
                 </a>
                 <a href="#/evento" title="Evento">
-                    <i class="mdi mdi-file-document"></i> {{"menu.evento" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.evento" | translate}}
                 </a>
                 <a href="#/integranteComissao" title="Integrante Comissao">
-                    <i class="mdi mdi-file-document"></i> {{"menu.integranteComissao" | translate}}
+                    <i class="mdi mdi-file-document-box"></i> {{"menu.integranteComissao" | translate}}
                 </a>
-            </div>
-            <div accordion-group ng-if="isAuthenticated || true">
-                <div accordion-heading>
-                        <span>
-                            {{"menu.administracao" | translate}}
-                        </span>
-                    <i class="pull-right glyphicon glyphicon-chevron-right"></i>
-                </div>
+            </accordion-group>
+            <accordion-group ng-if="isAuthenticated || true">
+                <accordion-heading>
+                    <span>
+                        {{"menu.administracao" | translate}}
+                    </span>
+                    <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
                 <a href="#/arquivoRelatorio" title="Arquivo Relatorio">
                     <i class="mdi mdi-file-document"></i> {{"menu.arquivoRelatorio" | translate}}
                 </a>
@@ -76,14 +63,23 @@
                 <a href="#/urna" title="Urna">
                     <i class="mdi mdi-file-document"></i> {{"menu.urna" | translate}}
                 </a>
-            </div>
-            <div accordion-group ng-if="isAuthenticated || true">
-                <div accordion-heading>
-                        <span>
-                            {{"menu.tipos" | translate}}
-                        </span>
-                    <i class="pull-right glyphicon glyphicon-chevron-right"></i>
-                </div>
+            </accordion-group>
+
+        </accordion>
+    </tab>
+    <tab>
+        <tab-heading>
+            <i class="mdi mdi-account"></i>
+        </tab-heading>
+
+        <accordion class="menu">
+            <accordion-group ng-if="isAuthenticated || true">
+                <accordion-heading>
+                    <span>
+                        {{"menu.tipos" | translate}}
+                    </span>
+                    <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
                 <a href="#/situacaoEleicao" title="Situacao Eleicao">
                     <i class="mdi mdi-file-document"></i> {{"menu.situacaoEleicao" | translate}}
                 </a>
@@ -102,25 +98,29 @@
                 <a href="#/tipoRelatorio" title="Tipo Relatorio">
                     <i class="mdi mdi-file-document"></i> {{"menu.tipoRelatorio" | translate}}
                 </a>
-            </div>
-            <div accordion-group>
-                <div accordion-heading>
+            </accordion-group>
+            <accordion-group>
+                <accordion-heading>
+                    <span> {{"menu.prototipos" | translate}} </span>
+                     <i class="pull-right mdi mdi-chevron-right"></i>
+                </accordion-heading>
+                <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
+                <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
+                <a href="#/slick" class="ng-binding"><i class="mdi mdi-book"></i>Slick</a>
+            </accordion-group>
+            <accordion-group>
+                <accordion-heading>
                     <span>{{"menu.sistema" | translate}}</span>
                     <i class="pull-right mdi"></i>
-                </div>
+                </accordion-heading>
                 <a href="#/sobre"><i class="mdi mdi-apps"></i>{{"menu.sobre" | translate}}</a>
                 <a href="/swagger-ui" target="_blank"><i class="mdi mdi-apps"></i>{{"menu.restapi" | translate}}</a>
-            </div>
+            </accordion-group>
+        </accordion>
 
-        </div>
-    </div>
-    <div tab >
-        <div tab-heading>
-            <i class="mdi mdi-account"></i>
-        </div>
-    </div>
+    </tab>
 
-</div>
+</tabset>
 
 
 

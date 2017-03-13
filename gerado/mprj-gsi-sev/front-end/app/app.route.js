@@ -8,9 +8,9 @@
         $stateProvider
             .state('main', {
                 url: "/",
-                controller: 'MainController',
-                controllerAs: 'mainController',
-                templateUrl: "modules/main/main.html"
+                    controller: 'dashboardController',
+                    controllerAs: 'dashboardController',
+                    templateUrl: "views/dashboards/dashboard.html"
             })
             .state('dashboard', {
                 url: "/dashboard",

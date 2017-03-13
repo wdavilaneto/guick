@@ -145,6 +145,7 @@
     </div>
     <!-- fim sessão -->
     <!-- sessão -->
+    <!-- Para desenvolvimento dos cards
     <div class="box box-primary">
         <div class="box-body">
             <div class="box-header">
@@ -153,8 +154,7 @@
             <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\\${entity.name}/.*/"></div>
         </div>
     </div>
-    <!-- Para desenvolvimento dos cards
-    <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.card.html'"></div>
     -->
+    <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.card.html'"></div>
     <div ng-include="'modules/${entity.beanName}/components/${entity.beanName}.modal.html'"></div>
 </section>
