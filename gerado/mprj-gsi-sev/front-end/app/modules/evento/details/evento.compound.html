@@ -1,58 +1,36 @@
 
-<div class="box-header"><h3 class="box-title"></h3></div>
-    <div class="box-body">
-        <div class="row">
-
-        </div>
-    </div>
-    <div class="box-footer hidden-sm hidden-xs">
-        <div class="row">
-            <div class="col-md-12">
-                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> {{"add" | translate}}</button>
-                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i> {{"associate" | translate}}</button>
-            </div>
-        </div>
-    </div>
-    <div class="box-footer hidden-md hidden-lg">
-        <div class="row">
-            <div class="col-md-12">
-                <button type="button" back class="bt bt-metal"><i class="mdi mdi-content-save"></i> </button>
-                <button type="button" class="bt bt-asphalt" ng-click="vm.saveContinue()" ng-disabled="userForm.$invalid"><i class="mdi mdi-content-save"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="box box-primary">
     <div class="box-body">
-                                <div class="col-md-4" ng-if="vm.entity.ocorrencia">
+                                <div class="col-md-4" ng-if="vm.entity.evento.ocorrencia">
                                     <div class="form-group">
                                         <label class="control-label">Ocorrencia</label>
-                                        <div ng-if="vm.entity.ocorrencia"> {{entity.ocorrencia}}</div>
+                                        <div ng-if="vm.entity.evento.ocorrencia"> {{vm.entity.evento.ocorrencia}}</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4" ng-if="vm.entity.justificativa">
+                                <div class="col-md-4" ng-if="vm.entity.evento.justificativa">
                                     <div class="form-group">
                                         <label class="control-label">Justificativa</label>
-                                        <div ng-if="vm.entity.justificativa"> {{entity.justificativa}}</div>
+                                        <div ng-if="vm.entity.evento.justificativa"> {{vm.entity.evento.justificativa}}</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4" ng-if="vm.entity.login">
+                                <div class="col-md-4" ng-if="vm.entity.evento.login">
                                     <div class="form-group">
                                         <label class="control-label">Login</label>
-                                        <div ng-if="vm.entity.login"> {{entity.login}}</div>
+                                        <div ng-if="vm.entity.evento.login"> {{vm.entity.evento.login}}</div>
                                     </div>
                                 </div>
 
 
 
 
-                                <div class="col-md-3" ng-if="vm.entity.dataRegistro">
+                                <div class="col-md-3" ng-if="vm.entity.evento.dataRegistro">
                                     <div class="form-group">
                                         <label class="control-label">Data Registro</label>
-                                        <div ng-if="vm.entity.dataRegistro"> {{entity.dataRegistro}}</div>
+                                        <div ng-if="vm.entity.evento.dataRegistro"> {{vm.entity.evento.dataRegistro}}</div>
                                     </div>
                                 </div>
 
 
     </div>
 </div>
+

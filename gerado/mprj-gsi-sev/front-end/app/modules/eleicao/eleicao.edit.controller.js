@@ -63,6 +63,8 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "eleicaoEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
+            // One to Many:
              vm.tabs.push({heading: "Arquivo Relatorio ", route: "eleicaoEdit.arquivoRelatorioCollection", icon: "mdi-label", visible: $stateParams.id});
              vm.tabs.push({heading: "Candidato ", route: "eleicaoEdit.candidatoCollection", icon: "mdi-label", visible: $stateParams.id});
              vm.tabs.push({heading: "Eleicao Parametro ", route: "eleicaoEdit.eleicaoParametroCollection", icon: "mdi-label", visible: $stateParams.id});

@@ -63,6 +63,8 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "tipoEventoEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
+            // One to Many:
              vm.tabs.push({heading: "Evento ", route: "tipoEventoEdit.eventoCollection", icon: "mdi-label", visible: $stateParams.id});
 
             vm.tabSelected = 'tipoEventoEdit.main';

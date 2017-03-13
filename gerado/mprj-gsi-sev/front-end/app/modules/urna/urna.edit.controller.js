@@ -63,7 +63,9 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "urnaEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
             vm.tabs.push({heading: "Eleicao", route: "urnaEdit.eleicao", icon: "mdi-eye", visible: $stateParams.id});
+            // One to Many:
              vm.tabs.push({heading: "Cedula ", route: "urnaEdit.cedulaCollection", icon: "mdi-label", visible: $stateParams.id});
 
             vm.tabSelected = 'urnaEdit.main';

@@ -63,8 +63,10 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "arquivoRelatorioEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
             vm.tabs.push({heading: "Eleicao", route: "arquivoRelatorioEdit.eleicao", icon: "mdi-eye", visible: $stateParams.id});
             vm.tabs.push({heading: "Evento", route: "arquivoRelatorioEdit.evento", icon: "mdi-eye", visible: $stateParams.id});
+            // One to Many:
 
             vm.tabSelected = 'arquivoRelatorioEdit.main';
 

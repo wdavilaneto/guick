@@ -34,7 +34,7 @@
             .state( cedulaEditMain )
             .state('cedulaEdit.urna', {
                 url: "/urna",
-                controller: 'cedulaExtController',
+                controller: 'cedulaEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/urna/details/urna.compound.html"
             })

@@ -34,7 +34,7 @@
             .state( resultadoApuracaoEditMain )
             .state('resultadoApuracaoEdit.candidato', {
                 url: "/candidato",
-                controller: 'resultadoApuracaoExtController',
+                controller: 'resultadoApuracaoEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/candidato/details/candidato.compound.html"
             })

@@ -34,7 +34,7 @@
             .state( eleitorEditMain )
             .state('eleitorEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'eleitorExtController',
+                controller: 'eleitorEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

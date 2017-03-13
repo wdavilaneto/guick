@@ -34,7 +34,7 @@
             .state( integranteComissaoEditMain )
             .state('integranteComissaoEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'integranteComissaoExtController',
+                controller: 'integranteComissaoEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

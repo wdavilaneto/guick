@@ -34,13 +34,13 @@
             .state( eleicaoParametroEditMain )
             .state('eleicaoParametroEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'eleicaoParametroExtController',
+                controller: 'eleicaoParametroEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })
             .state('eleicaoParametroEdit.parametro', {
                 url: "/parametro",
-                controller: 'eleicaoParametroExtController',
+                controller: 'eleicaoParametroEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/parametro/details/parametro.compound.html"
             })

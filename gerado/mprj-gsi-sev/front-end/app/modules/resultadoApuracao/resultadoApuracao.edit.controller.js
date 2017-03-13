@@ -63,7 +63,9 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "resultadoApuracaoEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
             vm.tabs.push({heading: "Candidato", route: "resultadoApuracaoEdit.candidato", icon: "mdi-eye", visible: $stateParams.id});
+            // One to Many:
 
             vm.tabSelected = 'resultadoApuracaoEdit.main';
 

@@ -34,7 +34,7 @@
             .state( eventoEditMain )
             .state('eventoEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'eventoExtController',
+                controller: 'eventoEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

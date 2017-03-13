@@ -1,7 +1,7 @@
 
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="nomeTipoIntegrante" type="text" required />
+        <input class="inputMaterial" id="nomeTipoIntegrante" ng-model="vm.entity.nomeTipoIntegrante" type="text" required />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="nomeTipoIntegrante">
@@ -10,7 +10,7 @@
 </div>
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="descricaoTipoIntegrante" type="text"  />
+        <input class="inputMaterial" id="descricaoTipoIntegrante" ng-model="vm.entity.descricaoTipoIntegrante" type="text"  />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="descricaoTipoIntegrante">

@@ -34,7 +34,7 @@
             .state( urnaEditMain )
             .state('urnaEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'urnaExtController',
+                controller: 'urnaEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

@@ -34,13 +34,13 @@
             .state( candidatoEditMain )
             .state('candidatoEdit.candidatoPadrao', {
                 url: "/candidatoPadrao",
-                controller: 'candidatoExtController',
+                controller: 'candidatoEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/candidatoPadrao/details/candidatoPadrao.compound.html"
             })
             .state('candidatoEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'candidatoExtController',
+                controller: 'candidatoEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

@@ -63,6 +63,8 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "parametroEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
+            // One to Many:
              vm.tabs.push({heading: "Eleicao Parametro ", route: "parametroEdit.eleicaoParametroCollection", icon: "mdi-label", visible: $stateParams.id});
 
             vm.tabSelected = 'parametroEdit.main';

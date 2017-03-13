@@ -4,7 +4,7 @@
 
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="nome" type="text" required />
+        <input class="inputMaterial" id="nome" ng-model="vm.entity.nome" type="text" required />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="nome">
@@ -22,7 +22,7 @@
 </div>
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="login" type="text" required />
+        <input class="inputMaterial" id="login" ng-model="vm.entity.login" type="text" required />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="login">
@@ -60,7 +60,7 @@
 
 <div class="col-md-3 form-group" show-errors>
     <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="cdmatricula" type="text" required />
+        <input class="inputMaterial" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text" required />
         <span class="bar"></span>
         <span class="highlight"></span>
         <label for="cdmatricula">

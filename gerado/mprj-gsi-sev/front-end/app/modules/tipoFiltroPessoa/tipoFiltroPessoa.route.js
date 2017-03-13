@@ -34,7 +34,7 @@
             .state( tipoFiltroPessoaEditMain )
             .state('tipoFiltroPessoaEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'tipoFiltroPessoaExtController',
+                controller: 'tipoFiltroPessoaEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })

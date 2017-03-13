@@ -34,13 +34,13 @@
             .state( arquivoRelatorioEditMain )
             .state('arquivoRelatorioEdit.eleicao', {
                 url: "/eleicao",
-                controller: 'arquivoRelatorioExtController',
+                controller: 'arquivoRelatorioEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/eleicao/details/eleicao.compound.html"
             })
             .state('arquivoRelatorioEdit.evento', {
                 url: "/evento",
-                controller: 'arquivoRelatorioExtController',
+                controller: 'arquivoRelatorioEditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/evento/details/evento.compound.html"
             })

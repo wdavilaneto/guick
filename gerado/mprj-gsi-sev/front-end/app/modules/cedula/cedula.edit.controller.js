@@ -63,7 +63,9 @@
             // ****************************************
             vm.tabs = [];
             vm.tabs.push({heading: "Principal", route: "cedulaEdit.main", icon: "mdi-home", visible: "true"});
+            // Many to One:
             vm.tabs.push({heading: "Urna", route: "cedulaEdit.urna", icon: "mdi-eye", visible: $stateParams.id});
+            // One to Many:
 
             vm.tabSelected = 'cedulaEdit.main';
 
