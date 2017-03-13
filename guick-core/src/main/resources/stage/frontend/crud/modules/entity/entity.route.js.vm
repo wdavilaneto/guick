@@ -38,7 +38,7 @@
 #set( $beanName = ${util.uncapitalize(${complexProperty.referedEntity.name})} )
             .state('${entity.beanName}Edit.${complexProperty.beanName}', {
                 url: "/${complexProperty.beanName}",
-                controller: '${entity.beanName}ExtController',
+                controller: '${entity.beanName}EditMainController',
                 controllerAs: 'vm',
                 templateUrl: "modules/${beanName}/details/${beanName}.compound.html"
             })
