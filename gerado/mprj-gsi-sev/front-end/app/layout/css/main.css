@@ -35,6 +35,7 @@ body.waiting-for-angular div#initializing-panel
 a
 {
     text-decoration:none;
+    cursor:pointer;
 }
 h1,
 h2,
@@ -456,7 +457,7 @@ footer
 .dropdown-menu
 {
     min-width:220px;
-    background:#0277bd;
+    /*background:#0277bd;*/
     border: 0;left:0 !important;
 }
 .dropdown-menu li
@@ -1848,3 +1849,53 @@ a.color-cloud:hover
     {
         display::none;
     }
+
+
+/*MENU SECURITY*/
+
+.menu-security .nav-tabs {
+    border-bottom:1px solid #3498db !important;
+}
+
+.menu-security ul.nav.nav-tabs {
+    background: transparent;
+}
+
+.menu-security .nav-tabs>li>a {
+    outline: none;
+}
+
+.menu-security .nav-tabs>li>a:hover {
+    border: 1px solid transparent !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.menu-security .nav-tabs>li.active a {
+    border-bottom: 1px solid #fff !important;
+    outline: none;
+}
+.menu-security .nav-tabs>li.active a:focus, .menu-security .nav-tabs>li.active a:hover
+    {
+    border-bottom: 1px solid #fff !important;
+    }
+
+.menu-security .nav-tabs>li.active a:hover {
+    color: #fff !important;
+}
+
+.menu-security .nav-tabs>li.active>a,
+.menu-security .nav-tabs>li.active>a:hover,
+.menu-security .nav-tabs>li.active>a:focus {
+    background: #0277bd!important;
+    color: #fff !important;
+    border-radius: 0 !important;
+    /*border-bottom: 1px solid #fff !important;*/
+}
+
+.menu-security .nav > li > a:hover, .menu-security .nav > li > a:focus
+    {
+        background:transparent !important;
+    }
+
+
+/**/

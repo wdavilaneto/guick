@@ -248,6 +248,12 @@ ul.list-process li a.bt-river{color:#fff;margin-top:0;}
             top: 7px;
             right: 60px;
         }
+	.bt-change-view
+		{
+			position:fixed;
+			top:7px;
+			right:120px;
+		}
 h1 a.bt
 	{
 		font-size:0.65em;

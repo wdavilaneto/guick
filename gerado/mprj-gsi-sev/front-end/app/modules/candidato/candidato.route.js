@@ -11,7 +11,7 @@
             url: "/candidato",
             controller: 'candidatoController',
             controllerAs: 'vm',
-            templateUrl: "modules/candidato/candidato.html"
+            templateUrl: "modules/candidato/candidato-card.html"
         };
         var candidatoEdit = {
             abstract: true,
