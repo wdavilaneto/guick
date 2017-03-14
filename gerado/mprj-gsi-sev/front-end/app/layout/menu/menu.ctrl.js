@@ -10,5 +10,8 @@
                 $scope.openLogout = function(){
                     $(".content-logout, .content-logout-page, footer nav.navbar").toggleClass("stash");
                 };
+                $scope.changeColection = function(){
+                    $(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
+                };
         }]);
     })();

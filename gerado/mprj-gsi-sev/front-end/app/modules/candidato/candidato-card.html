@@ -7,12 +7,12 @@
              <i class="mdi mdi-view-list"></i>
              <i class="mdi mdi-view-grid"></i>
          </a>-->
-        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list hidden-xs" href ng-class="{'stash-cards': !modoCards}">
             <i class="mdi mdi-view-list"></i>
             <!--<i class="mdi mdi-view-grid"></i>-->
         </a>
-        <a class="bt bt-river bt-circle bt-sm bt-change-view" href="">
-            <i class="mdi mdi-account"></i>
+        <a ng-click="changeColection()" class="bt bt-river bt-circle bt-sm bt-change-view" href="">
+            <i class="mdi mdi-view-grid"></i>
         </a>
 
 
@@ -114,10 +114,10 @@
                 <div class="box-header">
                     <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
                 </div>
-                <div class="row-form">
+                <div class="row-form table-collection">
                     <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\Candidato/.*/"></div>
                 </div>
-                <div class="row-form">
+                <div class="row-form card-collection">
                     <div ng-repeat="card in resultPage.content">
                         <div class="col-md-4 card bounceIn" ng-class="{'stash': !modoCards}">
                             <!--<h4 class="status {{vm.cssClassByStatus(card.status)}}">-->

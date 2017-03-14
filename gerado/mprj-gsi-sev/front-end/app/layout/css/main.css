@@ -777,9 +777,11 @@ label.label-required:after
 
 
 /*COMPONENTE UI SELECT*/
-.ui-select-match .btn.btn-default, .ui-select-match .btn.btn-default:focus
+.ui-select-match .btn.btn-default, .ui-select-match .btn.btn-default:focus, .btn-default-focus
 {
     background:transparent;
+    outline:none;
+    box-shadow:none;
 }
 .ui-select-bootstrap .ui-select-choices-row.active>a
 {
@@ -1897,5 +1899,30 @@ a.color-cloud:hover
         background:transparent !important;
     }
 
+
+/**/
+
+.ui-select-match {
+    margin-top: 6px;
+}
+
+
+/* ANGUCOMPLETE */
+
+    .angucomplete-holder
+        {
+            margin-top:-9px;
+        }
+    label.label-angucomplete
+        {
+            margin-top: -14px;
+            color: #0277bd;
+            font-weight: normal;
+        }
+    .angucomplete-dropdown {
+        height: 450px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
 /**/
