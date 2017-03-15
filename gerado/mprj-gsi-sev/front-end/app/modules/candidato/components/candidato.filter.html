@@ -41,83 +41,74 @@
                     </label>
                 </div>
             </div>
-            <div class="col-md-3 form-group">
-                <div class="inputMaterialGroup">
-                    <input class="inputMaterial" type="text" ng-model="vm.entity.login"  id="login" required />
-                    <span class="bar"></span>
-                    <span class="highlight"></span>
-                    <label for="login">
-                        Login
+
+            <div class="content-expand">
+                <div class="col-md-3 form-group">
+                    <div class="inputMaterialGroup">
+                        <input class="inputMaterial" type="text" ng-model="vm.entity.login"  id="login" required />
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label for="login">
+                            Login
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group" show-errors>
+                    <div class="inputMaterialGroup">
+                        <input class="inputMaterial" id="criterioDesempate" ng-model="vm.entity.criterioDesempate" type="text" required />
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label for="criterioDesempate">
+                            Criterio Desempate        </label>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group" show-errors>
+                    <div class="inputMaterialGroup">
+                        <input class="inputMaterial" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text" required  />
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label for="cdmatricula">
+                            Códigomatricula        </label>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <div candidatoPadrao-select></div>
+                </div>
+                <div class="col-md-9 form-group ">
+                    <label>
+                        Eleicao
+                        <!--<a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>-->
                     </label>
+                    <div angucomplete-alt id="eleicaoAutoComplete"
+                         name="eleicao"
+                         pause="500"
+                         remote-url="/sev/api/eleicao/searchText?text="
+                         selected-object="vm.searchSelects.eleicao"
+                         remote-url-data-field="content"
+                         title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+                         input-class="inputMaterial"
+                         field-required="true"
+                         text-no-results="Nenhum registro encontrado"
+                         text-searching="Buscando"
+                         auto-match="true"
+                         required
+                            />
+                    <!--placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "-->
+                </div>
+                <div class="col-md-3" ng-controller="DefaultDatepickerController" show-errors>
+                    <div class="inputMaterialGroup col-md-10">
+                        <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                               ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento"  required/>
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label for="dataNascimento">Data Nascimento </label>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 form-group" show-errors>
-                <div class="inputMaterialGroup">
-                    <input class="inputMaterial" id="criterioDesempate" ng-model="vm.entity.criterioDesempate" type="text" required />
-                    <span class="bar"></span>
-                    <span class="highlight"></span>
-                    <label for="criterioDesempate">
-                        Criterio Desempate        </label>
-                </div>
-            </div>
-            <div class="col-md-3 form-group" show-errors>
-                <div class="inputMaterialGroup">
-                    <input class="inputMaterial" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text" required  />
-                    <span class="bar"></span>
-                    <span class="highlight"></span>
-                    <label for="cdmatricula">
-                        Códigomatricula        </label>
-                </div>
-            </div>
 
-    <div class="col-md-3 form-group">
-        <div candidatoPadrao-select></div>
-    </div>
-    <div class="col-md-9 form-group ">
-        <label>
-            Eleicao
-            <!--<a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>-->
-        </label>
-            <div angucomplete-alt id="eleicaoAutoComplete"
-                 name="eleicao"
-                 pause="500"
-                 remote-url="/sev/api/eleicao/searchText?text="
-                 selected-object="vm.searchSelects.eleicao"
-                 remote-url-data-field="content"
-                 title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
-                 input-class="inputMaterial"
-                 field-required="true"
-                 text-no-results="Nenhum registro encontrado"
-                 text-searching="Buscando"
-                 auto-match="true"
-                 required
-                    />
-        <!--placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "-->
-    </div>
-
-
-
-
-
-    <div class="col-md-3" ng-controller="DefaultDatepickerController" show-errors>
-        <div class="inputMaterialGroup col-md-10">
-                <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
-                       ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento"  required/>
-            <span class="bar"></span>
-            <span class="highlight"></span>
-            <label for="dataNascimento">Data Nascimento </label>
-        </div>
-        <div class="col-md-2">
-                <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
         </div>
     </div>
-
-
-
-
-
-
-
-</div>
-</div>
 </div>
