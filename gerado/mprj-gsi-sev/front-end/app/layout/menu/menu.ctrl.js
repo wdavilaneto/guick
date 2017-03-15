@@ -14,7 +14,7 @@
                     $(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
                 };
                 $scope.openContentExpand = function(){
-                    $(".content-expand").toggleClass("stash");
+                    $(".content-expand, .mdi.mdi-chevron-down, .mdi.mdi-chevron-up").toggleClass("stash");
                 };
         }]);
     })();

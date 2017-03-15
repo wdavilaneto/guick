@@ -10,16 +10,19 @@ angular.module('sevApp')
                 var main = elem.find('#content');
                 var menu = elem.find('#menu');
                 var userArea = elem.find('#user-area');
+                var menuIcones = elem.find('#menu-icones');
 
                 if ( loginService.getCurrentUser() === null || loginService.getCurrentUser().username === null || loginService.getCurrentUser().username === '') {
                     main.hide();
                     menu.hide();
+                    menuIcones.hide();
                     userArea.hide();
                     login.hide();
                     loginService.authenticate( {} , function (data) {
                         main.show();
                         menu.show();
                         userArea.show();
+                        menuIcones.show();
                     }, function (data) {
                         login.show();
                     });
@@ -34,11 +37,13 @@ angular.module('sevApp')
                         main.hide();
                         menu.hide();
                         userArea.hide();
+                        menuIcones.hide();
                     });
                 });
                 scope.$on('event:auth-loginConfirmed', function() {
                     main.show();
                     menu.show();
+                    menuIcones.show();
                     userArea.show();
                     login.slideUp();
                 });

@@ -1955,8 +1955,18 @@ a.color-cloud:hover
         padding:0;
         display:none;
 
+
     }
 .content-expand.stash
+    {
+        display:block;
+
+    }
+.bt-expand .mdi.mdi-chevron-up, .bt-expand .mdi.mdi-chevron-down.stash
+    {
+        display:none;
+    }
+.bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
     {
         display:block;
     }
