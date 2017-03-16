@@ -68,7 +68,6 @@ hr
 footer nav.navbar-default
 {
     border:0;
-    /*box-shadow:-5px 1px 5px #000;*/
     z-index:999;
     transition:0.5s;
     -webkit-transition:0.5s;
@@ -746,8 +745,17 @@ label.label-required:after
 /*MODAL*/
 .modal-header
 {
-    padding: 7px;
+    padding: 14px;
     color: #fff;
+    background: #0277bd; /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  #0277bd 0%, #0277bd 51%, #016fb0 51%, #016fb0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#0277bd), color-stop(51%,#0277bd), color-stop(51%,#016fb0), color-stop(100%,#016fb0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  #0277bd 0%,#0277bd 51%,#016fb0 51%,#016fb0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  #0277bd 0%,#0277bd 51%,#016fb0 51%,#016fb0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  #0277bd 0%,#0277bd 51%,#016fb0 51%,#016fb0 100%); /* IE10+ */
+    background: linear-gradient(-249deg,  #0277bd 0%,#0277bd 51%,#016fb0 51%,#016fb0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0277bd', endColorstr='#016fb0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 .modal-content
 {
@@ -778,9 +786,11 @@ label.label-required:after
 
 
 /*COMPONENTE UI SELECT*/
-.ui-select-match .btn.btn-default, .ui-select-match .btn.btn-default:focus
+.ui-select-match .btn.btn-default, .ui-select-match .btn.btn-default:focus, .btn-default-focus
 {
     background:transparent;
+    outline:none;
+    box-shadow:none;
 }
 .ui-select-bootstrap .ui-select-choices-row.active>a
 {
@@ -1900,3 +1910,64 @@ a.color-cloud:hover
 
 
 /**/
+
+.ui-select-match {
+    margin-top: 6px;
+}
+
+
+/* ANGUCOMPLETE */
+
+    .angucomplete-holder
+        {
+            margin-top:-9px;
+        }
+    label.label-angucomplete
+        {
+            margin-top: -14px;
+            color: #0277bd;
+            font-weight: normal;
+        }
+    .angucomplete-dropdown {
+        height: 450px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+/**/
+
+/*grid*/
+
+.ui-grid-pager-panel
+    {
+        position:relative;
+        left:auto;
+        bottom:auto;
+        float:left;
+        display:block;
+        margin-top:14px;
+    }
+
+.content-expand
+    {
+        width:100%;
+        height:auto;
+        margin:0;
+        padding:0;
+        display:none;
+
+
+    }
+.content-expand.stash
+    {
+        display:block;
+
+    }
+.bt-expand .mdi.mdi-chevron-up, .bt-expand .mdi.mdi-chevron-down.stash
+    {
+        display:none;
+    }
+.bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
+    {
+        display:block;
+    }

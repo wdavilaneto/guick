@@ -1,15 +1,21 @@
-    #set( $js  = "$")
-    (function() {
-        'use strict';
+#set( $js  = "$")
+(function() {
+    'use strict';
 
-        angular.module('${project.name}App').controller('MenuController', ['${js}rootScope', '${js}scope', '${js}http', '${js}interval', 'jsog',
-            function(${js}rootScope, ${js}scope, ${js}http, ${js}interval, jsog ) {
-                ${js}scope.toothlet = function(){
-                    ${js}(".content-header.content-header-processo, .left-side, .right-side, .left-bar, nav.navbar.navbar-default.navbar-fixed-top, .bt-group-controller, .panel-page-pdf-content, .mh-mid, .content, footer, .totalContentWrapper").toggleClass("stash");
-                    ${js}(".content-document").toggleClass("stash-index");
-                };
-                ${js}scope.openLogout = function(){
-                    ${js}(".content-logout, .content-logout-page, footer nav.navbar").toggleClass("stash");
-                };
-        }]);
-    })();
+    angular.module('${project.name}App').controller('MenuController', ['${js}rootScope', '${js}scope', '${js}http', '${js}interval', 'jsog',
+        function(${js}rootScope, ${js}scope, ${js}http, ${js}interval, jsog ) {
+            ${js}scope.toothlet = function(){
+                ${js}(".content-header.content-header-processo, .left-side, .right-side, .left-bar, nav.navbar.navbar-default.navbar-fixed-top, .bt-group-controller, .panel-page-pdf-content, .mh-mid, .content, footer, .totalContentWrapper").toggleClass("stash");
+                ${js}(".content-document").toggleClass("stash-index");
+            };
+            ${js}scope.openLogout = function(){
+                ${js}(".content-logout, .content-logout-page, footer nav.navbar").toggleClass("stash");
+            };
+            ${js}scope.changeColection = function(){
+                ${js}(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
+            };
+            ${js}scope.openContentExpand = function(){
+                ${js}(".content-expand, .mdi.mdi-chevron-down, .mdi.mdi-chevron-up").toggleClass("stash");
+            };
+    }]);
+})();

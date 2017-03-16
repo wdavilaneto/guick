@@ -43,7 +43,7 @@
     }
     .menu .panel-default > .panel-heading + .panel-collapse > .panel-body:hover
     {
-        overflow-y:auto;
+            overflow-y:auto;
     }
 .menu .panel-default > .panel-heading + .panel-collapse > .panel-body a
     {

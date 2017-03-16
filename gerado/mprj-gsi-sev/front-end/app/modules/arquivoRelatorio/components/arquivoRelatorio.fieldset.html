@@ -67,13 +67,15 @@
     </div>
 
     <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <label for="dataCriacao">Data Criacao <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
-        <div class="input-group">
-            <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
                 ng-model="vm.entity.dataCriacao" current-text="Hoje" clear-text="Limpar" required id="dataCriacao" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataCriacao">Data Criacao <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
         </div>
     </div>
 
