@@ -93,7 +93,7 @@
 #if( ${complexProperty.referedEntity.table.count} > 10000)
               minlength="7"
 #end
-              input-class="form-control"
+              input-class="inputMaterial"
               field-required="true"
               text-no-results="Nenhum registro encontrado"
               text-searching="Buscando"
@@ -146,7 +146,7 @@
 #if( ${complexProperty.referedEntity.table.count} > 10000)
               minlength="7"
 #end
-              input-class="form-control"
+              input-class="inputMaterial"
               field-required="true"
               text-no-results="Nenhum registro encontrado"
               text-searching="Buscando"
@@ -202,7 +202,7 @@
 #if( ${complexProperty.referedEntity.table.count} > 10000)
               minlength="7"
 #end
-              input-class="form-control"
+              input-class="inputMaterial"
               field-required="true"
               text-no-results="Nenhum registro encontrado"
               text-searching="Buscando"

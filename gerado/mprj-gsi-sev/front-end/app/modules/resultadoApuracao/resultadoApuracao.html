@@ -11,6 +11,10 @@
             <i class="mdi mdi-view-list"></i>
             <!--<i class="mdi mdi-view-grid"></i>-->
         </a>
+        <a ng-click="changeColection()" class="bt bt-river bt-circle bt-sm bt-change-view" href="">
+            <i class="mdi mdi-view-grid"></i>
+        </a>
+
     </h1>
     <ol class="breadcrumb">
         <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
@@ -44,7 +48,7 @@
                             </div>
 
                             <div class="box-footer hidden-sm hidden-xs">
-                                <div class="row">
+                                <div class="row-form">
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
                                         <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
@@ -54,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="box-footer hidden-md hidden-lg">
-                                <div class="row">
+                                <div class="row-form">
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> </a>
                                         <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> </a>
@@ -74,9 +78,18 @@
                                 <div class="row">
                                     <div ng-include src="'modules/resultadoApuracao/components/resultadoApuracao.filter.html'"></div>
                                 </div>
-                            </div>
-                            <div class="box-footer hidden-sm hidden-xs">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <a ng-click="openContentExpand()" class="bt bt-river bt-circle bt-sm pull-right bt-expand" href="">
+                                            <i class="mdi mdi-chevron-down"></i>
+                                            <i class="mdi mdi-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row-form">
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
                                         <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
@@ -86,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="box-footer hidden-md hidden-lg">
-                                <div class="row">
+                                <div class="row-form">
                                     <div class="col-md-12">
                                         <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> </a>
                                         <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> </a>
@@ -108,11 +121,13 @@
             <div class="box-header">
                 <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
             </div>
-            <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\ResultadoApuracao/.*/"></div>
+            <div class="row-form table-collection">
+                <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\ResultadoApuracao/.*/"></div>
+            </div>
+            <div class="row-form card-collection">
+                <div ng-include="'modules/resultadoApuracao/components/resultadoApuracao.card.html'"></div>
+            </div>
         </div>
     </div>
-    <!-- Para desenvolvimento dos cards
-    <div ng-include="'modules/resultadoApuracao/components/resultadoApuracao.card.html'"></div>
-    -->
     <div ng-include="'modules/resultadoApuracao/components/resultadoApuracao.modal.html'"></div>
 </section>

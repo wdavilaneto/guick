@@ -3,17 +3,13 @@
 #if( ${project.config.useWorkflow} == true )
     <a href="#/${entity.beanName}" title="{{"menu.${entity.beanName}" | translate}"><i class="mdi mdi-home"></i></a>
 #end
-
 #if (${project.getAllMainEntities().size()} > 0)
-
 #foreach( ${entity} in ${project.getAllMainEntities()})
 #if (!${entity.isEmbeddable()})
     <a href="#/${entity.beanName}" title="{{"menu.${entity.beanName}" | translate}"><i class="mdi mdi-home"></i></a>
 #end
 #end
 #end
-
-
 #if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
 #if (${project.getAllDomainEntities().size()} > 0)
 
@@ -23,7 +19,6 @@
 #end
 #end
 #end
-
 #if (${project.getAllEnumLikeEntities().size()} > 0)
 
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
