@@ -1806,6 +1806,15 @@ a.color-cloud:hover
     color: #0277bd;
     font-size:0.85em;
 }
+.inputMaterialGroup .inputMaterial .angucomplete-holder input:focus ~ label,
+.inputMaterialGroup .inputMaterial .angucomplete-holder input:valid ~ label
+{
+    top:0px;
+    font-size:14px;
+    color: #0277bd;
+    font-size:0.85em;
+}
+
 /* BOTTOM BARS ================================= */
 .bar
 {
@@ -1846,6 +1855,14 @@ a.color-cloud:hover
     -moz-animation:inputHighlighter 0.3s ease;
     animation:inputHighlighter 0.3s ease;
 }
+.inputMaterial.inputMaterialFileUpload {
+    padding-bottom: 7px;
+}
+
+
+
+
+
 /**/
 
 /*CONTEUDO INTIMACAO*/
@@ -1931,6 +1948,7 @@ a.color-cloud:hover
         height: 450px;
         overflow-y: auto;
         overflow-x: hidden;
+        width:100%;
     }
 
 /**/
@@ -1969,4 +1987,11 @@ a.color-cloud:hover
 .bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
     {
         display:block;
+    }
+
+.content-img
+    {
+        background:#ddd;
+        border:1px solid #ededed;
+        min-height:250px;
     }

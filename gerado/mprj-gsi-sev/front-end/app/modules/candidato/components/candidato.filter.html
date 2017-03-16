@@ -75,24 +75,28 @@
                     <div candidatoPadrao-select></div>
                 </div>
                 <div class="col-md-9 form-group ">
-                    <label>
-                        Eleicao
-                        <!--<a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>-->
-                    </label>
-                    <div angucomplete-alt id="eleicaoAutoComplete"
-                         name="eleicao"
-                         pause="500"
-                         remote-url="/sev/api/eleicao/searchText?text="
-                         selected-object="vm.searchSelects.eleicao"
-                         remote-url-data-field="content"
-                         title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
-                         input-class="inputMaterial"
-                         field-required="true"
-                         text-no-results="Nenhum registro encontrado"
-                         text-searching="Buscando"
-                         auto-match="true"
-                         required
-                            />
+                    <div class="inputMaterialGroup">
+                        <div angucomplete-alt id="eleicaoAutoComplete"
+                             name="eleicao"
+                             pause="500"
+                             remote-url="/sev/api/eleicao/searchText?text="
+                             selected-object="vm.searchSelects.eleicao"
+                             remote-url-data-field="content"
+                             title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+                             input-class="inputMaterial"
+                             field-required="true"
+                             text-no-results="Nenhum registro encontrado"
+                             text-searching="Buscando"
+                             auto-match="true"
+                             required
+                                />
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label>
+                            Eleicao
+                            <!--<a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>-->
+                        </label>
+                    </div>
                     <!--placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "-->
                 </div>
                 <div class="col-md-3" ng-controller="DefaultDatepickerController" show-errors>
