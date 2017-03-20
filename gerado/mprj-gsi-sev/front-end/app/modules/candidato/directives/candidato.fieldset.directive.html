@@ -1,8 +1,8 @@
-<div class="col-md-2 form-group" show-errors>
-    <div class="content-img">
+<div class="col-md-2 card" show-errors>
+    <div class="card-content-ha">
         <img ng-src="data:image/*;base64,{{vm.entity.foto}}" ng-show="vm.entity.foto" width="100%" />
+        <input class="inputMaterial inputMaterialFileUpload" type="file" fileread="vm.entity.foto" filetype="vm.entity.fotoType" id="foto"/>
     </div>
-    <input class="inputMaterial inputMaterialFileUpload" type="file" fileread="vm.entity.foto" filetype="vm.entity.fotoType" id="foto"/>
 </div>
 <div class="col-md-10">
     <div class="row">
@@ -73,19 +73,25 @@
                     Códigomatricula        </label>
             </div>
         </div>
-        <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
-            <label for="dataNascimento">Data Nascimento </label>
-            <div class="input-group">
-                <input type="text" class="inputMaterial input-sm" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
-                       ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default btn-sm" ng-click="vm.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+        <div class="col-md-3 form-group"  ng-controller="DefaultDatepickerController" show-errors>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="inputMaterialGroup">
+                        <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                               ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" required />
+                        <span class="bar"></span>
+                        <span class="highlight"></span>
+                        <label for="dataNascimento">Data Nascimento </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+                </div>
             </div>
         </div>
         <div class="col-md-3 form-group" show-errors>
             <div class="inputMaterialGroup">
-                <input class="inputMaterial" id="criterioDesempate" ng-model="vm.entity.criterioDesempate" type="text"  />
+                <input class="inputMaterial" id="criterioDesempate" ng-model="vm.entity.criterioDesempate" type="text" required />
                 <span class="bar"></span>
                 <span class="highlight"></span>
                 <label for="criterioDesempate">

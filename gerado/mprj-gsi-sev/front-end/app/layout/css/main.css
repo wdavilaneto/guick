@@ -1976,15 +1976,18 @@ a.color-cloud:hover
 
 
     }
+
 .content-expand.stash
     {
         display:block;
 
     }
+
 .bt-expand .mdi.mdi-chevron-up, .bt-expand .mdi.mdi-chevron-down.stash
     {
         display:none;
     }
+
 .bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
     {
         display:block;
@@ -1994,5 +1997,4 @@ a.color-cloud:hover
     {
         background:#ddd;
         border:1px solid #ededed;
-        min-height:250px;
     }
