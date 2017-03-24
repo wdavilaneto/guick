@@ -317,10 +317,12 @@ h1 a.bt
 			transition:0.7s;
 			-webkit-transition:0.7s;
 			-moz-transition:0.7s;
+			opacity:0;
 		}
 		.search-filter-control.stash
 			{
 				transform:translate(0, 0);
+				opacity:1;
 			}
 		.search-filter-content
 			{

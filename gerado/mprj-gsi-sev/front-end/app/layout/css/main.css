@@ -1928,17 +1928,8 @@ a.color-cloud:hover
 
 /**/
 
-.ui-select-match {
-    margin-top: 6px;
-}
-
-
 /* ANGUCOMPLETE */
 
-    .angucomplete-holder
-        {
-            margin-top:-9px;
-        }
     label.label-angucomplete
         {
             margin-top: -14px;

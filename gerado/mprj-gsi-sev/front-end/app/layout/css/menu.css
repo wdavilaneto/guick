@@ -151,8 +151,8 @@
     z-index: 999;
     transition: 1s;
     -webkit-transition: 1s;
-    z-index: 99999;
-    background: #0277bd;
+    z-index: 999;
+    background: #e7e7e7;
     box-shadow: 1px 1px 3px #333;
     margin: 1%;
     border-radius: 5px;

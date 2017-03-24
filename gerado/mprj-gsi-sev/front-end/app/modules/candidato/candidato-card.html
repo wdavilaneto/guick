@@ -38,8 +38,8 @@
         <a ng-click="changeColection()" class="bt bt-river bt-circle bt-sm bt-change-view" href="">
             <i class="mdi mdi-view-grid"></i>
         </a>
-        <a ng-click="openCloseFilter()" class="bt bt-river bt-circle bt-sm pull-right bt-oc-filter" href="" >
-            <i class="mdi mdi-chevron-down"></i>
+        <a popover="Abrir Filtro" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" ng-click="openCloseFilter()" class="bt bt-river bt-circle bt-sm pull-right bt-oc-filter" href="" >
+            <i class="mdi mdi-magnify"></i>
         </a>
     </h1>
     <ol class="breadcrumb">
@@ -61,14 +61,10 @@
                                     <div class="row">
                                         <div class="row-form">
                                             <div class="col-md-6 form-group">
-                                                <div class="inputMaterialGroup">
-                                                    <input id="searchField.text" type="text" class="inputMaterial" required ng-model="vm.searchField.text"/>
-                                                    <span class="bar"></span>
-                                                    <span class="highlight"></span>
-                                                    <label for="searchField.text">
-                                                        Busca por texto
-                                                    </label>
-                                                </div>
+                                                <label for="searchField.text">
+                                                    Busca por texto
+                                                </label>
+                                                <input id="searchField.text" type="text" class="form-control" required ng-model="vm.searchField.text"/>
                                             </div>
                                         </div>
                                     </div>
