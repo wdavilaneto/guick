@@ -1976,19 +1976,23 @@ a.color-cloud:hover
 
 
     }
-
 .content-expand.stash
     {
         display:block;
 
     }
-
-.bt-expand .mdi.mdi-chevron-up, .bt-expand .mdi.mdi-chevron-down.stash
+.bt-expand .mdi.mdi-chevron-down
     {
-        display:none;
+        transition:0.3s;
+        -webkit-transition:0.3s;
+        -moz-transition:0.3s;
+    }
+.bt-expand .mdi.mdi-chevron-down.stash
+    {
+        transform:rotate(180deg);
     }
 
-.bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
+.bt-expand .mdi.mdi-chevron-down
     {
         display:block;
     }

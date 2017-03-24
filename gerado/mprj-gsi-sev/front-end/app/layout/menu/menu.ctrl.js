@@ -14,7 +14,10 @@
                 $(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
             };
             $scope.openContentExpand = function(){
-                $(".content-expand, .mdi.mdi-chevron-down, .mdi.mdi-chevron-up").toggleClass("stash");
+                $(".content-expand, .bt-expand .mdi.mdi-chevron-down").toggleClass("stash");
+            };
+            $scope.openCloseFilter = function(){
+                $(".search-filter-control, .bt-oc-filter .mdi.mdi-chevron-down").toggleClass("stash");
             };
     }]);
 })();
