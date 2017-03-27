@@ -8,7 +8,7 @@
                 $(".content-document").toggleClass("stash-index");
             };
             $scope.openLogout = function(){
-                $(".content-logout, .content-logout-page, footer nav.navbar").toggleClass("stash");
+                $(".content-logout, .content-logout-page").toggleClass("stash");
             };
             $scope.changeColection = function(){
                 $(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
@@ -18,6 +18,9 @@
             };
             $scope.openCloseFilter = function(){
                 $(".search-filter-control, .bt-oc-filter .mdi.mdi-chevron-down").toggleClass("stash");
+            };
+            $scope.openChangeProfile = function(){
+                $(".change-profile").toggleClass("stash");
             };
     }]);
 })();
