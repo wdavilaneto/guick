@@ -36,6 +36,12 @@
                             controllerAs: 'vm',
                             templateUrl: "layout/prototipo/slick.html"
                         })
+            .state('pagination', {
+                            url: "/pagination",
+                            controller: 'PageController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/pagination.html"
+                        })
         ;
 
         

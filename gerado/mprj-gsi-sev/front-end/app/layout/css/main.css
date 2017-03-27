@@ -2016,3 +2016,28 @@ a.color-cloud:hover
             background:red;
         }
 /**/
+
+/*
+PAGINAÇÃO*/
+
+.pagination > li > a, .pagination > li > span
+    {
+        border-radius:21px;
+        margin-left:3px;
+        box-shadow:1px 1px 3px #ccc;
+        border:0;
+    }
+    .pagination > li > a:hover
+        {
+            background:#fff;
+
+            transform:scale(1.1, 1.1);
+        }
+.pagination > li:last-child > a, .pagination > li:last-child > span
+    {
+        border-top-right-radius:21px;
+    }
+.pagination > li:first-child > a, .pagination > li:first-child > span
+    {
+        border-bottom-left-radius:21px;
+    }
