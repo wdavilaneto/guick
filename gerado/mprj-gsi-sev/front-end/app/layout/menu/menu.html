@@ -4,8 +4,7 @@
             <i class="mdi mdi-account-key"></i>
         </div>
 
-        <accordion class="menu">
-
+        <accordion  class="menu">
             <div class="panel panel-default ng-scope">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -14,10 +13,10 @@
                 </div>
             </div>
 
-            <accordion-group ng-if="isAuthenticated || true" scope>
+            <accordion-group is-open="status.open" close-others="oneAtATime" ng-if="isAuthenticated || true" scope>
                 <accordion-heading>
                     <span> {{"menu.principal" | translate}} </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/candidato" title="Candidato">
                     <i class="mdi mdi-file-document-box"></i> {{"menu.candidato" | translate}}
@@ -38,12 +37,12 @@
                     <i class="mdi mdi-file-document-box"></i> {{"menu.integranteComissao" | translate}}
                 </a>
             </accordion-group>
-            <accordion-group ng-if="isAuthenticated || true">
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>
                         {{"menu.administracao" | translate}}
                     </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/arquivoRelatorio" title="Arquivo Relatorio">
                     <i class="mdi mdi-file-document"></i> {{"menu.arquivoRelatorio" | translate}}
@@ -71,14 +70,13 @@
         <tab-heading>
             <i class="mdi mdi-account"></i>
         </tab-heading>
-
-        <accordion class="menu">
-            <accordion-group ng-if="isAuthenticated || true">
+        <accordion  class="menu">
+            <accordion-group close-others="oneAtATime"  is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>
                         {{"menu.tipos" | translate}}
                     </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/situacaoEleicao" title="Situacao Eleicao">
                     <i class="mdi mdi-file-document"></i> {{"menu.situacaoEleicao" | translate}}
@@ -99,19 +97,19 @@
                     <i class="mdi mdi-file-document"></i> {{"menu.tipoRelatorio" | translate}}
                 </a>
             </accordion-group>
-            <accordion-group>
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span> {{"menu.prototipos" | translate}} </span>
-                     <i class="pull-right mdi mdi-chevron-right"></i>
+                     <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
                 <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
                 <a href="#/slick" class="ng-binding"><i class="mdi mdi-book"></i>Slick</a>
             </accordion-group>
-            <accordion-group>
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>{{"menu.sistema" | translate}}</span>
-                    <i class="pull-right mdi"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/sobre"><i class="mdi mdi-apps"></i>{{"menu.sobre" | translate}}</a>
                 <a href="/swagger-ui" target="_blank"><i class="mdi mdi-apps"></i>{{"menu.restapi" | translate}}</a>
