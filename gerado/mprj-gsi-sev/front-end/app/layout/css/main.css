@@ -2026,18 +2026,20 @@ PAGINAÇÃO*/
         margin-left:3px;
         box-shadow:1px 1px 3px #ccc;
         border:0;
+        transition:0.3s;
+        -webkit-transition:0.3s;
+        -moz-transition:0.1s;
     }
     .pagination > li > a:hover
         {
             background:#fff;
 
-            transform:scale(1.1, 1.1);
         }
 .pagination > li:last-child > a, .pagination > li:last-child > span
     {
-        border-top-right-radius:21px;
+        border-radius:21px;
     }
 .pagination > li:first-child > a, .pagination > li:first-child > span
     {
-        border-bottom-left-radius:21px;
+        border-radius:21px;
     }

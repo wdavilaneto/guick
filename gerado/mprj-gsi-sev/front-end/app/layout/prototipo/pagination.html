@@ -13,8 +13,23 @@
     <div class="h-100">
         <div class="row">
             <div class="col-md-12">
-                <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="pageChanged()"></pagination>
+                <pagination next-text ="próximo" previous-text="Anterior" total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="pageChanged()"></pagination>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <pagination boundary-links="true" total-items="vm.totalItems" ng-model="vm.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            </div>
+        </div>
+        <div class="row">
+            <civ class="col-md-12">
+                <pagination first-text="primeiro" last-text="último" direction-links="false" boundary-links="true" total-items="vm.totalItems" ng-model="vm.currentPage"></pagination>
+            </civ>
+        </div>
+       <div class="row">
+           <div class="col-md-12">
+               <pagination first-text="primeiro" last-text="último" next-text ="próximo" previous-text="Anterior" total-items="vm.bigTotalItems" ng-model="vm.bigCurrentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true"></pagination>
+           </div>
+       </div>
     </div>
 </section>
