@@ -31,16 +31,32 @@
                 templateUrl: "layout/prototipo/book.html"
             })
              .state('slick', {
-                            url: "/slick",
-                            controller: 'SlickController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/slick.html"
-                        })
+                url: "/slick",
+                controller: 'SlickController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/slick.html"
+            })
             .state('pagination', {
-                            url: "/pagination",
-                            controller: 'PageController',
+                url: "/pagination",
+                controller: 'PageController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/pagination.html"
+            })
+             .state('progressbar', {
+                url: "/progressbar",
+                controller: 'ProgressivebarController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/progressbar.html"
+            })
+             .state('alertas', {
+                url: "/alertas",
+                templateUrl: "layout/prototipo/alertas.html"
+            })
+             .state('botoes', {
+                            url: "/botoes",
+                            controller: 'BotoesController',
                             controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/pagination.html"
+                            templateUrl: "layout/prototipo/botoes.html"
                         })
         ;
 
