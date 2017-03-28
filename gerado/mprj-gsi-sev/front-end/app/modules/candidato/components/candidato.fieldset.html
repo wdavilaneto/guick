@@ -1,46 +1,36 @@
 <div class="row">
     <div class="col-md-12 form-group" show-errors>
-    <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="nome" ng-model="vm.entity.nome" type="text" required />
-        <span class="bar"></span>
-        <span class="highlight"></span>
         <label for="nome">
             Nome        </label>
+        <input class="form-control" id="nome" ng-model="vm.entity.nome" type="text" />
     </div>
-</div>
     <div class="col-md-12 form-group" show-errors>
             <img ng-src="data:image/*;base64,{{vm.entity.foto}}" ng-show="vm.entity.foto" width="80px" />
             <input class="inputMaterial" type="file" fileread="vm.entity.foto" filetype="vm.entity.fotoType" id="foto"/>
     </div>
     <div class="col-md-6 form-group" show-errors>
-    <div class="inputMaterialGroup">
-        <input class="inputMaterial" type="email" ng-maxlength="200" ng-model="vm.entity.email" id="email" required >
-        <span class="bar"></span>
-        <span class="highlight"></span>
         <label for="email">
-            Email        </label>
+            Email
+        </label>
+        <input class="form-control" type="email" ng-maxlength="200" ng-model="vm.entity.email" id="email"  >
     </div>
-</div>
     <div class="col-md-6 form-group" show-errors>
-    <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="nomeCompleto" ng-model="vm.entity.nomeCompleto" type="text" required />
-        <span class="bar"></span>
-        <span class="highlight"></span>
         <label for="nomeCompleto">
-            Nome Completo        </label>
+            Nome Completo
+        </label>
+        <input class="form-control" id="nomeCompleto" ng-model="vm.entity.nomeCompleto" type="text"  />
     </div>
-</div>
     <div class="col-md-6 form-group" show-errors>
-    <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="login" ng-model="vm.entity.login" type="text" required />
-        <span class="bar"></span>
-        <span class="highlight"></span>
         <label for="login">
-            Login        </label>
+            Login
+        </label>
+        <input class="form-control" id="login" ng-model="vm.entity.login" type="text"  />
     </div>
-</div>
     <div class="col-md-6">
         <div class="form-group">
+            <label for="">
+                Candidato Padrão
+            </label>
             <div candidatoPadrao-select></div>
         </div>
     </div>
@@ -66,34 +56,25 @@
     </div>
 </div>
     <div class="col-md-6 form-group" show-errors>
-    <div class="inputMaterialGroup">
-        <input class="inputMaterial" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text" required />
-        <span class="bar"></span>
-        <span class="highlight"></span>
         <label for="cdmatricula">
-            Códigomatricula        </label>
+            Códigomatricula
+        </label>
+        <input class="form-control" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text"  />
     </div>
-</div>
     <div class="col-md-6 form-group" ng-controller="DefaultDatepickerController" show-errors>
-        <div class="col-md-10 inputMaterialGroup">
-            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
-                   ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" required />
-            <span class="bar"></span>
-            <span class="highlight"></span>
+        <div class="col-md-10 ">
             <label for="dataNascimento">Data Nascimento </label>
+            <input type="text" class="form-control" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                   ng-model="vm.entity.dataNascimento" current-text="Hoje" clear-text="Limpar"  id="dataNascimento" required />
         </div>
         <div class="col-md-2">
             <button type="button" class="bt bt-river bt-circle" ng-click="open($event)"><i class="mdi mdi-calendar"></i></button>
         </div>
     </div>
     <div class="col-md-6 form-group" show-errors>
-        <div class="inputMaterialGroup">
-            <input class="inputMaterial" id="criterioDesempate" ng-model="entity.criterioDesempate" type="text" required />
-            <span class="bar"></span>
-            <span class="highlight"></span>
-            <label for="criterioDesempate">
-                Criterio Desempate
-            </label>
-        </div>
+        <label for="criterioDesempate">
+            Criterio Desempate
+        </label>
+        <input class="form-control" id="criterioDesempate" ng-model="entity.criterioDesempate" type="text" required />
     </div>
 </div>

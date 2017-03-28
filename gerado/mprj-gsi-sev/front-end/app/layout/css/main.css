@@ -72,12 +72,7 @@ footer nav.navbar-default
     transition:0.5s;
     -webkit-transition:0.5s;
 }
-footer nav.navbar.stash
-    {
-        background:#333;
-        transition:0.5s;
-        -webkit-transition:0.5s;
-}
+
 footer nav.navbar
 {
     min-height: 0;
@@ -1928,17 +1923,8 @@ a.color-cloud:hover
 
 /**/
 
-.ui-select-match {
-    margin-top: 6px;
-}
-
-
 /* ANGUCOMPLETE */
 
-    .angucomplete-holder
-        {
-            margin-top:-9px;
-        }
     label.label-angucomplete
         {
             margin-top: -14px;
@@ -1976,19 +1962,23 @@ a.color-cloud:hover
 
 
     }
-
 .content-expand.stash
     {
         display:block;
 
     }
-
-.bt-expand .mdi.mdi-chevron-up, .bt-expand .mdi.mdi-chevron-down.stash
+.bt-expand .mdi.mdi-chevron-down
     {
-        display:none;
+        transition:0.3s;
+        -webkit-transition:0.3s;
+        -moz-transition:0.3s;
+    }
+.bt-expand .mdi.mdi-chevron-down.stash
+    {
+        transform:rotate(180deg);
     }
 
-.bt-expand .mdi.mdi-chevron-up.stash, .bt-expand .mdi.mdi-chevron-down
+.bt-expand .mdi.mdi-chevron-down
     {
         display:block;
     }
@@ -1997,4 +1987,59 @@ a.color-cloud:hover
     {
         background:#ddd;
         border:1px solid #ededed;
+    }
+
+/* CHANHE PROFILE */
+
+    .change-profile
+        {
+            width: 80%;
+            height: 100%;
+            position: fixed;
+            background: #e7e7e7;
+            transform:translate(25%, -200%);
+            z-index: 999;
+            transition:0.7s;
+            -webkit-transition:0.7s;
+            -moz-transition:0.7s;
+            opacity:0;
+        }
+    .change-profile.stash
+        {
+            transform:translate(25%, -5%);
+            opacity:1;
+        }
+    .change-profile-content
+        {
+            margin:auto;
+            padding:2%
+            background:red;
+        }
+/**/
+
+/*
+PAGINAÇÃO*/
+
+.pagination > li > a, .pagination > li > span
+    {
+        border-radius:21px;
+        margin-left:3px;
+        box-shadow:1px 1px 3px #ccc;
+        border:0;
+        transition:0.3s;
+        -webkit-transition:0.3s;
+        -moz-transition:0.1s;
+    }
+    .pagination > li > a:hover
+        {
+            background:#fff;
+
+        }
+.pagination > li:last-child > a, .pagination > li:last-child > span
+    {
+        border-radius:21px;
+    }
+.pagination > li:first-child > a, .pagination > li:first-child > span
+    {
+        border-radius:21px;
     }
