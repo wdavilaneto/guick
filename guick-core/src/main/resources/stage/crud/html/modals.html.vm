@@ -27,7 +27,6 @@
             </div>
             <div class="modal-body">
                 <div class="box box-primary">
-                    <div class="box-header"></div>
                     <div class="box-body">
                         <div class="row">
                             <div ng-include src="'views/crud/${entity.name}/${entity.name}ShowFieldset.html'"></div>
@@ -44,7 +43,6 @@
             </div>
             <div class="modal-body">
                 <div class="box box-primary">
-                     <div class="box-header"></div>
                      <div class="box-body">
                          <div class="row">
                             <div ng-include src="'views/crud/${entity.name}/${entity.name}ShowFieldset.html'"></div>

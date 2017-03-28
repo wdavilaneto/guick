@@ -72,23 +72,72 @@
     </button>
     <div class="content-logout">
         <div class="row">
-            <div class="col-md-12">
-                <h4>
+            <div class="col-md-3">
+                <img class="img-responsive img-circle" src="../layout/images/avatar5.png" alt=""/>
+            </div>
+            <div class="col-md-9 pd7">
+                <h4 class="color-river">
                     olá, Gustavo Carvalho
                 </h4>
-                <p>
-                    Deseja sair do sistema?
+                <p class="color-river">
+                    Administrador
                 </p>
-            </div>
-            <div class="col-md-12 ">
-                <a class="color-cloud ">
-                    sim
-                </a>
-                |
-                <a class="color-cloud" ng-click="openLogout()">
-                    nao
+                <a class="" ng-click="openChangeProfile()" href="">
+                    <i class="mdi mdi-account-convert"></i>
                 </a>
             </div>
         </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <button  popover="Sair" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" class="bt bt-alizarin bt-circle pull-right" ng-click="openLogout()">
+                    <i class="mdi mdi-logout"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="change-profile">
+        <section class="content-header">
+            <h1>
+                <i class="mdi mdi-account"></i>
+                Trocar Perfil
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alarm alarm-river">
+                        Caso queira mudar seu perfil, preencha com um novo login e senha de acesso.
+                    </div>
+                </div>
+            </div>
+            <div class="change-profile-content">
+                <div class="row-form">
+                    <div class="col-md-6 form-group">
+                        <label for="">
+                            Login
+                        </label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="">
+                            Senha
+                        </label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row-form">
+                    <a ng-click="openChangeProfile()" class="bt bt-carrot" href="">
+                        <i class="mdi mdi-block-helper"></i>
+                        Cancelar
+                    </a>
+                    <a class="bt bt-emerald" href="">
+                        <i class="mdi mdi-check"></i>
+                        Confirmar
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
 </div>

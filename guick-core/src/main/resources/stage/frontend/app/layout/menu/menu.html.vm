@@ -5,7 +5,6 @@
         </div>
 
         <accordion class="menu">
-
             <div class="panel panel-default ng-scope">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -16,10 +15,10 @@
 
 ## FIXME remove all || true for auth
 #if (${project.getAllMainEntities().size()} > 0)
-            <accordion-group ng-if="isAuthenticated || true" scope>
+            <accordion-group is-open="status.open" close-others="oneAtATime" ng-if="isAuthenticated || true" scope>
                 <accordion-heading>
                     <span> {{"menu.principal" | translate}} </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
 #foreach( ${entity} in ${project.getAllMainEntities()})
 #if (!${entity.isEmbeddable()})
@@ -32,12 +31,12 @@
 #end
 #if (${project.getAllDomainEntities().size()} > 0 || ${project.getAllEnumLikeEntities().size()} > 0)
 #if (${project.getAllDomainEntities().size()} > 0)
-            <accordion-group ng-if="isAuthenticated || true">
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>
                         {{"menu.administracao" | translate}}
                     </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
 #foreach( ${entity} in ${project.getAllDomainEntities()})
 #if (!${entity.isEmbeddable()})
@@ -58,12 +57,12 @@
 
         <accordion class="menu">
 #if (${project.getAllEnumLikeEntities().size()} > 0)
-            <accordion-group ng-if="isAuthenticated || true">
+            <accordion-group close-others="oneAtATime"  is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>
                         {{"menu.tipos" | translate}}
                     </span>
-                    <i class="pull-right mdi mdi-chevron-right"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
                 <a href="#/${entity.beanName}" title="${entity.title}">
@@ -73,27 +72,27 @@
             </accordion-group>
 #end
 #end
-            <accordion-group>
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span> {{"menu.prototipos" | translate}} </span>
-                     <i class="pull-right mdi mdi-chevron-right"></i>
+                     <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
                 <a href="#/book" class="ng-binding"><i class="mdi mdi-book"></i>Book</a>
                 <a href="#/slick" class="ng-binding"><i class="mdi mdi-book"></i>Slick</a>
             </accordion-group>
 #if( ${project.config.useWorkflow} == true )
-            <accordion-group>
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span> {{"menu.workflows" | translate}} </span>
-                     <i class="pull-right mdi mdi-chevron-right"></i>
+                     <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
             </accordion-group>
 #end
-            <accordion-group>
+            <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>{{"menu.sistema" | translate}}</span>
-                    <i class="pull-right mdi"></i>
+                    <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <a href="#/sobre"><i class="mdi mdi-apps"></i>{{"menu.sobre" | translate}}</a>
                 <a href="/swagger-ui" target="_blank"><i class="mdi mdi-apps"></i>{{"menu.restapi" | translate}}</a>

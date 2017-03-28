@@ -2,6 +2,29 @@
 #set( $entityBeanName = ${util.uncapitalize($entity.name)} )
 #set( $projectBeanName = ${util.uncapitalize($project.name)} )
 <!-- sessões -->
+
+<div class="search-filter-control">
+    <div class="search-filter-content">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="inputMaterialGroup ">
+                    <input type="text" class="inputMaterial" required/>
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="">Busca</label>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <a href="" class="bt bt-emerald bt-circle"><i class="mdi mdi-magnify"></i></a>
+            </div>
+            <div class="col-md-1">
+                <a ng-click="openCloseFilter()" href="" class="bt bt-alizarin bt-circle pull-right"><i class="mdi mdi-close"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="content-header">
     <h1>
         <i class="mdi mdi-view-grid"></i>
@@ -13,7 +36,9 @@
         <a ng-click="changeColection()" class="bt bt-river bt-circle bt-sm bt-change-view" href="">
             <i class="mdi mdi-view-grid"></i>
         </a>
-
+        <a popover="Abrir Filtro" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" ng-click="openCloseFilter()" class="bt bt-river bt-circle bt-sm pull-right bt-oc-filter" href="" >
+            <i class="mdi mdi-magnify"></i>
+        </a>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
@@ -91,8 +116,8 @@
                                         <div class="col-md-12">
                                             <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
                                             <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
-                                            <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
-                                            <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> Novo </a>
+                                            <a class="bt bt-river" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
+                                            <a class="bt bt-deeppurple" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> Novo </a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,8 +126,8 @@
                                         <div class="col-md-12">
                                             <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> </a>
                                             <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> </a>
-                                            <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
-                                            <a class="bt bt-asphalt" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> </a>
+                                            <a class="bt bt-river" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
+                                            <a class="bt bt-deeppurple" href="" ui-sref="${entity.beanName}Edit.main()"><i class="mdi mdi-plus"></i> </a>
                                         </div>
                                     </div>
                                 </div>

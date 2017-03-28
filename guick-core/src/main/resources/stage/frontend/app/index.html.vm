@@ -88,7 +88,6 @@
                 <div  ng-include="'layout/menu/menu.html'"></div>
             </div>
         </aside>
-        <div class="content-logout-page"></div>
         <aside class="right-side" id="content" ui-view ></aside>
     </div>
 </div>
@@ -210,6 +209,7 @@
 <script src="layout/prototipo/book.controller.js"></script>
 <script src="layout/js/booklet.js"></script>
 <script src="layout/prototipo/slick.controller.js"></script>
+<script src="layout/prototipo/pagination.js"></script>
 
 <!-- commons:controllers -->
 <script src="common/controllers/controllers.module.js"></script>

@@ -11,12 +11,14 @@
                             </h4>
                             -->
                             <div class="card-content">
-                                <h4>
 #set($counter = 0)
 #set($size = ${entity.getDistinctedProperties().size()})
 #foreach( ${property} in ${entity.getDistinctedProperties()})
 #if( ${size} < 3 || (${property.column.length} > 30 && ${property.column.length} < 500)) ## case too many fields prefer long string
-                                {{${entity.beanName}.${property}}}#if($counter < ($size - 1))#{end}
+                                <h4>
+                                    {{${entity.beanName}.${property}}}#if($counter < ($size - 1))
+#{end}
+                                </h4>
 #set($counter = $counter+1)
 #if($counter == 6)
     <!--
@@ -26,7 +28,6 @@
 #if($counter > 5)
     -->
 #end
-                                </h4>
                             </div>
                             <div class="card-footer">
                                 <a href="">
@@ -36,4 +37,3 @@
                         </div>
                     </div>
                 </div>
-

@@ -26,4 +26,7 @@
 #end
 #end
 #end
+    <a href="">
+        <i class="mdi mdi-logout"></i>
+    </a>
 </div>

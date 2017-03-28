@@ -36,17 +36,25 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/book.html"
             })
-             .state('slick', {
+            .state('slick', {
                             url: "/slick",
                             controller: 'SlickController',
                             controllerAs: 'vm',
                             templateUrl: "layout/prototipo/slick.html"
                         })
+            .state('pagination', {
+                            url: "/pagination",
+                            controller: 'PageController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/pagination.html"
+                        })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao
-    #*$translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
-    $translateProvider.preferredLanguage('i18n/locale-pt-BR');*#
+    #*
+    $translateProvider.useStaticFilesLoader({prefix: '/', suffix: '.json'});
+    $translateProvider.preferredLanguage('i18n/locale-pt-BR');
+    *#
 
     }
 

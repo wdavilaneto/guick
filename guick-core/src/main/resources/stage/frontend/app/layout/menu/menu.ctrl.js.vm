@@ -9,13 +9,19 @@
                 ${js}(".content-document").toggleClass("stash-index");
             };
             ${js}scope.openLogout = function(){
-                ${js}(".content-logout, .content-logout-page, footer nav.navbar").toggleClass("stash");
+                ${js}(".content-logout, .content-logout-page").toggleClass("stash");
             };
             ${js}scope.changeColection = function(){
                 ${js}(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
             };
             ${js}scope.openContentExpand = function(){
-                ${js}(".content-expand, .mdi.mdi-chevron-down, .mdi.mdi-chevron-up").toggleClass("stash");
+                ${js}(".content-expand, .bt-expand .mdi.mdi-chevron-down").toggleClass("stash");
+            };
+            ${js}scope.openCloseFilter = function(){
+                ${js}(".search-filter-control, .bt-oc-filter .mdi.mdi-chevron-down").toggleClass("stash");
+            };
+            ${js}scope.openChangeProfile = function(){
+                ${js}(".change-profile").toggleClass("stash");
             };
     }]);
 })();
