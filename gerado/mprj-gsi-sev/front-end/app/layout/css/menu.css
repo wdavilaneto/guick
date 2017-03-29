@@ -38,7 +38,7 @@
         border: 0;
         box-shadow:-60px 0px 60px rgba(0,0,0,0.2) inset, 30px 0px 35px #0277bd inset, 0px 1px 35px rgba(0,0,0,0.5) inset, 15px 0px 25px #024c77 inset;
         max-height:340px;
-        overflow-y:hidden;
+        overflow-y:auto;
         overflow-x:hidden;
     }
     .menu .panel-default > .panel-heading + .panel-collapse > .panel-body:hover
