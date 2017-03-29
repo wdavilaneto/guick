@@ -22,5 +22,8 @@
             $scope.openChangeProfile = function(){
                 $(".change-profile").toggleClass("stash");
             };
+            $scope.openGusmanzord = function(){
+                $(".content-gusmanzord").toggleClass("stash");
+            };
     }]);
 })();

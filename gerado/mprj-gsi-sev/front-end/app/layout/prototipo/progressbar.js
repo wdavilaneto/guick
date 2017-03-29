@@ -32,7 +32,7 @@
 
   vm.randomStacked = function() {
     vm.stacked = [];
-    var types = ['success', 'info', 'warning', 'danger'];
+    var types = ['success', 'info', 'warning', 'danger', 'standart'];
 
     for (var i = 0, n = Math.floor((Math.random() * 4) + 1); i < n; i++) {
         var index = Math.floor((Math.random() * 4));
