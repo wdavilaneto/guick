@@ -196,10 +196,34 @@
                         Botões radio
                     </h4>
                     <div class="card-content-ha">
-                        <div class="btn-group">
-                            <label class="btn btn-info" ng-model="radioModel" btn-radio="'Left'" uncheckable>Left</label>
-                            <label class="btn btn-info" ng-model="radioModel" btn-radio="'Middle'" uncheckable>Middle</label>
-                            <label class="btn btn-info" ng-model="radioModel" btn-radio="'Right'" uncheckable>Right</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'Left'" uncheckable>Left</label>
+                                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'Middle'" uncheckable>Middle</label>
+                                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'Right'" uncheckable>Right</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row-form">
+            <div class="col-md-12">
+                <div class="card">
+                    <h4 class="status color-river">
+                        Botão checkbox estilizado
+                    </h4>
+                    <div class="card-content-ha">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mpswitch">
+                                    <input ng-model="switchStatus" type="checkbox" name="mpswitch{{$index}}" class="mpswitch-checkbox" id="mpswitch{{$index}}">
+                                    <label class="mpswitch-label" for="mpswitch{{$index}}"></label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
