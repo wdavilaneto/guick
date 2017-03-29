@@ -2339,3 +2339,67 @@ a.color-cloud:hover
 	.b-selector a:hover          {color:#fff;}
 
 
+/*CONTEUDO INTIMACAO*/
+.bt-card-list i.mdi.mdi-view-list,
+.bt-card-list i.mdi.mdi-view-grid.stash
+    {
+        display:block;
+    }
+.bt-card-list i.mdi.mdi-view-list.stash,
+.bt-card-list i.mdi.mdi-view-grid.
+    {
+        display::none;
+    }
+    .bt-card-list
+        {
+        	display:none !important;
+            float:right !important;
+
+        }
+	.bt-card-list.stash
+		{
+			display:block !important;
+		}
+	.bt-change-view
+		{
+			float:right !important;
+
+		}
+	/*.mdi.mdi-table, .mdi.mdi-view-grid.stash
+		{
+			display:block !important;
+		}
+	.mdi.mdi-table.stash, .mdi.mdi-view-grid
+		{
+			display:none !important;
+		}*/
+h1 a.bt
+	{
+		font-size:0.65em;
+	}
+
+/* CARD-COLLECTION TABLE-COLLECTION */
+
+	.table-collection{
+		display:block;
+		transition:0.5s;
+		-webkit-transition:0.5s;
+		-moz-transition:0.5s;
+	}
+	.table-collection.stash{
+		display:none;
+		transform:translate(-100%, 0);
+	}
+	.card-collection{
+		display:none;
+		transition:0.5s;
+		-webkit-transition:0.5s;
+		-moz-transition:0.5s;
+		transform:translate(-100%, 0);
+	}
+	.card-collection.stash{
+		display:block;
+		transform:translate(0, 0%);
+	}
+
+/**/
