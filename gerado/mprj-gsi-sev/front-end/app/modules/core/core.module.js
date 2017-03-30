@@ -42,6 +42,7 @@
         'textAngular',
         'infinite-scroll',
         'slickCarousel',
+        'ui.tree',
 
         /*
          * Commons app modules

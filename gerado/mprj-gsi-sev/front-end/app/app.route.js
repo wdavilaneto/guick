@@ -58,10 +58,12 @@
                             controllerAs: 'vm',
                             templateUrl: "layout/prototipo/botoes.html"
                         })
+            .state('treeview', {
+                url: "/treeview",
+                controller: 'TreeviewController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/treeview.html"
+            })
         ;
-
-        
-
     }
-
 })();

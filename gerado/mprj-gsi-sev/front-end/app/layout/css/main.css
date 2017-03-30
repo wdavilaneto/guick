@@ -844,6 +844,10 @@ label.label-required:after
 {
     font-size:1.8em !important;
 }
+.mdi.mdi-sitemap.sitemap90
+    {
+        transform:rotate(-90deg);
+    }
 /**/
 
 /*MARGENS*/
@@ -2194,7 +2198,7 @@ a.color-cloud:hover
         margin-top:-1px;
         border-left:1px solid #ccc;
         border-bottom:1px solid #ccc;
-        border-right:1px solid #ccc;*/
+        border-right:1px solid #ccc;
 
     }
 .bt-oc-filter .mdi.mdi-chevron-down
@@ -2403,3 +2407,4 @@ h1 a.bt
 	}
 
 /**/
+

@@ -63,6 +63,45 @@
                 </ul>
             </li>
         </ul>-->
+    <button ng-click="openNotification()" class="bt-notification" href="">
+        <i class="mdi mdi-bell"></i>
+        <span class="count-notification">3</span>
+    </button>
+    <div class="content-notification">
+        <span class="arrow"></span>
+        <ul>
+            <li>
+                <a ng-click="openNotificationDetail()" href="">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="content-notification-detail">
+        <section class="content-header">
+            <h1>
+                <i class="mdi mdi-bell"></i>
+                Notificações
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    Notificações
+                </li>
+            </ol>
+        </section>
+        <section class="content"></section>
+    </div>
     <button class="toothlet" ng-click="toothlet()"
             popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
         <i class="mdi mdi-menu"></i>
@@ -90,8 +129,11 @@
         <hr/>
         <div class="row">
             <div class="col-md-12">
-                <button  popover="Sair" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" class="bt bt-alizarin bt-circle pull-right" ng-click="openLogout()">
+                <button  popover="Sair" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" class="bt bt-alizarin bt-circle pull-right" >
                     <i class="mdi mdi-logout"></i>
+                </button>
+                <button popover="Voltar" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" class="bt bt-river bt-circle pull-right" ng-click="openLogout()">
+                    <i class="mdi mdi-chevron-left"></i>
                 </button>
             </div>
         </div>
