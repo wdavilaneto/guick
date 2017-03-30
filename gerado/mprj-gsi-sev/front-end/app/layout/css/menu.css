@@ -134,12 +134,12 @@
 span.count-notification
     {
         position: absolute;
-        padding: 5px 10px;
+        padding: 1px 5px;
         background: red;
         color: #fff;
         border-radius: 15px;
         line-height: normal;
-        top: 40px;
+        top: 50px;
         left: 25px;
     }
 .content-notification

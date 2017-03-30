@@ -9,6 +9,7 @@
             };
             $scope.openLogout = function(){
                 $(".content-logout, .content-logout-page").toggleClass("stash");
+                $(".change-profile").removeClass("stash");
             };
             $scope.changeColection = function(){
                 $(".card-collection, .table-collection, .bt-card-list").toggleClass("stash");
