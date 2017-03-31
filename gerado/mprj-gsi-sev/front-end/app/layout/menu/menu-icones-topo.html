@@ -1,68 +1,5 @@
 <div class="navbar-right navbar-right-user" >
-    <!--    <ul class="nav navbar-nav" >
-            <li class="dropdown user user-menu">
-                <a href="" class="dropdown-toggle"
-                   popover="Alertas" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true"
-                   ng-click="">
-                    <i class="mdi mdi-bell">
-                        <small class="label label-header label-danger" ng-if="">{{notificacoesController.totalNotificacoesNaoVisualizadas}}</small>
-                    </i>
-                </a>
-                <ul class="dropdown-menu bkg-cloud-white color-river pd7 ding" >
-                    <span class="ding-arrow"></span>
-                    <h3 class="pd7 color-cloud bkg-river fs1 text-center">Notificações</h3>
-                    <li class="pd7"><span>Nenhuma notificação</span></li>
-                    <li class="pd7 " ng-repeat="">
-                        <a class="color-river pd14 brdb-cloud" ng-if="" ng-href="#">{{notificacao.mensagem}}</a>
-                        <span ng-if="">{{notificacao.mensagem}}</span>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown user user-menu">
-                <a href class="dropdown-toggle"
-                   popover="Notificações de erros" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true">
-                    <i class="mdi mdi-close-circle-outline">
-                        <small class="label label-header label-danger" ng-if="notificacoesController.notificacoesDeErro.length">{{notificacoesController.notificacoesDeErro.length}}</small>
-                    </i>
-                </a>
-                <ul class="dropdown-menu bkg-cloud-white color-river pd7 ding" style="width:619px">
-                    <span class="ding-arrow"></span>
-                    <h3 class="pd7 color-cloud bkg-river brdb-cloud fs1 text-center ">Notificações de erros</h3>
-                    <li class="pd7" ng-if="!notificacoesController.notificacoesDeErro.length"><span>Nenhuma notificação</span></li>
-                    <li class="pd7 " ng-repeat="notificacao in notificacoesController.notificacoesDeErro">
-                        <a class="color-river pd14 brdb-cloud" title="Clique aqui para remover esta mensagem"
-                           ng-click="notificacoesController.marcaComoVisualizada(notificacoesController.notificacoesDeErro, notificacao.id)">{{notificacao.mensagem}}
-                            <i class="mdi mdi-close-circle-outline" style="cursor:pointer">
-                                <small class="label label-header label-danger"></small>
-                            </i>
-                        </a>
 
-                        </i>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown user user-menu">
-                <a href="" class="dropdown-toggle"
-                   popover="Usuário" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true">
-                    <i class="mdi mdi-logout"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="user-header bg-light-blue">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img class=" img-responsive avatar-usuario" alt="" />
-                            </div>
-                            <div class="col-md-8">
-                                <h4 class="fs2">Perfil: </h4>
-                                <h4>{{mainController.user.login}}</h4>
-                                <small>{{mainController.user.perfil | translate}}</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="user-footer"><div class="pull-right"><a href="" ng-click="logout()" class="bt bt-alizarin" style="color:white;"><i class="mdi mdi-logout"></i> Sair</a></div></li>
-                </ul>
-            </li>
-        </ul>-->
     <button ng-click="openNotification()" class="bt-notification" href="">
         <i class="mdi mdi-bell"></i>
         <span class="count-notification">3</span>
@@ -71,7 +8,10 @@
         <span class="arrow"></span>
         <ul>
             <li>
-                <a ng-click="openNotificationDetail()" href="">
+                Últimas Notificações
+            </li>
+            <li>
+                <a ng-click="openNotificationPage()" href="">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 </a>
             </li>
@@ -86,13 +26,22 @@
                 </a>
             </li>
         </ul>
-
+        <div class="row">
+            <div class="col-md-12">
+                <a ng-click="openNotificationDetail()" class="bt bt-river bt-circle pull-right" href="">
+                    <i class="mdi mdi-eye"></i>
+                </a>
+            </div>
+        </div>
     </div>
     <div class="content-notification-detail">
         <section class="content-header">
             <h1>
                 <i class="mdi mdi-bell"></i>
                 Notificações
+                <a ng-click="openNotification()" class="bt bt-alizarin bt-circle bt-sm pull-right" href="">
+                    <i class="mdi mdi-close"></i>
+                </a>
             </h1>
             <ol class="breadcrumb">
                 <li>
@@ -100,13 +49,115 @@
                 </li>
             </ol>
         </section>
-        <section class="content"></section>
+        <section class="content">
+            <div class="row-form">
+                <div class="col-md-4">
+                    <div class="card card-river">
+                        <div class="card-content-ha">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="fs5_4">
+                                        03
+                                    </h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>
+                                        Quantidade de notificações.
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="col-md-4">
+                    <div class="card">
+                        <h4 class="status bkg-river">
+                            Nome da notificação
+                        </h4>
+                        <div class="card-content-ha">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis est facilis itaque molestias nobis? Aperiam blanditiis cum esse est, expedita hic iusto libero magni natus nisi provident quaerat temporibus tenetur?
+                        </div>
+                        <div class="card-footer">
+                            <a ng-click="openNotificationPage()" href="">
+                                <i class="mdi mdi-magnify"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h4 class="status bkg-river">
+                            Nome da notificação
+                        </h4>
+                        <div class="card-content-ha">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis est facilis itaque molestias nobis? Aperiam blanditiis cum esse est, expedita hic iusto libero magni natus nisi provident quaerat temporibus tenetur?
+                        </div>
+                        <div class="card-footer">
+                            <a href="">
+                                <i class="mdi mdi-magnify"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h4 class="status bkg-river">
+                            Nome da notificação
+                        </h4>
+                        <div class="card-content-ha">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis est facilis itaque molestias nobis? Aperiam blanditiis cum esse est, expedita hic iusto libero magni natus nisi provident quaerat temporibus tenetur?
+                        </div>
+                        <div class="card-footer">
+                            <a href="">
+                                <i class="mdi mdi-magnify"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <button class="toothlet" ng-click="toothlet()"
-            popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
+    <div class="content-notification-page">
+        <section class="content-header">
+            <h1>
+                Nome da Notificação
+                <a class="bt bt-alizarin bt-circle pull-right" ng-click="openNotificationPage()" href="">
+                    <i class="mdi mdi-close"></i>
+                </a>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    Nome da Notificação
+                </li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row-form">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h4 class="status color-river"></h4>
+                        <div class="card-content-ha">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dolore ea eum facilis illo minus nam neque nulla quaerat, recusandae reprehenderit soluta ullam vel velit voluptatum! In, provident voluptates? Odit.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolorum eveniet ex fugiat illum, incidunt laboriosam laborum libero, nam pariatur unde, velit veniam! Dolores ducimus nulla officia reprehenderit tenetur. Tenetur?
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="color-emerald" href="">
+                                <i class="mdi mdi-check"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <button class="toothlet" ng-click="toothlet()" popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
         <i class="mdi mdi-menu"></i>
     </button>
-    <button class="bt-logout" ng-click="openLogout()">
+    <button class="bt-logout pull-left" ng-click="openLogout()">
         <i class="mdi mdi-account-circle"></i>
     </button>
     <div class="content-logout">
