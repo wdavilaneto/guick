@@ -1,6 +1,5 @@
 <div class="navbar-right navbar-right-user" >
-
-    <button ng-click="openNotification()" class="bt-notification" href="">
+    <button popover="Notificações" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true" ng-click="openNotification()" class="bt-notification" href="">
         <i class="mdi mdi-bell"></i>
         <span class="count-notification">3</span>
     </button>
@@ -11,7 +10,7 @@
                 Últimas Notificações
             </li>
             <li>
-                <a ng-click="openNotificationPage()" href="">
+                <a  ng-click="openNotificationPage()" href="">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 </a>
             </li>
@@ -28,7 +27,7 @@
         </ul>
         <div class="row">
             <div class="col-md-12">
-                <a ng-click="openNotificationDetail()" class="bt bt-river bt-circle pull-right" href="">
+                <a popover="Ver todas" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" ng-click="openNotificationDetail()" class="bt bt-asphalt bt-circle pull-right" href="">
                     <i class="mdi mdi-eye"></i>
                 </a>
             </div>
@@ -52,7 +51,7 @@
         <section class="content">
             <div class="row-form">
                 <div class="col-md-4">
-                    <div class="card card-river">
+                    <div class="card card-asphalt">
                         <div class="card-content-ha">
                             <div class="row">
                                 <div class="col-md-6">
@@ -73,7 +72,8 @@
             <div class="row-form">
                 <div class="col-md-4">
                     <div class="card">
-                        <h4 class="status bkg-river">
+                        <h4 class="status bkg-asphalt">
+
                             Nome da notificação
                         </h4>
                         <div class="card-content-ha">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <h4 class="status bkg-river">
+                        <h4 class="status bkg-asphalt">
                             Nome da notificação
                         </h4>
                         <div class="card-content-ha">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <h4 class="status bkg-river">
+                        <h4 class="status bkg-asphalt">
                             Nome da notificação
                         </h4>
                         <div class="card-content-ha">
@@ -152,12 +152,13 @@
                     </div>
                 </div>
             </div>
+
         </section>
     </div>
     <button class="toothlet" ng-click="toothlet()" popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
         <i class="mdi mdi-menu"></i>
     </button>
-    <button class="bt-logout pull-left" ng-click="openLogout()">
+    <button popover="Perfil" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true" class="bt-logout pull-left" ng-click="openLogout()">
         <i class="mdi mdi-account-circle"></i>
     </button>
     <div class="content-logout">
@@ -231,6 +232,7 @@
                     </a>
                 </div>
             </div>
+
         </section>
     </div>
 </div>

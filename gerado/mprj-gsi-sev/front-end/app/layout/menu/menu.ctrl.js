@@ -27,6 +27,7 @@
             $scope.openNotification = function(){
                 $(".content-notification").toggleClass("stash");
                 $(".content-notification-detail").removeClass("stash");
+                $(".content-notification-page").removeClass("stash");
             };
             $scope.openNotificationDetail = function(){
                 $(".content-notification-detail").toggleClass("stash");
