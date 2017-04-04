@@ -1,10 +1,10 @@
 <script type="text/ng-template" id="nodes_renderer.html">
     <div ui-tree-handle class="tree-node tree-node-content">
-        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
-                class="glyphicon"
+        <a class="color-sunflower" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+                class="mdi"
                 ng-class="{
-          'glyphicon-chevron-right': collapsed,
-          'glyphicon-chevron-down': !collapsed
+          'mdi-folder-plus': collapsed,
+          'mdi-folder': !collapsed
         }"></span></a>
         {{node.title}}
         <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span

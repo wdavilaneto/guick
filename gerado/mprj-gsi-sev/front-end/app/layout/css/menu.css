@@ -143,8 +143,8 @@ span.count-notification
     }
 .content-notification
     {
-        position: absolute;
-        width: 98%;
+        position: fixed;
+        width: 25%;
         height: auto;
         padding: 7px;
         background: #e7e7e7;
@@ -174,7 +174,7 @@ span.count-notification
     }
 .content-notification.stash
     {
-        transform: translate(1%, 30%);
+        transform: translate(1%, 27%);
         opacity:1;
     }
 .content-notification ul li
@@ -204,6 +204,77 @@ span.count-notification
 .content-notification ul li a:hover, .content-notification ul li a:focus
     {
         text-decoration:none;
+    }
+.notification-alert
+    {
+        background: #e8cca1;
+    }
+.notification-alert a
+    {
+        color: #b57a1e !important;
+    }
+.card.card-notification-alert
+    {
+        background: #e8cca1;
+        color: #b57a1e !important;
+    }
+.card.card-notification-alert .card-footer
+    {
+        border-color:#b57a1e !important;
+    }
+.card.card-notification-alert h4.status
+    {
+        color: #b57a1e !important;
+    }
+.card.card-notification-alert a
+    {
+        color: #b57a1e !important;
+    }
+.notification-message
+    {
+        background: #b8d4b8;
+    }
+.card.card-notification-message
+    {
+        color: green !important;
+        background: #b8d4b8;
+    }
+.card.card-notification-message .card-footer
+    {
+        border-color:green !important;
+    }
+.card.card-notification-message h4.status
+    {
+        color: green !important;
+    }
+.card.card-notification-message a
+    {
+        color: green !important;
+    }
+.notification-message a
+    {
+        color: green !important;
+    }
+.notification-document
+    {
+        background: #b8d6ef;
+    }
+.card.card-notification-document
+    {
+        background: #b8d6ef;
+        color: #255277 !important;
+    }
+.card.card-notification-document .card-footer
+    {
+        border-color:#255277 !important;
+    }
+.card.card-notification-document h4.status
+    {
+        color: #255277 !important;
+    }
+.notification-document a
+    {
+        color: #255277 !important;
     }
 .content-notification-detail, .content-notification-page
     {
@@ -550,5 +621,8 @@ ul.nav.nav-tabs
     {
         margin-bottom:0px !important;
     }
-
+.bt-view-all
+    {
+        margin-top:-10px;
+    }
 

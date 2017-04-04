@@ -32,10 +32,12 @@
             $scope.openNotificationDetail = function(){
                 $(".content-notification-detail").toggleClass("stash");
                 $(".content-notification-page").removeClass("stash");
+                $(".content-notification").removeClass("stash");
             };
             $scope.openNotificationPage = function(){
                 $(".content-notification-page").toggleClass("stash");
                 $(".content-notification-detail").removeClass("stash");
+                $(".content-notification").removeClass("stash");
             };
     }]);
 })();
