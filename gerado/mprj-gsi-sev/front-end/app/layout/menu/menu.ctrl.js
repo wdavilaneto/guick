@@ -6,7 +6,7 @@
             $scope.toothlet = function(){
                 $(".content-header.content-header-processo, .left-side, .right-side, .left-bar, nav.navbar.navbar-default.navbar-fixed-top, .bt-group-controller, .panel-page-pdf-content, .mh-mid, .content, footer, .totalContentWrapper").toggleClass("stash");
                 $(".content-document").toggleClass("stash-index");
-                $(".content-notification-detail, .content-notification").removeClass("stash");
+                $(".content-notification-detail, .content-notification, .content-notification-page").removeClass("stash");
             };
             $scope.openLogout = function(){
                 $(".content-logout, .content-logout-page").toggleClass("stash");
@@ -27,7 +27,7 @@
             $scope.openNotification = function(){
                 $(".content-notification").toggleClass("stash");
                 $(".content-notification-detail").removeClass("stash");
-                $(".content-notification-page").removeClass("stash");
+                $(".content-notification-page").removeClass("stash") ;
             };
             $scope.openNotificationDetail = function(){
                 $(".content-notification-detail").toggleClass("stash");
