@@ -1001,7 +1001,7 @@ a.color-cloud:hover
 }
 .color-asphalt
 {
-    color:#34495e;
+    color:#34495e !important;
 }
 /**/
 
@@ -2215,10 +2215,6 @@ a.color-cloud:hover
     }
 /**/
 
-
-
-
-
 /*
  * jQuery Booklet Plugin
  * Copyright (c) 2010 - 2014 William Grauvogel (http://builtbywill.com/)
@@ -2425,5 +2421,143 @@ TREEVIEW
 
     }
 
+
+/**/
+
+/* MODAL */
+.bkg-modal
+    {
+        position:fixed;
+        width:100%;
+        height:100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9999999;
+        top:0;
+        opacity:0;
+        visibility:hidden;
+        transition:0.5s;
+        -webkit-transition:0.5s;
+        -moz-transition:0.5s;
+        left:0;
+    }
+.bkg-modal.stash
+    {
+        opacity:0.7;
+        visibility:visible;
+    }
+.modal-simples,
+.modal-rotate
+    {
+       position: absolute;
+       width: 50%;
+       height: auto;
+       background: #efefef;
+       box-shadow: 1px 1px 10px #333;
+       z-index: 999999999;
+       top: -100%;
+       left: 25%;
+       border-radius:3px;
+       transition:0.5s;
+
+    }
+.modal-simples.stash,
+.modal-rotate.stash
+    {
+    top: 15%;
+    }
+.modal-rotate.stash
+    {
+        transform:rotate(360deg);
+    }
+.modal-bottom
+    {
+        position:absolute;
+        width:100%;
+        height:auto;
+        background:#efefef;
+        transition:1s;
+        bottom:-65%;
+        z-index: 999999999;
+    }
+.modal-bottom .modal-footer
+    {
+
+    }
+.modal-bottom.stash
+    {
+        bottom:0;
+        transform:rotateX(360deg);
+    }
+.modal-right
+    {
+        position:absolute;
+        width:25%;
+        height:100%;
+        background:#efefef;
+        transition:1s;
+        top:0;
+        right:-65%;
+        z-index:999999999;
+    }
+.modal-right.stash
+    {
+        right:0;
+        transform:rotateY(360deg);
+    }
+.modal-top
+    {
+        position:fixed;
+        width:100%;
+        height:25%;
+        background:#efefef;
+        transition:1s;
+        top:-65%;
+        left:0%;
+        z-index:999999999;
+    }
+.modal-top.stash
+    {
+        top:0;
+        transform:rotateX(360deg);
+    }
+.modal-top .modal-header
+    {
+        width:100%;
+        bottom:0;
+        position:absolute;
+    }
+.modal-paper
+    {
+
+    }
+.modal-paper.stash
+    {
+
+    }
+.modal-header
+    {
+        color:#fff;
+        padding:21px;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#364354+0,2e3a48+50,364354+50,2e3a48+100 */
+        background: rgb(54,67,84); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+.modal-body
+    {
+        padding:14px;
+    }
+.modal-footer
+    {
+        padding:14px;
+        border-top:1px solid #364354;
+    }
+.bt-modal-close
+    {
+        color:#fff !important;
+        margin-top:-6px;
+    }
 
 /**/

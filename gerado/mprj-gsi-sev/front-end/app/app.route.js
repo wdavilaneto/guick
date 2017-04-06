@@ -53,16 +53,22 @@
                 templateUrl: "layout/prototipo/alertas.html"
             })
              .state('botoes', {
-                            url: "/botoes",
-                            controller: 'BotoesController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/botoes.html"
-                        })
+                url: "/botoes",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/botoes.html"
+            })
             .state('treeview', {
                 url: "/treeview",
                 controller: 'TreeviewController',
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/treeview.html"
+            })
+            .state('modal', {
+                url: "/modal",
+                controller: 'ModalPrototipoController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/modal.html"
             })
         ;
     }

@@ -39,5 +39,6 @@
                 $(".content-notification-detail").removeClass("stash");
                 $(".content-notification").removeClass("stash");
             };
+
     }]);
 })();
