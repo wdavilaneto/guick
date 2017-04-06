@@ -23,8 +23,11 @@
         vm.openModalTop = function(){
             $(".modal-top, .bkg-modal").toggleClass("stash");
         };
+        vm.openModalPaper = function(){
+                    $(".modal-paper, .bkg-modal").toggleClass("stash");
+                };
         vm.btClose = function(){
-            $(".modal-simples, .modal-rotate, .modal-bottom, .modal-right, .modal-top, .bkg-modal").removeClass("stash");
+            $(".modal-simples, .modal-rotate, .modal-bottom, .modal-right, .modal-top, .modal-paper, .bkg-modal").removeClass("stash");
         };
     }
 

@@ -2458,16 +2458,45 @@ TREEVIEW
        left: 25%;
        border-radius:3px;
        transition:0.5s;
-
+        opacity:0;
+       visibility:hidden;
+    }
+.modal-paper
+    {
+        position:absolute;
+        width:50%;
+        height:auto;
+        background:#efefef;
+        top:25% !important;
+        box-shadow:1px 1px 10px #333;
+        z-index: 999999999;
+       left:100%;
+       transform:scale(0,0);
+       opacity:0;
+      visibility:hidden;
+      transition:0.5s;
+    }
+.modal-paper.stash
+    {
+        left:25%;
+        transform:scale(1,1);
+        opacity:1;
+        visibility:visible;
     }
 .modal-simples.stash,
 .modal-rotate.stash
     {
     top: 15%;
+    opacity:1;
+    visibility:visible;
     }
 .modal-rotate.stash
     {
         transform:rotate(360deg);
+    }
+.modal-paper.stash
+    {
+
     }
 .modal-bottom
     {
@@ -2478,6 +2507,8 @@ TREEVIEW
         transition:1s;
         bottom:-65%;
         z-index: 999999999;
+        opacity:0;
+        visibility:hidden;
     }
 .modal-bottom .modal-footer
     {
@@ -2487,6 +2518,8 @@ TREEVIEW
     {
         bottom:0;
         transform:rotateX(360deg);
+        opacity:1;
+        visibility:visible;
     }
 .modal-right
     {
@@ -2498,11 +2531,15 @@ TREEVIEW
         top:0;
         right:-65%;
         z-index:999999999;
+        opacity:0;
+        visibility:hidden;
     }
 .modal-right.stash
     {
         right:0;
         transform:rotateY(360deg);
+        opacity:1;
+        visibility:visible;
     }
 .modal-top
     {
@@ -2514,11 +2551,15 @@ TREEVIEW
         top:-65%;
         left:0%;
         z-index:999999999;
+        opacity:0;
+        visibility:hidden;
     }
 .modal-top.stash
     {
         top:0;
         transform:rotateX(360deg);
+        opacity:1;
+        visibility:visible;
     }
 .modal-top .modal-header
     {
