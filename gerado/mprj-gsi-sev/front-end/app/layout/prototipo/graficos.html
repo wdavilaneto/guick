@@ -1,0 +1,56 @@
+<section class="content-header">
+    <h1>
+        <i class="mdi mdi-chart-line"></i>
+        Gráficos
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            Gráficos
+        </li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row-form">
+        <div class="card col-md-6">
+            <h4 class="status color-asphalt">
+                Line Chart
+            </h4>
+            <div class="card-content-ha">
+                <canvas id="line" class="chart chart-line" chart-data="vm.data"
+                        chart-labels="vm.labels" chart-series="vm.series" chart-options="vm.options"
+                        chart-dataset-override="vm.datasetOverride" chart-click="onClick">
+                </canvas>
+            </div>
+        </div>
+        <div class="card col-md-6">
+            <h4 class="status color-asphalt">
+                Bar Chart
+            </h4>
+            <div class="card-content-ha">
+                <canvas id="bar" class="chart chart-bar"
+                        chart-data="vm.data" chart-labels="vm.labels" chart-series="vm.series"
+                />
+            </div>
+        </div>
+        <div class="card col-md-6">
+            <h4 class="status color-asphalt">
+                Doughnut Chart
+            </h4>
+            <div class="card-content-ha">
+                <canvas id="doughnut" class="chart chart-doughnut"
+                        chart-data="vm.dataDon" chart-labels="vm.labelsDon"
+                />
+            </div>
+        </div>
+        <div class="card col-md-6">
+            <h4 class="status color-asphalt">
+                Radar Chart
+            </h4>
+            <div class="card-content-ha">
+                <canvas id="radar" class="chart chart-radar"
+                        chart-data="vm.data" chart-options="vm.options" chart-labels="vm.labels"
+                />
+            </div>
+        </div>
+    </div>
+</section>

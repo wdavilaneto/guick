@@ -70,6 +70,12 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/modal.html"
             })
+            .state('graficos', {
+                url: "/graficos",
+                controller: 'GraficosController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/graficos.html"
+            })
         ;
     }
 })();
