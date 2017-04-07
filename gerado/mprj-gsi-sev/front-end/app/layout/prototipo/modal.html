@@ -84,11 +84,47 @@
                 </a>
             </div>
         </div>
+        <div class="card col-md-4">
+        <h4 class="status color-asphalt">
+            Modal fullscreen
+        </h4>
+        <div class="card-content-ha"></div>
+        <div class="card-footer">
+            <a ng-click="vm.openModalFull()" class="" href="">
+                <i class="mdi mdi-open-in-new"></i>
+                abrir modal
+            </a>
+        </div>
     </div>
-
+        <div class="card col-md-4">
+            <h4 class="status color-asphalt">
+                Modal Mini
+            </h4>
+            <div class="card-content-ha"></div>
+            <div class="card-footer">
+                <a ng-click="vm.openModalMini()" class="" href="">
+                    <i class="mdi mdi-open-in-new"></i>
+                    abrir modal
+                </a>
+            </div>
+        </div>
+        <div class="card col-md-4">
+            <h4 class="status color-asphalt">
+                Modal Mini Center
+            </h4>
+            <div class="card-content-ha"></div>
+            <div class="card-footer">
+                <a ng-click="vm.openModalMiniCenter()" class="" href="">
+                    <i class="mdi mdi-open-in-new"></i>
+                    abrir modal
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
+<!-- FUNDO DAS MODAIS -->
 <div class="bkg-modal"></div>
-
+<!---->
 <!--MODAL SIMPLES-->
 <div class="modal-simples">
     <div class="modal-header">
@@ -99,8 +135,33 @@
             </a>
         </h4>
     </div>
-    <div class="modal-body"></div>
-    <div class="modal-footer"></div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label for="">Nome</label>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="">Nome</label>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="">Nome</label>
+                <input type="text" class="form-control"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="bt bt-emerald" href="">
+                    <i class="mdi mdi-check"></i>
+                    sim
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 <!---->
 
@@ -174,6 +235,45 @@
 <div class="modal-paper">
     <div class="modal-header">
         Modal Right
+        <a ng-click="vm.btClose()" class="bt-modal-close pull-right" href="">
+            <i class="mdi mdi-close"></i>
+        </a>
+    </div>
+    <div class="modal-body"></div>
+    <div class="modal-footer"></div>
+</div>
+<!---->
+
+<!-- MODAL FULLSCREEN -->
+<div class="modal-fullscreen">
+    <div class="modal-header">
+        Modal Fullscreen
+        <a ng-click="vm.btClose()" class="bt-modal-close pull-right" href="">
+            <i class="mdi mdi-close"></i>
+        </a>
+    </div>
+    <div class="modal-body"></div>
+    <div class="modal-footer"></div>
+</div>
+<!---->
+
+<!-- MODAL MINI  -->
+<div class="modal-mini">
+    <div class="modal-header">
+        Modal Mini
+        <a ng-click="vm.btClose()" class="bt-modal-close pull-right" href="">
+            <i class="mdi mdi-close"></i>
+        </a>
+    </div>
+    <div class="modal-body"></div>
+    <div class="modal-footer"></div>
+</div>
+<!---->
+
+<!-- MODAL MINI CENTER  -->
+<div class="modal-mini-center">
+    <div class="modal-header">
+        Modal Mini Center
         <a ng-click="vm.btClose()" class="bt-modal-close pull-right" href="">
             <i class="mdi mdi-close"></i>
         </a>

@@ -1811,57 +1811,57 @@ a.color-cloud:hover
 /**/
 /*FLOATING LABEL*/
 .inputMaterial
-{
-    padding:10px 0px 10px 0px;
-    display:block;
-    width:100%;
-    border:none;
-    border-bottom:1px solid #ccc;
-    background: transparent !important;
-}
+    {
+        padding:10px 0px 10px 0px;
+        display:block;
+        width:100%;
+        border:none;
+        border-bottom:1px solid #ccc;
+        background: transparent !important;
+    }
 .inputMaterial:focus
-{
-    outline:none;
-}
+    {
+        outline:none;
+    }
 /* LABEL ======================================= */
 .inputMaterialGroup label
-{
-    color:#999;
-    font-size:14px;
-    font-weight:normal;
-    position:absolute;
-    pointer-events:none;
-    left:5px;
-    top:25px;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
-}
+    {
+        color:#999;
+        font-size:14px;
+        font-weight:normal;
+        position:absolute;
+        pointer-events:none;
+        left:5px;
+        top:25px;
+        transition:0.2s ease all;
+        -moz-transition:0.2s ease all;
+        -webkit-transition:0.2s ease all;
+    }
 /* ACTIVE STATE ======================================= */
 .inputMaterial:focus ~ label,
 .inputMaterial:valid ~ label
-{
-    top:0px;
-    font-size:14px;
-    color: #0277bd;
-    font-size:0.85em;
-}
+    {
+        top:0px;
+        font-size:14px;
+        color: #0277bd;
+        font-size:0.85em;
+    }
 .inputMaterialGroup .inputMaterial .angucomplete-holder input:focus ~ label,
 .inputMaterialGroup .inputMaterial .angucomplete-holder input:valid ~ label
-{
-    top:0px;
-    font-size:14px;
-    color: #0277bd;
-    font-size:0.85em;
-}
+    {
+        top:0px;
+        font-size:14px;
+        color: #0277bd;
+        font-size:0.85em;
+    }
 
 /* BOTTOM BARS ================================= */
 .bar
-{
-    position:relative;
-    display:block;
-    width:100%;
-}
+    {
+        position:relative;
+        display:block;
+        width:100%;
+    }
 .bar:before, .bar:after
 {
     content:'';
@@ -2417,10 +2417,7 @@ TREEVIEW
         margin-bottom:1px;
         border-left:2px dotted #ddd;
         border-bottom:2px dotted #ddd;
-
-
     }
-
 
 /**/
 
@@ -2470,11 +2467,11 @@ TREEVIEW
         top:25% !important;
         box-shadow:1px 1px 10px #333;
         z-index: 999999999;
-       left:100%;
-       transform:scale(0,0);
-       opacity:0;
-      visibility:hidden;
-      transition:0.5s;
+        left:100%;
+        transform:scale(0,0);
+        opacity:0;
+        visibility:hidden;
+        transition:0.5s;
     }
 .modal-paper.stash
     {
@@ -2486,9 +2483,9 @@ TREEVIEW
 .modal-simples.stash,
 .modal-rotate.stash
     {
-    top: 15%;
-    opacity:1;
-    visibility:visible;
+        top: 15%;
+        opacity:1;
+        visibility:visible;
     }
 .modal-rotate.stash
     {
@@ -2500,9 +2497,10 @@ TREEVIEW
     }
 .modal-bottom
     {
-        position:absolute;
+        position:fixed;
         width:100%;
         height:auto;
+        left:0;
         background:#efefef;
         transition:1s;
         bottom:-65%;
@@ -2567,13 +2565,73 @@ TREEVIEW
         bottom:0;
         position:absolute;
     }
-.modal-paper
+.modal-fullscreen
     {
-
+        position:fixed;
+        width:100%;
+        height:100%;
+        top:-100%;
+        left:-100%;
+        background:#efefef;
+        transition:0.3s;
+        opacity:0;
+        visibility:hidden;
+        tansform:scale(0,0);
     }
-.modal-paper.stash
+.modal-fullscreen.stash
     {
-
+        top:0;
+        left:0;
+        z-index:999999999;
+        transform: rotate(360deg);
+        /*tansform:scale(1,1);*/
+        opacity:1;
+        visibility:visible;
+    }
+.modal-mini
+    {
+        position:absolute;
+        width:25%;
+        height:auto;
+        background:#efefef;
+        transition:0.5s;
+        /*opacity:0;
+        visibility:hidden;*/
+        bottom:-65%;
+        right:-65%;
+        z-index:999999999;
+        transform:scale(0,0);
+    }
+.modal-mini.stash
+    {
+        bottom:1%;
+        right:1%;
+        opacity:1;
+        visibility:visible;
+        transform:scale(1,1);
+    }
+.modal-mini-center
+    {
+        position: absolute;
+        width: 25%;
+        height: auto;
+        background: #efefef;
+        box-shadow: 1px 1px 10px #333;
+        z-index: 999999999;
+        top: -100%;
+        left: 25%;
+        border-radius:3px;
+        transition:0.5s;
+        opacity:0;
+        visibility:hidden;
+    }
+.modal-mini-center.stash
+    {
+        left:25%;
+        top:25%;
+        transform:scale(1,1);
+        opacity:1;
+        visibility:visible;
     }
 .modal-header
     {
@@ -2599,6 +2657,13 @@ TREEVIEW
     {
         color:#fff !important;
         margin-top:-6px;
+        transition:0.5s;
     }
-
+.bt-modal-close:hover
+    {
+        transform:rotate(180deg);
+    }
 /**/
+
+
+
