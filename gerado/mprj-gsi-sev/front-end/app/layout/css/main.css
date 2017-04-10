@@ -1623,6 +1623,7 @@ a.color-cloud:hover
     -webkit-transition:0.3s;
     -moz-transition:0.3s;
     margin-bottom:7px;
+    border-radius:4px;
 }
 .card:hover
 {
@@ -1738,7 +1739,8 @@ a.color-cloud:hover
 .card.card-amethyst a,
 .card.card-asphalt a,
 .card.card-emerald a,
-.card.card-carrot a
+.card.card-carrot a,
+.card.card-alizarin a
     {
         color:#fff;
     }
@@ -1809,6 +1811,19 @@ a.color-cloud:hover
     }
 
 /**/
+.card-alizarin,
+.card-alizarin:hover
+    {
+        color:#fff;
+        background: rgb(231,76,60); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(231,76,60,1) 0%, rgba(206,75,55,1) 50%, rgba(231,76,60,1) 50%, rgba(206,75,55,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(231,76,60,1)), color-stop(50%,rgba(206,75,55,1)), color-stop(50%,rgba(231,76,60,1)), color-stop(100%,rgba(206,75,55,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(45deg,  rgba(231,76,60,1) 0%,rgba(206,75,55,1) 50%,rgba(231,76,60,1) 50%,rgba(206,75,55,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(45deg,  rgba(231,76,60,1) 0%,rgba(206,75,55,1) 50%,rgba(231,76,60,1) 50%,rgba(206,75,55,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(45deg,  rgba(231,76,60,1) 0%,rgba(206,75,55,1) 50%,rgba(231,76,60,1) 50%,rgba(206,75,55,1) 100%); /* IE10+ */
+        background: linear-gradient(45deg,  rgba(231,76,60,1) 0%,rgba(206,75,55,1) 50%,rgba(231,76,60,1) 50%,rgba(206,75,55,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e74c3c', endColorstr='#ce4b37',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
 /*FLOATING LABEL*/
 .inputMaterial
     {

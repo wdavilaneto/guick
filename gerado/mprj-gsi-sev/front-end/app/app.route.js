@@ -82,6 +82,12 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/mailbox.html"
             })
+            .state('widgets', {
+                url: "/widgets",
+                controller: 'WidgetsController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/widgets.html"
+            })
         ;
     }
 })();
