@@ -521,22 +521,22 @@ a.dropdown-toggle:focus
 
 /* RIGHT-SIDE & LEFT-SIDE */
 .left-side
-{
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#364354+0,2e3a48+50,364354+50,2e3a48+100 */
-    background: rgb(54,67,84); /* Old browsers */
-    background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    width:20%;
-    height:100%;
-    transtion:0.5s;
-    -webkit-transition:0.5s;
-    -moz-transiton:0.5s;
-    float:left;
-    /*border-right:1px solid #ddd;*/
-    z-index:9999;
-}
+    {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#364354+0,2e3a48+50,364354+50,2e3a48+100 */
+        background: rgb(54,67,84); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        width:20%;
+        height:100%;
+        transtion:0.5s;
+        -webkit-transition:0.5s;
+        -moz-transiton:0.5s;
+        float:left;
+        /*border-right:1px solid #ddd;*/
+        z-index:9999;
+    }
 .left-side.stash-all,
 .left-side.stash
 {
