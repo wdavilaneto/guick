@@ -88,6 +88,10 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/widgets.html"
             })
+            .state('form', {
+                url: "/form",
+                templateUrl: "layout/prototipo/form.html"
+            })
         ;
     }
 })();
