@@ -37,17 +37,51 @@
                 templateUrl: "layout/prototipo/book.html"
             })
             .state('slick', {
-                            url: "/slick",
-                            controller: 'SlickController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/slick.html"
-                        })
+                url: "/slick",
+                controller: 'SlickController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/slick.html"
+            })
             .state('pagination', {
-                            url: "/pagination",
-                            controller: 'PageController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/pagination.html"
-                        })
+                url: "/pagination",
+                controller: 'PageController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/pagination.html"
+            })
+            .state('treeview', {
+                url: "/treeview",
+                controller: 'TreeviewController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/treeview.html"
+            })
+            .state('modal', {
+                url: "/modal",
+                controller: 'ModalPrototipoController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/modal.html"
+            })
+            .state('graficos', {
+                url: "/graficos",
+                controller: 'GraficosController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/graficos.html"
+            })
+            .state('mailbox', {
+                url: "/mailbox",
+                controller: 'MailBoxController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/mailbox.html"
+            })
+            .state('widgets', {
+                url: "/widgets",
+                controller: 'WidgetsController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/widgets.html"
+            })
+            .state('form', {
+                url: "/form",
+                templateUrl: "layout/prototipo/form.html"
+            })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao

@@ -57,7 +57,7 @@
             <label for="${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
         </div>
         <div class="col-md-2">
-            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+            <button type="button" class="bt bt-asphalt bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
         </div>
     </div>
 #end
