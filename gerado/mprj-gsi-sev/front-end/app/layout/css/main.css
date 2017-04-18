@@ -1516,6 +1516,19 @@ a.color-cloud:hover
     padding:7px;
     color:#ecf0f1;
 }
+.alarm-cloud
+    {
+        color:#364354;
+        background: #eaeaea; /* Old browsers */
+        background: -moz-linear-gradient(45deg,  #eaeaea 0%, #e2e2e2 52%, #eaeaea 52%, #d8d8d8 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#eaeaea), color-stop(52%,#e2e2e2), color-stop(52%,#eaeaea), color-stop(100%,#d8d8d8)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(45deg,  #eaeaea 0%,#e2e2e2 52%,#eaeaea 52%,#d8d8d8 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(45deg,  #eaeaea 0%,#e2e2e2 52%,#eaeaea 52%,#d8d8d8 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(45deg,  #eaeaea 0%,#e2e2e2 52%,#eaeaea 52%,#d8d8d8 100%); /* IE10+ */
+        background: linear-gradient(45deg,  #eaeaea 0%,#e2e2e2 52%,#eaeaea 52%,#d8d8d8 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#d8d8d8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        border:1px solid #ddd;
+    }
 .alarm-river
 {
     background: #0277bd; /* Old browsers */
@@ -1576,6 +1589,16 @@ a.color-cloud:hover
         background: linear-gradient(45deg,  rgba(0,192,239,1) 0%,rgba(0,171,214,1) 50%,rgba(0,192,239,1) 50%,rgba(0,171,214,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c0ef', endColorstr='#00abd6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     }
+.alarm-asphalt
+        {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#364354+0,2e3a48+50,364354+50,2e3a48+100 */
+        background: rgb(54,67,84); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+
 /**/
 
 /*FORMULARIO*/
@@ -1784,6 +1807,12 @@ a.color-cloud:hover
         background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+.card.card-asphalt hr
+    {
+        border:0;
+        border-bottom:1px solid rgba(255, 255, 255, 0.2);
+
     }
 .card-emerald,
 .card-emerald:hover
@@ -2689,3 +2718,44 @@ TREEVIEW
     border-bottom: 1px solid red;
     background: #e8d6d6;
 }
+
+
+/* WIZARD */
+ul.nav.nav-pills.nav-justified
+    {
+        padding-bottom: 2px;
+        border-bottom: 1px solid #ddd;
+    }
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus
+    {
+        border-radius:0;
+        padding:14px;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#364354+0,2e3a48+50,364354+50,2e3a48+100 */
+        background: rgb(54,67,84); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    }
+.nav-pills > li a:hover,
+.nav-pills > li a:focus
+    {
+        border:0 !important;
+        color:#fff;
+        background: rgb(54,67,84) !important; /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%) !important; /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%); !important/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#364354', endColorstr='#2e3a48',GradientType=1 ) !important; /* IE6-9 fallback on horizontal gradient */
+        border-radius:0;
+        padding:14px;
+    }
+.nav-justified > li > a
+    {
+        color:#364354;
+    }
+
+
