@@ -42,17 +42,17 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/pagination.html"
             })
-             .state('progressbar', {
+            .state('progressbar', {
                 url: "/progressbar",
                 controller: 'ProgressivebarController',
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/progressbar.html"
             })
-             .state('alertas', {
+            .state('alertas', {
                 url: "/alertas",
                 templateUrl: "layout/prototipo/alertas.html"
             })
-             .state('botoes', {
+            .state('botoes', {
                 url: "/botoes",
                 controller: 'BotoesController',
                 controllerAs: 'vm',

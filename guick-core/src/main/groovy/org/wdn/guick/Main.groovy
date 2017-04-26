@@ -33,7 +33,7 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("../sev")
+            main.project.initialize("../mid")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
 //            main.project.persist()
