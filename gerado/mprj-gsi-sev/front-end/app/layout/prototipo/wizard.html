@@ -1,0 +1,32 @@
+<section class="content-header">
+    <h1>
+        <i class="mdi mdi-code-greater-than"></i>
+        Wizard
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            wizard
+        </li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row-form h-100">
+        <div class="col-md-12">
+            <div id="wizard-container">
+                <div id="wizard-step-container">
+                    <ul class="nav nav-pills nav-justified">
+                        <li ng-repeat="step in vm.steps" ng-class="{'active':step.step == vm.currentStep}"><a ng-click="vm.gotoStep(step.step)" href="">{{step.step}}. {{step.name}}</a></li>
+                    </ul>
+                </div>
+                <div id="wizard-content-container">
+                    <ng-include src="vm.getStepTemplate()"></ng-include>
+                </div>
+                <div id="wizard-navigation-container">
+                    <button ng-disabled="vm.currentStep <= 1" class="bt bt-asphalt" name="previous" type="button" ng-click="vm.gotoStep(vm.currentStep - 1)"><i class="mdi mdi-chevron-left"></i> Previous step</button>
+                    <button ng-disabled="vm.currentStep >= vm.steps.length" class="bt bt-asphalt" name="next" type="button" ng-click="vm.gotoStep(vm.currentStep + 1)">Next step <i class="mdi mdi-chevron-right"></i></button>
+                    <button ng-disabled="vm.currentStep != vm.steps.length" class="bt bt-asphalt" name="next" type="button" ng-click="vm.save()"> <i class="mdi mdi-content-save"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -92,6 +92,13 @@
                 url: "/form",
                 templateUrl: "layout/prototipo/form.html"
             })
+             .state('wizard', {
+                url: "/wizard",
+                controller: 'WizardController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/wizard.html"
+            })
+
         ;
     }
 })();
