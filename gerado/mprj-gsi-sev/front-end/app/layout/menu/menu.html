@@ -36,6 +36,7 @@
                 <a href="#/integranteComissao" title="Integrante Comissao">
                     <i class="mdi mdi-file-document-box"></i> {{"menu.integranteComissao" | translate}}
                 </a>
+
             </accordion-group>
             <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
@@ -97,18 +98,33 @@
                     <i class="mdi mdi-file-document"></i> {{"menu.tipoRelatorio" | translate}}
                 </a>
             </accordion-group>
+
             <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span> {{"menu.prototipos" | translate}} </span>
                      <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
+                <accordion>
+                    <accordion-group is-open="status.isSubmenuOpen" ng-if="isAuthenticated || true">
+                        <accordion-heading>
+                            <span>
+                                <i class=""></i>
+                                Ui Kit
+                                <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.isSubmenuOpen, 'mdi-chevron-right': !status.isSubmenuOpen}"></i>
+                            </span>
+                        </accordion-heading>
+                        <a href="#/alertas" class="ng-binding"><i class="mdi mdi-alert"></i> alertas</a>
+                        <a href="#/botoes" class="ng-binding"><i class="mdi mdi-check-circle"></i> Botoes</a>
+                        <a href="#/boxes" class="ng-binding"><i class="mdi mdi-checkbox-blank"></i> Boxes</a>
+                        <a href="#/dropdown" class="ng-binding"><i class="mdi mdi-check-circle"></i> dropdown</a>
+
+                    </accordion-group>
+                </accordion>
                 <a href="#/cards" class="ng-binding"><i class="mdi mdi-view-grid"></i> Cards</a>
-                <a href="#/book" class="ng-binding"><i class="mdi mdi-book-open-variant"></i> Book</a>
+                <!--<a href="#/book" class="ng-binding"><i class="mdi mdi-book-open-variant"></i> Book</a>-->
                 <a href="#/slick" class="ng-binding"><i class="mdi mdi-view-carousel"></i> Slick</a>
                 <a href="#/pagination" class="ng-binding"><i class="mdi mdi-view-module"></i> paginação</a>
                 <a href="#/progressbar" class="ng-binding"><i class="mdi mdi-timelapse"></i> progressbar</a>
-                <a href="#/alertas" class="ng-binding"><i class="mdi mdi-alert"></i> alertas</a>
-                <a href="#/botoes" class="ng-binding"><i class="mdi mdi-check-circle"></i> Botoes</a>
                 <a href="#/treeview" class="ng-binding"><i class="mdi mdi-sitemap sitemap90"></i> Treeview</a>
                 <a href="#/modal" class="ng-binding"><i class="mdi mdi-open-in-new"></i>Modal</a>
                 <a href="#/graficos" class="ng-binding"><i class="mdi mdi-chart-line"></i>Gráficos</a>
@@ -116,7 +132,9 @@
                 <a href="#/widgets" class="ng-binding"><i class="mdi mdi-wrench"></i>Widgets</a>
                 <a href="#/form" class="ng-binding"><i class="mdi mdi-pencil-box-outline"></i>Formulários</a>
                 <a href="#/wizard" class="ng-binding"><i class="mdi mdi-code-greater-than"></i>Wizard</a>
+
             </accordion-group>
+
             <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
                     <span>{{"menu.sistema" | translate}}</span>
