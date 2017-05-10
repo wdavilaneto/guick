@@ -98,6 +98,18 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/wizard.html"
             })
+             .state('boxes', {
+                url: "/boxes",
+                controller: 'botoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/boxes.html"
+                        })
+            .state('labels', {
+                url: "/labels",
+                controller: 'botoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/labels.html"
+                })
 
         ;
     }
