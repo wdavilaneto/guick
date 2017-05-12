@@ -116,6 +116,12 @@
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/headers.html"
                 })
+            .state('aside', {
+                            url: "/aside",
+                            controller: 'BotoesController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/aside.html"
+                            })
 
         ;
     }

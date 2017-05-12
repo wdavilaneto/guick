@@ -242,7 +242,7 @@ footer
 .app-name p
 {
     color:#fafafa;
-    font-size: 1.1em;
+    font-size: 1.0em;
     display: block;
     width: 100%;
     padding: 14px 60px;
@@ -622,7 +622,7 @@ a.dropdown-toggle:focus
 .form-control:focus
 {
     border:0;
-    border-bottom:2px solid #00c0ef;
+    border-bottom:2px solid #34495e;
     box-shadow:none;
     background:transparent;
 }
@@ -2820,6 +2820,7 @@ nav.navbar-mprj ul
     {
         display:block;
         float:left;
+        width:100%;
         margin:0;
         padding:0px;
     }
@@ -2872,6 +2873,7 @@ nav.navbar-mprj ul li ul.submenu li
         width:20%;
         margin:auto;
         padding:14px;
+        border-left:1px solid #ccc;
     }
 nav.navbar-mprj ul li ul.submenu li ul
     {
@@ -2889,6 +2891,7 @@ nav.navbar-mprj ul li ul.submenu li ul li
         height:auto !important;
         line-height:inherit;
         padding:0;
+        border:none;
     }
 nav.navbar-mprj ul li ul.submenu li ul h3
     {
@@ -2911,6 +2914,7 @@ nav.navbar-mprj ul li ul.submenu li ul li a
         font-family:'Open-Sans-Light';
         color:#ddd;
         letter-spacing:0.7pt;
+        font-size:0.9em;
 
     }
 nav.navbar-mprj ul li ul.submenu li ul li a:hover

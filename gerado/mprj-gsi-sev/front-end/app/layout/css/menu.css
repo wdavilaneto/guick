@@ -78,6 +78,10 @@
         text-decoration: none;
         text-shadow:none;
     }
+.menu .panel-default > .panel-heading + .panel-collapse > .panel-body a i
+    {
+        color: #7692b5;
+    }
 .menu .panel-group .panel + .panel
     {
         margin-top: 0px;
@@ -100,12 +104,17 @@
         color: #fafafa !important;
         letter-spacing: 1pt;
         text-shadow:1px 1px 2px #000;
-        font-size:0.8em;
+        font-size:0.75em;
     }
 .menu .panel-title > a:hover, .menu .panel-title > a:focus
 {
     text-decoration: none;
 }
+.menu .panel-title > a i
+    {
+        color:#7692b5;
+    }
+
 .menu .accordion-toggle .glyphicon
 {
     color: #fff;
