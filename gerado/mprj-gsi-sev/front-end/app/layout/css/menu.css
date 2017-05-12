@@ -39,6 +39,11 @@
         overflow-y:auto;
         overflow-x:hidden;
     }
+.menu .submenu.panel-default > .panel-heading + .panel-collapse > .panel-body
+    {
+        background:#2e3a48 !important;
+        padding-left:14px;
+    }
     .menu .panel-default > .panel-heading + .panel-collapse > .panel-body:hover
     {
             overflow-y:auto;

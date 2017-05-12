@@ -100,15 +100,21 @@
             })
              .state('boxes', {
                 url: "/boxes",
-                controller: 'botoesController',
+                controller: 'BotoesController',
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/boxes.html"
                         })
             .state('labels', {
                 url: "/labels",
-                controller: 'botoesController',
+                controller: 'BotoesController',
                 controllerAs: 'vm',
                 templateUrl: "layout/prototipo/labels.html"
+                })
+            .state('headers', {
+                url: "/headers",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/headers.html"
                 })
 
         ;

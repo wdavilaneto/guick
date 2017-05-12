@@ -105,19 +105,28 @@
                      <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <accordion>
-                    <accordion-group is-open="status.isSubmenuOpen" ng-if="isAuthenticated || true">
+                    <accordion-group class="submenu" is-open="status.isSubmenuOpenLayout">
+                        <accordion-heading>
+                            <i class="mdi mdi-image-filter-black-white"></i>
+                            layout
+                            <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.isSubmenuOpenLayout, 'mdi-chevron-right': !status.isSubmenuOpenLayout}"></i>
+                        </accordion-heading>
+                        <a href="#/headers" class="ng-binding"><i class="mdi mdi-alert"></i> Headers</a>
+                    </accordion-group>
+                    <accordion-group class="submenu" is-open="status.isSubmenuOpenUi" ng-if="isAuthenticated || true">
                         <accordion-heading>
                             <span>
-                                <i class=""></i>
+                                <i class="mdi mdi-television-guide"></i>
                                 Ui Kit
-                                <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.isSubmenuOpen, 'mdi-chevron-right': !status.isSubmenuOpen}"></i>
+                                <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.isSubmenuOpenUi, 'mdi-chevron-right': !status.isSubmenuOpenUi}"></i>
                             </span>
                         </accordion-heading>
                         <a href="#/alertas" class="ng-binding"><i class="mdi mdi-alert"></i> alertas</a>
                         <a href="#/botoes" class="ng-binding"><i class="mdi mdi-check-circle"></i> Botoes</a>
                         <a href="#/boxes" class="ng-binding"><i class="mdi mdi-checkbox-blank"></i> Boxes</a>
-                        <a href="#/dropdown" class="ng-binding"><i class="mdi mdi-check-circle"></i> dropdown</a>
-                        <a href="#/labels" class="ng-binding"><i class="mdi mdi-check-circle"></i> Labels</a>
+                        <!--<a href="#/dropdown" class="ng-binding"><i class="mdi mdi-check-circle"></i> dropdown</a>-->
+                        <a href="#/modal" class="ng-binding"><i class="mdi mdi-open-in-new"></i>Modal</a>
+                        <a href="#/labels" class="ng-binding"><i class="mdi mdi-label"></i> Labels</a>
 
                     </accordion-group>
                 </accordion>
@@ -127,7 +136,6 @@
                 <a href="#/pagination" class="ng-binding"><i class="mdi mdi-view-module"></i> paginação</a>
                 <a href="#/progressbar" class="ng-binding"><i class="mdi mdi-timelapse"></i> progressbar</a>
                 <a href="#/treeview" class="ng-binding"><i class="mdi mdi-sitemap sitemap90"></i> Treeview</a>
-                <a href="#/modal" class="ng-binding"><i class="mdi mdi-open-in-new"></i>Modal</a>
                 <a href="#/graficos" class="ng-binding"><i class="mdi mdi-chart-line"></i>Gráficos</a>
                 <a href="#/mailbox" class="ng-binding"><i class="mdi mdi-email"></i>Caixa de Mensagem</a>
                 <a href="#/widgets" class="ng-binding"><i class="mdi mdi-wrench"></i>Widgets</a>
