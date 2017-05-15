@@ -36,7 +36,6 @@
                 <a href="#/integranteComissao" title="Integrante Comissao">
                     <i class="mdi mdi-file-document-box"></i> {{"menu.integranteComissao" | translate}}
                 </a>
-
             </accordion-group>
             <accordion-group is-open="status.open" ng-if="isAuthenticated || true">
                 <accordion-heading>
@@ -105,7 +104,7 @@
                      <i class="pull-right mdi mdi-chevron-right" ng-class="{'mdi-chevron-down': status.open, 'mdi-chevron-right': !status.open}"></i>
                 </accordion-heading>
                 <accordion>
-                    <accordion-group class="submenu" is-open="status.isSubmenuOpenLayout">
+                    <accordion-group class="submenu" is-open="status.isSubmenuOpenLayout" ng-if="isAuthenticated || true">
                         <accordion-heading>
                             <i class="mdi mdi-image-filter-black-white"></i>
                             layout

@@ -304,12 +304,10 @@
         transform: translateX(0);
     }
 }
-
 .fadeInRight {
     -webkit-animation-name: fadeInRight;
     animation-name: fadeInRight;
     animation-duration:2s;
-
 }
 @-webkit-keyframes fadeInLeft {
     0% {

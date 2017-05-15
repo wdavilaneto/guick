@@ -16,9 +16,5 @@
         middle: true,
         right: false
         };
-
-
-
-
     }
 })();

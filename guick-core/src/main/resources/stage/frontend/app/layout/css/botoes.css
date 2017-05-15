@@ -597,3 +597,13 @@ button.bt-transparent
 
 
 /**/
+
+.bt.disabled, .bt[disabled], fieldset[disabled] .bt
+    {
+       pointer-events: none;
+           cursor: not-allowed;
+           filter: alpha(opacity=65);
+           -webkit-box-shadow: none;
+           box-shadow: none;
+           opacity: .35;
+    }

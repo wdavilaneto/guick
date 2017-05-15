@@ -60,7 +60,7 @@
         -ms-transition: 0.3s;
         color: rgba(255,255,255,0.6);
         letter-spacing: 1pt;
-        font-size:0.75em;
+        font-size:0.85em;
         text-shadow:1px 1px rgba(0,0,0,0.3) ;
         /*border-bottom:1px solid rgba(255,255,255,0.1);*/
     }
@@ -104,7 +104,7 @@
         color: #fafafa !important;
         letter-spacing: 1pt;
         text-shadow:1px 1px 2px #000;
-        font-size:0.75em;
+        font-size:0.85em;
     }
 .menu .panel-title > a:hover, .menu .panel-title > a:focus
 {

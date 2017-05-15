@@ -98,6 +98,36 @@
                 url: "/form",
                 templateUrl: "layout/prototipo/form.html"
             })
+            .state('wizard', {
+                url: "/wizard",
+                controller: 'WizardController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/wizard.html"
+            })
+            .state('boxes', {
+                url: "/boxes",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/boxes.html"
+                        })
+            .state('labels', {
+                url: "/labels",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/labels.html"
+                })
+            .state('headers', {
+                url: "/headers",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/headers.html"
+                })
+            .state('aside', {
+                            url: "/aside",
+                            controller: 'BotoesController',
+                            controllerAs: 'vm',
+                            templateUrl: "layout/prototipo/aside.html"
+                            })
         ;
 
     ##TODO: Nao encontra o arquivo com essa linha. Investigar outra solucao

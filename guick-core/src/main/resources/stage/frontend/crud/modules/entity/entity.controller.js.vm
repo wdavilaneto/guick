@@ -189,7 +189,8 @@ angular.module('${projectBeanName}App')
         function cssClassByStatus(status) {
             var cssClasses = {PENDENTE: 'bkg-amethyst', CONCLUIDO: 'bkg-river', CANCELADO: 'bkg-silver'};
             try {
-                return cssClasses[status];
+                return 'bkg-river';
+                //return cssClasses[status];
             } catch (ex){
                 return 'bkg-amethyst';
             }

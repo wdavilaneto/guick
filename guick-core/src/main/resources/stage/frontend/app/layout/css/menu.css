@@ -39,6 +39,11 @@
         overflow-y:auto;
         overflow-x:hidden;
     }
+.menu .submenu.panel-default > .panel-heading + .panel-collapse > .panel-body
+    {
+        background:#2e3a48 !important;
+        padding-left:14px;
+    }
     .menu .panel-default > .panel-heading + .panel-collapse > .panel-body:hover
     {
             overflow-y:auto;
@@ -55,9 +60,9 @@
         -ms-transition: 0.3s;
         color: rgba(255,255,255,0.6);
         letter-spacing: 1pt;
-        font-size:1em;
+        font-size:0.85em;
         text-shadow:1px 1px rgba(0,0,0,0.3) ;
-        border-bottom:1px solid rgba(255,255,255,0.1);
+        /*border-bottom:1px solid rgba(255,255,255,0.1);*/
     }
 .menu .panel-default > .panel-heading + .panel-collapse > .panel-body a:hover
     {
@@ -72,6 +77,10 @@
         color: #fff;
         text-decoration: none;
         text-shadow:none;
+    }
+.menu .panel-default > .panel-heading + .panel-collapse > .panel-body a i
+    {
+        color: #7692b5;
     }
 .menu .panel-group .panel + .panel
     {
@@ -95,12 +104,17 @@
         color: #fafafa !important;
         letter-spacing: 1pt;
         text-shadow:1px 1px 2px #000;
-        font-size:1em;
+        font-size:0.85em;
     }
 .menu .panel-title > a:hover, .menu .panel-title > a:focus
 {
     text-decoration: none;
 }
+.menu .panel-title > a i
+    {
+        color:#7692b5;
+    }
+
 .menu .accordion-toggle .glyphicon
 {
     color: #fff;

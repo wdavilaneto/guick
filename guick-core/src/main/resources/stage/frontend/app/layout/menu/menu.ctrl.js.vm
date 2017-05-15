@@ -40,5 +40,8 @@
                 ${js}(".content-notification-detail").removeClass("stash");
                 ${js}(".content-notification").removeClass("stash");
             };
+            ${js}scope.openHeaderSubmenu = function(){
+                ${js}("nav.navbar-mprj ul li ul.submenu, nav.navbar-mprj ul li a.brand").toggleClass("stash");
+            };
     }]);
 })();
