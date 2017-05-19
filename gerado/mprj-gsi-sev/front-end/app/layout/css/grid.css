@@ -113,6 +113,7 @@ input.ngPagerCurrent {
     height:auto !important;
     min-height:30px;
     padding-bottom:39px;
+    border-radius:6px 6px 0 0;
 }
 
 .ui-grid-pager-panel{

@@ -216,7 +216,6 @@ h1 a.bt
 button.bt-river
     {
         color:#fff;
-        background-color:
         background: #0277bd;
         background: -moz-linear-gradient(-45deg,  #0277bd 0%, #0277bd 51%, #016fb0 51%, #016fb0 100%);
         background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#0277bd), color-stop(51%,#0277bd), color-stop(51%,#016fb0), color-stop(100%,#016fb0));
@@ -235,6 +234,24 @@ button.bt-river
         color:#fafafa;
     }
 /**/
+/*BOTÃO AZUL SECUNDARIO*/
+    .bt-cloudy,
+    button.bt-cloudy
+        {
+            color:#fff;
+            background: rgb(118,146,181);
+            background: -moz-linear-gradient(45deg,  rgba(118,146,181,1) 0%, rgba(102,122,155,1) 50%, rgba(118,146,181,1) 50%, rgba(102,122,155,1) 100%);
+            background: -webkit-linear-gradient(45deg,  rgba(118,146,181,1) 0%,rgba(102,122,155,1) 50%,rgba(118,146,181,1) 50%,rgba(102,122,155,1) 100%);
+            background: linear-gradient(45deg,  rgba(118,146,181,1) 0%,rgba(102,122,155,1) 50%,rgba(118,146,181,1) 50%,rgba(102,122,155,1) 100%);
+            border-color:#46546B !important ;
+            text-shadow:1px 1px 3px #46546B;
+        }
+    .bt-cloud:hover,
+    .bt-cloudy:focus
+        {
+            background:#667a9b !important;
+            color:#fafafa;
+        }
 /*BOTÃO AZUL CLARO*/
 .bt-sky,
 button.bt-sky

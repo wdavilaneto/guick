@@ -87,13 +87,6 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <div ng-include src="'modules/candidato/components/candidato.filter.html'"></div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <a ng-click="openContentExpand()" class="bt bt-asphalt bt-circle bt-sm pull-right bt-expand" href="">
-                                            <i class="mdi mdi-chevron-down"></i>
-                                        </a>
-                                    </div>
-                                </div>
                                 <hr/>
                                 <div class="row hidden-sm hidden-xs">
                                     <div class="col-md-12">
@@ -101,6 +94,9 @@
                                         <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
                                         <a class="bt bt-river" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
                                         <a class="bt bt-deeppurple" href="" ui-sref="candidatoEdit.main()"><i class="mdi mdi-plus"></i> Novo </a>
+                                        <a ng-click="openContentExpand()" class="bt bt-asphalt bt-circle bt-sm pull-right bt-expand" href="">
+                                            <i class="mdi mdi-chevron-down"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="row hidden-md hidden-lg">
