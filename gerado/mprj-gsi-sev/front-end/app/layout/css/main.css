@@ -262,6 +262,7 @@ footer
     position:relative;
     padding:14px;
     overflow-y:auto;
+
 }
 .content-header
 {
@@ -290,56 +291,56 @@ footer
 /**/
 /*BREADCRUMB*/
 .breadcrumb
-{
-    background: transparent;
-    border-radius: 0;
-    margin-bottom: 0;
-    padding: 3px 7px;
-}
+    {
+        background: transparent;
+        border-radius: 0;
+        margin-bottom: 0;
+        padding: 3px 7px;
+    }
 .breadcrumb > li
-{
-    font-size:0.75em;
-    letter-spacing:0.7pt;
-    text-transform:uppercase;
-    font-weight:normal;
-    color:#2e3a48;
-}
+    {
+        font-size:0.75em;
+        letter-spacing:0.7pt;
+        text-transform:uppercase;
+        font-weight:normal;
+        color:#2e3a48;
+    }
 .breadcrumb > li a
-{
-    color:#2e3a48;
-}
+    {
+        color:#2e3a48;
+    }
 .breadcrumb > li + li:before
-{
-    color:#3498DB;
-}
+    {
+        color:#3498DB;
+    }
 /**/
 
 /*NAVBAR*/
 .navbar-default
-{
-    border:0;
-    background: rgb(54,67,84) !important;
-    background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%) !important;
-    background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
-    background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
-}
+    {
+        border:0;
+        background: rgb(54,67,84) !important;
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%) !important;
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
+    }
 .navbar
-{
-    border-radius:0;margin-bottom: 0;
-}
+    {
+        border-radius:0;margin-bottom: 0;
+    }
 .navbar-brand,
 .navbar-brand:hover
-{
-    width: 220px;
-    background: url(../images/logo-mprj.png);
-    text-indent: -9999px;
-    -webkit-transition: 1s;
-    -moz-transition: 1s;
-    line-height: inherit;
-    float: none;
-    display: block;
-    margin: 0 auto;
-}
+    {
+        width: 220px;
+        background: url(../images/logo-mprj.png);
+        text-indent: -9999px;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        line-height: inherit;
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
 .navbar-brand:hover
 {
 
@@ -1977,7 +1978,7 @@ input[type="text"].ui-grid-filter-input
         border-bottom:1px solid #ededed;
         transition:0.5s;
         -webkit-transition:0.5s;
-        color:#98bcea;
+        color:#323e4d;
         font-family:'Open-Sans-Light'
         padding:7px;
     }
@@ -1986,7 +1987,7 @@ input[type="text"].ui-grid-filter-input:focus
     {
         outline:none;
         border:0;
-        border-bottom:1px solid #7692b5;
+        border-bottom:1px solid #323e4d;
     }
 .ui-grid-filter-container .ui-grid-filter-button
     {
@@ -2035,7 +2036,7 @@ input[type="text"].ui-grid-filter-input:focus
 .ui-grid-cell-contents.ui-grid-header-cell-primary-focus:focus
     {
         outline:none;
-        color:#7692b5;
+        color:#323e4d;
     }
 .ui-grid-pager-count-container
     {
@@ -2215,10 +2216,11 @@ input[type="text"].ui-grid-filter-input:focus
 .search-filter-control
     {
         width:100%;
+        height:100%;
         margin:0;
         position:absolute;
         z-index:9999;
-        transform:translate(0, -130px);
+        transform:translate(0, -200%);
         transition:0.7s;
         -webkit-transition:0.7s;
         -moz-transition:0.7s;
@@ -2232,11 +2234,9 @@ input[type="text"].ui-grid-filter-input:focus
 .search-filter-content
     {
         width:100%;
+        height:100%;
         padding:15px 40px;
-        background: rgb(54,67,84) !important;
-        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%) !important;
-        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
-        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
+        background:#fafafa;
     }
 .search-filter-content .form-control
     {
