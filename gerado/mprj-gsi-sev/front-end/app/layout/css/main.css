@@ -2009,11 +2009,9 @@ input[type="text"].ui-grid-filter-input:focus
         background: -webkit-linear-gradient(45deg,  rgba(118,146,181,1) 0%,rgba(102,122,155,1) 50%,rgba(118,146,181,1) 50%,rgba(102,122,155,1) 100%);
         background: linear-gradient(-45deg,  rgba(118,146,181,1) 0%,rgba(102,122,155,1) 50%,rgba(118,146,181,1) 50%,rgba(102,122,155,1) 100%);
         padding:14px;
-        border-radius:0 0 6px 6px;
     }
 .ui-grid-top-panel
     {
-        border-radius: 6px 6px 0 0;
         color:#fff;
         background: rgb(118,146,181);
         background: -moz-linear-gradient(45deg,  rgba(118,146,181,1) 0%, rgba(102,122,155,1) 50%, rgba(118,146,181,1) 50%, rgba(102,122,155,1) 100%);
@@ -2026,9 +2024,9 @@ input[type="text"].ui-grid-filter-input:focus
     }
 .ui-grid-cell-contents.ui-grid-header-cell-primary-focus
     {
-        transition;0.5s;
-        -moz-transition;0.5s;
-        -webkit-transition;0.5s;
+        transition:0.5s;
+        -moz-transition:0.5s;
+        -webkit-transition:0.5s;
     }
  span.ui-grid-cell-contents.ui-grid-header-cell-primary-focus
     {
@@ -2233,15 +2231,16 @@ input[type="text"].ui-grid-filter-input:focus
     }
 .search-filter-content
     {
-        background:#fafafa;
         width:100%;
         padding:15px 40px;
-        border-bottom:1px solid #ccc;
+        background: rgb(54,67,84) !important;
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%) !important;
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
+        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%) !important;
     }
-.search-filter-control .inputMaterial:focus ~ label,
-.search-filter-control .inputMaterial:valid ~ label
+.search-filter-content .form-control
     {
-        top:-5px;
+        color:#fff;
     }
 
 .search-filter-bt
