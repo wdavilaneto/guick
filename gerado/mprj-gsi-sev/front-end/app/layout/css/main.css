@@ -2238,10 +2238,10 @@ input[type="text"].ui-grid-filter-input:focus
         padding:15px 40px;
         background:#fafafa;
     }
-.search-filter-content .form-control
+/*.search-filter-content .form-control
     {
         color:#fff;
-    }
+    }*/
 
 .search-filter-bt
     {
