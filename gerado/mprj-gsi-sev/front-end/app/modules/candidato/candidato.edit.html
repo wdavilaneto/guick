@@ -11,18 +11,20 @@
 </section>
 
 <section class="content">
-    <div class="box box-primary">
-        <form name="mainForm" novalidate>
-            <tabset>
-                <tab ng-repeat="tab in vm.tabs" ng-click="vm.changeTab(tab.route)" ng-show="tab.visible">
-                    <tab-heading>
-                        <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
-                    </tab-heading>
-                </tab>
-            </tabset>
-            <div class="row">
-                <ui-view />
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="mainForm" novalidate>
+                <tabset>
+                    <tab ng-repeat="tab in vm.tabs" ng-click="vm.changeTab(tab.route)" ng-show="tab.visible">
+                        <tab-heading>
+                            <i class="mdi {{tab.icon}}"></i><span>{{tab.heading}}</span>
+                        </tab-heading>
+                    </tab>
+                </tabset>
+                <div class="row">
+                    <ui-view />
+                </div>
+            </form>
+        </div>
     </div>
 </section>
