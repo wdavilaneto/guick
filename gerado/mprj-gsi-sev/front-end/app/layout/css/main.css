@@ -14,10 +14,15 @@ body
 {
     background:#ecf0f1;
     overflow:hidden;
+    background: rgb(54,67,84);
+    background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
+    background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
+    background: linear-gradient(-198deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
 }
 body, html
 {
     height:100%;
+
 }
 html
 {
@@ -263,6 +268,7 @@ footer
     padding:14px;
     overflow-y:auto !important;
     overflow-x:hidden;
+    background:#fafafa;
 
 }
 .content-header
@@ -508,7 +514,7 @@ a.dropdown-toggle:focus
         background: rgb(54,67,84);
         background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
         background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
-        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
+        background: linear-gradient(45deg,  rgba(54,67,84,0.3) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
         width:20%;
         height:100%;
         transition:0.5s;
@@ -565,6 +571,98 @@ a.dropdown-toggle:focus
 /**/
 
 /* LOGIN */
+.content-field-total {
+
+    position: fixed;
+    width: 80%;
+    transform:translate(25%, 0);
+    z-index: 9999;
+    height: 100%;
+    transition:0.5s;
+    -webkit-transition:0.5s;
+    -moz-transition:0.5s;
+}
+.content-field
+    {
+        display:block;
+        width:20%;
+        min-width:358px;
+        margin: 20% auto;
+        box-shadow:5px 1px 50px #252e3a;
+        background: rgb(54,67,84);
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
+        background: linear-gradient(39deg,  rgba(54,67,84,0.3) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
+        animation-name:contentfieldanime;
+        -webkit-animation-name:contentfieldanime;
+        -moz-animation-name:contentfieldanime;
+        animation-duration:1s;
+        -webkit-animation-duration:1.2s;
+        -moz-animation-duration:1.2s;
+        border-radius:4px;
+    }
+
+.content-field h3
+    {
+        width:100%;
+        padding:5%;
+        margin:0;
+        font-size:2em;
+        color:#fff;
+        text-align:center;
+        display:block;
+        font-family:'Open-Sans-Light';
+        border-bottom:10px solid #2c3642;
+        background: rgb(54,67,84); /* Old browsers */
+        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
+        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
+        background: linear-gradient(39deg,  rgba(54,67,84,0.3) 0%,rgba(46,58,72,0.5) 50%,rgba(54,67,84,0.3) 50%,rgba(46,58,72,1) 100%);
+    }
+.content-login,
+.content-pass,
+.content-buttons
+    {
+        width:100%;
+        padding:2% 5%;
+        margin:0;
+    }
+.content-buttons
+    {
+        padding:5% !important;
+    }
+.content-login label,
+.content-pass label
+    {
+        display:block;
+        width:100%;
+        margin:0;
+        padding:0;
+        color:#fff;
+        font-size:0.8em;
+    }
+.content-login input,
+.content-pass input
+    {
+        display:block;
+        width:98%;
+        border:0;
+        padding: 1%;
+        border-bottom:1px solid #999;
+        margin-top:14px;
+        background:transparent;
+        color:#ddd;
+        transition:0.7s;
+        -webkit-transition:0.7s;
+        -moz-transition:0.7s;
+    }
+.content-login input:focus,
+.content-pass input:focus
+    {
+        outline:none;
+        border-color:#cddc39;
+    }
+
+
 .login .left-side, .login .toothlet
 {
     display:none;
@@ -573,44 +671,17 @@ a.dropdown-toggle:focus
 {
     margin-left:0;
 }
-.form-box
-{
-    width: 368px;
-    margin: 15% auto 0 auto;
-    background-color: #ECF0F1;
-    box-shadow: 1px 1px 10px #ccc;
-    border-radius: 0 0 4px 4px;
-    position: absolute;
-    left: 50%;
-}
-.form-box .header
-{
-    padding: 21px;
-    background: rgb(54,67,84);
-    background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
-    background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
-    background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
-    border-radius: 0;
-    font-size: 1.8em;
-    color: #fff;
-    text-align: center;
-}
-.body.bg-gray
-{
-    padding: 14px 14px 7px 14px;
-}
-.footer.bg-gray
-{
-    padding: 7px 14px 14px 14px;
-}
-.footer.bg-gray .btn.btn-primary
+
+
+.content-buttons .bt,
+.content-buttons button.bt,
+.content-buttons a.bt
     {
-        background: rgb(54,67,84);
-        background: -moz-linear-gradient(45deg,  rgba(54,67,84,1) 0%, rgba(46,58,72,1) 50%, rgba(54,67,84,1) 50%, rgba(46,58,72,1) 100%);
-        background: -webkit-linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
-        background: linear-gradient(45deg,  rgba(54,67,84,1) 0%,rgba(46,58,72,1) 50%,rgba(54,67,84,1) 50%,rgba(46,58,72,1) 100%);
-        padding:7px;
+        float:none;
+        width:100%;
     }
+
+
 /**/
 
 /* FORM */
@@ -1472,6 +1543,9 @@ a.color-cloud:hover
     width:100%;
     padding:7px;
     color:#ecf0f1;
+    animation-name:alarmanimate;
+    -webkit-animation-name:alarmanimate;
+    animation-duration:0.7s;
 }
 .alarm-cloud
     {
@@ -1619,7 +1693,7 @@ a.color-cloud:hover
 .card-footer
 {
     padding:14px;
-    border-top:1px dashed #ddd;
+    border-top:1px dashed #ccc;
 }
 .status
 {

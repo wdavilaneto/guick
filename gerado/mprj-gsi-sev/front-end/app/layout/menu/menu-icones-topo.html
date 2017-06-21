@@ -265,29 +265,38 @@
     <button class="toothlet" ng-click="toothlet()" popover="Reduzir Menu" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true">
         <i class="mdi mdi-menu"></i>
     </button>
-    <button popover="Perfil" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true" class="bt-logout pull-left" ng-click="openLogout()">
-        <i class="mdi mdi-account-circle"></i>
-    </button>
+
     <div class="content-logout">
         <div class="row">
+            <div class="col-md-12">
+                <button popover="Perfil" popover-placement="right" popover-trigger="mouseenter" popover-append-to-body="true" class="bt-logout pull-left" ng-click="openLogout()">
+                    <i class="mdi mdi-account-circle"></i>
+                </button>
+            </div>
             <div class="col-md-3">
                 <img class="img-responsive img-circle" src="../layout/images/avatar5.png" alt=""/>
             </div>
             <div class="col-md-9 pd7">
-                <h4 class="color-river">
+                <h4 class="user-name-content">
                     olá, Gustavo Carvalho
                 </h4>
-                <p class="color-river">
+                <small class="user-perfil-content">
                     Administrador
-                </p>
-                <a class="" ng-click="openChangeProfile()" href="">
-                    <i class="mdi mdi-account-convert"></i>
-                </a>
+                </small>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
             </div>
+
         </div>
         <hr/>
         <div class="row">
             <div class="col-md-12">
+                <button class="bt bt-asphalt bt-circle pull-right" ng-click="openChangeProfile()" href="">
+                    <i class="mdi mdi-account-convert"></i>
+                </button>
                 <button  popover="Sair" popover-placement="bottom" popover-trigger="mouseenter" popover-append-to-body="true" class="bt bt-alizarin bt-circle pull-right" >
                     <i class="mdi mdi-logout"></i>
                 </button>

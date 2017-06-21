@@ -117,11 +117,17 @@
                 templateUrl: "layout/prototipo/headers.html"
                 })
             .state('aside', {
-                            url: "/aside",
-                            controller: 'BotoesController',
-                            controllerAs: 'vm',
-                            templateUrl: "layout/prototipo/aside.html"
-                            })
+                url: "/aside",
+                controller: 'BotoesController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/aside.html"
+                })
+             .state('DashboardPrototipo', {
+                url: "/dashboard-prototipo",
+                controller: 'DashboardPrototipoController',
+                controllerAs: 'vm',
+                templateUrl: "layout/prototipo/dashboardPrototipo.html"
+                })
 
         ;
     }
