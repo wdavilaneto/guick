@@ -1,26 +1,18 @@
 guick
-=====
+====
 
-Gradle plugin / (& runtime tools rails like) to "Quick" development of applications
-
-### It (will) Contain ###
+### Project Generation based on database Model
 
 *  General (g)DSL to artifacts generation
-*  Freemarker Templating
-*  Data inputs from csv, wsdl/xsd, database, xpi, and your own java/groovy classes
-*  Archetyping (project startup like maven..)
-*  Usecase Generation from known webflow
+*  Freemarker/Velocity Templating
+*  Data inputs from: database  (json file later)
 
+### Main Usage
 
-### Main Archetype ###
+Runing directly from Main class, it will genrate an guick.json example on specified folder
 
-* Two separated projects (back-end & front-end)
-* spring-boot (mvc, secutiry, data, ioc..)
-* Angular & Bootstrap front (bower & angular)
+    Main main = new Main()
+    main.project.initialize("../sev")  // Specified folder to generate files
+    main.setTarget("stage/create-webapp").run()  // creante main archetype withou any database readings
+    main.setTarget("stage/crud").run()   // Generate Cruds and Master Details based on database
 
-
-### Usage for Gradle users ###
-
-
-
-### Usage for maven3 users ###

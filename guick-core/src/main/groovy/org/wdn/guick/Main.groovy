@@ -36,7 +36,6 @@ class Main {
             main.project.initialize("../sev")
             main.setTarget("stage/create-webapp").run()
             main.setTarget("stage/crud").run()
-//            main.project.persist()
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
