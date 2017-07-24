@@ -1,0 +1,23 @@
+#foreach( ${property} in ${entity.getManyToManyProperties()})
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "${property.constraint.table.name}", joinColumns = {
+#set( $index = 1 )
+#set( $totalValues = ${property.constraint.columnPairs.size()} )
+#foreach( ${columnPair} in ${property.constraint.columnPairs})
+            @JoinColumn(name = "${columnPair.coluna.name}", nullable = false, updatable = false)#if($index < $totalValues ), #end
+#set($index = $index + 1)
+
+#end
+            }, inverseJoinColumns = {
+#set( $index = 1 )
+#set( $totalValues = ${property.inverseConstraint.columnPairs.size()} )
+#foreach( ${columnPair} in ${property.inverseConstraint.columnPairs})
+            @JoinColumn(name = "${columnPair.coluna.name}", nullable = false, updatable = false)#if( $index < $totalValues), #end
+#set( $index = $index + 1)
+
+#end
+            })
+    @JsonIgnore
+    List<${property.getReferedEntity().getType()}> ${property.getName()}; ## = new ArrayList<${property.getReferedEntity().getType()}>(0)
+
+#end

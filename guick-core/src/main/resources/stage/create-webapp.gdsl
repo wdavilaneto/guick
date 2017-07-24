@@ -1,110 +1,104 @@
 def packageBase = project.packageBase
-
 def lang = project.config.generationLanguage
 def orgName = project.lastGroup
 def acronym = project.acronym
+def stage = "stage"
 
 guick {
 
     installPom {
-        //[input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
-        //[input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
-        //[input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
+        //[input: "${stage}/config/pom-parent.xml.vm", output: "/pom.xml"],
+        //[input: "${stage}/config/pom.xml.vm", output: "/api/pom.xml"],
+        //[input: "${stage}/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
 
         "license" {
             templates = [
-                    [input: "stage/license/LICENSE.txt", output: "/LICENSE.txt"]
+                    [input: "archetype/LICENSE.txt", output: "/LICENSE.txt"]
             ]
         }
 
         "configs" {
             templates = [
-//                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
-//                    [input: "stage/config/settings.gradle.vm", output: "/settings.gradle"],
-//                    [input: "stage/config/settings2.gradle.vm", output: "/api/settings.gradle"],
-//                    [input: "stage/config/build.gradle.vm", output: "/api/build.gradle"],
+//                    [input: "${stage}/config/build-root.gradle.vm", output: "/build.gradle"],
+//                    [input: "${stage}/config/settings.gradle.vm", output: "/settings.gradle"],
+//                    [input: "${stage}/config/settings2.gradle.vm", output: "/api/settings.gradle"],
+//                    [input: "${stage}/config/build.gradle.vm", output: "/api/build.gradle"],
+                    [input: "${stage}/config/pom-parent.xml.vm", output: "/pom.xml"],
+                    [input: "${stage}/config/pom.xml.vm", output: "/api/pom.xml"],
+                    [input: "${stage}/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
 
-                    [input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
-                    [input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
-                    [input: "stage/config/pom-front-end.xml.vm", output: "/front-end/pom.xml"],
+                    [input: "${stage}/config/.bowerrc", output: "/front-end/.bowerrc"],
+                    [input: "${stage}/config/.jshintrc", output: "/front-end/.jshintrc"],
+                    [input: "${stage}/config/.gitignore", output: "/front-end/.gitignore"],
+                    [input: "${stage}/config/.gitignore", output: "/api/.gitignore"],
+                    [input: "${stage}/config/.gitignore", output: "/.gitignore"],
+                    [input: "${stage}/config/.gitattributes", output: "/front-end/.gitattributes"],
 
-                    [input: "stage/config/.bowerrc", output: "/front-end/.bowerrc"],
-                    [input: "stage/config/.jshintrc", output: "/front-end/.jshintrc"],
-                    [input: "stage/config/.gitignore", output: "/front-end/.gitignore"],
-                    [input: "stage/config/.gitignore2", output: "/api/.gitignore"],
-                    [input: "stage/config/.gitignore2", output: "/.gitignore"],
-                    [input: "stage/config/.gitattributes", output: "/front-end/.gitattributes"],
+                    [input: "${stage}/config/bower.json.vm", output: "/front-end/bower.json"],
+                    [input: "${stage}/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
+                    [input: "${stage}/config/package.json.vm", output: "/front-end/package.json"],
 
-                    [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],
-                    [input: "stage/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
-                    [input: "stage/config/package.json.vm", output: "/front-end/package.json"],
+                    [input: "${stage}/frontend/app", output: "/front-end/app"],
+                    [input: "${stage}/frontend/config", output: "/front-end/config"],
 
-                    [input: "stage/frontend/app", output: "/front-end/app"],
-                    [input: "stage/frontend/config", output: "/front-end/config"],
+                    [input: "${stage}/frontend/css/org.css", output: "/front-end/app/layout/css/mprj.css"],
+                    [input: "${stage}/frontend/css/project.css", output: "/front-end/app/layout/css/${acronym}.css"],
 
-                    [input: "stage/frontend/css/org.css", output: "/front-end/app/layout/css/mprj.css"],
-                    [input: "stage/frontend/css/project.css", output: "/front-end/app/layout/css/${acronym}.css"],
+                    [input: "${stage}/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
+                    [input: "${stage}/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
+                    [input: "${stage}/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
 
-                    [input: "stage/crud/scripts/MonitorController.js.vm", output: "/front-end/app/scripts/controllers/monitor/MonitorController.js"],
-                    [input: "stage/crud/scripts/MainController.js.vm", output: "/front-end/app/scripts/controllers/MainController.js"],
-                    [input: "stage/crud/scripts/MonitorService.js.vm", output: "/front-end/app/scripts/service/monitor/MonitorService.js"],
+                    [input: "${stage}/crud/scripts/truncate.js.vm", output: "/front-end/app/scripts/service/support/truncate.js"],
+                    [input: "${stage}/crud/scripts/constants.js.vm", output: "/front-end/app/scripts/service/support/constants.js"],
+                    [input: "${stage}/crud/scripts/utils.js.vm", output: "/front-end/app/scripts/service/support/utils.js"],
+                    [input: "${stage}/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/directives/directives.js"],
+                    [input: "${stage}/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
 
-                    [input: "stage/crud/scripts/truncate.js.vm", output: "/front-end/app/scripts/service/support/truncate.js"],
-                    [input: "stage/crud/scripts/constants.js.vm", output: "/front-end/app/scripts/service/support/constants.js"],
-                    [input: "stage/crud/scripts/utils.js.vm", output: "/front-end/app/scripts/service/support/utils.js"],
-                    [input: "stage/crud/scripts/directives.js.vm", output: "/front-end/app/scripts/directives/directives.js"],
-                    [input: "stage/crud/scripts/SupportService.js.vm", output: "/front-end/app/scripts/service/support/SupportService.js"],
-
-                    [input: "stage/frontend/test/karma.conf.js.vm", output: "/front-end/test/karma.conf.js"],
-                    [input: "stage/frontend/test/unit/hello.spec.js.vm", output: "/front-end/test/unit/hello.spec.js"],
+                    [input: "${stage}/frontend/test/karma.conf.js.vm", output: "/front-end/test/karma.conf.js"],
+                    [input: "${stage}/frontend/test/unit/hello.spec.js.vm", output: "/front-end/test/unit/hello.spec.js"],
             ]
         }
 
         "resources" {
             templates = [
-                    [input: "stage/config/application.properties.vm", output: "/api/src/main/resources/application.properties"],
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
-                    [input: "stage/localization/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
-                    [input: "archetype/resources/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
-                    [input: "archetype/testResources/logback-test.xml.vm", output: "/api/src/test/resources/logback-test.xml.vm"]
+                    [input: "${stage}/api/", output: "/api/"]
             ]
         }
 
         //[input: "crud/AbstractTest.groovy.vm", output: "/api/src/test/groovy/${packageBase}/"]
         "single-generateds" {
             templates = [
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
-                    [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
-                    [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/aop/OnSuccessAdvice.${lang}"],
-                    [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/filter/CorsFilter.${lang}"],
+                    [input: "${stage}/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "${stage}/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
+                    [input: "${stage}/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
+                    [input: "${stage}/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/aop/OnSuccessAdvice.${lang}"],
+                    [input: "${stage}/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/filter/CorsFilter.${lang}"],
 
-                    [input: "stage/crud/api/exception/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/BusinessException.${lang}"],
-                    [input: "stage/crud/api/exception/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/DefaultExceptionHandler.${lang}"],
+                    [input: "${stage}/crud/api/exception/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/BusinessException.${lang}"],
+                    [input: "${stage}/crud/api/exception/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/DefaultExceptionHandler.${lang}"],
 
-                    [input: "stage/crud/api/rest/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/RestFieldMessageDTO.${lang}"],
-                    [input: "stage/crud/api/rest/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
-                    [input: "stage/crud/api/rest/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
+                    [input: "${stage}/crud/api/rest/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/RestFieldMessageDTO.${lang}"],
+                    [input: "${stage}/crud/api/rest/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
+                    [input: "${stage}/crud/api/rest/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
 
-                    [input: "stage/crud/api/json/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
-                    [input: "stage/crud/api/json/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
-                    [input: "stage/crud/api/json/JsonDateListSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateListSerializer.${lang}"],
-                    [input: "stage/crud/api/json/CustomBigDecimalDeserializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalDeserializer.${lang}"],
-                    [input: "stage/crud/api/json/CustomBigDecimalSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalSerializer.${lang}"],
+                    [input: "${stage}/crud/api/json/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
+                    [input: "${stage}/crud/api/json/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
+                    [input: "${stage}/crud/api/json/JsonDateListSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateListSerializer.${lang}"],
+                    [input: "${stage}/crud/api/json/CustomBigDecimalDeserializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalDeserializer.${lang}"],
+                    [input: "${stage}/crud/api/json/CustomBigDecimalSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalSerializer.${lang}"],
 
-                    [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
-                    [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
+                    [input: "${stage}/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
+                    [input: "${stage}/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
 
-                    [input: "stage/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
+                    [input: "${stage}/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
 
-                    [input: "stage/crud/api/presentation/AccountController.java.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/AccountController." + lang],
+                    [input: "${stage}/crud/api/presentation/AccountController.java.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/AccountController." + lang],
 
-                    [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/PageableHelper.${lang}"],
+                    [input: "${stage}/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/PageableHelper.${lang}"],
 
-                    [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepository.${lang}"],
-                    [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepositoryFactoryBean.${lang}"],
-                    [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/ICoreRepository.${lang}"]
+                    [input: "${stage}/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepository.${lang}"],
+                    [input: "${stage}/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepositoryFactoryBean.${lang}"],
+                    [input: "${stage}/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/ICoreRepository.${lang}"]
             ]
         }
 
@@ -114,11 +108,11 @@ guick {
 
 //"test-single-generateds" {
 //    templates = [
-//            [input: "stage/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
-//            [input: "stage/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
-//            [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
+//            [input: "${stage}/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
+//            [input: "${stage}/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
+//            [input: "${stage}/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
 //
-//            [input: "stage/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
-//            [input: "stage/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]
+//            [input: "${stage}/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
+//            [input: "${stage}/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]
 //    ]
 //}

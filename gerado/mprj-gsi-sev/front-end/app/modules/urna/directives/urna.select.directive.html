@@ -1,7 +1,0 @@
-
-<div ui-select ng-model="vm.entity.urna" ng-disabled="vm.urnaList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Urna...">{{$select.selected.msgComposta}}</div>
-    <div ui-select-choices repeat="item in vm.urnaList | filter: vm.$select.search">
-        <div ng-bind-html="item.msgComposta | highlight: vm.$select.search"></div>
-    </div>
-</div>

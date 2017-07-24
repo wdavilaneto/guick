@@ -1,0 +1,44 @@
+# spring.datasource.jndi-name=jboss:${project.name}Ds
+server.context-path=/${project.name}
+server.servlet-path=/api
+
+#spring.profiles.active=jboss
+spring.groovy.template.check-template-location=false
+spring.velocity.checkTemplateLocation=false
+spring.jta.enabled = false
+
+spring.datasource.url=${project.config.generatedDatasourceInfo.url}
+spring.datasource.username=${project.config.generatedDatasourceInfo.user}
+spring.datasource.password=${project.config.generatedDatasourceInfo.password}
+spring.datasource.driver-class-name=${project.config.generatedDatasourceInfo.driverName}
+#if ( ${project.config.guickConnectionInfo.driverName} == 'oracle.jdbc.driver.OracleDriver')
+spring.datasource.testOnBorrow=true
+spring.datasource.validation-query= select 1 from dual
+#end
+spring.datasource.initial-size=10
+spring.datasource.min-idle=10
+spring.datasource.max-active=300
+
+#JPA/HIbernate
+spring.data.jpa.repositories.enabled=true
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.max_fetch_depth=3
+#spring.jpa.properties.hibernate.cache.use_query_cache=true
+#spring.jpa.properties.hibernate.cache.use_second_level_cach=true
+#spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
+#spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+#mybatis.config-location=
+
+email.sender=sistema.${project.name}@${project.group}
+email.to=${project.name}@${project.group}
+
+# MULTIPART (MultipartProperties)
+#multipart.enabled=true
+#multipart.file-size-threshold=0 # Threshold after which files will be written to disk.
+#multipart.location= # Intermediate location of uploaded files.
+multipart.max-file-size=6Mb
+#validar "multipart.max-request-size" existencia de restricao no JBoss e Nginx
+multipart.max-request-size=20Mb
+
+#JSON
+spring.jackson.serialization.indent_output=true

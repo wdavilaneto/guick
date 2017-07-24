@@ -33,9 +33,9 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("../sev")
-            main.setTarget("stage/create-webapp").run()
-            main.setTarget("stage/crud").run()
+            main.project.initialize("../newsev")
+            main.setTarget("archetype/backend").run()
+            main.setTarget("archetype/crud-backend").run()
 //            main.project.persist()
         } catch (RuntimeException e) {
             e.printStackTrace()

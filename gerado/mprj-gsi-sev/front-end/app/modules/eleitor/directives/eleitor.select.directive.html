@@ -1,8 +1,0 @@
-
-<div ui-select ng-model="vm.entity.eleitor" ng-disabled="vm.eleitorList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Eleitor...">{{$select.selected.cdmatricula}}</div>
-    <div ui-select-choices repeat="item in vm.eleitorList | filter: vm.$select.search">
-        <div ng-bind-html="item.cdmatricula | highlight: vm.$select.search"></div>
-        <small ng-bind-html="item.login |  highlight: vm.$select.search "></small>
-    </div>
-</div>

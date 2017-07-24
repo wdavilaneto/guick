@@ -1,8 +1,0 @@
-
-<div ui-select ng-model="vm.entity.cedula" ng-disabled="vm.cedulaList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Cedula...">{{$select.selected.msgCriptografada}}</div>
-    <div ui-select-choices repeat="item in vm.cedulaList | filter: vm.$select.search">
-        <div ng-bind-html="item.msgCriptografada | highlight: vm.$select.search"></div>
-        <small ng-bind-html="item.calculada |  highlight: vm.$select.search "></small>
-    </div>
-</div>

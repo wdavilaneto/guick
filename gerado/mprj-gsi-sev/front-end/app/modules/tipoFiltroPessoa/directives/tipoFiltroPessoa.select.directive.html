@@ -1,8 +1,0 @@
-
-<div ui-select ng-model="vm.entity.tipoFiltroPessoa" ng-disabled="vm.tipoFiltroPessoaList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Tipo Filtro Pessoa...">{{$select.selected.descricaoTipoFiltro}}</div>
-    <div ui-select-choices repeat="item in vm.tipoFiltroPessoaList | filter: vm.$select.search">
-        <div ng-bind-html="item.descricaoTipoFiltro | highlight: vm.$select.search"></div>
-        <small ng-bind-html="item.consulta |  highlight: vm.$select.search "></small>
-    </div>
-</div>
