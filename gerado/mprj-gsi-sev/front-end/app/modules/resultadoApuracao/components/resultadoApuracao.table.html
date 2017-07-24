@@ -1,0 +1,25 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <th>Foto</th>
+                                                    <th>Candidato</th>
+                                                     <th>Qt Votos</th>
+                                                </tr>
+                                                <tr dir-paginate="resultadoApuracao in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(resultadoApuracao)" pagination-id="resultadoApuracao" ng-class="{selected: resultadoApuracao}">
+                                                    <td><img ng-src="data:image/*;base64,{{resultadoApuracao.candidato.foto}}" width="80px" /></td>
+                                                    <td><p>{{resultadoApuracao.candidato.nome}}<p></td>
+                                                     <td><p>{{resultadoApuracao.qtVotos}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="resultadoApuracaoPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="resultadoApuracao"></dir-pagination-controls>
+                                </div>

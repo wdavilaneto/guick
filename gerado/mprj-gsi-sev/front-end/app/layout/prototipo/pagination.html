@@ -1,0 +1,40 @@
+<section class="content-header">
+    <h1>
+        <i class="mdi mdi-view-module"></i>
+        Paginação
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            Paginação
+        </li>
+    </ol>
+</section>
+<section class="content bounceInLeft">
+    <div class="h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alarm alarm-asphalt">
+                    ...
+                </div>
+            </div>
+        </div>
+        <div class="row-form">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content-ha">
+                        <pagination boundary-links="true" total-items="vm.totalItems" ng-model="vm.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-form">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content-ha">
+                        <pagination first-text="primeiro" last-text="último" next-text ="próximo" previous-text="Anterior" total-items="vm.bigTotalItems" ng-model="vm.bigCurrentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

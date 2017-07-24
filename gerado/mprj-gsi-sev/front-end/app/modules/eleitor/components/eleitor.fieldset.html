@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="codigoAutenticacao" ng-model="vm.entity.codigoAutenticacao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="codigoAutenticacao">
+            Codigo Autenticacao        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="enderecoIp" ng-model="vm.entity.enderecoIp" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="enderecoIp">
+            Endereço Ip        </label>
+    </div>
+</div>
+
+    <div class="col-md-3 form-group" show-errors>
+        <div class="inputMaterialGroup">
+            <div class="input-group">
+                <img ng-src="data:image/*;base64,{{vm.entity.comprovanteVotacao}}" ng-show="vm.entity.comprovanteVotacao" width="80px" />
+                <input class="inputMaterial" type="file" fileread="vm.entity.comprovanteVotacao" filetype="vm.entity.comprovanteVotacaoType" id="comprovanteVotacao"/>
+                <span class="bar"></span>
+                <span class="highlight"></span>
+            </div>
+            <label for="comprovanteVotacao">
+                Comprovante Votação            </label>
+        </div>
+    </div>
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="nome" ng-model="vm.entity.nome" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="nome">
+            Nome*        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" type="email" ng-maxlength="200" ng-model="vm.entity.email" required id="email" >
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="email">
+            Email*        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="login" ng-model="vm.entity.login" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="login">
+            Login*        </label>
+    </div>
+</div>
+    <div class="col-md-3" show-errors>
+        <div class="form-group has-warning">
+            <label >Eleicao</label>
+            <div angucomplete-alt id="eleicaoAutoComplete"
+                input-name="eleicaoAutoComplete"
+                initial-value="{{entity.eleicao.nome}}"
+                placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+                name="eleicao"
+                pause="400"
+                remote-url="/sev/api/Eleicao/searchText?text="
+                selected-object="vm.searchSelects.eleicao"
+                remote-url-data-field="content"
+                title-field="nome,descricao,descricaoOrientacao,natureza,criterioDesempate,textoEmailConvite,statusApuracao"
+                      minlength="2"
+                input-class="form-control"
+                field-required="true"
+                text-no-results="Nenhum registro encontrado"
+                text-searching="Buscando"
+                auto-match="true"/>
+    </div>
+</div>
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="cdmatricula" ng-model="vm.entity.cdmatricula" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="cdmatricula">
+            Códigomatricula*        </label>
+    </div>
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataVoto" current-text="Hoje" clear-text="Limpar"  id="dataVoto" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataVoto">Data Voto </label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricaoCargo" ng-model="vm.entity.descricaoCargo" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricaoCargo">
+            Descrição Cargo        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" ng-model="vm.entity.versao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao        </label>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>

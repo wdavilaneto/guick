@@ -1,0 +1,32 @@
+<div class="content-field-total">
+    <div class="content-field">
+        <h3>
+            Área Restrita
+        </h3>
+        <div class="alarm alarm-alizarin" ng-show="authenticationError">
+            Usuário ou senha inválido!
+        </div>
+        <div id="login-box" ng-controller="loginController">
+            <form name="loginForm">
+                <div class="content-login" show-errors>
+                    <label for="">
+                        Login
+                    </label>
+                    <input type="text" name="username" ng-model="username" class="form-control" />
+                    <div class="alarm alarm-alizarin" ng-show="loginForm.username.$error.required">Campo obrigatório</div>
+                </div>
+                <div class="content-pass" show-errors>
+                    <label for="">
+                        Senha
+                    </label>
+                    <input type="password" name="password" ng-model="password" />
+                    <div class="alarm alarm-alizarin" ng-show="loginForm.password.$error.required"> Campo obrigatório</div>
+                </div>
+                <div class="content-buttons">
+                    <button type="submit" ng-click="submit()" class="bt bt-lime"> <i class="mdi mdi-check"></i> {{"login.authenticate" | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d %p [%c] - %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="java.sql" level="DEBUG"/>
+    <logger name="br.mp.mprj.sev" level="DEBUG"/>
+
+    <root level="WARN">
+        <appender-ref ref="stdout" />
+    </root>
+
+</configuration>
+

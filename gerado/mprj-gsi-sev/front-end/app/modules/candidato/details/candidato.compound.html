@@ -1,0 +1,62 @@
+
+<div class="box box-primary">
+    <div class="box-body">
+                                <div class="col-md-4" ng-if="vm.entity.candidato.nome">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome</label>
+                                        <div ng-if="vm.entity.candidato.nome"> {{vm.entity.candidato.nome}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <div class="form-group">
+                                        <label for="foto">Foto</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{vm.entity.candidato.foto}}" ng-show="vm.entity.candidato.foto" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.candidato.email">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <div ng-if="vm.entity.candidato.email"> {{vm.entity.candidato.email}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.candidato.nomeCompleto">
+                                    <div class="form-group">
+                                        <label class="control-label">Nome Completo</label>
+                                        <div ng-if="vm.entity.candidato.nomeCompleto"> {{vm.entity.candidato.nomeCompleto}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-if="vm.entity.candidato.login">
+                                    <div class="form-group">
+                                        <label class="control-label">Login</label>
+                                        <div ng-if="vm.entity.candidato.login"> {{vm.entity.candidato.login}}</div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3" ng-if="vm.entity.candidato.cdmatricula">
+                                    <div class="form-group">
+                                        <label class="control-label">Códigomatricula</label>
+                                        <div ng-if="vm.entity.candidato.cdmatricula"> {{vm.entity.candidato.cdmatricula}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.candidato.dataNascimento">
+                                    <div class="form-group">
+                                        <label class="control-label">Data Nascimento</label>
+                                        <div ng-if="vm.entity.candidato.dataNascimento"> {{vm.entity.candidato.dataNascimento}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.candidato.criterioDesempate">
+                                    <div class="form-group">
+                                        <label class="control-label">Criterio Desempate</label>
+                                        <div ng-if="vm.entity.candidato.criterioDesempate"> {{vm.entity.candidato.criterioDesempate}}</div>
+                                    </div>
+                                </div>
+
+
+    </div>
+</div>
+

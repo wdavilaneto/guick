@@ -1,0 +1,20 @@
+                                <div class="col-md-3" ng-if="vm.entity.descricao">
+                                    <div class="form-group">
+                                        <label class="control-label">Descrição</label>
+                                        <div ng-if="vm.entity.descricao"> {{entity.descricao}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <div class="form-group">
+                                        <label for="foto">Foto</label>
+                                        <div class="input-group">
+                                            <img ng-src="data:image/*;base64,{{entity.foto}}" ng-show="vm.entity.foto" width="80px" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+

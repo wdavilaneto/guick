@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group" show-errors>
+                <label for="foto">
+                    Foto
+                </label>
+                <img ng-src="data:image/*;base64,{{vm.entity.foto}}" ng-show="vm.entity.foto" width="80px" />
+                <input class="form-control" type="file" fileread="vm.entity.foto" filetype="vm.entity.fotoType" id="foto"/>
+            </div>
+            <div class="col-md-3 form-group" show-errors>
+                <label for="descricao">
+                    Descrição*
+                </label>
+                <input class="inputMaterial" id="descricao" ng-model="vm.entity.descricao" type="text"  />
+            </div>
+        </div>
+    </div>
+</div>

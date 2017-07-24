@@ -1,0 +1,21 @@
+                                <div class="box-body table-responsive no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                     <th>Descrição Situacao</th>
+                                                </tr>
+                                                <tr dir-paginate="situacaoEleicao in resultPage.content | itemsPerPage: pagination.pageSize" total-items="resultPage.totalElements" ng-click="select(situacaoEleicao)" pagination-id="situacaoEleicao" ng-class="{selected: situacaoEleicao}">
+                                                     <td><p>{{situacaoEleicao.descricaoSituacao}}<p></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer clearfix">
+                                    <dir-pagination-controls
+                                        on-page-change="situacaoEleicaoPaginationChanged(newPageNumber)"
+                                        boundary-links="true"
+                                        template-url="layout/dir-pagination.html"
+                                        pagination-id="situacaoEleicao"></dir-pagination-controls>
+                                </div>

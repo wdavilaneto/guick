@@ -1,0 +1,25 @@
+{
+    "group": "br.mp.mprj",
+    "name": "sev",
+    "guickConnectionInfo": {
+        "password": "a123",
+        "user": "walter",
+        "dialect": "org.hibernate.dialect.Oracle10gDialect",
+        "driverName": "oracle.jdbc.driver.OracleDriver",
+        "url": "jdbc:oracle:thin:@exa-scan.pgj.rj.gov.br:1521:desenv"
+    },
+    "generatedDatasourceInfo": {
+        "password": "a123",
+        "user": "walter",
+        "dialect": "org.hibernate.dialect.Oracle10gDialect",
+        "driverName": "oracle.jdbc.driver.OracleDriver",
+        "url": "jdbc:oracle:thin:@exa-scan.pgj.rj.gov.br:1521:desenv"
+    },
+    "generationLanguage": "java",
+    "tablePrefix": ["CORP","SEVO"],
+    "useWorkflow": "false",
+    "tables": [
+        { "owner": "SEVO"}
+    ],
+    "description": "Sistema de Votação Eletrônica"
+}

@@ -1,0 +1,204 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false" name="sev_cache">
+
+    <!--
+    CacheManager Configuration
+    ==========================
+    An ehcache.xml corresponds to a single CacheManager.
+
+    See instructions below or the ehcache schema (ehcache.xsd) on how to configure.
+
+    System property tokens can be specified in this file which are replaced when the configuration
+    is loaded. For example multicastGroupPort=${multicastGroupPort} can be replaced with the
+    System property either from an environment variable or a system property specified with a
+    command line switch such as -DmulticastGroupPort=4446.
+
+    DiskStore configuration
+    =======================
+
+    The diskStore element is optional. To turn off disk store path creation, comment out the diskStore
+    element below.
+
+    Configure it if you have overflowToDisk or diskPersistent enabled for any cache.
+
+    If it is not configured, and a cache is created which requires a disk store, a warning will be
+     issued and java.io.tmpdir will automatically be used.
+
+    diskStore has only one attribute - "path". It is the path to the directory where
+    .data and .index files will be created.
+
+    If the path is one of the following Java System Property it is replaced by its value in the
+    running VM. For backward compatibility these are not specified without being enclosed in the ${token}
+    replacement syntax.
+
+    The following properties are translated:
+    * user.home - User's home directory
+    * user.dir - User's current working directory
+    * java.io.tmpdir - Default temp file path
+    * ehcache.disk.store.dir - A system property you would normally specify on the command line
+      e.g. java -Dehcache.disk.store.dir=/u01/myapp/diskdir ...
+
+    Subdirectories can be specified below the property e.g. java.io.tmpdir/one
+    -->
+    <diskStore path="java.io.tmpdir/ehcache"/>
+
+    <!--
+    Cache configuration
+    ===================
+
+    The following attributes are required.
+
+    name:
+    Sets the name of the cache. This is used to identify the cache. It must be unique.
+
+    maxElementsInMemory:
+    Sets the maximum number of objects that will be created in memory
+
+	maxElementsOnDisk:
+    Sets the maximum number of objects that will be maintained in the DiskStore
+	The default value is zero, meaning unlimited.
+
+    eternal:
+    Sets whether elements are eternal. If eternal,  timeouts are ignored and the
+    element is never expired.
+
+    overflowToDisk:
+    Sets whether elements can overflow to disk when the memory store
+    has reached the maxInMemory limit.
+
+    The following attributes and elements are optional.
+
+    timeToIdleSeconds:
+    Sets the time to idle for an element before it expires.
+    i.e. The maximum amount of time between accesses before an element expires
+    Is only used if the element is not eternal.
+    Optional attribute. A value of 0 means that an Element can idle for infinity.
+    The default value is 0.
+
+    timeToLiveSeconds:
+    Sets the time to live for an element before it expires.
+    i.e. The maximum time between creation time and when an element expires.
+    Is only used if the element is not eternal.
+    Optional attribute. A value of 0 means that and Element can live for infinity.
+    The default value is 0.
+
+    diskPersistent:
+    Whether the disk store persists between restarts of the Virtual Machine.
+    The default value is false.
+
+    diskExpiryThreadIntervalSeconds:
+    The number of seconds between runs of the disk expiry thread. The default value
+    is 120 seconds.
+
+    diskSpoolBufferSizeMB:
+    This is the size to allocate the DiskStore for a spool buffer. Writes are made
+    to this area and then asynchronously written to disk. The default size is 30MB.
+    Each spool buffer is used only by its cache. If you get OutOfMemory errors consider
+    lowering this value. To improve DiskStore performance consider increasing it. Trace level
+    logging in the DiskStore will show if put back ups are occurring.
+
+    memoryStoreEvictionPolicy:
+    Policy would be enforced upon reaching the maxElementsInMemory limit. Default
+    policy is Least Recently Used (specified as LRU). Other policies available -
+    First In First Out (specified as FIFO) and Less Frequently Used
+    (specified as LFU)
+
+    Cache elements can also contain sub elements which take the same format of a factory class
+    and properties. Defined sub-elements are:
+
+    * cacheEventListenerFactory - Enables registration of listeners for cache events, such as
+      put, remove, update, and expire.
+
+    * bootstrapCacheLoaderFactory - Specifies a BootstrapCacheLoader, which is called by a
+      cache on initialisation to prepopulate itself.
+
+    * cacheExtensionFactory - Specifies a CacheExtension, a generic mechansim to tie a class
+      which holds a reference to a cache to the cache lifecycle.
+
+    * cacheExceptionHandlerFactory - Specifies a CacheExceptionHandler, which is called when
+      cache exceptions occur.
+
+    * cacheLoaderFactory - Specifies a CacheLoader, which can be used both asynchronously and
+      synchronously to load objects into a cache. More than one cacheLoaderFactory element
+      can be added, in which case the loaders form a chain which are executed in order. If a
+      loader returns null, the next in chain is called.
+    -->
+
+    <!--
+    Mandatory Default Cache configuration. These settings will be applied to caches
+    created programmtically using CacheManager.add(String cacheName).
+
+    The defaultCache has an implicit name "default" which is a reserved cache name.
+    -->
+    <defaultCache maxElementsInMemory="10000" eternal="false" diskPersistent="false" timeToIdleSeconds="120"
+                  timeToLiveSeconds="120" diskSpoolBufferSizeMB="60" />
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache" maxElementsInMemory="1000"
+            eternal="false" timeToIdleSeconds="360" timeToLiveSeconds="360">
+    </cache>
+
+    <!-- Extracted from docs: Tracks the timestamps of the most recent updates to particular tables. It is important that the cache timeout of the underlying cache implementation be set to a higher value than the timeouts of any of the query caches. In fact, it is recommend that the the underlying cache not be configured for expiry at all -->
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache" eternal="true"> </cache>
+
+    <cache name="br.mp.mprj.sev.domain.ArquivoRelatorio" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="arquivoRelatorioList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.CandidatoPadrao" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="candidatoPadraoList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.EleicaoParametro" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="eleicaoParametroList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.Parametro" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="parametroList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.ResultadoApuracao" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="resultadoApuracaoList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.SituacaoEleicao" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="situacaoEleicaoList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.TipoEvento" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="tipoEventoList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.TipoFiltroPessoa" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="tipoFiltroPessoaList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.TipoIntegranteComissao" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="tipoIntegranteComissaoList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.TipoParametro" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="tipoParametroList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.TipoRelatorio" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="tipoRelatorioList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+    <cache name="br.mp.mprj.sev.domain.Urna" maxElementsInMemory="5000" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+    <cache name="urnaList" maxElementsInMemory="500" eternal="false" diskPersistent="false"
+           timeToIdleSeconds="6000" timeToLiveSeconds="600"/>
+
+
+</ehcache>

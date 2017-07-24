@@ -1,0 +1,26 @@
+
+
+    <div class="col-md-3 form-group" show-errors>
+        <div class="inputMaterialGroup">
+            <div class="input-group">
+                <img ng-src="data:image/*;base64,{{vm.entity.foto}}" ng-show="vm.entity.foto" width="80px" />
+                <input class="inputMaterial" type="file" fileread="vm.entity.foto" filetype="vm.entity.fotoType" id="foto"/>
+                <span class="bar"></span>
+                <span class="highlight"></span>
+            </div>
+            <label for="foto">
+                Foto            </label>
+        </div>
+    </div>
+
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricao" ng-model="vm.entity.descricao" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricao">
+            Descrição*        </label>
+    </div>
+</div>
+

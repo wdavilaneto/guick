@@ -1,0 +1,118 @@
+<!-- sessões -->
+<section class="content-header">
+    <h1>
+        <i class="mdi mdi-view-grid"></i>
+        Candidato
+        <!-- <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+             <i class="mdi mdi-view-list"></i>
+             <i class="mdi mdi-view-grid"></i>
+         </a>-->
+        <a ng-init="modoCards = true" ng-click="modoCards = !modoCards" class="bt bt-river bt-circle bt-sm bt-card-list hidden-xs" href ng-class="{'stash': !modoCards}">
+            <i class="mdi mdi-view-list"></i>
+            <!--<i class="mdi mdi-view-grid"></i>-->
+        </a>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#/"> <i class="mdi mdi-magnify"></i> {{"menu.inicial" | translate}} </a></li>
+        <li class="active"><a href="#/candidato"> {{"filtro" | translate}} {{"menu.candidato" | translate}} </a></li>
+    </ol>
+</section>
+
+<section ng-scrollbars ng-scrollbars-config="config" class="content fadeInLeft">
+    <div class="box box-primary">
+        <form name="candidatoForm" novalidate ng-submit="vm.newSearch()">
+            <div tabset>
+                <div tab ng-click="vm.setTextSearchActive(true)">
+                    <div tab-heading><i class="mdi mdi-filter"></i> {{"filtro_busca" | translate}}</div>
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="row-form">
+                                        <div class="col-md-6 form-group">
+                                            <div class="inputMaterialGroup">
+                                                <input id="searchField.text" type="text" class="inputMaterial" required ng-model="vm.searchField.text"/>
+                                                <span class="bar"></span>
+                                                <span class="highlight"></span>
+                                                <label for="searchField.text">
+                                                    Busca por texto
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
+                                        <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
+                                        <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="candidatoEdit.main()"><i class="mdi mdi-plus"></i> Novo </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> </a>
+                                        <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="candidatoEdit.main()"><i class="mdi mdi-plus"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div tab ng-click="vm.setTextSearchActive(false)">
+                    <tab-heading><i class="mdi mdi-file-find"></i> {{"busca_avancada" | translate}}</tab-heading>
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div ng-include src="'modules/candidato/components/candidato.filter.html'"></div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> Limpar Filtro</a>
+                                        <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> Buscar</a>
+                                        <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> Novo </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="candidatoEdit.main()"><i class="mdi mdi-plus"></i> Novo </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer hidden-md hidden-lg">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="bt bt-sky" href="" ng-click="vm.clearForm()"><i class="mdi mdi-eraser"></i> </a>
+                                        <a class="bt bt-emerald" href="" ng-click="vm.newSearch()"><i class="mdi mdi-magnify"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ng-click="vm.open('lg')"><i class="mdi mdi-open-in-new"></i> </a>
+                                        <a class="bt bt-asphalt" href="" ui-sref="candidatoEdit.main()"><i class="mdi mdi-plus"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- fim sessão -->
+    <!-- sessão -->
+    <!-- Para desenvolvimento dos cards
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="box-header">
+                <h3 class="box-title color-asphalt"><i class="mdi mdi-filter"></i> {{"grid.titulo" | translate}}</h3>
+            </div>
+            <div class="bounceIn" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-pagination ui-grid-auto-resize block-ui block-ui-pattern="/.*\/api\Candidato/.*/"></div>
+        </div>
+    </div>
+    -->
+    <div ng-include="'modules/candidato/components/candidato.card.html'"></div>
+    <div ng-include="'modules/candidato/components/candidato.modal.html'"></div>
+</section>

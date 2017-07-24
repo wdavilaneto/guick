@@ -1,0 +1,161 @@
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="nome" ng-model="vm.entity.nome" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="nome">
+            Nome*        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricao" ng-model="vm.entity.descricao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricao">
+            Descrição        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="descricaoOrientacao" ng-model="vm.entity.descricaoOrientacao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="descricaoOrientacao">
+            Descrição Orientacao        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="criterioDesempate" ng-model="vm.entity.criterioDesempate" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="criterioDesempate">
+            Criterio Desempate        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <textarea class="inputMaterial" rows="3" ng-maxlength="4000" ng-model="vm.entity.textoEmailConvite" required   id="textoEmailConvite" ></textarea>
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="textoEmailConvite">
+            Email Convite*        </label>
+    </div>
+</div>
+    <div class="col-md-3 form-group" show-errors>
+        <label>Situacao Eleicao  <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>            </label>
+            <div situacaoEleicao-select></div>
+
+        </div>
+
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicio" current-text="Hoje" clear-text="Limpar" required id="dataInicio" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataInicio">Data Início <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFim" current-text="Hoje" clear-text="Limpar" required id="dataFim" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataFim">Data Fim <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="qtdeMaxVotos" ng-model="vm.entity.qtdeMaxVotos" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="qtdeMaxVotos">
+            Qtde Max Votos*        </label>
+    </div>
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicioApuracao" current-text="Hoje" clear-text="Limpar"  id="dataInicioApuracao" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataInicioApuracao">Data Início Apuracao </label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFimApuracao" current-text="Hoje" clear-text="Limpar"  id="dataFimApuracao" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataFimApuracao">Data Fim Apuracao </label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="natureza" ng-model="vm.entity.natureza" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="natureza">
+            Natureza*        </label>
+    </div>
+</div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataInicioPrev" current-text="Hoje" clear-text="Limpar" required id="dataInicioPrev" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataInicioPrev">Data Início Prev <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+    <div class="col-md-3 form-group" ng-controller="DefaultDatepickerController" show-errors>
+        <div class="inputMaterialGroup col-md-10">
+            <input type="text" class="inputMaterial" datepicker-popup="{{format}}" is-open="opened" date-disabled="disabled(date, mode)" close-text="Close"
+                ng-model="vm.entity.dataFimPrev" current-text="Hoje" clear-text="Limpar" required id="dataFimPrev" />
+            <span class="bar"></span>
+            <span class="highlight"></span>
+            <label for="dataFimPrev">Data Fim Prev <i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter" popover-placement="up" popover="Campo obrigatório"/></label>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="bt bt-river bt-circle" ng-click="vm.open($event)"><i class="mdi mdi-calendar"></i></button>
+        </div>
+    </div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" ng-model="vm.entity.versao" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao*        </label>
+    </div>
+</div>
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="statusApuracao" ng-model="vm.entity.statusApuracao" type="text" required />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="statusApuracao">
+            Status Apuracao*        </label>
+    </div>
+</div>
+

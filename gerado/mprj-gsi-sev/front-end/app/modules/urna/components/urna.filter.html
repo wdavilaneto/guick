@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row-form">
+            <div class="col-md-3 form-group">
+                <div class="inputMaterialGroup">
+                    <input class="inputMaterial" type="text" ng-model="vm.entity.msgComposta"  id="msgComposta" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <label for="msgComposta">
+                        Msg Composta
+                    </label>
+                </div>
+            </div>
+
+
+
+    <div class="col-md-3 form-group ">
+        <label>Eleicao
+            <a class="btn-detail" ng-show="vm.searchSelects.eleicao.id != null" ng-click="$event.stopPropagation(); view('lg','Eleicao');"><i class="fa fa-fw fa-search-plus"></i></a>
+        </label>
+        <div angucomplete-alt id="eleicaoAutoComplete"
+              placeholder="Busca por Nome ou Descrição ou Descrição Orientacao ou Criterio Desempate ou Email Convite ou "
+              name="eleicao"
+              pause="500"
+              remote-url="/sev/api/eleicao/searchText?text="
+              selected-object="vm.searchSelects.eleicao"
+              remote-url-data-field="content"
+              title-field="nome,descricao,descricaoOrientacao,criterioDesempate,textoEmailConvite,"
+              input-class="inputMaterial"
+              field-required="true"
+              text-no-results="Nenhum registro encontrado"
+              text-searching="Buscando"
+              auto-match="true"/>
+    </div>
+
+
+
+
+<div class="col-md-3 form-group" show-errors>
+    <div class="inputMaterialGroup">
+        <input class="inputMaterial" id="versao" ng-model="vm.entity.versao" type="text"  />
+        <span class="bar"></span>
+        <span class="highlight"></span>
+        <label for="versao">
+            Versao        </label>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+</div>
+</div>

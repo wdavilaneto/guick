@@ -1,0 +1,30 @@
+
+<div class="box box-primary">
+    <div class="box-body">
+                                <div class="col-md-4" ng-if="vm.entity.cedula.msgCriptografada">
+                                    <div class="form-group">
+                                        <label class="control-label">Msg Criptografada</label>
+                                        <div ng-if="vm.entity.cedula.msgCriptografada"> {{vm.entity.cedula.msgCriptografada}}</div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-2" ng-if="vm.entity.cedula.calculada">
+                                    <div class="form-group">
+                                        <label class="control-label">Calculada</label>
+                                        <div ng-if="vm.entity.cedula.calculada"> {{vm.entity.cedula.calculada}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" ng-if="vm.entity.cedula.versao">
+                                    <div class="form-group">
+                                        <label class="control-label">Versao</label>
+                                        <div ng-if="vm.entity.cedula.versao"> {{vm.entity.cedula.versao}}</div>
+                                    </div>
+                                </div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,70 @@
+package ${project.group}.${project.name}.presentation.support;
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver
+import org.springframework.data.web.SortHandlerMethodArgumentResolver
+import org.springframework.web.method.support.HandlerMethodArgumentResolver
+import org.springframework.web.servlet.ViewResolver
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import org.springframework.web.servlet.view.JstlView
+import org.springframework.web.servlet.view.UrlBasedViewResolver
+
+/**
+ * Created by walter.davila on 18/09/2014.
+ */
+@Configuration
+@EnableWebMvc
+@ComponentScan("br..custeio")
+class MainWebConfig extends WebMvcConfigurerAdapter {
+
+    private static final Logger logger = LoggerFactory.getLogger(MainWebConfig.class);
+
+    @Bean
+    public ViewResolver resolver() {
+        UrlBasedViewResolver url = new UrlBasedViewResolver();
+        url.setPrefix("/WEB-INF/views/");
+        url.setViewClass(JstlView.class);
+        url.setSuffix(".jsp");
+        return url;
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new PageableHandlerMethodArgumentResolver());
+        argumentResolvers.add(new SortHandlerMethodArgumentResolver());
+    }
+
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        converters.add(converter());
+//    }
+
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//        JodaTimeFormatterRegistrar joda = new JodaTimeFormatterRegistrar();
+//        joda.setUseIsoFormat(true);
+//        joda.registerFormatters(registry);
+//    }
+
+//    @Bean
+//    public MappingJackson2HttpMessageConverter converter() {
+//        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//        converter.setObjectMapper(mapper());
+//        return converter;
+//    }
+
+//    /**
+//     * Provides the Jackson ObjectMapper with custom configuration for our JSON serialization.
+//     * @return The Jackson object mapper with non-null serialization configured
+//     */
+//    @Bean
+//    public JacksonObjectMapper mapper() {
+//        return new JacksonObjectMapper();
+//    }
+
+}

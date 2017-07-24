@@ -1,0 +1,7 @@
+
+<div ui-select ng-model="vm.entity.arquivoRelatorio" ng-disabled="vm.arquivoRelatorioList.length < 1" ng-required="true">
+    <div ui-select-match placeholder="Escolha Arquivo Relatorio...">{{$select.selected.}}</div>
+    <div ui-select-choices repeat="item in vm.arquivoRelatorioList | filter: vm.$select.search">
+        <div ng-bind-html="item.id | highlight: vm.$select.search"></div>
+    </div>
+</div>
