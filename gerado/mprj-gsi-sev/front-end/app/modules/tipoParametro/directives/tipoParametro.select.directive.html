@@ -1,7 +1,0 @@
-
-<div ui-select ng-model="vm.entity.tipoParametro" ng-disabled="vm.tipoParametroList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Tipo Parametro...">{{$select.selected.descricao}}</div>
-    <div ui-select-choices repeat="item in vm.tipoParametroList | filter: vm.$select.search">
-        <div ng-bind-html="item.descricao | highlight: vm.$select.search"></div>
-    </div>
-</div>

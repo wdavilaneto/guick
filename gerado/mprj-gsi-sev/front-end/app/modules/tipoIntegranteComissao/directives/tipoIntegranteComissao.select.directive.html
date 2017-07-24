@@ -1,8 +1,0 @@
-
-<div ui-select ng-model="vm.entity.tipoIntegranteComissao" ng-disabled="vm.tipoIntegranteComissaoList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Tipo Integrante Comissao...">{{$select.selected.nomeTipoIntegrante}}</div>
-    <div ui-select-choices repeat="item in vm.tipoIntegranteComissaoList | filter: vm.$select.search">
-        <div ng-bind-html="item.nomeTipoIntegrante | highlight: vm.$select.search"></div>
-        <small ng-bind-html="item.descricaoTipoIntegrante |  highlight: vm.$select.search "></small>
-    </div>
-</div>

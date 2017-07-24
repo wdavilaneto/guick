@@ -1,7 +1,0 @@
-
-<div ui-select ng-model="vm.entity.eleicaoParametro" ng-disabled="vm.eleicaoParametroList.length < 1" ng-required="true">
-    <div ui-select-match placeholder="Escolha Eleicao Parametro...">{{$select.selected.valorParametro}}</div>
-    <div ui-select-choices repeat="item in vm.eleicaoParametroList | filter: vm.$select.search">
-        <div ng-bind-html="item.valorParametro | highlight: vm.$select.search"></div>
-    </div>
-</div>
