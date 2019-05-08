@@ -32,7 +32,12 @@ class VelocityWriter  extends AbstractTemplateWriter{
         File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)
         FileOutputStream fileOutputStream = new FileOutputStream(outputFile)
         Writer out = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-        Velocity.mergeTemplate(input, "UTF-8" , new VelocityContext(context), out )
+        try {
+            Velocity.mergeTemplate(input, "UTF-8", new VelocityContext(context), out)
+        } catch (err){
+            logger.info(context.toString())
+            logger.error(err.message, err)
+        }
         out.close()
     }
 }

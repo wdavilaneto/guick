@@ -33,9 +33,9 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("../sev")
-            main.setTarget("stage/create-webapp").run()
-            main.setTarget("stage/crud").run()
+            main.project.initialize("../angular")
+//            main.setTarget("angular/create-webapp").run()
+            main.setTarget("angular/crud").run()
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
