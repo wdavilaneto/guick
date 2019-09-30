@@ -1,6 +1,7 @@
 package org.wdn.guick.model
 
 import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -46,12 +47,6 @@ class Project implements Serializable {
         } else {
             // is it Test... we need to add classpaths ...
             path = new File(rootPath).getCanonicalPath()
-//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/classes/main/"))
-//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/build/resources/main/"))
-//            ClassPathManager.addURLToSystemClassLoader(new URL("file",null,"${this.path}/src/main/resources"))
-//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/classes/main/") );
-//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/build/resources/main/") );
-//            this.class.classLoader.rootLoader.addURL( new URL("file",null,"${this.path}/src/main/resources") );
         }
         File guickFile = new File(path)
         if (!guickFile.exists()) {
@@ -59,13 +54,7 @@ class Project implements Serializable {
         }
         guickFile = new File(path + "/guick.json")
         if (guickFile.exists()) {
-            config = new JsonSlurper().parse(guickFile);
-            logger.debug("initializing with ${config}")
-            group = config.group
-            name = config.name
-            this.database = config.guickConnectionInfo;
-            this.targetTables = config.tables;
-            this.description = config.description;
+            config = configure(guickFile);
         } else {
             if (new File(path + "/pom.xml").exists()) {
                 pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
@@ -84,7 +73,8 @@ class Project implements Serializable {
             config.description = "Project Description";
 
             // if no pom nither guick.json exists, create one and stop any generation
-            def json = new JsonBuilder(config).toPrettyString();
+             def json = new JsonBuilder(config).toPrettyString();
+//            def json = JsonOutput.toJson(config)
             guickFile.write(json);
 
             logger.warn "******** GUICK MESSAGE: READ THIS ********* "
@@ -93,19 +83,26 @@ class Project implements Serializable {
             logger.warn "Make sure to configure it before running any generator task again";
             logger.warn "Or it will create all with default values";
             logger.warn "******** ************************ ********* "
-            throw new FileNotFoundException("NO file ${guickFile} found");
+            System.exit(0)
         }
-
     }
 
     @Transient
     public void persist() {
         def json = new JsonBuilder(tables).toPrettyString();
         new File(path + "/tables.json").write(json);
-//        json = new JsonBuilder(tables).toPrettyString();
-//        new File (path + "/metadata.json").write(json);
-//        json = new JsonBuilder(entities).toPrettyString();
-//        new File (path + "/metadata.json").write(json);
+    }
+
+    @Transient
+    def configure(File guickFile) {
+        logger.debug("initializing with ${config}")
+        config = new JsonSlurper().parse(guickFile);
+        group = config.group
+        name = config.name
+        this.database = config.guickConnectionInfo;
+        this.targetTables = config.tables;
+        this.description = config.description;
+        return config;
     }
 
     public String getName() {
