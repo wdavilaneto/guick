@@ -11,8 +11,8 @@
       }
     },
     {
-      "state": "entities",
-      "name": "Entities",
+      "state": "domain",
+      "name": "Domain",
       "type": "sub",
       "icon": "favorite",
       "children": [
@@ -20,13 +20,13 @@
 #if (${project.getAllMainEntities().size()} > 0)
         {
           "state": "",
-          "name": "Main Entities",
+          "name": "Domain",
           "type": "sub",
           "children": [
 #foreach( ${entity} in ${project.getAllMainEntities()})
 #if (!${entity.isEmbeddable()})
             #if($isFirst == 1)#set( $isFirst = 0 )#{else}, #{end}{
-              "state": "${entity.beanName}",
+              "state": "${entity.dashedName}",
               "name": "${entity.title}",
               "type": "link"
             }
