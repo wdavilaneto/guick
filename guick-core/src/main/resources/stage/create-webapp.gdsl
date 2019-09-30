@@ -107,8 +107,6 @@ guick {
                     [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/ICoreRepository.${lang}"]
             ]
         }
-
-
     }
 }
 

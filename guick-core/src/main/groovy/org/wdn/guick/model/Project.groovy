@@ -56,34 +56,7 @@ class Project implements Serializable {
         if (guickFile.exists()) {
             config = configure(guickFile);
         } else {
-            if (new File(path + "/pom.xml").exists()) {
-                pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
-                config.group = pom.groupId.toString();
-                config.name = pom.artifactId.toString();
-            } else {
-                config.group = "org.wdn.configure";
-                config.name = "configureme";
-            }
-            config.guickConnectionInfo = new DatasourceInfo()
-            config.generatedDatasourceInfo = new DatasourceInfo()
-            config.generationLanguage = "java";
-            config.tablePrefix = "TB";
-            config.useWorkflow ="false";
-            config.tables = [[owner:"schema", tableName:"example_table"]];
-            config.description = "Project Description";
-
-            // if no pom nither guick.json exists, create one and stop any generation
-             def json = new JsonBuilder(config).toPrettyString();
-//            def json = JsonOutput.toJson(config)
-            guickFile.write(json);
-
-            logger.warn "******** GUICK MESSAGE: READ THIS ********* "
-            logger.warn "NO file ${guickFile} found !!!"
-            logger.warn "creating an example file";
-            logger.warn "Make sure to configure it before running any generator task again";
-            logger.warn "Or it will create all with default values";
-            logger.warn "******** ************************ ********* "
-            System.exit(0)
+            createConfigure(guickFile);
         }
     }
 
@@ -103,6 +76,37 @@ class Project implements Serializable {
         this.targetTables = config.tables;
         this.description = config.description;
         return config;
+    }
+
+    @Transient
+    def createConfigure(File guickFile) {
+        if (new File(path + "/pom.xml").exists()) {
+            pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
+            config.group = pom.groupId.toString();
+            config.name = pom.artifactId.toString();
+        } else {
+            config.group = "org.wdn.configure";
+            config.name = "configureme";
+        }
+        config.guickConnectionInfo = new DatasourceInfo()
+        config.generatedDatasourceInfo = new DatasourceInfo()
+        config.generationLanguage = "java";
+        config.tablePrefix = "TB";
+        config.useWorkflow ="false";
+        config.tables = [[owner:"schema", tableName:"example_table"]];
+        config.description = "Project Description";
+
+        // if no pom nither guick.json exists, create one and stop any generation
+        def json = new JsonBuilder(config).toPrettyString();
+        guickFile.write(json);
+
+        logger.warn "******** GUICK MESSAGE: READ THIS ********* "
+        logger.warn "NO file ${guickFile} found !!!"
+        logger.warn "creating an example file";
+        logger.warn "Make sure to configure it before running any generator task again";
+        logger.warn "Or it will create all with default values";
+        logger.warn "******** ************************ ********* "
+        System.exit(0)
     }
 
     public String getName() {

@@ -5,6 +5,9 @@ import org.apache.commons.lang.builder.EqualsBuilder
 import org.apache.commons.lang.builder.HashCodeBuilder
 import org.wdn.guick.util.StringUtil
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 class Entity extends Clazz {
 
     Table table = null
@@ -348,6 +351,16 @@ class Entity extends Clazz {
 
     public String getBeanName() {
         return StringUtils.uncapitalize(name);
+    }
+
+    public String getDashedName(){
+        final String regex = "(?=[A-Z][a-z])"
+        final String subst = "-"
+        final Pattern pattern = Pattern.compile(regex)
+        final Matcher matcher = pattern.matcher(name)
+        // The substituted value will be contained in the result variable
+        final String result = matcher.replaceAll(subst)
+        return result.toLowerCase().replaceFirst("-","")
     }
 
 }

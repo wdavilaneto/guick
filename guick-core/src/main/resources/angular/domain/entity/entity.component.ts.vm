@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-entity',
+  templateUrl: './${entity.dashedName}.component.html',
+  styleUrls: ['./${entity.dashedName}.component.css']
+})
+export class  ${entity.name}Component implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

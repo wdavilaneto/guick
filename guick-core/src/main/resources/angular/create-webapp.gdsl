@@ -1,0 +1,15 @@
+def packageBase = project.packageBase
+
+def lang = project.config.generationLanguage
+def orgName = project.lastGroup
+def acronym = project.acronym
+
+guick {
+    installPom {
+        "single-generateds" {
+            templates = [
+                    [input: "angular/webapp/", output: "/frontend/"]
+            ]
+        }
+    }
+}
