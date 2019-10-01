@@ -77,7 +77,7 @@ class MetadataFactory {
         // bidirectional relationship
         column.simpleProperty = property
 
-        property.name = getPropertyName(getAllRelationShipProperties(entity), PatternConverterFacade.columnToPropertyName(column))
+        property.name = getPropertyName(entity, PatternConverterFacade.columnToPropertyName(column))
         entity.properties.add(property)
         return property
     }
@@ -97,20 +97,20 @@ class MetadataFactory {
                     String otherKeyName = constraint.singleColumnPair.colunaReferenciada.name;
                     String fieldBasedOnFKColumnName = constraint.singleColumnPair.coluna.name.replaceFirst(thisPrefix + "_", "").replaceFirst(otherKeyName, "")
                     //println "${constraint.singleColumnPair.coluna.name} - ${otherKeyName} = $fieldBasedOnFKColumnName "
-                    if (fieldBasedOnFKColumnName.length() > 4 ) {
-                        fieldBasedOnFKColumnName = getPropertyName(getAllComplexProperties(entity), PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
+                    if (fieldBasedOnFKColumnName.length() > 4) {
+                        fieldBasedOnFKColumnName = getPropertyName(entity, PatternConverterFacade.columnToPropertyName(constraint.singleColumnPair.coluna))
                         if (fieldBasedOnFKColumnName.length() > 4) {
                             complexProperty.name = fieldBasedOnFKColumnName
                         } else {
-                            complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
+                            complexProperty.name = getPropertyName(entity, complexProperty.name)
                         }
                     } else {
                         // such a short field name .. lets try somthing diferent
-                        complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
+                        complexProperty.name = getPropertyName(entity, complexProperty.name)
                     }
 
                 } else {
-                    complexProperty.name = getPropertyName(getAllComplexProperties(entity), complexProperty.name)
+                    complexProperty.name = getPropertyName(entity, complexProperty.name)
                 }
 
                 entity.getComplexProperties().add(complexProperty)
@@ -118,7 +118,7 @@ class MetadataFactory {
                 // ToMany Property create
                 ComplexProperty referedProperty = new ComplexProperty(entity)
                 referedProperty.project = currentProject
-                referedProperty.name = getPropertyName(getAllComplexProperties(complexProperty.referedEntity), referedProperty.name)
+                referedProperty.name = getPropertyName(complexProperty.referedEntity, referedProperty.name)
                 referedProperty.mappedBy = complexProperty.name;
                 complexProperty.referedEntity.getComplexProperties().add(referedProperty);
 
@@ -147,14 +147,14 @@ class MetadataFactory {
 
         ComplexProperty complexProperty = new ComplexProperty(table.constraints[0], otherEntity);
         complexProperty.project = currentProject
-        complexProperty.name = getPropertyName(getAllComplexProperties(otherEntity), complexProperty.name) + "Collection"
+        complexProperty.name = getPropertyName(otherEntity, complexProperty.name) + "Collection";
         thisEntity.getComplexProperties().add(complexProperty);
         complexProperty.nmTable = table
 
         ComplexProperty referedProperty = new ComplexProperty(table.constraints[1], thisEntity);
-        referedProperty.project = currentProject
-        referedProperty.name = getPropertyName(getAllComplexProperties(thisEntity), referedProperty.name) + "Collection"
-        otherEntity.getComplexProperties().add(referedProperty);
+        referedProperty.project = currentProject;
+        referedProperty.name = getPropertyName(thisEntity, referedProperty.name) + "Collection"
+        otherEntity.getComplexProperties().add(referedProperty)
         referedProperty.nmTable = table
 
         table.entity = null
@@ -182,12 +182,12 @@ class MetadataFactory {
         return getAllRelationShipProperties(entity).addAll(getAllRelationShipProperties(entity));
     }
 
-    private String getPropertyName(List<Clazz> properties, String propertyName, int counter = 0) {
+    private String getPropertyName(Entity entity, String propertyName, int counter = 0) {
         String name = propertyName + (counter == 0 ? "" : counter);
-        if (!hasPropertyWithName(properties, name)) {
+        if (!entity.containsPropertyName(name)) {
             return name
         } else {
-            return getPropertyName(properties, propertyName, counter + 1);
+            return getPropertyName(entity, propertyName, counter + 1);
         }
     }
 

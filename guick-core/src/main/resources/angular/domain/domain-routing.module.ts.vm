@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-#foreach( ${entity} in ${project.entities})
-import { ${entity.name}Component } from './${entity.dashedName}/${entity.dashedName}.component';
-#end
+##foreach( ${entity} in ${project.entities})
+##import { ${entity.name}Component } from './${entity.dashedName}/${entity.dashedName}.component';
+##end
 
 const routes: Routes = [
 #foreach( ${entity} in ${project.entities})

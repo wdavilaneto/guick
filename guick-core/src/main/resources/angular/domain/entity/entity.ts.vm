@@ -1,0 +1,33 @@
+export class ${entity.name} {
+
+    public id: ${entity.getId().getAngularType()};
+#foreach( ${property} in ${entity.getProperties()})
+    public ${property.getName()}: ${property.getAngularType()};
+#end
+
+//  Enums (TODO)
+#foreach( ${property} in ${entity.getEnums()})
+//    public ${property.getName()} ${property.getSimpleProperty().getName()} = ${property.getName()}.${property.getCheckValues()[0]};
+#end
+
+// One to many Properties
+#foreach( ${property} in ${entity.getOneToManyProperties()})
+    public $property.getName(): Array<any> = new Array<any>(); // = new Array<$property.type>();
+#end
+
+//  to Many one properties
+#foreach( ${property} in ${entity.getManyToOneProperties()})
+    public $property.getName(): any; // = new $property.getName();
+#end
+
+//  Many to Many properties
+#foreach( ${property} in ${entity.getManyToManyProperties()})
+    public ${property.getName()}: Array<any> = new Array<any>(); //${property.getReferedEntity().getType()}
+#end
+
+#if(  ${entity.childrens.size()} > 0 && ${entity.childrens[0].name} == 'FuncImg' )
+//    foto: array<byte>; // byte[]
+#end
+
+
+}

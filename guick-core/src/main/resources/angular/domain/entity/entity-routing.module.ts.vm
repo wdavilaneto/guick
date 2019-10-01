@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { ${entity.name}LayoutComponent } from './${entity.dashedName}-layout/${entity.dashedName}-layout.component';
+import { ${entity.name}OverviewComponent } from './${entity.dashedName}-overview/${entity.dashedName}-overview.component';
+import { ${entity.name}FormComponent } from './${entity.dashedName}-form/${entity.dashedName}-form.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ${entity.name}LayoutComponent,
+    children: [
+      { path: '', redirectTo: '${entity.dashedName}-overview', pathMatch: 'full' },
+      { path: '${entity.dashedName}-overview', component: ${entity.name}OverviewComponent, data: { title: '${entity.name} Overview' } },
+      { path: '${entity.dashedName}-form', component: ${entity.name}FormComponent, data: { title: '${entity.name} Form' } },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class ${entity.name}RoutingModule {}

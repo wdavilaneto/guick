@@ -1,0 +1,7 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-${entity.dashedName}-layout',
+  templateUrl: './${entity.dashedName}-layout.component.html',
+})
+export class ${entity.name}LayoutComponent {}

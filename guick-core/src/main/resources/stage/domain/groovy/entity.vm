@@ -157,7 +157,7 @@ public class ${entity.getName()}#if( ${entity.getParent()} ) extends ${entity.ge
 #end
 
 ########################################################
-####### Syntax Shuger for properties on Embeddable ID ##
+####### Syntax Suger for properties on Embeddable ID ##
 ########################################################
 #foreach( ${property} in ${entity.id.getProperties()})
 #if ( !${strangeKey}  || ${property.column} != ${strangeKey} )

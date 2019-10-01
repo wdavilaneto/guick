@@ -24,6 +24,23 @@ public class RelationshipProperty extends Clazz {
         return PatternConverterFacade.getBeanType(column)
     }
 
+    public String getAngularType() {
+        final returnValue = this.getType().toLowerCase()
+        if (returnValue.startsWith("byte")) {
+            return returnValue.replaceFirst("byte", "any")
+        } else {
+            if (returnValue.equals("long") || returnValue.equals("integer") || returnValue.equals("biginteger")) {
+                return "number"
+            } else {
+                if (returnValue.equals("string")) {
+                    return "string"
+                } else {
+                    return "any"
+                }
+            }
+        }
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().

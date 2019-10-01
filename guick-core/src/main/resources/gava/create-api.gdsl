@@ -79,14 +79,3 @@ guick {
         }
     }
 }
-
-//"test-single-generateds" {
-//    templates = [
-//            [input: "stage/crud/test/ApplicationTestConfiguration.vm", output: "/api/src/test/${lang}/${packageBase}/ApplicationTestConfiguration.${lang}"],
-//            [input: "stage/crud/test/DatabaseIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/DatabaseIntegrationTestBase.${lang}"],
-//            [input: "stage/crud/test/SpringIntegrationTestBase.vm", output: "/api/src/test/${lang}/${packageBase}/SpringIntegrationTestBase.${lang}"],
-//
-//            [input: "stage/crud/test/concordion.css", output: "/api/src/test/resources/concordion.css"],
-//            [input: "stage/crud/test/application-test.properties.vm", output: "/api/src/test/resources/application-test.properties"]
-//    ]
-//}

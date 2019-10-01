@@ -59,17 +59,6 @@ guick {
                 }
             }
         }
-        for (def entity : entityList) {
-            if (entity.hasDeadline()) {
-                "geracao de alerts" {
-                    object entity
-                    templates = [
-                            [input: "stage/crud/scripts/AlertController.js.vm", output: "/front-end/app/scripts/controllers/support/${entity.name}AlertController.js"]
-                    ]
-                }
-
-            }
-        }
 
         "repository" {
             templates = [
@@ -84,90 +73,17 @@ guick {
         //[input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
         "single-generateds" {
             templates = [
-
-                    [input: "stage/frontend/app/modules/main/main.html.vm", output: "/front-end/app/modules/main/main.html"],
-
-                    [input: "stage/frontend/app/index.html.vm", output: "/front-end/app/index.html"],
-                    [input: "stage/frontend/app/layout/menu/menu.html.vm", output: "/front-end/app/layout/menu/menu.html"],
-                    [input: "stage/frontend/app/app.module.js.vm", output: "/front-end/app/app.module.js"],
-
-                    [input: "stage/frontend/app/i18n/", output: "/front-end/app/i18n"],
-
                     [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
-
-                    [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],
-                    [input: "stage/crud/scripts/DashboardController.js.vm", output: "/front-end/app/scripts/controllers/dashboards/DashboardController.js"],
-
-                    [input: "stage/crud/scripts/ActivitiService.js.vm", output: "/front-end/app/scripts/service/support/ActivitiService.js"],
-                    [input: "stage/crud/scripts/ActivitiController.js.vm", output: "/front-end/app/scripts/controllers/support/ActivitiController.js"],
-
-                    [input: "stage/crud/html/dashboard.html.vm", output: "/front-end/app/views/dashboards/dashboard.html"],
-
-                    [input: "stage/crud/html/deployment.html.vm", output: "/front-end/app/views/activiti/deployment.html"],
-
-                    [input: "stage/crud/html/modals.html.vm", output: "/front-end/app/views/modals.html"]
-
+                    [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"]
             ]
         }
 
-        for (def entity : entityList) {
-            "geracao de front-end" {
-                templates = [
-                        [input: "stage/frontend/crud/modules/entity/entity.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.controller.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.modal.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.modal.controller.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.edit.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.controller.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.controller.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.controller.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.controllerExt.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.extController.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.service.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.service.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.module.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.module.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.route.js.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.route.js"],
-                        [input: "stage/frontend/crud/modules/entity/entity.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.html"],
-                        [input: "stage/frontend/crud/modules/entity/entity.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.html"],
-                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.html"],
-                        [input: "stage/frontend/crud/modules/entity/entity.edit.main.html.vm", output: "/front-end/app/modules/${entity.beanName}/${entity.beanName}.edit.main.html"],
-
-                        [input: "stage/frontend/crud/modules/entity/components/entity.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.fieldset.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.table.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.table.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.filter.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.filter.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.card.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.card.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.readonly.fieldset.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.readonly.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.modal.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.modal.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.delete.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.delete.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.detalhar.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.detalhar.html"],
-                        [input: "stage/frontend/crud/modules/entity/components/entity.grid.cell.edit.html.vm", output: "/front-end/app/modules/${entity.beanName}/components/${entity.beanName}.grid.cell.edit.html"],
-
-                        [input: "stage/frontend/crud/modules/entity/directives/select.directive.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.directive.html"],
-                        [input: "stage/frontend/crud/modules/entity/directives/select.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.select.directive.js"],
-                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.js.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.js"],
-                        [input: "stage/frontend/crud/modules/entity/directives/fieldset.directive.html.vm", output: "/front-end/app/modules/${entity.beanName}/directives/${entity.beanName}.fieldset.directive.html"]
-                ]
-                object entity
-            }
-        }
-
-        // for (def property : entity.getManyToOneProperties())
-        for (def entity : entityList) {
-            "geracao de front-end" {
-                templates = [
-                        [input: "stage/frontend/crud/modules/entity/detail/tomany.controller.js.vm",
-                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.child.controller.js"],
-                        [input: "stage/frontend/crud/modules/entity/detail/tomany.child.html.vm",
-                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.child.html"],
-                        [input: "stage/frontend/crud/modules/entity/detail/tomany.compound.html.vm",
-                         output: "/front-end/app/modules/${entity.beanName}/details/${entity.beanName}.compound.html"]
-                ]
-                object entity
-            }
-
-        }
 
 //        for (def entity : entityList) {
 //            "tests" {
 //                object entity
 //                templates = [
 //                        [input: "stage/crud/test/SerializationTest.vm", output: "/api/src/test/${lang}/${packageBase}/domain/SerializationTest.${lang}"],
-//
 //                        [input: "stage/crud/test/integrationTest.vm", output: "/api/src/test/${lang}/${packageBase}/api/service/${entity.name}IntegrationTest.${lang}"],
 //                        [input: "stage/crud/test/dml-entity.sql.vm", output: "/api/src/test/resources/${packageBase}/api/service/dml-${entity.name}.sql.vm"],
 //

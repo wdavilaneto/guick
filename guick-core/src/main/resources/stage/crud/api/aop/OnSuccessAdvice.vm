@@ -32,12 +32,12 @@ import java.util.Locale;
  * Date: 22/10/14
  * Time: 21:51
  * <p/>
- * Este aspecto intercepta o retorno qualquer método anotado como @Okable.
- * O retorno deve ser do tipo HttpEntity. O código de mensagem é obtido do messages.properties pelo Spring.
- * O aspecto retorna a mensagem de sucesso no header do HttpResponse assim como um título da entidade sendo
+ * Este aspecto intercepta o retorno qualquer metodo anotado como @Okable.
+ * O retorno deve ser do tipo HttpEntity. O codigo de mensagem e obtido do messages.properties pelo Spring.
+ * O aspecto retorna a mensagem de sucesso no header do HttpResponse assim como um titulo da entidade sendo
  * manipulada. Caso necessite de um nome melhor tratado, basta incluir (no mesmo bundle), um nome customizado
- * com o seguinte código: Okable.httpResponse.headers.title.'sua.propria.Entidade'=Qualquer nome
- * Além disso, inclui um HttpStatus.OK no response
+ * com o seguinte codigo: Okable.httpResponse.headers.title.'sua.propria.Entidade'=Qualquer nome
+ * Alem disso, inclui um HttpStatus.OK no response
  */
 @Aspect
 public class OnSuccessAdvice {
@@ -109,7 +109,7 @@ public class OnSuccessAdvice {
 
                 return new ResponseEntity(objectBody, headers, httpStatus);
             } else {
-                //Métodos do tipo void, não tem como fazer nada, o desenvolvedor decidiu retornar 200
+                //Metodos do tipo void, não tem como fazer nada, o desenvolvedor decidiu retornar 200
                 return null;
             }
 
@@ -120,7 +120,7 @@ public class OnSuccessAdvice {
     }
 
     /**
-     * Para métodos do tipo GET, eu verifico se o retorno é nulo ou vazio (no caso de lista)
+     * Para metodos do tipo GET, eu verifico se o retorno e nulo ou vazio (no caso de lista)
      * retorna um status NOT_FOUND que pode ser tratado na tela
      *
      * @param pjp

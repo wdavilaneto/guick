@@ -46,7 +46,7 @@
 #foreach( ${entity} in ${project.getAllDomainEntities()})
 #if (!${entity.isEmbeddable()})
             #if($isFirst == 1)#set( $isFirst = 0 )#{else}, #{end}{
-              "state": "${entity.beanName}",
+              "state": "${entity.dashedName}",
               "name": "${entity.title}",
               "type": "link"
             }
@@ -65,7 +65,7 @@
           "children": [
 #foreach( ${entity} in ${project.getAllEnumLikeEntities()})
             #if($isFirst == 1)#set( $isFirst = 0 )#{else}, #{end}{
-              "state": "${entity.beanName}",
+              "state": "${entity.dashedName}",
               "name": "${entity.title}",
               "type": "link"
             }
