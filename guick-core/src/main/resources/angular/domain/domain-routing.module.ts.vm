@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+#foreach( ${entity} in ${project.entities})
+import { ${entity.name}Component } from './${entity.dashedName}/${entity.dashedName}.component';
+#end
+
+const routes: Routes = [
+#foreach( ${entity} in ${project.entities})
+    {
+        path: '${entity.dashedName}', loadChildren: () => import('./${entity.dashedName}/${entity.dashedName}.module').then(m => m.${entity.name}Module),
+        data: { title: '${entity.name}', titleI18n: '${entity.name}' },
+    },
+#end
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class DomainRoutingModule {}

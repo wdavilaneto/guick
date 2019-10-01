@@ -1,0 +1,26 @@
+{
+  "name": "${project.name}",
+  "version": "0.4.2",
+  "description": "Angular Material Admin Dashboard",
+  "author": "nzbin<nzb329@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/${project.name}/${project.name}.git"
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "admin dashboard",
+    "${project.name}"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/${project.name}/${project.name}/issues"
+  },
+  "homepage": "https://github.com/${project.name}/${project.name}#readme",
+  "scripts": {
+    "build": "../node_modules/.bin/tsc -p tsconfig.json"
+  },
+  "schematics": "./collection.json"
+}

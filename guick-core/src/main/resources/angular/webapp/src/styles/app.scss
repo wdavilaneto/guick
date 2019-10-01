@@ -1,0 +1,30 @@
+// Variables and Mixins
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+// Helpers
+@import 'helpers/helpers';
+// Themeing Styles
+@import 'widgets/widgets';
+@import 'theme/theme';
+// Plugins Style Fix
+@import 'plugins/plugins';
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($theme);
+@include matero-admin-theme($theme);
+
+//
+// Demo purpose only
+//
+.theme-dark {
+  $primary: mat-palette($mat-blue);
+  $accent: mat-palette($mat-amber, A200, A100, A400);
+
+  $theme: mat-dark-theme($primary, $accent);
+
+  @include angular-material-theme($theme);
+  @include matero-admin-theme($theme);
+}
