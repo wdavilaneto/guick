@@ -118,7 +118,7 @@ public class ${entity.name}Controller {
 #else
     def get(@PathVariable ${entity.id.type} id) {
 #end
-        return new ResponseEntity(${entityBeanName}Service.findOne(id), OK);
+        return new ResponseEntity(${entityBeanName}Service.getOne(id), OK);
     }
 
     /**

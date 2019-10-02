@@ -3,7 +3,7 @@
   "version": "0.0.0-NOT-USED",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disableHostCheck --proxy-config proxy.conf.json --base-href",
     "test": "ng test",
     "e2e": "ng e2e",
     "build": "ng build",

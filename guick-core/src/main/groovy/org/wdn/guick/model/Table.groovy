@@ -38,6 +38,9 @@ class Table {
                 pks.add(column);
             }
         }
+        if (pks.size() == 0) {
+            pks.add(columns[0]) // if you have no primary keys, Id assume firts column
+        }
         return pks;
     }
 

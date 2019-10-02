@@ -75,7 +75,7 @@ public interface I${entity.name}Service {
      * @param id
      * @return
      */
-    public ${entity.name} findOne(${entity.id.type} id);
+    public ${entity.name} getOne(${entity.id.type} id);
 
     /**
      * Deletes an entity with an given ID

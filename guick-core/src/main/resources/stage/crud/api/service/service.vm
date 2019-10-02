@@ -61,14 +61,14 @@ class ${entity.name}Service implements I${entity.name}Service {
 
     @Override
     @Transactional(readOnly = true)
-    public ${entity.name} findOne(${entity.id.type} id) {
-        return ${entityBeanName}Repository.findOne(id);
+    public ${entity.name} getOne(${entity.id.type} id) {
+        return ${entityBeanName}Repository.getOne(id);
     }
 
     @Override
     @Transactional
     public void delete(${entity.id.type} id) {
-        ${entityBeanName}Repository.delete(id);
+        ${entityBeanName}Repository.deleteById(id);
     }
 
     @Override
