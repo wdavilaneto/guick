@@ -1,7 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+import { ${entity.name}Service } from '../${entity.dashedName}.service';
 
 @Component({
   selector: 'app-${entity.dashedName}-layout',
   templateUrl: './${entity.dashedName}-layout.component.html',
 })
-export class ${entity.name}LayoutComponent {}
+export class ${entity.name}LayoutComponent {
+
+  result: any;
+  ${entity.beanName}s: ${entity.name}[];
+  ${entity.beanName}List = [];
+
+  constructor(private service: ${entity.name}Service, private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit() {
+    this.findAll();
+  }
+
+  findAll(): void {
+    this.service.findAll().subscribe(result => {
+      this.result = result;
+      this.${entity.beanName}s = result.content;
+      console.log(result);
+    });
+  }
+
+}

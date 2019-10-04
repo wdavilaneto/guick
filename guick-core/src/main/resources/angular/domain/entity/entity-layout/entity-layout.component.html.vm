@@ -16,13 +16,51 @@
 
       <mat-nav-list class="m-x--16 m-b--16 m-t-16">
         <mat-divider inset></mat-divider>
-        <a mat-list-item routerLink="/domain/${entity.dashedName}/${entity.dashedName}-overview">
-          <mat-icon class="icon-18 m-r-8">account_circle</mat-icon> Overview
-        </a>
-        <mat-divider inset></mat-divider>
-        <a mat-list-item routerLink="/domain/${entity.dashedName}/${entity.dashedName}-form">
-          <mat-icon class="icon-18 m-r-8">settings</mat-icon> Settings
-        </a>
+        <div *ngFor="let ${entity.beanName} of ${entity.beanName}s">
+          <mat-divider inset></mat-divider>
+          <mat-list-item routerLink="/domain/acao-atendimento/acao-${entity.dashed}-overview"
+            [mdePopoverTriggerFor]="appPopover" enterDelay="0" mdePopoverTriggerOn="hover" #popoverTrigger="mdePopoverTrigger">
+              <!--
+              <h4 mat-line>{{${entity.beanName}.id}}</h4>
+              -->
+#set( $list = ${entity.getDistinctedProperties()})
+<!-- $list -->
+#if( ${list.size()} >0 )
+            <small> {{${entity.beanName}.${entity.getDistinctedProperties()[0]}}}</small>
+#else
+            <small> {{${entity.beanName}.id}}</small>
+#end
+#if( ${list.size()} > 1 )
+#set( ${property} = ${list[1]})
+            <small> {{${entity.beanName}.${entity.getDistinctedProperties()[1]}}}</small>
+#end
+#if( ${list.size()} >2 )
+#set( ${property} = ${list[2]})
+            <small mat-line class="demo-secondary-text"> {{${entity.beanName}.${entity.getDistinctedProperties()[2]}}}</small>
+#end
+               <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="true">
+                  <mat-card>
+                    <mat-card-content>
+#set($counter = 0)
+#set($size = ${entity.getDistinctedProperties().size()})
+#foreach( ${property} in ${entity.getDistinctedProperties()})
+                <h4>
+                    {{${entity.beanName}.${property}}}
+                </h4>
+#set($counter = $counter+1)
+#if($counter == 6)
+    <!--
+#end
+#end
+
+#if($counter > 5)
+    -->
+#end
+                    </mat-card-content>
+                  </mat-card>
+                </mde-popover>
+          </mat-list-item>
+        </div>
       </mat-nav-list>
 
     </mat-card>

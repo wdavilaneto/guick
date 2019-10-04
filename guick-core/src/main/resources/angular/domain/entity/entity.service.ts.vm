@@ -1,9 +1,82 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { retry, map, catchError, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ${entity.name}Service {
 
-  constructor() { }
+  private endpoint = '/api/${entity.beanName}';  // URL to web api
+  constructor(private http: HttpClient, private messageService: ToastrService) {
+
+  }
+
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
+  }
+
+  /** GET heroes from the server */
+  get(id: any): Observable<any> {
+    return this.http.get(this.endpoint + '/' + id).pipe(
+      map(this.extractData)
+    );
+  }
+
+  /** GET heroes from the server */
+  findAll(): Observable<any> {
+    // return this.http.get<${entity.name}[]>(this.endpoint);
+    return this.http.get(this.endpoint).pipe(
+      map(this.extractData)
+    );
+  }
+
+  save(${entity.beanName}: ${entity.name}) {
+    if (${entity.beanName}.id) {
+      return this.http.put(this.endpoint + '/' + ${entity.beanName}.id, ${entity.beanName}).pipe(
+        tap(_ => this.messageService.success('Gravado com sucesso')),
+        catchError(this.handleError<any[]>('update', []))
+      );
+    } else {
+      return this.http.post(this.endpoint, ${entity.beanName}).pipe(
+        tap(_ => this.messageService.success('Gravado com sucesso')),
+        catchError(this.handleError<any[]>('save', []))
+      );
+    }
+  }
+
+  update(${entity.beanName}: ${entity.name}) {
+    return this.http.put(this.endpoint + '/' + ${entity.beanName}.id, ${entity.beanName}).pipe(
+      tap(_ => this.messageService.success('Gravado com sucesso')),
+      catchError(this.handleError<any[]>('update', []))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: HttpErrorResponse): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error.error); // log to console instead
+
+      const message = JSON.stringify(error.error);
+      // TODO: better job of transforming error for user consumption
+      this.messageService.error(`failed: ${message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+
 }

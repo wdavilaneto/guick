@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+import { ${entity.name}Service } from './${entity.dashedName}.service';
 
 @Component({
   selector: 'app-entity',
@@ -7,10 +12,5 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./${entity.dashedName}.component.css']
 })
 export class  ${entity.name}Component implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit(): void { }
 }

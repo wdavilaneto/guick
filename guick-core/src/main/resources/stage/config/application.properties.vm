@@ -1,6 +1,6 @@
 # spring.datasource.jndi-name=jboss:${project.name}Ds
 server.context-path=/${project.name}
-server.servlet-path=/api
+server.servlet.context-path=/api
 
 #spring.profiles.active=jboss
 spring.groovy.template.check-template-location=false
@@ -19,7 +19,7 @@ spring.datasource.initial-size=10
 spring.datasource.min-idle=10
 spring.datasource.max-active=300
 
-#JPA/HIbernate
+#JPA/Hibernate
 spring.data.jpa.repositories.enabled=true
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.max_fetch_depth=3
