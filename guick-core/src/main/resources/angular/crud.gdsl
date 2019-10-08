@@ -40,6 +40,7 @@ guick {
                         [input: "angular/domain/entity/entity-form/entity-form.component.ts.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-form/${entity.dashedName}-form.component.ts"],
                         [input: "angular/domain/entity/entity-layout/entity-layout.component.html.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-layout/${entity.dashedName}-layout.component.html"],
                         [input: "angular/domain/entity/entity-layout/entity-layout.component.ts.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-layout/${entity.dashedName}-layout.component.ts"],
+                        [input: "angular/domain/entity/entity-layout/entity-layout.component.css.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-layout/${entity.dashedName}-layout.component.css"],
                         [input: "angular/domain/entity/entity-overview/entity-overview.component.html.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-overview/${entity.dashedName}-overview.component.html"],
                         [input: "angular/domain/entity/entity-overview/entity-overview.component.ts.vm", output: "${routesDomain}/${entity.dashedName}/${entity.dashedName}-overview/${entity.dashedName}-overview.component.ts"],
                 ]

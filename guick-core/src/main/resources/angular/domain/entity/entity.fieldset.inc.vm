@@ -1,0 +1,190 @@
+#set( $js  = "$")
+#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
+#set( $projectBeanName = ${util.uncapitalize($project.name)} )
+#set( $bigFieldSize = 100)
+#set( $isFilter = false )
+#set( $idAgragation = '' )
+#set( $rowSize = 0)
+
+####### TODO Teste TEMPORARIO REMOVER!!!
+#if(  ${entity.childrens.size()} > 0 && ${entity.childrens[0].name} == 'FuncImg' )
+            <!--
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <img ng-src="data:image/*;base64,{{vm.entity.foto}}" ng-show="vm.entity.foto" width="80px" />
+                </div>
+                <mat-card-title>title</mat-card-title>
+                <mat-card-subtitle>asfd</mat-card-subtitle>
+            </mat-card-header>
+            -->
+#end
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+#if(${entity.id.type} != 'Long' && !(${entity.table.pk.size()} == 1 && ${entity.table.pk[0].useUUID}) && !(${entity.table.getFieldThatPointsParentPk().size()} == 1))
+#set( $property = ${entity.id} )
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+##########  HERE wh stasrt
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.length} >= ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+#end
+#########
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.length} >= ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+#end
+#########
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.length} >= ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+#end
+##################################################
+####################### Complex properties
+##################################################
+#set ($stringField = "id")
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()} )
+################ logic for description name
+#if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
+#set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
+### find first StringField
+#set ( $stringField = 'id' )
+#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
+#if(${prop.type} == 'String' && $stringField == 'id' )
+#set ($stringField = ${prop})
+#end
+#end
+#end
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <ng-select [items]="${beanName}$ | async" bindLabel="${stringField}" bindValue="id"
+                       formControlName="selected${idAgragation}${complexProperty.name}Id"
+                       placeholder="select #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}">
+            </ng-select>
+          </div>
+#else
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <ng-select [items]="people" bindLabel="name" bindValue="id" formControlName="selected${idAgragation}${complexProperty.name}Id"
+                       placeholder="select ${complexProperty.name}">
+            </ng-select>
+##if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
+##            <a class="btn-detail" (click)="onSelect${complexProperty.referedEntity.name}(${complexProperty.referedEntity.beanName}.id)"><i class="fa fa-fw fa-search-plus"></i></a>
+##end
+          </div>
+
+#end
+#end
+##################################################
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+#if(${complexProperty.referedEntity.table.count} > 200 || ${complexProperty.referedEntity.looksLikeMainEntity()})
+
+################ logic for description name
+#if (${complexProperty.referedEntity.looksLikeDomain()} && ${complexProperty.referedEntity.getManyToOneProperties().size()} >=1 )
+#set( $toOneProperty = ${complexProperty.referedEntity.getManyToOneProperties()[0]} )
+### find first StringField
+#set ( $stringField = 'id' )
+#foreach( ${prop} in ${toOneProperty.referedEntity.properties})
+#if(${prop.type} == 'String' && $stringField == 'id' )
+#set ($stringField = ${prop})
+#end
+#end
+#end
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <ng-select [items]="${beanName}$ | async" bindLabel="${prop.beanNAme}.${stringField}" bindValue="id"
+                       formControlName="selected${idAgragation}${complexProperty.name}Id"
+                       placeholder="select #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}">
+            </ng-select>
+          </div>
+#else
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <ng-select [items]="people" bindLabel="name" bindValue="id" formControlName="selected${idAgragation}${complexProperty.name}Id"
+                       placeholder="select #set($size = ${complexProperty.referedEntity.properties.size()} )#set($counter = 0)#foreach( ${prop} in ${complexProperty.referedEntity.properties})#set($counter = $counter + 1)#if(${prop.type} == 'String'&& ${prop.column.length} > 2)${prop.title}#if($counter < $size) ou #{end}#{end}#{end}">
+            </ng-select>
+##if( ${complexProperty.referedEntity.looksLikeMainEntity()} )
+##              <a class="btn-detail" (click)="onSelect${complexProperty.referedEntity.name}(${complexProperty.referedEntity.beanName}.id)"><i class="fa fa-fw fa-search-plus"></i></a>
+##end
+          </div>
+
+#end
+#end
+##################################################
+#set( $idAgragation = '' )
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.length} < ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+#end
+#########
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.length} < ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+
+#end
+#end
+#########
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.length} < ${bigFieldSize})
+          <div fxFlex="50" fxFlex.lt-md="100">
+#parse( "angular/domain/entity/entity.property.inc.vm" )
+          </div>
+#end
+#end
+
+
+
+
+#######################################
+################# now text areas
+#######################################
+#foreach( ${property} in ${entity.properties})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <mat-form-field>
+                <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
+            </mat-form-field>
+          </div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.parent.getProperties()})
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <mat-form-field>
+                <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
+            </mat-form-field>
+          </div>
+#end
+#end
+#######################################
+#foreach( ${property} in ${entity.id.getProperties()})
+#set( $idAgragation = 'id.' )
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <mat-form-field>
+                <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
+            </mat-form-field>
+          </div>
+#end
+#end
+
+        </div>

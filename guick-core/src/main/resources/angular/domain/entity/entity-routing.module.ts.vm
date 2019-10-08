@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '${entity.dashedName}-overview', pathMatch: 'full' },
       { path: '${entity.dashedName}-overview', component: ${entity.name}OverviewComponent, data: { title: '${entity.name} Overview' } },
+      { path: '${entity.dashedName}-overview/:id', component: ${entity.name}OverviewComponent, data: { title: '${entity.name} Overview' } },
       { path: '${entity.dashedName}-form', component: ${entity.name}FormComponent, data: { title: '${entity.name} Form' } },
     ],
   },

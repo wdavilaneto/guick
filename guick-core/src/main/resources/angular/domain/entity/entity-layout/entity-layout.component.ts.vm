@@ -9,6 +9,7 @@ import { ${entity.name}Service } from '../${entity.dashedName}.service';
 @Component({
   selector: 'app-${entity.dashedName}-layout',
   templateUrl: './${entity.dashedName}-layout.component.html',
+  styleUrls: ['./${entity.dashedName}-layout.component.css'],
 })
 export class ${entity.name}LayoutComponent {
 

@@ -1,0 +1,87 @@
+#if( !(${entity.table.getFieldThatPointsParentPk().size()} ==1 && ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column}) )
+#if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
+                    <mat-form-field>
+                        <mat-label>${property.title}</mat-label>
+                        <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
+                        #if(!${property.column.nullable})required#{end}>
+                    </mat-form-field>
+
+#else
+################# PDF OR IMAGE
+#if ( ${property.getType().equalsIgnoreCase('byte[]')} )
+
+#if (  ${property.name.toLowerCase().contains('pdf')} )
+    <!-- TODO PDF or field  ${idAgragation}${property} -->
+    ${idAgragation}${property}
+#else
+    <!-- TODO PDF or file field  ${idAgragation}${property} -->
+#end
+
+#else
+#if ( ${property.getType().equalsIgnoreCase('Date')} )
+#if (${property.column.insertable})
+                    <section>
+                      <mat-form-field>
+                        <mat-label>${property.title}</mat-label>
+                        <input matInput
+                               [matDatepicker]="${idAgragation}${property}Picker" formControlName="${idAgragation}${property}"
+                               #if(!${property.column.nullable})required#{end}>
+                        <mat-datepicker-toggle matSuffix [for]="${idAgragation}${property}Picker"></mat-datepicker-toggle>
+                        <mat-datepicker #${idAgragation}${property}Picker startView="year"></mat-datepicker>
+##                ##        <mat-error *ngIf="${idAgragation}${property}Model.hasError('required')">
+##                ##          Please choose a date.
+##                ##        </mat-error>
+##                ##        <mat-error *ngIf="${idAgragation}${property}Model.hasError('matDatepickerMax')">
+##                ##          Please choose an earlier date.
+##                ##        </mat-error>
+                      </mat-form-field>
+                    </section>
+#end
+#else
+#if ( ${property.name.toLowerCase().equalsIgnoreCase('sex')} || ${property.name.toLowerCase().equalsIgnoreCase('sexo')} )
+                    <section>
+                      <mat-form-field>
+                        <mat-label>Colors</mat-label>
+                        <mat-select formControlName="selected${idAgragation}${property}">
+                          <mat-option *ngFor="let sex of [{value:'M',label:'M'},{value:'F',label:'F'}]" [value]="sex.value">
+                            {{ sex.label }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </section>
+#else
+#if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
+                    <mat-form-field>
+                        <mat-label>${property.title}</mat-label>
+                        <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
+                        #if(!${property.column.nullable})required#{end}>
+                    </mat-form-field>
+#else
+#if(${property.column.length} >= 1000 && (${property.column.type.toLowerCase()} != 'clob' && ${property.column.type.toLowerCase()} != 'text' ) )
+                    <mat-form-field>
+                        <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
+                    </mat-form-field>
+#else
+#if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
+#####<div class="col-md-12 form-group" show-errors>
+#####    <label for="vm.entity.${idAgragation}${property}">${property.title} #if(!${property.column.nullable} && !$isFilter)<i class="fa fa-asterisk fa-sm" popover-trigger="mouseenter"  popover-placement="up" popover="Campo obrigatório"/>#{end}</label>
+#####    <div text-angular class="inputMaterial" ng-model="vm.entity.${idAgragation}${property}" #if(!${property.column.nullable})required #{end}#if(${property.name} != 'numeroProcesso') #end id="${idAgragation}${property}" />
+#if(!${property.column.nullable})
+#####    <span  class="help-block" ng-show="${idAgragation}${property}.$error.required">Obrigatório</span>
+#{end}
+#####</div>
+#else
+                    <mat-form-field>
+                        <mat-label>${property.title}</mat-label>
+                        <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
+                        #if(!${property.column.nullable})required#{end}>
+                    </mat-form-field>
+
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end

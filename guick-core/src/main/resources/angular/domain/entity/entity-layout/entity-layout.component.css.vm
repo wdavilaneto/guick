@@ -1,0 +1,5 @@
+.overview-card {
+    min-width: 600px;
+    min-height: 400px;
+    max-width: 1000px;
+}

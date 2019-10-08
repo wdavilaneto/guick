@@ -22,7 +22,7 @@ public class Pagination {
     private static final long serialVersionUID = -4541509938956089562L;
 
     private int page = 1;  // default values
-    private int size = 20; // default values
+    private int size = 10; // default values
     private String sort;
 
     public Pagination(){

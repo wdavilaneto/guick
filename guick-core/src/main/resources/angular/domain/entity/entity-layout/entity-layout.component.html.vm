@@ -18,8 +18,8 @@
         <mat-divider inset></mat-divider>
         <div *ngFor="let ${entity.beanName} of ${entity.beanName}s">
           <mat-divider inset></mat-divider>
-          <mat-list-item routerLink="/domain/acao-atendimento/acao-${entity.dashed}-overview"
-            [mdePopoverTriggerFor]="appPopover" enterDelay="0" mdePopoverTriggerOn="hover" #popoverTrigger="mdePopoverTrigger">
+          <mat-list-item routerLink="/domain/${entity.dashedName}/${entity.dashedName}-overview/{{${entity.beanName}.id}}"
+            [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="hover" #popoverTrigger="mdePopoverTrigger">
               <!--
               <h4 mat-line>{{${entity.beanName}.id}}</h4>
               -->
@@ -38,24 +38,31 @@
 #set( ${property} = ${list[2]})
             <small mat-line class="demo-secondary-text"> {{${entity.beanName}.${entity.getDistinctedProperties()[2]}}}</small>
 #end
-               <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="true">
-                  <mat-card>
+               <mde-popover #appPopover="mdePopover" [mdePopoverEnterDelay]="0" [mdePopoverLeaveDelay]="0" [mdePopoverOffsetX]="280" [mdePopoverOverlapTrigger]="true">
+                  <mat-card class="overview-card">
                     <mat-card-content>
+                        <form class="matero-form-horizontal">
+                        <div fxLayout="row wrap" fxLayoutGap="8px grid">
 #set($counter = 0)
 #set($size = ${entity.getDistinctedProperties().size()})
 #foreach( ${property} in ${entity.getDistinctedProperties()})
-                <h4>
-                    {{${entity.beanName}.${property}}}
-                </h4>
+                            <div fxFlex="50" fxFlex.lt-md="100">
+                              <mat-form-field>
+                                <mat-label>${property}</mat-label>
+                                <input matInput placeholder="" readonly value="{{${entity.beanName}.${property}}}">
+                              </mat-form-field>
+                            </div>
 #set($counter = $counter+1)
 #if($counter == 6)
-    <!--
+                            <!-- -->
 #end
 #end
 
 #if($counter > 5)
-    -->
+                            <!-- -->
 #end
+                      </div>
+                      </form>
                     </mat-card-content>
                   </mat-card>
                 </mde-popover>
