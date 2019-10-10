@@ -1,16 +1,84 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
 import { ${entity.name}Service } from './${entity.dashedName}.service';
 
 @Component({
-  selector: 'app-entity',
+  selector: 'app-${entity.dashedName}',
   templateUrl: './${entity.dashedName}.component.html',
   styleUrls: ['./${entity.dashedName}.component.css']
 })
 export class  ${entity.name}Component implements OnInit {
-  ngOnInit(): void { }
+  reactiveForm: FormGroup;
+  public id: number;
+  public tabSelected = '${entity.name}';
+
+  @Input()
+  ${entity.beanName}: ${entity.name} = new ${entity.name}();
+
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
+
+  constructor(
+    private service: ${entity.name}Service,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+    private dialog: MatDialog,
+    private fb: FormBuilder) {
+    // Create empty formgroup already to prevent error before init component
+    this.createFormGroup();
+  }
+
+  ngOnInit() {
+    this.createFormGroup();
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.id = params['id'];
+        this.createFormGroup();
+      }
+    });
+  }
+
+  backClicked() {
+    this.location.back();
+  }
+
+  createFormGroup() {
+    this.reactiveForm = this.fb.group({
+#set( $idAgragation = '' )
+#foreach( ${property} in ${entity.properties})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#foreach( ${property} in ${entity.parent.getProperties()})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#set( $idAgragation = 'id.' )
+#foreach( ${property} in ${entity.id.getProperties()})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#set( $idAgragation = '' )
+#set ($stringField = "id")
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+#end
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+#end
+    });
+  }
 }

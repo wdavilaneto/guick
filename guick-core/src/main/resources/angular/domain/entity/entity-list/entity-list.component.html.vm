@@ -1,0 +1,21 @@
+<section>
+    <h2>Paginated Table</h2>
+    <p>${entity.title}</p>
+    <mat-table [dataSource]="paginatedDataSource" aria-readonly="true" aria-label="${entity.title} ...">
+        <ng-container cdkColumnDef="name">
+            <mat-header-cell *cdkHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.name}}</mat-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="color">
+            <mat-header-cell *cdkHeaderCellDef>Color</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.color}}</mat-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="age">
+            <mat-header-cell *cdkHeaderCellDef>Age</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">{{row.age}}</mat-cell>
+        </ng-container>
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [length]="6" [pageIndex]="0" [pageSize]="3" [pageSizeOptions]="[1, 3, 5]"></mat-paginator>
+</section>

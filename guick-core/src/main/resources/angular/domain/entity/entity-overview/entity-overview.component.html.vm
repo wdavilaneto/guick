@@ -1,21 +1,15 @@
-<mat-card>
-  <mat-tab-group class="m--16">
-    <mat-tab label="${entity.name}">
+<mat-card [ngClass]="(${entity.beanName}.id > 0)?'active':'not-active'">
+  <mat-tab-group class="m--16" *ngIf="(${entity.beanName}.id > 0)">
+    <mat-tab label="${entity.name}" mat-align-tabs="start">
       <div class="m-16">
-        <form class="matero-form-horizontal" [formGroup]="reactiveForm" >
-        <!-- Main entity properties -->
-#parse( "angular/domain/entity/entity.fieldset.inc.vm" )
-          <div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-raised-button color="primary" class="m-t-8">Save</button>
-          </div>
-        </form>
+        <app-${entity.dashedName} [${entity.beanName}]="${entity.beanName}"></app-${entity.dashedName}>
       </div>
     </mat-tab>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-      <mat-tab label="${complexProperty.title}">
+      <mat-tab label="${complexProperty.title}" >
         <div class="m-16">
-            ${complexProperty.referedEntity.name}
+            <app-${complexProperty.referedEntity.dashedName}-list [${complexProperty.referedEntity.beanName}List]="${complexProperty.referedEntity.beanName}List"></app-${complexProperty.referedEntity.dashedName}-list>
         </div>
       </mat-tab>
 #end
@@ -25,7 +19,7 @@
 #set( $beanName = ${util.uncapitalize(${entity.referedEntity.name})} )
       <mat-tab label="${complexProperty.referedEntity.name}">
         <div class="m-16">
-            ${complexProperty.referedEntity.title}
+            <app-${complexProperty.referedEntity.dashedName} [${complexProperty.referedEntity.beanName}]="${entity.beanName}.${complexProperty.referedEntity.beanName}"></app-${complexProperty.referedEntity.dashedName}>
         </div>
       </mat-tab>
 #end
@@ -34,7 +28,7 @@
 #if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
       <mat-tab label="${complexProperty.referedEntity.name}">
         <div class="m-16">
-            ${complexProperty.referedEntity.title}
+            to many
         </div>
       </mat-tab>
 #end

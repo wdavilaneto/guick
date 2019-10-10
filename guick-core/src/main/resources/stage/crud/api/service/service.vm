@@ -62,7 +62,7 @@ class ${entity.name}Service implements I${entity.name}Service {
     @Override
     @Transactional(readOnly = true)
     public ${entity.name} getOne(${entity.id.type} id) {
-        return ${entityBeanName}Repository.getOne(id);
+        return ${entityBeanName}Repository.get(id);
     }
 
     @Override

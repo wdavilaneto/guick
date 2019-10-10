@@ -1,0 +1,8 @@
+.not-active {
+    opacity: 0;
+}
+
+.active {
+    opacity: 1;
+    transition: opacity 1s;
+}

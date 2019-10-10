@@ -1,0 +1,75 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatPaginator  } from '@angular/material';
+import { DataSource } from '@angular/cdk/table';
+import { BehaviorSubject, Observable, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+import { ${entity.name}Service } from '../${entity.dashedName}.service';
+
+
+@Component({
+  selector: 'app-${entity.dashedName}-list',
+  templateUrl: './${entity.dashedName}-list.component.html',
+})
+export class ${entity.name}ListComponent implements OnInit {
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) pager: MatPaginator;
+
+  paginatedDataSource: PaginatedDataSource;
+  public result: any;
+  public ${entity.beanName}List: ${entity.name}[];
+
+  constructor(
+    private service: ${entity.name}Service,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+    private dialog: MatDialog,
+    private fb: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.findAll();
+  }
+
+  findAll(): void {
+    this.service.findAll().subscribe(result => {
+      this.result = result;
+      this.${entity.beanName}List = result.results;
+      this.paginatedDataSource = new PaginatedDataSource(this.pager, this.${entity.beanName}List);
+      console.log(result);
+    });
+  }
+
+
+  backClicked() {
+    this.location.back();
+  }
+}
+
+export class PaginatedDataSource extends DataSource<${entity.name}> {
+  dataChange: BehaviorSubject<${entity.name}[]> = new BehaviorSubject<${entity.name}[]>([]);
+
+  constructor(private paginator: MatPaginator, private ${entity.beanName}List: ${entity.name}[]) {
+    super();
+    this.dataChange.next(this.${entity.beanName}List);
+  }
+
+  connect(): Observable<${entity.name}[]> {
+    const displayDataChanges = [this.dataChange, this.paginator.page];
+
+    return merge(...displayDataChanges).pipe(
+      map(() => {
+        const data = [...this.${entity.beanName}List];
+        const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+        return data.splice(startIndex, this.paginator.pageSize);
+      })
+    );
+  }
+
+  disconnect() { }
+}

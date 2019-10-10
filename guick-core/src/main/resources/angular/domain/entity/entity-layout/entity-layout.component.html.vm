@@ -26,19 +26,19 @@
 #set( $list = ${entity.getDistinctedProperties()})
 <!-- $list -->
 #if( ${list.size()} >0 )
-            <small> {{${entity.beanName}.${entity.getDistinctedProperties()[0]}}}</small>
+            <small class="truncate"> {{${entity.beanName}.${entity.getDistinctedProperties()[0]}}}</small>
 #else
             <small> {{${entity.beanName}.id}}</small>
 #end
 #if( ${list.size()} > 1 )
 #set( ${property} = ${list[1]})
-            <small> {{${entity.beanName}.${entity.getDistinctedProperties()[1]}}}</small>
+            <small class="truncate"> {{${entity.beanName}.${entity.getDistinctedProperties()[1]}}}</small>
 #end
 #if( ${list.size()} >2 )
 #set( ${property} = ${list[2]})
             <small mat-line class="demo-secondary-text"> {{${entity.beanName}.${entity.getDistinctedProperties()[2]}}}</small>
 #end
-               <mde-popover #appPopover="mdePopover" [mdePopoverEnterDelay]="0" [mdePopoverLeaveDelay]="0" [mdePopoverOffsetX]="280" [mdePopoverOverlapTrigger]="true">
+               <mde-popover #appPopover="mdePopover" [mdePopoverEnterDelay]="0" [mdePopoverLeaveDelay]="0" [mdePopoverOffsetX]="300" [mdePopoverOverlapTrigger]="true">
                   <mat-card class="overview-card">
                     <mat-card-content>
                         <form class="matero-form-horizontal">

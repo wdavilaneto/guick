@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+import { ${entity.name}Service } from '../${entity.dashedName}.service';
 
 @Component({
   selector: 'app-${entity.dashedName}-form',
@@ -7,29 +13,80 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class ${entity.name}FormComponent implements OnInit {
   reactiveForm: FormGroup;
+  public id: number;
+  public tabSelected = '${entity.name}';
+  ${entity.beanName}: ${entity.name} = new ${entity.name}();
 
-  constructor(private fb: FormBuilder) {
-    this.reactiveForm = this.fb.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      gender: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      company: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      tele: ['', [Validators.required]],
-      website: ['', [Validators.required]],
-      date: ['', [Validators.required]],
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
+
+  constructor(
+    private service: ${entity.name}Service,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+    private dialog: MatDialog,
+    private fb: FormBuilder) {
+    // Create empty formgroup already to prevent error before init component
+    this.createFormGroup();
+    // Subescribe on :id init/changes
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.id = params['id'];
+        this.initTemplate(this.id);
+      }
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  getErrorMessage(form: FormGroup) {
-    return form.get('email').hasError('required')
-      ? 'You must enter a value'
-      : form.get('email').hasError('email')
-      ? 'Not a valid email'
-      : '';
+  initTemplate(id: number) {
+    console.log(id);
+    this.get(id);
+  }
+
+  get(id: any): void {
+    this.service.get(id).subscribe(result => {
+      this.${entity.beanName} = result;
+      this.createFormGroup();
+    });
+  }
+
+  backClicked() {
+    this.location.back();
+  }
+  createFormGroup() {
+    this.reactiveForm = this.fb.group({
+#set( $idAgragation = '' )
+#foreach( ${property} in ${entity.properties})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#foreach( ${property} in ${entity.parent.getProperties()})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#set( $idAgragation = 'id.' )
+#foreach( ${property} in ${entity.id.getProperties()})
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#end
+#set( $idAgragation = '' )
+#set ($stringField = "id")
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+#end
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+#end
+    });
   }
 }

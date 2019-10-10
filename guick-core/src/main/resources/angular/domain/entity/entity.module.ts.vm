@@ -4,13 +4,13 @@ import { SharedModule } from '@shared/shared.module';
 import { ${entity.name}RoutingModule } from './${entity.dashedName}-routing.module';
 import { ${entity.name}LayoutComponent } from './${entity.dashedName}-layout/${entity.dashedName}-layout.component';
 import { ${entity.name}OverviewComponent } from './${entity.dashedName}-overview/${entity.dashedName}-overview.component';
-import { ${entity.name}FormComponent } from './${entity.dashedName}-form/${entity.dashedName}-form.component';
+import { DomainModule } from '../domain.module';
 
-const COMPONENTS = [${entity.name}LayoutComponent,  ${entity.name}OverviewComponent, ${entity.name}FormComponent];
+const COMPONENTS = [${entity.name}LayoutComponent,  ${entity.name}OverviewComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
-  imports: [SharedModule, ${entity.name}RoutingModule],
+  imports: [SharedModule, ${entity.name}RoutingModule, DomainModule],
   declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
   entryComponents: COMPONENTS_DYNAMIC,
 })

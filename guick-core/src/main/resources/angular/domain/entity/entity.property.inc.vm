@@ -1,11 +1,13 @@
 #if( !(${entity.table.getFieldThatPointsParentPk().size()} ==1 && ${entity.table.getFieldThatPointsParentPk()[0]} == ${property.column}) )
 #if ( ${property.column.name.contains('_DK_')} && ${property.column.nullable} )
-                    <mat-form-field>
-                        <mat-label>${property.title}</mat-label>
-                        <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
-                        #if(!${property.column.nullable})required#{end}>
-                    </mat-form-field>
-
+            <div fxFlex="50" fxFlex.lt-md="100">
+              <mat-form-field>
+                <mat-label>${property.title}</mat-label>
+                <input matInput placeholder="${property}" formControlName="${idAgragation}${property}" #if(!${property.column.nullable})required#{end}>
+                <mat-error *ngIf="reactiveForm.get('${idAgragation}${property}').invalid">Please enter ${property}
+                </mat-error>
+              </mat-form-field>
+            </div>
 #else
 ################# PDF OR IMAGE
 #if ( ${property.getType().equalsIgnoreCase('byte[]')} )
@@ -20,7 +22,7 @@
 #else
 #if ( ${property.getType().equalsIgnoreCase('Date')} )
 #if (${property.column.insertable})
-                    <section>
+                <div fxFlex="50" fxFlex.lt-md="100">
                       <mat-form-field>
                         <mat-label>${property.title}</mat-label>
                         <input matInput
@@ -35,32 +37,34 @@
 ##                ##          Please choose an earlier date.
 ##                ##        </mat-error>
                       </mat-form-field>
-                    </section>
+                </div>
 #end
 #else
 #if ( ${property.name.toLowerCase().equalsIgnoreCase('sex')} || ${property.name.toLowerCase().equalsIgnoreCase('sexo')} )
-                    <section>
+                <div fxFlex="50" fxFlex.lt-md="100">
                       <mat-form-field>
                         <mat-label>Colors</mat-label>
-                        <mat-select formControlName="selected${idAgragation}${property}">
+                        <mat-select formControlName="${idAgragation}${property}">
                           <mat-option *ngFor="let sex of [{value:'M',label:'M'},{value:'F',label:'F'}]" [value]="sex.value">
                             {{ sex.label }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
-                    </section>
+                </div>
 #else
 #if ( ${property.name.toLowerCase().startsWith('mail')} || ${property.name.toLowerCase().startsWith('email')} )
+                <div fxFlex="50" fxFlex.lt-md="100">
                     <mat-form-field>
                         <mat-label>${property.title}</mat-label>
                         <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
                         #if(!${property.column.nullable})required#{end}>
                     </mat-form-field>
+                </div>
 #else
 #if(${property.column.length} >= 1000 && (${property.column.type.toLowerCase()} != 'clob' && ${property.column.type.toLowerCase()} != 'text' ) )
-                    <mat-form-field>
-                        <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
-                    </mat-form-field>
+#######                    <mat-form-field>
+#######                        <textarea matInput placeholder="Textarea" formControlName="${idAgragation}${property}"></textarea>
+#######                    </mat-form-field>
 #else
 #if(${property.column.type} == 'CLOB' || ${property.column.type} == 'text' )
 #####<div class="col-md-12 form-group" show-errors>
@@ -71,12 +75,13 @@
 #{end}
 #####</div>
 #else
+                <div fxFlex="50" fxFlex.lt-md="100">
                     <mat-form-field>
                         <mat-label>${property.title}</mat-label>
                         <input matInput placeholder="Input" formControlName="${idAgragation}${property}"
                         #if(!${property.column.nullable})required#{end}>
                     </mat-form-field>
-
+                </div>
 #end
 #end
 #end

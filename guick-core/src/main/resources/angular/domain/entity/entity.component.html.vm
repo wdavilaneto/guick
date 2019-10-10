@@ -1,42 +1,9 @@
-#set( $js  = "$")
-#set( $entityBeanName = ${util.uncapitalize($entity.name)} )
-#set( $projectBeanName = ${util.uncapitalize($project.name)} )
-#set( $bigFieldSize = 100)
-#set( $isFilter = true )
-#set( $idAgragation = '' )
-#set( $rowSize = 0)
-<page-header></page-header>
-
-<mat-card>
-  <mat-card-content>
-    <div class="example-container">
-#foreach( ${property} in ${entity.properties})
-#if(${property.column.length} >= ${bigFieldSize})
-      <mat-form-field>
-        <input matInput placeholder="${property}">
-      </mat-form-field>
-#end
-#end
-#foreach( ${property} in ${entity.parent.getProperties()})
-#if(${property.column.length} >= ${bigFieldSize})
-      <mat-form-field>
-        <input matInput placeholder="${property}">
-      </mat-form-field>
-
-#end
-#end
-#foreach( ${property} in ${entity.id.getProperties()})
-#set( $idAgragation = 'id.' )
-#if(${property.column.length} >= ${bigFieldSize})
-      <mat-form-field>
-        <input matInput placeholder="${property}">
-      </mat-form-field>
-#end
-#end
-#set( $idAgragation = '' )
-
+<form class="matero-form-horizontal" [formGroup]="reactiveForm" >
+<!-- Main entity properties -->
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+#parse( "angular/domain/entity/entity.fieldset.inc.vm" )
     </div>
-  </mat-card-content>
-</mat-card>
-
-
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary" class="m-t-8">Save</button>
+    </div>
+</form>

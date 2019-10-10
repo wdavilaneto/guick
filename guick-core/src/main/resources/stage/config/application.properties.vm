@@ -28,9 +28,6 @@ spring.jpa.properties.hibernate.max_fetch_depth=3
 #spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
 #spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
-# TODO fix remove...
-spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false
-
 email.sender=sistema.${project.name}@${project.group}
 email.to=${project.name}@${project.group}
 

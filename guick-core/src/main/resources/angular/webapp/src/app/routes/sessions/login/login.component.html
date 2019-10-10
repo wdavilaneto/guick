@@ -5,14 +5,13 @@
       <form class="matero-form-horizontal" [formGroup]="reactiveForm" (ngSubmit)="login(reactiveForm)">
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Simple placeholder" formControlName="username" required value="kermit">
+          <input matInput placeholder="kermit" formControlName="username" required value="kermit">
           <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter username</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Simple placeholder" type="password" value="kermit"
-                 formControlName="password" required>
+          <input matInput placeholder="kermit" type="password" value="kermit" formControlName="password" required>
           <mat-error *ngIf="reactiveForm.get('password').invalid">Please enter password</mat-error>
         </mat-form-field>
 

@@ -3,3 +3,9 @@
     min-height: 400px;
     max-width: 1000px;
 }
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

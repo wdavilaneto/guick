@@ -10,12 +10,22 @@ import { ${entity.name}Service } from '../${entity.dashedName}.service';
 @Component({
   selector: 'app-${entity.dashedName}-overview',
   templateUrl: './${entity.dashedName}-overview.component.html',
+  styleUrls: ['./${entity.dashedName}-overview.component.css'],
 })
 export class ${entity.name}OverviewComponent implements OnInit {
   reactiveForm: FormGroup;
   public id: number;
   public tabSelected = '${entity.name}';
   ${entity.beanName}: ${entity.name} = new ${entity.name}();
+
+#foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
+#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+  public ${complexProperty.beanName}List: [];
+#end
 
   constructor(
     private service: ${entity.name}Service,
@@ -24,13 +34,15 @@ export class ${entity.name}OverviewComponent implements OnInit {
     private location: Location,
     private dialog: MatDialog,
     private fb: FormBuilder) {
+    // Create empty formgroup already to prevent error before init component
+    this.createFormGroup();
+    // Subescribe on :id init/changes
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.id = params['id'];
         this.initTemplate(this.id);
       }
     });
-
   }
 
   ngOnInit() {
@@ -58,19 +70,23 @@ export class ${entity.name}OverviewComponent implements OnInit {
       ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
 #foreach( ${property} in ${entity.parent.getProperties()})
-    ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
 #set( $idAgragation = 'id.' )
 #foreach( ${property} in ${entity.id.getProperties()})
-    ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
 #set( $idAgragation = '' )
 #set ($stringField = "id")
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
-//    ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
 #end
 #foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
-//    ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${idAgragation}${complexProperty.beanName}Select: ['', []],
 #end
     });
   }
