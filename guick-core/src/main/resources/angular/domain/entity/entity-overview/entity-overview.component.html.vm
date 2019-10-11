@@ -6,10 +6,10 @@
       </div>
     </mat-tab>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}
-      <mat-tab label="${complexProperty.title}" >
+#if (${complexProperty.isOneToMany()} )
+      <mat-tab label="${complexProperty.title}" (click)="select${complexProperty.name}()'">
         <div class="m-16">
-            <app-${complexProperty.referedEntity.dashedName}-list [${complexProperty.referedEntity.beanName}List]="${complexProperty.referedEntity.beanName}List"></app-${complexProperty.referedEntity.dashedName}-list>
+            <app-${complexProperty.referedEntity.dashedName}-list></app-${complexProperty.referedEntity.dashedName}-list>
         </div>
       </mat-tab>
 #end
@@ -17,7 +17,7 @@
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #if(!${complexProperty.referedEntity.looksLikeEnum()} )
 #set( $beanName = ${util.uncapitalize(${entity.referedEntity.name})} )
-      <mat-tab label="${complexProperty.referedEntity.name}">
+      <mat-tab label="${complexProperty.referedEntity.name}" (click)="tabSelected = '${complexProperty.referedEntity.dashedName}'">
         <div class="m-16">
             <app-${complexProperty.referedEntity.dashedName} [${complexProperty.referedEntity.beanName}]="${entity.beanName}.${complexProperty.referedEntity.beanName}"></app-${complexProperty.referedEntity.dashedName}>
         </div>
@@ -25,8 +25,8 @@
 #end
 #end
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} ) ## || ${complexProperty.isManyToMany()}  TODO Many to many needs special query
-      <mat-tab label="${complexProperty.referedEntity.name}">
+#if (${complexProperty.isOneToMany()} )
+      <mat-tab label="${complexProperty.referedEntity.name}" (click)="tabSelected = '${complexProperty.referedEntity.dashedName}'">
         <div class="m-16">
             to many
         </div>

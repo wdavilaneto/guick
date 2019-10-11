@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatDialog, MatSort, MatPaginator  } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable, merge } from 'rxjs';
@@ -7,9 +7,13 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
 import { ${entity.name}Service } from '../${entity.dashedName}.service';
-
+import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isManyToOne()} )
+import { ${complexProperty.referedEntity.name} } from '@core/services/domain/${complexProperty.referedEntity.dashedName}';
+#end
+#end
 
 @Component({
   selector: 'app-${entity.dashedName}-list',
@@ -20,8 +24,8 @@ export class ${entity.name}ListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) pager: MatPaginator;
 
   paginatedDataSource: PaginatedDataSource;
+  public ${entity.beanName}List
   public result: any;
-  public ${entity.beanName}List: ${entity.name}[];
 
   constructor(
     private service: ${entity.name}Service,
@@ -33,18 +37,43 @@ export class ${entity.name}ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.findAll();
+    //this.findAll();
   }
 
   findAll(): void {
     this.service.findAll().subscribe(result => {
       this.result = result;
-      this.${entity.beanName}List = result.results;
-      this.paginatedDataSource = new PaginatedDataSource(this.pager, this.${entity.beanName}List);
+      this.${entity.beanName}List = result.content;
+      this.paginatedDataSource = new PaginatedDataSource(this.pager, this.result.content);
       console.log(result);
     });
   }
 
+#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isManyToOne()} )
+  findBy${complexProperty.referedEntity.name}(): void {
+    this.service.findAll().subscribe(result => {
+      this.result = result;
+      console.log(result);
+      this.${entity.beanName}List = result.content;
+      this.paginatedDataSource = new PaginatedDataSource(this.pager, this.${entity.beanName}List);
+    });
+  }
+#end
+#end
+
+#foreach( ${complexProperty} in ${entity.parent.getDistinctedAllComplexProperties()})
+#if (${complexProperty.isManyToOne()} )
+  findBy${complexProperty.referedEntity.name}(): void {
+    this.service.findAll().subscribe(result => {
+      this.result = result;
+      console.log(result);
+      this.${entity.beanName}List = result.content;
+      this.paginatedDataSource = new PaginatedDataSource(this.pager, this.${entity.beanName}List);
+    });
+  }
+#end
+#end
 
   backClicked() {
     this.location.back();

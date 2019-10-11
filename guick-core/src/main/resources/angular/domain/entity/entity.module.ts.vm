@@ -5,8 +5,18 @@ import { ${entity.name}RoutingModule } from './${entity.dashedName}-routing.modu
 import { ${entity.name}LayoutComponent } from './${entity.dashedName}-layout/${entity.dashedName}-layout.component';
 import { ${entity.name}OverviewComponent } from './${entity.dashedName}-overview/${entity.dashedName}-overview.component';
 import { DomainModule } from '../domain.module';
+##foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+##import { ${complexProperty.referedEntity.name}Component } from '../${complexProperty.referedEntity.dashedName}/${complexProperty.referedEntity.dashedName}.component';
+##import { ${complexProperty.referedEntity.name}ListComponent } from '../${complexProperty.referedEntity.dashedName}/${complexProperty.referedEntity.dashedName}-list/${complexProperty.referedEntity.dashedName}-list.component';
+##end
 
-const COMPONENTS = [${entity.name}LayoutComponent,  ${entity.name}OverviewComponent];
+const COMPONENTS = [
+    ${entity.name}LayoutComponent,  ${entity.name}OverviewComponent,## ${entity.name}Component, ${entity.name}FormComponent, ${entity.name}ListComponent,
+###foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+##    ${complexProperty.referedEntity.name}Component,
+##    ${complexProperty.referedEntity.name}ListComponent,
+###end
+];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({

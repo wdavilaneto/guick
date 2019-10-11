@@ -36,8 +36,7 @@ export class  ${entity.name}Component implements OnInit {
     private location: Location,
     private dialog: MatDialog,
     private fb: FormBuilder) {
-    // Create empty formgroup already to prevent error before init component
-    this.createFormGroup();
+    this.${entity.beanName} = new ${entity.name}();
   }
 
   ngOnInit() {
@@ -55,6 +54,9 @@ export class  ${entity.name}Component implements OnInit {
   }
 
   createFormGroup() {
+    if (!this.${entity.beanName}) {
+      this.${entity.beanName} = new ${entity.name}();
+    }
     this.reactiveForm = this.fb.group({
 #set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})

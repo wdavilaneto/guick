@@ -20,7 +20,7 @@ const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
   imports: [SharedModule, DomainRoutingModule],
-  exports: [COMPONENTS],
+  exports: [...COMPONENTS],
   declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
   entryComponents: COMPONENTS_DYNAMIC,
 })
