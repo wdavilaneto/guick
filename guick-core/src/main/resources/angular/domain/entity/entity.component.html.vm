@@ -4,6 +4,7 @@
 #parse( "angular/domain/entity/entity.fieldset.inc.vm" )
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
-        <button mat-raised-button color="primary" class="m-t-8">Save</button>
+        <button mat-raised-button color="primary" class="m-t-8" *ngIf="${entity.beanName}.id != 0" (click)="save()">Save</button>
+        <button mat-raised-button color="primary" class="m-t-8" *ngIf="${entity.beanName}.id == 0" (click)="create()">Create new</button>
     </div>
 </form>

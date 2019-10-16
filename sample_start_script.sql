@@ -11,9 +11,9 @@ GRANT create session to ESCO;
 /*CREATE TABLES*/
 CREATE TABLE ESCO.ESCO_PESSOA
 (
-  EPES_DK   integer,
-  EPES_NM_PESSOA         varchar2(20),
-  EPES_CPF            varchar2(14)
+  EPES_DK integer,
+  EPES_NM_PESSOA varchar2(20),
+  EPES_CPF varchar2(14)
 );
 
 CREATE TABLE ESCO.ESCO_CURSO

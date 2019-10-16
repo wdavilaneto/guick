@@ -11,7 +11,7 @@
           </mat-form-field>
         </p>
         <button mat-raised-button color="primary">Search </button>
-        <button mat-raised-button color="accent" class="m-l-8">New</button>
+        <button mat-raised-button color="accent" class="m-l-8" routerLink="/domain/${entity.dashedName}/${entity.dashedName}-overview/new">New</button>
       </div>
 
       <mat-nav-list class="m-x--16 m-b--16 m-t-16">

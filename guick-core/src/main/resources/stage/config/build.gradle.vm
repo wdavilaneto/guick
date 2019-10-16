@@ -89,6 +89,7 @@ dependencies {
     testCompile 'c3p0:c3p0:0.9.1.2'
 
     //runtime 'com.h2database:h2:1.4.187'
-    runtime 'com.oracle:ojdbc6:11.2.0.3'
+    //runtime 'com.oracle:ojdbc6:11.2.0.3'
+    runtime 'com.oracle:ojdbc14:10.2.0.4.0'
 }
 

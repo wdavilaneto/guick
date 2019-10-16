@@ -1,0 +1,67 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+group = '${project.group}'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+//configurations {
+//    developmentOnly
+//    runtimeClasspath {
+//        extendsFrom developmentOnly
+//    }
+//}
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+def cucumberVersion = '4.7.4'
+def junitVersion = '5.2.0'
+dependencies {
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation  "commons-io:commons-io:2.6"
+
+    compile "org.hibernate:hibernate-ehcache:4.3.8.Final"
+    compile "org.mybatis:mybatis:3.2.8"
+    compile "org.mybatis:mybatis-spring:1.2.2"
+    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'joda-time:joda-time:2.5'
+    compile 'com.google.guava:guava:18.0'
+    compile "com.voodoodyne.jackson.jsog:jackson-jsog:1.0.1"
+
+    // Database
+    runtime 'com.oracle:ojdbc8:19.3'
+    testCompile 'c3p0:c3p0:0.9.1.2'
+//  runtime 'com.h2database:h2:1.4.187'
+//    compile 'org.codehaus.groovy:groovy-all:2.3.10'
+
+//  Test Session
+//  testCompile 'org.spockframework:spock-spring:1.0-groovy-2.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:${junitVersion}"
+
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+    // Docs
+//    compile ('io.springfox:springfox-swagger2:2.2.2') {
+//        exclude group: 'org.mapstruct', module: 'mapstruct'
+//    }
+
+}
+

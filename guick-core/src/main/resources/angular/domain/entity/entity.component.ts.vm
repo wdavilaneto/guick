@@ -41,12 +41,14 @@ export class  ${entity.name}Component implements OnInit {
 
   ngOnInit() {
     this.createFormGroup();
+    /*
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.id = params['id'];
         this.createFormGroup();
       }
     });
+    */
   }
 
   backClicked() {
@@ -83,4 +85,19 @@ export class  ${entity.name}Component implements OnInit {
 #end
     });
   }
+
+  create() {
+    console.log("create");
+    this.service.save(this.${entity.beanName}).subscribe(result => {
+      this.${entity.beanName} = result;
+    });
+  }
+
+  save() {
+    console.log("save");
+    this.service.update(this.${entity.beanName}).subscribe(result => {
+      this.${entity.beanName} = result;
+    });
+  }
+
 }

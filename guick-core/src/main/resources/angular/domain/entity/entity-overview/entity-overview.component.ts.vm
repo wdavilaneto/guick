@@ -56,8 +56,13 @@ export class ${entity.name}OverviewComponent implements OnInit {
   }
 
   initTemplate(id: number) {
-    console.log(id);
-    this.get(id);
+    if (id=== "new") {
+      this.${entity.beanName} = new ${entity.name}();
+      this.${entity.beanName}.id = 0
+      this.createFormGroup();
+    } else {
+      this.get(id);
+    }
   }
 
   get(id: any): void {

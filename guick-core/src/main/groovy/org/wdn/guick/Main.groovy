@@ -33,11 +33,11 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             Main main = new Main()
-            main.project.initialize("../angular")
-//            main.setTarget("angular/create-webapp").run()
+            main.project.initialize("../tw")
+            main.setTarget("angular/create-webapp").run()
             main.setTarget("angular/crud").run()
-//            main.setTarget("gava/create-api").run()
-//            main.setTarget("gava/crud").run()
+            main.setTarget("gava/create-api").run()
+            main.setTarget("gava/crud").run()
 
         } catch (RuntimeException e) {
             e.printStackTrace()

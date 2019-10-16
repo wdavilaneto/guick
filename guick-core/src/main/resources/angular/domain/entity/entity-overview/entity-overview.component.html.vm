@@ -1,5 +1,5 @@
-<mat-card [ngClass]="(${entity.beanName}.id > 0)?'active':'not-active'">
-  <mat-tab-group class="m--16" *ngIf="(${entity.beanName}.id > 0)">
+<mat-card [ngClass]="(${entity.beanName}.id >= 0)?'active':'not-active'">
+  <mat-tab-group class="m--16" *ngIf="(${entity.beanName}.id >= 0)">
     <mat-tab label="${entity.name}" mat-align-tabs="start">
       <div class="m-16">
         <app-${entity.dashedName} [${entity.beanName}]="${entity.beanName}"></app-${entity.dashedName}>

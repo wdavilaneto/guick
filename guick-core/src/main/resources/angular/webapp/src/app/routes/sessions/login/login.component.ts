@@ -12,7 +12,7 @@ import { AuthService } from '@core/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  email = '';
+  username = '';
   password = '';
   // matcher = new MyErrorStateMatcher();
   isLoadingResults = false;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     let body = new FormData();
     body.append('username', this.reactiveForm.get('username').value );
     body.append('password', this.reactiveForm.get('password').value);
-    this.authService.login(form)
+    this.authService.login(body) // TUDO back to token implementation soon
       .subscribe(res => {
         console.log(res);
         if (res.token) {
