@@ -6,8 +6,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
 import { ${entity.name}Service } from '../${entity.dashedName}.service';
-#foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isOneToMany()} )
+import { ${entity.name}ListComponent } from '../../${entity.dashedName}/${entity.dashedName}-list/${entity.dashedName}-list.component';
+##foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
+#foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
+#if (${complexProperty.isOneToMany()} && !${complexProperty.referedEntity.isEmbeddable()} && (${entity.name} != ${complexProperty.referedEntity.name}))
 import { ${complexProperty.referedEntity.name}ListComponent } from '../../${complexProperty.referedEntity.dashedName}/${complexProperty.referedEntity.dashedName}-list/${complexProperty.referedEntity.dashedName}-list.component';
 #end
 #end
@@ -28,11 +30,11 @@ export class ${entity.name}OverviewComponent implements OnInit {
   @ViewChild(${complexProperty.referedEntity.name}ListComponent,  { static: false } )
   ${beanName}ListComponent: ${complexProperty.referedEntity.name}ListComponent;
 #end
-#foreach( ${complexProperty} in ${entity.parent.getOneToManyProperties()})
-#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-  @ViewChild(${complexProperty.referedEntity.name}ListComponent,  { static: false } )
-  ${beanName}ListComponent: ${complexProperty.referedEntity.name}ListComponent;
-#end
+###foreach( ${complexProperty} in ${entity.parent.getOneToManyProperties()})
+###set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+##  @ViewChild(${complexProperty.referedEntity.name}ListComponent,  { static: false } )
+##  ${beanName}ListComponent: ${complexProperty.referedEntity.name}ListComponent;
+###end
 
   constructor(
     private service: ${entity.name}Service,
@@ -55,10 +57,10 @@ export class ${entity.name}OverviewComponent implements OnInit {
   ngOnInit() {
   }
 
-  initTemplate(id: number) {
-    if (id=== "new") {
+  initTemplate(id: any) {
+    if (id === "new") {
       this.${entity.beanName} = new ${entity.name}();
-      this.${entity.beanName}.id = 0
+      this.${entity.beanName}.id = null
       this.createFormGroup();
     } else {
       this.get(id);
@@ -77,35 +79,33 @@ export class ${entity.name}OverviewComponent implements OnInit {
   }
   createFormGroup() {
     this.reactiveForm = this.fb.group({
-#set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
-#foreach( ${property} in ${entity.parent.getProperties()})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
-#end
-#set( $idAgragation = 'id.' )
+###foreach( ${property} in ${entity.parent.getProperties()})
+##      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+##end
 #foreach( ${property} in ${entity.id.getProperties()})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      id_${property}: [this.${entity.beanName}.id.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
 #set( $idAgragation = '' )
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
-      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${complexProperty.beanName}Select: ['', []],
 #end
-#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
-#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
-      ${idAgragation}${complexProperty.beanName}Select: ['', []],
-#end
+###foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+###set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+##      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+##      ${complexProperty.beanName}Select: ['', []],
+###end
     });
   }
 
 #foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
   select${complexProperty.name}List() {
-    this.${beanName}ListComponent.findBy${entity.name}();
+    //this.${beanName}ListComponent.findBy${entity.name}();
   }
 #end
 ###foreach( ${complexProperty} in ${entity.parent.getOneToManyProperties()})

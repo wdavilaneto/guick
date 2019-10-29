@@ -1,12 +1,6 @@
 package org.wdn.guick
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.wdn.guick.core.DslArchitecture
-import org.wdn.guick.loader.Json
-import org.wdn.guick.model.Project
-
 /**
- * Created with IntelliJ IDEA.
+ *
  * User: wdavilaneto
  * Date: 9/25/13
  * Time: 6:05 PM
@@ -14,43 +8,19 @@ import org.wdn.guick.model.Project
  */
 class Main {
 
-    private static final GUICK_CONTEXT_CLASSPATH = "org.wdn.guick"
-
-    AnnotationConfigApplicationContext context
-    DslArchitecture guick
-    Project project
-    String target
-
-    Main() {
-        context = new AnnotationConfigApplicationContext()
-        context.scan(GUICK_CONTEXT_CLASSPATH)
-        context.refresh()
-        guick = (DslArchitecture) context.getBean("dslArchitecture")
-        project = context.getBean("project")
-    }
-
     static void main(String[] args) {
         ExpandoMetaClass.disableGlobally()
         try {
-            Main main = new Main()
-            main.project.initialize("../tw")
-            main.setTarget("angular/create-webapp").run()
-            main.setTarget("angular/crud").run()
-            main.setTarget("gava/create-api").run()
-            main.setTarget("gava/crud").run()
+            GuickAppliction guick = new GuickAppliction()
+            guick.initialize("../tw")
+            guick.setTarget("gava/create-api").run()
+            guick.setTarget("gava/crud").run()
+            guick.setTarget("angular/create-webapp").run()
+            guick.setTarget("angular/crud").run()
 
         } catch (RuntimeException e) {
             e.printStackTrace()
         }
-    }
-
-    void run() {
-        guick.runEngine(target)
-    }
-
-    Main setTarget(String lvalue) {
-        target = lvalue
-        return this
     }
 
 }

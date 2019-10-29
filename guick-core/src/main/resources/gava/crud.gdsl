@@ -70,10 +70,10 @@ guick {
 //        [input: "stage/workflow/SimpleProccessCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/SimpleProccessCommand.${lang}"],
 //        [input: "stage/workflow/IWorkflowCommand.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/IWorkflowCommand.${lang}"],
 //        [input: "stage/workflow/ActivitiTransferObject.vm", output: "/api/src/main/${lang}/${packageBase}/api/service/support/ActivitiTransferObject.${lang}"],
-        //[input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
+//        [input: "stage/config/ActivitiConfiguration.vm", output: "/api/src/main/${lang}/${packageBase}/ActivitiConfiguration.${lang}"],
         "single-generateds" {
             templates = [
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "gava/api/src/main/resources/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"]
             ]
         }

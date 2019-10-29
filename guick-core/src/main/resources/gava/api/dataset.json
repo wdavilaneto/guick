@@ -1,0 +1,3 @@
+[{ "name":"Lakewood" , "stars":3, "prices":[110 , 80 , 90 , 80]},
+ { "name":"Bridgewood", "stars":4, "prices":[160, 110, 60 , 50]},
+ { "name":"Ridgewood", "stars":5, "prices":[220, 110, 150, 40]}]

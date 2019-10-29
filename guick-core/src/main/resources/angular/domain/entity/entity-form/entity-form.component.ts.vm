@@ -64,28 +64,25 @@ export class ${entity.name}FormComponent implements OnInit {
   }
   createFormGroup() {
     this.reactiveForm = this.fb.group({
-#set( $idAgragation = '' )
 #foreach( ${property} in ${entity.properties})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
 #foreach( ${property} in ${entity.parent.getProperties()})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
-#set( $idAgragation = 'id.' )
 #foreach( ${property} in ${entity.id.getProperties()})
-      ${idAgragation}${property}: [this.${entity.beanName}.${idAgragation}${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+      id_${property}: [this.${entity.beanName}.id.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
-#set( $idAgragation = '' )
 #set ($stringField = "id")
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
-      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${complexProperty.beanName}Select: ['', []],
 #end
 #foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-      ${idAgragation}${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
-      ${idAgragation}${complexProperty.beanName}Select: ['', []],
+      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+      ${complexProperty.beanName}Select: ['', []],
 #end
     });
   }

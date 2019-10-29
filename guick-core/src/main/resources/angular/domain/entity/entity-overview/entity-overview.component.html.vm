@@ -7,7 +7,7 @@
     </mat-tab>
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #if (${complexProperty.isOneToMany()} )
-      <mat-tab label="${complexProperty.title}" (click)="select${complexProperty.name}()'">
+      <mat-tab label="${complexProperty.title}" (click)="select${complexProperty.name}()">
         <div class="m-16">
             <app-${complexProperty.referedEntity.dashedName}-list></app-${complexProperty.referedEntity.dashedName}-list>
         </div>

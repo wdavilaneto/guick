@@ -1,6 +1,6 @@
 export class ${entity.name} {
 
-    public id: ${entity.getId().getAngularType()};
+    public id: any;
 #foreach( ${property} in ${entity.getProperties()})
     public ${property.getName()}: ${property.getAngularType()};
 #end

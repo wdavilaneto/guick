@@ -23,19 +23,13 @@ class ResourceReader {
 
     @Resource
     Project project
-    private static boolean initizlied = false
-    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(UrlResource.getClassLoader())
 
-    public Reader getRunner(String runner) {
-        try {
-            return getReader("${runner}.gdsl")
-        } catch (FileNotFoundException ex) {
-            logger.error(ex.getMessage() + "\nRunner File: ${runner}.gdsl wore not found \nmake sure it's on classpath ")
-            throw ex;
-        }
-    }
-
-    public Reader getReader(String runner) {
+    /**
+     * Get file reader
+     * @param runner
+     * @return
+     */
+    Reader getReader(String runner) {
         InputStream stream = getResourceAsStream(runner)
         if (stream) {
             return new InputStreamReader(stream);
@@ -44,13 +38,6 @@ class ResourceReader {
         }
         if (project) {
             def strClientPath = "file://${project.path}/src/main/guick"
-//          if (initizlied) {
-//              try {
-//                  ClassPathManager.addURLToSystemClassLoader(new URL("file:///${project.path}/src/main/guick/"));
-//              } catch (Exception e) {
-//                  // ignore ...
-//              }
-//          }
             stream = new FileInputStream("${strClientPath}/${runner}")
             if (stream) {
                 return new InputStreamReader(stream);
@@ -59,7 +46,7 @@ class ResourceReader {
         throw new FileNotFoundException("File ${runner} not found on classpath")
     }
 
-    public InputStream getResourceAsStream(String resource) {
+    InputStream getResourceAsStream(String resource) {
         ResourceReader.class.getClassLoader().getResourceAsStream(resource)
     }
 

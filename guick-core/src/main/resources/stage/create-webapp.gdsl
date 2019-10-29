@@ -62,11 +62,11 @@ guick {
 
         "resources" {
             templates = [
-                    [input: "stage/config/application.properties.vm", output: "/api/src/main/resources/application.properties"],
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
-                    [input: "stage/localization/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
-                    [input: "archetype/resources/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
+                    [input: "gava/api/application.properties.vm", output: "/api/src/main/resources/application.properties"],
+                    [input: "gava/api/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "gava/api/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
+                    [input: "gava/api/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
+                    [input: "gava/api/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
                     [input: "archetype/testResources/logback-test.xml.vm", output: "/api/src/test/resources/logback-test.xml.vm"]
             ]
         }
@@ -74,7 +74,6 @@ guick {
         //[input: "crud/AbstractTest.groovy.vm", output: "/api/src/test/groovy/${packageBase}/"]
         "single-generateds" {
             templates = [
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
                     [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/aop/OnSuccessAdvice.${lang}"],

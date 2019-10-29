@@ -8,68 +8,43 @@ guick {
 
     installPom {
 
-        "license" {
-            templates = [
-                    [input: "stage/license/LICENSE.txt", output: "/LICENSE.txt"]
-            ]
-        }
-
-        "configs" {
+        "build" {
             templates = [
                     [input: "gava/build.gradle.vm", output: "/api/build.gradle"],
-//                    [input: "stage/config/build-root.gradle.vm", output: "/build.gradle"],
-//                    [input: "stage/config/settings2.gradle.vm", output: "/api/settings.gradle"],
-//                    [input: "stage/config/pom-parent.xml.vm", output: "/pom.xml"],
-//                    [input: "stage/config/pom.xml.vm", output: "/api/pom.xml"],
-
                     [input: "stage/config/.gitignore2", output: "/api/.gitignore"],
                     [input: "stage/config/.gitignore2", output: "/.gitignore"]
 
             ]
         }
 
-        "resources" {
+        "core" {
             templates = [
-                    [input: "stage/config/application.properties.vm", output: "/api/src/main/resources/application.properties"],
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "stage/config/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
-                    [input: "stage/localization/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
-                    [input: "archetype/resources/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
-                    [input: "archetype/testResources/logback-test.xml.vm", output: "/api/src/test/resources/logback-test.xml.vm"]
+                    [input: "gava/api/", output: "/api/"]
             ]
         }
 
         //[input: "crud/AbstractTest.groovy.vm", output: "/api/src/test/groovy/${packageBase}/"]
         "single-generateds" {
             templates = [
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application.${lang}"],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb.${lang}"],
                     [input: "stage/crud/api/aop/OnSuccessAdvice.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/aop/OnSuccessAdvice.${lang}"],
                     [input: "stage/crud/api/filter/CorsFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/filter/CorsFilter.${lang}"],
-
                     [input: "stage/crud/api/exception/BusinessException.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/BusinessException.${lang}"],
                     [input: "stage/crud/api/exception/DefaultExceptionHandler.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/exception/DefaultExceptionHandler.${lang}"],
-
                     [input: "stage/crud/api/rest/RestFieldMessageDTO.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/RestFieldMessageDTO.${lang}"],
                     [input: "stage/crud/api/rest/Pagination.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/Pagination." + lang],
                     [input: "stage/crud/api/rest/SearchFilter.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/rest/dto/SearchFilter." + lang],
-
                     [input: "stage/crud/api/json/JsonDateDeserializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateDeserializer.${lang}"],
                     [input: "stage/crud/api/json/JsonDateSerializer.java.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateSerializer.${lang}"],
                     [input: "stage/crud/api/json/JsonDateListSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/JsonDateListSerializer.${lang}"],
                     [input: "stage/crud/api/json/CustomBigDecimalDeserializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalDeserializer.${lang}"],
                     [input: "stage/crud/api/json/CustomBigDecimalSerializer.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/json/CustomBigDecimalSerializer.${lang}"],
-
                     [input: "stage/config/Application.vm", output: "/api/src/main/${lang}/${packageBase}/Application." + lang],
                     [input: "stage/config/ApplicationWeb.vm", output: "/api/src/main/${lang}/${packageBase}/ApplicationWeb." + lang],
-
                     [input: "stage/crud/api/security/", output: "/api/src/main/${lang}/${packageBase}/api/security/"],
-
                     [input: "stage/crud/api/presentation/AccountController.java.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/AccountController." + lang],
-
                     [input: "stage/crud/api/persistence/PageableHelper.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/PageableHelper.${lang}"],
-
                     [input: "stage/crud/api/persistence/CoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepository.${lang}"],
                     [input: "stage/crud/api/persistence/CoreRepositoryFactoryBean.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/CoreRepositoryFactoryBean.${lang}"],
                     [input: "stage/crud/api/persistence/ICoreRepository.vm", output: "/api/src/main/${lang}/${packageBase}/../commons/persistence/ICoreRepository.${lang}"]

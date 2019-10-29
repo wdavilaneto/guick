@@ -20,11 +20,11 @@ public class RelationshipProperty extends Clazz {
     Entity entity
 
     @Override
-    public String getType() {
+    def String getType() {
         return PatternConverterFacade.getBeanType(column)
     }
 
-    public String getAngularType() {
+    def String getAngularType() {
         final returnValue = this.getType().toLowerCase()
         if (returnValue.startsWith("byte")) {
             return returnValue.replaceFirst("byte", "any")
@@ -42,7 +42,7 @@ public class RelationshipProperty extends Clazz {
     }
 
     @Override
-    public int hashCode() {
+    def int hashCode() {
         return new HashCodeBuilder().
                 appendSuper(super.hashCode()).
                 append(column).

@@ -1,7 +1,9 @@
 export * from './interceptors/default.interceptor';
 
 #foreach( ${entity} in ${project.entities})
+#if (!${entity.isEmbeddable()})
 export * from './services/domain/${entity.dashedName}';
+#end
 #end
 
 export * from './services/menu.service';

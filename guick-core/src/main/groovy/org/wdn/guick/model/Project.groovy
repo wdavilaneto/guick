@@ -5,7 +5,9 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.wdn.guick.core.VelocityTemplateWriter
 import org.wdn.guick.util.StringUtil
 
 import javax.persistence.Transient
@@ -19,6 +21,9 @@ import javax.persistence.Transient
  */
 @Component
 class Project implements Serializable {
+
+    @Autowired
+    VelocityTemplateWriter templateWriter
 
     private final Logger logger = LoggerFactory.getLogger(this.class)
 
@@ -34,7 +39,6 @@ class Project implements Serializable {
 
     DatasourceInfo database
     def pom
-    def gradleProject
     def metadata = [:]
     def targetTables = [];
 
@@ -61,7 +65,7 @@ class Project implements Serializable {
     }
 
     @Transient
-    public void persist() {
+    def void persist() {
         def json = new JsonBuilder(tables).toPrettyString();
         new File(path + "/tables.json").write(json);
     }
@@ -80,6 +84,41 @@ class Project implements Serializable {
 
     @Transient
     def createConfigure(File guickFile) {
+        createConfigOrGetFromPom()
+        templateWriter.execute("init/guick.json", "", config)
+        templateWriter.execute("init/example_ddl.sql", "", config)
+        templateWriter.execute("init/README.md", "", config)
+
+        logger.warn "******** GUICK MESSAGE: READ THIS ********* "
+        logger.warn "NO file ${guickFile} found !!! creating an example file"
+        logger.warn "Make sure to configure it before running any generator task again!";
+        logger.warn "README.md generated";
+        logger.warn "******** ************************ ********* "
+        System.exit(0)
+    }
+
+    String getName() {
+        if (name == null || name.isEmpty()) {
+            name = path.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
+        }
+        return name;
+    }
+
+    String getGroup() {
+        if (this.group != null) {
+            return this.group
+        }
+        return getName()
+    }
+
+    String getLastGroup() {
+        if (this.group != null) {
+            return this.group.split("\\.")?.last();
+        }
+        return getName()
+    }
+
+    private createConfigOrGetFromPom() {
         if (new File(path + "/pom.xml").exists()) {
             pom = new XmlSlurper(false, false).parse(new File(path + "/pom.xml"));
             config.group = pom.groupId.toString();
@@ -88,77 +127,39 @@ class Project implements Serializable {
             config.group = "org.wdn.configure";
             config.name = "configureme";
         }
-        config.guickConnectionInfo = new DatasourceInfo()
-        config.generatedDatasourceInfo = new DatasourceInfo()
-        config.generationLanguage = "java";
-        config.tablePrefix = "TB";
-        config.useWorkflow ="false";
-        config.tables = [[owner:"schema", tableName:"example_table"]];
-        config.description = "Project Description";
-
-        // if no pom nither guick.json exists, create one and stop any generation
-        def json = new JsonBuilder(config).toPrettyString();
-        guickFile.write(json);
-
-        logger.warn "******** GUICK MESSAGE: READ THIS ********* "
-        logger.warn "NO file ${guickFile} found !!!"
-        logger.warn "creating an example file";
-        logger.warn "Make sure to configure it before running any generator task again";
-        logger.warn "Or it will create all with default values";
-        logger.warn "******** ************************ ********* "
-        System.exit(0)
+        return config
     }
 
-    public String getName() {
-        if (name == null || name.isEmpty()) {
-            name = path.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
-        }
-        return name;
-    }
-
-    public String getGroup() {
-        if (this.group != null) {
-            return this.group
-        }
-        return getName()
-    }
-
-    public String getLastGroup() {
-        if (this.group != null) {
-            return this.group.split("\\.")?.last();
-        }
-        return getName()
-    }
-
-
-    public String getSourcePath() {
+    def String getSourcePath() {
         return EngineConstants.DEFAULT_JAVA_SRC_WITH_PACKAGE + "/" + getAcronym()
     }
 
-    public String getTestSourcePath() {
+    def String getTestSourcePath() {
         return EngineConstants.DEFAULT_JAVA_TEST_WITH_PACKAGE + "/" + getAcronym()
     }
 
-    public List<EnumClass> getEnums() {
+    def List<EnumClass> getEnums() {
         def enumList = []
         return (List<EnumClass>) entities.each { entity -> enumList.addAll(entity.enums) }
     }
 
-    public List<Entity> getEntitiesWithoutHibernateIssue() {
+    def List<Entity> getEntitiesWithoutHibernateIssue() {
         return entities.findAll { e -> !hasHibernateIssue(e) }
     }
 
-    public List<Entity> getAllMainEntities() {
+    def List<Entity> getAllMainEntities() {
         return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeMainEntity() };
     }
-    public List<Entity> getAllDomainEntities() {
+
+    def List<Entity> getAllDomainEntities() {
         return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeDomain() };
     }
-    public List<Entity> getAllEnumLikeEntities() {
-        return getEntitiesWithoutHibernateIssue().findAll() {  it.looksLikeEnum()};
+
+    def List<Entity> getAllEnumLikeEntities() {
+        return getEntitiesWithoutHibernateIssue().findAll() { it.looksLikeEnum() };
     }
 
-    public List<Entity> getAllEntitiesWithDeadline(){
+    def List<Entity> getAllEntitiesWithDeadline() {
         return getEntitiesWithoutHibernateIssue().findAll() { (it.getAllDeadlineProperties().size() > 0) };
     }
 
@@ -178,15 +179,15 @@ class Project implements Serializable {
         return this.data
     }
 
-    public String getPackageBase() {
+    def String getPackageBase() {
         return group.replaceAll("\\.", '/') + "/" + getAcronym();
     }
 
-    public String getAcronym() {
+    def String getAcronym() {
         return name.replaceAll('\\\\', "/").replaceAll("-", "/").split("/")?.last();
     }
 
-    public String getBeanName() {
+    def String getBeanName() {
         return stringUtil.uncapitalize(name);
     }
 

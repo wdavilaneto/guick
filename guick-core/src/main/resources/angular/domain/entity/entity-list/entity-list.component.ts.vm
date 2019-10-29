@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ${entity.name}Service } from '../${entity.dashedName}.service';
 import { ${entity.name} } from '@core/services/domain/${entity.dashedName}';
 #foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
-#if (${complexProperty.isManyToOne()} )
+#if (${complexProperty.isManyToOne()} && !${entity.isEmbeddable()} && (${entity.name} != ${complexProperty.referedEntity.name}) )
 import { ${complexProperty.referedEntity.name} } from '@core/services/domain/${complexProperty.referedEntity.dashedName}';
 #end
 #end

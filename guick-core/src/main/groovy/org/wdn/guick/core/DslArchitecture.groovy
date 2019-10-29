@@ -4,8 +4,6 @@ import antlr.CppCodeGenerator
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import org.wdn.guick.loader.Cpp
-import org.wdn.guick.loader.Ctags
 import org.wdn.guick.loader.Database
 import org.wdn.guick.loader.Jpa
 import org.wdn.guick.loader.Json
@@ -29,8 +27,6 @@ class DslArchitecture {
     @Resource ResourceReader reader
     @Resource Json json
     @Resource Jpa jpa
-    @Resource Ctags ctags
-    @Resource Cpp cpp
     @Resource Database database
 
     void runEngine(String target) {
@@ -40,11 +36,9 @@ class DslArchitecture {
         binding.setVariable("util",new StringUtil())
         binding.setVariable("json", json)
         binding.setVariable("jpa", jpa)
-        binding.setVariable("ctags", ctags)
-        binding.setVariable("cpp", cpp)
         binding.setVariable("database", database)
 
-        Script dslScript = new GroovyShell(binding).parse(reader.getRunner(target))
+        Script dslScript = new GroovyShell(binding).parse(getRunner(target))
 
         dslScript.metaClass = createEMC(dslScript.class, {
             ExpandoMetaClass emc ->
@@ -60,6 +54,20 @@ class DslArchitecture {
         } catch (RuntimeException e) {
             println "Erro ao executar o script ${target}"
             throw e;
+        }
+    }
+
+    /**
+     * get gdsl file
+     * @param runner
+     * @return
+     */
+    private Reader getRunner(String runner) {
+        try {
+            return reader.getReader("${runner}.gdsl")
+        } catch (FileNotFoundException ex) {
+            logger.error(ex.getMessage() + "\nRunner File: ${runner}.gdsl wore not found \nmake sure it's on classpath ")
+            throw ex;
         }
     }
 

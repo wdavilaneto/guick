@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component
 
 @Component
 @PackageScope
-class VelocityWriter  extends AbstractTemplateWriter{
+class VelocityTemplateWriter extends AbstractTemplateWriter{
 
     private final Logger logger = LoggerFactory.getLogger(this.class)
 
-    public VelocityWriter() {
+    VelocityTemplateWriter() {
         Velocity.setProperty("resource.loader", "classpath"); //class
         Velocity.setProperty("classpath.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.setProperty("output.encoding", "UTF-8");
@@ -27,6 +27,10 @@ class VelocityWriter  extends AbstractTemplateWriter{
         Velocity.init()
     }
 
+    /**
+     * Writes a input template in a given output
+     * Process does not halt with exceptions, work or not work is not the absolute necessarily
+     */
     @Override
     protected doWriteTemplate(String input, Map context, String output) {
         File outputFile = getFileCratingAllNecessaryDirs(project.path.toString() + "/" + output)

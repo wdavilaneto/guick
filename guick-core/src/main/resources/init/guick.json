@@ -1,0 +1,27 @@
+{
+  "group": "org.wdn.configure",
+  "name": "configureme",
+  "guickConnectionInfo": {
+    "password": "sa",
+    "user": "sa",
+    "dialect": "org.hibernate.dialect.Oracle10gDialect",
+    "driverName": "oracle.jdbc.driver.OracleDriver",
+    "url": "jdbc:oracle:thin:@localhost:32769:ORCLCDB"
+  },
+  "generatedDatasourceInfo": {
+    "password": "sa",
+    "user": "sa",
+    "dialect": "org.hibernate.dialect.Oracle10gDialect",
+    "driverName": "oracle.jdbc.driver.OracleDriver",
+    "url": "jdbc:oracle:thin:@localhost:32769:ORCLCDB"
+  },
+  "generationLanguage": "java",
+  "tablePrefix": "TB",
+  "useWorkflow": "false",
+  "tables": [
+    {
+      "owner": "sa"
+    }
+  ],
+  "description": "Project Description"
+}

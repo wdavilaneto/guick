@@ -43,13 +43,13 @@ export class ${entity.name}Service {
   }
 
   save(${entity.beanName}: ${entity.name}) : Observable<any> {
-    if (${entity.beanName}.id && ${entity.beanName}.id != 0) {
+    if (${entity.beanName}.id) { ## && ${entity.beanName}.id != 0
       return this.http.put(this.endpoint + '/' + ${entity.beanName}.id, ${entity.beanName}).pipe(
         tap(_ => this.messageService.success('Gravado com sucesso')),
         catchError(this.handleError<any[]>('update', []))
       );
     } else {
-      ${entity.beanName}.id  = null
+##      ${entity.beanName}.id  = null
       return this.http.post(this.endpoint, ${entity.beanName}).pipe(
         tap(_ => this.messageService.success('Gravado com sucesso')),
         catchError(this.handleError<any[]>('save', []))

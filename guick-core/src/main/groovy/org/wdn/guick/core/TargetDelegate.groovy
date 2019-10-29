@@ -15,7 +15,7 @@ class TargetDelegate {
         println  "unprocessed property " + name
     }
 
-    public File file (String name) {
+    File file (String name) {
         return new File(name)
     }
 

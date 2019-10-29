@@ -37,7 +37,13 @@ abstract class AbstractTemplateWriter {
 
     abstract protected doWriteTemplate(String input, Map context, String output);
 
-    public process(List objects, List<Map<String, Object>> templates) {
+    /**
+     * Process list of objects (from gdsl) if given for scan input file, or if null the input folder to parse all
+     * sub inputs (files/vms)
+     * @param objects
+     * @param templates
+     */
+    def process(List objects, List<Map<String, Object>> templates) {
         if (objects == null) {
             for (def prams : templates) {
                 def resources = resolver.getResources("classpath*:" + prams.input.toString())
@@ -50,7 +56,7 @@ abstract class AbstractTemplateWriter {
                     }
                 } else {
                     String output = prams.output
-                    //String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
+                    // String normalizedInput = prams.input.toString().replaceFirst(prams.input.toString().split("/")[0], "")
                     String normalizedInput = prams.input.toString().split("/").last().toString()
                     if (output == null) {
                         output = normalizedInput
@@ -63,6 +69,7 @@ abstract class AbstractTemplateWriter {
                 }
             }
         } else {
+            // loop over input objects
             for (def obj : objects) {
                 for (def prams : templates) {
                     def resources = resolver.getResources("classpath*:" +prams.input.toString())
@@ -91,6 +98,14 @@ abstract class AbstractTemplateWriter {
         }
     }
 
+    /**
+     * Recursive method to "Execute" template on on file folders recursivly
+     * @param resources
+     * @param input
+     * @param output
+     * @param context
+     * @param obj
+     */
     private executeDinamic(org.springframework.core.io.Resource[] resources, String input, String output, def context, def obj = true) {
         for (def resource : resources) {
             if (resource.isReadable()) {
@@ -106,7 +121,14 @@ abstract class AbstractTemplateWriter {
         }
     }
 
-    private void execute(String input, String output, def extraContext = null, def obj = null) {
+    /**
+     * Exceute templating
+     * @param input
+     * @param output
+     * @param extraContext
+     * @param obj
+     */
+    def execute(String input, String output, def extraContext = null, def obj = null) {
         HashMap<String, Object> context = new HashMap();
         context.put("project", project)
         context.put("util", util);

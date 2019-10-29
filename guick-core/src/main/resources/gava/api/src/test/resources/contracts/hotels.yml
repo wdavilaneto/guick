@@ -1,0 +1,12 @@
+request:
+  method: GET
+  url: /
+  headers:
+    Content-Type: application/json
+response:
+  status: 200
+  body:
+    fraudCheckStatus: "FRAUD"
+    "rejection.reason": "Amount too high"
+  headers:
+    Content-Type: application/json;charset=UTF-8

@@ -38,15 +38,7 @@ class BaseTest {
 
     }
 
-    public void viaSpring(Project project){
-//        Map<String, Object> emfProperties = entityManagerFactory.getProperties();
-//        println emfProperties
-//        println entityManagerFactory.getJpaDialect()
-//        println entityManagerFactory.dataSource
-//        println entityManagerFactory.getPersistenceProvider()
-    }
-
-    public void viaConfiguration(Project project){
+    public void viaConfiguration(Project project) {
         Configuration configuration = new Configuration()
         configuration.setProperty("hibernate.dialect", project.datasource.dialect)
                 .setProperty("hibernate.connection.url", project.datasource.url)
@@ -68,7 +60,6 @@ class BaseTest {
         update.setOutputFile("${migrationPath}/pendingToDb.sql")
         update.execute(Target.SCRIPT, SchemaExport.Type.CREATE)
     }
-
 
 }
 

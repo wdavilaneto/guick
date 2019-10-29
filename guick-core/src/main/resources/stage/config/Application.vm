@@ -63,21 +63,20 @@ public class Application extends SpringBootServletInitializer {
         return new OnSuccessAdvice();
     }
 
-//   @Bean
-//   public EhCacheManagerFactoryBean cacheFactoryBean() {
-//       EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
-//       ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource(EHCACHE_FILE));
-//       ehCacheManagerFactoryBean.setShared(false);
-//       ehCacheManagerFactoryBean.setCacheManagerName("${project.name}_cache");
-//       return ehCacheManagerFactoryBean;
-//   }
-
-//   @Bean
-//   public CacheManager cacheManager(EhCacheManagerFactoryBean ehCacheManagerFactoryBean) {
-//       EhCacheCacheManager cacheManager = new EhCacheCacheManager();
-//       cacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
-//       return cacheManager;
-//   }
+##//   @Bean
+##//   public EhCacheManagerFactoryBean cacheFactoryBean() {
+##//       EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+##//       ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource(EHCACHE_FILE));
+##//       ehCacheManagerFactoryBean.setShared(false);
+##//       ehCacheManagerFactoryBean.setCacheManagerName("${project.name}_cache");
+##//       return ehCacheManagerFactoryBean;
+##//   }
+##//   @Bean
+##//   public CacheManager cacheManager(EhCacheManagerFactoryBean ehCacheManagerFactoryBean) {
+##//       EhCacheCacheManager cacheManager = new EhCacheCacheManager();
+##//       cacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
+##//       return cacheManager;
+##//   }
 
     @Bean(name = "entityManager")
     public SharedEntityManagerBean entityManager() {

@@ -38,7 +38,7 @@ dependencies {
     compile "com.voodoodyne.jackson.jsog:jackson-jsog:1.0.1"
 
     // Database
-    runtime 'com.oracle:ojdbc8:19.3'
+    runtime 'com.oracle:ojdbc8:12.2.0.1'
     testCompile 'c3p0:c3p0:0.9.1.2'
 //  runtime 'com.h2database:h2:1.4.187'
 //    compile 'org.codehaus.groovy:groovy-all:2.3.10'

@@ -7,10 +7,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 #foreach( ${entity} in ${project.entities})
+#if (!${entity.isEmbeddable()})
     {
         path: '${entity.dashedName}', loadChildren: () => import('./${entity.dashedName}/${entity.dashedName}.module').then(m => m.${entity.name}Module),
         data: { title: '${entity.name}', titleI18n: '${entity.name}' },
     },
+#end
 #end
 ];
 
