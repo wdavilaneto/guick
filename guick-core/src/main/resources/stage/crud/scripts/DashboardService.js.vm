@@ -44,7 +44,7 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
             }
         };
 
-        var service = $resource('/${projectBeanName}/api/reports/dashboard/', {}, {
+        var service = $resource('/api/reports/dashboard/', {}, {
 #set( $mainEntities = ${project.getAllMainEntities()} )
 #foreach( ${entity} in ${mainEntities} )
 #foreach( ${e} in ${entity.getOneToManyProperties()} )
@@ -55,19 +55,19 @@ ${projectBeanName}Services.factory('dashboardService', ['$resource',
 #set($collectionProperty = $util.capitalize( ${e.mappedBy} ) )
 #set($capitalizedName = $util.capitalize( ${e.name} ) )
 #set($capitalizedProp = $util.capitalize( ${numericProperties[0].name} ) )
-            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 1 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[1].name} ) )
-            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #if( !${e.referedEntity.looksLikeEnum()} && ${numericProperties.size()} > 2 && !${entity.getId().isEmbeddable()} && !${e.referedEntity.id.isEmbeddable()})
 #set($capitalizedProp = $util.uncapitalize( ${numericProperties[2].name} ) )
-            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
+            'get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}': { method: 'GET', url: '/api/reports/dashboard/get${capitalizedName}WithSum${collectionProperty}${capitalizedProp}', isArray: true},
 #end
 #end
 #end
-            'allCount': { method: 'GET', url: '/${projectBeanName}/api/reports/dashboard/allCount', isArray: true}
+            'allCount': { method: 'GET', url: '/api/reports/dashboard/allCount', isArray: true}
 
         });
 

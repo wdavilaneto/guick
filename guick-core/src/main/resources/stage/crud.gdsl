@@ -93,7 +93,7 @@ guick {
 
                     [input: "stage/frontend/app/i18n/", output: "/front-end/app/i18n"],
 
-                    [input: "stage/config/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "gava/api/src/main/resources/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
                     [input: "stage/crud/api/presentation/DashboardController.vm", output: "/api/src/main/${lang}/${packageBase}/api/rest/reports/DashboardController.${lang}"],
 
                     [input: "stage/crud/scripts/DashboardService.js.vm", output: "/front-end/app/scripts/service/dashboards/DashboardService.js"],

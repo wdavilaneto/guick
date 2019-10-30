@@ -3,7 +3,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('ModalPrototipoController', ModalPrototipoController);
+    angular.module('${project.name}App').controller('ModalPrototipoController', ModalPrototipoController);
 
     function ModalPrototipoController() {
         var vm = this;

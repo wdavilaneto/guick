@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('WidgetsController', WidgetsController);
+    angular.module('${project.name}App').controller('WidgetsController', WidgetsController);
 
 
     function WidgetsController() {

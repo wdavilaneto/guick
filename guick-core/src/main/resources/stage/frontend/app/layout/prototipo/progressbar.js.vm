@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('ProgressivebarController', ProgressivebarController);
+    angular.module('${project.name}App').controller('ProgressivebarController', ProgressivebarController);
 
 
     function ProgressivebarController() {

@@ -35,11 +35,11 @@ ${projectBeanName}Services.factory('activitiService', ['$resource',
 ]);
 
 ${projectBeanName}Services.factory('userService', function ($resource) {
-    var data = $resource('/${projectBeanName}/api/identity/users/:user', {user: "@user"});
+    var data = $resource('/api/identity/users/:user', {user: "@user"});
     return data;
 });
 
 ${projectBeanName}Services.factory('groupService', function ($resource) {
-    var data = $resource('/${projectBeanName}/api/identity/groups/:group', {group: "@group"});
+    var data = $resource('/api/identity/groups/:group', {group: "@group"});
     return data;
 });

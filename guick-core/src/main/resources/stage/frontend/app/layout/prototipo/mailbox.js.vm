@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('MailBoxController', MailBoxController);
+    angular.module('${project.name}App').controller('MailBoxController', MailBoxController);
 
 
     function MailBoxController() {

@@ -35,6 +35,7 @@ guick {
                     [input: "stage/config/.gitignore2", output: "/.gitignore"],
                     [input: "stage/config/.gitattributes", output: "/front-end/.gitattributes"],
 
+
                     [input: "stage/config/bower.json.vm", output: "/front-end/bower.json"],
                     [input: "stage/config/Gruntfile.js.vm", output: "/front-end/Gruntfile.js"],
                     [input: "stage/config/package.json.vm", output: "/front-end/package.json"],
@@ -62,11 +63,11 @@ guick {
 
         "resources" {
             templates = [
-                    [input: "gava/api/application.properties.vm", output: "/api/src/main/resources/application.properties"],
-                    [input: "gava/api/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
-                    [input: "gava/api/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
-                    [input: "gava/api/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
-                    [input: "gava/api/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
+                    [input: "gava/api/src/main/resources/application.properties.vm", output: "/api/src/main/resources/application.properties"],
+                    [input: "gava/api/src/main/resources/ehcache.xml.vm", output: "/api/src/main/resources/ehcache.xml"],
+                    [input: "gava/api/src/main/resources/mybatis-settings.xml.vm", output: "/api/src/main/resources/mybatis-settings.xml"],
+                    [input: "gava/api/src/main/resources/messages_pt_BR.properties.vm", output: "/api/src/main/resources/messages_pt_BR.properties"],
+                    [input: "gava/api/src/main/resources/logback.xml.vm", output: "/api/src/main/resources/logback.xml"],
                     [input: "archetype/testResources/logback-test.xml.vm", output: "/api/src/test/resources/logback-test.xml.vm"]
             ]
         }

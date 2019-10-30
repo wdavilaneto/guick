@@ -16,11 +16,11 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ${en
     ${entityBeanName}Service.$inject = ['$resource', 'gridService', 'ENV_CONFIG'];
 
     function ${entityBeanName}Service($resource, gridService, ENV_CONFIG) {
-        var service = $resource('/${projectBeanName}/api/${entityBeanName}/:id', {}, {
-            'findAll': { method: 'GET', url: '/${projectBeanName}/api/${entityBeanName}', isArray: false},
-            'search': { method: 'POST', url: '/${projectBeanName}/api/${entityBeanName}/search', isArray: false},
-            'searchText': { method: 'POST', url: '/${projectBeanName}/api/${entityBeanName}/searchText', isArray: false},
-            'findAllOverdue':{ method: 'GET', url: '/${projectBeanName}/api/${entityBeanName}/overdue', isArray: false},
+        var service = $resource('/api/${entityBeanName}/:id', {}, {
+            'findAll': { method: 'GET', url: '/api/${entityBeanName}', isArray: false},
+            'search': { method: 'POST', url: '/api/${entityBeanName}/search', isArray: false},
+            'searchText': { method: 'POST', url: '/api/${entityBeanName}/searchText', isArray: false},
+            'findAllOverdue':{ method: 'GET', url: '/api/${entityBeanName}/overdue', isArray: false},
             'get': { method: 'GET'},
             'save': { method: 'POST'},
             'remove': { method: 'DELETE'}

@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('PageController', PageController);
+    angular.module('${project.name}App').controller('PageController', PageController);
 
 
     function PageController() {
