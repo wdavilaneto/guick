@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('WizardController', WizardController);
+    angular.module('${project.name}App').controller('WizardController', WizardController);
 
 
     function WizardController() {

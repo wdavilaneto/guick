@@ -87,7 +87,7 @@ module.exports = function (grunt) {
             },
             proxies: [
                 {
-                    context: '/${project.beanName}/api',
+                    context: '/api',
                     host: 'localhost',
                     port: 8080,
                     https: false,

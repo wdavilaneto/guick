@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('BotoesController', BotoesController);
+    angular.module('${project.name}App').controller('BotoesController', BotoesController);
 
 
     function BotoesController() {

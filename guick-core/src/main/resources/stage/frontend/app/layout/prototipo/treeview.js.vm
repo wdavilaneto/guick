@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('TreeviewController', TreeviewController);
+    angular.module('${project.name}App').controller('TreeviewController', TreeviewController);
 
 
     function TreeviewController() {

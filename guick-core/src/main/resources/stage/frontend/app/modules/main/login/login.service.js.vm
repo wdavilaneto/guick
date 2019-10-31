@@ -19,10 +19,10 @@
 
             var self = this;
 
-            var service = $resource('/${projectBeanName}/api/authentication', {'username':'@username','password':'@password'}, {
+            var service = $resource('/api/authentication', {'username':'@username','password':'@password'}, {
                 'login': { method: 'POST', isArray: false, headers:{'Content-Type':'application/x-www-form-urlencoded'} ,ignoreAuthModule: 'ignoreAuthModule'},
-                'logout': { method: 'GET', url:"/'${projectBeanName}/api/logout", isArray: false, ignoreAuthModule: 'ignoreAuthModule'},
-                'authenticate': { method: 'GET', url:"/${projectBeanName}/api/authenticate", isArray: false, ignoreAuthModule: 'ignoreAuthModule'}
+                'logout': { method: 'GET', url:"/'api/logout", isArray: false, ignoreAuthModule: 'ignoreAuthModule'},
+                'authenticate': { method: 'GET', url:"/api/authenticate", isArray: false, ignoreAuthModule: 'ignoreAuthModule'}
             })
 
             var currentUser = null;

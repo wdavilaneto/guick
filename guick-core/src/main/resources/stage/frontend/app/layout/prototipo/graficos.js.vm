@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('sevApp').controller('GraficosController', GraficosController);
+    angular.module('${project.name}App').controller('GraficosController', GraficosController);
 
 
     function GraficosController() {
