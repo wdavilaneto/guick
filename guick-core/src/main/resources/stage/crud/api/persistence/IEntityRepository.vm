@@ -30,11 +30,11 @@ public interface ${entity.name}RepositoryCustom {
 
     Page<${entity.name}> searchText(String text, Pageable pageable);
 
-#if(!$entity.isEmbeddable() and !$entity.getParent() )
+##if(!$entity.isEmbeddable() and !$entity.getParent() )
     ${entity.name} get(${entity.id.type} id);
-#else
-    ${entity.name} get(${entity.name} e);
-#end
+##else
+##    ${entity.name} get(${entity.name} e);
+##end
 ##if( $entity.childrens.size() > 0 )
 
     public ${entity.name} update(${entity.name} ${entityBeanName});

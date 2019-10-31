@@ -159,17 +159,17 @@ public class ${entity.name}RepositoryImpl implements ${entity.name}RepositoryCus
         return (Page<${entity.name}>) PageableHelper.getPage(criteria, pageable);
     }
 
-#if(!$entity.isEmbeddable() and !$entity.getParent() )
+##if(!$entity.isEmbeddable() and !$entity.getParent() )
     @Override
     public ${entity.name} get(${entity.id.type} id) {
         return entityManager.find(${entity.name}.class, id);
     }
-#else
-    @Override
-    public ${entity.name} get(${entity.name} e) {
-        return entityManager.find(${entity.name}.class, e);
-    }
-#end
+##else
+##    @Override
+##    public ${entity.name} get(${entity.name} e) {
+##        return entityManager.find(${entity.name}.class, e);
+##    }
+##end
 ##if( $entity.childrens.size() > 0 )
     @Override
     public  ${entity.name} update( ${entity.name} ${entityBeanName}){

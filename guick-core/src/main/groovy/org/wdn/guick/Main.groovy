@@ -12,14 +12,14 @@ class Main {
         ExpandoMetaClass.disableGlobally()
         try {
             GuickAppliction guick = new GuickAppliction()
-            guick.initialize("../generated2")
+            guick.initialize("../generated")
             guick.setTarget("gava/create-api").run()
             guick.setTarget("gava/crud").run()
-//            guick.setTarget("angular/create-webapp").run()
-//            guick.setTarget("angular/crud").run()
+            guick.setTarget("angular/create-webapp").run()
+            guick.setTarget("angular/crud").run()
 
-            guick.setTarget("stage/create-webapp").run()
-            guick.setTarget("stage/crud").run()
+//            guick.setTarget("stage/create-webapp").run()
+//            guick.setTarget("stage/crud").run()
 
         } catch (RuntimeException e) {
             e.printStackTrace()

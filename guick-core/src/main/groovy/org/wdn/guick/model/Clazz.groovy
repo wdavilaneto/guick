@@ -57,39 +57,39 @@ class Clazz implements Serializable {
             title =  word.toUpperCase()
             return title
         } else {
-            for (def map in [
-                    [chave: "descricao", acentuado: "descrição"],
-                    [chave: "classificacao", acentuado: "classificação"],
-                    [chave: "servico", acentuado: "serviço"],
-                    [chave: "funcionario", acentuado: "funcionário"],
-                    [chave: "responsavel", acentuado: "responsável"],
-                    [chave: "responsavel", acentuado: "responsável"],
-                    [chave: "formacao", acentuado: "formação"],
-                    [chave: "medicao", acentuado: "medição"],
-                    [chave: "endereco", acentuado: "endereço"],
-                    [chave: "analise", acentuado: "análise"],
-                    [chave: "tecnico", acentuado: "técnico"],
-                    [chave: "tecnica", acentuado: "técnica"],
-                    [chave: "solicitacao", acentuado: "solicitação"],
-                    [chave: "instituicao", acentuado: "instituição"],
-                    [chave: "inicio", acentuado: "início"],
-                    [chave: "orgao", acentuado: "orgão"],
-                    [chave: "votacao", acentuado: "votação"],
-                    [chave: "orgi", acentuado: "orgão"],
-                    [chave: "secao", acentuado: "seção"],
-                    [chave: "sessao", acentuado: "sessão"],
-                    [chave: "inspecao", acentuado: "inspeção"],
-                    [chave: "convenio", acentuado: "convênio"],
-                    [chave: "fisica", acentuado: "física"],
-                    [chave: "saude", acentuado: "saúde"],
-                    [chave: "alimentacao", acentuado: "alimentação"],
-                    [chave: "nm", acentuado: "nome"],
-                    [chave: "cd", acentuado: "código"]
-            ]) {
-                if (word.contains(map.chave)) {
-                    word = word.replaceFirst(map.chave, map.acentuado);
-                }
-            }
+//            for (def map in [
+//                    [chave: "descricao", acentuado: "descrição"],
+//                    [chave: "classificacao", acentuado: "classificação"],
+//                    [chave: "servico", acentuado: "serviço"],
+//                    [chave: "funcionario", acentuado: "funcionário"],
+//                    [chave: "responsavel", acentuado: "responsável"],
+//                    [chave: "responsavel", acentuado: "responsável"],
+//                    [chave: "formacao", acentuado: "formação"],
+//                    [chave: "medicao", acentuado: "medição"],
+//                    [chave: "endereco", acentuado: "endereço"],
+//                    [chave: "analise", acentuado: "análise"],
+//                    [chave: "tecnico", acentuado: "técnico"],
+//                    [chave: "tecnica", acentuado: "técnica"],
+//                    [chave: "solicitacao", acentuado: "solicitação"],
+//                    [chave: "instituicao", acentuado: "instituição"],
+//                    [chave: "inicio", acentuado: "início"],
+//                    [chave: "orgao", acentuado: "orgão"],
+//                    [chave: "votacao", acentuado: "votação"],
+//                    [chave: "orgi", acentuado: "orgão"],
+//                    [chave: "secao", acentuado: "seção"],
+//                    [chave: "sessao", acentuado: "sessão"],
+//                    [chave: "inspecao", acentuado: "inspeção"],
+//                    [chave: "convenio", acentuado: "convênio"],
+//                    [chave: "fisica", acentuado: "física"],
+//                    [chave: "saude", acentuado: "saúde"],
+//                    [chave: "alimentacao", acentuado: "alimentação"],
+//                    [chave: "nm", acentuado: "nome"],
+//                    [chave: "cd", acentuado: "código"]
+//            ]) {
+//                if (word.contains(map.chave)) {
+//                    word = word.replaceFirst(map.chave, map.acentuado);
+//                }
+//            }
         }
         title = WordUtils.capitalize(word)
         return title

@@ -54,6 +54,7 @@ angular.module('${projectBeanName}App').factory('${entityBeanName}Service', ${en
             // Factory SearchSelect Object for all "search text properties"
             var searchSelects = {
 #set($idToOneSize = ${entity.id.getManyToOneProperties().size()} )
+#if(!${idToOneSize}) #set( $idToOneSize=0) #end
 #set($searchedEntitys = [])
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()} )
 #set( $foo = ${searchedEntitys.add( $complexProperty )} )
