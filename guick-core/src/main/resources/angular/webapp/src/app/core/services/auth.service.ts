@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private authenticationUrl: string = '/api/authentication/';
+  private authenticationUrl: string = '/api/authentication';
 
   isLoggedIn = false;
   redirectUrl: string;

@@ -4,9 +4,9 @@
 
 /* CAUTION The command below drops a user and all owned objects. */
 --DROP USER ESCO CASCADE;
-CREATE USER ESCO IDENTIFIED BY esco;
-GRANT UNLIMITED TABLESPACE TO ESCO;
-GRANT create session to ESCO;
+CREATE USER sa IDENTIFIED BY sa;
+GRANT UNLIMITED TABLESPACE TO sa;
+GRANT create session to sa;
 
 /* CREATE TABLES*/
 CREATE TABLE ESCO.PESSOA

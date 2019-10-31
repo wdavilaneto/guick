@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-    image: twtest:latest
+    image: generated:latest
     build:
       context: .
       dockerfile: Dockerfile
