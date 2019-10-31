@@ -26,6 +26,7 @@ export class ${entity.name} {
     public $property.getName(): any; // = new $property.getName();
 #end
 
+
 //  Many to Many properties
 #foreach( ${property} in ${entity.getManyToManyProperties()})
     public ${property.getName()}: Array<any> = new Array<any>(); //${property.getReferedEntity().getType()}

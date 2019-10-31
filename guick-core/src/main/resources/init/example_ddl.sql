@@ -71,7 +71,6 @@ CREATE TABLE pessoa (
 	matricula NVARCHAR2(16) NOT NULL,
 	login NVARCHAR2(100) NOT NULL,
 	nome NVARCHAR2(300) NOT NULL,
-	clob INTEGER NULL,
 	salario number(10,2) NULL,
 	foto blob NULL,
 	telefone NVARCHAR2(30) NULL,
@@ -79,7 +78,6 @@ CREATE TABLE pessoa (
 	cargo_id INTEGER NULL,
 	orgao_id INTEGER NULL,
 	papel_id INTEGER NULL,
-	CONSTRAINT pessoa_estatutario_check CHECK ((estatutario >= 0)),
 	CONSTRAINT pessoa_login_key UNIQUE (login),
 	CONSTRAINT pessoa_matricula_key UNIQUE (matricula),
 	CONSTRAINT pessoa_nome_key UNIQUE (nome)

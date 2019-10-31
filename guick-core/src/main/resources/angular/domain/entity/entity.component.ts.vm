@@ -63,23 +63,23 @@ export class  ${entity.name}Component implements OnInit {
 #foreach( ${property} in ${entity.properties})
       ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
 #end
-#foreach( ${property} in ${entity.parent.getProperties()})
-      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
-#end
-#foreach( ${property} in ${entity.id.getProperties()})
-      id_${property}: [this.${entity.beanName}.id.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
-#end
+###foreach( ${property} in ${entity.parent.getProperties()})
+##      ${property}: [this.${entity.beanName}.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+###end
+###foreach( ${property} in ${entity.id.getProperties()})
+##      id_${property}: [this.${entity.beanName}.id.${property}, [#if(!${property.column.nullable})Validators.required#{end} ]],
+###end
 #set ($stringField = "id")
 #foreach( ${complexProperty} in ${entity.getManyToOneProperties()})
 #set( $beanName = ${util.uncapitalize($complexProperty.name)} )
       ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
       ${complexProperty.beanName}Select: ['', []],
 #end
-#foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
-#set( $beanName = ${util.uncapitalize($complexProperty.name)} )
-      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
-      ${complexProperty.beanName}Select: ['', []],
-#end
+###foreach( ${complexProperty} in ${entity.parent.getManyToOneProperties()})
+###set( $beanName = ${util.uncapitalize($complexProperty.name)} )
+##      ${complexProperty.beanName}: [this.${entity.beanName}.${complexProperty.beanName}, []],
+##      ${complexProperty.beanName}Select: ['', []],
+##end
     });
   }
 
