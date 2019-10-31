@@ -4,6 +4,12 @@ export class ${entity.name} {
 #foreach( ${property} in ${entity.getProperties()})
     public ${property.getName()}: ${property.getAngularType()};
 #end
+#foreach( ${property} in ${entity.parent.getProperties()})
+    public ${property.getName()}: ${property.getAngularType()};
+#end
+#foreach( ${property} in ${entity.id.getProperties()})
+    public id_${property.getName()}: ${property.getAngularType()};
+#end
 
 //  Enums (TODO)
 #foreach( ${property} in ${entity.getEnums()})

@@ -9,9 +9,9 @@ import { ${entity.name}Service } from '../${entity.dashedName}.service';
 import { ${entity.name}ListComponent } from '../../${entity.dashedName}/${entity.dashedName}-list/${entity.dashedName}-list.component';
 ##foreach( ${complexProperty} in ${entity.getDistinctedAllComplexProperties()})
 #foreach( ${complexProperty} in ${entity.getOneToManyProperties()})
-#if (${complexProperty.isOneToMany()} && !${complexProperty.referedEntity.isEmbeddable()} && (${entity.name} != ${complexProperty.referedEntity.name}))
+##if (${complexProperty.isOneToMany()} && !${complexProperty.referedEntity.isEmbeddable()} && (${entity.name} != ${complexProperty.referedEntity.name}))
 import { ${complexProperty.referedEntity.name}ListComponent } from '../../${complexProperty.referedEntity.dashedName}/${complexProperty.referedEntity.dashedName}-list/${complexProperty.referedEntity.dashedName}-list.component';
-#end
+##end
 #end
 
 @Component({
